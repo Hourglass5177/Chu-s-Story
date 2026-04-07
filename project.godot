@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="楚物志"
-run/main_scene="uid://entcoo1qsndi"
+run/main_scene="uid://ceongw3s3fqwf"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
