@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://gwu8rmtm27b"]
+
+[ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_sh5y2"]
+
+[resource]
+script = ExtResource("1_sh5y2")
+region = "鄂州"
+category = 1
+effect_type = 2
+effect_value = 750
+destroy_after_use = true
+card_name = "牌子锣"
+metadata/_custom_type_script = "uid://cfcilcn48vowf"

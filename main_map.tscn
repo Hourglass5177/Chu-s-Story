@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://entcoo1qsndi"]
+
+[ext_resource type="Texture2D" uid="uid://lvomuoqvpev0" path="res://arts/地图完整版.png" id="1_dyl4d"]
+[ext_resource type="Script" uid="uid://dlskdmyfd5khf" path="res://main_map.gd" id="1_km2bi"]
+[ext_resource type="PackedScene" uid="uid://d17wx7legjg71" path="res://Players/player.tscn" id="3_5hk42"]
+[ext_resource type="PackedScene" uid="uid://82mw0rmfhe1u" path="res://Managers/turn_manager.tscn" id="4_1ns3a"]
+[ext_resource type="PackedScene" uid="uid://bgurc7rdpy6g4" path="res://Managers/ResouceManager.tscn" id="5_v4mvp"]
+
+[sub_resource type="TileSet" id="TileSet_dyl4d"]
+tile_shape = 3
+tile_layout = 1
+tile_offset_axis = 1
+tile_size = Vector2i(114, 101)
+custom_data_layer_0/name = "Cost"
+custom_data_layer_0/type = 2
+
+[node name="MainMap" type="Node2D" unique_id=961873305]
+script = ExtResource("1_km2bi")
+
+[node name="MapBackground" type="Sprite2D" parent="." unique_id=1962359010]
+position = Vector2(1280, 710)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_dyl4d")
+metadata/_edit_group_ = true
+
+[node name="TileMapLayer" type="TileMapLayer" parent="MapBackground" unique_id=1596255138]
+position = Vector2(-808.57104, 422.85718)
+scale = Vector2(2.8571427, 2.8571427)
+tile_set = SubResource("TileSet_dyl4d")
+metadata/_edit_group_ = true
+
+[node name="Player" parent="." unique_id=1900862353 instance=ExtResource("3_5hk42")]
+
+[node name="ResouceManager" parent="." unique_id=798380862 instance=ExtResource("5_v4mvp")]
+
+[node name="TurnManager" parent="." unique_id=1239037211 instance=ExtResource("4_1ns3a")]
+
+[connection signal="turn_start" from="TurnManager" to="Player" method="_on_turn_manager_turn_start"]

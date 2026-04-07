@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://82mw0rmfhe1u"]
+
+[ext_resource type="Script" uid="uid://cucgynpvxap8x" path="res://Managers/turn_manager.gd" id="1_2dkk1"]
+
+[node name="TurnManager" type="Node" unique_id=1239037211]
+script = ExtResource("1_2dkk1")
+
+[node name="TurnTimer" type="Timer" parent="." unique_id=1461645713]
+wait_time = 15.0
+one_shot = true

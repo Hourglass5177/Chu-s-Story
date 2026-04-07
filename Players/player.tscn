@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://d17wx7legjg71"]
+
+[ext_resource type="Texture2D" uid="uid://dtamyyoqvvfar" path="res://icon.svg" id="1_w22c2"]
+[ext_resource type="Script" uid="uid://blh8lxoamdqx4" path="res://Players/player.gd" id="2_fq5u1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fq5u1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_w22c2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="AnimatedSprite2D" unique_id=1900862353]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_fq5u1")
+script = ExtResource("2_fq5u1")
