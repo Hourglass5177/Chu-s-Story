@@ -40,6 +40,8 @@ func _process(delta: float) -> void:
 var player_index: int = 0
 var alive: bool = true
 var now_pos: Vector3i = Vector3i(0, 0, 0)
+var onTurn: bool = false
+var maxMove:int = 0
 
 # 这是一个数组，专门用来存放 CardData 类型的资源，也就是玩家手里的“非遗卡牌”
 var 非遗牌手牌: Array[非遗牌] = [] 
@@ -48,40 +50,71 @@ var 食物牌手牌: Array[食物牌] = []
 # --- 回合生命周期 ---
 func _on_turn_manager_turn_start(player_idx: int) -> void:
 	if player_idx != player_index:
-		return
-	before_turn()
-	await during_turn()
-	after_turn()
+		onTurn = false
+	else:
+		onTurn = true
 
 func before_turn():
 	print("玩家", player_name, "回合开始")
 
-func during_turn():
-	var turntimer = TurnManager.get_node("TurnTimer")
-	
-	# 创建一个回调函数，无论哪个信号触发，都发射统一的内部信号
-	var callback = func(): 
-		_internal_turn_end.emit()
-		
-	# 连接两个可能的结束条件
-	if not turntimer.timeout.is_connected(callback):
-		turntimer.timeout.connect(callback)
-	if not turn_over_byself.is_connected(callback):
-		turn_over_byself.connect(callback)
-	
-	# 等待统一信号
-	await _internal_turn_end
-	
-	# 【强制清理】断开连接，否则下个回合会重复触发导致内存泄漏和逻辑雪崩
-	turntimer.timeout.disconnect(callback)
-	turn_over_byself.disconnect(callback)
-	
-	# 计时器的 stop 应交由 TurnManager 处理，这里仅防错
-	if not turntimer.is_stopped():
-		turntimer.stop()
+#func during_turn():
+	#var turntimer = TurnManager.get_node("TurnTimer")
+	#
+	## 创建一个回调函数，无论哪个信号触发，都发射统一的内部信号
+	#var callback = func(): 
+		#_internal_turn_end.emit()
+		#
+	## 连接两个可能的结束条件
+	#if not turntimer.timeout.is_connected(callback):
+		#turntimer.timeout.connect(callback)
+	#if not turn_over_byself.is_connected(callback):
+		#turn_over_byself.connect(callback)
+	#
+	## 等待统一信号
+	#await _internal_turn_end
+	#
+	## 【强制清理】断开连接，否则下个回合会重复触发导致内存泄漏和逻辑雪崩
+	#turntimer.timeout.disconnect(callback)
+	#turn_over_byself.disconnect(callback)
+	#
+	## 计时器的 stop 应交由 TurnManager 处理，这里仅防错
+	#if not turntimer.is_stopped():
+		#turntimer.stop()
 
 func _on_phase_changed(new_phase: TurnManager.TurnPhase):
-	pass
+	if !onTurn:
+		return
+	match new_phase:
+		TurnManager.TurnPhase.BEGIN:
+			TurnManager.next_phase.emit(TurnManager.TurnPhase.ROLL_DICE)
+		TurnManager.TurnPhase.ROLL_DICE:
+			maxMove = do_roll_dice()
+			await get_tree().create_timer(1.0).timeout
+			TurnManager.next_phase.emit(TurnManager.TurnPhase.MOVING)
+		TurnManager.TurnPhase.MOVING:
+			TurnManager.next_phase.emit(TurnManager.TurnPhase.ACTION)
+		TurnManager.TurnPhase.ACTION:
+			var turntimer = TurnManager.get_node("TurnTimer")
+			turntimer.start()
+			# 创建一个回调函数，无论哪个信号触发，都发射统一的内部信号
+			var callback = func(): 
+				_internal_turn_end.emit()
+			# 连接两个可能的结束条件
+			if not turntimer.timeout.is_connected(callback):
+				turntimer.timeout.connect(callback)
+			if not turn_over_byself.is_connected(callback):
+				turn_over_byself.connect(callback)
+			# 等待统一信号
+			await _internal_turn_end
+			# 【强制清理】断开连接，否则下个回合会重复触发导致内存泄漏和逻辑雪崩
+			turntimer.timeout.disconnect(callback)
+			turn_over_byself.disconnect(callback)
+			# 计时器的 stop 应交由 TurnManager 处理，这里仅防错
+			if not turntimer.is_stopped():
+				turntimer.stop()
+			TurnManager.next_phase.emit(TurnManager.TurnPhase.END)
+		TurnManager.TurnPhase.END:
+			pass
 
 func after_turn():
 	print("玩家 ", player_name, "回合结束")
@@ -89,6 +122,39 @@ func after_turn():
 		print("玩家 ", player_name,"体力耗尽，被淘汰！")
 		alive = false
 		player_died.emit(self)
+		
+# 1. 触发抽卡请求（通常在“非遗”或“事件”格子上触发）
+func request_draw_card(deck_type: 卡牌基类.CardType, count: int = 1):
+	print(player_name, " 发起抽卡请求：", deck_type)
+	ResourceManager.draw_card(self, deck_type, count)
+	
+	# 如果抽的是非遗牌，一定要通知资源管理器重算得分！
+	if deck_type == 卡牌基类.CardType.非遗牌:
+		ResourceManager.calculate_victory_score(self)
+		
+	# 行动完成后，向外发射内部结束信号，解除 during_turn 的等待
+	turn_over_byself.emit() 
+
+# 2. 触发打工请求
+func request_work(work_turn: int):
+	print(player_name, " 发起打工请求，当前轮数：", work_turn)
+	ResourceManager.process_work_salary(self, work_turn)
+	turn_over_byself.emit()
+
+# 3. 触发商店购买请求
+func request_buy_food(food_card: 食物牌):
+	print(player_name, " 发起购买食物请求：", food_card.card_name if "card_name" in food_card else "未知食物")
+	var success = ResourceManager.buy_food(self, food_card)
+	if success:
+		pass
+	else:
+		print("购买失败，行动未结束，请玩家重新选择。")
+		# 购买失败不 emit 结束信号，让玩家继续停留在 ACTION 阶段操作
+
+# 4. 什么都不做，直接结束回合（直接点结束按钮）
+func request_end_turn():
+	print(player_name, " 放弃行动，直接结束。")
+	turn_over_byself.emit()
 
 # --- 实体动作逻辑 ---
 func do_roll_dice() -> int:

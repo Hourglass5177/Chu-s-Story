@@ -78,3 +78,6 @@ func buy_food(player: PlayerClass, food_card: 食物牌) -> bool:
 	else:
 		print(player.player_name, " 积分不足，无法购买！")
 		return false
+
+func calculate_victory_score(score: PlayerClass):
+	pass

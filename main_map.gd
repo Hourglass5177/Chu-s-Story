@@ -1,11 +1,12 @@
 extends Node2D
 signal game_start
-@onready var tile_map = $MapBackground/TileMapLayer
-@onready var player = $Player
+#@onready var tile_map = $MapBackground/TileMapLayer
+#@onready var player = $Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	var players: Array[PlayerClass] = [$Player]
+	TurnManager.start_game(players)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -11,7 +11,7 @@ enum TurnPhase{
 	ACTION,     # 行动
 	END         # 结算本回合
 }
-var players: Array[Node] = []
+var players: Array[PlayerClass] = []
 var now_turn: int = 0
 var now_phase: TurnPhase = TurnPhase.BEGIN
 var now_player_index: int = 0
@@ -19,7 +19,7 @@ var next_player_index: int = 0
 var player_num: int = 0
 var GameOn: bool = false
 
-func start_game(player_nodes: Array[Node]):
+func start_game(player_nodes: Array[PlayerClass]):
 	players = player_nodes
 	player_num = players.size()
 	now_player_index = 0
@@ -28,11 +28,19 @@ func start_game(player_nodes: Array[Node]):
 	now_turn_start()
 
 func now_turn_start():
-	$TurnTimer.start()
 	turn_start.emit(now_player_index)
 	for phase in TurnPhase.values():
-		await change_phase(phase)
-		await next_phase
+		change_phase(phase)
+		# 针对不同阶段采用不同的挂起策略
+		if phase in [TurnPhase.BEGIN, TurnPhase.END]:
+			# 【改动】：为 BEGIN 和 END 强制挂起 1.0 秒。
+			# 以后如果有复杂的开局/结算动画，可以把这里的时长调长，或者改成等待动画结束的信号
+			await get_tree().create_timer(1.0).timeout
+			
+		elif phase in [TurnPhase.ROLL_DICE, TurnPhase.MOVING, TurnPhase.ACTION]:
+			# 需要进行交互或特定逻辑的阶段，严格等待 next_phase 信号再放行
+			await next_phase
+	now_turn_end()
 	
 
 func now_turn_end():
@@ -40,7 +48,6 @@ func now_turn_end():
 	
 func change_phase(new_phase: TurnPhase):
 	now_phase = new_phase
-	phase_changed.emit(now_phase)
 	
 	match now_phase:
 		TurnPhase.BEGIN:
@@ -53,6 +60,7 @@ func change_phase(new_phase: TurnPhase):
 			print("等待玩家行动……")
 		TurnPhase.END:
 			print("回合结束")
+	phase_changed.emit(now_phase)
 			
 			
 func next_turn():
@@ -70,7 +78,7 @@ func getNextPlayer(player_id: int) -> int:
 	var cnt = 0
 	nxtplayer_id = (player_id+1) % player_num
 	while !players[nxtplayer_id].alive:
-		nxtplayer_id = (player_id+1) % player_num
+		nxtplayer_id = (nxtplayer_id+1) % player_num
 		cnt+=1
 		if cnt > player_num:
 			return -1
