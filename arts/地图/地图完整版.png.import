@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://lvomuoqvpev0"
-path="res://.godot/imported/地图完整版.png-feceb4e5c316c0a3839d76021f5b527e.ctex"
+path="res://.godot/imported/地图完整版.png-b57bd9d758e253683f8c6009596f57bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://arts/地图完整版.png"
-dest_files=["res://.godot/imported/地图完整版.png-feceb4e5c316c0a3839d76021f5b527e.ctex"]
+source_file="res://arts/地图/地图完整版.png"
+dest_files=["res://.godot/imported/地图完整版.png-b57bd9d758e253683f8c6009596f57bc.ctex"]
 
 [params]
 

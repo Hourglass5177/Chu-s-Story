@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ceongw3s3fqwf"]
 
-[ext_resource type="Texture2D" uid="uid://oqo6hsvsf81t" path="res://arts/地块.png" id="1_8yxnp"]
+[ext_resource type="Texture2D" uid="uid://oqo6hsvsf81t" path="res://arts/地图/地块.png" id="1_8yxnp"]
 [ext_resource type="Script" uid="uid://cmua4651bva5f" path="res://地图/map_section.gd" id="2_8sp3l"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8sp3l"]

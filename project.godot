@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 TurnManager="*uid://cucgynpvxap8x"
+ResouceManager="*uid://cqqtdufuwcgog"
 
 [display]
 

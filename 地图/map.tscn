@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://brmenhy1pw7pr"]
 
-[ext_resource type="Texture2D" uid="uid://lvomuoqvpev0" path="res://arts/地图完整版.png" id="1_v7ekd"]
+[ext_resource type="Texture2D" uid="uid://lvomuoqvpev0" path="res://arts/地图/地图完整版.png" id="1_v7ekd"]
 [ext_resource type="PackedScene" uid="uid://ceongw3s3fqwf" path="res://地图/map_section.tscn" id="2_gp7by"]
 
 [node name="MAP" type="Node2D" unique_id=1726495628]

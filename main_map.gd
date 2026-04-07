@@ -5,9 +5,7 @@ signal game_start
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var card_path = "Cards/鄂州/牌子锣.tres"
-	var new_card = load(card_path) as CardData
-	player.draw_card(new_card)
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
