@@ -20,10 +20,12 @@ class_name HUD
 @onready var information = $"手牌信息/游戏信息" as Label
 
 @onready var timer = TurnManager.get_node("TurnTimer") as Timer
-
+var map:MAP
 func _ready() -> void:
+	map = get_tree().get_first_node_in_group("MAP")
 	TurnManager.turn_start.connect(_on_turn_start)
 	TurnManager.phase_changed.connect(_on_phase_changed)
+	btn_end_turn.pressed.connect(_on_btn_end_turn_pressed)
 	_update_button_states(TurnManager.TurnPhase.BEGIN)
 
 func _process(delta: float):
@@ -64,11 +66,14 @@ func _on_phase_changed(new_phase: TurnManager.TurnPhase) -> void:
 func _roll_dice_information(result:int, player:PlayerClass) -> void:
 	_update_game_informs("玩家 " + player.player_name + " 掷出了 " + str(result) + " 点！")
 
-# --- UI 刷新辅助函数 ---
+# --- UI 刷新状态函数 ---
 func _update_player_stats(player: PlayerClass) -> void:
 	money_label.text = "积分点: " + str(player.current_money)
 	energy_label.text = "精力: " + str(player.current_energy) + " / " + str(player.max_energy)
 	score_label.text = "总分数: " + str(player.current_score)
+	current_status.text = "当前位置：" + MapSection.REGION.find_key(map.grid_map[player.now_pos].region) + str(map.grid_map[player.now_pos].location_index) + " - " + MapSection.SectionType.find_key(map.grid_map[player.now_pos].type)
+	if(TurnManager.now_phase == TurnManager.TurnPhase.MOVING):
+		_update_game_informs("剩余可移动：" + str(player.maxMove) + " 步")
 
 func _update_game_informs(information_to_display: String) -> void:
 	information.text = information_to_display
@@ -76,7 +81,7 @@ func _update_game_informs(information_to_display: String) -> void:
 func _update_button_states(phase: TurnManager.TurnPhase) -> void:
 	# 核心解耦：UI 自己决定什么时候按钮该亮起
 	btn_action.disabled = (phase != TurnManager.TurnPhase.ACTION)
-	btn_end_turn.disabled = (phase != TurnManager.TurnPhase.ACTION)
+	btn_end_turn.disabled = (not phase in [TurnManager.TurnPhase.ACTION, TurnManager.TurnPhase.MOVING])
 	btn_food.disabled = (phase != TurnManager.TurnPhase.ACTION)
 
 func _on_btn_action_pressed() -> void:
@@ -88,5 +93,8 @@ func _on_btn_action_pressed() -> void:
 	current_player.request_draw_card(卡牌基类.CardType.非遗牌, 1)
 
 func _on_btn_end_turn_pressed() -> void:
-	var current_player = TurnManager.players[TurnManager.now_player_index]
-	current_player.request_end_turn()
+	var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
+	if TurnManager.now_phase == TurnManager.TurnPhase.MOVING:
+		current_player.emit_next_phase(TurnManager.TurnPhase.ACTION)
+	elif TurnManager.now_phase == TurnManager.TurnPhase.ACTION:
+		current_player.emit_next_phase(TurnManager.TurnPhase.END)

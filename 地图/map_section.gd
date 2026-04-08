@@ -2,6 +2,7 @@ extends AnimatedSprite2D
 class_name MapSection
 signal section_clicked(target_section: MapSection)
 var is_reachable: bool = false
+var is_reached: bool = false
 enum SectionType{
 	一般,
 	非遗,
@@ -81,11 +82,17 @@ const REGIONNUM = {
 @export var cost: int = 1
 @export var icon: Image = null
 var player_index: int = -1
-var grid_visit_history: Dictionary = {}
+var grid_visit_history: Dictionary[PlayerClass, int] = {}
+@onready var click_area = $click_area
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	if click_area and not click_area.input_event.is_connected(_on_input_event):
+		click_area.input_event.connect(_on_input_event)
+	if not click_area.mouse_entered.is_connected(_on_mouse_entered):
+		click_area.mouse_entered.connect(_on_mouse_entered)
+	if not click_area.mouse_exited.is_connected(_on_mouse_exited):
+		click_area.mouse_exited.connect(_on_mouse_exited)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -98,3 +105,17 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if is_reachable:
 			section_clicked.emit(self)
+
+func _on_mouse_entered() -> void:
+	if is_reachable:
+		# 修改图片的颜色乘数。Color 会让 RGB 三原色都超过 1，实现“发光/变亮”的效果
+		self.modulate = Color(1.347, 0.589, 0.611, 1.0)
+		
+		# 选配：如果有单独的高亮图层，可以在这里 let highlight_sprite.show()
+
+func _on_mouse_exited() -> void:
+	# 鼠标移走，恢复为默认原色
+	self.modulate = Color(1.0, 1.0, 1.0)
+
+func _clear_is_reached() -> void:
+	is_reached = false

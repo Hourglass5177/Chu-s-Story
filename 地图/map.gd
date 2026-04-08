@@ -1,4 +1,5 @@
 extends Node2D
+class_name MAP
 var grid_map: Dictionary[Vector3i, MapSection] = {}
 
 func _ready():
@@ -25,7 +26,7 @@ func _on_phase_changed(new_phase: TurnManager.TurnPhase):
 		TurnManager.TurnPhase.ACTION:
 			# 移动结束，关闭所有高亮
 			_clear_all_highlights()
-			#_update_ui_for_action()
+			_update_ui_for_action()
 
 # --- 算法：显示可达区域 ---
 func _show_reachable_areas():
@@ -53,7 +54,7 @@ func _show_reachable_areas():
 			if new_pos in grid_map and now_status.x < max_steps:
 				var next_section = grid_map[new_pos]
 				var new_cost = now_status.y + next_section.cost
-				if new_cost <= available_energy and not vis.has(next_section.logical_index):
+				if new_cost <= available_energy and not vis.has(next_section.logical_index) and not next_section.is_reached:
 					next_section.is_reachable = true 
 					que.push_back(new_pos)
 					que_status.push_back(Vector2i(now_status.x + 1, new_cost))
@@ -71,7 +72,7 @@ func _on_section_clicked(target_section: MapSection) -> String:
 	var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
 	
 	var start_coord: Vector3i = current_player.now_pos
-	var target_coord: Vector3i = target_section.coord
+	var target_coord: Vector3i = target_section.location_index
 	
 	if target_coord == start_coord:
 		return "not necessary"
@@ -87,18 +88,17 @@ func _on_section_clicked(target_section: MapSection) -> String:
 	que.push_back(start_coord)
 	came_from[start_coord] = start_coord
 	cost_so_far[start_coord] = 0
-	
+	grid_map[start_coord].is_reached = true
+	grid_map[start_coord].is_reachable = false
 	var found_target: bool = false
 	
 	# --- 第一步：BFS 寻路与构建溯源树 ---
 	while not que.is_empty():
 		var now_pos = que.pop_front()
-		
 		# 如果找到了目标，直接停止扩散！
 		if now_pos == target_coord:
 			found_target = true
-			break 
-			
+			break 	
 		for mov: Vector3i in 常量.MOVE:
 			var new_pos: Vector3i = now_pos + mov
 			
@@ -107,7 +107,7 @@ func _on_section_clicked(target_section: MapSection) -> String:
 				var new_cost = cost_so_far[now_pos] + grid_map[new_pos].cost
 				
 				# 如果这个格子没去过，或者找到了一条更省精力的路，且未超过玩家最大精力上限
-				if (not cost_so_far.has(new_pos) or new_cost < cost_so_far[new_pos]) and new_cost <= max_energy:
+				if (not cost_so_far.has(new_pos) or new_cost < cost_so_far[new_pos]) and new_cost <= max_energy and not grid_map[new_pos].is_reached:
 					cost_so_far[new_pos] = new_cost
 					came_from[new_pos] = now_pos # 【关键】记录：我是从 now_pos 走到 new_pos 的
 					que.push_back(new_pos)
@@ -124,6 +124,8 @@ func _on_section_clicked(target_section: MapSection) -> String:
 	# 从终点一步步往回倒推，直到退回起点
 	while current_backtrack != start_coord:
 		# 注意：Tween 动画需要的是物理世界像素坐标 (global_position)，而不是逻辑坐标的差值
+		grid_map[current_backtrack].is_reached = true
+		grid_map[current_backtrack].is_reachable = false
 		path_pixels.append(grid_map[current_backtrack].global_position)
 		current_backtrack = came_from[current_backtrack]
 		
@@ -149,7 +151,7 @@ func _update_ui_for_action():
 	var hud:HUD = get_tree().get_first_node_in_group("HUD")
 	
 	# 根据格子类型，通知 HUD 改变按钮文字和功能
-	match current_section.SectionType:
+	match current_section.type:
 		MapSection.SectionType.非遗:
 			hud.btn_action.text = "抽取非遗牌"
 			# 你可以在 HUD 脚本里存储一个当前状态，以便点击时请求抽卡
@@ -157,6 +159,6 @@ func _update_ui_for_action():
 			hud.btn_action.text = "打工"
 		MapSection.SectionType.商店:
 			hud.btn_action.text = "购买食物"
-		MapSection.SectionType.一般:
+		_:
 			hud.btn_action.text = "行动"
 			hud.btn_action.disabled = true

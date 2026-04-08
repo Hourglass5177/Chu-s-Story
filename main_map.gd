@@ -5,8 +5,9 @@ signal game_start
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var players: Array[PlayerClass] = [$Player]
-	$Player.now_pos = Vector3i(0,0,0)
+	var players: Array[PlayerClass] = [$Player, $Player2]
+	$Player.start_coord = Vector3i(0,0,0)
+	$Player2.start_coord = Vector3i(7, -6, -1)
 	TurnManager.start_game(players)
 
 

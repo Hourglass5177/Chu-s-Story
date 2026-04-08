@@ -2,8 +2,7 @@ extends Node
 signal turn_start(player_idx : int)
 signal phase_changed(new_phase: TurnPhase)
 signal game_over()
-signal next_phase(phase: TurnPhase)
-signal wait_sig
+signal next_phase(target_phase: TurnPhase)
 
 enum TurnPhase{
 	BEGIN,    # 等待游戏开始或过渡状态
@@ -12,6 +11,7 @@ enum TurnPhase{
 	ACTION,     # 行动
 	END         # 结算本回合
 }
+
 var players: Array[PlayerClass] = []
 var now_turn: int = 0
 var now_phase: TurnPhase = TurnPhase.BEGIN
@@ -19,67 +19,89 @@ var now_player_index: int = 0
 var next_player_index: int = 0
 var player_num: int = 0
 var GameOn: bool = false
+var map: MAP
+
+@onready var turn_timer: Timer = $TurnTimer
+
+func _ready() -> void:
+	# 核心枢纽：监听来自全游戏任何地方的阶段跳转请求
+	next_phase.connect(_on_next_phase_requested)
+	turn_timer.timeout.connect(_on_timer_timeout)
+	map = get_tree().get_first_node_in_group("MAP")
 
 func start_game(player_nodes: Array[PlayerClass]):
 	players = player_nodes
 	player_num = players.size()
 	now_player_index = 0
-	next_player_index = now_player_index
+	next_player_index = getNextPlayer(now_player_index)
 	GameOn = true
 	now_turn_start()
 
 func now_turn_start():
+	now_turn += 1
 	turn_start.emit(now_player_index)
-	for phase in TurnPhase.values():
-		change_phase(phase)
-		# 针对不同阶段采用不同的挂起策略
-		if phase in [TurnPhase.BEGIN, TurnPhase.END]:
-			# 为 BEGIN 和 END 强制挂起 1.0 秒
-			$TurnTimer.start(1.0)
-			await $TurnTimer.timeout
-		elif phase in [TurnPhase.ROLL_DICE]:
-			$TurnTimer.start(3.0)
-			await $TurnTimer.timeout
-		elif phase in [TurnPhase.MOVING, TurnPhase.ACTION]:
-			var callback = func():
-				wait_sig.emit()
-			$TurnTimer.start(15.0)
-			if not $TurnTimer.timeout.is_connected(callback):
-				$TurnTimer.timeout.connect(callback)
-			if not next_phase.is_connected(callback):
-				next_phase.connect(callback)
-			await wait_sig
-			$TurnTimer.stop()
-			$TurnTimer.timeout.disconnect(callback)
-			next_phase.disconnect(callback)
-			
-	now_turn_end()
-	
+	# 引爆状态机的第一环
+	change_phase(TurnPhase.BEGIN)
 
-func now_turn_end():
-	next_turn()
-	
+func _on_next_phase_requested(target_phase: TurnPhase):
+	# 只要有人请求进入下一阶段，立刻掐断当前的计时器，防止幽灵回调
+	if not turn_timer.is_stopped():
+		turn_timer.stop()
+	change_phase(target_phase)
+
 func change_phase(new_phase: TurnPhase):
 	now_phase = new_phase
 	
+	# 进入新阶段的初始化与倒计时设定
 	match now_phase:
 		TurnPhase.BEGIN:
-			print("回合开始")
+			print("--- 回合开始 ---")
+			turn_timer.start(1.0)
 		TurnPhase.ROLL_DICE:
-			print("等待玩家掷骰子……")
+			print(">>> 等待玩家掷骰子")
+			turn_timer.start(3.0) # 兜底防卡死
 		TurnPhase.MOVING:
-			print("等待玩家移动……")
+			get_tree().call_group("section", "_clear_is_reached")
+			print(">>> 等待玩家移动")
+			turn_timer.start(15.0)
 		TurnPhase.ACTION:
-			print("等待玩家行动……")
+			print(">>> 等待玩家行动")
+			turn_timer.start(15.0)
 		TurnPhase.END:
-			print("回合结束")
+			print("--- 回合结束 ---")
+			turn_timer.start(1.0)
+			
+	# 广播当前阶段，让 Player 和 HUD 做出反应
 	phase_changed.emit(now_phase)
-			
-			
-func next_turn():
-	now_turn += 1
+
+# 倒计时结束的自动推进逻辑
+func _on_timer_timeout():
+	match now_phase:
+		TurnPhase.BEGIN:
+			_emit_next_phase(TurnPhase.ROLL_DICE)
+		TurnPhase.ROLL_DICE:
+			_emit_next_phase(TurnPhase.MOVING)
+		TurnPhase.MOVING:
+			# 时间到了没移动，强制进入行动阶段
+			_emit_next_phase(TurnPhase.ACTION)
+		TurnPhase.ACTION:
+			# 时间到了没操作，强制结束
+			_emit_next_phase(TurnPhase.END)
+		TurnPhase.END:
+			# 结算结束，把轮次交给下一个人
+			now_turn_end()
+
+func _emit_next_phase(nxt_phase: TurnPhase):
+	if(now_phase == TurnPhase.MOVING):
+		if map.grid_map[players[now_player_index].now_pos].grid_visit_history.has(players[now_player_index]):
+			map.grid_map[players[now_player_index].now_pos].grid_visit_history[players[now_player_index]] += 1
+		else:
+			map.grid_map[players[now_player_index].now_pos].grid_visit_history[players[now_player_index]] = 1
+	next_phase.emit(nxt_phase)
+
+func now_turn_end():
 	now_player_index = next_player_index
-	next_player_index = getNextPlayer(next_player_index)
+	next_player_index = getNextPlayer(now_player_index)
 	if next_player_index < 0:
 		game_over.emit()
 		GameOn = false

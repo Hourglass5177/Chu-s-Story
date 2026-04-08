@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bjxgwumod7vqk" path="res://HUDs/hud.gd" id="1_5v5lr"]
 [ext_resource type="FontFile" uid="uid://b1potytyqa1t5" path="res://arts/像素字体.ttf" id="1_co0a7"]
 
-[node name="HUD" type="CanvasLayer" unique_id=180054714]
+[node name="HUD" type="CanvasLayer" unique_id=180054714 groups=["HUD"]]
 script = ExtResource("1_5v5lr")
 
 [node name="玩家信息" type="ReferenceRect" parent="." unique_id=114009303]
@@ -11,6 +11,7 @@ offset_left = 21.0
 offset_top = 33.0
 offset_right = 502.0
 offset_bottom = 1563.0
+mouse_filter = 2
 border_width = 5.0
 
 [node name="玩家信息" type="Label" parent="玩家信息" unique_id=1920110384]
@@ -71,6 +72,7 @@ offset_left = 525.0
 offset_top = 30.0
 offset_right = 1965.0
 offset_bottom = 264.0
+mouse_filter = 2
 border_width = 5.0
 
 [node name="TurnLabel" type="Label" parent="回合信息" unique_id=2113256786]
@@ -125,6 +127,7 @@ offset_left = 514.0
 offset_top = 272.0
 offset_right = 1966.0
 offset_bottom = 1002.0
+mouse_filter = 2
 border_width = 2.6
 
 [node name="操作区域" type="ReferenceRect" parent="." unique_id=590482004]
@@ -132,6 +135,7 @@ offset_left = 1572.0
 offset_top = 1010.0
 offset_right = 1969.0
 offset_bottom = 1551.0
+mouse_filter = 2
 border_width = 2.1
 
 [node name="BtnAction" type="Button" parent="操作区域" unique_id=288720085]
@@ -187,6 +191,7 @@ offset_left = 1975.0
 offset_top = 16.0
 offset_right = 2549.0
 offset_bottom = 1587.0
+mouse_filter = 2
 border_width = 2.1
 
 [node name="ScoreLabel" type="Label" parent="积分区域" unique_id=965251142]
@@ -213,6 +218,7 @@ offset_left = 521.0
 offset_top = 1034.0
 offset_right = 1557.0
 offset_bottom = 1565.0
+mouse_filter = 2
 border_color = Color(0.25638545, 0.5783296, 0.7095881, 1)
 border_width = 2.5
 

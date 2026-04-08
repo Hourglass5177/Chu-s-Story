@@ -15,6 +15,6 @@ animations = [{
 }]
 
 [node name="Player" type="AnimatedSprite2D" unique_id=1900862353 groups=["Player"]]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.34000063, 0.34000063)
 sprite_frames = SubResource("SpriteFrames_fq5u1")
 script = ExtResource("2_fq5u1")

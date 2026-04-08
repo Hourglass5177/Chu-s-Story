@@ -15,3 +15,10 @@ scale = Vector2(0.60802674, 0.582512)
 [node name="HUD" parent="." unique_id=180054714 instance=ExtResource("2_ob7o4")]
 
 [node name="Player" parent="." unique_id=1900862353 instance=ExtResource("3_5hk42")]
+player_name = "Player1"
+
+[node name="Player2" parent="." unique_id=447856773 instance=ExtResource("3_5hk42")]
+modulate = Color(0.93552554, 0.5580796, 0.48421264, 1)
+player_name = "Player2"
+start_coord = Vector3i(7, -6, -1)
+player_index = 1

@@ -1,10 +1,9 @@
 extends AnimatedSprite2D
 class_name PlayerClass
-signal turn_over_byself
 signal roll_dice(result:int, player:PlayerClass)
-signal _internal_turn_end
 signal player_died(player:PlayerClass)
 var hud:HUD
+var map:MAP
 enum PlayerCharacter{
 	无,
 	美食博主,
@@ -21,6 +20,9 @@ func _ready() -> void:
 	# 2. 监听阶段改变信号 (比如判断什么时候该我走)
 	TurnManager.phase_changed.connect(_on_phase_changed)
 	hud = get_tree().get_first_node_in_group("HUD") as HUD
+	map = get_tree().get_first_node_in_group("MAP") as MAP
+	now_pos = start_coord
+	position = map.grid_map[start_coord].global_position
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,8 +37,9 @@ func _process(delta: float) -> void:
 @export var max_energy: int = 12
 @export var current_score: int = 0
 @export var current_money: int = 1000
+@export var start_coord: Vector3i = Vector3i(0,0,0)
 
-var player_index: int = 0
+@export var player_index: int = 0
 var alive: bool = true
 var now_pos: Vector3i = Vector3i(0, 0, 0)
 var onTurn: bool = false
@@ -56,64 +59,43 @@ func _on_turn_manager_turn_start(player_idx: int) -> void:
 func before_turn():
 	print("玩家", player_name, "回合开始")
 
-#func during_turn():
-	#var turntimer = TurnManager.get_node("TurnTimer")
-	#
-	## 创建一个回调函数，无论哪个信号触发，都发射统一的内部信号
-	#var callback = func(): 
-		#_internal_turn_end.emit()
-		#
-	## 连接两个可能的结束条件
-	#if not turntimer.timeout.is_connected(callback):
-		#turntimer.timeout.connect(callback)
-	#if not turn_over_byself.is_connected(callback):
-		#turn_over_byself.connect(callback)
-	#
-	## 等待统一信号
-	#await _internal_turn_end
-	#
-	## 【强制清理】断开连接，否则下个回合会重复触发导致内存泄漏和逻辑雪崩
-	#turntimer.timeout.disconnect(callback)
-	#turn_over_byself.disconnect(callback)
-	#
-	## 计时器的 stop 应交由 TurnManager 处理，这里仅防错
-	#if not turntimer.is_stopped():
-		#turntimer.stop()
-
 func _on_phase_changed(new_phase: TurnManager.TurnPhase):
 	if !onTurn:
 		return
 	match new_phase:
 		TurnManager.TurnPhase.BEGIN:
-			TurnManager.next_phase.emit(TurnManager.TurnPhase.ROLL_DICE)
+			emit_next_phase(TurnManager.TurnPhase.ROLL_DICE)
 		TurnManager.TurnPhase.ROLL_DICE:
 			maxMove = do_roll_dice()
 			await TurnManager.get_node("TurnTimer").timeout
-			TurnManager.next_phase.emit(TurnManager.TurnPhase.MOVING)
+			emit_next_phase(TurnManager.TurnPhase.MOVING)
 		TurnManager.TurnPhase.MOVING:
-			TurnManager.next_phase.emit(TurnManager.TurnPhase.ACTION)
+			pass
 		TurnManager.TurnPhase.ACTION:
-			var turntimer = TurnManager.get_node("TurnTimer")
-			turntimer.start()
-			# 创建一个回调函数，无论哪个信号触发，都发射统一的内部信号
-			var callback = func(): 
-				_internal_turn_end.emit()
-			# 连接两个可能的结束条件
-			if not turntimer.timeout.is_connected(callback):
-				turntimer.timeout.connect(callback)
-			if not turn_over_byself.is_connected(callback):
-				turn_over_byself.connect(callback)
-			# 等待统一信号
-			await _internal_turn_end
-			# 【强制清理】断开连接，否则下个回合会重复触发导致内存泄漏和逻辑雪崩
-			turntimer.timeout.disconnect(callback)
-			turn_over_byself.disconnect(callback)
-			# 计时器的 stop 应交由 TurnManager 处理，这里仅防错
-			if not turntimer.is_stopped():
-				turntimer.stop()
-			TurnManager.next_phase.emit(TurnManager.TurnPhase.END)
+			#var turntimer = TurnManager.get_node("TurnTimer")
+			#turntimer.start()
+			#var callback = func(): 
+				#_internal_turn_end.emit()
+			## 连接两个可能的结束条件
+			#if not turntimer.timeout.is_connected(callback):
+				#turntimer.timeout.connect(callback)
+			#if not turn_over_byself.is_connected(callback):
+				#turn_over_byself.connect(callback)
+			## 等待统一信号
+			#await _internal_turn_end
+			## 【强制清理】断开连接，否则下个回合会重复触发导致内存泄漏和逻辑雪崩
+			#turntimer.timeout.disconnect(callback)
+			#turn_over_byself.disconnect(callback)
+			## 计时器的 stop 应交由 TurnManager 处理，这里仅防错
+			#if not turntimer.is_stopped():
+				#turntimer.stop()
+			#emit_next_phase(TurnManager.TurnPhase.END)
+			pass
 		TurnManager.TurnPhase.END:
 			pass
+
+func emit_next_phase(next_phase: TurnManager.TurnPhase):
+	TurnManager._emit_next_phase(next_phase)
 
 func after_turn():
 	print("玩家 ", player_name, "回合结束")
@@ -132,13 +114,13 @@ func request_draw_card(deck_type: 卡牌基类.CardType, count: int = 1):
 		ResourceManager.calculate_victory_score(self)
 		
 	# 行动完成后，向外发射内部结束信号，解除 during_turn 的等待
-	turn_over_byself.emit() 
+
 
 # 2. 触发打工请求
 func request_work(work_turn: int):
 	print(player_name, " 发起打工请求，当前轮数：", work_turn)
 	ResourceManager.process_work_salary(self, work_turn)
-	turn_over_byself.emit()
+
 
 # 3. 触发商店购买请求
 func request_buy_food(food_card: 食物牌):
@@ -153,7 +135,7 @@ func request_buy_food(food_card: 食物牌):
 # 4. 什么都不做，直接结束回合（直接点结束按钮）
 func request_end_turn():
 	print(player_name, " 放弃行动，直接结束。")
-	turn_over_byself.emit()
+	#turn_over_byself.emit()
 
 # --- 实体动作逻辑 ---
 func do_roll_dice() -> int:
@@ -163,15 +145,18 @@ func do_roll_dice() -> int:
 	return result
 
 func move_along_path(path_pixels: Array[Vector2], total_cost: int, target_grid_pos: Vector3i) -> void:
-	# 资源扣除交由 ResourceManager 处理更为严谨，此处仅发请求或本地暂扣
 	current_energy -= total_cost
-	now_pos = target_grid_pos
-	
 	var tween = create_tween()
 	for point in path_pixels:
-		tween.tween_property(self, "position", point, 0.2).set_trans(Tween.TRANS_LINEAR)
+		maxMove -= 1
+		hud._update_player_stats(self)
+		tween.tween_property(self, "global_position", point, 0.2).set_trans(Tween.TRANS_LINEAR)
 		# 此处 触发事件
-	
 	await tween.finished
 	print(player_name, " 移动完毕。")
-	now_pos = target_grid_pos
+	now_pos = target_grid_pos # 更新逻辑坐标
+	hud._update_player_stats(self)
+	map._clear_all_highlights()
+	map._show_reachable_areas()
+	
+	#TurnManager.next_phase.emit(TurnManager.TurnPhase.ACTION)

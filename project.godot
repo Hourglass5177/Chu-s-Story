@@ -27,6 +27,11 @@ window/size/viewport_width=2560
 window/size/viewport_height=1600
 window/stretch/mode="canvas_items"
 
+[global_group]
+
+HUD=""
+MAP=""
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

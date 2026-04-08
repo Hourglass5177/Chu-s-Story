@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://baykix35vnduq" path="res://地图/市基类.tscn" id="2_degx4"]
 [ext_resource type="PackedScene" uid="uid://ceongw3s3fqwf" path="res://地图/map_section.tscn" id="2_gp7by"]
 
-[node name="MAP" type="Node2D" unique_id=1726495628]
+[node name="MAP" type="Node2D" unique_id=1726495628 groups=["MAP"]]
 script = ExtResource("1_y6k3l")
 metadata/_edit_group_ = true
 
