@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://baykix35vnduq"]
+
+[ext_resource type="Script" uid="uid://vr322en3dakv" path="res://地图/市基类.gd" id="1_5fe0u"]
+
+[node name="市基类" type="Node" unique_id=1457788836]
+script = ExtResource("1_5fe0u")
