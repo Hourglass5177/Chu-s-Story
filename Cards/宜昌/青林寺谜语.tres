@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://dhudinhypge5x"]
+
+[ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_s8gre"]
+
+[resource]
+script = ExtResource("1_s8gre")
+region = 16
+category = 2
+base_score = 1
+effect_type = 2
+effect_value = 750
+destroy_after_use = true
+card_name = "青林寺谜语"
+metadata/_custom_type_script = "uid://cfcilcn48vowf"

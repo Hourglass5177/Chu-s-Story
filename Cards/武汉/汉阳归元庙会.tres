@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://dd4boosjq1uv0"]
+
+[ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_6gsgv"]
+
+[resource]
+script = ExtResource("1_6gsgv")
+region = 11
+category = 4
+base_score = 3
+effect_type = 2
+effect_value = 750
+passive = true
+card_name = "汉阳归元庙会"
+metadata/_custom_type_script = "uid://cfcilcn48vowf"

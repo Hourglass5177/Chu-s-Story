@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://calmopj8chdno"]
+
+[ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_ckna0"]
+
+[resource]
+script = ExtResource("1_ckna0")
+region = 2
+category = 5
+base_score = 4
+effect_type = 2
+effect_value = 750
+passive = true
+card_name = "岳家拳"
+metadata/_custom_type_script = "uid://cfcilcn48vowf"

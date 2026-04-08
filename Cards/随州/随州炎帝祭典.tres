@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://b8g77est0m7sq"]
+
+[ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_h12b8"]
+
+[resource]
+script = ExtResource("1_h12b8")
+region = 9
+category = 4
+base_score = 3
+effect_type = 2
+effect_value = 750
+passive = true
+card_name = "随州炎帝祭典"
+metadata/_custom_type_script = "uid://cfcilcn48vowf"

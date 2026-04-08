@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://c2vmb423nvf2t"]
+
+[ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_a0jxf"]
+
+[resource]
+script = ExtResource("1_a0jxf")
+region = 1
+effect_type = 2
+effect_value = 750
+destroy_after_use = true
+card_name = "灯戏"
+metadata/_custom_type_script = "uid://cfcilcn48vowf"

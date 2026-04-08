@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://fxg1ml8fiqft"]
+
+[ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_dc2lp"]
+
+[resource]
+script = ExtResource("1_dc2lp")
+region = 8
+category = 4
+base_score = 3
+effect_type = 2
+effect_value = 750
+passive = true
+card_name = "武当山庙会"
+metadata/_custom_type_script = "uid://cfcilcn48vowf"

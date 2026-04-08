@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://c3q8ktmj6h6nc"]
+
+[ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_5nk0t"]
+
+[resource]
+script = ExtResource("1_5nk0t")
+region = 8
+category = 5
+base_score = 4
+effect_type = 2
+effect_value = 750
+passive = true
+card_name = "武当武术"
+metadata/_custom_type_script = "uid://cfcilcn48vowf"

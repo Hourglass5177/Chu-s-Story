@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://stjurnl1hvt8"]
+
+[ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_368eu"]
+
+[resource]
+script = ExtResource("1_368eu")
+region = 8
+category = 1
+effect_type = 2
+effect_value = 750
+destroy_after_use = true
+card_name = "吕家河民歌"
+metadata/_custom_type_script = "uid://cfcilcn48vowf"

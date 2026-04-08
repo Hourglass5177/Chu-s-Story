@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://b44rb8ad0hybj"]
+
+[ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_gx2ak"]
+
+[resource]
+script = ExtResource("1_gx2ak")
+region = 8
+category = 1
+effect_type = 2
+effect_value = 750
+destroy_after_use = true
+card_name = "武当山宫观道乐"
+metadata/_custom_type_script = "uid://cfcilcn48vowf"
