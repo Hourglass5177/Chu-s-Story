@@ -3,9 +3,14 @@
 [ext_resource type="Script" uid="uid://dlskdmyfd5khf" path="res://main_map.gd" id="1_km2bi"]
 [ext_resource type="PackedScene" uid="uid://deicr24uh1g8i" path="res://HUDs/HUD.tscn" id="2_ob7o4"]
 [ext_resource type="PackedScene" uid="uid://d17wx7legjg71" path="res://Players/player.tscn" id="3_5hk42"]
+[ext_resource type="PackedScene" uid="uid://brmenhy1pw7pr" path="res://地图/map.tscn" id="3_ob7o4"]
 
 [node name="MainMap" type="Node2D" unique_id=961873305]
 script = ExtResource("1_km2bi")
+
+[node name="MAP" parent="." unique_id=1726495628 instance=ExtResource("3_ob7o4")]
+position = Vector2(472, 90.000015)
+scale = Vector2(0.60802674, 0.582512)
 
 [node name="HUD" parent="." unique_id=180054714 instance=ExtResource("2_ob7o4")]
 

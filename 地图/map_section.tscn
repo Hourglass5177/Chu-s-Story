@@ -20,3 +20,13 @@ self_modulate = Color(1, 1, 1, 0.99215686)
 scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_8sp3l")
 script = ExtResource("2_8sp3l")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1870968708]
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=1762742723]
+scale = Vector2(0.88138586, 1.0595313)
+build_mode = 1
+polygon = PackedVector2Array(-25.414524, -36.242443, 25.414524, -36.242443, 25.414524, -36.242443, 52.64437, 0.7550509, 27.229847, 40.017696, -25.414524, 40.017696, -52.64437, 0)
+
+[connection signal="input_event" from="Area2D" to="." method="_on_input_event"]

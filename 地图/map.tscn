@@ -1,15 +1,24 @@
 [gd_scene format=3 uid="uid://brmenhy1pw7pr"]
 
 [ext_resource type="Texture2D" uid="uid://lvomuoqvpev0" path="res://arts/地图/地图完整版.png" id="1_v7ekd"]
+[ext_resource type="Script" uid="uid://bx70jhg7e3vy1" path="res://地图/map.gd" id="1_y6k3l"]
 [ext_resource type="PackedScene" uid="uid://baykix35vnduq" path="res://地图/市基类.tscn" id="2_degx4"]
 [ext_resource type="PackedScene" uid="uid://ceongw3s3fqwf" path="res://地图/map_section.tscn" id="2_gp7by"]
 
 [node name="MAP" type="Node2D" unique_id=1726495628]
+script = ExtResource("1_y6k3l")
+metadata/_edit_group_ = true
+
+[node name="底图" type="Sprite2D" parent="." unique_id=1420324248]
+position = Vector2(1280, 800)
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("1_v7ekd")
+metadata/_edit_group_ = true
 
 [node name="MapSprite" type="Sprite2D" parent="." unique_id=741853493]
-position = Vector2(1276, 799.99994)
-scale = Vector2(0.379, 0.379)
-texture = ExtResource("1_v7ekd")
+position = Vector2(15.000001, 7.0000005)
+scale = Vector2(0.99, 0.99)
+metadata/_edit_group_ = true
 
 [node name="十堰" parent="MapSprite" unique_id=1457788836 instance=ExtResource("2_degx4")]
 region = 8

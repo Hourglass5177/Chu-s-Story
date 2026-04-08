@@ -1,10 +1,10 @@
 extends AnimatedSprite2D
 class_name PlayerClass
 signal turn_over_byself
-signal roll_dice(result:int)
+signal roll_dice(result:int, player:PlayerClass)
 signal _internal_turn_end
 signal player_died(player:PlayerClass)
-
+var hud:HUD
 enum PlayerCharacter{
 	无,
 	美食博主,
@@ -18,10 +18,9 @@ enum PlayerCharacter{
 func _ready() -> void:
 	# 1. 监听回合开始信号
 	TurnManager.turn_start.connect(_on_turn_manager_turn_start)
-	
 	# 2. 监听阶段改变信号 (比如判断什么时候该我走)
 	TurnManager.phase_changed.connect(_on_phase_changed)
-	
+	hud = get_tree().get_first_node_in_group("HUD") as HUD
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -89,7 +88,7 @@ func _on_phase_changed(new_phase: TurnManager.TurnPhase):
 			TurnManager.next_phase.emit(TurnManager.TurnPhase.ROLL_DICE)
 		TurnManager.TurnPhase.ROLL_DICE:
 			maxMove = do_roll_dice()
-			await get_tree().create_timer(1.0).timeout
+			await TurnManager.get_node("TurnTimer").timeout
 			TurnManager.next_phase.emit(TurnManager.TurnPhase.MOVING)
 		TurnManager.TurnPhase.MOVING:
 			TurnManager.next_phase.emit(TurnManager.TurnPhase.ACTION)
@@ -159,7 +158,7 @@ func request_end_turn():
 # --- 实体动作逻辑 ---
 func do_roll_dice() -> int:
 	var result = randi_range(1, 12)
-	roll_dice.emit(result)
+	roll_dice.emit(result, self)
 	print(player_name, " 掷出了 ", result, " 点")
 	return result
 
@@ -171,6 +170,8 @@ func move_along_path(path_pixels: Array[Vector2], total_cost: int, target_grid_p
 	var tween = create_tween()
 	for point in path_pixels:
 		tween.tween_property(self, "position", point, 0.2).set_trans(Tween.TRANS_LINEAR)
+		# 此处 触发事件
 	
 	await tween.finished
 	print(player_name, " 移动完毕。")
+	now_pos = target_grid_pos

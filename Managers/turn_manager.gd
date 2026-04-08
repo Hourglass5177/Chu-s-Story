@@ -3,6 +3,7 @@ signal turn_start(player_idx : int)
 signal phase_changed(new_phase: TurnPhase)
 signal game_over()
 signal next_phase(phase: TurnPhase)
+signal wait_sig
 
 enum TurnPhase{
 	BEGIN,    # 等待游戏开始或过渡状态
@@ -33,13 +34,25 @@ func now_turn_start():
 		change_phase(phase)
 		# 针对不同阶段采用不同的挂起策略
 		if phase in [TurnPhase.BEGIN, TurnPhase.END]:
-			# 【改动】：为 BEGIN 和 END 强制挂起 1.0 秒。
-			# 以后如果有复杂的开局/结算动画，可以把这里的时长调长，或者改成等待动画结束的信号
-			await get_tree().create_timer(1.0).timeout
+			# 为 BEGIN 和 END 强制挂起 1.0 秒
+			$TurnTimer.start(1.0)
+			await $TurnTimer.timeout
+		elif phase in [TurnPhase.ROLL_DICE]:
+			$TurnTimer.start(3.0)
+			await $TurnTimer.timeout
+		elif phase in [TurnPhase.MOVING, TurnPhase.ACTION]:
+			var callback = func():
+				wait_sig.emit()
+			$TurnTimer.start(15.0)
+			if not $TurnTimer.timeout.is_connected(callback):
+				$TurnTimer.timeout.connect(callback)
+			if not next_phase.is_connected(callback):
+				next_phase.connect(callback)
+			await wait_sig
+			$TurnTimer.stop()
+			$TurnTimer.timeout.disconnect(callback)
+			next_phase.disconnect(callback)
 			
-		elif phase in [TurnPhase.ROLL_DICE, TurnPhase.MOVING, TurnPhase.ACTION]:
-			# 需要进行交互或特定逻辑的阶段，严格等待 next_phase 信号再放行
-			await next_phase
 	now_turn_end()
 	
 

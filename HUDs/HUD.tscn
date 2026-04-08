@@ -8,8 +8,8 @@ script = ExtResource("1_5v5lr")
 
 [node name="玩家信息" type="ReferenceRect" parent="." unique_id=114009303]
 offset_left = 21.0
-offset_top = 67.0
-offset_right = 641.0
+offset_top = 33.0
+offset_right = 502.0
 offset_bottom = 1563.0
 border_width = 5.0
 
@@ -67,7 +67,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="回合信息" type="ReferenceRect" parent="." unique_id=1083800022]
-offset_left = 645.0
+offset_left = 525.0
 offset_top = 30.0
 offset_right = 1965.0
 offset_bottom = 264.0
@@ -121,32 +121,29 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="地图" type="ReferenceRect" parent="." unique_id=186052157]
-offset_left = 647.0
+offset_left = 514.0
 offset_top = 272.0
-offset_right = 1969.6666
-offset_bottom = 921.0
+offset_right = 1966.0
+offset_bottom = 1002.0
 border_width = 2.6
 
 [node name="操作区域" type="ReferenceRect" parent="." unique_id=590482004]
-offset_left = 649.0
-offset_top = 928.0
+offset_left = 1572.0
+offset_top = 1010.0
 offset_right = 1969.0
-offset_bottom = 1570.0
+offset_bottom = 1551.0
 border_width = 2.1
 
 [node name="BtnAction" type="Button" parent="操作区域" unique_id=288720085]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -462.0
-offset_top = 163.5
-offset_right = -184.0
-offset_bottom = 261.5
+offset_left = -139.0
+offset_top = 49.0
+offset_right = 139.0
+offset_bottom = 147.0
 grow_horizontal = 2
-grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_co0a7")
 theme_override_font_sizes/font_size = 90
 text = "行动"
@@ -158,10 +155,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -149.0
-offset_top = 163.5
-offset_right = 129.0
-offset_bottom = 261.5
+offset_left = -139.0
+offset_top = -49.0
+offset_right = 139.0
+offset_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_co0a7")
@@ -170,17 +167,17 @@ text = "食物"
 
 [node name="BtnEndTurn" type="Button" parent="操作区域" unique_id=702813163]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 170.0
-offset_top = 163.5
-offset_right = 448.0
-offset_bottom = 261.5
+anchor_bottom = 1.0
+offset_left = -139.0
+offset_top = -147.0
+offset_right = 139.0
+offset_bottom = -49.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_co0a7")
 theme_override_font_sizes/font_size = 90
 text = "结束"
@@ -212,23 +209,27 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="手牌信息" type="ReferenceRect" parent="." unique_id=1990475967]
-offset_left = 660.0
-offset_top = 939.0
-offset_right = 1955.0
-offset_bottom = 1413.0
+offset_left = 521.0
+offset_top = 1034.0
+offset_right = 1557.0
+offset_bottom = 1565.0
 border_color = Color(0.25638545, 0.5783296, 0.7095881, 1)
 border_width = 2.5
 
 [node name="当前" type="Label" parent="手牌信息" unique_id=1831774146]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -626.5
-offset_top = 7.0
-offset_right = 189.5
-offset_bottom = 72.0
-grow_horizontal = 2
+offset_right = 816.0
+offset_bottom = 65.0
 theme_override_fonts/font = ExtResource("1_co0a7")
 theme_override_font_sizes/font_size = 55
 text = "当前位置：十堰0 (0, 0, 0) - 起点"
+
+[node name="游戏信息" type="Label" parent="手牌信息" unique_id=1817843051]
+layout_mode = 1
+offset_top = 69.0
+offset_right = 780.0
+offset_bottom = 166.0
+theme_override_fonts/font = ExtResource("1_co0a7")
+theme_override_font_sizes/font_size = 64
+text = "等待中…"
+vertical_alignment = 1
