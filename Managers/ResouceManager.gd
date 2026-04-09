@@ -6,26 +6,109 @@ var 食物牌库: Array[卡牌基类] = []
 var 事件牌库: Array[卡牌基类] = []
 var hud:HUD
 
+const STRING_TO_REGION = {
+	"鄂州":MapSection.REGION.鄂州,
+	"恩施":MapSection.REGION.恩施,
+	"黄冈":MapSection.REGION.黄冈,
+	"黄石":MapSection.REGION.黄石,
+	"荆门":MapSection.REGION.荆门,
+	"荆州":MapSection.REGION.荆州,
+	"潜江":MapSection.REGION.潜江,
+	"神农架":MapSection.REGION.神农架,
+	"十堰":MapSection.REGION.十堰,
+	"随州":MapSection.REGION.随州,
+	"天门":MapSection.REGION.天门,
+	"武汉":MapSection.REGION.武汉,
+	"仙桃":MapSection.REGION.仙桃,
+	"咸宁":MapSection.REGION.咸宁,
+	"襄阳":MapSection.REGION.襄阳,
+	"孝感":MapSection.REGION.孝感,
+	"宜昌":MapSection.REGION.宜昌,
+	"其他":MapSection.REGION.其他,
+	"未知":MapSection.REGION.未知
+}
+
 func _ready():
 	_init_decks()
 	hud = get_tree().get_first_node_in_group("HUD")
 
-# 1. 初始化并洗牌
+var 地区非遗牌库: Dictionary[MapSection.REGION, Array] = {} 
+
 func _init_decks():
-	### 实际开发中，这里应当遍历 res://Cards/ 目录去 load 所有 .tres 文件
-	# 此处为示例占位
-	非遗牌库.shuffle()
+	# 调用新的分地区加载函数
+	_load_regional_feiyi_cards("res://Cards/非遗牌")
+	
+	# 其他普通牌库保持原样加载
+	_load_cards_from_dir("res://Cards/食物牌", 食物牌库)
+	_load_cards_from_dir("res://Cards/事件牌", 事件牌库)
 	食物牌库.shuffle()
 	事件牌库.shuffle()
 
+# 【新增】：专门读取地区子文件夹的逻辑
+func _load_regional_feiyi_cards(base_path: String):
+	var dir = DirAccess.open(base_path)
+	if dir:
+		# 获取非遗牌目录下的所有子文件夹名称（比如 "鄂州", "恩施"）
+		var region_folders = dir.get_directories() 
+		
+		for folder_name in region_folders:
+			var region_path = base_path + "/" + folder_name
+			var cards_array: Array[卡牌基类] = []
+			
+			# 复用你之前的通用读取函数，把这个地区的文件全读出来
+			_load_cards_from_dir(region_path, cards_array)
+			
+			if cards_array.size() > 0:
+				cards_array.shuffle() # 仅对该地区洗牌
+				地区非遗牌库[STRING_TO_REGION[folder_name]] = cards_array # 存入字典
+				print("已加载地区 [", folder_name, "] 非遗牌库，共 ", cards_array.size(), " 张")
+	else:
+		push_warning("警告：找不到非遗牌根目录 -> ", base_path)
+		
+func _load_cards_from_dir(path: String, target_array: Array):
+	# 尝试打开目标文件夹
+	var dir = DirAccess.open(path)
+	
+	if dir:
+		# 获取文件夹下的所有文件名
+		var files = dir.get_files()
+		
+		for file_name in files:
+			# 过滤文件：我们只需要 .tres 结尾的文件，或者导出后的 .tres.remap 文件
+			if file_name.ends_with(".tres") or file_name.ends_with(".tres.remap"):
+				
+				# 【防坑神器】：处理打包导出后后缀名变成 .remap 的情况
+				var actual_file = file_name.trim_suffix(".remap") 
+				var full_path = path + "/" + actual_file
+				
+				# 加载资源
+				var card_resource = ResourceLoader.load(full_path)
+				
+				# 确保加载进来的确实是你的卡牌基类，防止把别的乱七八糟的资源混进去
+				if card_resource is 卡牌基类:
+					target_array.append(card_resource)
+	else:
+		push_warning("警告：牌库加载失败，找不到文件夹路径 -> ", path)
+		
+# 【新增】：提供给外部查询该地区是否还有牌的接口
+func has_feiyi_in_region(region:MapSection.REGION) -> bool:
+	if 地区非遗牌库.has(region):
+		return 地区非遗牌库[region].size() > 0
+	return false
 # 2. 发牌中心
-func draw_card(player: PlayerClass, deck_type: 卡牌基类.CardType) -> 卡牌基类:
-	if deck_type == 卡牌基类.CardType.非遗牌 and 非遗牌库.size() > 0:
-		var card = 非遗牌库.pop_back()
-		player.非遗牌手牌.append(card)
-		print(player.player_name, " 获得了非遗牌：【", card.card_name,"】")
-		hud._update_game_informs(player.player_name + " 消耗1点精力，收集了非遗！\n\n 获得了【" + card.card_name + "】！")
-		return card
+func draw_card(player: PlayerClass, deck_type: 卡牌基类.CardType, region:MapSection.REGION) -> 卡牌基类:
+	if deck_type == 卡牌基类.CardType.非遗牌:
+		# 必须指定地区且该地区有牌才能抽
+		var region_name = MapSection.REGION.find_key(region)
+		if 地区非遗牌库.has(region) and 地区非遗牌库[region].size() > 0:
+			var card = 地区非遗牌库[region].pop_back()
+			player.非遗牌手牌.append(card)
+			print(player.player_name, " 在 [", region_name, "] 获得了非遗牌：【", card.card_name,"】")
+			hud._update_game_informs(player.player_name + " 消耗1点精力，收集了非遗！\n\n 获得了【" + card.card_name + "】！")
+			return card
+		else:
+			print("抽牌失败：", region_name, " 地区的非遗牌已被抽空！")
+			return null
 	elif deck_type == 卡牌基类.CardType.食物牌 and 食物牌库.size() > 0:
 		var card = 食物牌库.pop_back()
 		player.食物牌手牌.append(card)
@@ -63,7 +146,7 @@ func modify_energy(player: PlayerClass, amount: int, reason: String = "") -> boo
 func get_feiyi(player: PlayerClass, section: MapSection) -> 卡牌基类:
 	modify_energy(player, -1, "收集非遗")
 	var region = section.region
-	return draw_card(player, 卡牌基类.CardType.非遗牌)
+	return draw_card(player, 卡牌基类.CardType.非遗牌, section.region)
 	
 
 # 4. 业务逻辑封装：处理打工发工资

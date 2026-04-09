@@ -49,6 +49,7 @@ var maxMove:int = 0
 var feiyi_collected_this_turn: bool = false # 记录本回合是否已经收集过非遗
 
 var is_working: bool = false # 当前是否处于“连续打工”状态
+var now_turn_worked: bool = false # 本回合是否已打工过
 var work_turns_left: int = 0 # 剩余连续打工回合数
 var work_turns: int = 0
 var current_work_index: int = -1 # 当前打工格子的逻辑索引
@@ -69,10 +70,11 @@ func before_turn():
 func _on_phase_changed(new_phase: TurnManager.TurnPhase):
 	if !onTurn:
 		return
+	hud._update_button_states(new_phase)
 	match new_phase:
 		TurnManager.TurnPhase.BEGIN:
 			feiyi_collected_this_turn = false
-			pass
+			now_turn_worked = false
 		TurnManager.TurnPhase.ROLL_DICE:
 			if is_working:
 				print(player_name, " 正在专心打工，跳过移动")
@@ -127,18 +129,29 @@ func move_along_path(path_pixels: Array[Vector2], total_cost: int, target_grid_p
 # 格子交互执行枢纽 (由 UI 点击触发)
 # ==========================================
 func execute_tile_action():
+	if !onTurn:
+		return
+	
+	hud.btn_action.disabled = true
+	
 	var section: MapSection = map.grid_map[now_pos]
 	var s_index = section.logical_index
 	
 	match section.type:
 		MapSection.SectionType.非遗:
-			if not feiyi_collected_this_turn and current_energy >= 1:
+			var region = section.region
+
+			# 严格加上 not feiyi_collected_this_turn 的判定，防止同一回合执行两次
+			if current_energy >= 1 and not feiyi_collected_this_turn and ResourceManager.has_feiyi_in_region(region):
+				var card = ResourceManager.get_feiyi(self, section)
 				feiyi_collected_this_turn = true
-				ResourceManager.get_feiyi(self, section)
-				print(player_name, " 消耗1点精力，收集了非遗！")
-				hud._update_player_stats(self)
-				hud.btn_action.disabled = true
-				ResourceManager.draw_card(self, 卡牌基类.CardType.非遗牌)
+				ResourceManager.calculate_victory_score(self)
+				await get_tree().create_timer(1.5).timeout
+			else:
+				# 兜底防错：如果不满足条件却点进来了，解锁 UI 避免卡死
+				hud.btn_action.disabled = false
+				hud.btn_end_turn.disabled = false
+				hud.btn_food.disabled = false
 				
 		MapSection.SectionType.打工:
 			if not is_working and section.grid_visit_history[self]<=1:
@@ -148,6 +161,7 @@ func execute_tile_action():
 				work_turns = 1
 				current_work_index = s_index
 				print(player_name, " 开始打工！")
+				now_turn_worked = true
 				hud.btn_action.disabled = true
 				hud.btn_food.disabled = true
 				hud._update_game_informs("开始打工！")
@@ -159,6 +173,7 @@ func execute_tile_action():
 				print(player_name, " 继续打工，剩余 ", work_turns_left, " 回合。")
 				hud.btn_action.disabled = true
 				hud.btn_food.disabled = true
+				now_turn_worked = true
 				hud._update_game_informs("继续打工")
 				
 			if current_energy >= 1 and is_working:
@@ -181,7 +196,7 @@ func execute_tile_action():
 			
 		MapSection.SectionType.事件, MapSection.SectionType.研究所:
 			print(player_name, " 触发了未实装的格子：", section.type)
-			TurnManager.next_phase.emit(TurnManager.TurnPhase.END)
+			emit_next_phase(TurnManager.TurnPhase.END)
 			
 
 # 自动触发类：风景
@@ -194,11 +209,12 @@ func auto_trigger_scenery(section: MapSection):
 		
 # 退出打工拦截
 func check_and_cancel_work():
-	if is_working:
+	if is_working and not now_turn_worked:
 		is_working = false
 		work_turns_left = 0
 		print(player_name, " 执行了其他操作，提前退出了打工状态！")
 		hud._update_game_informs("结束打工！")
+		await get_tree().create_timer(3).timeout
 
 # 覆盖原本的结束回合请求
 func request_end_turn():

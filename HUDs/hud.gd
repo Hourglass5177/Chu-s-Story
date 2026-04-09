@@ -91,35 +91,50 @@ func _update_button_states(phase: TurnManager.TurnPhase) -> void:
 	if not map.grid_map.has(current_coord): return
 	var current_section = map.grid_map[current_coord]
 	
-	match current_section.type: # 注意你定义的枚举变量名叫 type
-		MapSection.SectionType.非遗:
-			btn_action.text = "收集非遗"
-			# 精力不足或本回合已收集，则禁用
-			if current_player.current_energy < 1 or current_player.feiyi_collected_this_turn:
-				btn_action.disabled = true
+	if phase == TurnManager.TurnPhase.ACTION:
+		match current_section.type: # 注意你定义的枚举变量名叫 type
+			MapSection.SectionType.非遗:
+				# 获取玩家当前脚下格子属于哪个市区（字符串）
+				var region: MapSection.REGION = current_section.region
 				
-		MapSection.SectionType.打工:
-			btn_action.text = "打工"
-			if current_player.current_energy < 1:
-				btn_action.disabled = true
-			# 历史打过工，且现在并不在打工状态中，则终生禁止在此地再次打工
-			if current_section.grid_visit_history[current_player] > 1 and not current_player.is_working:
-				btn_action.disabled = true
+				btn_action.text = "收集非遗"
 				
-		MapSection.SectionType.商店:
-			btn_action.text = "打开商店"
-			# 买过一次就禁止再买
-			if current_section.grid_visit_history[current_player] > 1:
+				# 判定一：如果该地区根本没有牌了
+				if not ResourceManager.has_feiyi_in_region(region):
+					btn_action.text = "已被收集完"
+					btn_action.disabled = true
+				# 判定二：精力不足或本回合已收集
+				elif current_player.current_energy < 1 or current_player.feiyi_collected_this_turn:
+					btn_action.disabled = true
+				else: btn_action.disabled = false
+					
+			MapSection.SectionType.打工:
+				btn_action.text = "打工"
+				if current_player.current_energy < 1:
+					btn_action.disabled = true
+				# 历史打过工，且现在并不在打工状态中，则终生禁止在此地再次打工
+				elif current_section.grid_visit_history[current_player] > 1 and not current_player.is_working:
+					btn_action.disabled = true
+				elif current_player.now_turn_worked:
+					btn_action.disabled = true
+				else: btn_action.disabled = false
+					
+			MapSection.SectionType.商店:
+				btn_action.text = "打开商店"
+				# 买过一次就禁止再买
+				if current_section.grid_visit_history[current_player] > 1:
+					btn_action.disabled = true
+				else: btn_action.disabled = false
+					
+			MapSection.SectionType.风景:
+				btn_action.text = "行动"
+				btn_action.disabled = true # 风景是自动的，手动按钮一直禁用
+				if current_section.grid_visit_history[current_player] <= 1:
+					current_player.auto_trigger_scenery(current_section) 
+			_:
+				btn_action.text = "探索"
 				btn_action.disabled = true
-				
-		MapSection.SectionType.风景:
-			btn_action.text = "行动"
-			btn_action.disabled = true # 风景是自动的，手动按钮一直禁用
-			if current_section.grid_visit_history[current_player] <= 1:
-				current_player.auto_trigger_scenery(current_section) 
-		_:
-			btn_action.text = "探索"
-			btn_action.disabled = true
+	else: btn_action.text = "探索"
 
 func _on_btn_action_pressed() -> void:
 	var current_player = TurnManager.players[TurnManager.now_player_index]
@@ -127,10 +142,21 @@ func _on_btn_action_pressed() -> void:
 
 func _on_btn_end_turn_pressed() -> void:
 	var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
+	if current_player.is_working:
+		btn_end_turn.disabled = true
+		btn_action.disabled = true
+		btn_food.disabled = true
+		await current_player.check_and_cancel_work()
+		
 	if TurnManager.now_phase == TurnManager.TurnPhase.MOVING:
 		current_player.emit_next_phase(TurnManager.TurnPhase.ACTION)
 	elif TurnManager.now_phase == TurnManager.TurnPhase.ACTION:
 		current_player.emit_next_phase(TurnManager.TurnPhase.END)
+
+func _on_btn_food_pressed() -> void:
+	var current_player = TurnManager.players[TurnManager.now_player_index]
+	if current_player.is_working:
+		await current_player.check_and_cancel_work()
 
 func open_shop_panel(player:PlayerClass):
 	pass

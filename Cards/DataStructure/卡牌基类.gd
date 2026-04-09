@@ -14,7 +14,7 @@ enum CardType{
 @export var card_type: CardType = CardType.非遗牌
 @export var card_name: String = "未命名卡牌" 
 
-@export var image_of_front : Image = null
-@export var image_of_back: Image = null
+@export var image_of_front : Texture2D = null
+@export var image_of_back: Texture2D = null
 
 @export_multiline var description: String = "描述文本"
