@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://dgp0xufam3n38"]
+
+[ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_pjg4e"]
+
+[resource]
+script = ExtResource("1_pjg4e")
+region = 1
+category = 1
+effect_type = 2
+effect_value = 750
+destroy_after_use = true
+card_name = "利川灯歌"
+metadata/_custom_type_script = "uid://cfcilcn48vowf"

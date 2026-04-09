@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://hbrwd4u80kmw"]
+
+[ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_sr6q2"]
+
+[resource]
+script = ExtResource("1_sr6q2")
+region = 2
+category = 3
+base_score = 2
+effect_type = 2
+effect_value = 750
+destroy_after_use = true
+card_name = "李时珍传说"
+metadata/_custom_type_script = "uid://cfcilcn48vowf"

@@ -4,7 +4,6 @@
 
 [resource]
 script = ExtResource("1_sh5y2")
-region = "鄂州"
 category = 1
 effect_type = 2
 effect_value = 750

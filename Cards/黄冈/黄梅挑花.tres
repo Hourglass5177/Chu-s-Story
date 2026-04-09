@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://cetq353bs8yqi"]
+
+[ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_sxrp3"]
+
+[resource]
+script = ExtResource("1_sxrp3")
+region = 2
+category = 2
+base_score = 1
+effect_type = 2
+effect_value = 750
+destroy_after_use = true
+card_name = "黄梅挑花"
+metadata/_custom_type_script = "uid://cfcilcn48vowf"

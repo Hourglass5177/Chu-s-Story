@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://ysndsdawjvat"]
+
+[ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_t3e2e"]
+
+[resource]
+script = ExtResource("1_t3e2e")
+region = 2
+category = 6
+base_score = 5
+effect_type = 2
+effect_value = 750
+unbreakable = true
+card_name = "黄梅戏"
+metadata/_custom_type_script = "uid://cfcilcn48vowf"

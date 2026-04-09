@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://cj7q18j5r07av"]
+
+[ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_bgvw5"]
+
+[resource]
+script = ExtResource("1_bgvw5")
+region = 16
+category = 1
+effect_type = 2
+effect_value = 750
+destroy_after_use = true
+card_name = "宜昌薅草锣鼓"
+metadata/_custom_type_script = "uid://cfcilcn48vowf"
