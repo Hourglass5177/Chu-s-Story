@@ -4,9 +4,11 @@ signal event_on_trigger(event_name: String)
 var 非遗牌库: Array[卡牌基类] = []
 var 食物牌库: Array[卡牌基类] = []
 var 事件牌库: Array[卡牌基类] = []
+var hud:HUD
 
 func _ready():
 	_init_decks()
+	hud = get_tree().get_first_node_in_group("HUD")
 
 # 1. 初始化并洗牌
 func _init_decks():
@@ -17,22 +19,28 @@ func _init_decks():
 	事件牌库.shuffle()
 
 # 2. 发牌中心
-func draw_card(player: PlayerClass, deck_type: 卡牌基类.CardType, count: int = 1):
-	for i in range(count):
-		if deck_type == 卡牌基类.CardType.非遗牌 and 非遗牌库.size() > 0:
-			var card = 非遗牌库.pop_back()
-			player.非遗牌手牌.append(card)
-			print(player.player_name, " 获得了非遗牌：【", card.card_name,"】")
-		elif deck_type == 卡牌基类.CardType.食物牌 and 食物牌库.size() > 0:
-			var card = 食物牌库.pop_back()
-			player.食物牌手牌.append(card)
-			print(player.player_name, " 获得了食物牌：【", card.card_name,"】")
-		elif deck_type == 卡牌基类.CardType.事件牌 and 事件牌库.size() > 0:
-			var card = 事件牌库.pop_back()
-			event_on_trigger.emit(card.card_name)
-			print(player.player_name, " 抽到了事件牌：【", card.card_name,"】")
-		else:
-			print("牌库 [", deck_type, "] 已空！")
+func draw_card(player: PlayerClass, deck_type: 卡牌基类.CardType) -> 卡牌基类:
+	if deck_type == 卡牌基类.CardType.非遗牌 and 非遗牌库.size() > 0:
+		var card = 非遗牌库.pop_back()
+		player.非遗牌手牌.append(card)
+		print(player.player_name, " 获得了非遗牌：【", card.card_name,"】")
+		hud._update_game_informs(player.player_name + " 消耗1点精力，收集了非遗！\n\n 获得了【" + card.card_name + "】！")
+		return card
+	elif deck_type == 卡牌基类.CardType.食物牌 and 食物牌库.size() > 0:
+		var card = 食物牌库.pop_back()
+		player.食物牌手牌.append(card)
+		print(player.player_name, " 获得了食物牌：【", card.card_name,"】")
+		hud._update_game_informs(player.player_name + " 获得了【" + card.card_name + "】！")
+		return card
+	elif deck_type == 卡牌基类.CardType.事件牌 and 事件牌库.size() > 0:
+		var card = 事件牌库.pop_back()
+		event_on_trigger.emit(card.card_name)
+		print(player.player_name, " 抽到了事件牌：【", card.card_name,"】")
+		hud._update_game_informs(player.player_name + " 抽到了事件牌：【" + card.card_name + "】！")
+		return card
+	else:
+		print("牌库 [", deck_type, "] 已空！")
+		return null
 
 # 3. 积分与经济结算 (中央银行)
 func modify_money(player: PlayerClass, amount: int, reason: String = "无"):
@@ -52,19 +60,35 @@ func modify_energy(player: PlayerClass, amount: int, reason: String = "") -> boo
 	
 	return true
 
+func get_feiyi(player: PlayerClass, section: MapSection) -> 卡牌基类:
+	modify_energy(player, -1, "收集非遗")
+	var region = section.region
+	return draw_card(player, 卡牌基类.CardType.非遗牌)
+	
+
 # 4. 业务逻辑封装：处理打工发工资
 func process_work_salary(player: PlayerClass, work_turn: int):
 	var salary = 0
 	# 严格按照说明书规则发放打工积分 [cite: 85]
 	match work_turn:
-		1: salary = 300
-		2: salary = 400
-		3: salary = 500
+		1: salary = 250
+		2: salary = 300
+		3: salary = 350
 		_: push_error("非法的打工轮数！")
 		
 	# 打工消耗 1 点精力 [cite: 43]
 	modify_energy(player, -1, "打工消耗")
 	modify_money(player, salary, "打工第 " + str(work_turn) + " 回合工资")
+	hud.information.text += "\n"+player.player_name+"消耗1点精力，积分点 +"+str(salary)
+	hud._update_player_stats(player)
+
+func vis_scenery(player: PlayerClass, section: MapSection) -> bool:
+	var region = section.region
+	player.current_energy = clampi(player.current_energy + 3, 0, player.max_energy)
+	print(player.player_name, " 欣赏风景，回复3点精力，并获得风景明信片！")
+	hud._update_game_informs(player.player_name + " 欣赏风景，回复3点精力！")
+	# TODO: 获得明信片的接口
+	return true
 
 # 5. 业务逻辑封装：商店购买食物
 func buy_food(player: PlayerClass, food_card: 食物牌) -> bool:

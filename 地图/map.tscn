@@ -406,7 +406,7 @@ section_name = "襄阳8"
 location_index = Vector3i(8, -8, 0)
 region = 14
 logical_index = 39
-type = 1
+type = 5
 
 [node name="MapSection29" parent="MapSprite/襄阳" unique_id=2030396259 instance=ExtResource("2_gp7by")]
 position = Vector2(1400, 522)

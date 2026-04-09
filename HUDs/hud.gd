@@ -26,7 +26,8 @@ func _ready() -> void:
 	TurnManager.turn_start.connect(_on_turn_start)
 	TurnManager.phase_changed.connect(_on_phase_changed)
 	btn_end_turn.pressed.connect(_on_btn_end_turn_pressed)
-	_update_button_states(TurnManager.TurnPhase.BEGIN)
+	btn_action.pressed.connect(_on_btn_action_pressed)
+	#_update_button_states(TurnManager.TurnPhase.BEGIN)
 
 func _process(delta: float):
 	if timer and TurnManager.GameOn and timer.time_left > 0:
@@ -84,13 +85,45 @@ func _update_button_states(phase: TurnManager.TurnPhase) -> void:
 	btn_end_turn.disabled = (not phase in [TurnManager.TurnPhase.ACTION, TurnManager.TurnPhase.MOVING])
 	btn_food.disabled = (phase != TurnManager.TurnPhase.ACTION)
 
+	var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
+	var current_coord: Vector3i = current_player.now_pos
+	
+	if not map.grid_map.has(current_coord): return
+	var current_section = map.grid_map[current_coord]
+	
+	match current_section.type: # 注意你定义的枚举变量名叫 type
+		MapSection.SectionType.非遗:
+			btn_action.text = "收集非遗"
+			# 精力不足或本回合已收集，则禁用
+			if current_player.current_energy < 1 or current_player.feiyi_collected_this_turn:
+				btn_action.disabled = true
+				
+		MapSection.SectionType.打工:
+			btn_action.text = "打工"
+			if current_player.current_energy < 1:
+				btn_action.disabled = true
+			# 历史打过工，且现在并不在打工状态中，则终生禁止在此地再次打工
+			if current_section.grid_visit_history[current_player] > 1 and not current_player.is_working:
+				btn_action.disabled = true
+				
+		MapSection.SectionType.商店:
+			btn_action.text = "打开商店"
+			# 买过一次就禁止再买
+			if current_section.grid_visit_history[current_player] > 1:
+				btn_action.disabled = true
+				
+		MapSection.SectionType.风景:
+			btn_action.text = "行动"
+			btn_action.disabled = true # 风景是自动的，手动按钮一直禁用
+			if current_section.grid_visit_history[current_player] <= 1:
+				current_player.auto_trigger_scenery(current_section) 
+		_:
+			btn_action.text = "探索"
+			btn_action.disabled = true
+
 func _on_btn_action_pressed() -> void:
 	var current_player = TurnManager.players[TurnManager.now_player_index]
-	
-	# 这里目前用一个测试逻辑代替。
-	# 未来应通过 MainMap 获取 current_player.now_pos 所在格子的 SectionType
-	print("执行格子默认行动：抽一张非遗牌")
-	current_player.request_draw_card(卡牌基类.CardType.非遗牌, 1)
+	current_player.execute_tile_action()
 
 func _on_btn_end_turn_pressed() -> void:
 	var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
@@ -98,3 +131,6 @@ func _on_btn_end_turn_pressed() -> void:
 		current_player.emit_next_phase(TurnManager.TurnPhase.ACTION)
 	elif TurnManager.now_phase == TurnManager.TurnPhase.ACTION:
 		current_player.emit_next_phase(TurnManager.TurnPhase.END)
+
+func open_shop_panel(player:PlayerClass):
+	pass

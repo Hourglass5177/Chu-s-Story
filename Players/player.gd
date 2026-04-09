@@ -23,6 +23,7 @@ func _ready() -> void:
 	map = get_tree().get_first_node_in_group("MAP") as MAP
 	now_pos = start_coord
 	position = map.grid_map[start_coord].global_position
+	map.grid_map[start_coord].is_occupied = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -45,7 +46,13 @@ var now_pos: Vector3i = Vector3i(0, 0, 0)
 var onTurn: bool = false
 var maxMove:int = 0
 
-# 这是一个数组，专门用来存放 CardData 类型的资源，也就是玩家手里的“非遗卡牌”
+var feiyi_collected_this_turn: bool = false # 记录本回合是否已经收集过非遗
+
+var is_working: bool = false # 当前是否处于“连续打工”状态
+var work_turns_left: int = 0 # 剩余连续打工回合数
+var work_turns: int = 0
+var current_work_index: int = -1 # 当前打工格子的逻辑索引
+
 var 非遗牌手牌: Array[非遗牌] = [] 
 var 食物牌手牌: Array[食物牌] = []
 
@@ -64,33 +71,22 @@ func _on_phase_changed(new_phase: TurnManager.TurnPhase):
 		return
 	match new_phase:
 		TurnManager.TurnPhase.BEGIN:
-			emit_next_phase(TurnManager.TurnPhase.ROLL_DICE)
+			feiyi_collected_this_turn = false
+			pass
 		TurnManager.TurnPhase.ROLL_DICE:
+			if is_working:
+				print(player_name, " 正在专心打工，跳过移动")
+				hud._update_game_informs("打工中……")
+				emit_next_phase(TurnManager.TurnPhase.ACTION)
+				return
+			hud._update_game_informs("玩家"+player_name+" 掷骰子中…")
+			await get_tree().create_timer(1).timeout
 			maxMove = do_roll_dice()
-			await TurnManager.get_node("TurnTimer").timeout
-			emit_next_phase(TurnManager.TurnPhase.MOVING)
 		TurnManager.TurnPhase.MOVING:
 			pass
 		TurnManager.TurnPhase.ACTION:
-			#var turntimer = TurnManager.get_node("TurnTimer")
-			#turntimer.start()
-			#var callback = func(): 
-				#_internal_turn_end.emit()
-			## 连接两个可能的结束条件
-			#if not turntimer.timeout.is_connected(callback):
-				#turntimer.timeout.connect(callback)
-			#if not turn_over_byself.is_connected(callback):
-				#turn_over_byself.connect(callback)
-			## 等待统一信号
-			#await _internal_turn_end
-			## 【强制清理】断开连接，否则下个回合会重复触发导致内存泄漏和逻辑雪崩
-			#turntimer.timeout.disconnect(callback)
-			#turn_over_byself.disconnect(callback)
-			## 计时器的 stop 应交由 TurnManager 处理，这里仅防错
-			#if not turntimer.is_stopped():
-				#turntimer.stop()
-			#emit_next_phase(TurnManager.TurnPhase.END)
-			pass
+			hud._update_game_informs("等待行动…")
+			hud._update_button_states(TurnManager.TurnPhase.ACTION)
 		TurnManager.TurnPhase.END:
 			pass
 
@@ -103,39 +99,6 @@ func after_turn():
 		print("玩家 ", player_name,"体力耗尽，被淘汰！")
 		alive = false
 		player_died.emit(self)
-		
-# 1. 触发抽卡请求（通常在“非遗”或“事件”格子上触发）
-func request_draw_card(deck_type: 卡牌基类.CardType, count: int = 1):
-	print(player_name, " 发起抽卡请求：", deck_type)
-	ResourceManager.draw_card(self, deck_type, count)
-	
-	# 如果抽的是非遗牌，一定要通知资源管理器重算得分！
-	if deck_type == 卡牌基类.CardType.非遗牌:
-		ResourceManager.calculate_victory_score(self)
-		
-	# 行动完成后，向外发射内部结束信号，解除 during_turn 的等待
-
-
-# 2. 触发打工请求
-func request_work(work_turn: int):
-	print(player_name, " 发起打工请求，当前轮数：", work_turn)
-	ResourceManager.process_work_salary(self, work_turn)
-
-
-# 3. 触发商店购买请求
-func request_buy_food(food_card: 食物牌):
-	print(player_name, " 发起购买食物请求：", food_card.card_name if "card_name" in food_card else "未知食物")
-	var success = ResourceManager.buy_food(self, food_card)
-	if success:
-		pass
-	else:
-		print("购买失败，行动未结束，请玩家重新选择。")
-		# 购买失败不 emit 结束信号，让玩家继续停留在 ACTION 阶段操作
-
-# 4. 什么都不做，直接结束回合（直接点结束按钮）
-func request_end_turn():
-	print(player_name, " 放弃行动，直接结束。")
-	#turn_over_byself.emit()
 
 # --- 实体动作逻辑 ---
 func do_roll_dice() -> int:
@@ -154,9 +117,93 @@ func move_along_path(path_pixels: Array[Vector2], total_cost: int, target_grid_p
 		# 此处 触发事件
 	await tween.finished
 	print(player_name, " 移动完毕。")
+	map.grid_map[now_pos].is_occupied = false
 	now_pos = target_grid_pos # 更新逻辑坐标
+	map.grid_map[now_pos].is_occupied = true
 	hud._update_player_stats(self)
 	map._clear_all_highlights()
 	map._show_reachable_areas()
+# ==========================================
+# 格子交互执行枢纽 (由 UI 点击触发)
+# ==========================================
+func execute_tile_action():
+	var section: MapSection = map.grid_map[now_pos]
+	var s_index = section.logical_index
 	
-	#TurnManager.next_phase.emit(TurnManager.TurnPhase.ACTION)
+	match section.type:
+		MapSection.SectionType.非遗:
+			if not feiyi_collected_this_turn and current_energy >= 1:
+				feiyi_collected_this_turn = true
+				ResourceManager.get_feiyi(self, section)
+				print(player_name, " 消耗1点精力，收集了非遗！")
+				hud._update_player_stats(self)
+				hud.btn_action.disabled = true
+				ResourceManager.draw_card(self, 卡牌基类.CardType.非遗牌)
+				
+		MapSection.SectionType.打工:
+			if not is_working and section.grid_visit_history[self]<=1:
+				# 初次打工
+				is_working = true
+				work_turns_left = 2
+				work_turns = 1
+				current_work_index = s_index
+				print(player_name, " 开始打工！")
+				hud.btn_action.disabled = true
+				hud.btn_food.disabled = true
+				hud._update_game_informs("开始打工！")
+			
+			elif is_working:
+				# 连续打工中
+				work_turns_left -= 1
+				work_turns += 1
+				print(player_name, " 继续打工，剩余 ", work_turns_left, " 回合。")
+				hud.btn_action.disabled = true
+				hud.btn_food.disabled = true
+				hud._update_game_informs("继续打工")
+				
+			if current_energy >= 1 and is_working:
+				ResourceManager.process_work_salary(self, work_turns)
+				
+			if work_turns_left <= 0:
+				is_working = false
+				hud.btn_action.disabled = true
+				print(player_name, " 打工期满，恢复自由！")
+				hud._update_game_informs("打工结束！")
+			
+		MapSection.SectionType.商店:
+			if section.grid_visit_history[self] == 1:
+				hud.btn_action.disabled = true
+				print(player_name, " 打开了食物商店。")
+				# 呼叫 HUD 打开商店弹窗（HUD中留好接口）
+				hud.open_shop_panel(self)
+				# 注意：商店打开后不直接 emit END，等玩家买完或关掉弹窗再结束
+			
+			
+		MapSection.SectionType.事件, MapSection.SectionType.研究所:
+			print(player_name, " 触发了未实装的格子：", section.type)
+			TurnManager.next_phase.emit(TurnManager.TurnPhase.END)
+			
+
+# 自动触发类：风景
+func auto_trigger_scenery(section: MapSection):
+	if(section.type != MapSection.SectionType.风景):
+		return
+	if section.grid_visit_history[self] == 1:
+		ResourceManager.vis_scenery(self, section)
+	
+		
+# 退出打工拦截
+func check_and_cancel_work():
+	if is_working:
+		is_working = false
+		work_turns_left = 0
+		print(player_name, " 执行了其他操作，提前退出了打工状态！")
+		hud._update_game_informs("结束打工！")
+
+# 覆盖原本的结束回合请求
+func request_end_turn():
+	check_and_cancel_work() # 如果正在打工，点结束按钮直接放弃剩余打工回合
+	if TurnManager.now_phase == TurnManager.TurnPhase.MOVING:
+		TurnManager.next_phase.emit(TurnManager.TurnPhase.ACTION)
+	elif TurnManager.now_phase == TurnManager.TurnPhase.ACTION:
+		TurnManager.next_phase.emit(TurnManager.TurnPhase.END)

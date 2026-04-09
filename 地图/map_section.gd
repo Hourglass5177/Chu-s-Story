@@ -3,6 +3,7 @@ class_name MapSection
 signal section_clicked(target_section: MapSection)
 var is_reachable: bool = false
 var is_reached: bool = false
+var is_occupied: bool = false
 enum SectionType{
 	一般,
 	非遗,

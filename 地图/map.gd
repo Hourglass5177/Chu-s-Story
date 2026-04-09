@@ -1,11 +1,12 @@
 extends Node2D
 class_name MAP
 var grid_map: Dictionary[Vector3i, MapSection] = {}
-
+var hud:HUD
 func _ready():
 	# 1. 注册所有格子
 	# 假设所有的 MapSection 都放在一个叫 "Sections" 的节点下
 	TurnManager.phase_changed.connect(_on_phase_changed)
+	hud = get_tree().get_first_node_in_group("HUD")
 	for city in $MapSprite.get_children():
 		if city is 市基类:
 			for section: MapSection in city.get_children():
@@ -13,7 +14,7 @@ func _ready():
 				grid_map[Vector3i(0, 0, section.logical_index)] = section
 				# 监听格子的点击信号
 				section.section_clicked.connect(_on_section_clicked)
-				_update_ui_for_action()
+				#hud._update_ui_for_action()
 			
 	# 2. 监听阶段变化
 	
@@ -26,7 +27,7 @@ func _on_phase_changed(new_phase: TurnManager.TurnPhase):
 		TurnManager.TurnPhase.ACTION:
 			# 移动结束，关闭所有高亮
 			_clear_all_highlights()
-			_update_ui_for_action()
+	hud._update_button_states(new_phase)
 
 # --- 算法：显示可达区域 ---
 func _show_reachable_areas():
@@ -54,7 +55,7 @@ func _show_reachable_areas():
 			if new_pos in grid_map and now_status.x < max_steps:
 				var next_section = grid_map[new_pos]
 				var new_cost = now_status.y + next_section.cost
-				if new_cost <= available_energy and not vis.has(next_section.logical_index) and not next_section.is_reached:
+				if new_cost <= available_energy and not vis.has(next_section.logical_index) and not next_section.is_reached and not grid_map[new_pos].is_occupied:
 					next_section.is_reachable = true 
 					que.push_back(new_pos)
 					que_status.push_back(Vector2i(now_status.x + 1, new_cost))
@@ -107,7 +108,7 @@ func _on_section_clicked(target_section: MapSection) -> String:
 				var new_cost = cost_so_far[now_pos] + grid_map[new_pos].cost
 				
 				# 如果这个格子没去过，或者找到了一条更省精力的路，且未超过玩家最大精力上限
-				if (not cost_so_far.has(new_pos) or new_cost < cost_so_far[new_pos]) and new_cost <= max_energy and not grid_map[new_pos].is_reached:
+				if (not cost_so_far.has(new_pos) or new_cost < cost_so_far[new_pos]) and new_cost <= max_energy and not grid_map[new_pos].is_reached and not grid_map[new_pos].is_occupied:
 					cost_so_far[new_pos] = new_cost
 					came_from[new_pos] = now_pos # 【关键】记录：我是从 now_pos 走到 new_pos 的
 					que.push_back(new_pos)
@@ -137,28 +138,3 @@ func _on_section_clicked(target_section: MapSection) -> String:
 	current_player.move_along_path(path_pixels, total_cost_used, target_coord)
 	return "success"
 	
-func _update_ui_for_action():
-	await get_tree().create_timer(0.1).timeout
-	var current_player:PlayerClass = TurnManager.players[TurnManager.now_player_index]
-	var current_coord:Vector3i = current_player.now_pos
-	
-	if not grid_map.has(current_coord):
-		return
-		
-	var current_section = grid_map[current_coord]
-	
-	# 获取你已经用依赖注入或分组查找到的 HUD
-	var hud:HUD = get_tree().get_first_node_in_group("HUD")
-	
-	# 根据格子类型，通知 HUD 改变按钮文字和功能
-	match current_section.type:
-		MapSection.SectionType.非遗:
-			hud.btn_action.text = "抽取非遗牌"
-			# 你可以在 HUD 脚本里存储一个当前状态，以便点击时请求抽卡
-		MapSection.SectionType.打工:
-			hud.btn_action.text = "打工"
-		MapSection.SectionType.商店:
-			hud.btn_action.text = "购买食物"
-		_:
-			hud.btn_action.text = "行动"
-			hud.btn_action.disabled = true
