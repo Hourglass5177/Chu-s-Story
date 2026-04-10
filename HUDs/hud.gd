@@ -22,6 +22,7 @@ class_name HUD
 @onready var information = $"手牌信息/游戏信息" as Label
 
 @onready var timer = TurnManager.get_node("TurnTimer") as Timer
+@export var default_font: FontFile = null
 var map:MAP
 func _ready() -> void:
 	map_container.resized.connect(_on_container_resized)
@@ -32,6 +33,7 @@ func _ready() -> void:
 	btn_end_turn.pressed.connect(_on_btn_end_turn_pressed)
 	btn_action.pressed.connect(_on_btn_action_pressed)
 	#_update_button_states(TurnManager.TurnPhase.BEGIN)
+	detail_panel.use_button_clicked.connect(_execute_card_usage)
 # 暴露给编辑器的变量，把你做好的 map.tscn 直接从底层文件系统拖到右侧面板的这个槽位里
 @export var map_scene: PackedScene 
 
@@ -89,6 +91,7 @@ func _on_turn_start(player_idx: int) -> void:
 	var current_player = TurnManager.players[player_idx]
 	turn_label.text = "回合数：" + str(TurnManager.now_turn) + " 当前玩家：" + current_player.player_name
 	_update_player_stats(current_player)
+	refresh_feiyi_list(current_player)
 
 func _on_phase_changed(new_phase: TurnManager.TurnPhase) -> void:
 	# 每次阶段改变时，刷新 UI 上的数值和按钮可用性
@@ -211,3 +214,73 @@ func _on_btn_food_pressed() -> void:
 
 func open_shop_panel(player:PlayerClass):
 	pass
+
+# 预加载你刚才做好的两个组件
+const ThumbnailScene = preload("res://HUDs/非遗牌缩略图.tscn")
+const DetailPanelScene = preload("res://HUDs/非遗详情弹窗.tscn")
+
+@onready var feiyi_list = $"积分区域/ScrollContainer/非遗列表容器"
+@onready var detail_panel = $"非遗详情弹窗" 
+
+# 刷新右侧非遗列表（回合开始、或者抽到新卡时调用）
+func refresh_feiyi_list(player: PlayerClass):
+	# 1. 清空旧列表
+	for child in feiyi_list.get_children():
+		child.queue_free()
+		
+	# 2. 按城市将手牌分组
+	var city_groups: Dictionary[MapSection.REGION, Array] = {}
+	for card in player.非遗牌手牌:
+		if not city_groups.has(card.region):
+			city_groups[card.region] = []
+		city_groups[card.region].append(card)
+		
+	# 3. 动态生成 UI
+	for city_int in city_groups.keys():
+		# 生成城市标题
+		var city_name = MapSection.REGION.keys()[city_int]
+		var city_label = Label.new()
+		city_label.text = "== " + city_name + " =="
+		city_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER # 文本居中
+		city_label.add_theme_color_override("font_color", Color.BLACK) # 字体设为纯黑
+		city_label.add_theme_font_size_override("font_size", 64)
+		city_label.add_theme_font_override("font", default_font)
+		feiyi_list.add_child(city_label)
+		
+		# 生成该城市下的卡牌网格 (2列)
+		var grid = GridContainer.new()
+		grid.columns = 2
+		# 用代码强行设定网格间距
+		grid.add_theme_constant_override("h_separation", 10)
+		grid.add_theme_constant_override("v_separation", 10)
+		
+		feiyi_list.add_child(grid)
+		
+		for card in city_groups[ResourceManager.STRING_TO_REGION[city_name]]:
+			var thumbnail = ThumbnailScene.instantiate()
+			grid.add_child(thumbnail)
+			await get_tree().process_frame
+			thumbnail.setup(card)
+			
+			# 连接缩略图发出的信号
+			thumbnail.request_open_detail.connect(func(c): detail_panel.show_detail(c, player))
+			thumbnail.request_use_card.connect(_execute_card_usage)
+			
+		# 生成城市间的分界线
+		feiyi_list.add_child(HSeparator.new())
+
+# 统一处理卡牌使用逻辑（途径1：右键菜单，途径2：弹窗点击）
+func _execute_card_usage(card_data: 非遗牌):
+	var player = TurnManager.players[TurnManager.now_player_index]
+	print(player.player_name, " 主动使用了卡牌：", card_data.card_name)
+	card_data.execute_effect(player)
+	
+	# 使用完后可能需要从手牌移除（视规则而定）
+	# player.非遗牌手牌.erase(card_data)
+	# refresh_feiyi_list(player)
+
+# 途径3：被动/触发型卡牌的询问接口（留给 TurnManager 或 Player 脚本在特定时机调用）
+func prompt_passive_card_use(card_data: 非遗牌, callable_if_yes: Callable):
+	# 这里你可以唤起一个系统的 ConfirmationDialog 询问玩家
+	print("询问：是否要发动被动技能【", card_data.card_name, "】？")
+	# 如果玩家点是：callable_if_yes.call()

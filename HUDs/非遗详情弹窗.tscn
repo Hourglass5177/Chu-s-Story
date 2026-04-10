@@ -1,0 +1,155 @@
+[gd_scene format=3 uid="uid://cb5cdjbnpc5c6"]
+
+[ext_resource type="Texture2D" uid="uid://dd7ecbfvwpcjv" path="res://arts/1x/资源 10.png" id="1_f45lj"]
+[ext_resource type="Script" uid="uid://cdq4c0raxu70h" path="res://HUDs/非遗详情弹窗.gd" id="1_imxyn"]
+[ext_resource type="Texture2D" uid="uid://dgiwqefliuycr" path="res://arts/非遗卡牌/仙桃/仙桃雕花剪纸.jpg" id="2_gtjvs"]
+[ext_resource type="FontFile" uid="uid://b1potytyqa1t5" path="res://arts/像素字体.ttf" id="4_bqm6w"]
+[ext_resource type="Texture2D" uid="uid://plvuejng3g68" path="res://arts/1x/close.png" id="5_bqm6w"]
+[ext_resource type="Texture2D" uid="uid://b7clbspmqvqrf" path="res://arts/控件/close.png" id="5_x0v5x"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x0v5x"]
+texture = ExtResource("1_f45lj")
+
+[node name="非遗详情弹窗" type="Panel" unique_id=914408683]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -900.0
+offset_top = -600.0
+offset_right = 900.0
+offset_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_x0v5x")
+script = ExtResource("1_imxyn")
+
+[node name="标题" type="Label" parent="." unique_id=405692965]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -534.0
+offset_top = 83.0
+offset_right = 534.0
+offset_bottom = 164.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_bqm6w")
+theme_override_font_sizes/font_size = 80
+text = "==  湖北省非物质文化遗产  =="
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=310467574]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -784.0
+offset_top = -366.0
+offset_right = -253.0
+offset_bottom = 459.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gtjvs")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1822053717]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.0
+offset_top = -355.0
+offset_right = 765.0
+offset_bottom = 463.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 33
+metadata/_edit_group_ = true
+
+[node name="LblName" type="Label" parent="VBoxContainer" unique_id=2091125591]
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_bqm6w")
+theme_override_font_sizes/font_size = 64
+text = "【名称】剪纸（仙桃雕花剪纸）"
+vertical_alignment = 1
+
+[node name="LblCate" type="Label" parent="VBoxContainer" unique_id=553500864]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_bqm6w")
+theme_override_font_sizes/font_size = 64
+text = "【类别】手工技艺"
+vertical_alignment = 1
+
+[node name="LblScore" type="Label" parent="VBoxContainer" unique_id=796984962]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_bqm6w")
+theme_override_font_sizes/font_size = 64
+text = "【分数】1 分"
+vertical_alignment = 1
+
+[node name="LblDesc" type="Label" parent="VBoxContainer" unique_id=546313336]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_bqm6w")
+theme_override_font_sizes/font_size = 64
+text = "【描述】"
+autowrap_mode = 3
+
+[node name="LblEffect" type="Label" parent="VBoxContainer" unique_id=1358863927]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_bqm6w")
+theme_override_font_sizes/font_size = 64
+text = "【效果】"
+autowrap_mode = 3
+
+[node name="BtnUse" type="Button" parent="." unique_id=507031844]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 406.0
+offset_right = 734.0
+offset_bottom = 414.0
+
+[node name="BtnClose" type="TextureButton" parent="." unique_id=1881962062]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -380.0
+offset_top = -55.0
+offset_right = 26.0
+offset_bottom = 351.0
+grow_horizontal = 0
+texture_normal = ExtResource("5_x0v5x")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="mask" type="TextureRect" parent="BtnClose" unique_id=1887830459]
+modulate = Color(0, 0, 0, 0.39215687)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_bqm6w")

@@ -4,6 +4,8 @@ signal event_on_trigger(event_name: String)
 var 非遗牌库: Array[卡牌基类] = []
 var 食物牌库: Array[卡牌基类] = []
 var 事件牌库: Array[卡牌基类] = []
+var 地区非遗牌上限字典: Dictionary[MapSection.REGION, int] = {}
+var 类别非遗牌上限字典: Dictionary[非遗牌.CardCategory, int] = {}
 var hud:HUD
 
 const STRING_TO_REGION = {
@@ -41,6 +43,8 @@ func _init_decks():
 	# 其他普通牌库保持原样加载
 	_load_cards_from_dir("res://Cards/食物牌", 食物牌库)
 	_load_cards_from_dir("res://Cards/事件牌", 事件牌库)
+	_count_feiyi_in_category()
+	非遗牌库.shuffle()
 	食物牌库.shuffle()
 	事件牌库.shuffle()
 
@@ -60,7 +64,9 @@ func _load_regional_feiyi_cards(base_path: String):
 			
 			if cards_array.size() > 0:
 				cards_array.shuffle() # 仅对该地区洗牌
+				非遗牌库.append_array(cards_array)
 				地区非遗牌库[STRING_TO_REGION[folder_name]] = cards_array # 存入字典
+				地区非遗牌上限字典[STRING_TO_REGION[folder_name]] = cards_array.size()
 				print("已加载地区 [", folder_name, "] 非遗牌库，共 ", cards_array.size(), " 张")
 	else:
 		push_warning("警告：找不到非遗牌根目录 -> ", base_path)
@@ -89,7 +95,13 @@ func _load_cards_from_dir(path: String, target_array: Array):
 					target_array.append(card_resource)
 	else:
 		push_warning("警告：牌库加载失败，找不到文件夹路径 -> ", path)
-		
+
+func _count_feiyi_in_category():
+	for card:非遗牌 in 非遗牌库:
+		if 类别非遗牌上限字典.has(card.category):
+			类别非遗牌上限字典[card.category] += 1
+		else: 类别非遗牌上限字典[card.category] = 1
+
 # 【新增】：提供给外部查询该地区是否还有牌的接口
 func has_feiyi_in_region(region:MapSection.REGION) -> bool:
 	if 地区非遗牌库.has(region):
@@ -105,6 +117,7 @@ func draw_card(player: PlayerClass, deck_type: 卡牌基类.CardType, region:Map
 			player.非遗牌手牌.append(card)
 			print(player.player_name, " 在 [", region_name, "] 获得了非遗牌：【", card.card_name,"】")
 			hud._update_game_informs(player.player_name + " 消耗1点精力，收集了非遗！\n\n 获得了【" + card.card_name + "】！")
+			hud.refresh_feiyi_list(player)
 			return card
 		else:
 			print("抽牌失败：", region_name, " 地区的非遗牌已被抽空！")
@@ -169,6 +182,7 @@ func vis_scenery(player: PlayerClass, section: MapSection) -> bool:
 	var region = section.region
 	await get_tree().create_timer(1).timeout
 	modify_energy(player, 3, "看风景")
+	hud._update_player_stats(player)
 	print(player.player_name, " 欣赏风景，回复3点精力，并获得风景明信片！")
 	hud._update_game_informs(player.player_name + " 欣赏风景，回复3点精力！")
 	# TODO: 获得明信片的接口
@@ -187,5 +201,47 @@ func buy_food(player: PlayerClass, food_card: 食物牌) -> bool:
 		print(player.player_name, " 积分不足，无法购买！")
 		return false
 
-func calculate_victory_score(score: PlayerClass):
-	pass
+func calculate_victory_score(player: PlayerClass):
+	var sum:int = 0
+	var cate:Dictionary[非遗牌.CardCategory, int] = {}
+	var region:Dictionary[MapSection.REGION, int] = {}
+	var cat_bonus:int = 0
+	var reg_bonus:int = 0
+	for card:非遗牌 in player.非遗牌手牌:
+		sum += card.base_score
+		
+		if not cate.has(card.category):
+			cate[card.category] = 1
+		else: cate[card.category] += 1
+		
+		if cate[card.category] >= 10:
+			cat_bonus=5
+		elif cate[card.category] >= 5:
+			cat_bonus=3
+		elif cate[card.category] >= 3:
+			cat_bonus=2
+		
+		if not region.has(card.region):
+			region[card.region] = 1
+		else: region[card.region] += 1
+		
+		if region[card.region] >= 5:
+			reg_bonus = 5
+		
+	if cate.size() >= 5: cat_bonus+=5
+	for cat in 非遗牌.CardCategory:
+		if cate.has(cat):
+			if cate[cat] >= ResourceManager.类别非遗牌上限字典[cat]:
+				cat_bonus += 5
+				break
+	for reg in MapSection.REGION:
+		if region.has(reg):
+			if region[reg] >= ResourceManager.地区非遗牌上限字典[reg]:
+				reg_bonus += 2
+				break
+	if region.has(MapSection.REGION.潜江) and region.has(MapSection.REGION.天门) and region.has(MapSection.REGION.仙桃):
+		reg_bonus += 2
+		
+	player.current_score = sum + cat_bonus + reg_bonus
+	hud._update_player_stats(player)
+	# TODO: 特殊加分规则

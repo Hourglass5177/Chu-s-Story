@@ -6,10 +6,13 @@
 
 [resource]
 script = ExtResource("1_1hwsl")
+region = 11
 effect_type = 2
 effect_value = 750
 destroy_after_use = true
+effect_description = "行动阶段，可以消耗此牌，获得 3 点精力。"
 card_name = "湖北小曲"
 image_of_front = ExtResource("2_8kp5f")
 image_of_back = ExtResource("1_a65gr")
+description = "湖北小曲，原称汉滩小曲等，源于明清俗曲，至今三百多年，流行于湖北长江沿岸。表演形式多样，常为两人坐唱，分出生、旦行当。唱腔曲体为主，曲牌分五类，现存一百二十多个，传统曲目丰富，以爱情题材居多。"
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://uk8420gqoqix"]
+
+[ext_resource type="Texture2D" uid="uid://cyeo3arjkeu4s" path="res://arts/非遗卡牌/恩施/恩施市.png" id="1_l0xhr"]
+[ext_resource type="Texture2D" uid="uid://dkqkp6w73hqau" path="res://arts/非遗卡牌/恩施/宣恩薅草锣鼓.jpg" id="2_5n1dy"]
+[ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="3_mg8fi"]
+
+[resource]
+script = ExtResource("3_mg8fi")
+region = 1
+category = 1
+effect_type = 2
+effect_value = 750
+destroy_after_use = true
+effect_description = "行动阶段，可以消耗此牌，获得 750 点积分点。"
+card_name = "宣恩薅草锣鼓"
+image_of_front = ExtResource("2_5n1dy")
+image_of_back = ExtResource("1_l0xhr")
+description = "宣恩薅草锣鼓又称山锣鼓，是湘、鄂、渝、黔接壤的武陵山地土家族及相邻地区汉族和其他民族的劳动歌鼓，内容涵盖历史、生活等，是研究民俗学、民间文学和音乐学的宝贵资料。"
+metadata/_custom_type_script = "uid://cfcilcn48vowf"

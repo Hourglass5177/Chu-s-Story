@@ -7,9 +7,16 @@
 [ext_resource type="Texture2D" uid="uid://cl1kx714v8dsa" path="res://arts/素材合集/sprite及立绘/水墨风格立绘/旅行博主.png" id="3_wylfc"]
 [ext_resource type="Texture2D" uid="uid://0csabikpifj3" path="res://arts/控件/图层 10 (2).png" id="4_qifi5"]
 [ext_resource type="Texture2D" uid="uid://ceaqjgs43yytd" path="res://arts/控件/图层 4.png" id="5_5d0cg"]
+[ext_resource type="Texture2D" uid="uid://dkwk02t1niuc4" path="res://arts/1x/column（左上）.png" id="5_yoip1"]
+[ext_resource type="Texture2D" uid="uid://dd7ecbfvwpcjv" path="res://arts/1x/资源 10.png" id="6_a5gv0"]
+[ext_resource type="Texture2D" uid="uid://b81vuk1dw82iv" path="res://arts/1x/资源 26.png" id="7_a5gv0"]
+[ext_resource type="Texture2D" uid="uid://303pbr0epg5k" path="res://arts/1x/图层 10 (3).png" id="8_6ydt6"]
+[ext_resource type="PackedScene" uid="uid://cb5cdjbnpc5c6" path="res://HUDs/非遗详情弹窗.tscn" id="8_k31s0"]
+[ext_resource type="Texture2D" uid="uid://di25uit2kes1d" path="res://arts/控件/底边.png" id="12_amuwg"]
 
 [node name="HUD" type="CanvasLayer" unique_id=180054714 groups=["HUD"]]
 script = ExtResource("1_5v5lr")
+default_font = ExtResource("1_co0a7")
 map_scene = ExtResource("2_ggvuf")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1912144413]
@@ -29,6 +36,32 @@ offset_right = 502.0
 offset_bottom = 1563.0
 mouse_filter = 2
 border_width = 5.0
+
+[node name="玩家信息模块背景" type="TextureRect" parent="玩家信息" unique_id=348713386]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -481.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_yoip1")
+
+[node name="玩家信息背景2" type="TextureRect" parent="玩家信息" unique_id=455313465]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -224.0
+offset_top = -465.0
+offset_right = 224.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("6_a5gv0")
+expand_mode = 1
 
 [node name="姓名背景" type="TextureRect" parent="玩家信息" unique_id=1514416890]
 layout_mode = 0
@@ -59,20 +92,58 @@ text = "Player"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="职业背景" type="TextureRect" parent="玩家信息" unique_id=1150606002]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -222.5
+offset_top = 77.0
+offset_right = 233.5
+offset_bottom = 282.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_6ydt6")
+
+[node name="职业" type="Label" parent="玩家信息/职业背景" unique_id=1869495483]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -33.0
+offset_right = 115.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_co0a7")
+theme_override_font_sizes/font_size = 70
+text = "旅行博主"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="立绘背景" type="TextureRect" parent="玩家信息" unique_id=1979098344]
 layout_mode = 0
-offset_left = 35.0
-offset_top = 162.0
-offset_right = 463.0
-offset_bottom = 777.0
+offset_left = 32.0
+offset_top = 270.0
+offset_right = 460.0
+offset_bottom = 885.0
+texture = ExtResource("7_a5gv0")
 
 [node name="立绘" type="TextureRect" parent="玩家信息/立绘背景" unique_id=1710550446]
 z_index = 2
 layout_mode = 0
-offset_left = -17.0
-offset_top = 11.0
-offset_right = 483.0
-offset_bottom = 671.95886
+offset_left = -10.0
+offset_top = -18.0
+offset_right = 490.0
+offset_bottom = 642.95886
 texture = ExtResource("3_wylfc")
 expand_mode = 1
 stretch_mode = 5
@@ -82,17 +153,27 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -191.5
-offset_top = -16.0
-offset_right = 208.5
-offset_bottom = 122.0
+offset_left = -200.0
+offset_top = 1.0
+offset_right = 200.0
+offset_bottom = 139.0
 grow_horizontal = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_co0a7")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 60
 text = "玩家信息"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AchievementLabel" type="ReferenceRect" parent="玩家信息" unique_id=825477130]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 1062.0
+offset_right = 461.0
+offset_bottom = 1517.0
+mouse_filter = 2
+border_color = Color(0.9301437, 0.20356253, 0.42166385, 1)
+border_width = 2.3
 
 [node name="MoneyLabel" type="Label" parent="玩家信息" unique_id=1453334779]
 layout_mode = 1
@@ -101,15 +182,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -248.5
-offset_top = 201.0
-offset_right = 231.5
-offset_bottom = 291.0
+offset_left = -234.5
+offset_top = 385.0
+offset_right = 245.5
+offset_bottom = 475.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_co0a7")
-theme_override_font_sizes/font_size = 90
+theme_override_font_sizes/font_size = 70
 text = "积分点：1000"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -121,27 +202,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -203.5
-offset_top = 321.0
-offset_right = 196.5
-offset_bottom = 411.0
+offset_left = -189.5
+offset_top = 464.0
+offset_right = 210.5
+offset_bottom = 554.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_co0a7")
-theme_override_font_sizes/font_size = 90
+theme_override_font_sizes/font_size = 70
 text = "精力：6 点"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="AchievementLabel" type="ReferenceRect" parent="玩家信息" unique_id=825477130]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 1179.0
-offset_right = 473.0
-offset_bottom = 1517.0
-border_color = Color(0.9301437, 0.20356253, 0.42166385, 1)
-border_width = 2.3
 
 [node name="回合信息" type="ReferenceRect" parent="." unique_id=1083800022]
 offset_left = 525.0
@@ -235,6 +307,51 @@ physics_object_picking = true
 size = Vector2i(1500, 1140)
 render_target_update_mode = 4
 
+[node name="手牌信息" type="ReferenceRect" parent="." unique_id=1990475967]
+offset_left = 521.0
+offset_top = 1177.0
+offset_right = 1557.0
+offset_bottom = 1565.0
+mouse_filter = 2
+border_color = Color(0.25638545, 0.5783296, 0.7095881, 1)
+border_width = 2.5
+
+[node name="TextureRect" type="TextureRect" parent="手牌信息" unique_id=301734518]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_right = 507.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_amuwg")
+expand_mode = 1
+
+[node name="当前" type="Label" parent="手牌信息" unique_id=1831774146]
+layout_mode = 1
+offset_left = 86.0
+offset_top = 22.0
+offset_right = 902.0
+offset_bottom = 87.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_co0a7")
+theme_override_font_sizes/font_size = 55
+text = "当前位置：十堰0 (0, 0, 0) - 起点"
+
+[node name="游戏信息" type="Label" parent="手牌信息" unique_id=1817843051]
+layout_mode = 1
+offset_left = 85.0
+offset_top = 81.0
+offset_right = 865.0
+offset_bottom = 178.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_co0a7")
+theme_override_font_sizes/font_size = 55
+text = "等待中…"
+vertical_alignment = 1
+
 [node name="操作区域" type="ReferenceRect" parent="." unique_id=590482004]
 offset_left = 1572.0
 offset_top = 1173.0
@@ -248,10 +365,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -139.0
-offset_top = 17.0
-offset_right = 139.0
-offset_bottom = 115.0
+offset_left = -138.5
+offset_top = 24.0
+offset_right = 139.5
+offset_bottom = 122.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("1_co0a7")
 theme_override_font_sizes/font_size = 90
@@ -264,10 +381,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -139.0
-offset_top = -49.0
-offset_right = 139.0
-offset_bottom = 49.0
+offset_left = -138.5
+offset_top = -58.0
+offset_right = 139.5
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_co0a7")
@@ -281,10 +398,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -139.0
-offset_top = -111.0
-offset_right = 139.0
-offset_bottom = -13.0
+offset_left = -138.5
+offset_top = -140.0
+offset_right = 139.5
+offset_bottom = -42.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_co0a7")
@@ -319,31 +436,15 @@ text = "总分：0 点"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="手牌信息" type="ReferenceRect" parent="." unique_id=1990475967]
-offset_left = 521.0
-offset_top = 1177.0
-offset_right = 1557.0
-offset_bottom = 1565.0
-mouse_filter = 2
-border_color = Color(0.25638545, 0.5783296, 0.7095881, 1)
-border_width = 2.5
+[node name="ScrollContainer" type="ScrollContainer" parent="积分区域" unique_id=798965891]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 104.0
+offset_right = 560.0
+offset_bottom = 1210.0
 
-[node name="当前" type="Label" parent="手牌信息" unique_id=1831774146]
-layout_mode = 1
-offset_right = 816.0
-offset_bottom = 65.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_co0a7")
-theme_override_font_sizes/font_size = 55
-text = "当前位置：十堰0 (0, 0, 0) - 起点"
+[node name="非遗列表容器" type="VBoxContainer" parent="积分区域/ScrollContainer" unique_id=659525950]
+layout_mode = 2
 
-[node name="游戏信息" type="Label" parent="手牌信息" unique_id=1817843051]
-layout_mode = 1
-offset_top = 69.0
-offset_right = 780.0
-offset_bottom = 166.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_co0a7")
-theme_override_font_sizes/font_size = 64
-text = "等待中…"
-vertical_alignment = 1
+[node name="非遗详情弹窗" parent="." unique_id=914408683 instance=ExtResource("8_k31s0")]
+visible = false

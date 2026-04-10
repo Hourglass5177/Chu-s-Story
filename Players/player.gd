@@ -137,6 +137,7 @@ func do_roll_dice() -> int:
 
 func move_along_path(path_pixels: Array[Vector2], total_cost: int, target_grid_pos: Vector3i) -> void:
 	current_energy -= total_cost
+	hud.btn_end_turn.disabled = true
 	var tween = create_tween()
 	for point in path_pixels:
 		maxMove -= 1
@@ -145,6 +146,7 @@ func move_along_path(path_pixels: Array[Vector2], total_cost: int, target_grid_p
 		tween.tween_property(self, "position", target_loacal, 0.2).set_trans(Tween.TRANS_LINEAR)
 		# 此处 触发事件
 	await tween.finished
+	hud.btn_end_turn.disabled = false
 	print(player_name, " 移动完毕。")
 	map.grid_map[now_pos].is_occupied = false
 	now_pos = target_grid_pos # 更新逻辑坐标
@@ -170,7 +172,7 @@ func execute_tile_action():
 
 			# 严格加上 not feiyi_collected_this_turn 的判定，防止同一回合执行两次
 			if current_energy >= 1 and not feiyi_collected_this_turn and ResourceManager.has_feiyi_in_region(region):
-				var card = ResourceManager.get_feiyi(self, section)
+				ResourceManager.get_feiyi(self, section)
 				feiyi_collected_this_turn = true
 				ResourceManager.calculate_victory_score(self)
 				await get_tree().create_timer(1.5).timeout

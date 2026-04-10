@@ -29,15 +29,15 @@ func _on_phase_changed(new_phase: TurnManager.TurnPhase):
 			_clear_all_highlights()
 	hud._update_button_states(new_phase)
 
-# --- 算法：显示可达区域 ---
+# --- 显示可达区域 ---
 func _show_reachable_areas():
 	var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
 	var start_coord = current_player.now_pos
 	var max_steps = current_player.maxMove
-	var available_energy = current_player.current_energy # 【修复】：可以直接使用的剩余精力
+	var available_energy = current_player.current_energy 
 	
 	var que: Array[Vector3i] = []
-	var que_status: Array[Vector2i] = [] # x 存当前步数，y 存累计精力消耗
+	var que_status: Array[Vector2i] = []
 	var vis: Dictionary[int, bool] = {}
 	
 	que.push_back(start_coord)

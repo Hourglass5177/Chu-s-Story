@@ -40,6 +40,15 @@ enum REGION{
 	其他,
 	未知
 }
+const TYPE_TO_EFFECT = {
+	CardCategory.戏曲表演:"行动阶段，可以消耗此牌，获得 3 点精力。",
+	CardCategory.民间音乐:"行动阶段，可以消耗此牌，获得 750 点积分点。",
+	CardCategory.手工技艺:"移动阶段，可以消耗此牌，使可移动最大步数翻倍。",
+	CardCategory.神话传说:"任意时候可以消耗此牌，无效化对你的食物牌或事件牌的效果。",
+	CardCategory.节日庆典:"获得此牌时，立即获得 3 点精力点数和 750 积分点。",
+	CardCategory.武术拳法:"拥有此牌时，移动时消耗精力点数-1（不重复叠加）。",
+	CardCategory.国家级非遗:"国家级非遗，此牌的基础分数为 5 。"
+}
 # 导出变量
 @export var region: REGION = REGION.鄂州 # 地域 [cite: 1]
 @export var category: CardCategory = CardCategory.戏曲表演:
@@ -47,12 +56,11 @@ enum REGION{
 		category = value
 		# 当类别发生变化时，如果字典里有这个类别，自动更新基础分
 		base_score = CATEGORY_BASE_SCORES[category]
+		effect_description = TYPE_TO_EFFECT[category]
 		emit_changed()
 @export var rarity: int = 1 # 稀有度 [cite: 1]
 @export var base_score: int = 0
 
-# ----- 针对 Demo 的特殊效果标识 -----
-# 为了让程序知道这张牌打出时该执行什么逻辑，我们定义几个效果类型
 enum EffectType { 
 	NONE, 
 	DOUBLE_MOVE,       # 移动步数翻倍 (手工技艺) 
@@ -66,3 +74,14 @@ enum EffectType {
 @export var passive: bool = false
 @export var destroy_after_use: bool = false
 @export var unbreakable:bool = false
+@export_multiline var effect_description: String = TYPE_TO_EFFECT[category]
+
+# --- 留给未来实现的接口 ---
+# 判定当前时机是否满足使用条件
+func can_use(player: PlayerClass) -> bool:
+	return false
+
+# 实际执行卡牌效果
+func execute_effect(player: PlayerClass):
+	print("执行了非遗牌效果：", card_name)
+	pass

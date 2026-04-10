@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://bqf16ykb8t4kb"]
+
+[ext_resource type="Script" uid="uid://c83ra1664fpg6" path="res://HUDs/非遗牌缩略图.gd" id="1_2x1ad"]
+[ext_resource type="Texture2D" uid="uid://bj01tcuiap85c" path="res://arts/非遗卡牌/仙桃/荆州花鼓戏.jpg" id="1_3ccyg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0edu"]
+bg_color = Color(4.1392445e-06, 0.6009639, 0.4877537, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[node name="非遗牌缩略图" type="TextureButton" unique_id=1314083027]
+custom_minimum_size = Vector2(216, 282)
+offset_right = 289.0
+offset_bottom = 377.0
+texture_normal = ExtResource("1_3ccyg")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("1_2x1ad")
+
+[node name="ScoreBadge" type="PanelContainer" parent="." unique_id=3433961]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -57.0
+offset_bottom = 55.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_w0edu")
+
+[node name="BaseScore" type="Label" parent="ScoreBadge" unique_id=1735352126]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mask" type="ColorRect" parent="." unique_id=708654466]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.39215687)

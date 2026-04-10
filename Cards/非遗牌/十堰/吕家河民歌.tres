@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://stjurnl1hvt8"]
 
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_368eu"]
+[ext_resource type="Texture2D" uid="uid://botm3uys5vg7e" path="res://arts/非遗卡牌/十堰/十堰市.png" id="1_nhovk"]
+[ext_resource type="Texture2D" uid="uid://cfpyunuclybt8" path="res://arts/非遗卡牌/十堰/吕家河民歌.jpg" id="2_ja3jt"]
 
 [resource]
 script = ExtResource("1_368eu")
@@ -9,5 +11,9 @@ category = 1
 effect_type = 2
 effect_value = 750
 destroy_after_use = true
+effect_description = "行动阶段，可以消耗此牌，获得 750 点积分点。"
 card_name = "吕家河民歌"
+image_of_front = ExtResource("2_ja3jt")
+image_of_back = ExtResource("1_nhovk")
+description = "吕家河民歌受楚、巴、秦及道教文化影响，分为阳歌、阴歌和长篇叙事诗，以徵调式为主，多用五声音阶，有三句体和四句体结构，代表作有《闹五更》《站花墙》等。"
 metadata/_custom_type_script = "uid://cfcilcn48vowf"
