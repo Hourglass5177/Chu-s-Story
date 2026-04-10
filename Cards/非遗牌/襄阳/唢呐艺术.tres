@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://bc4c8h4vvqyl1"]
 
+[ext_resource type="Texture2D" uid="uid://btsnuuav1x0bk" path="res://arts/非遗卡牌/襄阳/襄阳市.png" id="1_4k8hc"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_5me64"]
+[ext_resource type="Texture2D" uid="uid://ckufvdy7qnn88" path="res://arts/非遗卡牌/襄阳/唢呐艺术.jpg" id="2_dndpo"]
 
 [resource]
 script = ExtResource("1_5me64")
@@ -10,4 +12,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "唢呐艺术"
+image_of_front = ExtResource("2_dndpo")
+image_of_back = ExtResource("1_4k8hc")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

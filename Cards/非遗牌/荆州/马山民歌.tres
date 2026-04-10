@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://bnokor4je1awb"]
 
+[ext_resource type="Texture2D" uid="uid://cle5vfdqc31ys" path="res://arts/非遗卡牌/荆州/荆州市.png" id="1_4u3ew"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_to5w5"]
+[ext_resource type="Texture2D" uid="uid://ccob53gs8m3fg" path="res://arts/非遗卡牌/荆州/马山民歌.jpg" id="2_daafr"]
 
 [resource]
 script = ExtResource("1_to5w5")
@@ -10,4 +12,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "马山民歌"
+image_of_front = ExtResource("2_daafr")
+image_of_back = ExtResource("1_4u3ew")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

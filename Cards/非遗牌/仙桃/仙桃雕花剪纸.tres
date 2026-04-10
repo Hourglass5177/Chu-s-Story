@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://dtcfevauxm70s"]
 
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_1iujs"]
+[ext_resource type="Texture2D" uid="uid://ow1j7bq8qsk" path="res://arts/非遗卡牌/仙桃/仙桃市.png" id="1_wipgq"]
+[ext_resource type="Texture2D" uid="uid://dgiwqefliuycr" path="res://arts/非遗卡牌/仙桃/仙桃雕花剪纸.jpg" id="2_l0324"]
 
 [resource]
 script = ExtResource("1_1iujs")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "仙桃雕花剪纸"
+image_of_front = ExtResource("2_l0324")
+image_of_back = ExtResource("1_wipgq")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

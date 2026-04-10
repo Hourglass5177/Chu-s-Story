@@ -1,20 +1,114 @@
 [gd_scene format=3 uid="uid://d17wx7legjg71"]
 
+[ext_resource type="Texture2D" uid="uid://ctxcx0y16euxc" path="res://arts/素材合集/sprite及立绘/棋子/5.png" id="1_bnt45"]
+[ext_resource type="Shader" uid="uid://clxuos8uim1v5" path="res://Players/player.gdshader" id="1_qhuue"]
 [ext_resource type="Texture2D" uid="uid://dtamyyoqvvfar" path="res://icon.svg" id="1_w22c2"]
 [ext_resource type="Script" uid="uid://blh8lxoamdqx4" path="res://Players/player.gd" id="2_fq5u1"]
+[ext_resource type="Texture2D" uid="uid://dh2spi1dh5nv7" path="res://arts/素材合集/sprite及立绘/棋子/3.png" id="2_x03v5"]
+[ext_resource type="Texture2D" uid="uid://bvgntrckldx1m" path="res://arts/素材合集/sprite及立绘/棋子/6.png" id="3_4rf5a"]
+[ext_resource type="Texture2D" uid="uid://bfudqf72sy71v" path="res://arts/素材合集/sprite及立绘/棋子/2.png" id="5_hn4mw"]
+[ext_resource type="Texture2D" uid="uid://fdvfx558bhbm" path="res://arts/素材合集/sprite及立绘/棋子/1.png" id="6_42mhn"]
+[ext_resource type="Texture2D" uid="uid://bvigtxk6dy5jt" path="res://arts/素材合集/sprite及立绘/棋子/4.png" id="7_ohjs5"]
+[ext_resource type="Texture2D" uid="uid://172wde0qrgpw" path="res://arts/素材合集/sprite及立绘/Sprite/角色/美食博主.png" id="9_sin8e"]
+[ext_resource type="Texture2D" uid="uid://dlvav0tcd14de" path="res://arts/素材合集/sprite及立绘/Sprite/角色/魔术博主.png" id="10_ok635"]
+[ext_resource type="Texture2D" uid="uid://cfs6r28wisna3" path="res://arts/素材合集/sprite及立绘/Sprite/角色/探险博主.png" id="11_vuxfe"]
+[ext_resource type="Texture2D" uid="uid://3wemd72u153f" path="res://arts/素材合集/sprite及立绘/Sprite/角色/商业博主.png" id="12_swvtt"]
+[ext_resource type="Texture2D" uid="uid://cylp1vutfm3pn" path="res://arts/素材合集/sprite及立绘/Sprite/角色/旅行博主.png" id="13_uxjgt"]
+[ext_resource type="Texture2D" uid="uid://dl6415rcqnxdk" path="res://arts/素材合集/sprite及立绘/Sprite/角色/生活博主.png" id="14_ps8ke"]
+[ext_resource type="Texture2D" uid="uid://dlblbp2f3py6y" path="res://arts/素材合集/sprite及立绘/水墨风格立绘/美食博主.png" id="15_0p034"]
+[ext_resource type="Texture2D" uid="uid://bvsqag4x4uom4" path="res://arts/素材合集/sprite及立绘/水墨风格立绘/魔术博主.png" id="16_qhuue"]
+[ext_resource type="Texture2D" uid="uid://b8ha2iwcaiqdu" path="res://arts/素材合集/sprite及立绘/水墨风格立绘/探险博主.png" id="17_tintf"]
+[ext_resource type="Texture2D" uid="uid://c1ver2vmuoqaw" path="res://arts/素材合集/sprite及立绘/水墨风格立绘/商业博主.png" id="18_8g4q3"]
+[ext_resource type="Texture2D" uid="uid://cl1kx714v8dsa" path="res://arts/素材合集/sprite及立绘/水墨风格立绘/旅行博主.png" id="19_wvm7i"]
+[ext_resource type="Texture2D" uid="uid://brfuunbe3ysc0" path="res://arts/素材合集/sprite及立绘/水墨风格立绘/生活博主.png" id="20_8yyuq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tintf"]
+shader = ExtResource("1_qhuue")
+shader_parameter/line_color = Color(0.28363878, 0.90376353, 0.6318472, 1)
+shader_parameter/line_thickness = 0.0
+shader_parameter/enable_pulse = true
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fq5u1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("1_bnt45")
+}],
+"loop": true,
+"name": &"商业博主",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_x03v5")
+}],
+"loop": true,
+"name": &"探险博主",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4rf5a")
+}],
+"loop": true,
+"name": &"旅行博主",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("1_w22c2")
 }],
 "loop": true,
-"name": &"default",
+"name": &"无",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_hn4mw")
+}],
+"loop": true,
+"name": &"生活博主",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_42mhn")
+}],
+"loop": true,
+"name": &"美食博主",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_ohjs5")
+}],
+"loop": true,
+"name": &"魔术博主",
 "speed": 5.0
 }]
 
 [node name="Player" type="AnimatedSprite2D" unique_id=1900862353 groups=["Player"]]
-scale = Vector2(0.34000063, 0.34000063)
+material = SubResource("ShaderMaterial_tintf")
+scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_fq5u1")
+animation = &"旅行博主"
+offset = Vector2(0, -550)
 script = ExtResource("2_fq5u1")
+"立绘精一图组" = Dictionary[int, Texture2D]({
+0: ExtResource("1_w22c2"),
+1: ExtResource("9_sin8e"),
+2: ExtResource("10_ok635"),
+3: ExtResource("11_vuxfe"),
+4: ExtResource("12_swvtt"),
+5: ExtResource("13_uxjgt"),
+6: ExtResource("14_ps8ke")
+})
+"立绘精二图组" = Dictionary[int, Texture2D]({
+0: ExtResource("1_w22c2"),
+1: ExtResource("15_0p034"),
+2: ExtResource("16_qhuue"),
+3: ExtResource("17_tintf"),
+4: ExtResource("18_8g4q3"),
+5: ExtResource("19_wvm7i"),
+6: ExtResource("20_8yyuq")
+})

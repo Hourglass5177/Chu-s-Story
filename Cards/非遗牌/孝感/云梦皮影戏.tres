@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://b05fs2wxscing"]
 
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_grbry"]
+[ext_resource type="Texture2D" uid="uid://d2on5kfua1tr5" path="res://arts/非遗卡牌/孝感/孝感市.png" id="1_lfyes"]
+[ext_resource type="Texture2D" uid="uid://cn4ug13lapim6" path="res://arts/非遗卡牌/孝感/云梦皮影戏.jpg" id="2_mnelc"]
 
 [resource]
 script = ExtResource("1_grbry")
@@ -9,4 +11,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "云梦皮影戏"
+image_of_front = ExtResource("2_mnelc")
+image_of_back = ExtResource("1_lfyes")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

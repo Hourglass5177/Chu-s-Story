@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://nu1tom68wolh"]
 
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_151pw"]
+[ext_resource type="Texture2D" uid="uid://d2on5kfua1tr5" path="res://arts/非遗卡牌/孝感/孝感市.png" id="1_qibwm"]
+[ext_resource type="Texture2D" uid="uid://dtqasaygeyybk" path="res://arts/非遗卡牌/孝感/龙舞.jpg" id="2_kt2hg"]
 
 [resource]
 script = ExtResource("1_151pw")
@@ -9,4 +11,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "三节龙"
+image_of_front = ExtResource("2_kt2hg")
+image_of_back = ExtResource("1_qibwm")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

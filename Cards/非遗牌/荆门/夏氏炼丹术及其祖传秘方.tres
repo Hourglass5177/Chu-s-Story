@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://cl73fi2mfbqqi"]
 
+[ext_resource type="Texture2D" uid="uid://dd8vkqfjiiqcx" path="res://arts/非遗卡牌/荆门/荆门市.png" id="1_85uah"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_wxnv3"]
+[ext_resource type="Texture2D" uid="uid://d2q3k4t8ddwhb" path="res://arts/非遗卡牌/荆门/夏氏炼丹术及其祖传秘方.jpg" id="2_gxlji"]
 
 [resource]
 script = ExtResource("1_wxnv3")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 unbreakable = true
 card_name = "夏氏炼丹术及其祖传秘方"
+image_of_front = ExtResource("2_gxlji")
+image_of_back = ExtResource("1_85uah")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

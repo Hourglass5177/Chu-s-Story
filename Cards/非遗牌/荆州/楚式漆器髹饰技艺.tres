@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://b5212aot7ek5q"]
 
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_bq5ow"]
+[ext_resource type="Texture2D" uid="uid://cle5vfdqc31ys" path="res://arts/非遗卡牌/荆州/荆州市.png" id="1_ioo8x"]
+[ext_resource type="Texture2D" uid="uid://cltb77hyopvav" path="res://arts/非遗卡牌/荆州/楚式漆器髹饰技艺.jpg" id="2_ykr6v"]
 
 [resource]
 script = ExtResource("1_bq5ow")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "楚式漆器髹饰技艺"
+image_of_front = ExtResource("2_ykr6v")
+image_of_back = ExtResource("1_ioo8x")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

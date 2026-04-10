@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://dhudinhypge5x"]
 
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_s8gre"]
+[ext_resource type="Texture2D" uid="uid://c1xsw060noh24" path="res://arts/非遗卡牌/宜昌/宜昌市.png" id="1_sgbiv"]
+[ext_resource type="Texture2D" uid="uid://dbcwlobwmnb78" path="res://arts/非遗卡牌/宜昌/青林寺谜语.jpg" id="2_cdual"]
 
 [resource]
 script = ExtResource("1_s8gre")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "青林寺谜语"
+image_of_front = ExtResource("2_cdual")
+image_of_back = ExtResource("1_sgbiv")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://coeq57v0ep0pl"]
 
+[ext_resource type="Texture2D" uid="uid://4aggj5qchnfw" path="res://arts/非遗卡牌/潜江/潜江市.png" id="1_3h57o"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_7oips"]
+[ext_resource type="Texture2D" uid="uid://baqnykpavtflf" path="res://arts/非遗卡牌/潜江/江汉平原皮影戏.jpg" id="2_33uqu"]
 
 [resource]
 script = ExtResource("1_7oips")
@@ -9,4 +11,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "江汉平原皮影戏"
+image_of_front = ExtResource("2_33uqu")
+image_of_back = ExtResource("1_3h57o")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

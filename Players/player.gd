@@ -20,10 +20,18 @@ func _ready() -> void:
 	# 2. 监听阶段改变信号 (比如判断什么时候该我走)
 	TurnManager.phase_changed.connect(_on_phase_changed)
 	hud = get_tree().get_first_node_in_group("HUD") as HUD
+	await get_tree().process_frame
 	map = get_tree().get_first_node_in_group("MAP") as MAP
+	if get_parent() != map:
+		self.reparent(map)
+		print(player_name, "已挂载到地图")
 	now_pos = start_coord
-	position = map.grid_map[start_coord].global_position
+	position = map.to_local(map.grid_map[start_coord].global_position) 
 	map.grid_map[start_coord].is_occupied = true
+	_init_character()
+	if material:
+		material = material.duplicate()
+		material.set_shader_parameter("line_thickness", 0.0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,6 +49,11 @@ func _process(delta: float) -> void:
 @export var start_coord: Vector3i = Vector3i(0,0,0)
 
 @export var player_index: int = 0
+var 立绘精一: Texture2D = null
+var 立绘精二: Texture2D = null
+@export var 立绘精一图组: Dictionary[PlayerCharacter, Texture2D] = {}
+@export var 立绘精二图组: Dictionary[PlayerCharacter, Texture2D] = {}
+
 var alive: bool = true
 var now_pos: Vector3i = Vector3i(0, 0, 0)
 var onTurn: bool = false
@@ -57,12 +70,24 @@ var current_work_index: int = -1 # 当前打工格子的逻辑索引
 var 非遗牌手牌: Array[非遗牌] = [] 
 var 食物牌手牌: Array[食物牌] = []
 
+func _init_character() -> void:
+	animation = PlayerCharacter.find_key(player_types)
+	立绘精一 = 立绘精一图组[player_types]
+	立绘精二 = 立绘精二图组[player_types]
+
 # --- 回合生命周期 ---
 func _on_turn_manager_turn_start(player_idx: int) -> void:
 	if player_idx != player_index:
 		onTurn = false
+		await get_tree().process_frame
+		if material:
+			material.set_shader_parameter("line_thickness", 0.0)
 	else:
 		onTurn = true
+		await get_tree().process_frame
+		if material:
+			material.set_shader_parameter("line_thickness", 20)
+		
 
 func before_turn():
 	print("玩家", player_name, "回合开始")
@@ -87,6 +112,7 @@ func _on_phase_changed(new_phase: TurnManager.TurnPhase):
 		TurnManager.TurnPhase.MOVING:
 			pass
 		TurnManager.TurnPhase.ACTION:
+			#if map.grid_map[now_pos].type != MapSection.SectionType.风景:
 			hud._update_game_informs("等待行动…")
 			hud._update_button_states(TurnManager.TurnPhase.ACTION)
 		TurnManager.TurnPhase.END:
@@ -115,7 +141,8 @@ func move_along_path(path_pixels: Array[Vector2], total_cost: int, target_grid_p
 	for point in path_pixels:
 		maxMove -= 1
 		hud._update_player_stats(self)
-		tween.tween_property(self, "global_position", point, 0.2).set_trans(Tween.TRANS_LINEAR)
+		var target_loacal = map.to_local(point)
+		tween.tween_property(self, "position", target_loacal, 0.2).set_trans(Tween.TRANS_LINEAR)
 		# 此处 触发事件
 	await tween.finished
 	print(player_name, " 移动完毕。")
@@ -188,6 +215,7 @@ func execute_tile_action():
 		MapSection.SectionType.商店:
 			if section.grid_visit_history[self] == 1:
 				hud.btn_action.disabled = true
+				section.grid_visit_history[self] += 1
 				print(player_name, " 打开了食物商店。")
 				# 呼叫 HUD 打开商店弹窗（HUD中留好接口）
 				hud.open_shop_panel(self)
@@ -204,6 +232,7 @@ func auto_trigger_scenery(section: MapSection):
 	if(section.type != MapSection.SectionType.风景):
 		return
 	if section.grid_visit_history[self] == 1:
+		section.grid_visit_history[self] += 1
 		ResourceManager.vis_scenery(self, section)
 	
 		

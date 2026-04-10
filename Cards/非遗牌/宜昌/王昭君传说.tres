@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://dae00aosyapih"]
 
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_c6smy"]
+[ext_resource type="Texture2D" uid="uid://c1xsw060noh24" path="res://arts/非遗卡牌/宜昌/宜昌市.png" id="1_ld3ef"]
+[ext_resource type="Texture2D" uid="uid://c3o51ey4saj0j" path="res://arts/非遗卡牌/宜昌/王昭君传说.jpg" id="2_l83t7"]
 
 [resource]
 script = ExtResource("1_c6smy")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "王昭君传说"
+image_of_front = ExtResource("2_l83t7")
+image_of_back = ExtResource("1_ld3ef")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

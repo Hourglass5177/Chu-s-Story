@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://calmopj8chdno"]
 
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_ckna0"]
+[ext_resource type="Texture2D" uid="uid://d274sm5fqdttn" path="res://arts/非遗卡牌/黄冈/黄冈市.png" id="1_muwg1"]
+[ext_resource type="Texture2D" uid="uid://c4upicd8k5f5w" path="res://arts/非遗卡牌/黄冈/岳家拳.jpg" id="2_pc328"]
 
 [resource]
 script = ExtResource("1_ckna0")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 passive = true
 card_name = "岳家拳"
+image_of_front = ExtResource("2_pc328")
+image_of_back = ExtResource("1_muwg1")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

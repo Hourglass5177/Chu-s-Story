@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://r7g5gns0fwqx"]
 
+[ext_resource type="Texture2D" uid="uid://c1xsw060noh24" path="res://arts/非遗卡牌/宜昌/宜昌市.png" id="1_acen8"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_sw4x7"]
+[ext_resource type="Texture2D" uid="uid://bltsyexiq48yd" path="res://arts/非遗卡牌/宜昌/长江峡江号子.jpg" id="2_kqr5g"]
 
 [resource]
 script = ExtResource("1_sw4x7")
@@ -9,4 +11,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "长江峡江号子"
+image_of_front = ExtResource("2_kqr5g")
+image_of_back = ExtResource("1_acen8")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

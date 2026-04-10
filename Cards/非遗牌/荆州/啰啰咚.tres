@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://b3v62lw51r4a6"]
 
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_kug06"]
+[ext_resource type="Texture2D" uid="uid://cle5vfdqc31ys" path="res://arts/非遗卡牌/荆州/荆州市.png" id="1_qp8c5"]
+[ext_resource type="Texture2D" uid="uid://c5jfhhr0qi8i4" path="res://arts/非遗卡牌/荆州/啰啰咚.jpg" id="2_nkj8l"]
 
 [resource]
 script = ExtResource("1_kug06")
@@ -10,4 +12,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "啰啰咚"
+image_of_front = ExtResource("2_nkj8l")
+image_of_back = ExtResource("1_qp8c5")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

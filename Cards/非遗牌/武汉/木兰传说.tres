@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://dhlyjro3hkes4"]
 
+[ext_resource type="Texture2D" uid="uid://dhptya05n0dgp" path="res://arts/非遗卡牌/武汉/武汉市.png" id="1_d8dsh"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_fjs4o"]
+[ext_resource type="Texture2D" uid="uid://c5bo0dsbbot1q" path="res://arts/非遗卡牌/武汉/木兰传说.jpg" id="2_21203"]
 
 [resource]
 script = ExtResource("1_fjs4o")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "木兰传说"
+image_of_front = ExtResource("2_21203")
+image_of_back = ExtResource("1_d8dsh")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

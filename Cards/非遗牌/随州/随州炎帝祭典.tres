@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://b8g77est0m7sq"]
 
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_h12b8"]
+[ext_resource type="Texture2D" uid="uid://b2er4qmucfr6m" path="res://arts/非遗卡牌/随州/随州市.png" id="1_lcuv7"]
+[ext_resource type="Texture2D" uid="uid://djec115yyq3hc" path="res://arts/非遗卡牌/随州/随州炎帝祭典.jpg" id="2_sm4y5"]
 
 [resource]
 script = ExtResource("1_h12b8")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 passive = true
 card_name = "随州炎帝祭典"
+image_of_front = ExtResource("2_sm4y5")
+image_of_back = ExtResource("1_lcuv7")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

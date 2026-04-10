@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://brvove37yklp5"]
 
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_tn778"]
+[ext_resource type="Texture2D" uid="uid://rejj4ykvo1tl" path="res://arts/非遗卡牌/鄂州/鄂州市.png" id="1_wxs6h"]
+[ext_resource type="Texture2D" uid="uid://8icmwjyyn7em" path="res://arts/非遗卡牌/鄂州/鄂州雕花剪纸.jpg" id="2_soaqf"]
 
 [resource]
 script = ExtResource("1_tn778")
@@ -10,4 +12,6 @@ effect_type = 2
 effect_value = 750
 unbreakable = true
 card_name = "鄂州雕花剪纸"
+image_of_front = ExtResource("2_soaqf")
+image_of_back = ExtResource("1_wxs6h")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

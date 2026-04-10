@@ -167,7 +167,8 @@ func process_work_salary(player: PlayerClass, work_turn: int):
 
 func vis_scenery(player: PlayerClass, section: MapSection) -> bool:
 	var region = section.region
-	player.current_energy = clampi(player.current_energy + 3, 0, player.max_energy)
+	await get_tree().create_timer(1).timeout
+	modify_energy(player, 3, "看风景")
 	print(player.player_name, " 欣赏风景，回复3点精力，并获得风景明信片！")
 	hud._update_game_informs(player.player_name + " 欣赏风景，回复3点精力！")
 	# TODO: 获得明信片的接口

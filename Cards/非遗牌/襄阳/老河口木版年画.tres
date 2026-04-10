@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://52wp3p8w7vvy"]
 
+[ext_resource type="Texture2D" uid="uid://btsnuuav1x0bk" path="res://arts/非遗卡牌/襄阳/襄阳市.png" id="1_d30pl"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_ksm1d"]
+[ext_resource type="Texture2D" uid="uid://c86lfahllnlh2" path="res://arts/非遗卡牌/襄阳/老河口木版年画.jpg" id="2_pq7i7"]
 
 [resource]
 script = ExtResource("1_ksm1d")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "老河口木版年画"
+image_of_front = ExtResource("2_pq7i7")
+image_of_back = ExtResource("1_d30pl")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

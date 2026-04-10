@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://cpjro02ljiocn"]
 
+[ext_resource type="Texture2D" uid="uid://d274sm5fqdttn" path="res://arts/非遗卡牌/黄冈/黄冈市.png" id="1_b88l1"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_o1iwx"]
+[ext_resource type="Texture2D" uid="uid://dojhilllab8iv" path="res://arts/非遗卡牌/黄冈/红安绣活.jpg" id="2_g2ycn"]
 
 [resource]
 script = ExtResource("1_o1iwx")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "红安绣活"
+image_of_front = ExtResource("2_g2ycn")
+image_of_back = ExtResource("1_b88l1")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

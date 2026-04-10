@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://bkrt6flnx3428"]
 
+[ext_resource type="Texture2D" uid="uid://cyeo3arjkeu4s" path="res://arts/非遗卡牌/恩施/恩施市.png" id="1_okn52"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_v6u18"]
+[ext_resource type="Texture2D" uid="uid://cixgw3ssidds" path="res://arts/非遗卡牌/恩施/干栏吊脚楼建造技艺.jpg" id="2_rj0ul"]
 
 [resource]
 script = ExtResource("1_v6u18")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "干栏吊脚楼建造技艺"
+image_of_front = ExtResource("2_rj0ul")
+image_of_back = ExtResource("1_okn52")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

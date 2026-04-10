@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://cetq353bs8yqi"]
 
+[ext_resource type="Texture2D" uid="uid://d274sm5fqdttn" path="res://arts/非遗卡牌/黄冈/黄冈市.png" id="1_s2dl2"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_sxrp3"]
+[ext_resource type="Texture2D" uid="uid://cd8v0sudxj7y8" path="res://arts/非遗卡牌/黄冈/黄梅挑花.jpg" id="2_qltll"]
 
 [resource]
 script = ExtResource("1_sxrp3")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "黄梅挑花"
+image_of_front = ExtResource("2_qltll")
+image_of_back = ExtResource("1_s2dl2")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

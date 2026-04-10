@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://cwtxw3wx0o7ih"]
 
+[ext_resource type="Texture2D" uid="uid://cyeo3arjkeu4s" path="res://arts/非遗卡牌/恩施/恩施市.png" id="1_efgv0"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_ivrw0"]
+[ext_resource type="Texture2D" uid="uid://clrcjjekjc82r" path="res://arts/非遗卡牌/恩施/肉连响.jpg" id="2_7xqu8"]
 
 [resource]
 script = ExtResource("1_ivrw0")
@@ -9,4 +11,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "肉连响"
+image_of_front = ExtResource("2_7xqu8")
+image_of_back = ExtResource("1_efgv0")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

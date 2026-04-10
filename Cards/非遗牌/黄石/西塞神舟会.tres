@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://bdkise08c2xiq"]
 
+[ext_resource type="Texture2D" uid="uid://ckb5uf542r12h" path="res://arts/非遗卡牌/黄石/黄石市.png" id="1_2qnhg"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_ou0jl"]
+[ext_resource type="Texture2D" uid="uid://cir3j1tv6pljh" path="res://arts/非遗卡牌/黄石/西塞神舟会.jpg" id="2_bglhi"]
 
 [resource]
 script = ExtResource("1_ou0jl")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 unbreakable = true
 card_name = "西塞神舟会"
+image_of_front = ExtResource("2_bglhi")
+image_of_back = ExtResource("1_2qnhg")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://l40qwsgkt446"]
 
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_lr0vk"]
+[ext_resource type="Texture2D" uid="uid://btsnuuav1x0bk" path="res://arts/非遗卡牌/襄阳/襄阳市.png" id="1_s1uac"]
+[ext_resource type="Texture2D" uid="uid://cmm6xgqcfmgad" path="res://arts/非遗卡牌/襄阳/老河口丝弦.jpg" id="2_dqdls"]
 
 [resource]
 script = ExtResource("1_lr0vk")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 unbreakable = true
 card_name = "老河口丝弦"
+image_of_front = ExtResource("2_dqdls")
+image_of_back = ExtResource("1_s1uac")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

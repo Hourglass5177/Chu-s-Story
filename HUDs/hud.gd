@@ -7,6 +7,8 @@ class_name HUD
 @onready var player_label = $"玩家信息/玩家信息" as Label
 @onready var money_label = $"玩家信息/MoneyLabel" as Label
 @onready var energy_label = $"玩家信息/EnergyLabel" as Label
+@onready var name_label = $"玩家信息/姓名背景/NameLabel" as Label
+@onready var 立绘精二 = $"玩家信息/立绘背景/立绘" as TextureRect
 
 @onready var map_sec = $"地图"
 
@@ -22,12 +24,59 @@ class_name HUD
 @onready var timer = TurnManager.get_node("TurnTimer") as Timer
 var map:MAP
 func _ready() -> void:
+	map_container.resized.connect(_on_container_resized)
+	_spawn_map_in_hud()
 	map = get_tree().get_first_node_in_group("MAP")
 	TurnManager.turn_start.connect(_on_turn_start)
 	TurnManager.phase_changed.connect(_on_phase_changed)
 	btn_end_turn.pressed.connect(_on_btn_end_turn_pressed)
 	btn_action.pressed.connect(_on_btn_action_pressed)
 	#_update_button_states(TurnManager.TurnPhase.BEGIN)
+# 暴露给编辑器的变量，把你做好的 map.tscn 直接从底层文件系统拖到右侧面板的这个槽位里
+@export var map_scene: PackedScene 
+
+# 获取刚才建的那个 SubViewport 节点
+@onready var map_viewport = $"地图/地图背景/SubViewportContainer/SubViewport"
+@onready var map_container = $"地图/地图背景/SubViewportContainer"
+
+var map_instance:Node2D
+const MAP_REAL_SIZE = Vector2(2560, 1600)
+
+func _spawn_map_in_hud():
+	if map_scene:
+		map_instance = map_scene.instantiate()
+		map_viewport.add_child(map_instance)
+		print("地图已成功嵌入 HUD 视口中！")
+		_on_container_resized()
+	else:
+		push_error("HUD 没有配置地图场景！请在检查器中拖入 map.tscn")
+
+func _on_container_resized():
+	if not is_instance_valid(map_instance): 
+		return
+		
+	var ui_size = map_container.size
+	
+	# 【核心修复】：为防止高大棋子被视口截断，给地图四周增加“虚拟安全留白”（物理像素）
+	var margin_top = 250    # 顶部留出 250 像素（根据你棋子贴图的高度可适当调大/调小）
+	var margin_bottom = 50.0 # 底部留出 50 像素，防止踩底边的格子时脚被切掉
+	var margin_x = 100      # 左右两侧各留 100 像素边缘
+	
+	# 加上留白后的“虚拟地图总尺寸”
+	var padded_size = MAP_REAL_SIZE + Vector2(margin_x * 2, margin_top + margin_bottom)
+	
+	# 针对这个更大的虚拟尺寸计算缩放比例（地图会自动被缩得稍微小一点，腾出留白）
+	var scale_factor = min(ui_size.x / padded_size.x, ui_size.y / padded_size.y)
+	
+	# 等比例缩放地图节点
+	map_instance.scale = Vector2(scale_factor, scale_factor)
+	
+	# 完美居中这个带留白的虚拟方块
+	var scaled_padded_size = padded_size * scale_factor
+	var base_offset = (ui_size - scaled_padded_size) / 2.0
+	
+	# 最终赋予的位置：UI 居中偏移量 + 左侧和顶部的边距补偿
+	map_instance.position = base_offset + Vector2(margin_x, margin_top) * scale_factor
 
 func _process(delta: float):
 	if timer and TurnManager.GameOn and timer.time_left > 0:
@@ -72,6 +121,8 @@ func _update_player_stats(player: PlayerClass) -> void:
 	money_label.text = "积分点: " + str(player.current_money)
 	energy_label.text = "精力: " + str(player.current_energy) + " / " + str(player.max_energy)
 	score_label.text = "总分数: " + str(player.current_score)
+	name_label.text = player.player_name
+	立绘精二.texture = player.立绘精二
 	current_status.text = "当前位置：" + MapSection.REGION.find_key(map.grid_map[player.now_pos].region) + str(map.grid_map[player.now_pos].location_index) + " - " + MapSection.SectionType.find_key(map.grid_map[player.now_pos].type)
 	if(TurnManager.now_phase == TurnManager.TurnPhase.MOVING):
 		_update_game_informs("剩余可移动：" + str(player.maxMove) + " 步")

@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://b8lgot1k6q5es"]
 
+[ext_resource type="Texture2D" uid="uid://d4e02edk104je" path="res://arts/非遗卡牌/天门/天门市.png" id="1_lp51k"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_wf7fv"]
+[ext_resource type="Texture2D" uid="uid://64n8k642iynp" path="res://arts/非遗卡牌/天门/天门民歌.jpg" id="2_tf8jv"]
 
 [resource]
 script = ExtResource("1_wf7fv")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "天门民歌"
+image_of_front = ExtResource("2_tf8jv")
+image_of_back = ExtResource("1_lp51k")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

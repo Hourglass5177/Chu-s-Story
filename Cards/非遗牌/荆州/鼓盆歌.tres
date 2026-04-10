@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://illosbx6ka2q"]
 
+[ext_resource type="Texture2D" uid="uid://cle5vfdqc31ys" path="res://arts/非遗卡牌/荆州/荆州市.png" id="1_6v6n7"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_nn7bo"]
+[ext_resource type="Texture2D" uid="uid://bb7fxibaemdbw" path="res://arts/非遗卡牌/荆州/鼓盆歌.jpg" id="2_hxcbi"]
 
 [resource]
 script = ExtResource("1_nn7bo")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 unbreakable = true
 card_name = "鼓盆歌"
+image_of_front = ExtResource("2_hxcbi")
+image_of_back = ExtResource("1_6v6n7")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

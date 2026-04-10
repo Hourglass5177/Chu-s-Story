@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://c2115lvccm8oq"]
 
+[ext_resource type="Texture2D" uid="uid://ckb5uf542r12h" path="res://arts/非遗卡牌/黄石/黄石市.png" id="1_0o8nk"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_pg730"]
+[ext_resource type="Texture2D" uid="uid://c8376cylcy8fi" path="res://arts/非遗卡牌/黄石/采茶戏.jpg" id="2_lalp2"]
 
 [resource]
 script = ExtResource("1_pg730")
@@ -9,4 +11,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "采茶戏"
+image_of_front = ExtResource("2_lalp2")
+image_of_back = ExtResource("1_0o8nk")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

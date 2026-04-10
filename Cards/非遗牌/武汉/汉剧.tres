@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://bpyjxs5its4ym"]
 
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_fn7mh"]
+[ext_resource type="Texture2D" uid="uid://dhptya05n0dgp" path="res://arts/非遗卡牌/武汉/武汉市.png" id="1_iow1b"]
+[ext_resource type="Texture2D" uid="uid://dfaxb0jejjc4h" path="res://arts/非遗卡牌/武汉/汉剧.jpg" id="2_xhbw6"]
 
 [resource]
 script = ExtResource("1_fn7mh")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 unbreakable = true
 card_name = "汉剧"
+image_of_front = ExtResource("2_xhbw6")
+image_of_back = ExtResource("1_iow1b")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

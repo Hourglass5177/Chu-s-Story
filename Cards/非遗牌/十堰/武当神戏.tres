@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://dvfltx47c0edw"]
 
+[ext_resource type="Texture2D" uid="uid://botm3uys5vg7e" path="res://arts/非遗卡牌/十堰/十堰市.png" id="1_3tqdk"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_sclt3"]
+[ext_resource type="Texture2D" uid="uid://wqwusjol0j7k" path="res://arts/非遗卡牌/十堰/武当神戏.jpg" id="2_20rqv"]
 
 [resource]
 script = ExtResource("1_sclt3")
@@ -9,4 +11,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "武当神戏"
+image_of_front = ExtResource("2_20rqv")
+image_of_back = ExtResource("1_3tqdk")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

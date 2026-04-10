@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://rtp7ffcp6602"]
 
+[ext_resource type="Texture2D" uid="uid://c1xsw060noh24" path="res://arts/非遗卡牌/宜昌/宜昌市.png" id="1_g3aqn"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_p4l3u"]
+[ext_resource type="Texture2D" uid="uid://spc0j0aabenc" path="res://arts/非遗卡牌/宜昌/枝江民间吹打乐.jpg" id="2_yolkh"]
 
 [resource]
 script = ExtResource("1_p4l3u")
@@ -10,4 +12,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "枝江民间吹打乐"
+image_of_front = ExtResource("2_yolkh")
+image_of_back = ExtResource("1_g3aqn")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://dujcy1e4epgqr"]
 
+[ext_resource type="Texture2D" uid="uid://dhptya05n0dgp" path="res://arts/非遗卡牌/武汉/武汉市.png" id="1_j1kwt"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_mum1q"]
+[ext_resource type="Texture2D" uid="uid://btdt4d3d20g0q" path="res://arts/非遗卡牌/武汉/汉绣.jpg" id="2_nnnmb"]
 
 [resource]
 script = ExtResource("1_mum1q")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "汉绣"
+image_of_front = ExtResource("2_nnnmb")
+image_of_back = ExtResource("1_j1kwt")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

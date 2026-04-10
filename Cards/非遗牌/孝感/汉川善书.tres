@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://kt8lb8wxsju6"]
 
+[ext_resource type="Texture2D" uid="uid://d2on5kfua1tr5" path="res://arts/非遗卡牌/孝感/孝感市.png" id="1_dgk6m"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_iuyhc"]
+[ext_resource type="Texture2D" uid="uid://droqxis2homaa" path="res://arts/非遗卡牌/孝感/汉川善书.jpg" id="2_t44vq"]
 
 [resource]
 script = ExtResource("1_iuyhc")
@@ -8,4 +10,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "汉川善书"
+image_of_front = ExtResource("2_t44vq")
+image_of_back = ExtResource("1_dgk6m")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

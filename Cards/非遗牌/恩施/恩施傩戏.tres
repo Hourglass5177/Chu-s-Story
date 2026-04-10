@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://bnwk5dv750uht"]
 
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_868vg"]
+[ext_resource type="Texture2D" uid="uid://cyeo3arjkeu4s" path="res://arts/非遗卡牌/恩施/恩施市.png" id="1_qyip2"]
+[ext_resource type="Texture2D" uid="uid://ciilw8gpsen3" path="res://arts/非遗卡牌/恩施/恩施傩戏.jpg" id="2_14osg"]
 
 [resource]
 script = ExtResource("1_868vg")
@@ -9,4 +11,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "恩施傩戏"
+image_of_front = ExtResource("2_14osg")
+image_of_back = ExtResource("1_qyip2")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

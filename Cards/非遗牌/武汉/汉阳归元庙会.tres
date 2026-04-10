@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://dd4boosjq1uv0"]
 
+[ext_resource type="Texture2D" uid="uid://dhptya05n0dgp" path="res://arts/非遗卡牌/武汉/武汉市.png" id="1_0b82o"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_6gsgv"]
+[ext_resource type="Texture2D" uid="uid://cnaqdjefgdnm3" path="res://arts/非遗卡牌/武汉/汉阳归元庙会.jpg" id="2_vmh6v"]
 
 [resource]
 script = ExtResource("1_6gsgv")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 passive = true
 card_name = "汉阳归元庙会"
+image_of_front = ExtResource("2_vmh6v")
+image_of_back = ExtResource("1_0b82o")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://bgg3t6r8jrxt8"]
 
+[ext_resource type="Texture2D" uid="uid://cyeo3arjkeu4s" path="res://arts/非遗卡牌/恩施/恩施市.png" id="1_hb1vg"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_p3kv8"]
+[ext_resource type="Texture2D" uid="uid://cfjwxdrilw8xo" path="res://arts/非遗卡牌/恩施/地龙灯.png" id="2_8fvyc"]
 
 [resource]
 script = ExtResource("1_p3kv8")
@@ -9,4 +11,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "地龙灯"
+image_of_front = ExtResource("2_8fvyc")
+image_of_back = ExtResource("1_hb1vg")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

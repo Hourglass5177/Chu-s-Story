@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://qv20i4dxqy1x"]
 
+[ext_resource type="Texture2D" uid="uid://dhptya05n0dgp" path="res://arts/非遗卡牌/武汉/武汉市.png" id="1_502r4"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_rr1uj"]
+[ext_resource type="Texture2D" uid="uid://behukdpt1x5qy" path="res://arts/非遗卡牌/武汉/湖北评书.jpg" id="2_clt3r"]
 
 [resource]
 script = ExtResource("1_rr1uj")
@@ -9,4 +11,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "湖北评书"
+image_of_front = ExtResource("2_clt3r")
+image_of_back = ExtResource("1_502r4")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

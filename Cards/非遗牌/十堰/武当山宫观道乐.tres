@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://b44rb8ad0hybj"]
 
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_gx2ak"]
+[ext_resource type="Texture2D" uid="uid://botm3uys5vg7e" path="res://arts/非遗卡牌/十堰/十堰市.png" id="1_wvm4h"]
+[ext_resource type="Texture2D" uid="uid://s6k1713hqi21" path="res://arts/非遗卡牌/十堰/武当山宫观道乐.jpg" id="2_5annj"]
 
 [resource]
 script = ExtResource("1_gx2ak")
@@ -10,4 +12,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "武当山宫观道乐"
+image_of_front = ExtResource("2_5annj")
+image_of_back = ExtResource("1_wvm4h")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

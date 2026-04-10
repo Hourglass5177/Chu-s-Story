@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://dvme0g32u7mdp"]
 
+[ext_resource type="Texture2D" uid="uid://c1xsw060noh24" path="res://arts/非遗卡牌/宜昌/宜昌市.png" id="1_e011m"]
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_kj4oo"]
+[ext_resource type="Texture2D" uid="uid://gy41j4xyvdrr" path="res://arts/非遗卡牌/宜昌/当阳关陵庙会.jpg" id="2_k336u"]
 
 [resource]
 script = ExtResource("1_kj4oo")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 passive = true
 card_name = "当阳关陵庙会"
+image_of_front = ExtResource("2_k336u")
+image_of_back = ExtResource("1_e011m")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"

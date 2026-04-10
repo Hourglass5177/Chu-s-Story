@@ -20,6 +20,7 @@ var next_player_index: int = 0
 var player_num: int = 0
 var GameOn: bool = false
 var map: MAP
+var hud: HUD
 
 @onready var turn_timer: Timer = $TurnTimer
 
@@ -27,6 +28,8 @@ func _ready() -> void:
 	# 核心枢纽：监听来自全游戏任何地方的阶段跳转请求
 	next_phase.connect(_on_next_phase_requested)
 	turn_timer.timeout.connect(_on_timer_timeout)
+	hud = get_tree().get_first_node_in_group("HUD")
+	await get_tree().process_frame
 	map = get_tree().get_first_node_in_group("MAP")
 
 func start_game(player_nodes: Array[PlayerClass]):

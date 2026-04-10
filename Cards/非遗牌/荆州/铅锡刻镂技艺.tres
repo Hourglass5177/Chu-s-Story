@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="非遗牌" format=3 uid="uid://bs3dejge7x7ha"]
 
 [ext_resource type="Script" uid="uid://cfcilcn48vowf" path="res://Cards/DataStructure/非遗牌.gd" id="1_6kjrt"]
+[ext_resource type="Texture2D" uid="uid://cle5vfdqc31ys" path="res://arts/非遗卡牌/荆州/荆州市.png" id="1_v8o73"]
+[ext_resource type="Texture2D" uid="uid://d4baujq6uxi37" path="res://arts/非遗卡牌/荆州/铅锡刻镂技艺.jpg" id="2_2w2e7"]
 
 [resource]
 script = ExtResource("1_6kjrt")
@@ -11,4 +13,6 @@ effect_type = 2
 effect_value = 750
 destroy_after_use = true
 card_name = "铅锡刻镂技艺"
+image_of_front = ExtResource("2_2w2e7")
+image_of_back = ExtResource("1_v8o73")
 metadata/_custom_type_script = "uid://cfcilcn48vowf"
