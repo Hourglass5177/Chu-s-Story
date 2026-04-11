@@ -11,9 +11,11 @@ config_version=5
 [application]
 
 config/name="楚物志"
+config/version="beta 0.1.0"
 run/main_scene="uid://bpggqwetns32d"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/image="uid://conv21o25i7e4"
+config/icon="uid://gforsoryh67s"
 
 [autoload]
 

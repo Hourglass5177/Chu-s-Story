@@ -378,7 +378,7 @@ offset_bottom = -51.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_co0a7")
 theme_override_font_sizes/font_size = 50
-text = "【空格】切换视角"
+text = "【ALT】切换视角"
 
 [node name="手牌信息" type="ReferenceRect" parent="." unique_id=1990475967]
 offset_left = 521.0
