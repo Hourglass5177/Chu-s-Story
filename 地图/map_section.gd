@@ -74,6 +74,15 @@ const REGIONNUM = {
 	REGION.未知:0,
 }
 
+const 出生点坐标 = {
+	REGION.十堰: Vector3i(0,0,0),
+	REGION.随州: Vector3i(13, -9, -4),
+	REGION.孝感: Vector3i(15, -12, -3), 
+	REGION.黄冈: Vector3i(20, -17, -3), 
+	REGION.荆州: Vector3i(11, -17, 6), 
+	REGION.恩施: Vector3i(-1, -12, 13), 
+}
+
 @export var section_name: String = ""
 @export var location_index: Vector3i = Vector3i(0, 0, 0)
 @export var region: REGION = REGION.鄂州

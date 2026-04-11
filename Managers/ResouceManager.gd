@@ -32,7 +32,7 @@ const STRING_TO_REGION = {
 
 func _ready():
 	_init_decks()
-	hud = get_tree().get_first_node_in_group("HUD")
+	#hud = get_tree().get_first_node_in_group("HUD")
 	
 
 var 地区非遗牌库: Dictionary[MapSection.REGION, Array] = {} 

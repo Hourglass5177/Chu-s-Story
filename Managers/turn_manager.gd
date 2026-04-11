@@ -27,9 +27,9 @@ func _ready() -> void:
 	# 核心枢纽：监听来自全游戏任何地方的阶段跳转请求
 	next_phase.connect(_on_next_phase_requested)
 	turn_timer.timeout.connect(_on_timer_timeout)
-	hud = get_tree().get_first_node_in_group("HUD")
-	await get_tree().process_frame
-	map = get_tree().get_first_node_in_group("MAP")
+	#hud = get_tree().get_first_node_in_group("HUD")
+	#await get_tree().process_frame
+	#map = get_tree().get_first_node_in_group("MAP")
 
 func start_game(player_nodes: Array[PlayerClass]):
 	players = player_nodes
@@ -104,6 +104,11 @@ func _emit_next_phase(nxt_phase: TurnPhase):
 	next_phase.emit(nxt_phase)
 
 func now_turn_end():
+	for player:PlayerClass in players:
+		if player.current_score >= 20:
+			game_over()
+			GameOn = false
+			return
 	now_player_index = next_player_index
 	next_player_index = getNextPlayer(now_player_index)
 	if next_player_index < 0:

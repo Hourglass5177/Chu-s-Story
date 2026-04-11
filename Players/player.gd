@@ -4,7 +4,6 @@ signal roll_dice(result:int, player:PlayerClass)
 var hud:HUD
 var map:MAP
 enum PlayerCharacter{
-	无,
 	美食博主,
 	魔术博主,
 	探险博主,
@@ -40,7 +39,7 @@ func _process(delta: float) -> void:
 
 # 玩家的基础属性 [cite: 1]
 @export var player_name: String = "Player"
-@export var player_types: PlayerCharacter = PlayerCharacter.无
+@export var player_types: PlayerCharacter = PlayerCharacter.美食博主
 
 @export var current_energy: int = 6 
 @export var max_energy: int = 12

@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://ctxcx0y16euxc" path="res://arts/素材合集/sprite及立绘/棋子/5.png" id="1_bnt45"]
 [ext_resource type="Shader" uid="uid://clxuos8uim1v5" path="res://Players/player.gdshader" id="1_qhuue"]
-[ext_resource type="Texture2D" uid="uid://dtamyyoqvvfar" path="res://icon.svg" id="1_w22c2"]
 [ext_resource type="Script" uid="uid://blh8lxoamdqx4" path="res://Players/player.gd" id="2_fq5u1"]
 [ext_resource type="Texture2D" uid="uid://dh2spi1dh5nv7" path="res://arts/素材合集/sprite及立绘/棋子/3.png" id="2_x03v5"]
 [ext_resource type="Texture2D" uid="uid://bvgntrckldx1m" path="res://arts/素材合集/sprite及立绘/棋子/6.png" id="3_4rf5a"]
@@ -56,14 +55,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_w22c2")
-}],
-"loop": true,
-"name": &"无",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": ExtResource("5_hn4mw")
 }],
 "loop": true,
@@ -103,26 +94,24 @@ corner_radius_bottom_left = 80
 material = SubResource("ShaderMaterial_tintf")
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_fq5u1")
-animation = &"旅行博主"
+animation = &"商业博主"
 offset = Vector2(0, -550)
 script = ExtResource("2_fq5u1")
 "立绘精一图组" = Dictionary[int, Texture2D]({
-0: ExtResource("1_w22c2"),
-1: ExtResource("9_sin8e"),
-2: ExtResource("10_ok635"),
-3: ExtResource("11_vuxfe"),
-4: ExtResource("12_swvtt"),
-5: ExtResource("13_uxjgt"),
-6: ExtResource("14_ps8ke")
+0: ExtResource("9_sin8e"),
+1: ExtResource("10_ok635"),
+2: ExtResource("11_vuxfe"),
+3: ExtResource("12_swvtt"),
+4: ExtResource("13_uxjgt"),
+5: ExtResource("14_ps8ke")
 })
 "立绘精二图组" = Dictionary[int, Texture2D]({
-0: ExtResource("1_w22c2"),
-1: ExtResource("15_0p034"),
-2: ExtResource("16_qhuue"),
-3: ExtResource("17_tintf"),
-4: ExtResource("18_8g4q3"),
-5: ExtResource("19_wvm7i"),
-6: ExtResource("20_8yyuq")
+0: ExtResource("15_0p034"),
+1: ExtResource("16_qhuue"),
+2: ExtResource("17_tintf"),
+3: ExtResource("18_8g4q3"),
+4: ExtResource("19_wvm7i"),
+5: ExtResource("20_8yyuq")
 })
 
 [node name="ScoreBadge" type="PanelContainer" parent="." unique_id=208997199]

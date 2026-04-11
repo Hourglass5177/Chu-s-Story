@@ -180,6 +180,7 @@ func _update_player_stats(player: PlayerClass) -> void:
 	player.score_label.text = str(player.current_score)
 	name_label.text = player.player_name
 	立绘精二.texture = player.立绘精二
+	$"玩家信息/职业背景/职业".text = PlayerClass.PlayerCharacter.find_key(player.player_types)
 	current_status.text = "当前位置：" + MapSection.REGION.find_key(map.grid_map[player.now_pos].region) + str(map.grid_map[player.now_pos].location_index) + " - " + MapSection.SectionType.find_key(map.grid_map[player.now_pos].type)
 	if(TurnManager.now_phase == TurnManager.TurnPhase.MOVING):
 		_update_game_informs("剩余可移动：" + str(player.maxMove) + " 步")

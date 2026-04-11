@@ -2,22 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dlskdmyfd5khf" path="res://main_map.gd" id="1_km2bi"]
 [ext_resource type="PackedScene" uid="uid://deicr24uh1g8i" path="res://HUDs/HUD.tscn" id="2_ob7o4"]
-[ext_resource type="PackedScene" uid="uid://d17wx7legjg71" path="res://Players/player.tscn" id="3_5hk42"]
 
-[node name="MainMap" type="Node2D" unique_id=961873305]
+[node name="MainMap" type="Node2D" unique_id=961873305 groups=["MAINMAP"]]
 script = ExtResource("1_km2bi")
 
 [node name="HUD" parent="." unique_id=180054714 instance=ExtResource("2_ob7o4")]
 layer = -1
-
-[node name="Player" parent="." unique_id=1900862353 instance=ExtResource("3_5hk42")]
-animation = &"无"
-player_name = "Player1"
-player_types = 5
-
-[node name="Player2" parent="." unique_id=2135449373 instance=ExtResource("3_5hk42")]
-animation = &"无"
-player_name = "Player2"
-player_types = 4
-start_coord = Vector3i(7, -6, -1)
-player_index = 1
