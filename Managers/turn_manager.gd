@@ -44,6 +44,8 @@ func now_turn_start():
 	turn_start.emit(now_player_index)
 	# 引爆状态机的第一环
 	change_phase(TurnPhase.BEGIN)
+	if hud.is_focus_mode:
+		hud.update_camera_view(0.5)
 
 func _on_next_phase_requested(target_phase: TurnPhase):
 	# 只要有人请求进入下一阶段，立刻掐断当前的计时器，防止幽灵回调

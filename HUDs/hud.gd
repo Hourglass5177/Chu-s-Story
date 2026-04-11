@@ -25,6 +25,20 @@ class_name HUD
 
 @onready var timer = TurnManager.get_node("TurnTimer") as Timer
 @export var default_font: FontFile = null
+
+@onready var map_camera = $"地图/地图背景/SubViewportContainer/SubViewport/MapCamera"
+@onready var btn_view_toggle = $"地图/BtnViewToggle" # 请换成你实际的按钮路径
+
+var is_focus_mode: bool = false
+var global_zoom: Vector2
+var global_pos: Vector2
+
+# 之前我们算好的留白参数，原封不动保留
+const MAP_REAL_SIZE = Vector2(2560, 1600)
+const margin_top = 250.0 - 250
+const margin_bottom = 100.0 - 100
+const margin_x = 50.0 - 50
+
 var map:MAP
 func _ready() -> void:
 	map_container.resized.connect(_on_container_resized)
@@ -37,6 +51,12 @@ func _ready() -> void:
 	#_update_button_states(TurnManager.TurnPhase.BEGIN)
 	$BtnClose.pressed.connect(_on_close_pressed)
 	btn_food.pressed.connect(_on_btn_food_pressed)
+	btn_view_toggle.pressed.connect(_on_view_toggle_pressed)
+	# 设置相机的绝对物理边界。
+	map_camera.limit_left = -margin_x
+	map_camera.limit_top = -margin_top
+	map_camera.limit_right = MAP_REAL_SIZE.x + margin_x
+	map_camera.limit_bottom = MAP_REAL_SIZE.y + margin_bottom
 	if $BtnClose.texture_normal:
 		var bitmap = BitMap.new()
 		# 读取原图的透明通道数据
@@ -57,7 +77,6 @@ func _ready() -> void:
 @onready var btn_close_game = $"BtnClose"
 
 var map_instance:Node2D
-const MAP_REAL_SIZE = Vector2(2560, 1600)
 
 func _spawn_map_in_hud():
 	if map_scene:
@@ -69,31 +88,50 @@ func _spawn_map_in_hud():
 		push_error("HUD 没有配置地图场景！请在检查器中拖入 map.tscn")
 
 func _on_container_resized():
-	if not is_instance_valid(map_instance): 
-		return
-		
+	if not is_instance_valid(map_instance): return
 	var ui_size = map_container.size
 	
-	# 【核心修复】：为防止高大棋子被视口截断，给地图四周增加“虚拟安全留白”（物理像素）
-	var margin_top = 250    # 顶部留出 250 像素（根据你棋子贴图的高度可适当调大/调小）
-	var margin_bottom = 50.0 # 底部留出 50 像素，防止踩底边的格子时脚被切掉
-	var margin_x = 100      # 左右两侧各留 100 像素边缘
-	
-	# 加上留白后的“虚拟地图总尺寸”
+	# 计算全局视野的缩放比例
 	var padded_size = MAP_REAL_SIZE + Vector2(margin_x * 2, margin_top + margin_bottom)
-	
-	# 针对这个更大的虚拟尺寸计算缩放比例（地图会自动被缩得稍微小一点，腾出留白）
 	var scale_factor = min(ui_size.x / padded_size.x, ui_size.y / padded_size.y)
+	global_zoom = Vector2(scale_factor, scale_factor)
 	
-	# 等比例缩放地图节点
-	map_instance.scale = Vector2(scale_factor, scale_factor)
+	# 计算带有留白的地图真实的几何中心点
+	global_pos = Vector2(MAP_REAL_SIZE.x / 2.0, MAP_REAL_SIZE.y / 2.0 + (margin_bottom - margin_top) / 2.0)
 	
-	# 完美居中这个带留白的虚拟方块
-	var scaled_padded_size = padded_size * scale_factor
-	var base_offset = (ui_size - scaled_padded_size) / 2.0
+	map_instance.scale = Vector2(1.0, 1.0)
+	map_instance.position = Vector2(0, 0)
 	
-	# 最终赋予的位置：UI 居中偏移量 + 左侧和顶部的边距补偿
-	map_instance.position = base_offset + Vector2(margin_x, margin_top) * scale_factor
+	# 刷新当前镜头
+	update_camera_view(0.0)
+
+func _on_view_toggle_pressed():
+	is_focus_mode = not is_focus_mode
+	update_camera_view(0.4) # 0.4 秒的顺滑运镜动画
+
+func update_camera_view(duration: float = 0.4):
+	var target_zoom: Vector2
+	var target_pos: Vector2
+	
+	if is_focus_mode:
+		# 聚焦时，镜头放大到全局的 2 倍（你可以根据美术素材精细度改为 1.5 或 2.5）
+		target_zoom = global_zoom * 2.0
+		
+		# 自动寻找当前回合玩家的坐标
+		var current_player = TurnManager.players[TurnManager.now_player_index]
+		target_pos = current_player.position if is_instance_valid(current_player) else global_pos
+	else:
+		target_zoom = global_zoom
+		target_pos = global_pos
+		
+	# 创建并行动画：同时平滑缩放(zoom)和移动(position)
+	if duration > 0:
+		var tween = create_tween().set_parallel(true).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+		tween.tween_property(map_camera, "zoom", target_zoom, duration)
+		tween.tween_property(map_camera, "position", target_pos, duration)
+	else:
+		map_camera.zoom = target_zoom
+		map_camera.position = target_pos
 
 func _process(delta: float):
 	if timer and TurnManager.GameOn and timer.time_left > 0:

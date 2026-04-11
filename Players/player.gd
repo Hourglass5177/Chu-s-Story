@@ -168,6 +168,7 @@ func move_along_path(path_pixels: Array[Vector2], total_cost: int, target_grid_p
 	now_pos = target_grid_pos # 更新逻辑坐标
 	map.grid_map[now_pos].is_occupied = true
 	hud._update_player_stats(self)
+	hud.update_camera_view(0.5)
 	map._clear_all_highlights()
 	map._show_reachable_areas()
 # ==========================================

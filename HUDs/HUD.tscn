@@ -23,6 +23,13 @@
 [ext_resource type="PackedScene" uid="uid://cm1kw23jddbnc" path="res://HUDs/食物背包弹窗.tscn" id="21_eb20h"]
 [ext_resource type="PackedScene" uid="uid://dh48ddr23kk4b" path="res://HUDs/商店弹窗.tscn" id="22_4r6rv"]
 
+[sub_resource type="InputEventKey" id="InputEventKey_4r6rv"]
+device = -1
+keycode = 4194328
+
+[sub_resource type="Shortcut" id="Shortcut_ny0mp"]
+events = [SubResource("InputEventKey_4r6rv")]
+
 [node name="HUD" type="CanvasLayer" unique_id=180054714 groups=["HUD"]]
 script = ExtResource("1_5v5lr")
 default_font = ExtResource("1_co0a7")
@@ -339,18 +346,39 @@ expand_mode = 1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="地图/地图背景" unique_id=338757648]
 layout_mode = 0
-offset_left = 7.505
-offset_top = -80.0
-offset_right = 1507.505
-offset_bottom = 1060.0
+offset_left = 105.99999
+offset_top = 135.0
+offset_right = 1405.0
+offset_bottom = 961.0
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="地图/地图背景/SubViewportContainer" unique_id=61636319]
 transparent_bg = true
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(1500, 1140)
+size = Vector2i(1299, 826)
 render_target_update_mode = 4
+
+[node name="MapCamera" type="Camera2D" parent="地图/地图背景/SubViewportContainer/SubViewport" unique_id=570745662]
+
+[node name="BtnViewToggle" type="TextureButton" parent="地图" unique_id=1288930273]
+layout_mode = 0
+offset_left = -668.0
+offset_top = -46.0
+offset_right = -628.0
+offset_bottom = -6.0
+shortcut = SubResource("Shortcut_ny0mp")
+
+[node name="缩放提示信息" type="Label" parent="地图" unique_id=1057708247]
+layout_mode = 0
+offset_left = 48.0
+offset_top = -116.0
+offset_right = 503.0
+offset_bottom = -51.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_co0a7")
+theme_override_font_sizes/font_size = 50
+text = "【空格】切换视角"
 
 [node name="手牌信息" type="ReferenceRect" parent="." unique_id=1990475967]
 offset_left = 521.0

@@ -235,16 +235,14 @@ func calculate_victory_score(player: PlayerClass):
 			reg_bonus = 5
 		
 	if cate.size() >= 5: cat_bonus+=5
-	for cat in 非遗牌.CardCategory:
+	for cat in 非遗牌.CardCategory.values():
 		if cate.has(cat):
 			if cate[cat] >= ResourceManager.类别非遗牌上限字典[cat]:
-				cat_bonus += 5
-				break
-	for reg in MapSection.REGION:
+				cat_bonus += 5			
+	for reg in MapSection.REGION.values():
 		if region.has(reg):
-			if region[reg] >= ResourceManager.地区非遗牌上限字典[reg]:
+			if region[reg] >= ResourceManager.地区非遗牌上限字典.get(reg, 999):
 				reg_bonus += 2
-				break
 	if region.has(MapSection.REGION.潜江) and region.has(MapSection.REGION.天门) and region.has(MapSection.REGION.仙桃):
 		reg_bonus += 2
 		
@@ -256,7 +254,6 @@ func draw_shop_foods(count: int = 3) -> Array[食物牌]:
 	var foods: Array[食物牌] = []
 	# 保证牌库有足够的牌，不够就把所有的拿出来
 	var actual_count = min(count, 食物牌库.size())
-	print("【DEBUG】当前食物牌库真实数量：", 食物牌库.size())
 	食物牌库.shuffle()
 	for i in range(actual_count):
 		# 注意这里是弹出，因为摆在货架上的牌就不在牌库里了
