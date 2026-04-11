@@ -12,6 +12,7 @@ texture = ExtResource("1_f45lj")
 
 [node name="非遗详情弹窗" type="Panel" unique_id=914408683]
 process_mode = 3
+z_index = -1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -25,6 +26,20 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_x0v5x")
 script = ExtResource("1_imxyn")
+
+[node name="Panel" type="Panel" parent="." unique_id=891633872]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -539.0
+offset_top = -381.0
+offset_right = 580.0
+offset_bottom = 307.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="标题" type="Label" parent="." unique_id=405692965]
 layout_mode = 1
@@ -120,13 +135,6 @@ theme_override_fonts/font = ExtResource("4_bqm6w")
 theme_override_font_sizes/font_size = 64
 text = "【效果】"
 autowrap_mode = 3
-
-[node name="BtnUse" type="Button" parent="." unique_id=507031844]
-layout_mode = 0
-offset_left = 720.0
-offset_top = 406.0
-offset_right = 734.0
-offset_bottom = 414.0
 
 [node name="BtnClose" type="TextureButton" parent="." unique_id=1881962062]
 layout_mode = 1

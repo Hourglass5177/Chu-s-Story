@@ -5,8 +5,8 @@ class_name HUD
 @onready var time_label = $"回合信息/TimeLabel" as Label
 
 @onready var player_label = $"玩家信息/玩家信息" as Label
-@onready var money_label = $"玩家信息/MoneyLabel" as Label
-@onready var energy_label = $"玩家信息/EnergyLabel" as Label
+@onready var money_label = $"玩家信息/积分背景/MoneyLabel" as Label
+@onready var energy_label = $"玩家信息/精力背景/EnergyLabel" as Label
 @onready var name_label = $"玩家信息/姓名背景/NameLabel" as Label
 @onready var 立绘精二 = $"玩家信息/立绘背景/立绘" as TextureRect
 
@@ -33,7 +33,18 @@ func _ready() -> void:
 	btn_end_turn.pressed.connect(_on_btn_end_turn_pressed)
 	btn_action.pressed.connect(_on_btn_action_pressed)
 	#_update_button_states(TurnManager.TurnPhase.BEGIN)
-	detail_panel.use_button_clicked.connect(_execute_card_usage)
+	$BtnClose.pressed.connect(_on_close_pressed)
+	if $BtnClose.texture_normal:
+		var bitmap = BitMap.new()
+		# 读取原图的透明通道数据
+		bitmap.create_from_image_alpha($BtnClose.texture_normal.get_image())
+		# 将其设为按钮的点击遮罩
+		$BtnClose.texture_click_mask = bitmap
+		var mask = $BtnClose/mask
+		$BtnClose.mouse_entered.connect(func(): mask.show())
+		$BtnClose.mouse_exited.connect(func(): mask.hide())
+		$BtnClose.button_down.connect(func(): mask.modulate = Color(0, 0, 0, 0.7)) # 按下更黑
+		$BtnClose.button_up.connect(func(): mask.modulate = Color(0, 0, 0, 0.4))   # 松开恢复
 # 暴露给编辑器的变量，把你做好的 map.tscn 直接从底层文件系统拖到右侧面板的这个槽位里
 @export var map_scene: PackedScene 
 
@@ -121,8 +132,8 @@ func _roll_dice_information(result:int, player:PlayerClass) -> void:
 
 # --- UI 刷新状态函数 ---
 func _update_player_stats(player: PlayerClass) -> void:
-	money_label.text = "积分点: " + str(player.current_money)
-	energy_label.text = "精力: " + str(player.current_energy) + " / " + str(player.max_energy)
+	money_label.text = str(player.current_money)
+	energy_label.text = str(player.current_energy) + "/" + str(player.max_energy)
 	score_label.text = "总分数: " + str(player.current_score)
 	name_label.text = player.player_name
 	立绘精二.texture = player.立绘精二
@@ -284,3 +295,7 @@ func prompt_passive_card_use(card_data: 非遗牌, callable_if_yes: Callable):
 	# 这里你可以唤起一个系统的 ConfirmationDialog 询问玩家
 	print("询问：是否要发动被动技能【", card_data.card_name, "】？")
 	# 如果玩家点是：callable_if_yes.call()
+
+func _on_close_pressed():
+	print("退出游戏")
+	get_tree().quit(0)

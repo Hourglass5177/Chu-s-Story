@@ -12,7 +12,14 @@
 [ext_resource type="Texture2D" uid="uid://b81vuk1dw82iv" path="res://arts/1x/资源 26.png" id="7_a5gv0"]
 [ext_resource type="Texture2D" uid="uid://303pbr0epg5k" path="res://arts/1x/图层 10 (3).png" id="8_6ydt6"]
 [ext_resource type="PackedScene" uid="uid://cb5cdjbnpc5c6" path="res://HUDs/非遗详情弹窗.tscn" id="8_k31s0"]
+[ext_resource type="Texture2D" uid="uid://jtcm1u76xyu0" path="res://arts/控件/资源 51.png" id="11_s6yh1"]
 [ext_resource type="Texture2D" uid="uid://di25uit2kes1d" path="res://arts/控件/底边.png" id="12_amuwg"]
+[ext_resource type="Texture2D" uid="uid://cu8ke8hxriu56" path="res://arts/控件/资源 50.png" id="12_uaqhe"]
+[ext_resource type="Texture2D" uid="uid://dv5tmg3pvybts" path="res://arts/1x/资源 25.png" id="13_koecs"]
+[ext_resource type="Texture2D" uid="uid://cbp4umacubqfi" path="res://arts/控件/left.png" id="13_uaqhe"]
+[ext_resource type="Texture2D" uid="uid://rg30iaom72fv" path="res://arts/1x/right.png" id="14_d7akv"]
+[ext_resource type="Texture2D" uid="uid://b7clbspmqvqrf" path="res://arts/控件/close.png" id="14_ytx7x"]
+[ext_resource type="Texture2D" uid="uid://plvuejng3g68" path="res://arts/1x/close.png" id="15_koecs"]
 
 [node name="HUD" type="CanvasLayer" unique_id=180054714 groups=["HUD"]]
 script = ExtResource("1_5v5lr")
@@ -86,6 +93,8 @@ offset_bottom = 32.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 14
 theme_override_fonts/font = ExtResource("1_co0a7")
 theme_override_font_sizes/font_size = 75
 text = "Player"
@@ -138,7 +147,7 @@ offset_bottom = 885.0
 texture = ExtResource("7_a5gv0")
 
 [node name="立绘" type="TextureRect" parent="玩家信息/立绘背景" unique_id=1710550446]
-z_index = 2
+z_index = 1
 layout_mode = 0
 offset_left = -10.0
 offset_top = -18.0
@@ -175,45 +184,79 @@ mouse_filter = 2
 border_color = Color(0.9301437, 0.20356253, 0.42166385, 1)
 border_width = 2.3
 
-[node name="MoneyLabel" type="Label" parent="玩家信息" unique_id=1453334779]
+[node name="积分背景" type="TextureRect" parent="玩家信息" unique_id=1966629834]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -223.5
+offset_top = -398.0
+offset_right = 243.5
+offset_bottom = -198.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("11_s6yh1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MoneyLabel" type="Label" parent="玩家信息/积分背景" unique_id=1453334779]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -234.5
-offset_top = 385.0
-offset_right = 245.5
-offset_bottom = 475.0
+offset_left = -62.5
+offset_top = -52.0
+offset_right = 146.5
+offset_bottom = 38.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("1_co0a7")
-theme_override_font_sizes/font_size = 70
-text = "积分点：1000"
+theme_override_font_sizes/font_size = 71
+text = "1000"
+vertical_alignment = 1
+
+[node name="精力背景" type="TextureRect" parent="玩家信息" unique_id=1474567996]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 1175.0
+offset_right = 471.0
+offset_bottom = 1616.0
+texture = ExtResource("12_uaqhe")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EnergyLabel" type="Label" parent="玩家信息/精力背景" unique_id=41309931]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.5
+offset_top = -50.5
+offset_right = 115.5
+offset_bottom = 39.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("1_co0a7")
+theme_override_font_sizes/font_size = 76
+text = "6/12"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EnergyLabel" type="Label" parent="玩家信息" unique_id=41309931]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -189.5
-offset_top = 464.0
-offset_right = 210.5
-offset_bottom = 554.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_co0a7")
-theme_override_font_sizes/font_size = 70
-text = "精力：6 点"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Left" type="Sprite2D" parent="玩家信息" unique_id=1826585474]
+position = Vector2(248, 1091)
+texture = ExtResource("13_uaqhe")
 
 [node name="回合信息" type="ReferenceRect" parent="." unique_id=1083800022]
 offset_left = 525.0
@@ -322,7 +365,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -23.0
-offset_right = 507.0
+offset_right = 463.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -409,12 +452,24 @@ theme_override_font_sizes/font_size = 90
 text = "结束"
 
 [node name="积分区域" type="ReferenceRect" parent="." unique_id=106443970]
-offset_left = 1975.0
-offset_top = 16.0
-offset_right = 2549.0
-offset_bottom = 1587.0
+offset_left = 2035.0
+offset_top = 137.0
+offset_right = 2535.0
+offset_bottom = 1549.0
 mouse_filter = 2
 border_width = 2.1
+
+[node name="积分区域背景" type="TextureRect" parent="积分区域" unique_id=1486286758]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_koecs")
+expand_mode = 1
 
 [node name="ScoreLabel" type="Label" parent="积分区域" unique_id=965251142]
 layout_mode = 1
@@ -431,20 +486,54 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_co0a7")
-theme_override_font_sizes/font_size = 90
+theme_override_font_sizes/font_size = 80
 text = "总分：0 点"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="积分区域" unique_id=798965891]
 layout_mode = 0
-offset_left = 58.0
-offset_top = 104.0
-offset_right = 560.0
-offset_bottom = 1210.0
+offset_left = 32.0
+offset_top = 121.0
+offset_right = 472.0
+offset_bottom = 1227.0
+horizontal_scroll_mode = 0
 
 [node name="非遗列表容器" type="VBoxContainer" parent="积分区域/ScrollContainer" unique_id=659525950]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+alignment = 1
+
+[node name="Right" type="Sprite2D" parent="积分区域" unique_id=1177467446]
+position = Vector2(257, 54)
+texture = ExtResource("14_d7akv")
+
+[node name="BtnClose" type="TextureButton" parent="." unique_id=718526081]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -216.0
+offset_top = -66.0
+offset_right = 64.0
+offset_bottom = 214.0
+grow_horizontal = 0
+texture_normal = ExtResource("14_ytx7x")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="mask" type="TextureRect" parent="BtnClose" unique_id=1073166334]
+modulate = Color(0, 0, 0, 0.39215687)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_koecs")
 
 [node name="非遗详情弹窗" parent="." unique_id=914408683 instance=ExtResource("8_k31s0")]
 visible = false
+z_index = 3
