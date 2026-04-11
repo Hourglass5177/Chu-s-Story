@@ -20,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://rg30iaom72fv" path="res://arts/1x/right.png" id="14_d7akv"]
 [ext_resource type="Texture2D" uid="uid://b7clbspmqvqrf" path="res://arts/控件/close.png" id="14_ytx7x"]
 [ext_resource type="Texture2D" uid="uid://plvuejng3g68" path="res://arts/1x/close.png" id="15_koecs"]
+[ext_resource type="PackedScene" uid="uid://cm1kw23jddbnc" path="res://HUDs/食物背包弹窗.tscn" id="21_eb20h"]
+[ext_resource type="PackedScene" uid="uid://dh48ddr23kk4b" path="res://HUDs/商店弹窗.tscn" id="22_4r6rv"]
 
 [node name="HUD" type="CanvasLayer" unique_id=180054714 groups=["HUD"]]
 script = ExtResource("1_5v5lr")
@@ -376,7 +378,7 @@ expand_mode = 1
 layout_mode = 1
 offset_left = 86.0
 offset_top = 22.0
-offset_right = 902.0
+offset_right = 1028.0
 offset_bottom = 87.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_co0a7")
@@ -384,16 +386,18 @@ theme_override_font_sizes/font_size = 55
 text = "当前位置：十堰0 (0, 0, 0) - 起点"
 
 [node name="游戏信息" type="Label" parent="手牌信息" unique_id=1817843051]
+custom_minimum_size = Vector2(1, 0)
 layout_mode = 1
 offset_left = 85.0
 offset_top = 81.0
-offset_right = 865.0
+offset_right = 1029.0
 offset_bottom = 178.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_co0a7")
 theme_override_font_sizes/font_size = 55
 text = "等待中…"
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="操作区域" type="ReferenceRect" parent="." unique_id=590482004]
 offset_left = 1572.0
@@ -524,6 +528,7 @@ stretch_mode = 4
 metadata/_edit_group_ = true
 
 [node name="mask" type="TextureRect" parent="BtnClose" unique_id=1073166334]
+visible = false
 modulate = Color(0, 0, 0, 0.39215687)
 layout_mode = 1
 anchors_preset = 15
@@ -537,3 +542,12 @@ texture = ExtResource("15_koecs")
 [node name="非遗详情弹窗" parent="." unique_id=914408683 instance=ExtResource("8_k31s0")]
 visible = false
 z_index = 3
+
+[node name="食物背包弹窗" parent="." unique_id=482406155 instance=ExtResource("21_eb20h")]
+visible = false
+z_index = 3
+offset_top = -545.5
+offset_bottom = 463.5
+
+[node name="商店弹窗" parent="." unique_id=181615663 instance=ExtResource("22_4r6rv")]
+visible = false

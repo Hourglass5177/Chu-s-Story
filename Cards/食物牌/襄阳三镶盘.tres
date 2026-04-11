@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="食物牌" format=3 uid="uid://itrvw1asr0l4"]
+
+[ext_resource type="Texture2D" uid="uid://crx4qxhrp8si6" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_i1m1b"]
+[ext_resource type="Texture2D" uid="uid://caff1ju58jvjm" path="res://arts/食物牌/襄阳三镶盘.png" id="2_i1m1b"]
+[ext_resource type="Script" uid="uid://cabfa12ti5mjs" path="res://Cards/DataStructure/食物牌.gd" id="3_gmey4"]
+
+[resource]
+script = ExtResource("3_gmey4")
+card_type = 2
+card_name = "襄阳三镶盘"
+image_of_front = ExtResource("2_i1m1b")
+image_of_back = ExtResource("1_i1m1b")
+metadata/_custom_type_script = "uid://cabfa12ti5mjs"

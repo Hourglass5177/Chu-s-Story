@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="食物牌" format=3 uid="uid://bk71oy6cgesuh"]
+
+[ext_resource type="Texture2D" uid="uid://crx4qxhrp8si6" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_2xdb4"]
+[ext_resource type="Texture2D" uid="uid://bwgrjsm0e6j3m" path="res://arts/食物牌/广水滑肉.png" id="2_2xdb4"]
+[ext_resource type="Script" uid="uid://cabfa12ti5mjs" path="res://Cards/DataStructure/食物牌.gd" id="3_avn3q"]
+
+[resource]
+script = ExtResource("3_avn3q")
+card_type = 2
+card_name = "广水滑肉"
+image_of_front = ExtResource("2_2xdb4")
+image_of_back = ExtResource("1_2xdb4")
+metadata/_custom_type_script = "uid://cabfa12ti5mjs"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="食物牌" format=3 uid="uid://6lg6mxvytldk"]
+
+[ext_resource type="Texture2D" uid="uid://crx4qxhrp8si6" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_a8t33"]
+[ext_resource type="Texture2D" uid="uid://bv6ein8y2325t" path="res://arts/食物牌/随州三鲜.png" id="2_a8t33"]
+[ext_resource type="Script" uid="uid://cabfa12ti5mjs" path="res://Cards/DataStructure/食物牌.gd" id="3_dn0wh"]
+
+[resource]
+script = ExtResource("3_dn0wh")
+card_type = 2
+card_name = "随州三鲜"
+image_of_front = ExtResource("2_a8t33")
+image_of_back = ExtResource("1_a8t33")
+metadata/_custom_type_script = "uid://cabfa12ti5mjs"

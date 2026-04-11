@@ -33,6 +33,7 @@ const STRING_TO_REGION = {
 func _ready():
 	_init_decks()
 	hud = get_tree().get_first_node_in_group("HUD")
+	
 
 var 地区非遗牌库: Dictionary[MapSection.REGION, Array] = {} 
 
@@ -116,7 +117,10 @@ func draw_card(player: PlayerClass, deck_type: 卡牌基类.CardType, region:Map
 			var card = 地区非遗牌库[region].pop_back()
 			player.非遗牌手牌.append(card)
 			print(player.player_name, " 在 [", region_name, "] 获得了非遗牌：【", card.card_name,"】")
-			hud._update_game_informs(player.player_name + " 消耗1点精力，收集了非遗！\n\n 获得了【" + card.card_name + "】！")
+			if card.category == 非遗牌.CardCategory.节日庆典:
+				hud._update_game_informs(player.player_name + " 消耗1点精力，收集了非遗！\n 获得了【" + card.card_name + "】！")
+				hud.information.text += "\n获得节日庆典类非遗牌，立即获得3点精力和750积分点！"
+			else: 	hud._update_game_informs(player.player_name + " 消耗1点精力，收集了非遗！\n\n 获得了【" + card.card_name + "】！")
 			hud.refresh_feiyi_list(player)
 			return card
 		else:
@@ -142,6 +146,7 @@ func draw_card(player: PlayerClass, deck_type: 卡牌基类.CardType, region:Map
 func modify_money(player: PlayerClass, amount: int, reason: String = "无"):
 	player.current_money += amount
 	# 如果金额是负数且不够扣，可以在这里进行破产拦截
+	hud._update_player_stats(player)
 	print(player.player_name, " 积分点 ", amount, "。当前积分点: ", player.current_money, "。原因: ", reason)
 
 func modify_energy(player: PlayerClass, amount: int, reason: String = "") -> bool:
@@ -153,14 +158,17 @@ func modify_energy(player: PlayerClass, amount: int, reason: String = "") -> boo
 		
 	player.current_energy = new_energy
 	print(player.player_name, " 精力变动: ", amount, "。当前精力: ", player.current_energy, "。原因: ", reason)
-	
+	hud._update_player_stats(player)
 	return true
 
 func get_feiyi(player: PlayerClass, section: MapSection) -> 卡牌基类:
 	modify_energy(player, -1, "收集非遗")
 	var region = section.region
-	return draw_card(player, 卡牌基类.CardType.非遗牌, section.region)
-	
+	var card = draw_card(player, 卡牌基类.CardType.非遗牌, section.region)
+	if card.category == 非遗牌.CardCategory.节日庆典:
+		modify_energy(player, 3, "获得节日庆典类非遗牌")
+		modify_money(player, 750, "获得节日庆典类非遗牌")
+	return card
 
 # 4. 业务逻辑封装：处理打工发工资
 func process_work_salary(player: PlayerClass, work_turn: int):
@@ -176,13 +184,11 @@ func process_work_salary(player: PlayerClass, work_turn: int):
 	modify_energy(player, -1, "打工消耗")
 	modify_money(player, salary, "打工第 " + str(work_turn) + " 回合工资")
 	hud.information.text += "\n"+player.player_name+"消耗1点精力，积分点 +"+str(salary)
-	hud._update_player_stats(player)
 
 func vis_scenery(player: PlayerClass, section: MapSection) -> bool:
 	var region = section.region
 	await get_tree().create_timer(1).timeout
 	modify_energy(player, 3, "看风景")
-	hud._update_player_stats(player)
 	print(player.player_name, " 欣赏风景，回复3点精力，并获得风景明信片！")
 	hud._update_game_informs(player.player_name + " 欣赏风景，回复3点精力！")
 	# TODO: 获得明信片的接口
@@ -245,3 +251,54 @@ func calculate_victory_score(player: PlayerClass):
 	player.current_score = sum + cat_bonus + reg_bonus
 	hud._update_player_stats(player)
 	# TODO: 特殊加分规则
+
+func draw_shop_foods(count: int = 3) -> Array[食物牌]:
+	var foods: Array[食物牌] = []
+	# 保证牌库有足够的牌，不够就把所有的拿出来
+	var actual_count = min(count, 食物牌库.size())
+	print("【DEBUG】当前食物牌库真实数量：", 食物牌库.size())
+	食物牌库.shuffle()
+	for i in range(actual_count):
+		# 注意这里是弹出，因为摆在货架上的牌就不在牌库里了
+		foods.append(食物牌库.pop_back() as 食物牌) 
+	return foods
+
+func use_feiyi(player: PlayerClass, card:非遗牌):
+	await feiyi_execute_effect(player, card)
+	desert_feiyi(player, card)
+
+func feiyi_execute_effect(player: PlayerClass, card:非遗牌):
+	print("执行了非遗牌效果：", card.card_name)
+	match card.category:
+		非遗牌.CardCategory.戏曲表演:
+			ResourceManager.modify_energy(player, 3, "使用戏曲表演类非遗牌")
+			hud._update_game_informs("使用"+非遗牌.CardCategory.find_key(card.category)+"类非遗牌【"+card.card_name+"】，回复3点精力！")
+		非遗牌.CardCategory.民间音乐:
+			ResourceManager.modify_money(player, 750, "使用民间音乐类非遗牌")
+			hud._update_game_informs("使用"+非遗牌.CardCategory.find_key(card.category)+"类非遗牌【"+card.card_name+"】，获得750积分点！")
+		非遗牌.CardCategory.手工技艺:
+			player.maxMove *= 2
+			hud._update_player_stats(player)
+			hud.information.text += ("\n使用"+非遗牌.CardCategory.find_key(card.category)+"类非遗牌【"+card.card_name+"】，最大可移动步数翻倍！")
+		_:
+			pass
+	await get_tree().process_frame
+
+func desert_feiyi(player:PlayerClass, card:非遗牌):
+	if player.非遗牌手牌.has(card):
+		player.非遗牌手牌.erase(card)
+		calculate_victory_score(player)
+		hud.refresh_feiyi_list(player)
+		hud._update_player_stats(player)
+
+func find_winner() -> Array[PlayerClass]:
+	var maxScore = -1
+	var winners:Array[PlayerClass] = []
+	for player in TurnManager.players:
+		if player.current_score > maxScore:
+			maxScore = player.current_score
+			winners.clear()
+			winners.append(player)
+		elif  player.current_score == maxScore:
+			winners.append(player)
+	return winners

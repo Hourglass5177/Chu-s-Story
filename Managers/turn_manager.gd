@@ -1,7 +1,6 @@
 extends Node
 signal turn_start(player_idx : int)
 signal phase_changed(new_phase: TurnPhase)
-signal game_over()
 signal next_phase(target_phase: TurnPhase)
 
 enum TurnPhase{
@@ -106,7 +105,7 @@ func now_turn_end():
 	now_player_index = next_player_index
 	next_player_index = getNextPlayer(now_player_index)
 	if next_player_index < 0:
-		game_over.emit()
+		game_over()
 		GameOn = false
 		return
 	now_turn_start()
@@ -121,3 +120,19 @@ func getNextPlayer(player_id: int) -> int:
 		if cnt > player_num:
 			return -1
 	return nxtplayer_id
+
+func player_died(player: PlayerClass):
+	pass
+
+func game_over():
+	var winners:Array[PlayerClass] = ResourceManager.find_winner()
+	if winners.size() > 1:
+		var info:String = "玩家 "
+		for winner:PlayerClass in winners:
+			info += winner.player_name + " "
+		info += "并列获胜！ 分数：" + str(winners[0].current_score)
+		hud._update_game_informs(info)
+	elif winners.size() == 1:
+		hud._update_game_informs("玩家 "+winners[0].player_name+" 获胜！ 分数：" + str(winners[0].current_score))
+	hud.btn_close_game.process_mode = Node.PROCESS_MODE_ALWAYS
+	get_tree().paused = true

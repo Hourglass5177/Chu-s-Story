@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="食物牌" format=3 uid="uid://cxtnfpl3617bb"]
+
+[ext_resource type="Texture2D" uid="uid://crx4qxhrp8si6" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_lhwkp"]
+[ext_resource type="Texture2D" uid="uid://dycdnbt81gi5r" path="res://arts/食物牌/荆门雪枣.png" id="2_lhwkp"]
+[ext_resource type="Script" uid="uid://cabfa12ti5mjs" path="res://Cards/DataStructure/食物牌.gd" id="3_cj5ar"]
+
+[resource]
+script = ExtResource("3_cj5ar")
+card_type = 2
+card_name = "荆门雪枣"
+image_of_front = ExtResource("2_lhwkp")
+image_of_back = ExtResource("1_lhwkp")
+metadata/_custom_type_script = "uid://cabfa12ti5mjs"

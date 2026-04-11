@@ -46,7 +46,7 @@ const TYPE_TO_EFFECT = {
 	CardCategory.手工技艺:"移动阶段，可以消耗此牌，使可移动最大步数翻倍。",
 	CardCategory.神话传说:"任意时候可以消耗此牌，无效化对你的食物牌或事件牌的效果。",
 	CardCategory.节日庆典:"获得此牌时，立即获得 3 点精力点数和 750 积分点。",
-	CardCategory.武术拳法:"拥有此牌时，移动时消耗精力点数-1（不重复叠加）。",
+	CardCategory.武术拳法:"拥有此牌时，移动阶段第一次移动时消耗精力点数-1（不重复叠加）。",
 	CardCategory.国家级非遗:"国家级非遗，此牌的基础分数为 5 。"
 }
 # 导出变量
@@ -79,9 +79,12 @@ enum EffectType {
 # --- 留给未来实现的接口 ---
 # 判定当前时机是否满足使用条件
 func can_use(player: PlayerClass) -> bool:
-	return false
-
-# 实际执行卡牌效果
-func execute_effect(player: PlayerClass):
-	print("执行了非遗牌效果：", card_name)
-	pass
+	match category:
+		CardCategory.戏曲表演:
+			return (TurnManager.now_phase == TurnManager.TurnPhase.ACTION) and player.onTurn and player.alive
+		CardCategory.民间音乐:
+			return (TurnManager.now_phase == TurnManager.TurnPhase.ACTION) and player.onTurn and player.alive
+		CardCategory.手工技艺:
+			return (TurnManager.now_phase == TurnManager.TurnPhase.MOVING) and player.onTurn and player.alive
+		_:
+			return false

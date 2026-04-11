@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="食物牌" format=3 uid="uid://br76x4fdmlc3q"]
+
+[ext_resource type="Texture2D" uid="uid://crx4qxhrp8si6" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_mxsrn"]
+[ext_resource type="Texture2D" uid="uid://43v5p2qaoyht" path="res://arts/食物牌/花园红烧肉.png" id="2_mxsrn"]
+[ext_resource type="Script" uid="uid://cabfa12ti5mjs" path="res://Cards/DataStructure/食物牌.gd" id="3_ebr31"]
+
+[resource]
+script = ExtResource("3_ebr31")
+card_type = 2
+card_name = "花园红烧肉"
+image_of_front = ExtResource("2_mxsrn")
+image_of_back = ExtResource("1_mxsrn")
+metadata/_custom_type_script = "uid://cabfa12ti5mjs"

@@ -87,6 +87,18 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qhuue"]
+bg_color = Color(6.738305e-07, 0.5520583, 0.7828263, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 80
+corner_radius_top_right = 80
+corner_radius_bottom_right = 80
+corner_radius_bottom_left = 80
+
 [node name="Player" type="AnimatedSprite2D" unique_id=1900862353 groups=["Player"]]
 material = SubResource("ShaderMaterial_tintf")
 scale = Vector2(0.1, 0.1)
@@ -112,3 +124,23 @@ script = ExtResource("2_fq5u1")
 5: ExtResource("19_wvm7i"),
 6: ExtResource("20_8yyuq")
 })
+
+[node name="ScoreBadge" type="PanelContainer" parent="." unique_id=208997199]
+modulate = Color(1, 1, 1, 0.63529414)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -461.61816
+offset_top = -1388.0
+offset_right = -259.38184
+offset_bottom = -1173.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qhuue")
+
+[node name="Score" type="Label" parent="ScoreBadge" unique_id=1347704533]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 150
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1

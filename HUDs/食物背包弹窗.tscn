@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://cm1kw23jddbnc"]
+
+[ext_resource type="Texture2D" uid="uid://dd7ecbfvwpcjv" path="res://arts/1x/资源 10.png" id="1_tit42"]
+[ext_resource type="Script" uid="uid://dagk8w2uilpbx" path="res://HUDs/食物背包弹窗.gd" id="2_ln7w7"]
+[ext_resource type="Texture2D" uid="uid://b7clbspmqvqrf" path="res://arts/控件/close.png" id="3_a3ix4"]
+[ext_resource type="Texture2D" uid="uid://plvuejng3g68" path="res://arts/1x/close.png" id="4_it5y2"]
+[ext_resource type="FontFile" uid="uid://b1potytyqa1t5" path="res://arts/像素字体.ttf" id="5_it5y2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ln7w7"]
+texture = ExtResource("1_tit42")
+
+[node name="食物背包弹窗" type="Panel" unique_id=482406155]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -814.5
+offset_top = -504.5
+offset_right = 814.5
+offset_bottom = 504.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ln7w7")
+script = ExtResource("2_ln7w7")
+
+[node name="Panel" type="Panel" parent="." unique_id=1905945790]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -539.0
+offset_top = -381.0
+offset_right = 580.0
+offset_bottom = 307.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=2035678471]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 145.5
+offset_top = 194.5
+offset_right = -141.5
+offset_bottom = -133.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer" unique_id=2007852203]
+layout_mode = 2
+size_flags_horizontal = 6
+columns = 3
+
+[node name="BtnClose" type="TextureButton" parent="." unique_id=1704648796]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -312.5
+offset_top = -21.5
+offset_right = 19.5
+offset_bottom = 310.5
+grow_horizontal = 0
+texture_normal = ExtResource("3_a3ix4")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="mask" type="TextureRect" parent="BtnClose" unique_id=1652389095]
+visible = false
+modulate = Color(0, 0, 0, 0.39215687)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_it5y2")
+
+[node name="标题" type="Label" parent="." unique_id=482211188]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -534.0
+offset_top = 69.0
+offset_right = 534.0
+offset_bottom = 150.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_it5y2")
+theme_override_font_sizes/font_size = 80
+text = "==  湖北省特色小吃  =="
+horizontal_alignment = 1
+vertical_alignment = 1

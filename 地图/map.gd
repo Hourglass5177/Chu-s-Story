@@ -35,6 +35,11 @@ func _show_reachable_areas():
 	var start_coord = current_player.now_pos
 	var max_steps = current_player.maxMove
 	var available_energy = current_player.current_energy 
+	if not current_player.武术拳法已生效:
+		for card:非遗牌 in current_player.非遗牌手牌:
+			if card.category == 非遗牌.CardCategory.武术拳法:
+				available_energy += 1
+				break
 	
 	var que: Array[Vector3i] = []
 	var que_status: Array[Vector2i] = []
@@ -79,6 +84,11 @@ func _on_section_clicked(target_section: MapSection) -> String:
 		return "not necessary"
 		
 	var max_energy = current_player.current_energy
+	if not current_player.武术拳法已生效:
+		for card:非遗牌 in current_player.非遗牌手牌:
+			if card.category == 非遗牌.CardCategory.武术拳法:
+				max_energy += 1
+				break
 	
 	# 【核心数据结构】
 	var que: Array[Vector3i] = []

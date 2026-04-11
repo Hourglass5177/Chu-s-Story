@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="食物牌" format=3 uid="uid://u1xwmlk5r1mt"]
+
+[ext_resource type="Texture2D" uid="uid://crx4qxhrp8si6" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_ny1mc"]
+[ext_resource type="Texture2D" uid="uid://c56hq7tu7uy5" path="res://arts/食物牌/嘉鱼麻糖.png" id="2_ny1mc"]
+[ext_resource type="Script" uid="uid://cabfa12ti5mjs" path="res://Cards/DataStructure/食物牌.gd" id="3_tgrmq"]
+
+[resource]
+script = ExtResource("3_tgrmq")
+card_type = 2
+card_name = "嘉鱼麻糖"
+image_of_front = ExtResource("2_ny1mc")
+image_of_back = ExtResource("1_ny1mc")
+metadata/_custom_type_script = "uid://cabfa12ti5mjs"

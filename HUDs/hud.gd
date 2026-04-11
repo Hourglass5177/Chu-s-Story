@@ -21,6 +21,8 @@ class_name HUD
 @onready var current_status = $"手牌信息/当前" as Label
 @onready var information = $"手牌信息/游戏信息" as Label
 
+@onready var backpack_panel = $食物背包弹窗 as Panel
+
 @onready var timer = TurnManager.get_node("TurnTimer") as Timer
 @export var default_font: FontFile = null
 var map:MAP
@@ -34,6 +36,7 @@ func _ready() -> void:
 	btn_action.pressed.connect(_on_btn_action_pressed)
 	#_update_button_states(TurnManager.TurnPhase.BEGIN)
 	$BtnClose.pressed.connect(_on_close_pressed)
+	btn_food.pressed.connect(_on_btn_food_pressed)
 	if $BtnClose.texture_normal:
 		var bitmap = BitMap.new()
 		# 读取原图的透明通道数据
@@ -51,6 +54,7 @@ func _ready() -> void:
 # 获取刚才建的那个 SubViewport 节点
 @onready var map_viewport = $"地图/地图背景/SubViewportContainer/SubViewport"
 @onready var map_container = $"地图/地图背景/SubViewportContainer"
+@onready var btn_close_game = $"BtnClose"
 
 var map_instance:Node2D
 const MAP_REAL_SIZE = Vector2(2560, 1600)
@@ -135,6 +139,7 @@ func _update_player_stats(player: PlayerClass) -> void:
 	money_label.text = str(player.current_money)
 	energy_label.text = str(player.current_energy) + "/" + str(player.max_energy)
 	score_label.text = "总分数: " + str(player.current_score)
+	player.score_label.text = str(player.current_score)
 	name_label.text = player.player_name
 	立绘精二.texture = player.立绘精二
 	current_status.text = "当前位置：" + MapSection.REGION.find_key(map.grid_map[player.now_pos].region) + str(map.grid_map[player.now_pos].location_index) + " - " + MapSection.SectionType.find_key(map.grid_map[player.now_pos].type)
@@ -222,9 +227,11 @@ func _on_btn_food_pressed() -> void:
 	var current_player = TurnManager.players[TurnManager.now_player_index]
 	if current_player.is_working:
 		await current_player.check_and_cancel_work()
+		
+	backpack_panel.open_backpack(current_player)
 
 func open_shop_panel(player:PlayerClass):
-	pass
+	$"商店弹窗".open_shop(player)
 
 # 预加载你刚才做好的两个组件
 const ThumbnailScene = preload("res://HUDs/非遗牌缩略图.tscn")
@@ -297,5 +304,6 @@ func prompt_passive_card_use(card_data: 非遗牌, callable_if_yes: Callable):
 	# 如果玩家点是：callable_if_yes.call()
 
 func _on_close_pressed():
+	get_tree().paused = false
 	print("退出游戏")
 	get_tree().quit(0)

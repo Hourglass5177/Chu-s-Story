@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dpgvji8mixlo3"]
+
+[ext_resource type="Texture2D" uid="uid://dd7ecbfvwpcjv" path="res://arts/1x/资源 10.png" id="1_mbpf2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ri0iv"]
+texture = ExtResource("1_mbpf2")
+
+[node name="食物效果选择弹窗" type="Panel" unique_id=1228236371]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -506.25
+offset_top = -308.25
+offset_right = 506.25
+offset_bottom = 308.25
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ri0iv")

@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://dh48ddr23kk4b"]
+
+[ext_resource type="Texture2D" uid="uid://dd7ecbfvwpcjv" path="res://arts/1x/资源 10.png" id="1_ed4q1"]
+[ext_resource type="Script" uid="uid://q5coxuyxhkp3" path="res://HUDs/商店弹窗.gd" id="2_7ushe"]
+[ext_resource type="FontFile" uid="uid://b1potytyqa1t5" path="res://arts/像素字体.ttf" id="2_ng1lp"]
+[ext_resource type="Texture2D" uid="uid://b7clbspmqvqrf" path="res://arts/控件/close.png" id="4_87m43"]
+[ext_resource type="Texture2D" uid="uid://plvuejng3g68" path="res://arts/1x/close.png" id="5_5b8tk"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ng1lp"]
+texture = ExtResource("1_ed4q1")
+
+[node name="商店弹窗" type="Panel" unique_id=181615663]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -817.5
+offset_top = -533.5
+offset_right = 817.5
+offset_bottom = 533.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ng1lp")
+script = ExtResource("2_7ushe")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=367375329]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 77.5
+offset_top = 209.5
+offset_right = -75.5
+offset_bottom = -125.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="余额" type="Label" parent="." unique_id=97021391]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -182.0
+offset_top = 933.5
+offset_right = 191.0
+offset_bottom = 1004.5
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_ng1lp")
+theme_override_font_sizes/font_size = 70
+text = "余额：1000 点"
+
+[node name="BtnClose" type="TextureButton" parent="." unique_id=1257231702]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -379.5
+offset_top = -80.5
+offset_right = 26.5
+offset_bottom = 325.5
+grow_horizontal = 0
+texture_normal = ExtResource("4_87m43")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_group_ = true
+
+[node name="mask" type="TextureRect" parent="BtnClose" unique_id=272131227]
+visible = false
+modulate = Color(0, 0, 0, 0.39215687)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_5b8tk")
+
+[node name="标题" type="Label" parent="." unique_id=516995090]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -534.0
+offset_top = 83.0
+offset_right = 534.0
+offset_bottom = 164.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_ng1lp")
+theme_override_font_sizes/font_size = 80
+text = "==  小吃商店  =="
+horizontal_alignment = 1
+vertical_alignment = 1

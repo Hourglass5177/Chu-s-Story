@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="食物牌" format=3 uid="uid://rumbjvrxyq7r"]
+
+[ext_resource type="Texture2D" uid="uid://crx4qxhrp8si6" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_h4lwo"]
+[ext_resource type="Texture2D" uid="uid://capdea6r2vu4r" path="res://arts/食物牌/印子粑.png" id="2_h4lwo"]
+[ext_resource type="Script" uid="uid://cabfa12ti5mjs" path="res://Cards/DataStructure/食物牌.gd" id="3_4w028"]
+
+[resource]
+script = ExtResource("3_4w028")
+card_type = 2
+card_name = "印子粑"
+image_of_front = ExtResource("2_h4lwo")
+image_of_back = ExtResource("1_h4lwo")
+metadata/_custom_type_script = "uid://cabfa12ti5mjs"

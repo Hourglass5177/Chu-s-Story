@@ -39,7 +39,6 @@ offset_right = 580.0
 offset_bottom = 307.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 
 [node name="标题" type="Label" parent="." unique_id=405692965]
 layout_mode = 1

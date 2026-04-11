@@ -33,14 +33,14 @@ func _gui_input(event: InputEvent) -> void:
 			_show_context_menu(event.global_position)
 
 func _show_context_menu(pos: Vector2):
-	# 如果不是主动牌，或者当前不能用，就不弹菜单
-	#if not card_data.can_use(TurnManager.players[TurnManager.now_player_index]):
-		#return
+	var current_player = TurnManager.players[TurnManager.now_player_index]
+	if not card_data.can_use(current_player):
+		return
 		
 	var popup = PopupMenu.new()
 	popup.add_item("使用")
 	popup.id_pressed.connect(func(id):
-		if id == 0: request_use_card.emit(card_data)
+		if id == 0: ResourceManager.use_feiyi(current_player, card_data)
 	)
 	add_child(popup)
 	# 在鼠标点击的位置弹出菜单

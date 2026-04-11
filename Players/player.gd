@@ -1,7 +1,6 @@
 extends AnimatedSprite2D
 class_name PlayerClass
 signal roll_dice(result:int, player:PlayerClass)
-signal player_died(player:PlayerClass)
 var hud:HUD
 var map:MAP
 enum PlayerCharacter{
@@ -32,6 +31,7 @@ func _ready() -> void:
 	if material:
 		material = material.duplicate()
 		material.set_shader_parameter("line_thickness", 0.0)
+	score_label.text = str(current_score)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -54,12 +54,15 @@ var 立绘精二: Texture2D = null
 @export var 立绘精一图组: Dictionary[PlayerCharacter, Texture2D] = {}
 @export var 立绘精二图组: Dictionary[PlayerCharacter, Texture2D] = {}
 
+@onready var score_label = $ScoreBadge/Score as Label
+
 var alive: bool = true
 var now_pos: Vector3i = Vector3i(0, 0, 0)
 var onTurn: bool = false
 var maxMove:int = 0
 
 var feiyi_collected_this_turn: bool = false # 记录本回合是否已经收集过非遗
+var 武术拳法已生效:bool = false
 
 var is_working: bool = false # 当前是否处于“连续打工”状态
 var now_turn_worked: bool = false # 本回合是否已打工过
@@ -93,7 +96,7 @@ func before_turn():
 	print("玩家", player_name, "回合开始")
 
 func _on_phase_changed(new_phase: TurnManager.TurnPhase):
-	if !onTurn:
+	if !onTurn or !alive:
 		return
 	hud._update_button_states(new_phase)
 	match new_phase:
@@ -110,13 +113,14 @@ func _on_phase_changed(new_phase: TurnManager.TurnPhase):
 			await get_tree().create_timer(1).timeout
 			maxMove = do_roll_dice()
 		TurnManager.TurnPhase.MOVING:
-			pass
+			武术拳法已生效 = false
 		TurnManager.TurnPhase.ACTION:
 			#if map.grid_map[now_pos].type != MapSection.SectionType.风景:
 			hud._update_game_informs("等待行动…")
 			hud._update_button_states(TurnManager.TurnPhase.ACTION)
 		TurnManager.TurnPhase.END:
-			pass
+			await get_tree().process_frame
+			after_turn()
 
 func emit_next_phase(next_phase: TurnManager.TurnPhase):
 	TurnManager._emit_next_phase(next_phase)
@@ -126,7 +130,13 @@ func after_turn():
 	if alive and current_energy <= 0:
 		print("玩家 ", player_name,"体力耗尽，被淘汰！")
 		alive = false
-		player_died.emit(self)
+		await TurnManager.player_died(self)
+		hud._update_game_informs("玩家 " + player_name + "精力耗尽，被淘汰！分数：" + str(current_score))
+		get_tree().paused = true
+		await get_tree().create_timer(2.5, true).timeout
+		get_tree().paused = false
+		map.grid_map[now_pos].is_occupied = false
+		hide()
 
 # --- 实体动作逻辑 ---
 func do_roll_dice() -> int:
@@ -136,6 +146,12 @@ func do_roll_dice() -> int:
 	return result
 
 func move_along_path(path_pixels: Array[Vector2], total_cost: int, target_grid_pos: Vector3i) -> void:
+	if not 武术拳法已生效:
+		for card in 非遗牌手牌:
+			if card.category == 非遗牌.CardCategory.武术拳法:
+				total_cost = maxi(total_cost-1, 0)
+				武术拳法已生效 = true
+				break
 	current_energy -= total_cost
 	hud.btn_end_turn.disabled = true
 	var tween = create_tween()
@@ -219,7 +235,6 @@ func execute_tile_action():
 				hud.btn_action.disabled = true
 				section.grid_visit_history[self] += 1
 				print(player_name, " 打开了食物商店。")
-				# 呼叫 HUD 打开商店弹窗（HUD中留好接口）
 				hud.open_shop_panel(self)
 				# 注意：商店打开后不直接 emit END，等玩家买完或关掉弹窗再结束
 			

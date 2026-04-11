@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="食物牌" format=3 uid="uid://bgs4y5knw7xy0"]
+
+[ext_resource type="Texture2D" uid="uid://crx4qxhrp8si6" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_dj83q"]
+[ext_resource type="Texture2D" uid="uid://djtss20qu6uav" path="res://arts/食物牌/松花皮蛋.png" id="2_dj83q"]
+[ext_resource type="Script" uid="uid://cabfa12ti5mjs" path="res://Cards/DataStructure/食物牌.gd" id="3_ck4x6"]
+
+[resource]
+script = ExtResource("3_ck4x6")
+card_type = 2
+card_name = "松花皮蛋"
+image_of_front = ExtResource("2_dj83q")
+image_of_back = ExtResource("1_dj83q")
+metadata/_custom_type_script = "uid://cabfa12ti5mjs"
