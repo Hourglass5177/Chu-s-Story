@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="食物牌" format=3 uid="uid://br76x4fdmlc3q"]
 
 [ext_resource type="Texture2D" uid="uid://crx4qxhrp8si6" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_mxsrn"]
-[ext_resource type="Texture2D" uid="uid://43v5p2qaoyht" path="res://arts/食物牌/花园红烧肉.png" id="2_mxsrn"]
+[ext_resource type="Texture2D" path="res://arts/食物牌/数字版/花园红烧肉.png" id="2_mxsrn"]
 [ext_resource type="Script" uid="uid://cabfa12ti5mjs" path="res://Cards/DataStructure/食物牌.gd" id="3_ebr31"]
 
 [resource]

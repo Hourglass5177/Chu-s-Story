@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="事件牌" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Cards/DataStructure/事件牌.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://arts/事件卡/事件牌（牌面）(1)_12.jpg" id="2_front"]
+[ext_resource type="Texture2D" path="res://arts/事件卡/事件牌（牌背）.png" id="3_back"]
+
+[resource]
+script = ExtResource("1_script")
+card_type = 1
+card_name = "游目骋怀"
+image_of_front = ExtResource("2_front")
+image_of_back = ExtResource("3_back")
+description = "前往任意风景打卡点并完成打卡，在正常奖励外额外获得2点精力。（该牌可保留）"
+event_id = &"you_mu_cheng_huai"
+event_category = 1
+retainable = true
+implementation_status = 0
+dependency_note = ""

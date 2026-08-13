@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_iuyhc")
+region = 15
 effect_type = 2
 effect_value = 750
 destroy_after_use = true

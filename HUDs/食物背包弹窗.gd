@@ -22,7 +22,7 @@ func _ready():
 		$BtnClose.button_up.connect(func(): mask.modulate = Color(0, 0, 0, 0.4))   # 松开恢复
 
 # 打开背包并动态生成食物列表
-func open_backpack(player: PlayerClass):
+func open_backpack(player: PlayerClass) -> void:
 	# 先清空旧的列表
 	for child in grid_container.get_children():
 		child.queue_free()
@@ -43,7 +43,7 @@ func open_backpack(player: PlayerClass):
 	get_tree().paused = true
 
 # 纯代码动态生成单个食物 UI 项
-func _create_food_item_ui(card: 食物牌, player: PlayerClass):
+func _create_food_item_ui(card: 食物牌, player: PlayerClass) -> void:
 	var item_box = VBoxContainer.new()
 	
 	# 食物图片
@@ -80,46 +80,12 @@ func _create_food_item_ui(card: 食物牌, player: PlayerClass):
 	
 	grid_container.add_child(item_box)
 
-func _on_food_used(card: 食物牌, player: PlayerClass):
-	if card.food_type == 食物牌.FoodType.市级:
-		# 动态生成一个弹出菜单
-		var popup = PopupMenu.new()
-		popup.add_item("精力 +2", 0)
-		popup.add_item("精力 +1, 积分 +100", 1)
-		
-		# 连接点击信号
-		popup.id_pressed.connect(func(id):
-			card.execute_effect(player, id)
-			match id:
-				0:
-					hud._update_game_informs("吃下了【" + card.card_name + "】回复了 2 点精力！")
-				1:
-					hud._update_game_informs("吃下了【" + card.card_name + "】回复了1点精力，获得了100积分点！")
-			player.食物牌手牌.erase(card)
-			open_backpack(player) # 刷新背包
-			popup.queue_free()    # 选完销毁菜单
-		)
-		
-		add_child(popup)
-
-		# 1. 实时获取鼠标在当前屏幕（视口）上的绝对坐标
-		var mouse_pos = get_viewport().get_mouse_position()
-
-		# 2. 加上一个小偏移量（向右下角偏 10 像素）
-		# 极其重要：如果不加偏移，菜单的左上角会正好刷在鼠标尖端，极易导致玩家误触第一个选项！
-		var offset = Vector2(10, 10) 
-
-		# 3. 在鼠标右下方弹出菜单 (注意 Godot 4 推荐转成 Vector2i)
-		popup.popup(Rect2i(mouse_pos + offset, Vector2i(200, 100)))
-	else:
-		card.execute_effect(player)
-		player.食物牌手牌.erase(card)
-	
-	ResourceManager.食物牌库.insert(0, card)
-	
-	# 3. 刷新 HUD 信息和背包界面
-	# 重新渲染当前拥有的食物
-	open_backpack(player) 
+func _on_food_used(card: 食物牌, player: PlayerClass) -> void:
+	if not card.can_use(player):
+		return
+	if ResourceManager.consume_food(player, card):
+		hud._update_game_informs("享用【" + card.card_name + "】，精力+2。")
+		open_backpack(player)
 
 func _on_close():
 	hide()

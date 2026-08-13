@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="事件牌" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Cards/DataStructure/事件牌.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://arts/事件卡/事件牌（牌面）(1)_77.jpg" id="2_front"]
+[ext_resource type="Texture2D" path="res://arts/事件卡/事件牌（牌背）.png" id="3_back"]
+
+[resource]
+script = ExtResource("1_script")
+card_type = 1
+card_name = "传艺互鉴"
+image_of_front = ExtResource("2_front")
+image_of_back = ExtResource("3_back")
+description = "选择一名其他玩家，随机抽取其1张非国家级非遗牌并免费获得。"
+event_id = &"chuan_yi_hu_jian"
+event_category = 2
+retainable = false
+implementation_status = 0
+dependency_note = ""

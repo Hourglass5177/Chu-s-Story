@@ -1,0 +1,7 @@
+{
+  "dirs": ["res://tests/unit", "res://tests/integration"],
+  "include_subdirs": true,
+  "should_exit": true,
+  "should_maximize": false,
+  "log_level": 1
+}

@@ -10,7 +10,6 @@ func _ready() -> void:
 	#$Player2.start_coord = Vector3i(7, -6, -1)
 	#TurnManager.start_game(players)
 	init_game()
-	pass
 
 func init_game():
 	player_data = GameManager.player_data
@@ -40,13 +39,7 @@ func init_game():
 	# 2. 【核心修复：依赖注入】主动将 HUD 的控制权分发给所有全局单例！
 	ResourceManager.hud = current_hud
 	TurnManager.hud = current_hud
+	EventManager.bind_runtime(current_hud, current_hud.get_event_overlay())
 	await get_tree().process_frame
 	TurnManager.map = get_tree().get_first_node_in_group("MAP")
 	TurnManager.start_game(players)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-func _input(event):
-	pass

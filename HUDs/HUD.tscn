@@ -351,6 +351,7 @@ offset_top = 135.0
 offset_right = 1405.0
 offset_bottom = 961.0
 stretch = true
+mouse_filter = 1
 
 [node name="SubViewport" type="SubViewport" parent="地图/地图背景/SubViewportContainer" unique_id=61636319]
 transparent_bg = true
@@ -378,7 +379,7 @@ offset_bottom = -51.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_co0a7")
 theme_override_font_sizes/font_size = 50
-text = "【ALT】切换视角"
+text = "ALT 切换视角"
 
 [node name="手牌信息" type="ReferenceRect" parent="." unique_id=1990475967]
 offset_left = 521.0
@@ -519,7 +520,7 @@ grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_co0a7")
 theme_override_font_sizes/font_size = 80
-text = "总分：0 点"
+text = "总分数：0分"
 horizontal_alignment = 1
 vertical_alignment = 1
 

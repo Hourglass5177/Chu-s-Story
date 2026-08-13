@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://HUDs/事件牌缩略图.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://arts/事件卡/事件牌（牌背）.png" id="2_back"]
+
+[node name="事件牌缩略图" type="TextureButton"]
+custom_minimum_size = Vector2(216, 282)
+offset_right = 216.0
+offset_bottom = 282.0
+focus_mode = 2
+texture_normal = ExtResource("2_back")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("1_script")
+
+[node name="Mask" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.392157)

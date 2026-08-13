@@ -1,0 +1,167 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://HUDs/研究所弹窗.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://arts/1x/资源 10.png" id="2_panel"]
+[ext_resource type="FontFile" path="res://arts/像素字体.ttf" id="3_font"]
+[ext_resource type="Texture2D" path="res://arts/控件/close.png" id="4_close"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_panel"]
+texture = ExtResource("2_panel")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab"]
+bg_color = Color(0.96, 0.84, 0.61, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.48, 0.25, 0.16, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_active"]
+bg_color = Color(0.72, 0.37, 0.22, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.42, 0.2, 0.12, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="研究所弹窗" type="Panel"]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -817.5
+offset_top = -533.5
+offset_right = 817.5
+offset_bottom = 533.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_panel")
+script = ExtResource("1_script")
+
+[node name="标题" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 300.0
+offset_top = 74.0
+offset_right = -300.0
+offset_bottom = 166.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 78
+text = "非遗研究所"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="状态栏" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 230.0
+offset_top = 182.0
+offset_right = -230.0
+offset_bottom = 252.0
+grow_horizontal = 2
+theme_override_constants/separation = 140
+alignment = 1
+
+[node name="余额" type="Label" parent="状态栏"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.2, 0.13, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 48
+text = "余额  1000"
+
+[node name="购买次数" type="Label" parent="状态栏"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.2, 0.13, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 48
+text = "本次可购  3/3"
+
+[node name="页签" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 520.0
+offset_top = 266.0
+offset_right = -520.0
+offset_bottom = 338.0
+grow_horizontal = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="购买" type="Button" parent="页签"]
+custom_minimum_size = Vector2(240, 68)
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+theme_override_colors/font_color = Color(0.32, 0.16, 0.1, 1)
+theme_override_colors/font_hover_color = Color(0.32, 0.16, 0.1, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.93, 0.78, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = SubResource("StyleBoxFlat_tab")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tab")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tab_active")
+text = "购买"
+
+[node name="出售" type="Button" parent="页签"]
+custom_minimum_size = Vector2(240, 68)
+layout_mode = 2
+toggle_mode = true
+theme_override_colors/font_color = Color(0.32, 0.16, 0.1, 1)
+theme_override_colors/font_hover_color = Color(0.32, 0.16, 0.1, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.93, 0.78, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = SubResource("StyleBoxFlat_tab")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tab")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tab_active")
+text = "出售"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 160.0
+offset_top = 352.0
+offset_right = -160.0
+offset_bottom = -102.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="CardGrid" type="GridContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 44
+theme_override_constants/v_separation = 28
+columns = 3
+
+[node name="BtnClose" type="TextureButton" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -285.0
+offset_top = -34.0
+offset_right = 42.0
+offset_bottom = 293.0
+grow_horizontal = 0
+texture_normal = ExtResource("4_close")
+ignore_texture_size = true
+stretch_mode = 4

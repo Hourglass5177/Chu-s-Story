@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="食物牌" format=3 uid="uid://ctkrl4nr0cxnp"]
 
 [ext_resource type="Texture2D" uid="uid://crx4qxhrp8si6" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_pgvkc"]
-[ext_resource type="Texture2D" uid="uid://3mq5kuhlx1g6" path="res://arts/食物牌/矮子馅饼.png" id="2_pgvkc"]
+[ext_resource type="Texture2D" path="res://arts/食物牌/数字版/矮子馅饼.png" id="2_pgvkc"]
 [ext_resource type="Script" uid="uid://cabfa12ti5mjs" path="res://Cards/DataStructure/食物牌.gd" id="3_j0hr8"]
 
 [resource]

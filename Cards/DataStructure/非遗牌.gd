@@ -44,7 +44,7 @@ const TYPE_TO_EFFECT = {
 	CardCategory.戏曲表演:"行动阶段，可以消耗此牌，获得 3 点精力。",
 	CardCategory.民间音乐:"行动阶段，可以消耗此牌，获得 750 点积分点。",
 	CardCategory.手工技艺:"移动阶段，可以消耗此牌，使可移动最大步数翻倍。",
-	CardCategory.神话传说:"任意时候可以消耗此牌，无效化对你的食物牌或事件牌的效果。",
+	CardCategory.神话传说:"任意时候可以消耗此牌。当其他玩家的食物牌或事件牌效果即将作用于你时，可无效化自己受到的部分，或将该部分转移给另一名合法玩家。",
 	CardCategory.节日庆典:"获得此牌时，立即获得 3 点精力点数和 750 积分点。",
 	CardCategory.武术拳法:"拥有此牌时，移动阶段第一次移动时消耗精力点数-1（不重复叠加）。",
 	CardCategory.国家级非遗:"国家级非遗，此牌的基础分数为 5 。"
@@ -79,12 +79,18 @@ enum EffectType {
 # --- 留给未来实现的接口 ---
 # 判定当前时机是否满足使用条件
 func can_use(player: PlayerClass) -> bool:
+	if player == null or not TurnManager.GameOn:
+		return false
+	if TurnManager.now_player_index < 0 or TurnManager.now_player_index >= TurnManager.players.size():
+		return false
+	if TurnManager.players[TurnManager.now_player_index] != player:
+		return false
 	match category:
 		CardCategory.戏曲表演:
 			return (TurnManager.now_phase == TurnManager.TurnPhase.ACTION) and player.onTurn and player.alive
 		CardCategory.民间音乐:
 			return (TurnManager.now_phase == TurnManager.TurnPhase.ACTION) and player.onTurn and player.alive
 		CardCategory.手工技艺:
-			return (TurnManager.now_phase == TurnManager.TurnPhase.MOVING) and player.onTurn and player.alive
+			return (TurnManager.now_phase == TurnManager.TurnPhase.MOVING) and player.onTurn and player.alive and not player.handicraft_used_this_moving
 		_:
 			return false

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="事件牌" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Cards/DataStructure/事件牌.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://arts/事件卡/事件牌（牌面）(1)_75.jpg" id="2_front"]
+[ext_resource type="Texture2D" path="res://arts/事件卡/事件牌（牌背）.png" id="3_back"]
+
+[resource]
+script = ExtResource("1_script")
+card_type = 1
+card_name = "有食同享"
+image_of_front = ExtResource("2_front")
+image_of_back = ExtResource("3_back")
+description = "全场每名存活玩家各获得1张食物牌；牌库不足时按回合顺序执行最大合法数量。"
+event_id = &"you_shi_tong_xiang"
+event_category = 2
+retainable = false
+implementation_status = 0
+dependency_note = ""

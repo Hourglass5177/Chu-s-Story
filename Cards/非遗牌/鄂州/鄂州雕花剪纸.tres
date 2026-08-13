@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_tn778")
+region = 0
 category = 6
 base_score = 5
 effect_type = 2

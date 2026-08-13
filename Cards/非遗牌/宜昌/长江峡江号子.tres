@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_sw4x7")
+region = 16
 category = 1
 effect_type = 2
 effect_value = 750

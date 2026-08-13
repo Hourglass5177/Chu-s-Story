@@ -1,0 +1,1190 @@
+extends Node
+
+signal event_revealed(player: PlayerClass, card: 事件牌)
+signal choice_requested(request: EventChoiceRequest)
+signal reaction_requested(request: EventChoiceRequest)
+signal choice_resolved(request_id: int, timed_out: bool)
+signal event_finished(player: PlayerClass, card: 事件牌, summary: String)
+signal retained_cards_changed(player: PlayerClass)
+
+const CHOICE_TIMEOUT_SECONDS: float = 15.0
+const IMPLEMENTED_EVENT_IDS: Array[StringName] = [
+	&"zuo_shou_yu_li", &"bai_ge_zheng_liu", &"pou_duo_yi_gua", &"ba_geng_xie_ye",
+	&"yi_chuang_zeng_shou", &"wen_hua_xin_feng", &"jiao_huan_ren_sheng",
+	&"mei_mei_yu_gong", &"yang_jing_xu_rui", &"miao_shou_hui_chun", &"cun_bu_nan_xing",
+	&"jing_pi_li_jin", &"bi_men_xie_ke", &"juan_yi_xiu_zheng", &"you_mu_cheng_huai",
+	&"chen_jin_ti_yan", &"yi_wai_zhi_xi", &"xin_huo_xiang_chuan", &"you_shi_tong_xiang",
+	&"chuan_yi_hu_jian", &"yi_cang_hu_huan", &"tai_jiu_huan_xin", &"wen_hua_gong_xiang",
+	&"tong_tai_jing_ji", &"yi_shi_hui_you", &"gu_di_chong_you", &"dou_zhuan_xing_yi",
+	&"chang_xing_wu_zu", &"ri_xing_qian_li", &"yi_jing_xun_zong", &"tong_xing_feng_cai",
+	&"guo_bao_hu_hang", &"jin_chan_tuo_qiao", &"yi_hua_jie_mu", &"jin_ji_bi_xian",
+	&"jian_wang_zhi_lai", &"fu_di_chou_xin", &"zhan_yi_gong_yan", &"shi_ji_tao_zhen",
+]
+
+var hud: HUD = null
+var event_overlay: Control = null
+var resolving: bool = false
+var auto_resolve_choices: bool = false
+var choice_strategy: Callable = Callable()
+
+var _request_sequence: int = 0
+var _pending_request: EventChoiceRequest = null
+var _pending_choice = null
+var _choice_waiting: bool = false
+var _choice_timer: Timer = null
+var _status_by_player: Dictionary = {}
+var _skip_current_action_after_event: bool = false
+
+func _ready() -> void:
+	_choice_timer = Timer.new()
+	_choice_timer.one_shot = true
+	_choice_timer.process_mode = Node.PROCESS_MODE_ALWAYS
+	add_child(_choice_timer)
+	_choice_timer.timeout.connect(_on_choice_timeout)
+
+func bind_runtime(target_hud: HUD, overlay: Control = null) -> void:
+	hud = target_hud
+	event_overlay = overlay
+
+func reset_for_new_game() -> void:
+	resolving = false
+	_pending_request = null
+	_pending_choice = null
+	_choice_waiting = false
+	_status_by_player.clear()
+	_skip_current_action_after_event = false
+	_revive_modal_owned = false
+	choice_strategy = Callable()
+	if _choice_timer != null:
+		_choice_timer.stop()
+
+func submit_choice(request_id: int, choice) -> void:
+	if not _choice_waiting or _pending_request == null:
+		return
+	if request_id != _pending_request.request_id:
+		return
+	if choice != null and not _pending_request.options.has(choice):
+		return
+	_pending_choice = choice
+	_choice_waiting = false
+	_choice_timer.stop()
+	choice_resolved.emit(request_id, false)
+
+func _request_choice(request: EventChoiceRequest, is_reaction: bool = false):
+	if request.options.is_empty():
+		return null
+	_request_sequence += 1
+	request.request_id = _request_sequence
+	request.timeout_seconds = CHOICE_TIMEOUT_SECONDS
+	_pending_request = request
+	_pending_choice = null
+	_choice_waiting = true
+	if is_reaction:
+		reaction_requested.emit(request)
+	else:
+		choice_requested.emit(request)
+	if choice_strategy.is_valid():
+		_pending_choice = choice_strategy.call(request)
+		_choice_waiting = false
+	elif auto_resolve_choices or event_overlay == null:
+		_pending_choice = null if request.optional else request.options.pick_random()
+		_choice_waiting = false
+	else:
+		_choice_timer.start(request.timeout_seconds)
+	while _choice_waiting:
+		await get_tree().process_frame
+	var result = _pending_choice
+	_pending_request = null
+	_pending_choice = null
+	return result
+
+func _on_choice_timeout() -> void:
+	if not _choice_waiting or _pending_request == null:
+		return
+	var request_id := _pending_request.request_id
+	_pending_choice = null if _pending_request.optional else _pending_request.options.pick_random()
+	_choice_waiting = false
+	choice_resolved.emit(request_id, true)
+
+func _labels_for_players(players: Array[PlayerClass]) -> PackedStringArray:
+	var labels := PackedStringArray()
+	for player: PlayerClass in players:
+		labels.append(player.player_name)
+	return labels
+
+func is_event_implemented(event_id: StringName) -> bool:
+	return event_id in IMPLEMENTED_EVENT_IDS
+
+func _labels_for_cards(cards: Array) -> PackedStringArray:
+	var labels := PackedStringArray()
+	for card in cards:
+		labels.append(card.card_name)
+	return labels
+
+func _alive_players() -> Array[PlayerClass]:
+	var result: Array[PlayerClass] = []
+	for player: PlayerClass in TurnManager.players:
+		if player.alive:
+			result.append(player)
+	return result
+
+func _player_status(player: PlayerClass) -> Dictionary:
+	if not _status_by_player.has(player):
+		_status_by_player[player] = {}
+	return _status_by_player[player]
+
+func add_status(player: PlayerClass, status_id: StringName, phases: int) -> void:
+	var statuses := _player_status(player)
+	statuses[status_id] = {
+		"remaining": maxi(phases, 0),
+		"applied_turn": TurnManager.now_turn,
+	}
+
+func get_status_remaining(player: PlayerClass, status_id: StringName) -> int:
+	var status: Dictionary = _player_status(player).get(status_id, {})
+	return int(status.get("remaining", 0))
+
+func has_status(player: PlayerClass, status_id: StringName) -> bool:
+	return get_status_remaining(player, status_id) > 0
+
+func _consume_status_phase(player: PlayerClass, status_id: StringName) -> bool:
+	var statuses := _player_status(player)
+	if not statuses.has(status_id):
+		return false
+	var status: Dictionary = statuses[status_id]
+	if int(status.get("remaining", 0)) <= 0:
+		statuses.erase(status_id)
+		return false
+	if TurnManager.now_turn <= int(status.get("applied_turn", -1)):
+		return false
+	status["remaining"] = int(status["remaining"]) - 1
+	statuses[status_id] = status
+	if int(status["remaining"]) <= 0:
+		statuses.erase(status_id)
+	return true
+
+func on_phase_entered(player: PlayerClass, phase: TurnManager.TurnPhase) -> bool:
+	if phase == TurnManager.TurnPhase.BEGIN:
+		var statuses := _player_status(player)
+		statuses.erase(&"free_move_this_phase")
+		statuses.erase(&"ignore_special_terrain_this_phase")
+	elif phase == TurnManager.TurnPhase.MOVING:
+		if _consume_status_phase(player, &"free_move_phases"):
+			_player_status(player)[&"free_move_this_phase"] = {"remaining": 1, "applied_turn": TurnManager.now_turn}
+		if _consume_status_phase(player, &"skip_moving"):
+			return true
+	elif phase == TurnManager.TurnPhase.ACTION:
+		if _consume_status_phase(player, &"skip_action"):
+			return true
+	elif phase == TurnManager.TurnPhase.END:
+		_tick_end_of_turn_status(player, &"work_banned")
+		_tick_end_of_turn_status(player, &"scenery_banned")
+	return false
+
+func _tick_end_of_turn_status(player: PlayerClass, status_id: StringName) -> void:
+	var statuses := _player_status(player)
+	if not statuses.has(status_id):
+		return
+	var status: Dictionary = statuses[status_id]
+	if TurnManager.now_turn <= int(status.get("applied_turn", -1)):
+		return
+	status["remaining"] = int(status.get("remaining", 0)) - 1
+	if int(status["remaining"]) <= 0:
+		statuses.erase(status_id)
+	else:
+		statuses[status_id] = status
+
+func is_work_banned(player: PlayerClass) -> bool:
+	return has_status(player, &"work_banned")
+
+func is_scenery_banned(player: PlayerClass) -> bool:
+	return has_status(player, &"scenery_banned")
+
+func is_loss_immune(player: PlayerClass) -> bool:
+	var status: Dictionary = _player_status(player).get(&"loss_immunity", {})
+	return int(status.get("turn", -1)) == TurnManager.now_turn and TurnManager.now_phase == TurnManager.TurnPhase.ACTION
+
+func adjust_movement_cost(player: PlayerClass, total_cost: int, base_steps: int, target: MapSection) -> int:
+	var statuses := _player_status(player)
+	if statuses.has(&"free_move_this_phase"):
+		return 0
+	if statuses.has(&"ignore_special_terrain_this_phase") and target.landform != MapSection.LandForm.平原:
+		statuses.erase(&"ignore_special_terrain_this_phase")
+		return 0
+	return total_cost
+
+func has_free_move_this_phase(player: PlayerClass) -> bool:
+	return _player_status(player).has(&"free_move_this_phase")
+
+func can_ignore_special_terrain_this_phase(player: PlayerClass) -> bool:
+	return _player_status(player).has(&"ignore_special_terrain_this_phase")
+
+func open_retained_event_menu(player: PlayerClass) -> void:
+	if resolving or player == null:
+		return
+	if TurnManager.now_player_index < 0 or TurnManager.now_player_index >= TurnManager.players.size():
+		return
+	if player != TurnManager.players[TurnManager.now_player_index]:
+		return
+	var playable: Array[事件牌] = []
+	for card: 事件牌 in player.事件牌手牌:
+		if _can_play_retained_now(card, player):
+			playable.append(card)
+	if playable.is_empty():
+		if hud != null:
+			hud._update_game_informs("暂无可用事件牌。")
+		return
+	resolving = true
+	TurnManager.begin_modal_resolution()
+	var request := EventChoiceRequest.new(player, "选择要使用的保留事件牌", playable, _labels_for_cards(playable), true, EventChoiceRequest.ChoiceKind.卡牌)
+	var selected = await _request_choice(request)
+	if selected is 事件牌:
+		await play_retained_event(player, selected as 事件牌)
+	resolving = false
+	TurnManager.end_modal_resolution(TurnManager.now_phase == TurnManager.TurnPhase.ACTION)
+
+func can_play_retained_event_now(card: 事件牌, player: PlayerClass = null) -> bool:
+	if resolving or card == null or player == null or not player.事件牌手牌.has(card):
+		return false
+	if TurnManager.now_player_index < 0 or TurnManager.now_player_index >= TurnManager.players.size():
+		return false
+	return player == TurnManager.players[TurnManager.now_player_index] and _can_play_retained_now(card, player)
+
+func get_retained_event_usage_hint(card: 事件牌, player: PlayerClass = null) -> String:
+	if card == null:
+		return ""
+	match card.event_id:
+		&"you_mu_cheng_huai":
+			return "行动阶段" if player == null or not is_scenery_banned(player) else "闭门谢客期间不可用"
+		&"chang_xing_wu_zu":
+			return "移动阶段"
+		&"miao_shou_hui_chun":
+			return "淘汰前响应"
+		&"jin_chan_tuo_qiao", &"yi_hua_jie_mu":
+			return "受他人卡牌影响时响应"
+		_:
+			return "按牌面时机使用"
+
+func request_play_retained_event(player: PlayerClass, card: 事件牌) -> void:
+	if not can_play_retained_event_now(card, player):
+		if hud != null:
+			hud._update_game_informs(get_retained_event_usage_hint(card, player))
+		return
+	resolving = true
+	TurnManager.begin_modal_resolution()
+	await play_retained_event(player, card)
+	resolving = false
+	TurnManager.end_modal_resolution(TurnManager.now_phase == TurnManager.TurnPhase.ACTION)
+
+func _can_play_retained_now(card: 事件牌, player: PlayerClass = null) -> bool:
+	if card.event_id == &"you_mu_cheng_huai":
+		return TurnManager.now_phase == TurnManager.TurnPhase.ACTION and (player == null or not is_scenery_banned(player))
+	if card.event_id == &"chang_xing_wu_zu":
+		return TurnManager.now_phase == TurnManager.TurnPhase.MOVING
+	return false
+
+func play_retained_event(player: PlayerClass, card: 事件牌) -> void:
+	if not player.事件牌手牌.has(card) or not _can_play_retained_now(card, player):
+		return
+	player.事件牌手牌.erase(card)
+	ResourceManager.discard_event(card)
+	retained_cards_changed.emit(player)
+	if card.event_id == &"chang_xing_wu_zu":
+		_player_status(player)[&"ignore_special_terrain_this_phase"] = {"remaining": 1, "applied_turn": TurnManager.now_turn}
+		if player.map != null:
+			player.map._clear_all_highlights()
+			player.map._show_reachable_areas()
+		if hud != null:
+			hud._update_game_informs("【畅行无阻】已生效：本次移动到特殊地形无需精力。")
+	elif card.event_id == &"you_mu_cheng_huai":
+		await _play_you_mu_cheng_huai(player)
+
+func trigger_arrival_event(player: PlayerClass, section: MapSection, arrival_id: int) -> void:
+	if resolving or section == null or section.type != MapSection.SectionType.事件:
+		return
+	if arrival_id <= 0 or player.last_normal_arrival_position != section.location_index:
+		return
+	if arrival_id <= player.last_resolved_event_arrival_id:
+		return
+	player.last_resolved_event_arrival_id = arrival_id
+	var card := ResourceManager.draw_event_card(player)
+	if card == null:
+		if hud != null:
+			hud._update_game_informs("事件牌已抽完，本格无事发生。")
+		return
+	await resolve_event(player, card)
+
+func resolve_event(player: PlayerClass, card: 事件牌) -> void:
+	resolving = true
+	_skip_current_action_after_event = false
+	TurnManager.begin_modal_resolution()
+	event_revealed.emit(player, card)
+	var reveal_request := EventChoiceRequest.new(player, "确认后结算", [true], PackedStringArray(["结算"]), false, EventChoiceRequest.ChoiceKind.确认)
+	await _request_choice(reveal_request)
+	if card.retainable:
+		player.事件牌手牌.append(card)
+		retained_cards_changed.emit(player)
+		if hud != null:
+			hud._update_game_informs("%s 获得事件牌【%s】。" % [player.player_name, card.card_name])
+	else:
+		await _execute_event(player, card)
+		ResourceManager.discard_event(card)
+	var summary := "事件【%s】结算完成。" % card.card_name
+	event_finished.emit(player, card, summary)
+	resolving = false
+	var skip_current_action := _skip_current_action_after_event
+	_skip_current_action_after_event = false
+	TurnManager.end_modal_resolution(not skip_current_action)
+	if skip_current_action and TurnManager.GameOn and TurnManager.now_phase == TurnManager.TurnPhase.ACTION:
+		TurnManager._emit_next_phase(TurnManager.TurnPhase.END)
+
+func _execute_event(player: PlayerClass, card: 事件牌) -> void:
+	match card.event_id:
+		&"zuo_shou_yu_li": await _event_zuo_shou_yu_li(player)
+		&"bai_ge_zheng_liu": await _event_bai_ge_zheng_liu(player)
+		&"pou_duo_yi_gua": await _event_pou_duo_yi_gua(player)
+		&"ba_geng_xie_ye": add_status(player, &"work_banned", 3)
+		&"yi_chuang_zeng_shou": _event_yi_chuang_zeng_shou(player)
+		&"wen_hua_xin_feng": await _event_wen_hua_xin_feng(player)
+		&"jiao_huan_ren_sheng": await _event_jiao_huan_ren_sheng(player)
+		&"mei_mei_yu_gong": await _event_mei_mei_yu_gong(player)
+		&"yang_jing_xu_rui": _event_yang_jing_xu_rui(player)
+		&"cun_bu_nan_xing": await _event_cun_bu_nan_xing(player)
+		&"jing_pi_li_jin": ResourceManager.modify_energy(player, -3, "事件：精疲力尽")
+		&"bi_men_xie_ke": add_status(player, &"scenery_banned", 3)
+		&"juan_yi_xiu_zheng": await _event_juan_yi_xiu_zheng(player)
+		&"chen_jin_ti_yan": await _event_chen_jin_ti_yan(player)
+		&"yi_wai_zhi_xi": _draw_food_cards(player, 2)
+		&"xin_huo_xiang_chuan": await _event_xin_huo_xiang_chuan(player)
+		&"you_shi_tong_xiang": await _event_you_shi_tong_xiang(player)
+		&"chuan_yi_hu_jian": await _event_chuan_yi_hu_jian(player)
+		&"yi_cang_hu_huan": await _event_yi_cang_hu_huan(player)
+		&"tai_jiu_huan_xin": await _discard_cards_from_player(player, 2, "汰旧焕新")
+		&"wen_hua_gong_xiang": await _event_wen_hua_gong_xiang(player)
+		&"tong_tai_jing_ji": await _event_tong_tai_jing_ji(player)
+		&"yi_shi_hui_you": await _event_yi_shi_hui_you(player)
+		&"gu_di_chong_you": _event_gu_di_chong_you(player)
+		&"dou_zhuan_xing_yi": await _event_dou_zhuan_xing_yi(player)
+		&"ri_xing_qian_li": await _event_ri_xing_qian_li(player)
+		&"yi_jing_xun_zong": await _event_yi_jing_xun_zong(player)
+		&"tong_xing_feng_cai": await _event_tong_xing_feng_cai(player)
+		&"guo_bao_hu_hang": _event_guo_bao_hu_hang()
+		&"jin_ji_bi_xian": await _event_jin_ji_bi_xian(player)
+		&"jian_wang_zhi_lai": await _event_jian_wang_zhi_lai(player)
+		&"fu_di_chou_xin": await _event_fu_di_chou_xin(player)
+		&"zhan_yi_gong_yan": await _event_zhan_yi_gong_yan(player)
+		&"shi_ji_tao_zhen": await _event_shi_ji_tao_zhen(player)
+		_:
+			# 依赖牌不应进入牌库；若数据配置错误，明确报错而不是静默空结算。
+			push_error("EventManager: 尚未实现或不应入库的事件效果 %s (%s)" % [card.card_name, card.event_id])
+
+func _choose_player(requester: PlayerClass, prompt: String, candidates: Array[PlayerClass], optional: bool = false) -> PlayerClass:
+	if candidates.is_empty():
+		return null
+	var request := EventChoiceRequest.new(requester, prompt, candidates, _labels_for_players(candidates), optional, EventChoiceRequest.ChoiceKind.玩家)
+	return await _request_choice(request) as PlayerClass
+
+func _choose_card(requester: PlayerClass, prompt: String, cards: Array, optional: bool = false):
+	if cards.is_empty():
+		return null
+	var request := EventChoiceRequest.new(requester, prompt, cards, _labels_for_cards(cards), optional, EventChoiceRequest.ChoiceKind.卡牌)
+	return await _request_choice(request)
+
+func _choose_section(requester: PlayerClass, prompt: String, sections: Array[MapSection], optional: bool = false) -> MapSection:
+	if sections.is_empty():
+		return null
+	var labels := PackedStringArray()
+	for section: MapSection in sections:
+		labels.append(section.section_name if not section.section_name.is_empty() else "格子 %d" % section.logical_index)
+	var request := EventChoiceRequest.new(requester, prompt, sections, labels, optional, EventChoiceRequest.ChoiceKind.格子)
+	return await _request_choice(request) as MapSection
+
+func _choose_option(requester: PlayerClass, prompt: String, options: Array, labels: PackedStringArray, optional: bool = false):
+	if options.is_empty():
+		return null
+	var request := EventChoiceRequest.new(requester, prompt, options, labels, optional, EventChoiceRequest.ChoiceKind.选项)
+	return await _request_choice(request)
+
+func _next_alive(player: PlayerClass, direction: int = 1) -> PlayerClass:
+	var players: Array[PlayerClass] = TurnManager.players
+	var start := players.find(player)
+	if start < 0:
+		return null
+	for offset in range(1, players.size() + 1):
+		var index := posmod(start + direction * offset, players.size())
+		if players[index].alive and players[index] != player:
+			return players[index]
+	return null
+
+func _unique_sections(section_type: int = -1) -> Array[MapSection]:
+	var result: Array[MapSection] = []
+	var seen: Dictionary[int, bool] = {}
+	if TurnManager.map == null:
+		return result
+	for value in TurnManager.map.grid_map.values():
+		var section := value as MapSection
+		if section == null or seen.has(section.get_instance_id()):
+			continue
+		seen[section.get_instance_id()] = true
+		if section_type < 0 or section.type == section_type:
+			result.append(section)
+	return result
+
+func _nearest_sections(player: PlayerClass, section_type: MapSection.SectionType) -> Array[MapSection]:
+	var nearest: Array[MapSection] = []
+	var best_distance := 1 << 30
+	for section: MapSection in _unique_sections(section_type):
+		var distance := _shortest_step_distance(player.now_pos, section.location_index)
+		if distance < 0:
+			continue
+		if distance < best_distance:
+			best_distance = distance
+			nearest.assign([section])
+		elif distance == best_distance:
+			nearest.append(section)
+	return nearest
+
+func _teleport_player(player: PlayerClass, section: MapSection) -> void:
+	if player == null or section == null or player.map == null:
+		return
+	var old_section: MapSection = player.map.grid_map.get(player.now_pos)
+	if old_section != null:
+		old_section.is_occupied = false
+	player.now_pos = section.location_index
+	section.is_occupied = true
+	player.position = player.map.to_local(section.global_position)
+	if player.hud != null:
+		player.hud._update_player_stats(player)
+		player.hud.update_camera_view(0.25)
+
+func _swap_player_positions(first: PlayerClass, second: PlayerClass) -> void:
+	if first == null or second == null or first.map == null:
+		return
+	var first_section: MapSection = first.map.grid_map.get(first.now_pos)
+	var second_section: MapSection = second.map.grid_map.get(second.now_pos)
+	if first_section == null or second_section == null:
+		return
+	var first_pos := first.now_pos
+	first.now_pos = second.now_pos
+	second.now_pos = first_pos
+	first.position = first.map.to_local(second_section.global_position)
+	second.position = second.map.to_local(first_section.global_position)
+	first_section.is_occupied = true
+	second_section.is_occupied = true
+	if hud != null:
+		hud._update_player_stats(first)
+		hud._update_player_stats(second)
+		# ALT 聚焦模式的相机目标取自当前玩家的位置；换位后需要立即重算。
+		# 非聚焦模式下 update_camera_view() 会继续保持全图视角。
+		hud.update_camera_view(0.25)
+
+func _non_national_feiyi(player: PlayerClass) -> Array[非遗牌]:
+	var result: Array[非遗牌] = []
+	for card: 非遗牌 in player.非遗牌手牌:
+		if card.category != 非遗牌.CardCategory.国家级非遗:
+			result.append(card)
+	return result
+
+func _all_hand_cards(player: PlayerClass) -> Array:
+	var result: Array = []
+	result.append_array(player.非遗牌手牌)
+	result.append_array(player.食物牌手牌)
+	result.append_array(player.事件牌手牌)
+	return result
+
+func _discard_player_card(player: PlayerClass, card) -> void:
+	if card is 食物牌 and player.食物牌手牌.has(card):
+		player.食物牌手牌.erase(card)
+		if not ResourceManager.食物牌库.has(card):
+			ResourceManager.食物牌库.insert(0, card)
+	elif card is 非遗牌 and player.非遗牌手牌.has(card):
+		ResourceManager.desert_feiyi(player, card)
+	elif card is 事件牌 and player.事件牌手牌.has(card):
+		player.事件牌手牌.erase(card)
+		ResourceManager.discard_event(card)
+		retained_cards_changed.emit(player)
+
+func _discard_cards_from_player(player: PlayerClass, count: int, reason: String) -> void:
+	var discard_count := mini(count, _all_hand_cards(player).size())
+	for index in discard_count:
+		var cards := _all_hand_cards(player)
+		var selected = await _choose_card(player, "%s：选择弃牌（还需 %d 张）" % [reason, discard_count - index], cards)
+		if selected == null:
+			break
+		_discard_player_card(player, selected)
+
+func _draw_food_cards(player: PlayerClass, count: int) -> int:
+	var drawn := 0
+	for _index in mini(count, ResourceManager.食物牌库.size()):
+		var card := ResourceManager.draw_card(player, 卡牌基类.CardType.食物牌, MapSection.REGION.未知)
+		if card != null:
+			drawn += 1
+	return drawn
+
+func _apply_money(target: PlayerClass, amount: int, reason: String) -> void:
+	var legal_amount := maxi(amount, -maxi(target.current_money, 0)) if amount < 0 else amount
+	ResourceManager.modify_money(target, legal_amount, reason)
+
+func _apply_energy(target: PlayerClass, amount: int, reason: String) -> void:
+	ResourceManager.modify_energy(target, amount, reason)
+
+func _apply_status(target: PlayerClass, status_id: StringName, phases: int) -> void:
+	add_status(target, status_id, phases)
+
+func _apply_swap_with_source(target: PlayerClass, source: PlayerClass) -> void:
+	_swap_player_positions(source, target)
+
+func _eligible_response_cards(target: PlayerClass, effect_kind: StringName) -> Array:
+	var cards: Array = []
+	if effect_kind not in [&"event", &"food", &"feiyi"]:
+		return cards
+	var has_redirect_target := _alive_players().size() > 1
+	for event_card: 事件牌 in target.事件牌手牌:
+		if event_card.event_id == &"jin_chan_tuo_qiao":
+			cards.append(event_card)
+		elif event_card.event_id == &"yi_hua_jie_mu" and has_redirect_target:
+			cards.append(event_card)
+	if effect_kind in [&"event", &"food"]:
+		for feiyi: 非遗牌 in target.非遗牌手牌:
+			if feiyi.category == 非遗牌.CardCategory.神话传说:
+				cards.append(feiyi)
+	return cards
+
+func _redirect_targets(target: PlayerClass, validator: Callable = Callable()) -> Array[PlayerClass]:
+	var redirects: Array[PlayerClass] = []
+	for candidate: PlayerClass in _alive_players():
+		if candidate == target:
+			continue
+		if validator.is_valid() and not validator.call(candidate):
+			continue
+		redirects.append(candidate)
+	return redirects
+
+func _resolve_effect_target(
+	effect_source: PlayerClass,
+	target: PlayerClass,
+	effect_kind: StringName,
+	prompt: String,
+	allow_reaction: bool = true,
+	redirect_validator: Callable = Callable()
+) -> PlayerClass:
+	if target == null or not target.alive:
+		return null
+	var redirects := _redirect_targets(target, redirect_validator)
+	var response_cards := _eligible_response_cards(target, effect_kind) if allow_reaction and effect_source != target else []
+	if redirects.is_empty():
+		for response_card in response_cards.duplicate():
+			if response_card is 事件牌 and response_card.event_id == &"yi_hua_jie_mu":
+				response_cards.erase(response_card)
+	if not response_cards.is_empty():
+		var request := EventChoiceRequest.new(target, "%s\n是否使用响应牌？" % prompt, response_cards, _labels_for_cards(response_cards), true, EventChoiceRequest.ChoiceKind.卡牌)
+		var response = await _request_choice(request, true)
+		if response is 事件牌:
+			var event_response := response as 事件牌
+			target.事件牌手牌.erase(event_response)
+			ResourceManager.discard_event(event_response)
+			retained_cards_changed.emit(target)
+			if event_response.event_id == &"jin_chan_tuo_qiao":
+				return null
+			if event_response.event_id == &"yi_hua_jie_mu":
+				var redirected := await _choose_player(target, "移花接木：选择新的合法目标", redirects)
+				if redirected == null:
+					return null
+				return await _resolve_effect_target(effect_source, redirected, effect_kind, prompt, true, redirect_validator)
+		elif response is 非遗牌:
+			var myth := response as 非遗牌
+			ResourceManager.desert_feiyi(target, myth)
+			var modes: Array = [&"cancel"]
+			var labels := PackedStringArray(["抵消"])
+			if not redirects.is_empty():
+				modes.append(&"redirect")
+				labels.append("转移")
+			var mode = await _choose_option(target, "选择响应效果", modes, labels)
+			if mode == &"redirect":
+				var redirected := await _choose_player(target, "选择新的合法目标", redirects)
+				if redirected != null:
+					return await _resolve_effect_target(effect_source, redirected, effect_kind, prompt, true, redirect_validator)
+			return null
+	return target
+
+func _resolve_incoming_effect(
+	effect_source: PlayerClass,
+	target: PlayerClass,
+	effect_kind: StringName,
+	prompt: String,
+	apply_callable: Callable,
+	allow_reaction: bool = true,
+	redirect_validator: Callable = Callable()
+) -> bool:
+	var final_target := await _resolve_effect_target(effect_source, target, effect_kind, prompt, allow_reaction, redirect_validator)
+	if final_target == null:
+		return false
+	apply_callable.call(final_target)
+	return true
+
+func _can_be_forced_to_work(player: PlayerClass) -> bool:
+	return player != null \
+		and player.alive \
+		and not is_work_banned(player) \
+		and player.current_energy >= 1 \
+		and not _nearest_sections(player, MapSection.SectionType.打工).is_empty()
+
+func _event_zuo_shou_yu_li(source: PlayerClass) -> void:
+	var candidates: Array[PlayerClass] = []
+	for player: PlayerClass in _alive_players():
+		if _can_be_forced_to_work(player):
+			candidates.append(player)
+	var selected: Array[PlayerClass] = []
+	for index in mini(2, candidates.size()):
+		var target := await _choose_player(source, "坐收渔利：选择第 %d 名打工者" % (index + 1), candidates)
+		if target == null:
+			break
+		selected.append(target)
+		candidates.erase(target)
+	for worker: PlayerClass in selected:
+		var final_worker := await _resolve_effect_target(source, worker, &"event", "坐收渔利：前往打工并结算工资", true, _can_be_forced_to_work)
+		if final_worker == null:
+			continue
+		var nearest := _nearest_sections(final_worker, MapSection.SectionType.打工)
+		var work_section := await _choose_section(final_worker, "选择最近的打工点", nearest) if nearest.size() > 1 else (nearest[0] if not nearest.is_empty() else null)
+		if work_section == null:
+			continue
+		_teleport_player(final_worker, work_section)
+		ResourceManager.modify_energy(final_worker, -1, "事件：坐收渔利打工消耗")
+		if final_worker == source:
+			_apply_money(final_worker, 250, "事件：坐收渔利工资")
+		else:
+			_apply_money(final_worker, 125, "事件：坐收渔利工资分成")
+			_apply_money(source, 125, "事件：坐收渔利工资分成")
+
+func _event_bai_ge_zheng_liu(source: PlayerClass) -> void:
+	var opponent := _next_alive(source, -1)
+	if opponent == null:
+		return
+	var source_rolls: Array[int] = []
+	var opponent_rolls: Array[int] = []
+	source_rolls.append(_roll_2d6())
+	opponent_rolls.append(_roll_2d6())
+	var source_team: Array[PlayerClass] = [source]
+	var opponent_team: Array[PlayerClass] = [opponent]
+	for player: PlayerClass in _alive_players():
+		if player in [source, opponent]:
+			continue
+		var team = await _choose_option(player, "百舸争流：%s 首骰 %d，%s 首骰 %d，请选择队伍" % [source.player_name, source_rolls[0], opponent.player_name, opponent_rolls[0]], [source, opponent], PackedStringArray([source.player_name, opponent.player_name]))
+		if team == source:
+			source_team.append(player)
+		else:
+			opponent_team.append(player)
+	for _index in 2:
+		source_rolls.append(_roll_2d6())
+		opponent_rolls.append(_roll_2d6())
+	var source_total: int = 0
+	var opponent_total: int = 0
+	for value: int in source_rolls:
+		source_total += value
+	for value: int in opponent_rolls:
+		opponent_total += value
+	if source_total == opponent_total:
+		await _show_bai_ge_result(source, source_rolls, opponent, opponent_rolls, "平局，双方均无奖惩")
+		if hud != null:
+			hud._update_game_informs("百舸争流平局，双方均无奖惩。")
+		return
+	var winners := source_team if source_total > opponent_total else opponent_team
+	var losers := opponent_team if source_total > opponent_total else source_team
+	var winning_captain := source if source_total > opponent_total else opponent
+	await _show_bai_ge_result(source, source_rolls, opponent, opponent_rolls, "%s 方获胜" % winning_captain.player_name)
+	for winner: PlayerClass in winners:
+		await _resolve_incoming_effect(source, winner, &"event", "百舸争流获胜奖励", _apply_money.bind(200, "事件：百舸争流获胜"))
+	for loser: PlayerClass in losers:
+		await _resolve_incoming_effect(source, loser, &"event", "百舸争流失败惩罚", _apply_money.bind(-200, "事件：百舸争流失败"))
+
+func _show_bai_ge_result(
+	source: PlayerClass,
+	source_rolls: Array[int],
+	opponent: PlayerClass,
+	opponent_rolls: Array[int],
+	result_text: String
+) -> void:
+	var source_total := _sum_rolls(source_rolls)
+	var opponent_total := _sum_rolls(opponent_rolls)
+	var prompt := "%s：%s，共 %d 点\n%s：%s，共 %d 点\n结果：%s" % [
+		source.player_name, _format_rolls(source_rolls), source_total,
+		opponent.player_name, _format_rolls(opponent_rolls), opponent_total,
+		result_text,
+	]
+	await _choose_option(source, prompt, [true], PackedStringArray(["结算"]))
+
+func _sum_rolls(rolls: Array[int]) -> int:
+	var total := 0
+	for value: int in rolls:
+		total += value
+	return total
+
+func _format_rolls(rolls: Array[int]) -> String:
+	var labels := PackedStringArray()
+	for value: int in rolls:
+		labels.append(str(value))
+	return " / ".join(labels)
+
+func _event_pou_duo_yi_gua(source: PlayerClass) -> void:
+	var players := _alive_players()
+	if players.is_empty():
+		return
+	var highest := players[0].current_money
+	var lowest := players[0].current_money
+	for player: PlayerClass in players:
+		highest = maxi(highest, player.current_money)
+		lowest = mini(lowest, player.current_money)
+	for player: PlayerClass in players:
+		if player.current_money == highest:
+			await _resolve_incoming_effect(source, player, &"event", "裒多益寡：积分点最多者失去500积分点", _apply_money.bind(-500, "事件：裒多益寡"))
+	for player: PlayerClass in players:
+		if player.current_money == lowest:
+			await _resolve_incoming_effect(source, player, &"event", "裒多益寡：积分点最少者获得500积分点", _apply_money.bind(500, "事件：裒多益寡"))
+
+func _event_yi_chuang_zeng_shou(player: PlayerClass) -> void:
+	if player.player_types in [PlayerClass.PlayerCharacter.魔术博主, PlayerClass.PlayerCharacter.旅行博主, PlayerClass.PlayerCharacter.商业博主]:
+		ResourceManager.modify_money(player, 300, "事件：艺创增收")
+	else:
+		ResourceManager.modify_energy(player, 2, "事件：艺创增收")
+
+func _event_wen_hua_xin_feng(source: PlayerClass) -> void:
+	var players := _alive_players()
+	var maximum := 0
+	for player: PlayerClass in players:
+		maximum = maxi(maximum, player.非遗牌手牌.size())
+	for player: PlayerClass in players:
+		if player.非遗牌手牌.size() == maximum:
+			await _resolve_incoming_effect(source, player, &"event", "文化新风：非遗牌数量最多奖励", _apply_money.bind(100, "事件：文化新风"))
+		var has_national := false
+		for card: 非遗牌 in player.非遗牌手牌:
+			if card.category == 非遗牌.CardCategory.国家级非遗:
+				has_national = true
+				break
+		if has_national:
+			await _resolve_incoming_effect(source, player, &"event", "文化新风：国家级非遗奖励", _apply_money.bind(100, "事件：文化新风"))
+
+func _event_jiao_huan_ren_sheng(source: PlayerClass) -> void:
+	var target := _next_alive(source)
+	if target == null:
+		return
+	await _resolve_incoming_effect(
+		source, target, &"event", "交换人生：与事件触发者永久交换职业",
+		_apply_swap_job.bind(source), true,
+		func(candidate: PlayerClass) -> bool: return candidate != source
+	)
+
+func _apply_swap_job(target: PlayerClass, source: PlayerClass) -> void:
+	var source_job := source.player_types
+	source.player_types = target.player_types
+	target.player_types = source_job
+	source._init_character()
+	target._init_character()
+
+func _event_mei_mei_yu_gong(source: PlayerClass) -> void:
+	for player: PlayerClass in _alive_players():
+		var amount := _roll_2d6()
+		await _resolve_incoming_effect(source, player, &"event", "美美与共：获得%d点精力" % amount, _apply_energy.bind(amount, "事件：美美与共"))
+
+func _event_yang_jing_xu_rui(player: PlayerClass) -> void:
+	ResourceManager.modify_energy(player, player.current_energy, "事件：养精蓄锐")
+	add_status(player, &"skip_moving", 2)
+	add_status(player, &"skip_action", 2)
+
+func _event_cun_bu_nan_xing(source: PlayerClass) -> void:
+	var target := await _choose_player(source, "寸步难行：选择跳过两个移动阶段的玩家", _alive_players())
+	if target != null:
+		await _resolve_incoming_effect(source, target, &"event", "寸步难行：跳过接下来两个移动阶段", _apply_status.bind(&"skip_moving", 2))
+
+func _event_juan_yi_xiu_zheng(player: PlayerClass) -> void:
+	var accept = await _choose_option(player, "是否跳过本回合行动阶段并恢复3点精力？", [true, false], PackedStringArray(["接受休整", "拒绝并继续行动"]))
+	if accept != true:
+		return
+	ResourceManager.modify_energy(player, 3, "事件：倦艺休整")
+	if not player.食物牌手牌.is_empty():
+		var food = await _choose_card(player, "可弃1张食物牌，额外恢复2点精力", player.食物牌手牌, true)
+		if food is 食物牌:
+			_discard_player_card(player, food)
+			ResourceManager.modify_energy(player, 2, "事件：倦艺休整弃食物")
+	_skip_current_action_after_event = true
+
+func _event_chen_jin_ti_yan(player: PlayerClass) -> void:
+	if is_scenery_banned(player):
+		return
+	var nearest := _nearest_sections(player, MapSection.SectionType.风景)
+	var target := await _choose_section(player, "选择一处等距最近的风景打卡点", nearest) if nearest.size() > 1 else (nearest[0] if not nearest.is_empty() else null)
+	if target == null:
+		return
+	_teleport_player(player, target)
+	ResourceManager.modify_energy(player, 6, "事件：沉浸体验双倍打卡")
+	add_status(player, &"skip_moving", 2)
+
+func _event_xin_huo_xiang_chuan(source: PlayerClass) -> void:
+	var cards := _non_national_feiyi(source)
+	if cards.is_empty():
+		return
+	var targets := _alive_players()
+	targets.erase(source)
+	var target := await _choose_player(source, "薪火相传：选择受赠玩家", targets)
+	if target == null:
+		return
+	var card = await _choose_card(source, "选择要赠出的非国家级非遗牌", cards)
+	if card == null:
+		return
+	var applied := await _resolve_incoming_effect(
+		source, target, &"event", "薪火相传：接受非遗牌【%s】" % card.card_name,
+		_apply_receive_feiyi.bind(source, card), true,
+		func(candidate: PlayerClass) -> bool: return candidate != source
+	)
+	if applied:
+		ResourceManager.modify_energy(source, 3, "事件：薪火相传")
+
+func _apply_receive_feiyi(target: PlayerClass, source: PlayerClass, card: 非遗牌) -> void:
+	if source.非遗牌手牌.has(card):
+		source.非遗牌手牌.erase(card)
+		target.非遗牌手牌.append(card)
+		ResourceManager.calculate_victory_score(source)
+		ResourceManager.calculate_victory_score(target)
+
+func _event_you_shi_tong_xiang(source: PlayerClass) -> void:
+	for player: PlayerClass in _alive_players():
+		if ResourceManager.食物牌库.is_empty():
+			break
+		await _resolve_incoming_effect(source, player, &"event", "有食同享：获得1张食物牌", _apply_draw_one_food)
+
+func _apply_draw_one_food(target: PlayerClass) -> void:
+	_draw_food_cards(target, 1)
+
+func _event_chuan_yi_hu_jian(source: PlayerClass) -> void:
+	var targets: Array[PlayerClass] = []
+	for player: PlayerClass in _alive_players():
+		if player != source and not _non_national_feiyi(player).is_empty():
+			targets.append(player)
+	var target := await _choose_player(source, "传艺互鉴：选择被抽牌的玩家", targets)
+	if target == null:
+		return
+	var final_target := await _resolve_effect_target(
+		source,
+		target,
+		&"event",
+		"传艺互鉴：随机失去1张非国家级非遗牌",
+		true,
+		func(candidate: PlayerClass) -> bool: return not _non_national_feiyi(candidate).is_empty()
+	)
+	if final_target == null:
+		return
+	var card: 非遗牌 = _non_national_feiyi(final_target).pick_random()
+	_apply_steal_feiyi(final_target, source, card)
+
+func _apply_steal_feiyi(target: PlayerClass, receiver: PlayerClass, card: 非遗牌) -> void:
+	if target.非遗牌手牌.has(card):
+		target.非遗牌手牌.erase(card)
+		receiver.非遗牌手牌.append(card)
+		ResourceManager.calculate_victory_score(target)
+		ResourceManager.calculate_victory_score(receiver)
+
+func _event_yi_cang_hu_huan(source: PlayerClass) -> void:
+	var targets: Array[PlayerClass] = []
+	for player: PlayerClass in _alive_players():
+		if player != source and not _non_national_feiyi(player).is_empty():
+			targets.append(player)
+	if _non_national_feiyi(source).is_empty():
+		return
+	var target := await _choose_player(source, "艺藏互换：选择交换对象", targets)
+	if target == null:
+		return
+	var accepted = await _choose_option(target, "%s 邀请交换非遗牌" % source.player_name, [true], PackedStringArray(["接受"]), true)
+	if accepted != true:
+		return
+	var source_card = await _choose_card(source, "选择要交换的非国家级非遗牌", _non_national_feiyi(source))
+	var target_card = await _choose_card(target, "选择要交换的非国家级非遗牌", _non_national_feiyi(target))
+	if source_card == null or target_card == null:
+		return
+	source.非遗牌手牌.erase(source_card)
+	target.非遗牌手牌.erase(target_card)
+	source.非遗牌手牌.append(target_card)
+	target.非遗牌手牌.append(source_card)
+	ResourceManager.modify_energy(source, 1, "事件：艺藏互换")
+	ResourceManager.modify_energy(target, 1, "事件：艺藏互换")
+	ResourceManager.calculate_victory_score(source)
+	ResourceManager.calculate_victory_score(target)
+
+func _event_wen_hua_gong_xiang(source: PlayerClass) -> void:
+	var targets: Array[PlayerClass] = []
+	for player: PlayerClass in _alive_players():
+		if not _all_hand_cards(player).is_empty():
+			targets.append(player)
+	var target := await _choose_player(source, "文化共享：选择弃牌玩家", targets)
+	if target == null:
+		return
+	var final_target := await _resolve_effect_target(
+		source,
+		target,
+		&"event",
+		"文化共享：弃掉最多两张手牌",
+		true,
+		func(candidate: PlayerClass) -> bool: return not _all_hand_cards(candidate).is_empty()
+	)
+	if final_target != null:
+		await _discard_cards_from_player(final_target, 2, "文化共享")
+
+func _event_tong_tai_jing_ji(source: PlayerClass) -> void:
+	var target := _next_alive(source)
+	if target == null:
+		return
+	var source_cards := _non_national_feiyi(source)
+	var target_cards := _non_national_feiyi(target)
+	if source_cards.is_empty() or target_cards.is_empty():
+		return
+	var source_card: 非遗牌 = source_cards.pick_random()
+	var target_card: 非遗牌 = target_cards.pick_random()
+	var result_text := "%s 抽到【%s】（%d级）\n%s 抽到【%s】（%d级）" % [
+		source.player_name, target_card.card_name, target_card.rarity,
+		target.player_name, source_card.card_name, source_card.rarity,
+	]
+	if source_card.rarity > target_card.rarity:
+		result_text += "\n%s 获胜" % source.player_name
+		await _choose_option(source, result_text, [true], PackedStringArray(["结算"]), false)
+		_apply_money(source, 100, "事件：同台竞技")
+		await _resolve_incoming_effect(source, target, &"event", "同台竞技：失去100积分点", _apply_money.bind(-100, "事件：同台竞技"))
+	elif source_card.rarity < target_card.rarity:
+		result_text += "\n%s 获胜" % target.player_name
+		await _choose_option(source, result_text, [true], PackedStringArray(["结算"]), false)
+		_apply_money(source, -100, "事件：同台竞技")
+		await _resolve_incoming_effect(source, target, &"event", "同台竞技：获得100积分点", _apply_money.bind(100, "事件：同台竞技"))
+	else:
+		result_text += "\n同级，双方各得50积分点"
+		await _choose_option(source, result_text, [true], PackedStringArray(["结算"]), false)
+		_apply_money(source, 50, "事件：同台竞技平局")
+		await _resolve_incoming_effect(source, target, &"event", "同台竞技：获得50积分点", _apply_money.bind(50, "事件：同台竞技平局"))
+
+func _event_yi_shi_hui_you(source: PlayerClass) -> void:
+	var target := _next_alive(source)
+	if target == null:
+		return
+	await _resolve_incoming_effect(
+		source, target, &"event", "以食会友：交换双方全部食物牌",
+		_apply_swap_food.bind(source), true,
+		func(candidate: PlayerClass) -> bool: return candidate != source
+	)
+
+func _apply_swap_food(target: PlayerClass, source: PlayerClass) -> void:
+	var source_foods := source.食物牌手牌.duplicate()
+	source.食物牌手牌.assign(target.食物牌手牌)
+	target.食物牌手牌.assign(source_foods)
+
+func _event_gu_di_chong_you(player: PlayerClass) -> void:
+	if player.last_successful_feiyi_section != null:
+		_teleport_player(player, player.last_successful_feiyi_section)
+
+func _event_dou_zhuan_xing_yi(source: PlayerClass) -> void:
+	var target := _next_alive(source)
+	if target != null:
+		await _resolve_incoming_effect(
+			source, target, &"event", "斗转星移：与事件触发者互换位置",
+			_apply_swap_with_source.bind(source), true,
+			func(candidate: PlayerClass) -> bool: return candidate != source
+		)
+
+func _event_ri_xing_qian_li(player: PlayerClass) -> void:
+	var sections := _unique_sections()
+	for occupied: MapSection in sections.duplicate():
+		if occupied.is_occupied and occupied.location_index != player.now_pos:
+			sections.erase(occupied)
+	var target := await _choose_section(player, "日行千里：选择任意目标格", sections)
+	if target != null:
+		_teleport_player(player, target)
+
+func _event_yi_jing_xun_zong(player: PlayerClass) -> void:
+	var first := _roll_2d6()
+	var second := _roll_2d6()
+	var steps = await _choose_option(player, "艺径寻踪：选择移动点数", [first, second], PackedStringArray([str(first), str(second)]))
+	if steps == null:
+		return
+	var sections := _sections_within_steps(player, mini(int(steps), player.current_energy))
+	var target := await _choose_section(player, "艺径寻踪：选择移动终点", sections)
+	if target == null:
+		return
+	var distance := _shortest_step_distance(player.now_pos, target.location_index)
+	ResourceManager.modify_energy(player, -distance, "事件：艺径寻踪移动")
+	_teleport_player(player, target)
+	if target.type == MapSection.SectionType.非遗 and ResourceManager.has_feiyi_in_region(target.region):
+		var card := ResourceManager.get_feiyi(player, target, 0) as 非遗牌
+		if card != null:
+			ResourceManager.calculate_victory_score(player)
+
+func _sections_within_steps(player: PlayerClass, max_steps: int) -> Array[MapSection]:
+	var result: Array[MapSection] = []
+	for section: MapSection in _unique_sections():
+		if section.location_index == player.now_pos:
+			continue
+		if section.is_occupied:
+			continue
+		var distance := _shortest_step_distance(player.now_pos, section.location_index)
+		if distance >= 0 and distance <= max_steps:
+			result.append(section)
+	return result
+
+func _shortest_step_distance(start: Vector3i, target: Vector3i) -> int:
+	if start == target:
+		return 0
+	var queue: Array[Vector3i] = [start]
+	var distance: Dictionary[Vector3i, int] = {start: 0}
+	while not queue.is_empty():
+		var current: Vector3i = queue.pop_front()
+		for direction: Vector3i in 常量.MOVE:
+			var next: Vector3i = current + direction
+			if not TurnManager.map.grid_map.has(next) or distance.has(next):
+				continue
+			distance[next] = distance[current] + 1
+			if next == target:
+				return distance[next]
+			queue.append(next)
+	return -1
+
+func _event_tong_xing_feng_cai(source: PlayerClass) -> void:
+	var targets := _alive_players()
+	targets.erase(source)
+	var target := await _choose_player(source, "同行风采：选择互换位置的玩家", targets)
+	if target != null:
+		await _resolve_incoming_effect(
+			source, target, &"event", "同行风采：与事件触发者互换位置",
+			_apply_swap_with_source.bind(source), true,
+			func(candidate: PlayerClass) -> bool: return candidate != source
+		)
+
+func _event_guo_bao_hu_hang() -> void:
+	for player: PlayerClass in _alive_players():
+		for card: 非遗牌 in player.非遗牌手牌:
+			if card.category == 非遗牌.CardCategory.国家级非遗:
+				add_status(player, &"free_move_phases", 2)
+				break
+
+func _event_jin_ji_bi_xian(player: PlayerClass) -> void:
+	var cards := _all_hand_cards(player)
+	if cards.is_empty():
+		return
+	var selected = await _choose_card(player, "紧急避险：必须弃1张手牌以获得本回合损失免疫", cards)
+	if selected == null:
+		return
+	_discard_player_card(player, selected)
+	_player_status(player)[&"loss_immunity"] = {"turn": TurnManager.now_turn}
+
+func _event_jian_wang_zhi_lai(player: PlayerClass) -> void:
+	var candidates: Array[非遗牌] = MarketManager.sample_cards(3)
+	if candidates.is_empty():
+		return
+	var selected := await _choose_card(player, "鉴往知来：选择1张免费获得", candidates) as 非遗牌
+	if selected != null:
+		MarketManager.take_card_free(player, selected)
+
+func _event_shi_ji_tao_zhen(player: PlayerClass) -> void:
+	var candidates: Array[非遗牌] = MarketManager.get_inventory()
+	if candidates.is_empty():
+		return
+	var selected := await _choose_card(player, "市集淘珍：选择1张免费获得", candidates) as 非遗牌
+	if selected != null:
+		MarketManager.take_card_free(player, selected)
+
+func _event_zhan_yi_gong_yan(player: PlayerClass) -> void:
+	var cards := _non_national_feiyi(player)
+	if cards.is_empty():
+		return
+	var highest_score := -1
+	for card: 非遗牌 in cards:
+		highest_score = maxi(highest_score, card.base_score)
+	var highest_cards: Array[非遗牌] = []
+	for card: 非遗牌 in cards:
+		if card.base_score == highest_score:
+			highest_cards.append(card)
+	var selected: 非遗牌 = highest_cards[0] if highest_cards.size() == 1 else await _choose_card(
+		player,
+		"展艺共研：选择一张基础分最高的非国家级非遗牌",
+		highest_cards
+	) as 非遗牌
+	if selected != null:
+		ResourceManager.desert_feiyi(player, selected)
+
+func _event_fu_di_chou_xin(source: PlayerClass) -> void:
+	var candidates: Array[PlayerClass] = []
+	for player: PlayerClass in _alive_players():
+		if not _non_national_feiyi(player).is_empty():
+			candidates.append(player)
+	var target := await _choose_player(source, "釜底抽薪：选择一名玩家", candidates)
+	if target == null:
+		return
+	var final_target := await _resolve_effect_target(
+		source,
+		target,
+		&"event",
+		"釜底抽薪：随机将最多2张非国家级非遗牌放入全局研究所",
+		true,
+		func(candidate: PlayerClass) -> bool: return not _non_national_feiyi(candidate).is_empty()
+	)
+	if final_target == null:
+		return
+	var cards := _non_national_feiyi(final_target)
+	cards.shuffle()
+	for index: int in mini(2, cards.size()):
+		ResourceManager.desert_feiyi(final_target, cards[index])
+
+func _play_you_mu_cheng_huai(player: PlayerClass) -> void:
+	if is_scenery_banned(player):
+		if hud != null:
+			hud._update_game_informs("闭门谢客生效中，不能使用【游目骋怀】。")
+		return
+	var sections := _unique_sections(MapSection.SectionType.风景)
+	var target := await _choose_section(player, "游目骋怀：选择任意风景打卡点", sections)
+	if target == null:
+		return
+	_teleport_player(player, target)
+	ResourceManager.modify_energy(player, 5, "事件：游目骋怀打卡及额外奖励")
+
+func _roll_2d6() -> int:
+	return randi_range(1, 6) + randi_range(1, 6)
+
+func try_revive_player(dying_player: PlayerClass) -> bool:
+	if dying_player == null or dying_player.current_energy > 0:
+		return false
+	var player_count: int = TurnManager.players.size()
+	if player_count == 0:
+		return false
+	var start_index: int = TurnManager.now_player_index
+	for offset in player_count:
+		var holder: PlayerClass = TurnManager.players[(start_index + offset) % player_count]
+		if not holder.alive and holder != dying_player:
+			continue
+		var revive_cards: Array[事件牌] = []
+		for card: 事件牌 in holder.事件牌手牌:
+			if card.event_id == &"miao_shou_hui_chun":
+				revive_cards.append(card)
+		if revive_cards.is_empty():
+			continue
+		begin_modal_if_needed()
+		var decision = await _choose_option(holder, "%s 即将被淘汰，是否使用【妙手回春】？" % dying_player.player_name, [true], PackedStringArray(["使用并恢复3点精力"]), true)
+		if decision == true:
+			var revive_card := revive_cards[0]
+			holder.事件牌手牌.erase(revive_card)
+			ResourceManager.discard_event(revive_card)
+			retained_cards_changed.emit(holder)
+			dying_player.alive = true
+			ResourceManager.modify_energy(dying_player, 3, "事件：妙手回春")
+			dying_player.show()
+			if dying_player.map != null and dying_player.map.grid_map.has(dying_player.now_pos):
+				dying_player.map.grid_map[dying_player.now_pos].is_occupied = true
+			end_modal_if_owned()
+			return true
+	end_modal_if_owned()
+	return false
+
+var _revive_modal_owned: bool = false
+
+func begin_modal_if_needed() -> void:
+	if not TurnManager.is_modal_resolution_active():
+		TurnManager.begin_modal_resolution()
+		_revive_modal_owned = true
+
+func end_modal_if_owned() -> void:
+	if _revive_modal_owned:
+		TurnManager.end_modal_resolution(false)
+		_revive_modal_owned = false

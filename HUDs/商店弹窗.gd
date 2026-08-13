@@ -24,7 +24,7 @@ func _ready():
 		$BtnClose.button_down.connect(func(): mask.modulate = Color(0, 0, 0, 0.7)) 
 		$BtnClose.button_up.connect(func(): mask.modulate = Color(0, 0, 0, 0.4))   
 
-func open_shop(player: PlayerClass):
+func open_shop(player: PlayerClass) -> void:
 	current_player = player
 	show()
 	hud.btn_action.disabled = true
@@ -55,7 +55,7 @@ func open_shop(player: PlayerClass):
 	for card in shop_foods:
 		_create_commodity_ui(card)
 
-func _create_commodity_ui(card: 食物牌):
+func _create_commodity_ui(card: 食物牌) -> void:
 	var item_box = VBoxContainer.new()
 	item_box.add_theme_constant_override("separation", 10)
 	item_box.set_meta("card_data", card)
@@ -87,10 +87,11 @@ func _create_commodity_ui(card: 食物牌):
 	item_box.add_child(btn_buy)
 	food_container.add_child(item_box)
 
-func _buy_food(card: 食物牌, ui_node: Control):
-	# 扣钱发货
-	ResourceManager.modify_money(current_player, -card.cost, "购买食物")
-	current_player.食物牌手牌.append(card)
+func _buy_food(card: 食物牌, ui_node: Control) -> void:
+	if not shop_foods.has(card):
+		return
+	if not ResourceManager.buy_food(current_player, card):
+		return
 	
 	# 从货架数组中移除
 	shop_foods.erase(card)
@@ -113,7 +114,7 @@ func _buy_food(card: 食物牌, ui_node: Control):
 					
 	print(current_player.player_name, " 购买了 ", card.card_name)
 
-func _on_leave():
+func _on_leave() -> void:
 	# 离开时，把没买完的牌塞回牌库底
 	for leftover in shop_foods:
 		ResourceManager.食物牌库.insert(0, leftover)

@@ -1,7 +1,14 @@
-[gd_scene format=3 uid="uid://ceongw3s3fqwf"]
+[gd_scene load_steps=5 format=3 uid="uid://ceongw3s3fqwf"]
 
 [ext_resource type="Texture2D" uid="uid://oqo6hsvsf81t" path="res://arts/地图/地块.png" id="1_8yxnp"]
 [ext_resource type="Script" uid="uid://cmua4651bva5f" path="res://地图/map_section.gd" id="2_8sp3l"]
+
+[sub_resource type="Shader" id="Shader_yellow_hover"]
+code = "shader_type canvas_item;\n\nuniform vec4 fill_color : source_color = vec4(1.0, 0.68, 0.08, 1.0);\n\nvoid fragment() {\n\tvec4 source = texture(TEXTURE, UV);\n\tfloat canvas_alpha = source.a > 0.001 ? COLOR.a / source.a : 0.0;\n\tfloat cyan_fill = step(0.55, source.g) * step(0.55, source.b) * (1.0 - step(0.55, source.r));\n\tsource.rgb = mix(source.rgb, fill_color.rgb, cyan_fill);\n\tCOLOR = vec4(source.rgb, source.a * canvas_alpha);\n}\n"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yellow_hover"]
+shader = SubResource("Shader_yellow_hover")
+shader_parameter/fill_color = Color(1, 0.68, 0.08, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8sp3l"]
 animations = [{
@@ -20,6 +27,14 @@ self_modulate = Color(1, 1, 1, 0.5882353)
 scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_8sp3l")
 script = ExtResource("2_8sp3l")
+
+[node name="NormalHoverHighlight" type="Sprite2D" parent="."]
+visible = false
+top_level = true
+z_index = 1
+modulate = Color(1, 1, 1, 0.68)
+texture = ExtResource("1_8yxnp")
+material = SubResource("ShaderMaterial_yellow_hover")
 
 [node name="click_area" type="Area2D" parent="." unique_id=1870968708]
 scale = Vector2(0.99999994, 0.99999994)

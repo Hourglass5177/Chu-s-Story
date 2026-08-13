@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cabfa12ti5mjs" path="res://Cards/DataStructure/食物牌.gd" id="1_2by3m"]
 [ext_resource type="Texture2D" uid="uid://crx4qxhrp8si6" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_osqd2"]
-[ext_resource type="Texture2D" uid="uid://il0aojlvmygw" path="res://arts/食物牌/宜城板鸭.png" id="2_r676b"]
+[ext_resource type="Texture2D" path="res://arts/食物牌/数字版/宜城板鸭.png" id="2_r676b"]
 
 [resource]
 script = ExtResource("1_2by3m")

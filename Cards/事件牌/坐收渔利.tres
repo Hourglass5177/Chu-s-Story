@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="事件牌" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Cards/DataStructure/事件牌.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://arts/事件卡/事件牌（牌面）(1)_02.jpg" id="2_front"]
+[ext_resource type="Texture2D" path="res://arts/事件卡/事件牌（牌背）.png" id="3_back"]
+
+[resource]
+script = ExtResource("1_script")
+card_type = 1
+card_name = "坐收渔利"
+image_of_front = ExtResource("2_front")
+image_of_back = ExtResource("3_back")
+description = "可指定场上任意两名玩家，分别前往各自最近的打工点工作一回合。正常消耗精力，每份工资由事件触发者和该打工者平分。"
+event_id = &"zuo_shou_yu_li"
+event_category = 0
+retainable = false
+implementation_status = 0
+dependency_note = ""

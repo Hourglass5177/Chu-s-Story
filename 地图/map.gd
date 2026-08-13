@@ -30,49 +30,141 @@ func _on_phase_changed(new_phase: TurnManager.TurnPhase):
 	hud._update_button_states(new_phase)
 
 # --- 显示可达区域 ---
-func _show_reachable_areas():
+func _show_reachable_areas() -> void:
+	_clear_all_highlights()
+	if TurnManager.is_movement_locked() or TurnManager.players.is_empty():
+		return
 	var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
-	var start_coord = current_player.now_pos
-	var max_steps = current_player.maxMove
-	var available_energy = current_player.current_energy 
+	var start_coord: Vector3i = current_player.now_pos
+	var max_steps: int = current_player.maxMove
+	var available_energy: int = current_player.current_energy
 	if not current_player.武术拳法已生效:
 		for card:非遗牌 in current_player.非遗牌手牌:
 			if card.category == 非遗牌.CardCategory.武术拳法:
 				available_energy += 1
 				break
-	
-	var que: Array[Vector3i] = []
-	var que_status: Array[Vector2i] = []
-	var vis: Dictionary[int, bool] = {}
-	
-	que.push_back(start_coord)
-	que_status.push_back(Vector2i(0, 0))
-	
-	if grid_map.has(start_coord):
-		vis[grid_map[start_coord].logical_index] = true
-		grid_map[start_coord].is_reachable = true
-	
-	while not que.is_empty():
-		var now_pos = que.pop_front()
-		var now_status = que_status.pop_front()
-		for mov: Vector3i in 常量.MOVE:
-			var new_pos: Vector3i = now_pos + mov
-			if new_pos in grid_map and now_status.x < max_steps:
-				var next_section = grid_map[new_pos]
-				var new_cost = now_status.y + next_section.cost
-				if new_cost <= available_energy and not vis.has(next_section.logical_index) and not next_section.is_reached and not grid_map[new_pos].is_occupied:
-					next_section.is_reachable = true 
-					que.push_back(new_pos)
-					que_status.push_back(Vector2i(now_status.x + 1, new_cost))
-					vis[next_section.logical_index] = true
 
-func _clear_all_highlights():
+	var states: Array[Dictionary] = _search_path_states(start_coord, max_steps, available_energy)
+	for state: Dictionary in states:
+		var coord: Vector3i = state["position"]
+		if coord == start_coord or not _is_state_active(state, states):
+			continue
+		grid_map[coord].is_reachable = true
+	# 免费移动阶段可选择骰子步数内的任意合法格；畅行无阻额外开放骰子步数内的特殊地形终点。
+	if EventManager.has_free_move_this_phase(current_player) or EventManager.can_ignore_special_terrain_this_phase(current_player):
+		var step_queue: Array[Vector3i] = [start_coord]
+		var step_distance: Dictionary[Vector3i, int] = {start_coord: 0}
+		while not step_queue.is_empty():
+			var step_pos: Vector3i = step_queue.pop_front()
+			for mov: Vector3i in 常量.MOVE:
+				var candidate: Vector3i = step_pos + mov
+				if not grid_map.has(candidate) or step_distance.has(candidate):
+					continue
+				var distance: int = step_distance[step_pos] + 1
+				if distance > max_steps:
+					continue
+				step_distance[candidate] = distance
+				step_queue.append(candidate)
+				var candidate_section: MapSection = grid_map[candidate]
+				var free_target := EventManager.has_free_move_this_phase(current_player)
+				var special_target := EventManager.can_ignore_special_terrain_this_phase(current_player) and candidate_section.landform != MapSection.LandForm.平原
+				if (free_target or special_target) and not candidate_section.is_occupied and not candidate_section.is_reached:
+					candidate_section.is_reachable = true
+	if EventManager.is_scenery_banned(current_player):
+		for section: MapSection in grid_map.values():
+			if section.type == MapSection.SectionType.风景:
+				section.is_reachable = false
+
+func _clear_all_highlights() -> void:
 	for section:MapSection in grid_map.values():
 		section.is_reachable = false
 
+func _search_path_states(start_coord: Vector3i, max_steps: int, max_energy: int) -> Array[Dictionary]:
+	var states: Array[Dictionary] = [{
+		"position": start_coord,
+		"steps": 0,
+		"cost": 0,
+		"parent": -1,
+	}]
+	var frontier: Array[int] = [0]
+	var labels: Dictionary[Vector3i, Array] = {start_coord: [Vector2i(0, 0)]}
+	while not frontier.is_empty():
+		var state_index: int = frontier.pop_front()
+		var state: Dictionary = states[state_index]
+		var position: Vector3i = state["position"]
+		var label := Vector2i(int(state["steps"]), int(state["cost"]))
+		if not labels.get(position, []).has(label) or label.x >= max_steps:
+			continue
+		for movement: Vector3i in 常量.MOVE:
+			var next_position: Vector3i = position + movement
+			if not grid_map.has(next_position):
+				continue
+			var next_section: MapSection = grid_map[next_position]
+			if next_section.is_reached or next_section.is_occupied:
+				continue
+			var next_label := Vector2i(label.x + 1, label.y + next_section.cost)
+			if next_label.x > max_steps or next_label.y > max_energy:
+				continue
+			var existing_labels: Array = labels.get(next_position, [])
+			var dominated := false
+			for existing: Vector2i in existing_labels:
+				if existing.x <= next_label.x and existing.y <= next_label.y:
+					dominated = true
+					break
+			if dominated:
+				continue
+			var retained_labels: Array = []
+			for existing: Vector2i in existing_labels:
+				if not (next_label.x <= existing.x and next_label.y <= existing.y):
+					retained_labels.append(existing)
+			retained_labels.append(next_label)
+			labels[next_position] = retained_labels
+			states.append({
+				"position": next_position,
+				"steps": next_label.x,
+				"cost": next_label.y,
+				"parent": state_index,
+			})
+			frontier.append(states.size() - 1)
+	for state: Dictionary in states:
+		state["active_labels"] = labels
+	return states
+
+func _is_state_active(state: Dictionary, _states: Array[Dictionary]) -> bool:
+	var labels: Dictionary = state.get("active_labels", {})
+	var position: Vector3i = state["position"]
+	return labels.get(position, []).has(Vector2i(int(state["steps"]), int(state["cost"])))
+
+func _best_path(start_coord: Vector3i, target_coord: Vector3i, max_steps: int, max_energy: int) -> Dictionary:
+	var states := _search_path_states(start_coord, max_steps, max_energy)
+	var best_index := -1
+	for index: int in states.size():
+		var state: Dictionary = states[index]
+		if state["position"] != target_coord or not _is_state_active(state, states):
+			continue
+		if best_index < 0:
+			best_index = index
+			continue
+		var best: Dictionary = states[best_index]
+		if int(state["cost"]) < int(best["cost"]) or (int(state["cost"]) == int(best["cost"]) and int(state["steps"]) < int(best["steps"])):
+			best_index = index
+	if best_index < 0:
+		return {}
+	var coordinates: Array[Vector3i] = []
+	var cursor := best_index
+	while cursor >= 0 and states[cursor]["position"] != start_coord:
+		coordinates.append(states[cursor]["position"])
+		cursor = int(states[cursor]["parent"])
+	coordinates.reverse()
+	return {
+		"coordinates": coordinates,
+		"cost": int(states[best_index]["cost"]),
+		"steps": int(states[best_index]["steps"]),
+	}
+
 # --- 玩家点击处理 ---
 func _on_section_clicked(target_section: MapSection) -> String:
-	if TurnManager.now_phase != TurnManager.TurnPhase.MOVING:
+	if TurnManager.now_phase != TurnManager.TurnPhase.MOVING or TurnManager.is_movement_locked():
 		return "not available"
 		
 	var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
@@ -84,67 +176,24 @@ func _on_section_clicked(target_section: MapSection) -> String:
 		return "not necessary"
 		
 	var max_energy = current_player.current_energy
+	if EventManager.has_free_move_this_phase(current_player) or (EventManager.can_ignore_special_terrain_this_phase(current_player) and target_section.landform != MapSection.LandForm.平原):
+		max_energy = 1 << 30
 	if not current_player.武术拳法已生效:
 		for card:非遗牌 in current_player.非遗牌手牌:
 			if card.category == 非遗牌.CardCategory.武术拳法:
 				max_energy += 1
 				break
 	
-	# 【核心数据结构】
-	var que: Array[Vector3i] = []
-	var came_from: Dictionary = {}   # 记录路径：{ 当前节点坐标 : 来源节点坐标 }
-	var cost_so_far: Dictionary = {} # 记录消耗：{ 当前节点坐标 : 从起点到这里的总消耗 }
-	
-	# 初始化起点
-	que.push_back(start_coord)
-	came_from[start_coord] = start_coord
-	cost_so_far[start_coord] = 0
-	grid_map[start_coord].is_reached = true
-	grid_map[start_coord].is_reachable = false
-	var found_target: bool = false
-	
-	# --- 第一步：BFS 寻路与构建溯源树 ---
-	while not que.is_empty():
-		var now_pos = que.pop_front()
-		# 如果找到了目标，直接停止扩散！
-		if now_pos == target_coord:
-			found_target = true
-			break 	
-		for mov: Vector3i in 常量.MOVE:
-			var new_pos: Vector3i = now_pos + mov
-			
-			if new_pos in grid_map:
-				# 计算走到新格子的累计精力消耗
-				var new_cost = cost_so_far[now_pos] + grid_map[new_pos].cost
-				
-				# 如果这个格子没去过，或者找到了一条更省精力的路，且未超过玩家最大精力上限
-				if (not cost_so_far.has(new_pos) or new_cost < cost_so_far[new_pos]) and new_cost <= max_energy and not grid_map[new_pos].is_reached and not grid_map[new_pos].is_occupied:
-					cost_so_far[new_pos] = new_cost
-					came_from[new_pos] = now_pos # 【关键】记录：我是从 now_pos 走到 new_pos 的
-					que.push_back(new_pos)
-
-	# --- 第二步：回溯生成具体路径 ---
-	if not found_target:
+	var path_result: Dictionary = _best_path(start_coord, target_coord, current_player.maxMove, max_energy)
+	if path_result.is_empty():
 		print("无法到达该目标！")
 		return "error"
-		
+
 	var path_pixels: Array[Vector2] = []
-	var current_backtrack = target_coord
-	var total_cost_used = cost_so_far[target_coord]
-	
-	# 从终点一步步往回倒推，直到退回起点
-	while current_backtrack != start_coord:
-		# 注意：Tween 动画需要的是物理世界像素坐标 (global_position)，而不是逻辑坐标的差值
-		grid_map[current_backtrack].is_reached = true
-		grid_map[current_backtrack].is_reachable = false
-		path_pixels.append(grid_map[current_backtrack].global_position)
-		current_backtrack = came_from[current_backtrack]
-		
-	# 因为是从终点倒推的，所以路径是反的，最后必须翻转一下！
-	path_pixels.reverse()
-	
-	# --- 第三步：通知 Player 开始移动 ---
-	# 传递真正的像素路线数组、准确的总消耗、以及目标的逻辑坐标
-	current_player.move_along_path(path_pixels, total_cost_used, target_coord)
-	return "success"
+	for coordinate: Vector3i in path_result["coordinates"]:
+		grid_map[coordinate].is_reached = true
+		grid_map[coordinate].is_reachable = false
+		path_pixels.append(grid_map[coordinate].global_position)
+	var moved: bool = await current_player.move_along_path(path_pixels, int(path_result["cost"]), target_coord)
+	return "success" if moved else "not available"
 	
