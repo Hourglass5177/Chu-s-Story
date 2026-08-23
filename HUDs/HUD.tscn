@@ -310,6 +310,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TimeLabel" type="Label" parent="回合信息" unique_id=315376715]
+visible = false
 z_index = 6
 layout_mode = 1
 anchors_preset = 5
@@ -351,7 +352,6 @@ offset_top = 135.0
 offset_right = 1405.0
 offset_bottom = 961.0
 stretch = true
-mouse_filter = 1
 
 [node name="SubViewport" type="SubViewport" parent="地图/地图背景/SubViewportContainer" unique_id=61636319]
 transparent_bg = true
@@ -372,14 +372,15 @@ shortcut = SubResource("Shortcut_ny0mp")
 
 [node name="缩放提示信息" type="Label" parent="地图" unique_id=1057708247]
 layout_mode = 0
-offset_left = 48.0
-offset_top = -116.0
-offset_right = 503.0
-offset_bottom = -51.0
+offset_left = 36.0
+offset_top = -150.0
+offset_right = 581.0
+offset_bottom = -45.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_co0a7")
-theme_override_font_sizes/font_size = 50
-text = "ALT 切换视角"
+theme_override_font_sizes/font_size = 40
+text = "【ALT】切换全局/跟踪视角
+【滚轮】视角缩放"
 
 [node name="手牌信息" type="ReferenceRect" parent="." unique_id=1990475967]
 offset_left = 521.0

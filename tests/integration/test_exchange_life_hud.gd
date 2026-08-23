@@ -2,6 +2,7 @@ extends GutTest
 
 class HudRefreshProbe extends HUD:
 	var refreshed_player: PlayerClass = null
+	var refreshed_hand_player: PlayerClass = null
 	var camera_refresh_count: int = 0
 
 	func _ready() -> void:
@@ -12,6 +13,9 @@ class HudRefreshProbe extends HUD:
 
 	func _update_button_states(_phase: TurnManager.TurnPhase) -> void:
 		pass
+
+	func refresh_feiyi_list(player: PlayerClass) -> void:
+		refreshed_hand_player = player
 
 	func update_camera_view(_duration: float = 0.4) -> void:
 		camera_refresh_count += 1
@@ -59,6 +63,7 @@ func test_exchange_life_refreshes_current_player_profile_immediately() -> void:
 	assert_eq(_source.player_types, PlayerClass.PlayerCharacter.商业博主)
 	assert_eq(_target.player_types, PlayerClass.PlayerCharacter.美食博主)
 	assert_eq(_hud.refreshed_player, _source, "事件关闭时应立即刷新当前玩家左侧档案")
+	assert_eq(_hud.refreshed_hand_player, _source, "事件结束必须把右侧手牌恢复为当前玩家")
 
 func test_position_swap_refreshes_alt_focus_camera_target() -> void:
 	var map := MAP.new()

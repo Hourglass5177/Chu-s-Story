@@ -300,6 +300,44 @@ func test_reset_clears_revive_modal_ownership() -> void:
 	EventManager.reset_for_new_game()
 	assert_false(EventManager._revive_modal_owned)
 
+
+func test_reset_cancels_a_pending_reveal_without_late_side_effects() -> void:
+	var runtime_hud_backup: HUD = EventManager.hud
+	var runtime_overlay_backup: Control = EventManager.event_overlay
+	var overlay := Control.new()
+	add_child_autofree(overlay)
+	EventManager.bind_runtime(null, overlay)
+	EventManager.auto_resolve_choices = false
+	TurnManager.modal_resolution_depth = 0
+	var card := 事件牌.new()
+	card.card_name = "跨局取消测试"
+	card.event_id = &"cancel_during_reveal"
+	watch_signals(EventManager)
+
+	EventManager.resolve_event(_source, card)
+	await get_tree().process_frame
+	assert_true(EventManager.resolving)
+	assert_not_null(EventManager._pending_request)
+	assert_eq(TurnManager.modal_resolution_depth, 1)
+	assert_false(ResourceManager.事件弃牌堆.has(card))
+
+	EventManager.reset_for_new_game()
+	# GameManager.reset_session() 会先清空 TurnManager；这里模拟同一顺序，
+	# 并验证旧协程恢复后不会再次改动模态深度。
+	TurnManager.modal_resolution_depth = 0
+	for _frame: int in 3:
+		await get_tree().process_frame
+
+	assert_false(EventManager.resolving)
+	assert_null(EventManager._pending_request)
+	assert_true(EventManager._active_resolution_contexts.is_empty())
+	assert_eq(TurnManager.modal_resolution_depth, 0)
+	assert_false(ResourceManager.事件弃牌堆.has(card), "旧事件不得在重置后进入新局弃牌堆")
+	assert_false(_source.事件牌手牌.has(card), "旧事件不得在重置后收入保留牌手牌")
+	assert_signal_not_emitted(EventManager, "event_finished")
+
+	EventManager.bind_runtime(runtime_hud_backup, runtime_overlay_backup)
+
 func test_jin_chan_does_not_cancel_the_other_players_portion_of_tong_tai() -> void:
 	var source_card := 非遗牌.new()
 	source_card.card_name = "来源牌"

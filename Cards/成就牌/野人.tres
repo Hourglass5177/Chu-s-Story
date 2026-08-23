@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="成就牌" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Cards/DataStructure/成就牌.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://arts/成就卡/成就卡（牌面）3.png" id="2_front"]
+[ext_resource type="Texture2D" path="res://arts/成就卡/成就卡（牌背）.png" id="3_back"]
+
+[resource]
+script = ExtResource("1_script")
+card_type = 3
+card_name = "野人"
+image_of_front = ExtResource("2_front")
+image_of_back = ExtResource("3_back")
+description = "集齐全部神农架非遗牌，并打卡全部神农架风景。"
+achievement_id = &"ye_ren"
+score_value = 2
+condition_kind = 2
+threshold = 2
+replaces_achievement_id = &""

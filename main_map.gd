@@ -43,3 +43,4 @@ func init_game():
 	await get_tree().process_frame
 	TurnManager.map = get_tree().get_first_node_in_group("MAP")
 	TurnManager.start_game(players)
+	AchievementManager.bind_map(TurnManager.map)

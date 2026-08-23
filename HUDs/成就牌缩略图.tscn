@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://HUDs/成就牌缩略图.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://arts/成就卡/成就卡（牌背）.png" id="2_back"]
+[ext_resource type="FontFile" path="res://arts/像素字体.ttf" id="3_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_score"]
+bg_color = Color(0.84, 0.51, 0.18, 0.96)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[node name="成就牌缩略图" type="TextureButton"]
+custom_minimum_size = Vector2(216, 282)
+offset_right = 216.0
+offset_bottom = 282.0
+focus_mode = 2
+texture_normal = ExtResource("2_back")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("1_script")
+
+[node name="ScoreBadge" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -57.0
+offset_bottom = 55.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_score")
+
+[node name="Score" type="Label" parent="ScoreBadge"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.29, 0.13, 0.05, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 32
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mask" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.35, 0.19, 0.05, 0.28)

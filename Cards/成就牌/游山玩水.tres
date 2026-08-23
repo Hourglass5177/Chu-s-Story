@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="成就牌" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Cards/DataStructure/成就牌.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://arts/成就卡/成就卡（牌背）.png" id="2_back"]
+
+[resource]
+script = ExtResource("1_script")
+card_type = 3
+card_name = "游山玩水"
+image_of_front = ExtResource("2_back")
+image_of_back = ExtResource("2_back")
+description = "首次打卡6个不同风景。"
+achievement_id = &"you_shan_wan_shui"
+score_value = 5
+condition_kind = 0
+threshold = 6
+replaces_achievement_id = &""

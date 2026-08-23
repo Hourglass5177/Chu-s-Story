@@ -84,9 +84,15 @@ var map:MAP
 var event_overlay: EventOverlay
 var market_overlay: 研究所弹窗
 var score_overlay: ScoreDetailPanel
+var achievement_detail_overlay: AchievementDetailPanel
+var achievement_toast: AchievementToast
+var game_result_overlay: GameResultOverlay
 const EVENT_OVERLAY_SCENE := preload("res://HUDs/event_overlay.tscn")
 const MARKET_OVERLAY_SCENE := preload("res://HUDs/研究所弹窗.tscn")
 const SCORE_OVERLAY_SCENE := preload("res://HUDs/计分详情弹窗.tscn")
+const ACHIEVEMENT_DETAIL_SCENE := preload("res://HUDs/成就详情弹窗.tscn")
+const ACHIEVEMENT_TOAST_SCENE := preload("res://HUDs/成就获得提示.tscn")
+const GAME_RESULT_OVERLAY_SCENE := preload("res://HUDs/GameResultOverlay/game_result_overlay.tscn")
 func _ready() -> void:
 	map_container.resized.connect(_on_container_resized)
 	_spawn_map_in_hud()
@@ -103,6 +109,8 @@ func _ready() -> void:
 	_setup_event_ui()
 	_setup_market_ui()
 	_setup_score_ui()
+	_setup_achievement_ui()
+	_setup_game_result_ui()
 	_setup_map_tooltip()
 	score_label.mouse_filter = Control.MOUSE_FILTER_STOP
 	score_label.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
@@ -142,6 +150,58 @@ func _setup_score_ui() -> void:
 	score_overlay = SCORE_OVERLAY_SCENE.instantiate() as ScoreDetailPanel
 	add_child(score_overlay)
 
+func _setup_achievement_ui() -> void:
+	achievement_detail_overlay = ACHIEVEMENT_DETAIL_SCENE.instantiate() as AchievementDetailPanel
+	add_child(achievement_detail_overlay)
+	achievement_toast = ACHIEVEMENT_TOAST_SCENE.instantiate() as AchievementToast
+	add_child(achievement_toast)
+	if not AchievementManager.achievement_claimed.is_connected(_on_achievement_claimed):
+		AchievementManager.achievement_claimed.connect(_on_achievement_claimed)
+	if not AchievementManager.achievement_destroyed.is_connected(_on_achievement_destroyed):
+		AchievementManager.achievement_destroyed.connect(_on_achievement_destroyed)
+
+func _setup_game_result_ui() -> void:
+	game_result_overlay = GAME_RESULT_OVERLAY_SCENE.instantiate() as GameResultOverlay
+	add_child(game_result_overlay)
+	if not TurnManager.game_finished.is_connected(_on_game_finished):
+		TurnManager.game_finished.connect(_on_game_finished)
+	game_result_overlay.return_to_main_menu_requested.connect(_on_result_return_to_main_menu)
+	game_result_overlay.quit_requested.connect(_on_result_quit_requested)
+
+func _on_game_finished(result: GameResult) -> void:
+	if game_result_overlay != null:
+		game_result_overlay.present(result)
+
+func _on_result_return_to_main_menu() -> void:
+	if game_result_overlay != null:
+		game_result_overlay.reset_overlay(false)
+	GameManager.return_to_main_menu()
+
+func _on_result_quit_requested() -> void:
+	if game_result_overlay != null:
+		game_result_overlay.reset_overlay(false)
+	get_tree().quit()
+
+func _on_achievement_claimed(player: PlayerClass, card: 成就牌) -> void:
+	if achievement_toast != null:
+		achievement_toast.enqueue(card, player)
+	if TurnManager.GameOn and TurnManager.now_player_index >= 0 and TurnManager.now_player_index < TurnManager.players.size():
+		var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
+		if current_player == player:
+			refresh_achievement_list(player)
+		_update_player_stats(player)
+	_update_game_informs("%s 达成【%s】，+%d分。" % [player.player_name, card.card_name, card.score_value])
+
+func _on_achievement_destroyed(previous_owner: PlayerClass, card: 成就牌, _replacement: 成就牌) -> void:
+	if previous_owner == null:
+		return
+	if TurnManager.GameOn and TurnManager.now_player_index >= 0 and TurnManager.now_player_index < TurnManager.players.size():
+		var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
+		if current_player == previous_owner:
+			refresh_achievement_list(previous_owner)
+		_update_player_stats(previous_owner)
+	_update_game_informs("%s 的【%s】已升级移除。" % [previous_owner.player_name, card.card_name])
+
 func _on_score_label_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		if TurnManager.GameOn and TurnManager.now_player_index >= 0 and TurnManager.now_player_index < TurnManager.players.size():
@@ -164,9 +224,10 @@ func _on_event_modal_closed(_player: PlayerClass, _card: 事件牌, _summary: St
 	# 部分事件会直接改变玩家档案（例如“交换人生”的职业与立绘），
 	# 不经过资源管理器的数值刷新链，因此在事件结算完成时统一刷新当前玩家信息。
 	if TurnManager.GameOn and TurnManager.now_player_index >= 0 and TurnManager.now_player_index < TurnManager.players.size():
-		_update_player_stats(TurnManager.players[TurnManager.now_player_index])
+		var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
+		_update_player_stats(current_player)
+		refresh_feiyi_list(current_player)
 	_update_button_states(TurnManager.now_phase)
-	call_deferred("_refresh_current_event_list")
 # 暴露给编辑器的变量，把你做好的 map.tscn 直接从底层文件系统拖到右侧面板的这个槽位里
 @export var map_scene: PackedScene 
 
@@ -405,10 +466,16 @@ func _roll_dice_information(result:int, player:PlayerClass) -> void:
 
 # --- UI 刷新状态函数 ---
 func _update_player_stats(player: PlayerClass) -> void:
+	if player == null:
+		return
+	# 地图上的棋子分数徽章属于玩家自身，不是共享 HUD；后台玩家也必须实时更新。
+	if player.score_label != null and is_instance_valid(player.score_label):
+		player.score_label.text = str(player.current_score)
+	if not _can_display_player(player):
+		return
 	money_label.text = str(player.current_money)
 	energy_label.text = str(player.current_energy) + "/" + str(player.max_energy)
 	score_label.text = "总分数：" + str(player.current_score) + "分"
-	player.score_label.text = str(player.current_score)
 	name_label.text = player.player_name
 	立绘精二.texture = player.立绘精二
 	$"玩家信息/职业背景/职业".text = PlayerClass.PlayerCharacter.find_key(player.player_types)
@@ -520,14 +587,18 @@ func open_shop_panel(player:PlayerClass):
 const ThumbnailScene = preload("res://HUDs/非遗牌缩略图.tscn")
 const DetailPanelScene = preload("res://HUDs/非遗详情弹窗.tscn")
 const EventThumbnailScene = preload("res://HUDs/事件牌缩略图.tscn")
+const AchievementThumbnailScene = preload("res://HUDs/成就牌缩略图.tscn")
 
 @onready var feiyi_list = $"积分区域/ScrollContainer/非遗列表容器"
 @onready var detail_panel = $"非遗详情弹窗" 
 
 # 刷新右侧非遗列表（回合开始、或者抽到新卡时调用）
 func refresh_feiyi_list(player: PlayerClass):
+	if not _can_display_player(player):
+		return
 	# 1. 清空旧列表
 	for child in feiyi_list.get_children():
+		feiyi_list.remove_child(child)
 		child.queue_free()
 		
 	# 2. 按城市将手牌分组
@@ -566,7 +637,6 @@ func refresh_feiyi_list(player: PlayerClass):
 		for card in city_groups[ResourceManager.STRING_TO_REGION[city_name]]:
 			var thumbnail = ThumbnailScene.instantiate()
 			grid.add_child(thumbnail)
-			await get_tree().process_frame
 			thumbnail.setup(card)
 			
 			# 连接缩略图发出的信号
@@ -588,34 +658,93 @@ func refresh_feiyi_list(player: PlayerClass):
 	refresh_event_list(player)
 
 func refresh_event_list(player: PlayerClass) -> void:
+	if not _can_display_player(player):
+		return
 	var previous_section := feiyi_list.get_node_or_null("事件牌列表区")
 	if previous_section != null:
 		feiyi_list.remove_child(previous_section)
 		previous_section.queue_free()
-	if player.事件牌手牌.is_empty():
+	var previous_achievement_section := feiyi_list.get_node_or_null("成就牌列表区")
+	if previous_achievement_section != null:
+		feiyi_list.remove_child(previous_achievement_section)
+		previous_achievement_section.queue_free()
+	if not player.事件牌手牌.is_empty():
+		var event_section := VBoxContainer.new()
+		event_section.name = "事件牌列表区"
+		event_section.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		feiyi_list.add_child(event_section)
+		var title := Label.new()
+		title.text = "事件牌"
+		title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		title.add_theme_color_override("font_color", Color.BLACK)
+		title.add_theme_font_size_override("font_size", 64)
+		title.add_theme_font_override("font", default_font)
+		event_section.add_child(title)
+		var event_card_list := GridContainer.new()
+		event_card_list.columns = 2
+		event_card_list.add_theme_constant_override("h_separation", 10)
+		event_card_list.add_theme_constant_override("v_separation", 10)
+		event_section.add_child(event_card_list)
+		for card: 事件牌 in player.事件牌手牌:
+			var thumbnail := EventThumbnailScene.instantiate() as 事件牌缩略图
+			event_card_list.add_child(thumbnail)
+			thumbnail.setup(card, player)
+			thumbnail.request_open_detail.connect(_open_event_card_detail.bind(player))
+			thumbnail.request_use_card.connect(_request_event_card_use.bind(player))
+	refresh_achievement_list(player)
+
+func refresh_achievement_list(player: PlayerClass) -> void:
+	if not _can_display_player(player):
 		return
-	var event_section := VBoxContainer.new()
-	event_section.name = "事件牌列表区"
-	event_section.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	feiyi_list.add_child(event_section)
+	var previous_section := feiyi_list.get_node_or_null("成就牌列表区")
+	if previous_section != null:
+		feiyi_list.remove_child(previous_section)
+		previous_section.queue_free()
+	var achievements: Array[成就牌] = AchievementManager.get_owned_achievements(player)
+	if achievements.is_empty():
+		return
+	var section := VBoxContainer.new()
+	section.name = "成就牌列表区"
+	section.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	feiyi_list.add_child(section)
+	var separator := HSeparator.new()
+	section.add_child(separator)
 	var title := Label.new()
-	title.text = "事件牌"
+	title.name = "标题"
+	title.text = "成就"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_color_override("font_color", Color.BLACK)
+	title.add_theme_color_override("font_color", Color(0.55, 0.28, 0.11, 1))
+	title.add_theme_color_override("font_outline_color", Color(0.31, 0.13, 0.05, 1))
+	title.add_theme_constant_override("outline_size", 2)
 	title.add_theme_font_size_override("font_size", 64)
 	title.add_theme_font_override("font", default_font)
-	event_section.add_child(title)
-	var event_card_list := GridContainer.new()
-	event_card_list.columns = 2
-	event_card_list.add_theme_constant_override("h_separation", 10)
-	event_card_list.add_theme_constant_override("v_separation", 10)
-	event_section.add_child(event_card_list)
-	for card: 事件牌 in player.事件牌手牌:
-		var thumbnail := EventThumbnailScene.instantiate() as 事件牌缩略图
-		event_card_list.add_child(thumbnail)
-		thumbnail.setup(card, player)
-		thumbnail.request_open_detail.connect(_open_event_card_detail.bind(player))
-		thumbnail.request_use_card.connect(_request_event_card_use.bind(player))
+	section.add_child(title)
+	var grid := GridContainer.new()
+	grid.name = "卡牌列表"
+	grid.columns = 2
+	grid.add_theme_constant_override("h_separation", 10)
+	grid.add_theme_constant_override("v_separation", 10)
+	section.add_child(grid)
+	for card: 成就牌 in achievements:
+		var thumbnail := AchievementThumbnailScene.instantiate() as 成就牌缩略图
+		grid.add_child(thumbnail)
+		thumbnail.setup(card)
+		thumbnail.request_open_detail.connect(_open_achievement_detail)
+
+## 左右两侧是同一份“当前回合玩家”HUD，任何后台目标都不能直接覆盖它。
+## GameOn=false 时保留场景预览和独立 UI 测试按指定玩家渲染的能力。
+func _can_display_player(player: PlayerClass) -> bool:
+	if player == null:
+		return false
+	if not TurnManager.GameOn:
+		return true
+	if TurnManager.now_player_index < 0 or TurnManager.now_player_index >= TurnManager.players.size():
+		return false
+	return TurnManager.players[TurnManager.now_player_index] == player
+
+func _open_achievement_detail(card: 成就牌) -> void:
+	if achievement_detail_overlay != null:
+		achievement_detail_overlay.show_detail(card)
 
 func _refresh_current_event_list() -> void:
 	if TurnManager.GameOn and TurnManager.now_player_index >= 0 and TurnManager.now_player_index < TurnManager.players.size():

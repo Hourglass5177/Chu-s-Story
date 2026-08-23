@@ -1,11 +1,23 @@
 extends Node
 
 signal event_revealed(player: PlayerClass, card: 事件牌)
+signal gameplay_event_triggered(player: PlayerClass, card: 事件牌)
 signal choice_requested(request: EventChoiceRequest)
 signal reaction_requested(request: EventChoiceRequest)
 signal choice_resolved(request_id: int, timed_out: bool)
 signal event_finished(player: PlayerClass, card: 事件牌, summary: String)
+signal interaction_finished(player: PlayerClass)
 signal retained_cards_changed(player: PlayerClass)
+
+
+class EventResolutionContext extends RefCounted:
+	var session_token: int
+	var resolution_id: int
+	var cancelled: bool = false
+
+	func _init(current_session_token: int, current_resolution_id: int) -> void:
+		session_token = current_session_token
+		resolution_id = current_resolution_id
 
 const CHOICE_TIMEOUT_SECONDS: float = 15.0
 const IMPLEMENTED_EVENT_IDS: Array[StringName] = [
@@ -34,6 +46,11 @@ var _choice_waiting: bool = false
 var _choice_timer: Timer = null
 var _status_by_player: Dictionary = {}
 var _skip_current_action_after_event: bool = false
+var _session_token: int = 0
+var _resolution_sequence: int = 0
+var _active_resolution_contexts: Array[EventResolutionContext] = []
+var _resolution_context_stack: Array[EventResolutionContext] = []
+var _current_resolution_context: EventResolutionContext = null
 
 func _ready() -> void:
 	_choice_timer = Timer.new()
@@ -47,16 +64,54 @@ func bind_runtime(target_hud: HUD, overlay: Control = null) -> void:
 	event_overlay = overlay
 
 func reset_for_new_game() -> void:
+	_cancel_all_resolution_contexts()
+	_session_token += 1
 	resolving = false
+	_request_sequence = 0
 	_pending_request = null
 	_pending_choice = null
 	_choice_waiting = false
 	_status_by_player.clear()
 	_skip_current_action_after_event = false
 	_revive_modal_owned = false
+	auto_resolve_choices = false
 	choice_strategy = Callable()
 	if _choice_timer != null:
 		_choice_timer.stop()
+	interaction_finished.emit(null)
+
+
+func _begin_resolution_context() -> EventResolutionContext:
+	_resolution_sequence += 1
+	var context := EventResolutionContext.new(_session_token, _resolution_sequence)
+	_active_resolution_contexts.append(context)
+	_resolution_context_stack.append(context)
+	_current_resolution_context = context
+	return context
+
+
+func _finish_resolution_context(context: EventResolutionContext) -> void:
+	if context == null:
+		return
+	_active_resolution_contexts.erase(context)
+	_resolution_context_stack.erase(context)
+	_current_resolution_context = _resolution_context_stack.back() if not _resolution_context_stack.is_empty() else null
+
+
+func _cancel_all_resolution_contexts() -> void:
+	for context: EventResolutionContext in _active_resolution_contexts:
+		context.cancelled = true
+	_active_resolution_contexts.clear()
+	_resolution_context_stack.clear()
+	_current_resolution_context = null
+
+
+func _is_resolution_context_cancelled(context: EventResolutionContext) -> bool:
+	return context != null and (
+		context.cancelled
+		or context.session_token != _session_token
+		or not _active_resolution_contexts.has(context)
+	)
 
 func submit_choice(request_id: int, choice) -> void:
 	if not _choice_waiting or _pending_request == null:
@@ -71,6 +126,9 @@ func submit_choice(request_id: int, choice) -> void:
 	choice_resolved.emit(request_id, false)
 
 func _request_choice(request: EventChoiceRequest, is_reaction: bool = false):
+	var resolution_context := _current_resolution_context
+	if _is_resolution_context_cancelled(resolution_context):
+		return null
 	if request.options.is_empty():
 		return null
 	_request_sequence += 1
@@ -93,6 +151,10 @@ func _request_choice(request: EventChoiceRequest, is_reaction: bool = false):
 		_choice_timer.start(request.timeout_seconds)
 	while _choice_waiting:
 		await get_tree().process_frame
+		if _is_resolution_context_cancelled(resolution_context):
+			return null
+	if _is_resolution_context_cancelled(resolution_context):
+		return null
 	var result = _pending_choice
 	_pending_request = null
 	_pending_choice = null
@@ -234,14 +296,24 @@ func open_retained_event_menu(player: PlayerClass) -> void:
 		if hud != null:
 			hud._update_game_informs("暂无可用事件牌。")
 		return
+	var resolution_context := _begin_resolution_context()
 	resolving = true
 	TurnManager.begin_modal_resolution()
 	var request := EventChoiceRequest.new(player, "选择要使用的保留事件牌", playable, _labels_for_cards(playable), true, EventChoiceRequest.ChoiceKind.卡牌)
 	var selected = await _request_choice(request)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if selected is 事件牌:
 		await play_retained_event(player, selected as 事件牌)
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 	resolving = false
-	TurnManager.end_modal_resolution(TurnManager.now_phase == TurnManager.TurnPhase.ACTION)
+	TurnManager.end_modal_resolution(
+		TurnManager.now_phase == TurnManager.TurnPhase.ACTION,
+		TurnManager.now_phase == TurnManager.TurnPhase.MOVING
+	)
+	_finish_resolution_context(resolution_context)
+	interaction_finished.emit(player)
 
 func can_play_retained_event_now(card: 事件牌, player: PlayerClass = null) -> bool:
 	if resolving or card == null or player == null or not player.事件牌手牌.has(card):
@@ -270,11 +342,19 @@ func request_play_retained_event(player: PlayerClass, card: 事件牌) -> void:
 		if hud != null:
 			hud._update_game_informs(get_retained_event_usage_hint(card, player))
 		return
+	var resolution_context := _begin_resolution_context()
 	resolving = true
 	TurnManager.begin_modal_resolution()
 	await play_retained_event(player, card)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	resolving = false
-	TurnManager.end_modal_resolution(TurnManager.now_phase == TurnManager.TurnPhase.ACTION)
+	TurnManager.end_modal_resolution(
+		TurnManager.now_phase == TurnManager.TurnPhase.ACTION,
+		TurnManager.now_phase == TurnManager.TurnPhase.MOVING
+	)
+	_finish_resolution_context(resolution_context)
+	interaction_finished.emit(player)
 
 func _can_play_retained_now(card: 事件牌, player: PlayerClass = null) -> bool:
 	if card.event_id == &"you_mu_cheng_huai":
@@ -284,6 +364,7 @@ func _can_play_retained_now(card: 事件牌, player: PlayerClass = null) -> bool
 	return false
 
 func play_retained_event(player: PlayerClass, card: 事件牌) -> void:
+	var resolution_context := _current_resolution_context
 	if not player.事件牌手牌.has(card) or not _can_play_retained_now(card, player):
 		return
 	player.事件牌手牌.erase(card)
@@ -298,6 +379,8 @@ func play_retained_event(player: PlayerClass, card: 事件牌) -> void:
 			hud._update_game_informs("【畅行无阻】已生效：本次移动到特殊地形无需精力。")
 	elif card.event_id == &"you_mu_cheng_huai":
 		await _play_you_mu_cheng_huai(player)
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 
 func trigger_arrival_event(player: PlayerClass, section: MapSection, arrival_id: int) -> void:
 	if resolving or section == null or section.type != MapSection.SectionType.事件:
@@ -315,26 +398,42 @@ func trigger_arrival_event(player: PlayerClass, section: MapSection, arrival_id:
 	await resolve_event(player, card)
 
 func resolve_event(player: PlayerClass, card: 事件牌) -> void:
+	if player == null or card == null or not card.is_available():
+		return
+	var resolution_context := _begin_resolution_context()
 	resolving = true
 	_skip_current_action_after_event = false
 	TurnManager.begin_modal_resolution()
+	gameplay_event_triggered.emit(player, card)
 	event_revealed.emit(player, card)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	var reveal_request := EventChoiceRequest.new(player, "确认后结算", [true], PackedStringArray(["结算"]), false, EventChoiceRequest.ChoiceKind.确认)
 	await _request_choice(reveal_request)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if card.retainable:
 		player.事件牌手牌.append(card)
 		retained_cards_changed.emit(player)
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 		if hud != null:
 			hud._update_game_informs("%s 获得事件牌【%s】。" % [player.player_name, card.card_name])
 	else:
 		await _execute_event(player, card)
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 		ResourceManager.discard_event(card)
 	var summary := "事件【%s】结算完成。" % card.card_name
 	event_finished.emit(player, card, summary)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	resolving = false
 	var skip_current_action := _skip_current_action_after_event
 	_skip_current_action_after_event = false
 	TurnManager.end_modal_resolution(not skip_current_action)
+	_finish_resolution_context(resolution_context)
+	interaction_finished.emit(player)
 	if skip_current_action and TurnManager.GameOn and TurnManager.now_phase == TurnManager.TurnPhase.ACTION:
 		TurnManager._emit_next_phase(TurnManager.TurnPhase.END)
 
@@ -379,31 +478,39 @@ func _execute_event(player: PlayerClass, card: 事件牌) -> void:
 			push_error("EventManager: 尚未实现或不应入库的事件效果 %s (%s)" % [card.card_name, card.event_id])
 
 func _choose_player(requester: PlayerClass, prompt: String, candidates: Array[PlayerClass], optional: bool = false) -> PlayerClass:
+	var resolution_context := _current_resolution_context
 	if candidates.is_empty():
 		return null
 	var request := EventChoiceRequest.new(requester, prompt, candidates, _labels_for_players(candidates), optional, EventChoiceRequest.ChoiceKind.玩家)
-	return await _request_choice(request) as PlayerClass
+	var selected := await _request_choice(request) as PlayerClass
+	return null if _is_resolution_context_cancelled(resolution_context) else selected
 
 func _choose_card(requester: PlayerClass, prompt: String, cards: Array, optional: bool = false):
+	var resolution_context := _current_resolution_context
 	if cards.is_empty():
 		return null
 	var request := EventChoiceRequest.new(requester, prompt, cards, _labels_for_cards(cards), optional, EventChoiceRequest.ChoiceKind.卡牌)
-	return await _request_choice(request)
+	var selected = await _request_choice(request)
+	return null if _is_resolution_context_cancelled(resolution_context) else selected
 
 func _choose_section(requester: PlayerClass, prompt: String, sections: Array[MapSection], optional: bool = false) -> MapSection:
+	var resolution_context := _current_resolution_context
 	if sections.is_empty():
 		return null
 	var labels := PackedStringArray()
 	for section: MapSection in sections:
 		labels.append(section.section_name if not section.section_name.is_empty() else "格子 %d" % section.logical_index)
 	var request := EventChoiceRequest.new(requester, prompt, sections, labels, optional, EventChoiceRequest.ChoiceKind.格子)
-	return await _request_choice(request) as MapSection
+	var selected := await _request_choice(request) as MapSection
+	return null if _is_resolution_context_cancelled(resolution_context) else selected
 
 func _choose_option(requester: PlayerClass, prompt: String, options: Array, labels: PackedStringArray, optional: bool = false):
+	var resolution_context := _current_resolution_context
 	if options.is_empty():
 		return null
 	var request := EventChoiceRequest.new(requester, prompt, options, labels, optional, EventChoiceRequest.ChoiceKind.选项)
-	return await _request_choice(request)
+	var selected = await _request_choice(request)
+	return null if _is_resolution_context_cancelled(resolution_context) else selected
 
 func _next_alive(player: PlayerClass, direction: int = 1) -> PlayerClass:
 	var players: Array[PlayerClass] = TurnManager.players
@@ -505,10 +612,13 @@ func _discard_player_card(player: PlayerClass, card) -> void:
 		retained_cards_changed.emit(player)
 
 func _discard_cards_from_player(player: PlayerClass, count: int, reason: String) -> void:
+	var resolution_context := _current_resolution_context
 	var discard_count := mini(count, _all_hand_cards(player).size())
 	for index in discard_count:
 		var cards := _all_hand_cards(player)
 		var selected = await _choose_card(player, "%s：选择弃牌（还需 %d 张）" % [reason, discard_count - index], cards)
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 		if selected == null:
 			break
 		_discard_player_card(player, selected)
@@ -568,6 +678,9 @@ func _resolve_effect_target(
 	allow_reaction: bool = true,
 	redirect_validator: Callable = Callable()
 ) -> PlayerClass:
+	var resolution_context := _current_resolution_context
+	if _is_resolution_context_cancelled(resolution_context):
+		return null
 	if target == null or not target.alive:
 		return null
 	var redirects := _redirect_targets(target, redirect_validator)
@@ -579,6 +692,8 @@ func _resolve_effect_target(
 	if not response_cards.is_empty():
 		var request := EventChoiceRequest.new(target, "%s\n是否使用响应牌？" % prompt, response_cards, _labels_for_cards(response_cards), true, EventChoiceRequest.ChoiceKind.卡牌)
 		var response = await _request_choice(request, true)
+		if _is_resolution_context_cancelled(resolution_context):
+			return null
 		if response is 事件牌:
 			var event_response := response as 事件牌
 			target.事件牌手牌.erase(event_response)
@@ -588,9 +703,12 @@ func _resolve_effect_target(
 				return null
 			if event_response.event_id == &"yi_hua_jie_mu":
 				var redirected := await _choose_player(target, "移花接木：选择新的合法目标", redirects)
+				if _is_resolution_context_cancelled(resolution_context):
+					return null
 				if redirected == null:
 					return null
-				return await _resolve_effect_target(effect_source, redirected, effect_kind, prompt, true, redirect_validator)
+				var resolved_target := await _resolve_effect_target(effect_source, redirected, effect_kind, prompt, true, redirect_validator)
+				return null if _is_resolution_context_cancelled(resolution_context) else resolved_target
 		elif response is 非遗牌:
 			var myth := response as 非遗牌
 			ResourceManager.desert_feiyi(target, myth)
@@ -600,10 +718,15 @@ func _resolve_effect_target(
 				modes.append(&"redirect")
 				labels.append("转移")
 			var mode = await _choose_option(target, "选择响应效果", modes, labels)
+			if _is_resolution_context_cancelled(resolution_context):
+				return null
 			if mode == &"redirect":
 				var redirected := await _choose_player(target, "选择新的合法目标", redirects)
+				if _is_resolution_context_cancelled(resolution_context):
+					return null
 				if redirected != null:
-					return await _resolve_effect_target(effect_source, redirected, effect_kind, prompt, true, redirect_validator)
+					var resolved_target := await _resolve_effect_target(effect_source, redirected, effect_kind, prompt, true, redirect_validator)
+					return null if _is_resolution_context_cancelled(resolution_context) else resolved_target
 			return null
 	return target
 
@@ -616,7 +739,10 @@ func _resolve_incoming_effect(
 	allow_reaction: bool = true,
 	redirect_validator: Callable = Callable()
 ) -> bool:
+	var resolution_context := _current_resolution_context
 	var final_target := await _resolve_effect_target(effect_source, target, effect_kind, prompt, allow_reaction, redirect_validator)
+	if _is_resolution_context_cancelled(resolution_context):
+		return false
 	if final_target == null:
 		return false
 	apply_callable.call(final_target)
@@ -630,6 +756,7 @@ func _can_be_forced_to_work(player: PlayerClass) -> bool:
 		and not _nearest_sections(player, MapSection.SectionType.打工).is_empty()
 
 func _event_zuo_shou_yu_li(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var candidates: Array[PlayerClass] = []
 	for player: PlayerClass in _alive_players():
 		if _can_be_forced_to_work(player):
@@ -637,16 +764,22 @@ func _event_zuo_shou_yu_li(source: PlayerClass) -> void:
 	var selected: Array[PlayerClass] = []
 	for index in mini(2, candidates.size()):
 		var target := await _choose_player(source, "坐收渔利：选择第 %d 名打工者" % (index + 1), candidates)
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 		if target == null:
 			break
 		selected.append(target)
 		candidates.erase(target)
 	for worker: PlayerClass in selected:
 		var final_worker := await _resolve_effect_target(source, worker, &"event", "坐收渔利：前往打工并结算工资", true, _can_be_forced_to_work)
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 		if final_worker == null:
 			continue
 		var nearest := _nearest_sections(final_worker, MapSection.SectionType.打工)
 		var work_section := await _choose_section(final_worker, "选择最近的打工点", nearest) if nearest.size() > 1 else (nearest[0] if not nearest.is_empty() else null)
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 		if work_section == null:
 			continue
 		_teleport_player(final_worker, work_section)
@@ -658,6 +791,7 @@ func _event_zuo_shou_yu_li(source: PlayerClass) -> void:
 			_apply_money(source, 125, "事件：坐收渔利工资分成")
 
 func _event_bai_ge_zheng_liu(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var opponent := _next_alive(source, -1)
 	if opponent == null:
 		return
@@ -671,6 +805,8 @@ func _event_bai_ge_zheng_liu(source: PlayerClass) -> void:
 		if player in [source, opponent]:
 			continue
 		var team = await _choose_option(player, "百舸争流：%s 首骰 %d，%s 首骰 %d，请选择队伍" % [source.player_name, source_rolls[0], opponent.player_name, opponent_rolls[0]], [source, opponent], PackedStringArray([source.player_name, opponent.player_name]))
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 		if team == source:
 			source_team.append(player)
 		else:
@@ -686,6 +822,8 @@ func _event_bai_ge_zheng_liu(source: PlayerClass) -> void:
 		opponent_total += value
 	if source_total == opponent_total:
 		await _show_bai_ge_result(source, source_rolls, opponent, opponent_rolls, "平局，双方均无奖惩")
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 		if hud != null:
 			hud._update_game_informs("百舸争流平局，双方均无奖惩。")
 		return
@@ -693,10 +831,16 @@ func _event_bai_ge_zheng_liu(source: PlayerClass) -> void:
 	var losers := opponent_team if source_total > opponent_total else source_team
 	var winning_captain := source if source_total > opponent_total else opponent
 	await _show_bai_ge_result(source, source_rolls, opponent, opponent_rolls, "%s 方获胜" % winning_captain.player_name)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	for winner: PlayerClass in winners:
 		await _resolve_incoming_effect(source, winner, &"event", "百舸争流获胜奖励", _apply_money.bind(200, "事件：百舸争流获胜"))
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 	for loser: PlayerClass in losers:
 		await _resolve_incoming_effect(source, loser, &"event", "百舸争流失败惩罚", _apply_money.bind(-200, "事件：百舸争流失败"))
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 
 func _show_bai_ge_result(
 	source: PlayerClass,
@@ -705,6 +849,7 @@ func _show_bai_ge_result(
 	opponent_rolls: Array[int],
 	result_text: String
 ) -> void:
+	var resolution_context := _current_resolution_context
 	var source_total := _sum_rolls(source_rolls)
 	var opponent_total := _sum_rolls(opponent_rolls)
 	var prompt := "%s：%s，共 %d 点\n%s：%s，共 %d 点\n结果：%s" % [
@@ -713,6 +858,8 @@ func _show_bai_ge_result(
 		result_text,
 	]
 	await _choose_option(source, prompt, [true], PackedStringArray(["结算"]))
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 
 func _sum_rolls(rolls: Array[int]) -> int:
 	var total := 0
@@ -727,6 +874,7 @@ func _format_rolls(rolls: Array[int]) -> String:
 	return " / ".join(labels)
 
 func _event_pou_duo_yi_gua(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var players := _alive_players()
 	if players.is_empty():
 		return
@@ -738,9 +886,13 @@ func _event_pou_duo_yi_gua(source: PlayerClass) -> void:
 	for player: PlayerClass in players:
 		if player.current_money == highest:
 			await _resolve_incoming_effect(source, player, &"event", "裒多益寡：积分点最多者失去500积分点", _apply_money.bind(-500, "事件：裒多益寡"))
+			if _is_resolution_context_cancelled(resolution_context):
+				return
 	for player: PlayerClass in players:
 		if player.current_money == lowest:
 			await _resolve_incoming_effect(source, player, &"event", "裒多益寡：积分点最少者获得500积分点", _apply_money.bind(500, "事件：裒多益寡"))
+			if _is_resolution_context_cancelled(resolution_context):
+				return
 
 func _event_yi_chuang_zeng_shou(player: PlayerClass) -> void:
 	if player.player_types in [PlayerClass.PlayerCharacter.魔术博主, PlayerClass.PlayerCharacter.旅行博主, PlayerClass.PlayerCharacter.商业博主]:
@@ -749,6 +901,7 @@ func _event_yi_chuang_zeng_shou(player: PlayerClass) -> void:
 		ResourceManager.modify_energy(player, 2, "事件：艺创增收")
 
 func _event_wen_hua_xin_feng(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var players := _alive_players()
 	var maximum := 0
 	for player: PlayerClass in players:
@@ -756,6 +909,8 @@ func _event_wen_hua_xin_feng(source: PlayerClass) -> void:
 	for player: PlayerClass in players:
 		if player.非遗牌手牌.size() == maximum:
 			await _resolve_incoming_effect(source, player, &"event", "文化新风：非遗牌数量最多奖励", _apply_money.bind(100, "事件：文化新风"))
+			if _is_resolution_context_cancelled(resolution_context):
+				return
 		var has_national := false
 		for card: 非遗牌 in player.非遗牌手牌:
 			if card.category == 非遗牌.CardCategory.国家级非遗:
@@ -763,8 +918,11 @@ func _event_wen_hua_xin_feng(source: PlayerClass) -> void:
 				break
 		if has_national:
 			await _resolve_incoming_effect(source, player, &"event", "文化新风：国家级非遗奖励", _apply_money.bind(100, "事件：文化新风"))
+			if _is_resolution_context_cancelled(resolution_context):
+				return
 
 func _event_jiao_huan_ren_sheng(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var target := _next_alive(source)
 	if target == null:
 		return
@@ -773,6 +931,8 @@ func _event_jiao_huan_ren_sheng(source: PlayerClass) -> void:
 		_apply_swap_job.bind(source), true,
 		func(candidate: PlayerClass) -> bool: return candidate != source
 	)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 
 func _apply_swap_job(target: PlayerClass, source: PlayerClass) -> void:
 	var source_job := source.player_types
@@ -782,9 +942,12 @@ func _apply_swap_job(target: PlayerClass, source: PlayerClass) -> void:
 	target._init_character()
 
 func _event_mei_mei_yu_gong(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	for player: PlayerClass in _alive_players():
 		var amount := _roll_2d6()
 		await _resolve_incoming_effect(source, player, &"event", "美美与共：获得%d点精力" % amount, _apply_energy.bind(amount, "事件：美美与共"))
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 
 func _event_yang_jing_xu_rui(player: PlayerClass) -> void:
 	ResourceManager.modify_energy(player, player.current_energy, "事件：养精蓄锐")
@@ -792,43 +955,62 @@ func _event_yang_jing_xu_rui(player: PlayerClass) -> void:
 	add_status(player, &"skip_action", 2)
 
 func _event_cun_bu_nan_xing(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var target := await _choose_player(source, "寸步难行：选择跳过两个移动阶段的玩家", _alive_players())
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if target != null:
 		await _resolve_incoming_effect(source, target, &"event", "寸步难行：跳过接下来两个移动阶段", _apply_status.bind(&"skip_moving", 2))
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 
 func _event_juan_yi_xiu_zheng(player: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var accept = await _choose_option(player, "是否跳过本回合行动阶段并恢复3点精力？", [true, false], PackedStringArray(["接受休整", "拒绝并继续行动"]))
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if accept != true:
 		return
 	ResourceManager.modify_energy(player, 3, "事件：倦艺休整")
 	if not player.食物牌手牌.is_empty():
 		var food = await _choose_card(player, "可弃1张食物牌，额外恢复2点精力", player.食物牌手牌, true)
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 		if food is 食物牌:
 			_discard_player_card(player, food)
 			ResourceManager.modify_energy(player, 2, "事件：倦艺休整弃食物")
 	_skip_current_action_after_event = true
 
 func _event_chen_jin_ti_yan(player: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	if is_scenery_banned(player):
 		return
 	var nearest := _nearest_sections(player, MapSection.SectionType.风景)
 	var target := await _choose_section(player, "选择一处等距最近的风景打卡点", nearest) if nearest.size() > 1 else (nearest[0] if not nearest.is_empty() else null)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if target == null:
 		return
+	_record_scenery_check_in(player, target)
 	_teleport_player(player, target)
 	ResourceManager.modify_energy(player, 6, "事件：沉浸体验双倍打卡")
 	add_status(player, &"skip_moving", 2)
 
 func _event_xin_huo_xiang_chuan(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var cards := _non_national_feiyi(source)
 	if cards.is_empty():
 		return
 	var targets := _alive_players()
 	targets.erase(source)
 	var target := await _choose_player(source, "薪火相传：选择受赠玩家", targets)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if target == null:
 		return
 	var card = await _choose_card(source, "选择要赠出的非国家级非遗牌", cards)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if card == null:
 		return
 	var applied := await _resolve_incoming_effect(
@@ -836,31 +1018,35 @@ func _event_xin_huo_xiang_chuan(source: PlayerClass) -> void:
 		_apply_receive_feiyi.bind(source, card), true,
 		func(candidate: PlayerClass) -> bool: return candidate != source
 	)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if applied:
 		ResourceManager.modify_energy(source, 3, "事件：薪火相传")
 
 func _apply_receive_feiyi(target: PlayerClass, source: PlayerClass, card: 非遗牌) -> void:
-	if source.非遗牌手牌.has(card):
-		source.非遗牌手牌.erase(card)
-		target.非遗牌手牌.append(card)
-		ResourceManager.calculate_victory_score(source)
-		ResourceManager.calculate_victory_score(target)
+	ResourceManager.transfer_feiyi_card(source, target, card)
 
 func _event_you_shi_tong_xiang(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	for player: PlayerClass in _alive_players():
 		if ResourceManager.食物牌库.is_empty():
 			break
 		await _resolve_incoming_effect(source, player, &"event", "有食同享：获得1张食物牌", _apply_draw_one_food)
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 
 func _apply_draw_one_food(target: PlayerClass) -> void:
 	_draw_food_cards(target, 1)
 
 func _event_chuan_yi_hu_jian(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var targets: Array[PlayerClass] = []
 	for player: PlayerClass in _alive_players():
 		if player != source and not _non_national_feiyi(player).is_empty():
 			targets.append(player)
 	var target := await _choose_player(source, "传艺互鉴：选择被抽牌的玩家", targets)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if target == null:
 		return
 	var final_target := await _resolve_effect_target(
@@ -871,19 +1057,18 @@ func _event_chuan_yi_hu_jian(source: PlayerClass) -> void:
 		true,
 		func(candidate: PlayerClass) -> bool: return not _non_national_feiyi(candidate).is_empty()
 	)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if final_target == null:
 		return
 	var card: 非遗牌 = _non_national_feiyi(final_target).pick_random()
 	_apply_steal_feiyi(final_target, source, card)
 
 func _apply_steal_feiyi(target: PlayerClass, receiver: PlayerClass, card: 非遗牌) -> void:
-	if target.非遗牌手牌.has(card):
-		target.非遗牌手牌.erase(card)
-		receiver.非遗牌手牌.append(card)
-		ResourceManager.calculate_victory_score(target)
-		ResourceManager.calculate_victory_score(receiver)
+	ResourceManager.transfer_feiyi_card(target, receiver, card)
 
 func _event_yi_cang_hu_huan(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var targets: Array[PlayerClass] = []
 	for player: PlayerClass in _alive_players():
 		if player != source and not _non_national_feiyi(player).is_empty():
@@ -891,30 +1076,37 @@ func _event_yi_cang_hu_huan(source: PlayerClass) -> void:
 	if _non_national_feiyi(source).is_empty():
 		return
 	var target := await _choose_player(source, "艺藏互换：选择交换对象", targets)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if target == null:
 		return
 	var accepted = await _choose_option(target, "%s 邀请交换非遗牌" % source.player_name, [true], PackedStringArray(["接受"]), true)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if accepted != true:
 		return
 	var source_card = await _choose_card(source, "选择要交换的非国家级非遗牌", _non_national_feiyi(source))
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	var target_card = await _choose_card(target, "选择要交换的非国家级非遗牌", _non_national_feiyi(target))
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if source_card == null or target_card == null:
 		return
-	source.非遗牌手牌.erase(source_card)
-	target.非遗牌手牌.erase(target_card)
-	source.非遗牌手牌.append(target_card)
-	target.非遗牌手牌.append(source_card)
+	if not ResourceManager.swap_feiyi_cards(source, source_card, target, target_card):
+		return
 	ResourceManager.modify_energy(source, 1, "事件：艺藏互换")
 	ResourceManager.modify_energy(target, 1, "事件：艺藏互换")
-	ResourceManager.calculate_victory_score(source)
-	ResourceManager.calculate_victory_score(target)
 
 func _event_wen_hua_gong_xiang(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var targets: Array[PlayerClass] = []
 	for player: PlayerClass in _alive_players():
 		if not _all_hand_cards(player).is_empty():
 			targets.append(player)
 	var target := await _choose_player(source, "文化共享：选择弃牌玩家", targets)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if target == null:
 		return
 	var final_target := await _resolve_effect_target(
@@ -925,10 +1117,15 @@ func _event_wen_hua_gong_xiang(source: PlayerClass) -> void:
 		true,
 		func(candidate: PlayerClass) -> bool: return not _all_hand_cards(candidate).is_empty()
 	)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if final_target != null:
 		await _discard_cards_from_player(final_target, 2, "文化共享")
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 
 func _event_tong_tai_jing_ji(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var target := _next_alive(source)
 	if target == null:
 		return
@@ -945,20 +1142,33 @@ func _event_tong_tai_jing_ji(source: PlayerClass) -> void:
 	if source_card.rarity > target_card.rarity:
 		result_text += "\n%s 获胜" % source.player_name
 		await _choose_option(source, result_text, [true], PackedStringArray(["结算"]), false)
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 		_apply_money(source, 100, "事件：同台竞技")
 		await _resolve_incoming_effect(source, target, &"event", "同台竞技：失去100积分点", _apply_money.bind(-100, "事件：同台竞技"))
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 	elif source_card.rarity < target_card.rarity:
 		result_text += "\n%s 获胜" % target.player_name
 		await _choose_option(source, result_text, [true], PackedStringArray(["结算"]), false)
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 		_apply_money(source, -100, "事件：同台竞技")
 		await _resolve_incoming_effect(source, target, &"event", "同台竞技：获得100积分点", _apply_money.bind(100, "事件：同台竞技"))
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 	else:
 		result_text += "\n同级，双方各得50积分点"
 		await _choose_option(source, result_text, [true], PackedStringArray(["结算"]), false)
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 		_apply_money(source, 50, "事件：同台竞技平局")
 		await _resolve_incoming_effect(source, target, &"event", "同台竞技：获得50积分点", _apply_money.bind(50, "事件：同台竞技平局"))
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 
 func _event_yi_shi_hui_you(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var target := _next_alive(source)
 	if target == null:
 		return
@@ -967,6 +1177,8 @@ func _event_yi_shi_hui_you(source: PlayerClass) -> void:
 		_apply_swap_food.bind(source), true,
 		func(candidate: PlayerClass) -> bool: return candidate != source
 	)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 
 func _apply_swap_food(target: PlayerClass, source: PlayerClass) -> void:
 	var source_foods := source.食物牌手牌.duplicate()
@@ -978,6 +1190,7 @@ func _event_gu_di_chong_you(player: PlayerClass) -> void:
 		_teleport_player(player, player.last_successful_feiyi_section)
 
 func _event_dou_zhuan_xing_yi(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var target := _next_alive(source)
 	if target != null:
 		await _resolve_incoming_effect(
@@ -985,24 +1198,34 @@ func _event_dou_zhuan_xing_yi(source: PlayerClass) -> void:
 			_apply_swap_with_source.bind(source), true,
 			func(candidate: PlayerClass) -> bool: return candidate != source
 		)
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 
 func _event_ri_xing_qian_li(player: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var sections := _unique_sections()
 	for occupied: MapSection in sections.duplicate():
 		if occupied.is_occupied and occupied.location_index != player.now_pos:
 			sections.erase(occupied)
 	var target := await _choose_section(player, "日行千里：选择任意目标格", sections)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if target != null:
 		_teleport_player(player, target)
 
 func _event_yi_jing_xun_zong(player: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var first := _roll_2d6()
 	var second := _roll_2d6()
 	var steps = await _choose_option(player, "艺径寻踪：选择移动点数", [first, second], PackedStringArray([str(first), str(second)]))
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if steps == null:
 		return
 	var sections := _sections_within_steps(player, mini(int(steps), player.current_energy))
 	var target := await _choose_section(player, "艺径寻踪：选择移动终点", sections)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if target == null:
 		return
 	var distance := _shortest_step_distance(player.now_pos, target.location_index)
@@ -1043,15 +1266,20 @@ func _shortest_step_distance(start: Vector3i, target: Vector3i) -> int:
 	return -1
 
 func _event_tong_xing_feng_cai(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var targets := _alive_players()
 	targets.erase(source)
 	var target := await _choose_player(source, "同行风采：选择互换位置的玩家", targets)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if target != null:
 		await _resolve_incoming_effect(
 			source, target, &"event", "同行风采：与事件触发者互换位置",
 			_apply_swap_with_source.bind(source), true,
 			func(candidate: PlayerClass) -> bool: return candidate != source
 		)
+		if _is_resolution_context_cancelled(resolution_context):
+			return
 
 func _event_guo_bao_hu_hang() -> void:
 	for player: PlayerClass in _alive_players():
@@ -1061,32 +1289,42 @@ func _event_guo_bao_hu_hang() -> void:
 				break
 
 func _event_jin_ji_bi_xian(player: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var cards := _all_hand_cards(player)
 	if cards.is_empty():
 		return
 	var selected = await _choose_card(player, "紧急避险：必须弃1张手牌以获得本回合损失免疫", cards)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if selected == null:
 		return
 	_discard_player_card(player, selected)
 	_player_status(player)[&"loss_immunity"] = {"turn": TurnManager.now_turn}
 
 func _event_jian_wang_zhi_lai(player: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var candidates: Array[非遗牌] = MarketManager.sample_cards(3)
 	if candidates.is_empty():
 		return
 	var selected := await _choose_card(player, "鉴往知来：选择1张免费获得", candidates) as 非遗牌
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if selected != null:
 		MarketManager.take_card_free(player, selected)
 
 func _event_shi_ji_tao_zhen(player: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var candidates: Array[非遗牌] = MarketManager.get_inventory()
 	if candidates.is_empty():
 		return
 	var selected := await _choose_card(player, "市集淘珍：选择1张免费获得", candidates) as 非遗牌
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if selected != null:
 		MarketManager.take_card_free(player, selected)
 
 func _event_zhan_yi_gong_yan(player: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var cards := _non_national_feiyi(player)
 	if cards.is_empty():
 		return
@@ -1102,15 +1340,20 @@ func _event_zhan_yi_gong_yan(player: PlayerClass) -> void:
 		"展艺共研：选择一张基础分最高的非国家级非遗牌",
 		highest_cards
 	) as 非遗牌
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if selected != null:
 		ResourceManager.desert_feiyi(player, selected)
 
 func _event_fu_di_chou_xin(source: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	var candidates: Array[PlayerClass] = []
 	for player: PlayerClass in _alive_players():
 		if not _non_national_feiyi(player).is_empty():
 			candidates.append(player)
 	var target := await _choose_player(source, "釜底抽薪：选择一名玩家", candidates)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if target == null:
 		return
 	var final_target := await _resolve_effect_target(
@@ -1121,6 +1364,8 @@ func _event_fu_di_chou_xin(source: PlayerClass) -> void:
 		true,
 		func(candidate: PlayerClass) -> bool: return not _non_national_feiyi(candidate).is_empty()
 	)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if final_target == null:
 		return
 	var cards := _non_national_feiyi(final_target)
@@ -1129,16 +1374,26 @@ func _event_fu_di_chou_xin(source: PlayerClass) -> void:
 		ResourceManager.desert_feiyi(final_target, cards[index])
 
 func _play_you_mu_cheng_huai(player: PlayerClass) -> void:
+	var resolution_context := _current_resolution_context
 	if is_scenery_banned(player):
 		if hud != null:
 			hud._update_game_informs("闭门谢客生效中，不能使用【游目骋怀】。")
 		return
 	var sections := _unique_sections(MapSection.SectionType.风景)
 	var target := await _choose_section(player, "游目骋怀：选择任意风景打卡点", sections)
+	if _is_resolution_context_cancelled(resolution_context):
+		return
 	if target == null:
 		return
+	_record_scenery_check_in(player, target)
 	_teleport_player(player, target)
 	ResourceManager.modify_energy(player, 5, "事件：游目骋怀打卡及额外奖励")
+
+func _record_scenery_check_in(player: PlayerClass, section: MapSection) -> bool:
+	var achievement_manager: Node = get_node_or_null("/root/AchievementManager")
+	if achievement_manager == null:
+		return false
+	return bool(achievement_manager.call("record_scenery_check_in", player, section))
 
 func _roll_2d6() -> int:
 	return randi_range(1, 6) + randi_range(1, 6)
@@ -1149,7 +1404,9 @@ func try_revive_player(dying_player: PlayerClass) -> bool:
 	var player_count: int = TurnManager.players.size()
 	if player_count == 0:
 		return false
+	var resolution_context := _begin_resolution_context()
 	var start_index: int = TurnManager.now_player_index
+	var interaction_was_shown := false
 	for offset in player_count:
 		var holder: PlayerClass = TurnManager.players[(start_index + offset) % player_count]
 		if not holder.alive and holder != dying_player:
@@ -1161,20 +1418,30 @@ func try_revive_player(dying_player: PlayerClass) -> bool:
 		if revive_cards.is_empty():
 			continue
 		begin_modal_if_needed()
+		interaction_was_shown = true
 		var decision = await _choose_option(holder, "%s 即将被淘汰，是否使用【妙手回春】？" % dying_player.player_name, [true], PackedStringArray(["使用并恢复3点精力"]), true)
+		if _is_resolution_context_cancelled(resolution_context):
+			return false
 		if decision == true:
 			var revive_card := revive_cards[0]
 			holder.事件牌手牌.erase(revive_card)
 			ResourceManager.discard_event(revive_card)
 			retained_cards_changed.emit(holder)
+			if _is_resolution_context_cancelled(resolution_context):
+				return false
 			dying_player.alive = true
 			ResourceManager.modify_energy(dying_player, 3, "事件：妙手回春")
 			dying_player.show()
 			if dying_player.map != null and dying_player.map.grid_map.has(dying_player.now_pos):
 				dying_player.map.grid_map[dying_player.now_pos].is_occupied = true
 			end_modal_if_owned()
+			_finish_resolution_context(resolution_context)
+			interaction_finished.emit(holder)
 			return true
 	end_modal_if_owned()
+	_finish_resolution_context(resolution_context)
+	if interaction_was_shown:
+		interaction_finished.emit(dying_player)
 	return false
 
 var _revive_modal_owned: bool = false

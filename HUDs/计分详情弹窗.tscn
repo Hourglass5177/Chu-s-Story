@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://HUDs/计分详情弹窗.gd" id="1_script"]
 [ext_resource type="Texture2D" path="res://arts/1x/资源 10.png" id="2_panel"]
 [ext_resource type="FontFile" path="res://arts/像素字体.ttf" id="3_font"]
 [ext_resource type="Texture2D" path="res://arts/控件/close.png" id="4_close"]
+[ext_resource type="Texture2D" path="res://arts/1x/close.png" id="5_close_mask"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_panel"]
 texture = ExtResource("2_panel")
@@ -91,12 +92,12 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 300.0
-offset_top = 235.0
+offset_top = 205.0
 offset_right = -300.0
-offset_bottom = -195.0
+offset_bottom = -170.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 14
 
 [node name="基础分" type="HBoxContainer" parent="Panel/详情"]
 layout_mode = 2
@@ -178,6 +179,36 @@ theme_override_font_sizes/font_size = 48
 text = "+0"
 horizontal_alignment = 2
 
+[node name="成就分" type="HBoxContainer" parent="Panel/详情"]
+layout_mode = 2
+
+[node name="名称" type="Label" parent="Panel/详情/成就分"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.28, 0.16, 0.1, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 48
+text = "成就分"
+
+[node name="数值" type="Label" parent="Panel/详情/成就分"]
+layout_mode = 2
+custom_minimum_size = Vector2(150, 0)
+theme_override_colors/font_color = Color(0.47, 0.23, 0.12, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 48
+text = "+0"
+horizontal_alignment = 2
+
+[node name="成就明细" type="Label" parent="Panel/详情"]
+visible = false
+custom_minimum_size = Vector2(1, 42)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.49, 0.31, 0.19, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+autowrap_mode = 3
+
 [node name="分隔" type="HSeparator" parent="Panel/详情"]
 layout_mode = 2
 
@@ -256,3 +287,17 @@ grow_horizontal = 0
 texture_normal = ExtResource("4_close")
 ignore_texture_size = true
 stretch_mode = 4
+
+[node name="mask" type="TextureRect" parent="Panel/BtnClose"]
+visible = false
+modulate = Color(0, 0, 0, 0.39215687)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_close_mask")
+expand_mode = 1
+stretch_mode = 5

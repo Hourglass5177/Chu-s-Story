@@ -19,6 +19,7 @@ var _deadline_msec: int = 0
 var _timeout_seconds: float = 15.0
 var _current_card_name: String = ""
 var _showing_retained_preview: bool = false
+var _retained_preview_owns_pause: bool = false
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -30,7 +31,7 @@ func _ready() -> void:
 	EventManager.choice_requested.connect(_on_choice_requested)
 	EventManager.reaction_requested.connect(_on_reaction_requested)
 	EventManager.choice_resolved.connect(_on_choice_resolved)
-	EventManager.event_finished.connect(_on_event_finished)
+	EventManager.interaction_finished.connect(_on_interaction_finished)
 
 func _process(_delta: float) -> void:
 	if not visible or _active_request == null:
@@ -113,17 +114,29 @@ func _on_choice_resolved(request_id: int, _timed_out: bool) -> void:
 	_timer_panel.hide()
 	_timeout_bar.value = 0.0
 
-func _on_event_finished(_player: PlayerClass, _card: 事件牌, _summary: String) -> void:
+func _on_interaction_finished(_player: PlayerClass) -> void:
+	_release_retained_preview_pause()
+	_reset_and_hide()
+
+
+func _reset_and_hide() -> void:
 	_active_request = null
 	_current_card_name = ""
+	_showing_retained_preview = false
 	_card_image.texture = null
 	_timer_panel.show()
+	_timeout_bar.show()
+	_timeout_bar.value = 0.0
+	_timeout_hint.text = ""
+	_countdown_label.text = ""
+	_instruction_label.text = ""
+	_step_label.text = ""
 	_clear_options()
 	hide()
 
 
 func show_retained_card_detail(player: PlayerClass, card: 事件牌) -> void:
-	if player == null or card == null:
+	if player == null or card == null or _showing_retained_preview:
 		return
 	_showing_retained_preview = true
 	_active_request = null
@@ -151,21 +164,23 @@ func show_retained_card_detail(player: PlayerClass, card: 事件牌) -> void:
 	close_button.pressed.connect(close_retained_card_detail)
 	_options_box.add_child(close_button)
 	show()
-	get_tree().paused = true
+	_retained_preview_owns_pause = not get_tree().paused
+	if _retained_preview_owns_pause:
+		get_tree().paused = true
 	close_button.grab_focus()
 
 
 func close_retained_card_detail() -> void:
 	if not _showing_retained_preview:
 		return
-	_showing_retained_preview = false
-	_current_card_name = ""
-	_card_image.texture = null
-	_timer_panel.show()
-	_timeout_bar.show()
-	_clear_options()
-	hide()
-	get_tree().paused = false
+	_release_retained_preview_pause()
+	_reset_and_hide()
+
+
+func _release_retained_preview_pause() -> void:
+	if _retained_preview_owns_pause:
+		get_tree().paused = false
+		_retained_preview_owns_pause = false
 
 
 func _on_retained_use_pressed(player: PlayerClass, card: 事件牌) -> void:

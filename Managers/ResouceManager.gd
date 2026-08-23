@@ -1,5 +1,7 @@
 extends Node
 signal event_on_trigger(event_name: String)
+signal energy_changed(player: PlayerClass, previous_energy: int, current_energy: int, reason: String)
+signal feiyi_hand_changed(player: PlayerClass)
 # 全局牌库
 var 非遗牌库: Array[卡牌基类] = []
 var 食物牌库: Array[卡牌基类] = []
@@ -8,6 +10,8 @@ var 事件弃牌堆: Array[事件牌] = []
 var 地区非遗牌上限字典: Dictionary[MapSection.REGION, int] = {}
 var 类别非遗牌上限字典: Dictionary[非遗牌.CardCategory, int] = {}
 var hud:HUD
+## 只用于确认会话生命周期没有重复执行昂贵的整副牌库重建。
+var _deck_build_generation: int = 0
 
 const STRING_TO_REGION = {
 	"鄂州":MapSection.REGION.鄂州,
@@ -31,14 +35,28 @@ const STRING_TO_REGION = {
 	"未知":MapSection.REGION.未知
 }
 
-func _ready():
-	_init_decks()
+func _ready() -> void:
+	reset_for_new_game()
 	#hud = get_tree().get_first_node_in_group("HUD")
 	
 
 var 地区非遗牌库: Dictionary[MapSection.REGION, Array] = {} 
 
-func _init_decks():
+func reset_for_new_game() -> void:
+	非遗牌库.clear()
+	食物牌库.clear()
+	事件牌库.clear()
+	事件弃牌堆.clear()
+	地区非遗牌库.clear()
+	地区非遗牌上限字典.clear()
+	类别非遗牌上限字典.clear()
+	_init_decks()
+
+func unbind_runtime() -> void:
+	hud = null
+
+func _init_decks() -> void:
+	_deck_build_generation += 1
 	# 调用新的分地区加载函数
 	_load_regional_feiyi_cards("res://Cards/非遗牌")
 	
@@ -60,7 +78,7 @@ func _load_event_cards(path: String) -> void:
 			事件牌库.append(card as 事件牌)
 
 # 【新增】：专门读取地区子文件夹的逻辑
-func _load_regional_feiyi_cards(base_path: String):
+func _load_regional_feiyi_cards(base_path: String) -> void:
 	var dir = DirAccess.open(base_path)
 	if dir:
 		# 获取非遗牌目录下的所有子文件夹名称（比如 "鄂州", "恩施"）
@@ -82,7 +100,7 @@ func _load_regional_feiyi_cards(base_path: String):
 	else:
 		push_warning("警告：找不到非遗牌根目录 -> ", base_path)
 		
-func _load_cards_from_dir(path: String, target_array: Array):
+func _load_cards_from_dir(path: String, target_array: Array) -> void:
 	# 尝试打开目标文件夹
 	var dir = DirAccess.open(path)
 	
@@ -107,7 +125,7 @@ func _load_cards_from_dir(path: String, target_array: Array):
 	else:
 		push_warning("警告：牌库加载失败，找不到文件夹路径 -> ", path)
 
-func _count_feiyi_in_category():
+func _count_feiyi_in_category() -> void:
 	for card:非遗牌 in 非遗牌库:
 		if 类别非遗牌上限字典.has(card.category):
 			类别非遗牌上限字典[card.category] += 1
@@ -118,14 +136,65 @@ func has_feiyi_in_region(region:MapSection.REGION) -> bool:
 	if 地区非遗牌库.has(region):
 		return 地区非遗牌库[region].size() > 0
 	return false
+
+func add_feiyi_card(player: PlayerClass, card: 非遗牌, refresh: bool = true) -> bool:
+	if player == null or card == null or player.非遗牌手牌.has(card):
+		return false
+	player.非遗牌手牌.append(card)
+	_emit_feiyi_hand_changed(player, refresh)
+	return true
+
+func remove_feiyi_card(player: PlayerClass, card: 非遗牌, refresh: bool = true) -> bool:
+	if player == null or card == null or not player.非遗牌手牌.has(card):
+		return false
+	player.非遗牌手牌.erase(card)
+	_emit_feiyi_hand_changed(player, refresh)
+	return true
+
+func transfer_feiyi_card(source: PlayerClass, target: PlayerClass, card: 非遗牌) -> bool:
+	if source == null or target == null or source == target or card == null:
+		return false
+	if not source.非遗牌手牌.has(card) or target.非遗牌手牌.has(card):
+		return false
+	source.非遗牌手牌.erase(card)
+	target.非遗牌手牌.append(card)
+	_emit_feiyi_hand_changed(source, true)
+	_emit_feiyi_hand_changed(target, true)
+	return true
+
+func swap_feiyi_cards(first: PlayerClass, first_card: 非遗牌, second: PlayerClass, second_card: 非遗牌) -> bool:
+	if first == null or second == null or first == second or first_card == null or second_card == null:
+		return false
+	if not first.非遗牌手牌.has(first_card) or not second.非遗牌手牌.has(second_card):
+		return false
+	first.非遗牌手牌.erase(first_card)
+	second.非遗牌手牌.erase(second_card)
+	first.非遗牌手牌.append(second_card)
+	second.非遗牌手牌.append(first_card)
+	_emit_feiyi_hand_changed(first, true)
+	_emit_feiyi_hand_changed(second, true)
+	return true
+
+func _emit_feiyi_hand_changed(player: PlayerClass, refresh: bool) -> void:
+	feiyi_hand_changed.emit(player)
+	if not refresh:
+		return
+	calculate_victory_score(player)
+	if hud != null and TurnManager.GameOn \
+			and TurnManager.now_player_index >= 0 \
+			and TurnManager.now_player_index < TurnManager.players.size() \
+			and TurnManager.players[TurnManager.now_player_index] == player:
+		hud.refresh_feiyi_list(player)
+		hud._update_player_stats(player)
+
 # 2. 发牌中心
 func draw_card(player: PlayerClass, deck_type: 卡牌基类.CardType, region: MapSection.REGION, collection_cost: int = 1) -> 卡牌基类:
 	if deck_type == 卡牌基类.CardType.非遗牌:
 		# 必须指定地区且该地区有牌才能抽
 		var region_name = MapSection.REGION.find_key(region)
 		if 地区非遗牌库.has(region) and 地区非遗牌库[region].size() > 0:
-			var card = 地区非遗牌库[region].pop_back()
-			player.非遗牌手牌.append(card)
+			var card := 地区非遗牌库[region].pop_back() as 非遗牌
+			add_feiyi_card(player, card)
 			print(player.player_name, " 在 [", region_name, "] 获得了非遗牌：【", card.card_name,"】")
 			if hud != null:
 				var collection_message := "%s 免费收集了非遗！" % player.player_name if collection_cost <= 0 else "%s 消耗%d点精力，收集了非遗！" % [player.player_name, collection_cost]
@@ -134,7 +203,6 @@ func draw_card(player: PlayerClass, deck_type: 卡牌基类.CardType, region: Ma
 					hud.information.text += "\n获得节日庆典类非遗牌，立即获得3点精力和750积分点！"
 				else:
 					hud._update_game_informs(collection_message + "\n\n 获得了【" + card.card_name + "】！")
-				hud.refresh_feiyi_list(player)
 			return card
 		else:
 			print("抽牌失败：", region_name, " 地区的非遗牌已被抽空！")
@@ -185,12 +253,14 @@ func modify_energy(player: PlayerClass, amount: int, reason: String = "") -> boo
 			hud._update_game_informs("【紧急避险】免疫了 %s。" % reason)
 		return false
 	# 判定精力上限
-	var new_energy = clampi(player.current_energy + amount, 0, player.max_energy)
+	var old_energy: int = player.current_energy
+	var new_energy: int = clampi(old_energy + amount, 0, player.max_energy)
 	
-	if player.current_energy == new_energy:
+	if old_energy == new_energy:
 		return false # 没有发生实际改变（比如已经满了，或者已经扣到0了）
 		
 	player.current_energy = new_energy
+	energy_changed.emit(player, old_energy, new_energy, reason)
 	print(player.player_name, " 精力变动: ", amount, "。当前精力: ", player.current_energy, "。原因: ", reason)
 	if hud != null:
 		hud._update_player_stats(player)
@@ -232,12 +302,16 @@ func process_work_salary(player: PlayerClass, work_turn: int):
 	hud.information.text += "\n"+player.player_name+"消耗1点精力，积分点 +"+str(salary)
 
 func vis_scenery(player: PlayerClass, section: MapSection) -> bool:
-	var region = section.region
+	var achievement_manager: Node = get_node_or_null("/root/AchievementManager")
+	if achievement_manager != null and not bool(achievement_manager.call("record_scenery_check_in", player, section)):
+		return false
 	await get_tree().create_timer(1).timeout
+	if not is_instance_valid(player):
+		return false
 	modify_energy(player, 3, "看风景")
 	print(player.player_name, " 欣赏风景，回复3点精力，并获得风景明信片！")
-	hud._update_game_informs(player.player_name + " 欣赏风景，回复3点精力！")
-	# TODO: 获得明信片的接口
+	if hud != null:
+		hud._update_game_informs(player.player_name + " 欣赏风景，回复3点精力！")
 	return true
 
 # 5. 业务逻辑封装：商店购买食物
@@ -265,6 +339,9 @@ func consume_food(player: PlayerClass, food_card: 食物牌, option_id: int = -1
 	# 已使用的食物牌回到牌库；必须在真正消费后才回收，避免同一张牌同时在手牌和牌库中。
 	if not 食物牌库.has(food_card):
 		食物牌库.insert(0, food_card)
+	var achievement_manager: Node = get_node_or_null("/root/AchievementManager")
+	if achievement_manager != null:
+		achievement_manager.call("record_food_consumed", player, food_card)
 	return true
 
 func get_score_breakdown(player: PlayerClass) -> Dictionary:
@@ -316,12 +393,20 @@ func get_score_breakdown(player: PlayerClass) -> Dictionary:
 			_add_region_score_annotation(region_annotations, trio_region, "触发江汉三市得分+2（合计）")
 
 	var regional_combo_score := region_combo_bonus + region_completion_bonus
+	var achievement_score: int = 0
+	var achievements: Array = []
+	var achievement_manager: Node = get_node_or_null("/root/AchievementManager")
+	if achievement_manager != null:
+		achievement_score = int(achievement_manager.call("get_achievement_score", player))
+		achievements = achievement_manager.call("get_owned_achievements", player)
 	return {
 		"base_score": base_score,
 		"category_combo_score": category_combo_bonus,
 		"category_completion_score": category_completion_bonus,
 		"regional_combo_score": regional_combo_score,
-		"total_score": base_score + category_combo_bonus + category_completion_bonus + regional_combo_score,
+		"achievement_score": achievement_score,
+		"achievements": achievements,
+		"total_score": base_score + category_combo_bonus + category_completion_bonus + regional_combo_score + achievement_score,
 		"region_annotations": region_annotations,
 	}
 
@@ -394,13 +479,8 @@ func feiyi_execute_effect(player: PlayerClass, card:非遗牌) -> void:
 			pass
 
 func desert_feiyi(player:PlayerClass, card:非遗牌) -> void:
-	if player.非遗牌手牌.has(card):
-		player.非遗牌手牌.erase(card)
+	if remove_feiyi_card(player, card):
 		MarketManager.deposit_card(card, &"used_or_discarded")
-		calculate_victory_score(player)
-		if hud != null:
-			hud.refresh_feiyi_list(player)
-			hud._update_player_stats(player)
 
 func find_winner() -> Array[PlayerClass]:
 	var maxScore = -1

@@ -6,6 +6,7 @@ class_name ScoreDetailPanel
 @onready var rules_label: Label = $Panel/规则内容
 @onready var rules_button: Button = $Panel/计分规则
 @onready var close_button: TextureButton = $Panel/BtnClose
+@onready var close_mask: TextureRect = $Panel/BtnClose/mask
 
 var _player: PlayerClass = null
 var _showing_rules := false
@@ -15,7 +16,19 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	rules_button.pressed.connect(_toggle_rules)
 	close_button.pressed.connect(close_panel)
+	_setup_close_button_feedback()
 	hide()
+
+func _setup_close_button_feedback() -> void:
+	if close_button.texture_normal == null:
+		return
+	var bitmap := BitMap.new()
+	bitmap.create_from_image_alpha(close_button.texture_normal.get_image())
+	close_button.texture_click_mask = bitmap
+	close_button.mouse_entered.connect(func(): close_mask.show())
+	close_button.mouse_exited.connect(func(): close_mask.hide())
+	close_button.button_down.connect(func(): close_mask.modulate = Color(0, 0, 0, 0.7))
+	close_button.button_up.connect(func(): close_mask.modulate = Color(0, 0, 0, 0.4))
 
 func open_for_player(player: PlayerClass) -> void:
 	if player == null:
@@ -52,10 +65,19 @@ func _refresh_content() -> void:
 	$Panel/详情/类别组合分/数值.text = "+" + str(int(breakdown.get("category_combo_score", 0)))
 	$Panel/详情/类别集齐分/数值.text = "+" + str(int(breakdown.get("category_completion_score", 0)))
 	$Panel/详情/地域组合分/数值.text = "+" + str(int(breakdown.get("regional_combo_score", 0)))
+	$Panel/详情/成就分/数值.text = "+" + str(int(breakdown.get("achievement_score", 0)))
+	var achievement_names: Array[String] = []
+	for value: Variant in breakdown.get("achievements", []):
+		if value is 成就牌:
+			var achievement := value as 成就牌
+			achievement_names.append("%s +%d" % [achievement.card_name, achievement.score_value])
+	$Panel/详情/成就明细.visible = not achievement_names.is_empty()
+	$Panel/详情/成就明细.text = " · ".join(achievement_names)
 	$Panel/详情/总分/数值.text = str(int(breakdown.get("total_score", 0)))
 
 func _get_rules_text() -> String:
 	return "基础分：手牌上所有非遗牌的基础分之和。\n\n" \
 		+ "类别组合：同类3/5/10张得2/3/5分，只取最高一档；集齐5种类别再得5分。\n\n" \
 		+ "类别集齐：每集齐一个类别的全部实际牌得5分。\n\n" \
-		+ "地域组合：同城5张得5分（只计一次）；每集齐一市全部实际牌得2分；同时持有潜江、天门、仙桃非遗牌再得2分。"
+		+ "地域组合：同城5张得5分（只计一次）；每集齐一市全部实际牌得2分；同时持有潜江、天门、仙桃非遗牌再得2分。\n\n" \
+		+ "成就分：本局获得的成就牌分数之和。成就全局唯一，先达成者获得。"

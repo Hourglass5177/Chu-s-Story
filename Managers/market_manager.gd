@@ -69,7 +69,8 @@ func sell_card(player: PlayerClass, card: 非遗牌) -> bool:
 	if player == null or not player.非遗牌手牌.has(card) or not is_tradable(card):
 		return false
 	var price: int = get_sell_price(card)
-	player.非遗牌手牌.erase(card)
+	if not ResourceManager.remove_feiyi_card(player, card, false):
+		return false
 	_inventory.append(card)
 	ResourceManager.modify_money(player, price, "出售非遗牌")
 	ResourceManager.calculate_victory_score(player)
@@ -87,7 +88,9 @@ func buy_card(player: PlayerClass, card: 非遗牌, arrival_id: int) -> bool:
 	if player.current_money < price:
 		return false
 	_inventory.erase(card)
-	player.非遗牌手牌.append(card)
+	if not ResourceManager.add_feiyi_card(player, card, false):
+		_inventory.append(card)
+		return false
 	var player_counts: Dictionary = _purchase_counts.get(player, {})
 	player_counts[arrival_id] = int(player_counts.get(arrival_id, 0)) + 1
 	_purchase_counts[player] = player_counts
@@ -102,7 +105,9 @@ func take_card_free(player: PlayerClass, card: 非遗牌) -> bool:
 	if player == null or not _inventory.has(card) or not is_tradable(card):
 		return false
 	_inventory.erase(card)
-	player.非遗牌手牌.append(card)
+	if not ResourceManager.add_feiyi_card(player, card, false):
+		_inventory.append(card)
+		return false
 	ResourceManager.calculate_victory_score(player)
 	_refresh_player_ui(player)
 	_emit_inventory_changed()

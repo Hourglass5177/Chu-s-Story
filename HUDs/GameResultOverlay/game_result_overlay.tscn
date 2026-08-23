@@ -1,0 +1,379 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://HUDs/GameResultOverlay/game_result_overlay.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://arts/1x/资源 10.png" id="2_frame"]
+[ext_resource type="FontFile" path="res://arts/像素字体.ttf" id="3_font"]
+
+[sub_resource type="StyleBoxFlat" id="Style_button_normal"]
+bg_color = Color(0.941, 0.761, 0.471, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.451, 0.231, 0.141, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 30.0
+content_margin_top = 14.0
+content_margin_right = 30.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="Style_button_hover"]
+bg_color = Color(0.882, 0.482, 0.212, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.855, 0.58, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 30.0
+content_margin_top = 14.0
+content_margin_right = 30.0
+content_margin_bottom = 14.0
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="Style_button_pressed"]
+bg_color = Color(0.62, 0.294, 0.153, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.933, 0.655, 0.322, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 30.0
+content_margin_top = 16.0
+content_margin_right = 30.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="Style_stage"]
+bg_color = Color(0.31, 0.141, 0.071, 0.92)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.961, 0.737, 0.424, 0.9)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+content_margin_left = 34.0
+content_margin_top = 10.0
+content_margin_right = 34.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="Style_details_background"]
+bg_color = Color(0.451, 0.251, 0.153, 0.12)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.686, 0.424, 0.247, 0.38)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+content_margin_left = 22.0
+content_margin_top = 22.0
+content_margin_right = 22.0
+content_margin_bottom = 22.0
+
+[sub_resource type="Theme" id="Theme_result"]
+default_font = ExtResource("3_font")
+default_font_size = 30
+Button/colors/font_color = Color(0.31, 0.16, 0.1, 1)
+Button/colors/font_hover_color = Color(1, 0.96, 0.84, 1)
+Button/colors/font_pressed_color = Color(1, 0.92, 0.78, 1)
+Button/colors/font_focus_color = Color(1, 0.96, 0.84, 1)
+Button/colors/font_outline_color = Color(0.25, 0.102, 0.047, 0.68)
+Button/constants/outline_size = 4
+Button/font_sizes/font_size = 34
+Button/styles/normal = SubResource("Style_button_normal")
+Button/styles/hover = SubResource("Style_button_hover")
+Button/styles/focus = SubResource("Style_button_hover")
+Button/styles/pressed = SubResource("Style_button_pressed")
+
+[node name="GameResultOverlay" type="Control"]
+process_mode = 3
+visible = false
+z_index = 200
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+theme = SubResource("Theme_result")
+script = ExtResource("1_script")
+
+[node name="FixedAnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+
+[node name="Dimmer" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.071, 0.039, 0.022, 0.82)
+
+[node name="Sparkles" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+z_index = 10
+position = Vector2(1280, 800)
+emitting = false
+amount = 28
+one_shot = true
+lifetime = 2.2
+preprocess = 0.5
+randomness = 0.85
+emission_shape = 3
+emission_rect_extents = Vector2(950, 360)
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 12)
+initial_velocity_min = 10.0
+initial_velocity_max = 42.0
+scale_amount_min = 3.0
+scale_amount_max = 7.0
+color = Color(1, 0.764, 0.302, 0.72)
+
+[node name="Frame" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 82.0
+offset_top = 62.0
+offset_right = -82.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_frame")
+patch_margin_left = 62
+patch_margin_top = 84
+patch_margin_right = 62
+patch_margin_bottom = 62
+
+[node name="Header" type="HBoxContainer" parent="Frame"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 104.0
+offset_top = 18.0
+offset_right = -104.0
+offset_bottom = 146.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 30
+
+[node name="HeaderBalance" type="Control" parent="Frame/Header"]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TitleStack" type="VBoxContainer" parent="Frame/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 1
+
+[node name="TitleLabel" type="Label" parent="Frame/Header/TitleStack"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.973, 0.91, 1)
+theme_override_colors/font_outline_color = Color(0.235, 0.098, 0.043, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 60
+text = "游戏结束"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReasonLabel" type="Label" parent="Frame/Header/TitleStack"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.36, 0.184, 0.094, 1)
+theme_override_font_sizes/font_size = 25
+text = "胜利条件达成"
+horizontal_alignment = 1
+
+[node name="SkipButton" type="Button" parent="Frame/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(190, 66)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "跳过"
+
+[node name="StagePanel" type="PanelContainer" parent="Frame"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 610.0
+offset_top = 154.0
+offset_right = -610.0
+offset_bottom = 220.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_stage")
+
+[node name="StageLabel" type="Label" parent="Frame/StagePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.91, 0.714, 1)
+theme_override_colors/font_outline_color = Color(0.18, 0.071, 0.031, 0.82)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 35
+text = "结算开始"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SummaryPage" type="Control" parent="Frame"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 112.0
+offset_top = 238.0
+offset_right = -112.0
+offset_bottom = -170.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GridCenter" type="CenterContainer" parent="Frame/SummaryPage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PlayerGrid" type="GridContainer" parent="Frame/SummaryPage/GridCenter"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/h_separation = 28
+theme_override_constants/v_separation = 24
+columns = 3
+
+[node name="WinnerShowcase" type="CenterContainer" parent="Frame"]
+unique_name_in_owner = true
+visible = false
+z_index = 5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 112.0
+offset_top = 238.0
+offset_right = -112.0
+offset_bottom = -170.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="WinnerList" type="HBoxContainer" parent="Frame/WinnerShowcase"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 34
+alignment = 1
+
+[node name="DetailsPage" type="Control" parent="Frame"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 112.0
+offset_top = 238.0
+offset_right = -112.0
+offset_bottom = -170.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DetailsPanel" type="PanelContainer" parent="Frame/DetailsPage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_details_background")
+
+[node name="DetailScroll" type="ScrollContainer" parent="Frame/DetailsPage/DetailsPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="DetailList" type="VBoxContainer" parent="Frame/DetailsPage/DetailsPanel/DetailScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="ActionBar" type="HBoxContainer" parent="Frame"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 350.0
+offset_top = -146.0
+offset_right = -350.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="DetailsButton" type="Button" parent="Frame/ActionBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 76)
+layout_mode = 2
+focus_mode = 2
+text = "计分详情"
+
+[node name="ReturnButton" type="Button" parent="Frame/ActionBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 76)
+layout_mode = 2
+focus_mode = 2
+text = "返回主菜单"
+
+[node name="QuitButton" type="Button" parent="Frame/ActionBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 76)
+layout_mode = 2
+focus_mode = 2
+text = "退出游戏"

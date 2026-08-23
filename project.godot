@@ -24,6 +24,7 @@ TurnManager="*uid://82mw0rmfhe1u"
 GameManager="*uid://doh3a7q0o7j46"
 EventManager="*res://Managers/event_manager.gd"
 MarketManager="*res://Managers/market_manager.gd"
+AchievementManager="*res://Managers/achievement_manager.gd"
 
 [display]
 

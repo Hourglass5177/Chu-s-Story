@@ -2,6 +2,10 @@ extends Node
 signal turn_start(player_idx : int)
 signal phase_changed(new_phase: TurnPhase)
 signal next_phase(target_phase: TurnPhase)
+signal game_finished(result: GameResult)
+
+const NO_END_REASON: int = -1
+const EndReason = GameResult.EndReason
 
 enum TurnPhase{
 	BEGIN,    # 等待游戏开始或过渡状态
@@ -21,8 +25,11 @@ var GameOn: bool = false
 var modal_resolution_depth: int = 0
 var movement_lock_active: bool = false
 var _movement_resume_time: float = 0.0
+var _modal_resume_time: float = 0.0
+var _modal_resume_phase: TurnPhase = TurnPhase.BEGIN
 var map: MAP
 var hud: HUD
+var _last_game_result: GameResult = null
 
 @onready var turn_timer: Timer = $TurnTimer
 
@@ -44,12 +51,21 @@ func start_game(player_nodes: Array[PlayerClass]) -> void:
 	now_player_index = 0
 	next_player_index = getNextPlayer(now_player_index)
 	GameOn = true
+	_last_game_result = null
 	modal_resolution_depth = 0
 	movement_lock_active = false
 	_movement_resume_time = 0.0
+	_modal_resume_time = 0.0
+	_modal_resume_phase = TurnPhase.BEGIN
+	get_tree().paused = false
+	# 牌库由 Autoload 首次启动以及 GameManager.reset_session() 为下一局预先重建。
+	# 不在主场景已经显示后再次同步加载全部卡牌资源，避免首帧 HUD 被阻塞数秒。
 	EventManager.reset_for_new_game()
 	if has_node("/root/MarketManager"):
 		MarketManager.reset_for_new_game()
+	var achievement_manager: Node = get_node_or_null("/root/AchievementManager")
+	if achievement_manager != null and achievement_manager.has_method("reset_for_new_game"):
+		achievement_manager.call("reset_for_new_game", players)
 	now_turn_start()
 
 func now_turn_start() -> void:
@@ -59,7 +75,7 @@ func now_turn_start() -> void:
 	turn_start.emit(now_player_index)
 	# 引爆状态机的第一环
 	change_phase(TurnPhase.BEGIN)
-	if hud.is_focus_mode:
+	if hud != null and hud.is_focus_mode:
 		hud.update_camera_view(0.5)
 
 func _on_next_phase_requested(target_phase: TurnPhase) -> void:
@@ -141,14 +157,23 @@ func is_movement_locked() -> bool:
 	return movement_lock_active
 
 func begin_modal_resolution() -> void:
+	if modal_resolution_depth == 0:
+		_modal_resume_phase = now_phase
+		_modal_resume_time = turn_timer.time_left if not turn_timer.is_stopped() else 0.0
 	modal_resolution_depth += 1
 	if not turn_timer.is_stopped():
 		turn_timer.stop()
 
-func end_modal_resolution(reset_action_timer: bool = true) -> void:
+func end_modal_resolution(reset_action_timer: bool = true, resume_paused_timer: bool = false) -> void:
 	modal_resolution_depth = maxi(modal_resolution_depth - 1, 0)
-	if modal_resolution_depth == 0 and reset_action_timer and GameOn and now_phase == TurnPhase.ACTION:
+	if modal_resolution_depth != 0:
+		return
+	if reset_action_timer and GameOn and now_phase == TurnPhase.ACTION:
 		turn_timer.start(15.0)
+	elif resume_paused_timer and GameOn and now_phase == _modal_resume_phase and _modal_resume_time > 0.0:
+		turn_timer.start(maxf(_modal_resume_time, 0.05))
+	_modal_resume_time = 0.0
+	_modal_resume_phase = TurnPhase.BEGIN
 
 func is_modal_resolution_active() -> bool:
 	return modal_resolution_depth > 0
@@ -162,15 +187,18 @@ func now_turn_end() -> void:
 		await players[now_player_index].resolve_turn_end_elimination()
 	if not GameOn:
 		return
-	if has_player_reached_score_limit():
-		game_over()
+	# 淘汰结算完成后再同时检查两项胜利条件，避免死亡回调抢先结束游戏。
+	var end_reason: int = get_current_end_reason()
+	if end_reason != NO_END_REASON:
+		finish_game(end_reason)
 		return
-	now_player_index = next_player_index
+	var next_alive_index: int = getNextPlayer(now_player_index)
+	if next_alive_index < 0:
+		# 正常游戏不会进入这里；所有玩家均淘汰时，上面的淘汰条件必然已命中。
+		push_error("TurnManager.now_turn_end: 没有可交接的存活玩家。")
+		return
+	now_player_index = next_alive_index
 	next_player_index = getNextPlayer(now_player_index)
-	if next_player_index < 0:
-		game_over()
-		GameOn = false
-		return
 	now_turn_start()
 
 func getNextPlayer(player_id: int) -> int:
@@ -182,14 +210,18 @@ func getNextPlayer(player_id: int) -> int:
 			return candidate_index
 	return -1
 
+
+## 兼容 PlayerClass 的淘汰通知入口。
+## 正式胜利判断统一由 now_turn_end 在玩家完成隐藏和格子清理后执行。
 func player_died(_player: PlayerClass) -> bool:
-	if has_reached_elimination_limit():
-		game_over()
-		return true
 	return false
 
 func has_player_reached_score_limit() -> bool:
 	for player: PlayerClass in players:
+		# 胜利判断和计分详情、最终排名统一读取同一份实时分解，
+		# 避免缓存分数因刚完成的手牌或成就事务而滞后。
+		var breakdown: Dictionary = ResourceManager.get_score_breakdown(player)
+		player.current_score = int(breakdown.get("total_score", 0))
 		if player.current_score >= 20:
 			return true
 	return false
@@ -203,19 +235,113 @@ func has_reached_elimination_limit() -> bool:
 	var elimination_limit := 1 if players.size() <= 1 else 2
 	return eliminated_count >= elimination_limit
 
-func game_over() -> void:
+func get_current_end_reason() -> int:
+	var reached_score_limit: bool = has_player_reached_score_limit()
+	var reached_elimination_limit: bool = has_reached_elimination_limit()
+	if reached_score_limit and reached_elimination_limit:
+		return EndReason.BOTH
+	if reached_score_limit:
+		return EndReason.SCORE_LIMIT
+	if reached_elimination_limit:
+		return EndReason.ELIMINATION_LIMIT
+	return NO_END_REASON
+
+func get_game_result() -> GameResult:
+	return _last_game_result
+
+## 正式终局的唯一入口。重复调用返回同一个快照且不会重复发信号。
+func finish_game(reason: int) -> GameResult:
+	if _last_game_result != null:
+		return _last_game_result
 	if not GameOn:
-		return
+		return null
+	if not GameResult.is_valid_end_reason(reason):
+		reason = get_current_end_reason()
+	if not GameResult.is_valid_end_reason(reason):
+		push_error("TurnManager.finish_game: 无效的结束原因。")
+		return null
+
+	_last_game_result = _build_game_result(reason)
 	GameOn = false
 	turn_timer.stop()
-	var winners:Array[PlayerClass] = ResourceManager.find_winner()
-	if winners.size() > 1:
-		var info:String = "玩家 "
-		for winner:PlayerClass in winners:
-			info += winner.player_name + " "
-		info += "并列获胜！ 分数：" + str(winners[0].current_score)
-		hud._update_game_informs(info)
-	elif winners.size() == 1:
-		hud._update_game_informs("玩家 "+winners[0].player_name+" 获胜！ 分数：" + str(winners[0].current_score))
-	hud.btn_close_game.process_mode = Node.PROCESS_MODE_ALWAYS
+	movement_lock_active = false
+	_movement_resume_time = 0.0
+	_modal_resume_time = 0.0
+	_modal_resume_phase = TurnPhase.BEGIN
+	modal_resolution_depth = 0
 	get_tree().paused = true
+	game_finished.emit(_last_game_result)
+	return _last_game_result
+
+## 保留旧入口供现有调用兼容；新代码应传入明确原因调用 finish_game。
+func game_over(reason: int = NO_END_REASON) -> GameResult:
+	if reason == NO_END_REASON:
+		reason = get_current_end_reason()
+	return finish_game(reason)
+
+func reset_session() -> void:
+	turn_timer.stop()
+	players.clear()
+	player_num = 0
+	now_turn = 0
+	now_phase = TurnPhase.BEGIN
+	now_player_index = 0
+	next_player_index = 0
+	GameOn = false
+	modal_resolution_depth = 0
+	movement_lock_active = false
+	_movement_resume_time = 0.0
+	_modal_resume_time = 0.0
+	_modal_resume_phase = TurnPhase.BEGIN
+	_last_game_result = null
+	map = null
+	hud = null
+	if get_tree() != null:
+		get_tree().paused = false
+
+func _build_game_result(reason: int) -> GameResult:
+	var ranked_players: Array[Dictionary] = []
+	for original_order: int in players.size():
+		var player: PlayerClass = players[original_order]
+		var breakdown: Dictionary = ResourceManager.get_score_breakdown(player)
+		var total_score: int = int(breakdown.get("total_score", player.current_score))
+		player.current_score = total_score
+		ranked_players.append({
+			"player": player,
+			"breakdown": breakdown,
+			"score": total_score,
+			"player_index": player.player_index,
+			"original_order": original_order,
+		})
+	ranked_players.sort_custom(_ranked_player_precedes)
+
+	var entries: Array[GameResultEntry] = []
+	var previous_score: int = 0
+	var previous_rank: int = 0
+	for sorted_index: int in ranked_players.size():
+		var candidate: Dictionary = ranked_players[sorted_index]
+		var score: int = int(candidate["score"])
+		var rank: int = sorted_index + 1
+		if sorted_index > 0 and score == previous_score:
+			rank = previous_rank
+		var entry := GameResultEntry.new(
+			candidate["player"] as PlayerClass,
+			candidate["breakdown"] as Dictionary,
+			rank,
+			rank == 1
+		)
+		entries.append(entry)
+		previous_score = score
+		previous_rank = rank
+	return GameResult.new(reason, now_turn, entries)
+
+func _ranked_player_precedes(first: Dictionary, second: Dictionary) -> bool:
+	var first_score: int = int(first["score"])
+	var second_score: int = int(second["score"])
+	if first_score != second_score:
+		return first_score > second_score
+	var first_player_index: int = int(first["player_index"])
+	var second_player_index: int = int(second["player_index"])
+	if first_player_index != second_player_index:
+		return first_player_index < second_player_index
+	return int(first["original_order"]) < int(second["original_order"])

@@ -185,7 +185,9 @@ func test_two_player_game_requires_two_eliminations_or_score_limit() -> void:
 	second.alive = false
 	assert_true(TurnManager.has_reached_elimination_limit())
 	second.alive = true
-	first.current_score = 20
+	var score_card := _make_feiyi("胜利条件测试", 非遗牌.CardCategory.戏曲表演)
+	score_card.base_score = 20
+	first.非遗牌手牌.append(score_card)
 	assert_true(TurnManager.has_player_reached_score_limit())
 	first.free()
 	second.free()

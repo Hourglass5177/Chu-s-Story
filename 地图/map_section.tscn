@@ -32,7 +32,7 @@ script = ExtResource("2_8sp3l")
 visible = false
 top_level = true
 z_index = 1
-modulate = Color(1, 1, 1, 0.68)
+modulate = Color(1, 1, 1, 0.3)
 texture = ExtResource("1_8yxnp")
 material = SubResource("ShaderMaterial_yellow_hover")
 
