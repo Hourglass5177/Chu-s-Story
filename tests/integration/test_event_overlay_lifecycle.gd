@@ -6,6 +6,7 @@ const MIAO_SHOU_CARD := preload("res://Cards/事件牌/妙手回春.tres")
 const EXHAUSTED_CARD := preload("res://Cards/事件牌/精疲力尽.tres")
 const FREE_PASSAGE_CARD := preload("res://Cards/事件牌/畅行无阻.tres")
 const REST_CARD := preload("res://Cards/事件牌/倦艺休整.tres")
+const JIN_CHAN_CARD := preload("res://Cards/事件牌/金蝉脱壳.tres")
 
 var _overlay: EventOverlay
 var _player: PlayerClass
@@ -16,6 +17,7 @@ var _scenery: MapSection
 
 var _async_done: bool = false
 var _async_bool_result: bool = false
+var _async_player_result: PlayerClass = null
 
 var _players_backup: Array[PlayerClass] = []
 var _player_num_backup: int
@@ -108,9 +110,9 @@ func test_direct_you_mu_choice_closes_overlay_and_restores_action_timer() -> voi
 	_async_done = false
 	_run_direct_retained_use(card)
 
-	assert_true(await _wait_until(func() -> bool: return _overlay._active_request != null))
-	assert_true(_overlay.visible)
-	var request := _overlay._active_request
+	assert_true(await _wait_until(func() -> bool: return EventManager._pending_request != null))
+	assert_false(_overlay.visible, "格子目标必须改由地图承接，事件选项遮罩不得继续阻挡地图")
+	var request := EventManager._pending_request
 	assert_eq(request.kind, EventChoiceRequest.ChoiceKind.格子)
 	assert_true(request.options.has(_scenery))
 	EventManager.submit_choice(request.request_id, _scenery)
@@ -148,6 +150,31 @@ func test_retained_event_menu_cancel_closes_overlay_without_consuming_card() -> 
 	assert_eq(TurnManager.modal_resolution_depth, 0)
 	assert_false(TurnManager.turn_timer.is_stopped())
 	assert_gt(TurnManager.turn_timer.time_left, 14.0)
+
+
+func test_external_food_jin_chan_identifies_holder_shows_front_and_closes() -> void:
+	var card := JIN_CHAN_CARD.duplicate(true) as 事件牌
+	_holder.事件牌手牌.append(card)
+	_async_done = false
+	_async_player_result = _player
+	_run_external_food_response(_player, _holder)
+
+	assert_true(await _wait_until(func() -> bool: return _overlay._active_request != null))
+	var request := _overlay._active_request
+	assert_eq(request.requester, _holder)
+	assert_true(request.close_overlay_on_resolve, "外部食物响应必须在单次选择后自行关闭遮罩")
+	assert_eq(_overlay._context_label.text, "%s · 响应牌" % _holder.player_name)
+	assert_eq(_overlay._title_label.text, "【金蝉脱壳】")
+	assert_eq(_overlay._card_image.texture, card.image_of_front, "响应弹窗必须展示实际响应牌正面")
+	assert_true(_overlay._prompt_label.text.contains(_holder.player_name), "正文必须明确当前响应者")
+
+	EventManager.submit_choice(request.request_id, card)
+	assert_true(await _wait_until(func() -> bool: return _async_done))
+	assert_null(_async_player_result, "金蝉脱壳应只抵消持有者受到的本次效果")
+	assert_false(_overlay.visible, "外部食物响应完成后不得残留事件遮罩")
+	assert_null(_overlay._active_request)
+	assert_false(_holder.事件牌手牌.has(card))
+	assert_true(ResourceManager.事件弃牌堆.has(card))
 
 
 func test_miao_shou_accept_closes_overlay_and_releases_modal() -> void:
@@ -209,8 +236,8 @@ func test_new_game_reset_closes_a_pending_event_overlay() -> void:
 	_async_done = false
 	_run_direct_retained_use(card)
 
-	assert_true(await _wait_until(func() -> bool: return _overlay._active_request != null))
-	assert_true(_overlay.visible)
+	assert_true(await _wait_until(func() -> bool: return EventManager._pending_request != null))
+	assert_false(_overlay.visible)
 	EventManager.reset_for_new_game()
 	await get_tree().process_frame
 
@@ -254,7 +281,8 @@ func test_multistep_regular_event_stays_open_until_its_last_choice() -> void:
 	assert_true(TurnManager.turn_timer.is_stopped())
 	assert_true(_overlay._active_request.prompt.begins_with("是否跳过"))
 
-	EventManager.submit_choice(_overlay._active_request.request_id, false)
+	assert_true(_overlay._active_request.optional, "牌面明确为可选择的休整不得按强制选择处理")
+	EventManager.submit_choice(_overlay._active_request.request_id, null)
 	assert_true(await _wait_until(func() -> bool: return _async_done))
 	assert_false(_overlay.visible)
 	assert_eq(TurnManager.modal_resolution_depth, 0)
@@ -405,6 +433,15 @@ func _run_revive() -> void:
 
 func _run_regular_event(card: 事件牌) -> void:
 	await EventManager.resolve_event(_player, card)
+	_async_done = true
+
+
+func _run_external_food_response(source: PlayerClass, target: PlayerClass) -> void:
+	_async_player_result = await EventManager.resolve_external_food_target(
+		source,
+		target,
+		"毛嘴卤鸡：精力与支付结算"
+	)
 	_async_done = true
 
 

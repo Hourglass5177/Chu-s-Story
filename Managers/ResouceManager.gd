@@ -1,7 +1,19 @@
 extends Node
 signal event_on_trigger(event_name: String)
 signal energy_changed(player: PlayerClass, previous_energy: int, current_energy: int, reason: String)
+signal money_changed(player: PlayerClass, previous_money: int, current_money: int, reason: String)
+signal score_changed(player: PlayerClass, previous_score: int, current_score: int, breakdown: Dictionary)
+signal work_completed(player: PlayerClass, work_turns: int, income: int)
+signal food_purchased(player: PlayerClass, card: 食物牌, price: int)
 signal feiyi_hand_changed(player: PlayerClass)
+signal food_hand_changed(player: PlayerClass)
+signal card_hand_visual_requested(kind: CardHandVisualKind, player: PlayerClass, card: 卡牌基类, other_player: PlayerClass, reveal_detail: bool)
+
+enum CardHandVisualKind {
+	获得,
+	失去,
+	转移,
+}
 # 全局牌库
 var 非遗牌库: Array[卡牌基类] = []
 var 食物牌库: Array[卡牌基类] = []
@@ -12,6 +24,10 @@ var 类别非遗牌上限字典: Dictionary[非遗牌.CardCategory, int] = {}
 var hud:HUD
 ## 只用于确认会话生命周期没有重复执行昂贵的整副牌库重建。
 var _deck_build_generation: int = 0
+
+const FOLK_MUSIC_MONEY_GAIN: int = 500
+const FESTIVAL_ENERGY_GAIN: int = 3
+const FESTIVAL_MONEY_GAIN: int = 500
 
 const STRING_TO_REGION = {
 	"鄂州":MapSection.REGION.鄂州,
@@ -64,9 +80,9 @@ func _init_decks() -> void:
 	_load_cards_from_dir("res://Cards/食物牌", 食物牌库)
 	_load_event_cards("res://Cards/事件牌")
 	_count_feiyi_in_category()
-	非遗牌库.shuffle()
-	食物牌库.shuffle()
-	事件牌库.shuffle()
+	GameManager.shuffle_array(非遗牌库)
+	GameManager.shuffle_array(食物牌库)
+	GameManager.shuffle_array(事件牌库)
 	事件弃牌堆.clear()
 
 func _load_event_cards(path: String) -> void:
@@ -92,7 +108,7 @@ func _load_regional_feiyi_cards(base_path: String) -> void:
 			_load_cards_from_dir(region_path, cards_array)
 			
 			if cards_array.size() > 0:
-				cards_array.shuffle() # 仅对该地区洗牌
+				GameManager.shuffle_array(cards_array) # 仅对该地区洗牌
 				非遗牌库.append_array(cards_array)
 				地区非遗牌库[STRING_TO_REGION[folder_name]] = cards_array # 存入字典
 				地区非遗牌上限字典[STRING_TO_REGION[folder_name]] = cards_array.size()
@@ -137,10 +153,11 @@ func has_feiyi_in_region(region:MapSection.REGION) -> bool:
 		return 地区非遗牌库[region].size() > 0
 	return false
 
-func add_feiyi_card(player: PlayerClass, card: 非遗牌, refresh: bool = true) -> bool:
+func add_feiyi_card(player: PlayerClass, card: 非遗牌, refresh: bool = true, reveal_detail: bool = false) -> bool:
 	if player == null or card == null or player.非遗牌手牌.has(card):
 		return false
 	player.非遗牌手牌.append(card)
+	card_hand_visual_requested.emit(CardHandVisualKind.获得, player, card, null, reveal_detail)
 	_emit_feiyi_hand_changed(player, refresh)
 	return true
 
@@ -148,6 +165,7 @@ func remove_feiyi_card(player: PlayerClass, card: 非遗牌, refresh: bool = tru
 	if player == null or card == null or not player.非遗牌手牌.has(card):
 		return false
 	player.非遗牌手牌.erase(card)
+	card_hand_visual_requested.emit(CardHandVisualKind.失去, player, card, null, false)
 	_emit_feiyi_hand_changed(player, refresh)
 	return true
 
@@ -158,6 +176,7 @@ func transfer_feiyi_card(source: PlayerClass, target: PlayerClass, card: 非遗�
 		return false
 	source.非遗牌手牌.erase(card)
 	target.非遗牌手牌.append(card)
+	card_hand_visual_requested.emit(CardHandVisualKind.转移, source, card, target, false)
 	_emit_feiyi_hand_changed(source, true)
 	_emit_feiyi_hand_changed(target, true)
 	return true
@@ -171,9 +190,58 @@ func swap_feiyi_cards(first: PlayerClass, first_card: 非遗牌, second: PlayerC
 	second.非遗牌手牌.erase(second_card)
 	first.非遗牌手牌.append(second_card)
 	second.非遗牌手牌.append(first_card)
+	card_hand_visual_requested.emit(CardHandVisualKind.转移, first, first_card, second, false)
+	card_hand_visual_requested.emit(CardHandVisualKind.转移, second, second_card, first, false)
 	_emit_feiyi_hand_changed(first, true)
 	_emit_feiyi_hand_changed(second, true)
 	return true
+
+func add_food_card(player: PlayerClass, card: 食物牌) -> bool:
+	if player == null or card == null or player.食物牌手牌.has(card):
+		return false
+	player.食物牌手牌.append(card)
+	card_hand_visual_requested.emit(CardHandVisualKind.获得, player, card, null, false)
+	food_hand_changed.emit(player)
+	return true
+
+func remove_food_card(player: PlayerClass, card: 食物牌) -> bool:
+	if player == null or card == null or not player.食物牌手牌.has(card):
+		return false
+	player.食物牌手牌.erase(card)
+	card_hand_visual_requested.emit(CardHandVisualKind.失去, player, card, null, false)
+	food_hand_changed.emit(player)
+	return true
+
+func add_event_card(player: PlayerClass, card: 事件牌) -> bool:
+	if player == null or card == null or player.事件牌手牌.has(card):
+		return false
+	player.事件牌手牌.append(card)
+	card_hand_visual_requested.emit(CardHandVisualKind.获得, player, card, null, false)
+	return true
+
+func remove_event_card(player: PlayerClass, card: 事件牌) -> bool:
+	if player == null or card == null or not player.事件牌手牌.has(card):
+		return false
+	player.事件牌手牌.erase(card)
+	card_hand_visual_requested.emit(CardHandVisualKind.失去, player, card, null, false)
+	return true
+
+func swap_food_hands(first: PlayerClass, second: PlayerClass) -> bool:
+	if first == null or second == null or first == second:
+		return false
+	var first_cards: Array[食物牌] = []
+	first_cards.assign(first.食物牌手牌)
+	var second_cards: Array[食物牌] = []
+	second_cards.assign(second.食物牌手牌)
+	first.食物牌手牌.assign(second_cards)
+	second.食物牌手牌.assign(first_cards)
+	for card: 食物牌 in first_cards:
+		card_hand_visual_requested.emit(CardHandVisualKind.转移, first, card, second, false)
+	for card: 食物牌 in second_cards:
+		card_hand_visual_requested.emit(CardHandVisualKind.转移, second, card, first, false)
+	food_hand_changed.emit(first)
+	food_hand_changed.emit(second)
+	return not first_cards.is_empty() or not second_cards.is_empty()
 
 func _emit_feiyi_hand_changed(player: PlayerClass, refresh: bool) -> void:
 	feiyi_hand_changed.emit(player)
@@ -188,28 +256,19 @@ func _emit_feiyi_hand_changed(player: PlayerClass, refresh: bool) -> void:
 		hud._update_player_stats(player)
 
 # 2. 发牌中心
-func draw_card(player: PlayerClass, deck_type: 卡牌基类.CardType, region: MapSection.REGION, collection_cost: int = 1) -> 卡牌基类:
+func draw_card(player: PlayerClass, deck_type: 卡牌基类.CardType, region: MapSection.REGION, collection_cost: int = 1, reveal_feiyi_detail: bool = false) -> 卡牌基类:
 	if deck_type == 卡牌基类.CardType.非遗牌:
 		# 必须指定地区且该地区有牌才能抽
 		var region_name = MapSection.REGION.find_key(region)
 		if 地区非遗牌库.has(region) and 地区非遗牌库[region].size() > 0:
 			var card := 地区非遗牌库[region].pop_back() as 非遗牌
-			add_feiyi_card(player, card)
-			print(player.player_name, " 在 [", region_name, "] 获得了非遗牌：【", card.card_name,"】")
-			if hud != null:
-				var collection_message := "%s 免费收集了非遗！" % player.player_name if collection_cost <= 0 else "%s 消耗%d点精力，收集了非遗！" % [player.player_name, collection_cost]
-				if card.category == 非遗牌.CardCategory.节日庆典:
-					hud._update_game_informs(collection_message + "\n 获得了【" + card.card_name + "】！")
-					hud.information.text += "\n获得节日庆典类非遗牌，立即获得3点精力和750积分点！"
-				else:
-					hud._update_game_informs(collection_message + "\n\n 获得了【" + card.card_name + "】！")
-			return card
+			return _deliver_drawn_feiyi(player, card, region, collection_cost, reveal_feiyi_detail)
 		else:
 			print("抽牌失败：", region_name, " 地区的非遗牌已被抽空！")
 			return null
 	elif deck_type == 卡牌基类.CardType.食物牌 and 食物牌库.size() > 0:
 		var card = 食物牌库.pop_back()
-		player.食物牌手牌.append(card)
+		add_food_card(player, card)
 		print(player.player_name, " 获得了食物牌：【", card.card_name,"】")
 		if hud != null:
 			hud._update_game_informs(player.player_name + " 获得了【" + card.card_name + "】！")
@@ -230,7 +289,93 @@ func draw_event_card(player: PlayerClass) -> 事件牌:
 		hud._update_game_informs(player.player_name + " 抽到了事件牌：【" + card.card_name + "】！")
 	return card
 
+## 实际玩法入口：魔术博主先查看牌堆顶最多三张，选择一张后才公开事件。
+func draw_event_card_with_profession(player: PlayerClass) -> 事件牌:
+	if 事件牌库.is_empty():
+		return null
+	if not ProfessionManager.can_reorder_draws(player) or 事件牌库.size() <= 1:
+		return draw_event_card(player)
+	var deck_generation: int = _deck_build_generation
+	var candidates: Array = _take_top_cards(事件牌库, ProfessionManager.get_draw_count(player))
+	var result: ProfessionDrawResult = await _request_profession_draw_choice(player, candidates, &"event")
+	if deck_generation != _deck_build_generation:
+		return null
+	var selected := _commit_profession_draw(事件牌库, candidates, result) as 事件牌
+	if selected == null:
+		return null
+	event_on_trigger.emit(selected.card_name)
+	print(player.player_name, " 抽到了事件牌：【", selected.card_name, "】")
+	if hud != null:
+		hud._update_game_informs(player.player_name + " 抽到了事件牌：【" + selected.card_name + "】！")
+	return selected
+
+func _request_profession_draw_choice(player: PlayerClass, candidates: Array, deck_kind: StringName) -> ProfessionDrawResult:
+	var owns_modal: bool = bool(TurnManager.GameOn)
+	var turn_session_generation: int = TurnManager.get_session_generation()
+	var modal_token: int = -1
+	if owns_modal:
+		modal_token = TurnManager.begin_modal_resolution()
+	var result: ProfessionDrawResult = await ProfessionManager.request_draw_choice(player, candidates, deck_kind)
+	if owns_modal and turn_session_generation == TurnManager.get_session_generation():
+		TurnManager.end_modal_resolution(false, true, modal_token)
+	return result
+
+func _take_top_cards(deck: Array, count: int) -> Array:
+	var cards: Array = []
+	for _index: int in mini(maxi(count, 0), deck.size()):
+		cards.append(deck.pop_back())
+	return cards
+
+## UI 中的第一张是下一张牌堆顶；数组末端才是实际牌顶，因此按反序追加。
+func _restore_top_order(deck: Array, cards_in_draw_order: Array) -> void:
+	for index: int in range(cards_in_draw_order.size() - 1, -1, -1):
+		var card = cards_in_draw_order[index]
+		if card != null and not deck.has(card):
+			deck.append(card)
+
+func _commit_profession_draw(deck: Array, candidates: Array, result: ProfessionDrawResult):
+	if result == null or result.cancelled or result.selected_card == null or not candidates.has(result.selected_card):
+		_restore_top_order(deck, candidates)
+		return null
+	_restore_top_order(deck, result.return_order)
+	return result.selected_card
+
+func _deliver_drawn_feiyi(
+	player: PlayerClass,
+	card: 非遗牌,
+	region: MapSection.REGION,
+	collection_cost: int,
+	reveal_feiyi_detail: bool
+) -> 非遗牌:
+	if card == null:
+		return null
+	add_feiyi_card(player, card, true, reveal_feiyi_detail)
+	var region_name = MapSection.REGION.find_key(region)
+	print(player.player_name, " 在 [", region_name, "] 获得了非遗牌：【", card.card_name,"】")
+	if hud != null:
+		var collection_message := "%s 免费收集了非遗！" % player.player_name if collection_cost <= 0 else "%s 消耗%d点精力，收集了非遗！" % [player.player_name, collection_cost]
+		if card.category == 非遗牌.CardCategory.节日庆典:
+			hud._update_game_informs(collection_message + "\n 获得了【" + card.card_name + "】！")
+			hud.information.text += "\n获得节日庆典类非遗牌，立即获得%d点精力和%d积分点！" % [FESTIVAL_ENERGY_GAIN, FESTIVAL_MONEY_GAIN]
+		else:
+			hud._update_game_informs(collection_message + "\n\n 获得了【" + card.card_name + "】！")
+	return card
+
+## 食物效果专用的免费地区抽牌：不消耗精力、不触发魔术博主三选一，
+## 也不写入“上次成功收集的非遗点”；节日庆典的获得奖励仍正常结算。
+func draw_regional_feiyi_free(player: PlayerClass, region: MapSection.REGION, reveal_detail: bool = true) -> 非遗牌:
+	if player == null or not 地区非遗牌库.has(region) or 地区非遗牌库[region].is_empty():
+		return null
+	var card := 地区非遗牌库[region].pop_back() as 非遗牌
+	_deliver_drawn_feiyi(player, card, region, 0, reveal_detail)
+	if card.category == 非遗牌.CardCategory.节日庆典:
+		modify_energy(player, FESTIVAL_ENERGY_GAIN, "获得节日庆典类非遗牌")
+		modify_money(player, FESTIVAL_MONEY_GAIN, "获得节日庆典类非遗牌")
+	return card
+
 func discard_event(card: 事件牌) -> void:
+	if card != null and card.has_meta(&"generated_by_food"):
+		return
 	if card != null and not 事件弃牌堆.has(card):
 		事件弃牌堆.append(card)
 
@@ -240,15 +385,17 @@ func modify_money(player: PlayerClass, amount: int, reason: String = "无", igno
 		if hud != null:
 			hud._update_game_informs("【紧急避险】免疫了 %s。" % reason)
 		return false
+	var previous_money: int = player.current_money
 	player.current_money += amount
+	money_changed.emit(player, previous_money, player.current_money, reason)
 	# 如果金额是负数且不够扣，可以在这里进行破产拦截
 	if hud != null:
 		hud._update_player_stats(player)
 	print(player.player_name, " 积分点 ", amount, "。当前积分点: ", player.current_money, "。原因: ", reason)
 	return true
 
-func modify_energy(player: PlayerClass, amount: int, reason: String = "") -> bool:
-	if amount < 0 and EventManager.is_loss_immune(player):
+func modify_energy(player: PlayerClass, amount: int, reason: String = "", ignore_loss_immunity: bool = false) -> bool:
+	if amount < 0 and not ignore_loss_immunity and EventManager.is_loss_immune(player):
 		if hud != null:
 			hud._update_game_informs("【紧急避险】免疫了 %s。" % reason)
 		return false
@@ -274,44 +421,92 @@ func get_feiyi(player: PlayerClass, section: MapSection, energy_cost: int = 1) -
 	# 原型已将收集非遗的消耗调整为 1 点精力，保持与实际游戏一致。
 	if energy_cost > 0:
 		modify_energy(player, -energy_cost, "收集非遗")
-	var card := draw_card(player, 卡牌基类.CardType.非遗牌, section.region, energy_cost) as 非遗牌
+	var card := draw_card(player, 卡牌基类.CardType.非遗牌, section.region, energy_cost, true) as 非遗牌
 	if card == null:
 		# 牌库在抽取前被其他逻辑清空时，返还本次未完成收集的消耗。
 		if energy_cost > 0:
 			modify_energy(player, energy_cost, "收集非遗失败返还")
 		return null
 	if card.category == 非遗牌.CardCategory.节日庆典:
-		modify_energy(player, 3, "获得节日庆典类非遗牌")
-		modify_money(player, 750, "获得节日庆典类非遗牌")
+		modify_energy(player, FESTIVAL_ENERGY_GAIN, "获得节日庆典类非遗牌")
+		modify_money(player, FESTIVAL_MONEY_GAIN, "获得节日庆典类非遗牌")
+	player.last_successful_feiyi_section = section
+	return card
+
+## 玩家实际抽取入口；普通职业沿用单抽，魔术博主以原子事务完成三选一及回顶排序。
+func get_feiyi_with_profession(player: PlayerClass, section: MapSection, energy_cost: int = 1) -> 非遗牌:
+	energy_cost = maxi(energy_cost, 0)
+	if player == null or section == null or player.current_energy < energy_cost or not has_feiyi_in_region(section.region):
+		return null
+	var deck: Array = 地区非遗牌库[section.region]
+	if not ProfessionManager.can_reorder_draws(player) or deck.size() <= 1:
+		return get_feiyi(player, section, energy_cost) as 非遗牌
+	var deck_generation: int = _deck_build_generation
+	var candidates: Array = _take_top_cards(deck, ProfessionManager.get_draw_count(player))
+	var result: ProfessionDrawResult = await _request_profession_draw_choice(player, candidates, &"feiyi")
+	if deck_generation != _deck_build_generation:
+		return null
+	var card := _commit_profession_draw(deck, candidates, result) as 非遗牌
+	if card == null:
+		return null
+	if energy_cost > 0:
+		modify_energy(player, -energy_cost, "收集非遗")
+	_deliver_drawn_feiyi(player, card, section.region, energy_cost, true)
+	if card.category == 非遗牌.CardCategory.节日庆典:
+		modify_energy(player, FESTIVAL_ENERGY_GAIN, "获得节日庆典类非遗牌")
+		modify_money(player, FESTIVAL_MONEY_GAIN, "获得节日庆典类非遗牌")
 	player.last_successful_feiyi_section = section
 	return card
 
 # 4. 业务逻辑封装：处理打工发工资
-func process_work_salary(player: PlayerClass, work_turn: int):
-	var salary = 0
+func process_work_salary(player: PlayerClass, work_turn: int) -> bool:
+	if player == null:
+		return false
+	var work_energy_cost: int = ProfessionManager.get_work_energy_cost(player)
+	if player.current_energy < work_energy_cost:
+		return false
+	var salary: int = 0
 	# 严格按照说明书规则发放打工积分 [cite: 85]
 	match work_turn:
 		1: salary = 250
 		2: salary = 300
 		3: salary = 350
-		_: push_error("非法的打工轮数！")
+		_:
+			push_error("ResourceManager.process_work_salary: 非法的打工轮数。")
+			return false
+	salary = FoodManager.adjust_work_income(player, salary)
 		
-	# 打工消耗 1 点精力 [cite: 43]
-	modify_energy(player, -1, "打工消耗")
+	if work_energy_cost > 0:
+		modify_energy(player, -work_energy_cost, "打工消耗")
 	modify_money(player, salary, "打工第 " + str(work_turn) + " 回合工资")
-	hud.information.text += "\n"+player.player_name+"消耗1点精力，积分点 +"+str(salary)
+	work_completed.emit(player, work_turn, salary)
+	if work_energy_cost == 0 and ProfessionManager.is_skill_enabled(player, PlayerClass.PlayerCharacter.生活博主):
+		ProfessionManager.notify_skill_triggered(player, "打工不消耗精力")
+	if hud != null:
+		var food_effect_message := FoodManager.get_work_income_effect_message(player)
+		if not food_effect_message.is_empty():
+			hud.information.text += "\n" + food_effect_message
+		if work_energy_cost == 0:
+			hud.information.text += "\n【生活博主】打工免耗，积分点 +%d" % salary
+		else:
+			hud.information.text += "\n%s消耗%d点精力，积分点 +%d" % [player.player_name, work_energy_cost, salary]
+	return true
 
 func vis_scenery(player: PlayerClass, section: MapSection) -> bool:
 	var achievement_manager: Node = get_node_or_null("/root/AchievementManager")
 	if achievement_manager != null and not bool(achievement_manager.call("record_scenery_check_in", player, section)):
 		return false
-	await get_tree().create_timer(1).timeout
 	if not is_instance_valid(player):
 		return false
 	modify_energy(player, 3, "看风景")
-	print(player.player_name, " 欣赏风景，回复3点精力，并获得风景明信片！")
+	var travel_reward: int = ProfessionManager.get_scenery_arrival_money(player)
+	var travel_reward_applied := ProfessionManager.record_scenery_arrival(player, section, &"normal")
+	var result_message := player.player_name + " 欣赏风景，回复3点精力！"
+	if travel_reward_applied:
+		result_message = "%s 欣赏风景，回复3点精力，获得%d积分点！" % [player.player_name, travel_reward]
+	print(result_message)
 	if hud != null:
-		hud._update_game_informs(player.player_name + " 欣赏风景，回复3点精力！")
+		hud._update_game_informs(result_message)
 	return true
 
 # 5. 业务逻辑封装：商店购买食物
@@ -321,28 +516,54 @@ func buy_food(player: PlayerClass, food_card: 食物牌) -> bool:
 	var cost: int = food_card.cost
 	if player.current_money >= cost:
 		modify_money(player, -cost, "购买食物")
-		player.食物牌手牌.append(food_card)
+		add_food_card(player, food_card)
 		食物牌库.erase(food_card)
+		food_purchased.emit(player, food_card, cost)
 		return true
 	else:
 		print(player.player_name, " 积分不足，无法购买！")
 		return false
 
 func consume_food(player: PlayerClass, food_card: 食物牌, option_id: int = -1) -> bool:
+	# 兼容旧版同步调用与既有市级回归测试；完整食物 UI 统一 await FoodManager.consume_food()。
 	if not player.食物牌手牌.has(food_card):
 		return false
 	if not food_card.can_use(player):
 		return false
-	food_card.execute_effect(player, option_id)
-	player.food_used_this_turn = true
-	player.食物牌手牌.erase(food_card)
+	if food_card.food_type != 食物牌.FoodType.市级:
+		return false
+	var is_extra_food_use: bool = player.food_used_count_this_turn >= ProfessionManager.BASE_FOOD_USE_LIMIT \
+		and ProfessionManager.is_skill_enabled(player, PlayerClass.PlayerCharacter.美食博主)
+	modify_energy(player, 2, "食物：%s" % food_card.card_name)
+	player.food_used_count_this_turn += 1
+	if is_extra_food_use:
+		ProfessionManager.notify_skill_triggered(player, "额外享用食物")
+	remove_food_card(player, food_card)
 	# 已使用的食物牌回到牌库；必须在真正消费后才回收，避免同一张牌同时在手牌和牌库中。
-	if not 食物牌库.has(food_card):
-		食物牌库.insert(0, food_card)
+	return_food_to_bottom(food_card)
 	var achievement_manager: Node = get_node_or_null("/root/AchievementManager")
 	if achievement_manager != null:
 		achievement_manager.call("record_food_consumed", player, food_card)
 	return true
+
+func return_food_to_bottom(card: 食物牌) -> void:
+	if card != null and not 食物牌库.has(card):
+		食物牌库.insert(0, card)
+
+## 从牌堆顶向下按等级抽取，不改变未命中牌的相对顺序。
+## levels 为空表示全部等级；抽出的牌在调用方完成获得动画后加入手牌。
+func draw_food_cards_filtered(count: int, levels: Array = []) -> Array[食物牌]:
+	var result: Array[食物牌] = []
+	if count <= 0:
+		return result
+	var index := 食物牌库.size() - 1
+	while index >= 0 and result.size() < count:
+		var card := 食物牌库[index] as 食物牌
+		if card != null and (levels.is_empty() or levels.has(card.food_type)):
+			result.append(card)
+			食物牌库.remove_at(index)
+		index -= 1
+	return result
 
 func get_score_breakdown(player: PlayerClass) -> Dictionary:
 	var base_score: int = 0
@@ -417,7 +638,10 @@ func _add_region_score_annotation(annotations: Dictionary, region: MapSection.RE
 
 func calculate_victory_score(player: PlayerClass) -> void:
 	var breakdown := get_score_breakdown(player)
+	var previous_score: int = player.current_score
 	player.current_score = int(breakdown.get("total_score", 0))
+	if previous_score != player.current_score:
+		score_changed.emit(player, previous_score, player.current_score, breakdown.duplicate(true))
 	if hud != null:
 		hud._update_player_stats(player)
 
@@ -434,11 +658,16 @@ func draw_shop_foods(count: int = 3) -> Array[食物牌]:
 	var foods: Array[食物牌] = []
 	# 保证牌库有足够的牌，不够就把所有的拿出来
 	var actual_count = min(count, 食物牌库.size())
-	食物牌库.shuffle()
 	for i in range(actual_count):
 		# 注意这里是弹出，因为摆在货架上的牌就不在牌库里了
 		foods.append(食物牌库.pop_back() as 食物牌) 
 	return foods
+
+## 将未购买的货架牌按展示顺序放回牌堆底；牌堆顶位于数组末端。
+## 依次插入索引 0 后，未来从牌堆顶抽取时仍会得到原展示顺序。
+func return_shop_foods_to_bottom(cards: Array[食物牌]) -> void:
+	for card: 食物牌 in cards:
+		return_food_to_bottom(card)
 
 func use_feiyi(player: PlayerClass, card:非遗牌) -> bool:
 	if not player.非遗牌手牌.has(card):
@@ -463,12 +692,14 @@ func feiyi_execute_effect(player: PlayerClass, card:非遗牌) -> void:
 			if hud != null:
 				hud._update_game_informs("使用"+非遗牌.CardCategory.find_key(card.category)+"类非遗牌【"+card.card_name+"】，回复3点精力！")
 		非遗牌.CardCategory.民间音乐:
-			ResourceManager.modify_money(player, 750, "使用民间音乐类非遗牌")
+			ResourceManager.modify_money(player, FOLK_MUSIC_MONEY_GAIN, "使用民间音乐类非遗牌")
 			if hud != null:
-				hud._update_game_informs("使用"+非遗牌.CardCategory.find_key(card.category)+"类非遗牌【"+card.card_name+"】，获得750积分点！")
+				hud._update_game_informs("使用"+非遗牌.CardCategory.find_key(card.category)+"类非遗牌【"+card.card_name+"】，获得%d积分点！" % FOLK_MUSIC_MONEY_GAIN)
 		非遗牌.CardCategory.手工技艺:
 			player.handicraft_used_this_moving = true
-			player.maxMove *= 2
+			if not player.movement_multiplier_applied:
+				player.maxMove *= 2
+				player.movement_multiplier_applied = true
 			if hud != null:
 				hud._update_player_stats(player)
 				hud.information.text += ("\n使用"+非遗牌.CardCategory.find_key(card.category)+"类非遗牌【"+card.card_name+"】，最大可移动步数翻倍！")

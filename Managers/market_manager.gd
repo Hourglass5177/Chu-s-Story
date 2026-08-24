@@ -30,8 +30,9 @@ func get_sell_price(card: 非遗牌) -> int:
 		return 0
 	return BASE_SELL_PRICE + maxi(card.base_score, 0) * SCORE_PRICE_STEP
 
-func get_buy_price(card: 非遗牌) -> int:
-	return get_sell_price(card) * 2
+func get_buy_price(card: 非遗牌, player: PlayerClass = null) -> int:
+	var base_price: int = get_sell_price(card) * 2
+	return ProfessionManager.adjust_market_buy_price(player, base_price)
 
 func get_purchase_count(player: PlayerClass, arrival_id: int) -> int:
 	return int(_purchase_counts.get(player, {}).get(arrival_id, 0))
@@ -84,7 +85,8 @@ func buy_card(player: PlayerClass, card: 非遗牌, arrival_id: int) -> bool:
 		return false
 	if get_remaining_purchases(player, arrival_id) <= 0:
 		return false
-	var price: int = get_buy_price(card)
+	var price: int = get_buy_price(card, player)
+	var regular_price: int = get_sell_price(card) * 2
 	if player.current_money < price:
 		return false
 	_inventory.erase(card)
@@ -95,6 +97,8 @@ func buy_card(player: PlayerClass, card: 非遗牌, arrival_id: int) -> bool:
 	player_counts[arrival_id] = int(player_counts.get(arrival_id, 0)) + 1
 	_purchase_counts[player] = player_counts
 	ResourceManager.modify_money(player, -price, "购买非遗牌", true)
+	if price < regular_price and ProfessionManager.is_skill_enabled(player, PlayerClass.PlayerCharacter.商业博主):
+		ProfessionManager.notify_skill_triggered(player, "五折购得非遗牌")
 	ResourceManager.calculate_victory_score(player)
 	_refresh_player_ui(player)
 	_emit_inventory_changed()
@@ -116,7 +120,7 @@ func take_card_free(player: PlayerClass, card: 非遗牌) -> bool:
 
 func sample_cards(count: int) -> Array[非遗牌]:
 	var candidates: Array[非遗牌] = get_inventory()
-	candidates.shuffle()
+	GameManager.shuffle_array(candidates)
 	var result: Array[非遗牌] = []
 	for index: int in mini(maxi(count, 0), candidates.size()):
 		result.append(candidates[index])

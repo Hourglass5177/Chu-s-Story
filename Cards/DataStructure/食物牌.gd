@@ -1,6 +1,7 @@
 @tool
 extends 卡牌基类
 class_name 食物牌
+
 enum FoodType{
 	市级,
 	省级,
@@ -9,36 +10,25 @@ enum FoodType{
 }
 const COSTOFTYPE = {
 	FoodType.市级: 150,
-	FoodType.省级: 200,
-	FoodType.国家级: 250
+	FoodType.省级: 250,
+	FoodType.国家级: 500,
+	FoodType.其他: 150,
 }
-# TODO(P2): 目前所有食物均按市级效果处理。待省级、国家级效果实现后，
-# 再将价格统一调整为说明书定义的市级 100 / 省级 150 / 国家级 200 积分。
 
-@export var food_type: FoodType = FoodType.市级:
-	set(value):
-		food_type = value
-		cost = COSTOFTYPE[food_type]
-		emit_changed()
+## 跨文件名、牌面版本和本局运行时保持稳定的食物标识。
+@export var food_id: StringName = &""
+@export var food_type: FoodType = FoodType.市级
 @export var cost: int = 150
 @export_multiline var effect_description: String = "精力 +2"
 
-# 食物是否可以在当前状态下使用
-func can_use(player: PlayerClass) -> bool:
-	if player == null or not TurnManager.GameOn:
-		return false
-	if TurnManager.now_player_index < 0 or TurnManager.now_player_index >= TurnManager.players.size():
-		return false
-	# 只要在自己的行动阶段就能吃
-	var is_my_turn = (TurnManager.players[TurnManager.now_player_index] == player)
-	var is_action_phase = (TurnManager.now_phase == TurnManager.TurnPhase.ACTION)
-	
-	return is_my_turn and is_action_phase and not player.food_used_this_turn
+func get_default_cost() -> int:
+	return int(COSTOFTYPE.get(food_type, 150))
 
-# 执行吃食物的效果
-func execute_effect(player: PlayerClass, _option_id: int = -1) -> void:
-	if food_type == FoodType.市级:
-		ResourceManager.modify_energy(player, 2, "吃食物: " + card_name)
-	else:
-		print(player.player_name, " 吃了【", card_name, "】，回复了 ", 2, " 点精力！")
-		ResourceManager.modify_energy(player, 2, "吃食物: " + card_name)
+
+## Resource 只提供便捷查询，实际规则和事务统一由 FoodManager 处理。
+func can_use(player: PlayerClass) -> bool:
+	var manager: Node = Engine.get_main_loop().root.get_node_or_null("FoodManager") if Engine.get_main_loop() is SceneTree else null
+	if manager != null and manager.has_method("get_use_check"):
+		var check = manager.call("get_use_check", player, self)
+		return check != null and bool(check.get("allowed"))
+	return false

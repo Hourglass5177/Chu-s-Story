@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ProfessionDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Cards/DataStructure/profession_definition.gd" id="1_definition"]
+
+[resource]
+script = ExtResource("1_definition")
+profession_id = &"adventure_blogger"
+profession_type = 2
+profession_name = "探险博主"
+skill_name = "邻格探索"
+description = "准备阶段和结束阶段，可以各移动一次至相邻的任意可达且未被其他玩家占据的格子；不消耗精力，也不会在移动时立即触发格子效果。"
+short_description = "准备阶段和结束阶段各可免费移动至相邻格"
+can_move_at_begin = true
+can_move_at_end = true

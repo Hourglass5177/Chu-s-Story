@@ -9,6 +9,42 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ng1lp"]
 texture = ExtResource("1_ed4q1")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_refresh"]
+bg_color = Color(0.945, 0.765, 0.455, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.482, 0.243, 0.153, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_refresh_hover"]
+bg_color = Color(0.98, 0.847, 0.596, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.482, 0.243, 0.153, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_refresh_disabled"]
+bg_color = Color(0.72, 0.68, 0.58, 0.72)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.55, 0.49, 0.4, 0.72)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="商店弹窗" type="Panel" unique_id=181615663]
 process_mode = 3
 anchors_preset = 8
@@ -52,7 +88,31 @@ grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_ng1lp")
 theme_override_font_sizes/font_size = 70
-text = "余额：1000 点"
+text = "余额：—"
+
+[node name="BtnRefresh" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(230, 72)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -600.0
+offset_top = 88.0
+offset_right = -370.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.32, 0.16, 0.1, 1)
+theme_override_colors/font_hover_color = Color(0.32, 0.16, 0.1, 1)
+theme_override_colors/font_disabled_color = Color(0.48, 0.43, 0.36, 0.82)
+theme_override_fonts/font = ExtResource("2_ng1lp")
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_refresh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_refresh_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_refresh_hover")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_refresh_disabled")
+text = "刷新"
 
 [node name="BtnClose" type="TextureButton" parent="." unique_id=1257231702]
 process_mode = 3
@@ -92,6 +152,7 @@ offset_top = 83.0
 offset_right = 534.0
 offset_bottom = 164.0
 grow_horizontal = 2
+mouse_filter = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_ng1lp")
 theme_override_font_sizes/font_size = 80

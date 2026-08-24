@@ -178,6 +178,9 @@ func _create_player_slot(player_index: int):
 	for job in jobs_data.values():
 		var job_name = PlayerClass.PlayerCharacter.find_key(job)
 		job_btn.add_item(job_name)
+		var definition := ProfessionManager.get_definition_by_type(int(job))
+		if definition != null:
+			job_btn.get_popup().set_item_tooltip(job_btn.get_item_count() - 1, definition.description)
 	job_btn.select(_get_first_available_index(job_btn, "JobButton"))
 	job_btn.custom_minimum_size = Vector2(180, 50)
 	job_btn.add_theme_font_size_override("font_size", 28)
@@ -186,6 +189,7 @@ func _create_player_slot(player_index: int):
 	job_btn.item_selected.connect(func(idx): 
 		_update_unique_options()
 		_update_portrait(slot)
+		_update_job_tooltip(slot)
 	)
 	slot.add_child(job_btn)
 	
@@ -193,6 +197,7 @@ func _create_player_slot(player_index: int):
 	
 	# 初始化默认立绘
 	_update_portrait(slot)
+	_update_job_tooltip(slot)
 
 func _update_portrait(slot: HBoxContainer):
 	var job_btn = slot.get_node("JobButton") as OptionButton
@@ -200,6 +205,15 @@ func _update_portrait(slot: HBoxContainer):
 	var job_name = job_btn.get_item_text(job_btn.get_selected_id())
 	# 从字典里取图，找不到就用默认的
 	portrait.texture = job_portraits.get(job_name, preload("res://icon.svg"))
+
+func _update_job_tooltip(slot: HBoxContainer) -> void:
+	var job_btn := slot.get_node("JobButton") as OptionButton
+	if job_btn == null:
+		return
+	var job_name: String = job_btn.get_item_text(job_btn.get_selected_id())
+	var profession_type = PlayerClass.PlayerCharacter.get(job_name)
+	var definition := ProfessionManager.get_definition_by_type(int(profession_type))
+	job_btn.tooltip_text = definition.description if definition != null else ""
 
 # ================= 核心：排他锁定逻辑 =================
 
@@ -261,6 +275,8 @@ func _on_confirm_start():
 		})
 		
 	print("准备创建游戏，玩家数据：", final_players_data)
+	GameManager.configure_session()
+	ResourceManager.reset_for_new_game()
 	GameManager.player_data = final_players_data
 	get_tree().change_scene_to_file("res://main_map.tscn")
 

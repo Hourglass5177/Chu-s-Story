@@ -43,15 +43,36 @@ var _map_tooltip: PanelContainer = null
 var _map_tooltip_label: Label = null
 var _map_tooltip_timer: Timer = null
 var _hovered_map_section: MapSection = null
+var _active_event_map_request: EventChoiceRequest = null
+var _event_map_selected_options: Array = []
+var _event_map_restore_focus_mode: bool = false
+var _event_map_source_name: String = ""
+var _event_no_effect_pending: bool = false
+var _active_profession_map_request: ProfessionSectionChoiceRequest = null
+var _profession_map_restore_focus_mode: bool = false
+var _profession_map_focus_player: PlayerClass = null
+var _profession_map_session_generation: int = -1
+var _profession_map_turn_epoch: int = -1
+var _profession_map_phase: TurnManager.TurnPhase = TurnManager.TurnPhase.BEGIN
+var _camera_focus_player_override: PlayerClass = null
+var _last_profession_block_turns: Dictionary = {}
 
 const MAP_ZOOM_MIN_FACTOR := 1.0
 const MAP_ZOOM_MAX_FACTOR := 3.0
 const MAP_ZOOM_STEP := 1.15
+const MAP_FOCUS_ENTRY_ZOOM_FACTOR := 2.0
 const MAP_DRAG_THRESHOLD := 8.0
 const MAP_TOOLTIP_DELAY := 0.6
 
 static func clamp_map_zoom_factor(value: float) -> float:
 	return clampf(value, MAP_ZOOM_MIN_FACTOR, MAP_ZOOM_MAX_FACTOR)
+
+static func get_focus_entry_zoom_factor(_current_factor: float) -> float:
+	# 追踪视角始终相对“默认全图”放大一倍，不按玩家当前缩放继续翻倍。
+	return clamp_map_zoom_factor(MAP_FOCUS_ENTRY_ZOOM_FACTOR)
+
+static func get_view_mode_hint_text(focus_mode: bool) -> String:
+	return "【ALT】切换视角：%s\n【滚轮】视角缩放" % ("追踪" if focus_mode else "全局")
 
 # 之前我们算好的留白参数，原封不动保留
 const MAP_REAL_SIZE = Vector2(2560, 1600)
@@ -87,12 +108,20 @@ var score_overlay: ScoreDetailPanel
 var achievement_detail_overlay: AchievementDetailPanel
 var achievement_toast: AchievementToast
 var game_result_overlay: GameResultOverlay
+var card_hand_animator: CardHandAnimator
+var profession_detail_overlay: ProfessionDetailPanel
+var profession_draw_overlay: ProfessionDrawPanel
+var profession_skill_toast: ProfessionSkillToast
 const EVENT_OVERLAY_SCENE := preload("res://HUDs/event_overlay.tscn")
 const MARKET_OVERLAY_SCENE := preload("res://HUDs/研究所弹窗.tscn")
 const SCORE_OVERLAY_SCENE := preload("res://HUDs/计分详情弹窗.tscn")
 const ACHIEVEMENT_DETAIL_SCENE := preload("res://HUDs/成就详情弹窗.tscn")
 const ACHIEVEMENT_TOAST_SCENE := preload("res://HUDs/成就获得提示.tscn")
 const GAME_RESULT_OVERLAY_SCENE := preload("res://HUDs/GameResultOverlay/game_result_overlay.tscn")
+const CARD_HAND_ANIMATOR_SCENE := preload("res://HUDs/card_hand_animator.tscn")
+const PROFESSION_DETAIL_SCENE := preload("res://HUDs/职业详情弹窗.tscn")
+const PROFESSION_DRAW_SCENE := preload("res://HUDs/职业抽牌弹窗.tscn")
+const PROFESSION_SKILL_TOAST_SCENE := preload("res://HUDs/职业技能提示.tscn")
 func _ready() -> void:
 	map_container.resized.connect(_on_container_resized)
 	_spawn_map_in_hud()
@@ -105,16 +134,23 @@ func _ready() -> void:
 	$BtnClose.pressed.connect(_on_close_pressed)
 	btn_food.pressed.connect(_on_btn_food_pressed)
 	btn_view_toggle.pressed.connect(_on_view_toggle_pressed)
+	_update_view_mode_hint()
 	map_container.gui_input.connect(_on_map_container_gui_input)
 	_setup_event_ui()
 	_setup_market_ui()
 	_setup_score_ui()
 	_setup_achievement_ui()
 	_setup_game_result_ui()
+	_setup_card_hand_animation()
+	_setup_profession_ui()
 	_setup_map_tooltip()
 	score_label.mouse_filter = Control.MOUSE_FILTER_STOP
 	score_label.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	score_label.gui_input.connect(_on_score_label_gui_input)
+	var profession_panel := $"玩家信息/职业背景" as Control
+	profession_panel.mouse_filter = Control.MOUSE_FILTER_STOP
+	profession_panel.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	profession_panel.gui_input.connect(_on_profession_panel_gui_input)
 	# 设置相机的绝对物理边界。
 	map_camera.limit_left = -margin_x
 	map_camera.limit_top = -margin_top
@@ -138,6 +174,11 @@ func _setup_event_ui() -> void:
 	EventManager.retained_cards_changed.connect(_on_retained_cards_changed)
 	EventManager.event_revealed.connect(_on_event_modal_opened)
 	EventManager.event_finished.connect(_on_event_modal_closed)
+	EventManager.choice_requested.connect(_on_event_choice_requested)
+	EventManager.choice_resolved.connect(_on_event_choice_resolved)
+	EventManager.interaction_finished.connect(_on_event_interaction_finished)
+	if map != null and not map.event_section_selected.is_connected(_on_event_map_section_selected):
+		map.event_section_selected.connect(_on_event_map_section_selected)
 
 func get_event_overlay() -> EventOverlay:
 	return event_overlay
@@ -168,6 +209,209 @@ func _setup_game_result_ui() -> void:
 	game_result_overlay.return_to_main_menu_requested.connect(_on_result_return_to_main_menu)
 	game_result_overlay.quit_requested.connect(_on_result_quit_requested)
 
+func _setup_card_hand_animation() -> void:
+	card_hand_animator = CARD_HAND_ANIMATOR_SCENE.instantiate() as CardHandAnimator
+	add_child(card_hand_animator)
+	card_hand_animator.setup(self)
+	card_hand_animator.animation_started.connect(_on_card_hand_animation_started)
+	card_hand_animator.queue_finished.connect(_on_card_hand_queue_finished)
+	if not ResourceManager.card_hand_visual_requested.is_connected(_on_card_hand_visual_requested):
+		ResourceManager.card_hand_visual_requested.connect(_on_card_hand_visual_requested)
+
+func _setup_profession_ui() -> void:
+	profession_detail_overlay = PROFESSION_DETAIL_SCENE.instantiate() as ProfessionDetailPanel
+	add_child(profession_detail_overlay)
+	profession_draw_overlay = PROFESSION_DRAW_SCENE.instantiate() as ProfessionDrawPanel
+	add_child(profession_draw_overlay)
+	profession_skill_toast = PROFESSION_SKILL_TOAST_SCENE.instantiate() as ProfessionSkillToast
+	add_child(profession_skill_toast)
+	ProfessionManager.skill_triggered.connect(_on_profession_skill_triggered)
+	ProfessionManager.skill_state_changed.connect(_on_profession_skill_state_changed)
+	ProfessionManager.profession_changed.connect(_on_profession_changed)
+	ProfessionManager.section_choice_requested.connect(_on_profession_section_choice_requested)
+	ProfessionManager.section_choice_resolved.connect(_on_profession_section_choice_resolved)
+	if map != null and not map.section_choice_selected.is_connected(_on_generic_map_section_selected):
+		map.section_choice_selected.connect(_on_generic_map_section_selected)
+
+func _on_profession_panel_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if TurnManager.GameOn and TurnManager.now_player_index >= 0 and TurnManager.now_player_index < TurnManager.players.size():
+			profession_detail_overlay.show_for_player(TurnManager.players[TurnManager.now_player_index])
+			get_viewport().set_input_as_handled()
+
+func _on_profession_skill_triggered(player: PlayerClass, profession_id: StringName, message: String) -> void:
+	if profession_skill_toast != null:
+		profession_skill_toast.enqueue(player, profession_id, message)
+	_pulse_profession_label(player)
+	if _can_display_player(player):
+		_update_player_stats(player)
+
+func _on_profession_skill_state_changed(player: PlayerClass) -> void:
+	var previous: int = int(_last_profession_block_turns.get(player, 0))
+	var current: int = ProfessionManager.get_blocked_turns(player)
+	_last_profession_block_turns[player] = current
+	if profession_skill_toast != null:
+		var definition = ProfessionManager.get_definition(player)
+		var profession_id: StringName = definition.profession_id if definition != null else &""
+		if current > 0 and previous <= 0:
+			profession_skill_toast.enqueue(player, profession_id, "职业技能被封锁")
+		elif current == 0 and previous > 0:
+			profession_skill_toast.enqueue(player, profession_id, "职业技能恢复")
+	if _can_display_player(player):
+		_update_player_stats(player)
+
+func _on_profession_changed(first_player: PlayerClass, second_player: PlayerClass) -> void:
+	if first_player != null:
+		_update_player_stats(first_player)
+	if second_player != null:
+		_update_player_stats(second_player)
+
+func _pulse_profession_label(player: PlayerClass) -> void:
+	if not _can_display_player(player):
+		return
+	var label := $"玩家信息/职业背景/职业" as Label
+	var tween := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(label, "modulate", Color(1.0, 0.74, 0.28, 1.0), 0.12)
+	tween.tween_property(label, "modulate", Color.WHITE, 0.24)
+
+func _on_profession_section_choice_requested(request: ProfessionSectionChoiceRequest) -> void:
+	if request == null or map == null or request.options.is_empty():
+		return
+	_active_profession_map_request = request
+	map.begin_section_choice(&"profession", request.request_id, request.options)
+	btn_action.text = "不移动"
+	btn_action.disabled = not request.optional
+	btn_food.disabled = true
+	btn_end_turn.disabled = true
+	_profession_map_restore_focus_mode = is_focus_mode
+	_profession_map_focus_player = request.player
+	_profession_map_session_generation = TurnManager.get_session_generation()
+	_profession_map_turn_epoch = TurnManager.get_turn_epoch()
+	_profession_map_phase = TurnManager.now_phase
+	if is_focus_mode:
+		_leave_focus_at_current_camera()
+	btn_view_toggle.disabled = true
+	current_status.text = "【%s】请选择移动终点" % request.source_name
+	information.text = request.source_description
+
+func _on_generic_map_section_selected(owner: StringName, request_id: int, section: MapSection) -> void:
+	if owner != &"profession" or _active_profession_map_request == null:
+		return
+	if request_id == _active_profession_map_request.request_id:
+		ProfessionManager.submit_section_choice(request_id, section)
+
+func _on_profession_section_choice_resolved(request_id: int, _section: MapSection, _timed_out: bool) -> void:
+	if _active_profession_map_request == null or request_id != _active_profession_map_request.request_id:
+		return
+	map.end_section_choice(&"profession", request_id)
+	_active_profession_map_request = null
+	# 此信号只表示“选项已经确定”，棋子的技能移动尚未完成。
+	# ALT、按钮和追踪镜头统一在 complete_profession_section_choice() 中恢复，
+	# 避免先追旧位置、再追新位置、随后又追下一玩家的连续 Tween 竞态。
+
+func complete_profession_section_choice(
+	player: PlayerClass,
+	session_generation: int,
+	turn_epoch: int,
+	phase: TurnManager.TurnPhase
+) -> void:
+	if _profession_map_focus_player != player \
+			or _profession_map_session_generation != session_generation \
+			or _profession_map_turn_epoch != turn_epoch \
+			or _profession_map_phase != phase:
+		return
+	var still_owns_view: bool = session_generation == TurnManager.get_session_generation() \
+		and turn_epoch == TurnManager.get_turn_epoch() \
+		and TurnManager.GameOn \
+		and TurnManager.now_player_index >= 0 \
+		and TurnManager.now_player_index < TurnManager.players.size() \
+		and TurnManager.players[TurnManager.now_player_index] == player
+	if still_owns_view:
+		btn_view_toggle.disabled = false
+		if _profession_map_restore_focus_mode:
+			_set_focus_mode(true)
+			update_camera_view_for_player(player, 0.25)
+	_profession_map_restore_focus_mode = false
+	_profession_map_focus_player = null
+	_profession_map_session_generation = -1
+	_profession_map_turn_epoch = -1
+	_profession_map_phase = TurnManager.TurnPhase.BEGIN
+	if still_owns_view:
+		_update_button_states(TurnManager.now_phase)
+
+func _on_card_hand_visual_requested(kind: int, player: PlayerClass, card: 卡牌基类, other_player: PlayerClass, reveal_detail: bool) -> void:
+	if card_hand_animator == null or not TurnManager.GameOn or GameManager.is_headless_simulation():
+		return
+	card_hand_animator.enqueue(kind, player, card, other_player, reveal_detail)
+
+func _on_card_hand_animation_started(_kind: int, _player: PlayerClass, card: 卡牌基类) -> void:
+	if card is 成就牌:
+		return
+	btn_action.disabled = true
+	btn_food.disabled = true
+	btn_end_turn.disabled = true
+
+func _on_card_hand_queue_finished() -> void:
+	_update_button_states(TurnManager.now_phase)
+
+func wait_for_card_hand_animations() -> void:
+	while card_hand_animator != null and card_hand_animator.is_busy():
+		await card_hand_animator.queue_finished
+
+func get_player_card_anchor(player: PlayerClass) -> Vector2:
+	if player == null or not is_instance_valid(player) or map_viewport == null or map_container == null:
+		return map_container.get_global_rect().get_center() if map_container != null else Vector2(1280.0, 800.0)
+	var viewport_position := map_viewport.get_canvas_transform() * player.global_position
+	var viewport_size := Vector2(map_viewport.size)
+	var display_scale := Vector2.ONE
+	if viewport_size.x > 0.0 and viewport_size.y > 0.0:
+		display_scale = map_container.size / viewport_size
+	return map_container.get_global_rect().position + viewport_position * display_scale + Vector2(0.0, -72.0)
+
+func get_hand_area_anchor(card: 卡牌基类) -> Vector2:
+	if card is 食物牌:
+		return btn_food.get_global_rect().get_center()
+	return $"积分区域".get_global_rect().get_center()
+
+func get_card_thumbnail_anchor(card: 卡牌基类) -> Vector2:
+	var thumbnail := _find_card_thumbnail(feiyi_list, card)
+	if thumbnail == null:
+		thumbnail = _find_card_thumbnail(backpack_panel, card)
+	return thumbnail.get_global_rect().get_center() if thumbnail != null else get_hand_area_anchor(card)
+
+func set_card_thumbnail_hidden(card: 卡牌基类, hidden: bool) -> void:
+	var thumbnail := _find_card_thumbnail(feiyi_list, card)
+	if thumbnail != null:
+		thumbnail.modulate.a = 0.0 if hidden else 1.0
+
+func refresh_hand_after_animation(player: PlayerClass) -> void:
+	if not _can_display_player(player):
+		return
+	refresh_feiyi_list(player)
+	_update_player_stats(player)
+
+func show_collected_feiyi_detail_and_wait(player: PlayerClass, card: 非遗牌) -> void:
+	if not _can_display_player(player) or detail_panel == null:
+		return
+	detail_panel.show_detail(card, player)
+	await detail_panel.detail_closed
+
+func _find_card_thumbnail(root: Node, card: 卡牌基类) -> Control:
+	if root == null or card == null:
+		return null
+	if root is 非遗牌缩略图 and (root as 非遗牌缩略图).card_data == card:
+		return root as Control
+	if root is 事件牌缩略图 and (root as 事件牌缩略图).card_data == card:
+		return root as Control
+	if root is Control and root.has_meta("card_data") and root.get_meta("card_data") == card:
+		return root as Control
+	for child: Node in root.get_children():
+		var found := _find_card_thumbnail(child, card)
+		if found != null:
+			return found
+	return null
+
 func _on_game_finished(result: GameResult) -> void:
 	if game_result_overlay != null:
 		game_result_overlay.present(result)
@@ -188,7 +432,10 @@ func _on_achievement_claimed(player: PlayerClass, card: 成就牌) -> void:
 	if TurnManager.GameOn and TurnManager.now_player_index >= 0 and TurnManager.now_player_index < TurnManager.players.size():
 		var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
 		if current_player == player:
-			refresh_achievement_list(player)
+			if card_hand_animator != null:
+				card_hand_animator.enqueue(ResourceManager.CardHandVisualKind.获得, player, card, null, false, false)
+			else:
+				refresh_achievement_list(player)
 		_update_player_stats(player)
 	_update_game_informs("%s 达成【%s】，+%d分。" % [player.player_name, card.card_name, card.score_value])
 
@@ -227,7 +474,135 @@ func _on_event_modal_closed(_player: PlayerClass, _card: 事件牌, _summary: St
 		var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
 		_update_player_stats(current_player)
 		refresh_feiyi_list(current_player)
+	_event_no_effect_pending = _summary.ends_with("无事发生！")
+	if _event_no_effect_pending and _event_map_source_name.is_empty():
+		if information != null:
+			information.text += "\n无事发生！"
+		_event_no_effect_pending = false
 	_update_button_states(TurnManager.now_phase)
+
+func _on_event_choice_requested(request: EventChoiceRequest) -> void:
+	if request.presentation == EventChoiceRequest.Presentation.研究所:
+		_event_map_source_name = request.source_name if not request.source_name.is_empty() else request.title
+		current_status.text = "【%s】请选择非遗牌" % _event_map_source_name
+		information.text = request.source_description if not request.source_description.is_empty() else request.prompt
+		market_overlay.open_event_choice(request)
+		return
+	if request.kind not in [EventChoiceRequest.ChoiceKind.格子, EventChoiceRequest.ChoiceKind.玩家] or map == null:
+		return
+	var sections: Array[MapSection] = []
+	if request.kind == EventChoiceRequest.ChoiceKind.格子:
+		for option in request.options:
+			if option is MapSection:
+				sections.append(option as MapSection)
+	else:
+		for option in request.options:
+			if not option is PlayerClass:
+				continue
+			var target_player := option as PlayerClass
+			var target_section := map.grid_map.get(target_player.now_pos) as MapSection
+			if target_section != null and not sections.has(target_section):
+				sections.append(target_section)
+	if sections.is_empty():
+		return
+	_active_event_map_request = request
+	_event_map_selected_options.clear()
+	_event_map_source_name = request.source_name if not request.source_name.is_empty() else request.title
+	map.begin_event_section_choice(request.request_id, sections)
+	btn_action.disabled = true
+	btn_food.disabled = true
+	btn_end_turn.disabled = true
+	_event_map_restore_focus_mode = is_focus_mode
+	if is_focus_mode:
+		_leave_focus_at_current_camera()
+	btn_view_toggle.disabled = true
+	_update_event_map_choice_status()
+	information.text = request.source_description if not request.source_description.is_empty() else request.prompt
+
+func _on_event_map_section_selected(request_id: int, section: MapSection) -> void:
+	if _active_event_map_request == null or request_id != _active_event_map_request.request_id:
+		return
+	var choice = section
+	if _active_event_map_request.kind == EventChoiceRequest.ChoiceKind.玩家:
+		choice = _get_player_option_at_section(_active_event_map_request, section)
+	if choice == null:
+		return
+	if not _active_event_map_request.multiple:
+		EventManager.submit_choice(request_id, choice)
+		return
+	if _event_map_selected_options.has(choice):
+		_event_map_selected_options.erase(choice)
+	else:
+		_event_map_selected_options.append(choice)
+	EventManager.submit_choice_preview(request_id, _event_map_selected_options)
+	_update_event_map_choice_status()
+	if _event_map_selected_options.size() >= _active_event_map_request.max_selections:
+		EventManager.submit_choice(request_id, _event_map_selected_options.duplicate())
+
+func _get_player_option_at_section(request: EventChoiceRequest, section: MapSection) -> PlayerClass:
+	for option in request.options:
+		if option is PlayerClass \
+				and (option as PlayerClass).now_pos == section.location_index \
+				and not _event_map_selected_options.has(option):
+			return option as PlayerClass
+	for option in request.options:
+		if option is PlayerClass and (option as PlayerClass).now_pos == section.location_index:
+			return option as PlayerClass
+	return null
+
+
+func _update_event_map_choice_status() -> void:
+	if _active_event_map_request == null:
+		return
+	if _active_event_map_request.kind == EventChoiceRequest.ChoiceKind.玩家:
+		if _active_event_map_request.multiple:
+			current_status.text = "【%s】请选择玩家 %d/%d" % [
+				_event_map_source_name,
+				_event_map_selected_options.size(),
+				_active_event_map_request.max_selections,
+			]
+		else:
+			current_status.text = "【%s】请选择玩家" % _event_map_source_name
+	else:
+		current_status.text = "【%s】请选择移动终点" % _event_map_source_name
+
+func _on_event_choice_resolved(request_id: int, _timed_out: bool) -> void:
+	if market_overlay != null and market_overlay.is_event_choice_open(request_id):
+		market_overlay.finish_event_choice(request_id)
+		information.text = "【%s】结算中…" % _event_map_source_name
+		return
+	if _active_event_map_request == null or request_id != _active_event_map_request.request_id:
+		return
+	_finish_event_map_choice(request_id)
+	information.text = "【%s】结算中…" % _event_map_source_name
+
+func _on_event_interaction_finished(_player: PlayerClass) -> void:
+	if market_overlay != null:
+		market_overlay.finish_event_choice()
+	if _active_event_map_request != null:
+		_finish_event_map_choice(_active_event_map_request.request_id)
+	if _event_map_source_name.is_empty():
+		return
+	if TurnManager.GameOn and TurnManager.now_player_index >= 0 and TurnManager.now_player_index < TurnManager.players.size():
+		var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
+		_update_player_stats(current_player)
+		_update_button_states(TurnManager.now_phase)
+	information.text = "【%s】结算完成。" % _event_map_source_name
+	if _event_no_effect_pending:
+		information.text += "\n无事发生！"
+	_event_no_effect_pending = false
+	_event_map_source_name = ""
+
+func _finish_event_map_choice(request_id: int) -> void:
+	if map != null:
+		map.end_event_section_choice(request_id)
+	_active_event_map_request = null
+	_event_map_selected_options.clear()
+	btn_view_toggle.disabled = false
+	if _event_map_restore_focus_mode:
+		_set_focus_mode(true)
+		update_camera_view(0.25)
+	_event_map_restore_focus_mode = false
 # 暴露给编辑器的变量，把你做好的 map.tscn 直接从底层文件系统拖到右侧面板的这个槽位里
 @export var map_scene: PackedScene 
 
@@ -268,16 +643,40 @@ func _on_container_resized():
 	update_camera_view(0.0)
 
 func _on_view_toggle_pressed():
-	is_focus_mode = not is_focus_mode
+	if is_focus_mode:
+		_leave_focus_at_current_camera()
+	else:
+		_set_focus_mode(true)
+		map_zoom_factor = get_focus_entry_zoom_factor(map_zoom_factor)
 	update_camera_view(0.4) # 0.4 秒的顺滑运镜动画
+
+func _leave_focus_at_current_camera() -> void:
+	if not is_focus_mode:
+		return
+	# 手动切换和地图选点共用同一路径：只解除追踪，不跳回旧全局中心。
+	# 先终止可能尚未完成的追踪 Tween，再以屏幕上的实时位置和缩放保存全局镜头状态。
+	_stop_camera_tween()
+	if is_instance_valid(map_camera) and global_zoom.x > 0.0 and global_zoom.y > 0.0:
+		_global_camera_position = _clamp_camera_position(map_camera.position, map_camera.zoom)
+	_set_focus_mode(false)
+
+func _set_focus_mode(value: bool) -> void:
+	is_focus_mode = value
+	_update_view_mode_hint()
+
+func _update_view_mode_hint() -> void:
+	var hint_label := get_node_or_null("地图/缩放提示信息") as Label
+	if hint_label != null:
+		hint_label.text = get_view_mode_hint_text(is_focus_mode)
 
 func update_camera_view(duration: float = 0.4):
 	var target_zoom := global_zoom * map_zoom_factor
 	var target_pos := _global_camera_position
 	if is_focus_mode:
-		if TurnManager.now_player_index >= 0 and TurnManager.now_player_index < TurnManager.players.size():
-			var current_player = TurnManager.players[TurnManager.now_player_index]
-			target_pos = current_player.position if is_instance_valid(current_player) else global_pos
+		var focus_player: PlayerClass = _camera_focus_player_override
+		if focus_player == null and TurnManager.now_player_index >= 0 and TurnManager.now_player_index < TurnManager.players.size():
+			focus_player = TurnManager.players[TurnManager.now_player_index]
+		target_pos = focus_player.position if is_instance_valid(focus_player) else global_pos
 	target_pos = _clamp_camera_position(target_pos, target_zoom)
 	_stop_camera_tween()
 	# 创建并行动画：同时平滑缩放(zoom)和移动(position)
@@ -288,6 +687,11 @@ func update_camera_view(duration: float = 0.4):
 	else:
 		map_camera.zoom = target_zoom
 		map_camera.position = target_pos
+
+func update_camera_view_for_player(player: PlayerClass, duration: float = 0.4) -> void:
+	_camera_focus_player_override = player
+	update_camera_view(duration)
+	_camera_focus_player_override = null
 
 func _stop_camera_tween() -> void:
 	if _camera_tween != null and _camera_tween.is_valid():
@@ -424,7 +828,15 @@ func _get_map_section_tooltip_text(section: MapSection) -> String:
 	return section.get_tooltip_text()
 
 func _process(delta: float):
-	if timer and TurnManager.GameOn and timer.time_left > 0:
+	if _active_event_map_request != null:
+		var choice_time_left := EventManager.get_choice_time_left(_active_event_map_request.request_id)
+		time_label.visible = choice_time_left > 0.0
+		time_label.text = " " + str(int(ceil(choice_time_left))) + " s"
+	elif _active_profession_map_request != null:
+		var choice_time_left := ProfessionManager.get_section_choice_time_left(_active_profession_map_request.request_id)
+		time_label.visible = choice_time_left > 0.0
+		time_label.text = " " + str(int(ceil(choice_time_left))) + " s"
+	elif timer and TurnManager.GameOn and timer.time_left > 0:
 		time_label.visible = true
 		time_label.text = " " + str(int(ceil(timer.time_left))) + " s"
 	else:
@@ -438,6 +850,7 @@ func _on_turn_start(player_idx: int) -> void:
 	refresh_feiyi_list(current_player)
 
 func _on_phase_changed(new_phase: TurnManager.TurnPhase) -> void:
+	_clear_dice_information_connection()
 	# 每次阶段改变时，刷新 UI 上的数值和按钮可用性
 	var current_player = TurnManager.players[TurnManager.now_player_index]
 	_update_player_stats(current_player)
@@ -450,9 +863,8 @@ func _on_phase_changed(new_phase: TurnManager.TurnPhase) -> void:
 			phase_label.text = "【准备阶段】"
 		TurnManager.TurnPhase.ROLL_DICE:
 			phase_label.text = "【掷骰子】"
-			TurnManager.players[TurnManager.now_player_index].roll_dice.connect(_roll_dice_information)
-			await TurnManager.players[TurnManager.now_player_index].roll_dice
-			TurnManager.players[TurnManager.now_player_index].roll_dice.disconnect(_roll_dice_information)
+			_dice_signal_player = TurnManager.players[TurnManager.now_player_index]
+			_dice_signal_player.roll_dice.connect(_roll_dice_information, CONNECT_ONE_SHOT)
 		TurnManager.TurnPhase.MOVING:
 			phase_label.text = "【移动中】"
 		TurnManager.TurnPhase.ACTION:
@@ -462,7 +874,16 @@ func _on_phase_changed(new_phase: TurnManager.TurnPhase) -> void:
 			phase_label.text = "【结束阶段】"
 
 func _roll_dice_information(result:int, player:PlayerClass) -> void:
+	_dice_signal_player = null
 	_update_game_informs("玩家 " + player.player_name + " 掷出了 " + str(result) + " 点！")
+
+var _dice_signal_player: PlayerClass = null
+
+func _clear_dice_information_connection() -> void:
+	if _dice_signal_player != null and is_instance_valid(_dice_signal_player) \
+			and _dice_signal_player.roll_dice.is_connected(_roll_dice_information):
+		_dice_signal_player.roll_dice.disconnect(_roll_dice_information)
+	_dice_signal_player = null
 
 # --- UI 刷新状态函数 ---
 func _update_player_stats(player: PlayerClass) -> void:
@@ -478,7 +899,12 @@ func _update_player_stats(player: PlayerClass) -> void:
 	score_label.text = "总分数：" + str(player.current_score) + "分"
 	name_label.text = player.player_name
 	立绘精二.texture = player.立绘精二
-	$"玩家信息/职业背景/职业".text = PlayerClass.PlayerCharacter.find_key(player.player_types)
+	var profession_label := $"玩家信息/职业背景/职业" as Label
+	profession_label.text = PlayerClass.PlayerCharacter.find_key(player.player_types)
+	profession_label.add_theme_color_override(
+		"font_color",
+		Color("8c7568") if ProfessionManager.get_blocked_turns(player) > 0 else Color.BLACK
+	)
 	current_status.text = "当前位置：" + MapSection.REGION.find_key(map.grid_map[player.now_pos].region) + str(map.grid_map[player.now_pos].location_index) + " - " + MapSection.SectionType.find_key(map.grid_map[player.now_pos].type)
 	if(TurnManager.now_phase == TurnManager.TurnPhase.MOVING):
 		_update_game_informs("剩余可移动：" + str(player.maxMove) + " 步")
@@ -513,7 +939,7 @@ func _update_button_states(phase: TurnManager.TurnPhase) -> void:
 				
 				# 判定一：如果该地区根本没有牌了
 				if not ResourceManager.has_feiyi_in_region(region):
-					btn_action.text = "已被收集完"
+					btn_action.text = "集罄"
 					btn_action.disabled = true
 				# 判定二：精力不足或本回合已收集
 				elif current_player.current_energy < 1 or current_player.feiyi_collected_this_turn:
@@ -522,10 +948,11 @@ func _update_button_states(phase: TurnManager.TurnPhase) -> void:
 					
 			MapSection.SectionType.打工:
 				btn_action.text = "打工"
+				var work_energy_cost: int = ProfessionManager.get_work_energy_cost(current_player)
 				if EventManager.is_work_banned(current_player):
 					btn_action.text = "暂时禁止打工"
 					btn_action.disabled = true
-				elif current_player.current_energy < 1:
+				elif current_player.current_energy < work_energy_cost:
 					btn_action.disabled = true
 				# 历史打过工，且现在并不在打工状态中，则终生禁止在此地再次打工
 				elif current_section.grid_visit_history.get(current_player, 0) > 1 and not current_player.is_working:
@@ -536,20 +963,15 @@ func _update_button_states(phase: TurnManager.TurnPhase) -> void:
 					
 			MapSection.SectionType.商店:
 				btn_action.text = "打开商店"
-				# 买过一次就禁止再买
-				if current_section.grid_visit_history.get(current_player, 0) > 1:
-					btn_action.disabled = true
-				else: btn_action.disabled = false
+				btn_action.disabled = not current_player.has_current_action_arrival_at(current_player.now_pos) \
+					or current_player.last_opened_shop_arrival_id == current_player.arrival_id
 					
 			MapSection.SectionType.风景:
 				btn_action.text = "行动"
 				btn_action.disabled = true # 风景是自动的，手动按钮一直禁用
-				if current_section.grid_visit_history.get(current_player, 0) <= 1:
-					current_player.auto_trigger_scenery(current_section) 
 			MapSection.SectionType.研究所:
 				btn_action.text = "交易"
-				btn_action.disabled = current_player.arrival_id <= 0 \
-					or current_player.last_normal_arrival_position != current_player.now_pos \
+				btn_action.disabled = not current_player.has_current_action_arrival_at(current_player.now_pos) \
 					or not MarketManager.can_open_visit(current_player, current_player.arrival_id)
 			_:
 				btn_action.text = "探索"
@@ -557,6 +979,9 @@ func _update_button_states(phase: TurnManager.TurnPhase) -> void:
 	else: btn_action.text = "探索"
 
 func _on_btn_action_pressed() -> void:
+	if _active_profession_map_request != null and _active_profession_map_request.optional:
+		ProfessionManager.submit_section_choice(_active_profession_map_request.request_id, null)
+		return
 	var current_player = TurnManager.players[TurnManager.now_player_index]
 	current_player.execute_tile_action()
 
@@ -604,6 +1029,8 @@ func refresh_feiyi_list(player: PlayerClass):
 	# 2. 按城市将手牌分组
 	var city_groups: Dictionary[MapSection.REGION, Array] = {}
 	for card in player.非遗牌手牌:
+		if card_hand_animator != null and card_hand_animator.should_hide_card(card):
+			continue
 		if not city_groups.has(card.region):
 			city_groups[card.region] = []
 		city_groups[card.region].append(card)
@@ -668,7 +1095,11 @@ func refresh_event_list(player: PlayerClass) -> void:
 	if previous_achievement_section != null:
 		feiyi_list.remove_child(previous_achievement_section)
 		previous_achievement_section.queue_free()
-	if not player.事件牌手牌.is_empty():
+	var visible_event_cards: Array[事件牌] = []
+	for card: 事件牌 in player.事件牌手牌:
+		if card_hand_animator == null or not card_hand_animator.should_hide_card(card):
+			visible_event_cards.append(card)
+	if not visible_event_cards.is_empty():
 		var event_section := VBoxContainer.new()
 		event_section.name = "事件牌列表区"
 		event_section.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
@@ -685,7 +1116,7 @@ func refresh_event_list(player: PlayerClass) -> void:
 		event_card_list.add_theme_constant_override("h_separation", 10)
 		event_card_list.add_theme_constant_override("v_separation", 10)
 		event_section.add_child(event_card_list)
-		for card: 事件牌 in player.事件牌手牌:
+		for card: 事件牌 in visible_event_cards:
 			var thumbnail := EventThumbnailScene.instantiate() as 事件牌缩略图
 			event_card_list.add_child(thumbnail)
 			thumbnail.setup(card, player)
@@ -701,7 +1132,11 @@ func refresh_achievement_list(player: PlayerClass) -> void:
 		feiyi_list.remove_child(previous_section)
 		previous_section.queue_free()
 	var achievements: Array[成就牌] = AchievementManager.get_owned_achievements(player)
-	if achievements.is_empty():
+	var visible_achievements: Array[成就牌] = []
+	for card: 成就牌 in achievements:
+		if card_hand_animator == null or not card_hand_animator.should_hide_card(card):
+			visible_achievements.append(card)
+	if visible_achievements.is_empty():
 		return
 	var section := VBoxContainer.new()
 	section.name = "成就牌列表区"
@@ -725,7 +1160,7 @@ func refresh_achievement_list(player: PlayerClass) -> void:
 	grid.add_theme_constant_override("h_separation", 10)
 	grid.add_theme_constant_override("v_separation", 10)
 	section.add_child(grid)
-	for card: 成就牌 in achievements:
+	for card: 成就牌 in visible_achievements:
 		var thumbnail := AchievementThumbnailScene.instantiate() as 成就牌缩略图
 		grid.add_child(thumbnail)
 		thumbnail.setup(card)

@@ -63,6 +63,8 @@ func after_each() -> void:
 	get_tree().paused = false
 	TurnManager.turn_timer.stop()
 	if is_instance_valid(_hud):
+		if _hud.card_hand_animator != null:
+			_hud.card_hand_animator.clear_queue()
 		if _hud.game_result_overlay != null:
 			_hud.game_result_overlay.reset_overlay(false)
 		if _hud.achievement_detail_overlay != null and _hud.achievement_detail_overlay.visible:
@@ -95,6 +97,8 @@ func test_achievement_section_is_absent_until_owned_and_thumbnail_is_read_only()
 	TurnManager.turn_timer.start(8.0)
 	assert_true(ResourceManager.modify_energy(_player, 1, "HUD成就测试"))
 	await get_tree().process_frame
+	assert_null(_hud.feiyi_list.get_node_or_null("成就牌列表区"), "成就获得动画结束前不得抢先显示标题")
+	assert_true(await _wait_until(func() -> bool: return not _hud.card_hand_animator.is_busy(), 2.0))
 
 	var section := _hud.feiyi_list.get_node_or_null("成就牌列表区")
 	assert_not_null(section)
@@ -119,7 +123,7 @@ func test_off_turn_achievement_cannot_replace_current_players_profile_or_hand_se
 	var food := 食物牌.new()
 	for _index: int in 6:
 		AchievementManager.record_food_consumed(_player, food)
-	await get_tree().process_frame
+	assert_true(await _wait_until(func() -> bool: return not _hud.card_hand_animator.is_busy(), 2.0))
 	_assert_single_visible_achievement(AchievementManager.ID_TAO_TIE)
 
 	_other_player.current_energy = 11
@@ -190,3 +194,12 @@ func _assert_single_visible_achievement(expected_id: StringName) -> void:
 		return
 	var thumbnail := grid.get_child(0) as 成就牌缩略图
 	assert_eq(thumbnail.card_data.achievement_id, expected_id)
+
+
+func _wait_until(predicate: Callable, max_seconds: float = 0.5) -> bool:
+	var deadline_msec := Time.get_ticks_msec() + int(max_seconds * 1000.0)
+	while Time.get_ticks_msec() < deadline_msec:
+		if bool(predicate.call()):
+			return true
+		await get_tree().process_frame
+	return bool(predicate.call())

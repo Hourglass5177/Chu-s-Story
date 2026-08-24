@@ -1,13 +1,17 @@
-[gd_resource type="Resource" script_class="食物牌" format=3 uid="uid://bgs4y5knw7xy0"]
+[gd_resource type="Resource" script_class="食物牌" format=3 uid="uid://b8gwy21stt68w"]
 
-[ext_resource type="Texture2D" uid="uid://crx4qxhrp8si6" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_dj83q"]
-[ext_resource type="Texture2D" path="res://arts/食物牌/数字版/松花皮蛋.png" id="2_dj83q"]
-[ext_resource type="Script" uid="uid://cabfa12ti5mjs" path="res://Cards/DataStructure/食物牌.gd" id="3_ck4x6"]
+[ext_resource type="Texture2D" uid="uid://crx4qxhrp8si6" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_jk4yj"]
+[ext_resource type="Texture2D" path="res://arts/食物牌/数字版/精武鸭脖.png" id="2_wjpve"]
+[ext_resource type="Script" uid="uid://cabfa12ti5mjs" path="res://Cards/DataStructure/食物牌.gd" id="3_3woy1"]
 
 [resource]
-script = ExtResource("3_ck4x6")
+script = ExtResource("3_3woy1")
+food_id = &"jing_wu_ya_bo"
+food_type = 0
+cost = 150
+effect_description = "精力 +2"
 card_type = 2
-card_name = "松花皮蛋"
-image_of_front = ExtResource("2_dj83q")
-image_of_back = ExtResource("1_dj83q")
+card_name = "精武鸭脖"
+image_of_front = ExtResource("2_wjpve")
+image_of_back = ExtResource("1_jk4yj")
 metadata/_custom_type_script = "uid://cabfa12ti5mjs"

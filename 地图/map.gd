@@ -1,7 +1,12 @@
 extends Node2D
 class_name MAP
+signal event_section_selected(request_id: int, section: MapSection)
+signal section_choice_selected(owner: StringName, request_id: int, section: MapSection)
 var grid_map: Dictionary[Vector3i, MapSection] = {}
 var hud:HUD
+var _event_section_request_id: int = -1
+var _event_section_options: Array[MapSection] = []
+var _section_choice_owner: StringName = &""
 func _ready():
 	# 1. 注册所有格子
 	# 假设所有的 MapSection 都放在一个叫 "Sections" 的节点下
@@ -38,13 +43,14 @@ func _show_reachable_areas() -> void:
 	var start_coord: Vector3i = current_player.now_pos
 	var max_steps: int = current_player.maxMove
 	var available_energy: int = current_player.current_energy
+	available_energy += FoodManager.get_preview_movement_discount(current_player)
 	if not current_player.武术拳法已生效:
 		for card:非遗牌 in current_player.非遗牌手牌:
 			if card.category == 非遗牌.CardCategory.武术拳法:
 				available_energy += 1
 				break
 
-	var states: Array[Dictionary] = _search_path_states(start_coord, max_steps, available_energy)
+	var states: Array[Dictionary] = _search_path_states(start_coord, max_steps, available_energy, current_player)
 	for state: Dictionary in states:
 		var coord: Vector3i = state["position"]
 		if coord == start_coord or not _is_state_active(state, states):
@@ -79,7 +85,47 @@ func _clear_all_highlights() -> void:
 	for section:MapSection in grid_map.values():
 		section.is_reachable = false
 
-func _search_path_states(start_coord: Vector3i, max_steps: int, max_energy: int) -> Array[Dictionary]:
+func begin_event_section_choice(request_id: int, sections: Array[MapSection]) -> void:
+	begin_section_choice(&"event", request_id, sections)
+
+func begin_section_choice(owner: StringName, request_id: int, sections: Array[MapSection]) -> void:
+	_clear_all_highlights()
+	_section_choice_owner = owner
+	_event_section_request_id = request_id
+	_event_section_options.clear()
+	for section: MapSection in sections:
+		if section == null or _event_section_options.has(section):
+			continue
+		_event_section_options.append(section)
+		section.is_reachable = true
+
+func end_event_section_choice(request_id: int = -1) -> void:
+	end_section_choice(&"event", request_id)
+
+func end_section_choice(owner: StringName = &"", request_id: int = -1) -> void:
+	if not owner.is_empty() and owner != _section_choice_owner:
+		return
+	if request_id >= 0 and request_id != _event_section_request_id:
+		return
+	_section_choice_owner = &""
+	_event_section_request_id = -1
+	_event_section_options.clear()
+	_clear_all_highlights()
+
+func is_event_section_choice_active() -> bool:
+	return _section_choice_owner == &"event" and is_section_choice_active()
+
+func is_section_choice_active(owner: StringName = &"") -> bool:
+	if not owner.is_empty() and owner != _section_choice_owner:
+		return false
+	return _event_section_request_id >= 0 and not _event_section_options.is_empty()
+
+func _search_path_states(
+	start_coord: Vector3i,
+	max_steps: int,
+	max_energy: int,
+	player: PlayerClass = null
+) -> Array[Dictionary]:
 	var states: Array[Dictionary] = [{
 		"position": start_coord,
 		"steps": 0,
@@ -102,7 +148,8 @@ func _search_path_states(start_coord: Vector3i, max_steps: int, max_energy: int)
 			var next_section: MapSection = grid_map[next_position]
 			if next_section.is_reached or next_section.is_occupied:
 				continue
-			var next_label := Vector2i(label.x + 1, label.y + next_section.cost)
+			var entry_cost := ProfessionManager.adjust_section_movement_cost(player, next_section, next_section.cost)
+			var next_label := Vector2i(label.x + 1, label.y + entry_cost)
 			if next_label.x > max_steps or next_label.y > max_energy:
 				continue
 			var existing_labels: Array = labels.get(next_position, [])
@@ -135,8 +182,14 @@ func _is_state_active(state: Dictionary, _states: Array[Dictionary]) -> bool:
 	var position: Vector3i = state["position"]
 	return labels.get(position, []).has(Vector2i(int(state["steps"]), int(state["cost"])))
 
-func _best_path(start_coord: Vector3i, target_coord: Vector3i, max_steps: int, max_energy: int) -> Dictionary:
-	var states := _search_path_states(start_coord, max_steps, max_energy)
+func _best_path(
+	start_coord: Vector3i,
+	target_coord: Vector3i,
+	max_steps: int,
+	max_energy: int,
+	player: PlayerClass = null
+) -> Dictionary:
+	var states := _search_path_states(start_coord, max_steps, max_energy, player)
 	var best_index := -1
 	for index: int in states.size():
 		var state: Dictionary = states[index]
@@ -164,6 +217,13 @@ func _best_path(start_coord: Vector3i, target_coord: Vector3i, max_steps: int, m
 
 # --- 玩家点击处理 ---
 func _on_section_clicked(target_section: MapSection) -> String:
+	if is_section_choice_active():
+		if _event_section_options.has(target_section):
+			section_choice_selected.emit(_section_choice_owner, _event_section_request_id, target_section)
+			if _section_choice_owner == &"event":
+				event_section_selected.emit(_event_section_request_id, target_section)
+			return "event choice"
+		return "not available"
 	if TurnManager.now_phase != TurnManager.TurnPhase.MOVING or TurnManager.is_movement_locked():
 		return "not available"
 		
@@ -176,6 +236,7 @@ func _on_section_clicked(target_section: MapSection) -> String:
 		return "not necessary"
 		
 	var max_energy = current_player.current_energy
+	max_energy += FoodManager.get_preview_movement_discount(current_player)
 	if EventManager.has_free_move_this_phase(current_player) or (EventManager.can_ignore_special_terrain_this_phase(current_player) and target_section.landform != MapSection.LandForm.平原):
 		max_energy = 1 << 30
 	if not current_player.武术拳法已生效:
@@ -184,7 +245,7 @@ func _on_section_clicked(target_section: MapSection) -> String:
 				max_energy += 1
 				break
 	
-	var path_result: Dictionary = _best_path(start_coord, target_coord, current_player.maxMove, max_energy)
+	var path_result: Dictionary = _best_path(start_coord, target_coord, current_player.maxMove, max_energy, current_player)
 	if path_result.is_empty():
 		print("无法到达该目标！")
 		return "error"

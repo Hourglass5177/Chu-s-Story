@@ -64,7 +64,7 @@ func test_two_consecutive_sessions_rebuild_clean_state_without_duplicate_signals
 	var prepared_deck_generation: int = ResourceManager._deck_build_generation
 	assert_gt(int(clean_counts["feiyi"]), 0)
 	assert_gt(int(clean_counts["food"]), 0)
-	assert_eq(int(clean_counts["event"]), 39)
+	assert_eq(int(clean_counts["event"]), 40)
 	var energy_connections_before := _connection_count(ResourceManager, &"energy_changed", AchievementManager._on_energy_changed)
 	var hand_connections_before := _connection_count(ResourceManager, &"feiyi_hand_changed", AchievementManager._on_feiyi_hand_changed)
 	var event_connections_before := _connection_count(EventManager, &"gameplay_event_triggered", AchievementManager._on_gameplay_event_triggered)
@@ -92,6 +92,34 @@ func test_two_consecutive_sessions_rebuild_clean_state_without_duplicate_signals
 	assert_eq(energy_connections_before, 1)
 	assert_eq(hand_connections_before, 1)
 	assert_eq(event_connections_before, 1)
+
+
+func test_skipped_roll_phase_clears_the_previous_hud_dice_listener() -> void:
+	var hud := SessionHudProbe.new()
+	var player := _new_player("跳过掷骰测试")
+	_created_nodes.append(hud)
+	player.roll_dice.connect(hud._roll_dice_information, CONNECT_ONE_SHOT)
+	hud._dice_signal_player = player
+	assert_true(player.roll_dice.is_connected(hud._roll_dice_information))
+	hud._clear_dice_information_connection()
+	assert_false(player.roll_dice.is_connected(hud._roll_dice_information))
+	# 下一回合重新进入掷骰阶段时必须可安全建立唯一监听。
+	player.roll_dice.connect(hud._roll_dice_information, CONNECT_ONE_SHOT)
+	assert_true(player.roll_dice.is_connected(hud._roll_dice_information))
+
+
+func test_game_manager_reset_cancels_interaction_once_and_preserves_reason_for_waiter() -> void:
+	TurnManager.GameOn = true
+	TurnManager.now_phase = TurnManager.TurnPhase.ACTION
+	var ticket := InteractionCoordinator.begin_interaction(
+		&"session_reset_probe", 15.0, Callable(), TurnManager.ModalResumePolicy.NO_RESUME, true
+	)
+	assert_not_null(ticket)
+	GameManager.reset_session(false)
+	var result := await InteractionCoordinator.await_result(ticket)
+	assert_eq(result.state, InteractionTicket.State.CANCELLED)
+	assert_eq(result.cancel_reason, &"session_reset")
+	assert_eq(TurnManager.get_modal_snapshot().depth, 0)
 
 
 func _dirty_every_runtime_system(player: PlayerClass) -> void:

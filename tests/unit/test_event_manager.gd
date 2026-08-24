@@ -6,6 +6,7 @@ var _effect_calls: int = 0
 
 func before_each() -> void:
 	EventManager.reset_for_new_game()
+	ProfessionManager.reset_for_new_game()
 	EventManager.auto_resolve_choices = true
 	TurnManager.GameOn = true
 	TurnManager.now_turn = 1
@@ -23,24 +24,42 @@ func after_each() -> void:
 	TurnManager.GameOn = false
 	TurnManager.players.clear()
 	EventManager.reset_for_new_game()
+	ProfessionManager.reset_for_new_game()
 	_source.free()
 	_target.free()
 
+func test_gu_zhu_yi_zhi_blocks_own_skill_without_reaction_and_keeps_action() -> void:
+	var card := load("res://Cards/事件牌/孤注一掷.tres") as 事件牌
+	var discard_before: Array[事件牌] = []
+	discard_before.assign(ResourceManager.事件弃牌堆)
+	watch_signals(EventManager)
+	await EventManager.resolve_event(_source, card)
+	assert_eq(ProfessionManager.get_blocked_turns(_source), 4)
+	assert_true(ResourceManager.事件弃牌堆.has(card))
+	assert_eq(TurnManager.now_phase, TurnManager.TurnPhase.ACTION)
+	assert_eq(TurnManager.modal_resolution_depth, 0)
+	assert_signal_not_emitted(EventManager, "reaction_requested")
+	assert_signal_emitted_with_parameters(EventManager, "event_finished", [_source, card, "事件【孤注一掷】结算完成。"])
+	ResourceManager.事件弃牌堆.assign(discard_before)
+
 func test_new_status_does_not_consume_already_entered_phase() -> void:
-	EventManager.add_status(_target, &"skip_moving", 2)
+	EventManager.add_status(_target, &"skip_moving", 2, "寸步难行")
 	assert_false(EventManager.on_phase_entered(_target, TurnManager.TurnPhase.MOVING))
+	assert_eq(EventManager.take_phase_message(_target), "")
 	assert_eq(EventManager.get_status_remaining(_target, &"skip_moving"), 2)
 	TurnManager.now_turn = 2
 	assert_true(EventManager.on_phase_entered(_target, TurnManager.TurnPhase.MOVING))
+	assert_eq(EventManager.take_phase_message(_target), "【寸步难行】生效：跳过移动阶段。")
 	assert_eq(EventManager.get_status_remaining(_target, &"skip_moving"), 1)
 	TurnManager.now_turn = 3
 	assert_true(EventManager.on_phase_entered(_target, TurnManager.TurnPhase.MOVING))
 	assert_eq(EventManager.get_status_remaining(_target, &"skip_moving"), 0)
 
 func test_free_move_status_applies_to_two_future_moving_phases() -> void:
-	EventManager.add_status(_target, &"free_move_phases", 2)
+	EventManager.add_status(_target, &"free_move_phases", 2, "国宝护航")
 	TurnManager.now_turn = 2
 	assert_false(EventManager.on_phase_entered(_target, TurnManager.TurnPhase.MOVING))
+	assert_eq(EventManager.take_phase_message(_target), "【国宝护航】生效：本移动阶段移动不消耗精力。")
 	var section := MapSection.new()
 	assert_eq(EventManager.adjust_movement_cost(_target, 7, 4, section), 0)
 	TurnManager.now_turn = 3
@@ -163,15 +182,27 @@ func test_timeout_defaults_optional_to_pass_and_forced_to_legal_option() -> void
 	assert_false(EventManager._choice_waiting)
 	assert_signal_emit_count(EventManager, "choice_resolved", 1)
 
-	var forced := EventChoiceRequest.new(_source, "强制", [42], PackedStringArray(["唯一合法项"]), false)
+	var forced := EventChoiceRequest.new(_source, "强制", [42, 84], PackedStringArray(["第一项", "第二项"]), false)
 	forced.request_id = 72
 	EventManager._pending_request = forced
 	EventManager._choice_waiting = true
 	EventManager._pending_choice = null
 	EventManager._on_choice_timeout()
-	assert_eq(EventManager._pending_choice, 42)
+	assert_eq(EventManager._pending_choice, 42, "强制选择超时必须按选项顺序执行第一项")
 	assert_false(EventManager._choice_waiting)
 	assert_signal_emit_count(EventManager, "choice_resolved", 2)
+
+	var forced_multiple := EventChoiceRequest.new(_source, "强制多选", [_source, _target], PackedStringArray(["来源", "目标"]), false, EventChoiceRequest.ChoiceKind.玩家)
+	forced_multiple.request_id = 73
+	forced_multiple.multiple = true
+	forced_multiple.min_selections = 2
+	forced_multiple.max_selections = 2
+	EventManager._pending_request = forced_multiple
+	EventManager._choice_waiting = true
+	EventManager._pending_choice = [_target]
+	EventManager._on_choice_timeout()
+	assert_eq(EventManager._pending_choice, [_target, _source], "强制多选超时应保留已选项并按原顺序补足")
+	assert_signal_emit_count(EventManager, "choice_resolved", 3)
 
 func test_timeout_clears_stale_event_overlay_request() -> void:
 	var overlay := preload("res://HUDs/event_overlay.tscn").instantiate() as EventOverlay
@@ -262,14 +293,16 @@ func test_equidistant_work_choice_is_requested_from_the_moved_player() -> void:
 	TurnManager.map = map
 	var section_requesters: Array[PlayerClass] = []
 	EventManager.choice_strategy = func(request: EventChoiceRequest):
+		if request.multiple:
+			return request.options.slice(0, request.max_selections)
 		if request.kind == EventChoiceRequest.ChoiceKind.格子:
 			section_requesters.append(request.requester)
 		return request.options[0]
 	await EventManager._event_zuo_shou_yu_li(_source)
 	assert_eq(section_requesters, [_target])
 	assert_eq(_target.current_energy, 5)
-	assert_eq(_target.current_money, 1125)
-	assert_eq(_source.current_money, 1125)
+	assert_eq(_target.current_money, 625)
+	assert_eq(_source.current_money, 625)
 	TurnManager.map = null
 	map.free()
 
@@ -356,8 +389,8 @@ func test_jin_chan_does_not_cancel_the_other_players_portion_of_tong_tai() -> vo
 			return jin_chan
 		return request.options[0]
 	await EventManager._event_tong_tai_jing_ji(_source)
-	assert_eq(_source.current_money, 1100, "来源玩家的获胜部分应继续结算")
-	assert_eq(_target.current_money, 1000, "目标玩家只抵消自己的失分部分")
+	assert_eq(_source.current_money, 600, "来源玩家的获胜部分应继续结算")
+	assert_eq(_target.current_money, 500, "目标玩家只抵消自己的失分部分")
 	assert_false(_target.事件牌手牌.has(jin_chan))
 
 func test_yi_cang_invitation_timeout_means_refusal() -> void:

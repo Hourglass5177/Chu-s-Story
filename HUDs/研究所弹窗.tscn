@@ -81,7 +81,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.35, 0.2, 0.13, 1)
 theme_override_fonts/font = ExtResource("3_font")
 theme_override_font_sizes/font_size = 48
-text = "余额  1000"
+text = "余额  —"
 
 [node name="购买次数" type="Label" parent="状态栏"]
 layout_mode = 2

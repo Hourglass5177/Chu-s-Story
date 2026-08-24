@@ -1,7 +1,6 @@
 extends GutTest
 
 const EVENT_DIR := "res://Cards/事件牌"
-const BLOCKED_NAMES := ["孤注一掷"]
 const RETAINED_NAMES := ["妙手回春", "游目骋怀", "畅行无阻", "金蝉脱壳", "移花接木"]
 
 func test_all_40_event_resources_are_valid_and_uniquely_identified() -> void:
@@ -24,7 +23,7 @@ func test_all_40_event_resources_are_valid_and_uniquely_identified() -> void:
 		ids[card.event_id] = true
 	assert_eq(resources.size(), 40)
 
-func test_exactly_39_events_are_active_and_all_have_effect_dispatch() -> void:
+func test_all_40_events_are_active_and_have_effect_dispatch() -> void:
 	var active_count := 0
 	var active_ids: Array[StringName] = []
 	for file_name: String in DirAccess.get_files_at(EVENT_DIR):
@@ -35,16 +34,16 @@ func test_exactly_39_events_are_active_and_all_have_effect_dispatch() -> void:
 			active_count += 1
 			active_ids.append(card.event_id)
 			assert_true(EventManager.is_event_implemented(card.event_id), card.card_name + " 缺少效果分派")
-	assert_eq(active_count, 39)
-	assert_eq(EventManager.IMPLEMENTED_EVENT_IDS.size(), 39)
+	assert_eq(active_count, 40)
+	assert_eq(EventManager.IMPLEMENTED_EVENT_IDS.size(), 40)
 	for event_id: StringName in EventManager.IMPLEMENTED_EVENT_IDS:
 		assert_has(active_ids, event_id, str(event_id) + " 不得只登记分派而没有可用资源")
 
-func test_dependency_events_are_explicitly_blocked() -> void:
-	for name: String in BLOCKED_NAMES:
-		var card := load(EVENT_DIR + "/" + name + ".tres") as 事件牌
-		assert_false(card.is_available(), name + " 不应进入当前牌库")
-		assert_false(card.dependency_note.is_empty(), name + " 必须写明依赖")
+func test_gu_zhu_yi_zhi_is_available_without_stale_dependency() -> void:
+	var card := load(EVENT_DIR + "/孤注一掷.tres") as 事件牌
+	assert_true(card.is_available())
+	assert_true(card.dependency_note.is_empty())
+	assert_eq(card.event_id, &"gu_zhu_yi_zhi")
 
 func test_only_confirmed_five_events_are_retainable() -> void:
 	var retained: Array[String] = []
@@ -58,8 +57,8 @@ func test_only_confirmed_five_events_are_retainable() -> void:
 	expected.sort()
 	assert_eq(retained, expected)
 
-func test_runtime_event_deck_filters_blocked_cards() -> void:
-	assert_eq(ResourceManager.事件牌库.size(), 39)
+func test_runtime_event_deck_contains_all_40_available_cards() -> void:
+	assert_eq(ResourceManager.事件牌库.size(), 40)
 	for card: 事件牌 in ResourceManager.事件牌库:
 		assert_true(card.is_available())
 

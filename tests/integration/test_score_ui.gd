@@ -1,5 +1,14 @@
 extends GutTest
 
+class CameraToggleProbe extends HUD:
+	var camera_update_count: int = 0
+
+	func update_camera_view(_duration: float = 0.4):
+		camera_update_count += 1
+
+	func _update_view_mode_hint() -> void:
+		pass
+
 func test_score_panel_shows_breakdown_and_rules_page() -> void:
 	var was_paused := get_tree().paused
 	get_tree().paused = false
@@ -39,6 +48,16 @@ func test_map_zoom_limits_and_tooltip_copy_are_fixed() -> void:
 	assert_eq(HUD.clamp_map_zoom_factor(0.25), 1.0)
 	assert_eq(HUD.clamp_map_zoom_factor(2.0), 2.0)
 	assert_eq(HUD.clamp_map_zoom_factor(9.0), 3.0)
+	assert_eq(HUD.get_focus_entry_zoom_factor(1.0), 2.0, "默认全图进入追踪应相对默认放大一倍")
+	assert_eq(HUD.get_focus_entry_zoom_factor(1.5), 2.0, "追踪入口缩放不得依赖当前全局倍率")
+	assert_eq(HUD.get_focus_entry_zoom_factor(3.0), 2.0, "追踪入口不得把当前倍率再次翻倍")
+	assert_eq(HUD.get_view_mode_hint_text(false), "【ALT】切换视角：全局\n【滚轮】视角缩放")
+	assert_eq(HUD.get_view_mode_hint_text(true), "【ALT】切换视角：追踪\n【滚轮】视角缩放")
+	var hud_scene := preload("res://HUDs/HUD.tscn").instantiate()
+	var view_hint := hud_scene.get_node("地图/缩放提示信息") as Label
+	assert_eq(view_hint.get_theme_constant("outline_size"), 2, "视角状态需要轻微白边以提高辨识度")
+	assert_eq(view_hint.get_theme_color("font_outline_color"), Color(1.0, 1.0, 1.0, 0.9))
+	hud_scene.free()
 	assert_eq(HUD.MAP_TOOLTIP_DELAY, 0.6)
 	assert_eq(MapSection.get_type_brief(MapSection.SectionType.研究所), "买卖非遗牌")
 	assert_eq(MapSection.get_type_brief(MapSection.SectionType.一般), "")
@@ -51,6 +70,31 @@ func test_map_zoom_limits_and_tooltip_copy_are_fixed() -> void:
 	scenery.cost = 2
 	assert_eq(scenery.get_tooltip_text(), "十堰16 · 山地 · 风景（武当山）\n精力消耗：2\n首次到达后获得3点精力")
 	scenery.free()
+
+func test_leaving_focus_keeps_the_current_camera_center() -> void:
+	var hud := CameraToggleProbe.new()
+	var camera := Camera2D.new()
+	var viewport := SubViewport.new()
+	viewport.size = Vector2i(1299, 826)
+	hud.map_camera = camera
+	hud.map_viewport = viewport
+	hud.global_zoom = Vector2.ONE
+	hud.map_zoom_factor = 2.0
+	hud.global_pos = Vector2(1280.0, 800.0)
+	hud._global_camera_position = hud.global_pos
+	hud.is_focus_mode = true
+	var displayed_center := Vector2(900.0, 600.0)
+	camera.position = displayed_center
+	camera.zoom = Vector2(2.0, 2.0)
+
+	hud._on_view_toggle_pressed()
+
+	assert_false(hud.is_focus_mode)
+	assert_eq(hud._global_camera_position, displayed_center, "退出追踪后应从当前画面继续全局浏览，不回地图正中")
+	assert_eq(hud.camera_update_count, 1)
+	camera.free()
+	viewport.free()
+	hud.free()
 
 func test_every_scenery_section_has_a_display_name() -> void:
 	var map_scene := preload("res://地图/map.tscn").instantiate()

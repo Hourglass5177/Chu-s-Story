@@ -40,11 +40,14 @@ func before_each() -> void:
 	_first = PlayerClass.new()
 	_first.player_name = "成就流程P1"
 	_first.player_index = 0
+	# 本文件验证普通的一回合一张规则；美食博主的三张上限由职业专项测试覆盖。
+	_first.player_types = PlayerClass.PlayerCharacter.生活博主
 	_second = PlayerClass.new()
 	_second.player_name = "成就流程P2"
 	_second.player_index = 1
 	var players: Array[PlayerClass] = [_first, _second]
 	AchievementManager.reset_for_new_game(players)
+	ProfessionManager.reset_for_new_game(players)
 	TurnManager.players.assign(players)
 	TurnManager.player_num = 2
 	TurnManager.now_player_index = 0
@@ -69,6 +72,7 @@ func after_each() -> void:
 		_created_map.free()
 	_created_map = null
 	AchievementManager.reset_for_new_game([])
+	ProfessionManager.reset_for_new_game()
 	EventManager.reset_for_new_game()
 	EventManager.bind_runtime(_event_hud_backup, _event_overlay_backup)
 	ResourceManager.食物牌库.assign(_food_deck_backup)
@@ -112,7 +116,7 @@ func test_food_counts_only_after_a_successful_consume_even_at_full_energy() -> v
 	assert_eq(_achievement_progress(_first, AchievementManager.ID_TAO_TIE), 1)
 
 
-func test_event_progress_counts_public_resolution_once_but_not_empty_blocked_or_retained_reuse() -> void:
+func test_event_progress_counts_public_resolution_once_but_not_empty_or_retained_reuse() -> void:
 	var no_effect_card := load("res://Cards/事件牌/故地重游.tres") as 事件牌
 	await EventManager.resolve_event(_first, no_effect_card)
 	assert_eq(_achievement_progress(_first, AchievementManager.ID_XING_YUN_ER), 1, "有效事件即使无事发生也应计数")
@@ -129,14 +133,19 @@ func test_event_progress_counts_public_resolution_once_but_not_empty_blocked_or_
 	var event_section := MapSection.new()
 	event_section.type = MapSection.SectionType.事件
 	event_section.location_index = Vector3i(2, -2, 0)
+	_first.arrival_id = 1
 	_first.last_normal_arrival_position = event_section.location_index
+	_first.last_action_arrival_position = event_section.location_index
+	_first.last_action_arrival_turn_epoch = TurnManager.get_turn_epoch()
+	_first.last_action_arrival_session_generation = TurnManager.get_session_generation()
 	await EventManager.trigger_arrival_event(_first, event_section, 1)
 	event_section.free()
 	assert_eq(_achievement_progress(_first, AchievementManager.ID_XING_YUN_ER), 2, "空牌库没有公开事件，不得计数")
 
-	var blocked_card := load("res://Cards/事件牌/孤注一掷.tres") as 事件牌
-	await EventManager.resolve_event(_first, blocked_card)
-	assert_eq(_achievement_progress(_first, AchievementManager.ID_XING_YUN_ER), 2, "未实装依赖牌不是合法公开结算")
+	var profession_block_card := load("res://Cards/事件牌/孤注一掷.tres") as 事件牌
+	await EventManager.resolve_event(_first, profession_block_card)
+	assert_eq(_achievement_progress(_first, AchievementManager.ID_XING_YUN_ER), 3, "孤注一掷已是合法公开事件，应计数一次")
+	assert_eq(ProfessionManager.get_blocked_turns(_first), 4)
 
 
 func test_normal_scenery_check_in_is_atomic_unique_and_rewards_three_only_once() -> void:

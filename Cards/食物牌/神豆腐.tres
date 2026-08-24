@@ -1,13 +1,17 @@
-[gd_resource type="Resource" script_class="食物牌" format=3 uid="uid://c6kplbilumi8l"]
+[gd_resource type="Resource" script_class="食物牌" format=3 uid="uid://vem5qlmsk1ta"]
 
-[ext_resource type="Texture2D" uid="uid://crx4qxhrp8si6" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_bxco0"]
-[ext_resource type="Texture2D" path="res://arts/食物牌/数字版/孔明菜.png" id="2_0psf7"]
-[ext_resource type="Script" uid="uid://cabfa12ti5mjs" path="res://Cards/DataStructure/食物牌.gd" id="3_s45gw"]
+[ext_resource type="Texture2D" uid="uid://crx4qxhrp8si6" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_66tmg"]
+[ext_resource type="Texture2D" path="res://arts/食物牌/数字版/神豆腐.png" id="2_lgh00"]
+[ext_resource type="Script" uid="uid://cabfa12ti5mjs" path="res://Cards/DataStructure/食物牌.gd" id="3_1l4ya"]
 
 [resource]
-script = ExtResource("3_s45gw")
+script = ExtResource("3_1l4ya")
+food_id = &"shen_dou_fu"
+food_type = 0
+cost = 150
+effect_description = "精力 +2"
 card_type = 2
-card_name = "孔明菜"
-image_of_front = ExtResource("2_0psf7")
-image_of_back = ExtResource("1_bxco0")
+card_name = "神豆腐"
+image_of_front = ExtResource("2_lgh00")
+image_of_back = ExtResource("1_66tmg")
 metadata/_custom_type_script = "uid://cabfa12ti5mjs"

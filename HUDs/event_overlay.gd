@@ -57,6 +57,12 @@ func _on_event_revealed(player: PlayerClass, card: 事件牌) -> void:
 	show()
 
 func _on_choice_requested(request: EventChoiceRequest) -> void:
+	if request.presentation != EventChoiceRequest.Presentation.默认 \
+			or request.kind in [EventChoiceRequest.ChoiceKind.格子, EventChoiceRequest.ChoiceKind.玩家]:
+		_active_request = null
+		_clear_options()
+		hide()
+		return
 	_show_request(request, false)
 
 func _on_reaction_requested(request: EventChoiceRequest) -> void:
@@ -69,15 +75,18 @@ func _show_request(request: EventChoiceRequest, is_reaction: bool) -> void:
 	_deadline_msec = Time.get_ticks_msec() + int(request.timeout_seconds * 1000.0)
 	var requester_name := request.requester.player_name if is_instance_valid(request.requester) else "当前玩家"
 	var is_reveal_confirmation := request.kind == EventChoiceRequest.ChoiceKind.确认 and not _current_card_name.is_empty()
-	_context_label.text = "%s · %s" % [requester_name, "响应" if is_reaction else ("事件牌" if is_reveal_confirmation else "选择")]
-	_title_label.text = "【%s】" % _current_card_name if not _current_card_name.is_empty() else request.title
-	if _current_card_name.is_empty():
-		_card_image.texture = EVENT_CARD_BACK
+	_context_label.text = "%s · %s" % [requester_name, "响应牌" if is_reaction else ("事件牌" if is_reveal_confirmation else "选择")]
+	if is_reaction:
+		_show_response_card_preview(request.options[0] if not request.options.is_empty() else null)
+	else:
+		_title_label.text = "【%s】" % _current_card_name if not _current_card_name.is_empty() else request.title
+		if _current_card_name.is_empty():
+			_card_image.texture = EVENT_CARD_BACK
 	if not is_reveal_confirmation:
 		_prompt_label.text = request.prompt
 	_instruction_label.text = "是否响应" if is_reaction else ("确认" if is_reveal_confirmation else "请选择")
 	_step_label.text = "%d 秒" % int(request.timeout_seconds)
-	_timeout_hint.text = "超时放弃" if request.optional else "超时随机选择"
+	_timeout_hint.text = "超时放弃" if request.optional else "超时默认选择"
 	_timeout_bar.value = 100.0
 	_clear_options()
 	for index in request.options.size():
@@ -86,6 +95,9 @@ func _show_request(request: EventChoiceRequest, is_reaction: bool) -> void:
 		button.focus_mode = Control.FOCUS_ALL
 		button.text = request.option_labels[index] if index < request.option_labels.size() else str(request.options[index])
 		button.pressed.connect(_on_option_pressed.bind(request.options[index]))
+		if is_reaction and request.options[index] is 卡牌基类:
+			button.mouse_entered.connect(_show_response_card_preview.bind(request.options[index]))
+			button.focus_entered.connect(_show_response_card_preview.bind(request.options[index]))
 		_options_box.add_child(button)
 	if request.optional:
 		var pass_button := Button.new()
@@ -106,13 +118,27 @@ func _on_option_pressed(option) -> void:
 func _on_choice_resolved(request_id: int, _timed_out: bool) -> void:
 	if _active_request == null or _active_request.request_id != request_id:
 		return
+	var close_overlay := _active_request.close_overlay_on_resolve
 	_active_request = null
 	_clear_options()
+	if close_overlay:
+		_reset_and_hide()
+		return
 	_instruction_label.text = "结算中"
 	_step_label.text = ""
 	_countdown_label.text = ""
 	_timer_panel.hide()
 	_timeout_bar.value = 0.0
+
+
+func _show_response_card_preview(card) -> void:
+	if not card is 卡牌基类:
+		_title_label.text = "选择响应牌"
+		_card_image.texture = EVENT_CARD_BACK
+		return
+	var response_card := card as 卡牌基类
+	_title_label.text = "【%s】" % response_card.card_name
+	_card_image.texture = response_card.image_of_front if response_card.image_of_front != null else EVENT_CARD_BACK
 
 func _on_interaction_finished(_player: PlayerClass) -> void:
 	_release_retained_preview_pause()

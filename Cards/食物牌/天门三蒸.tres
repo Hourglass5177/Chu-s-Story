@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="食物牌" load_steps=4 format=3]
+
+[ext_resource type="Texture2D" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_back"]
+[ext_resource type="Texture2D" path="res://arts/食物牌/数字版/完全版-v1/天门三蒸.png" id="2_front"]
+[ext_resource type="Script" path="res://Cards/DataStructure/食物牌.gd" id="3_script"]
+
+[resource]
+script = ExtResource("3_script")
+food_id = &"tian_men_san_zheng"
+food_type = 1
+cost = 250
+effect_description = "精力+1，随机获得两张省/市级食物牌。"
+card_type = 2
+card_name = "天门三蒸"
+image_of_front = ExtResource("2_front")
+image_of_back = ExtResource("1_back")
+description = "精力+1，随机获得两张省/市级食物牌。"
+metadata/_custom_type_script = "res://Cards/DataStructure/食物牌.gd"

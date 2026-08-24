@@ -228,7 +228,7 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("1_co0a7")
 theme_override_font_sizes/font_size = 71
-text = "1000"
+text = "500"
 vertical_alignment = 1
 
 [node name="精力背景" type="TextureRect" parent="玩家信息" unique_id=1474567996]
@@ -377,9 +377,11 @@ offset_top = -150.0
 offset_right = 581.0
 offset_bottom = -45.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 0.9)
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("1_co0a7")
 theme_override_font_sizes/font_size = 40
-text = "【ALT】切换全局/跟踪视角
+text = "【ALT】切换视角：全局
 【滚轮】视角缩放"
 
 [node name="手牌信息" type="ReferenceRect" parent="." unique_id=1990475967]

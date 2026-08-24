@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="楚物志"
-config/version="beta 0.1.0"
+config/version="beta 0.2.0"
 run/main_scene="uid://bpggqwetns32d"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/image="uid://conv21o25i7e4"
@@ -19,12 +19,15 @@ config/icon="uid://gforsoryh67s"
 
 [autoload]
 
-ResourceManager="*uid://cqqtdufuwcgog"
-TurnManager="*uid://82mw0rmfhe1u"
-GameManager="*uid://doh3a7q0o7j46"
+GameManager="*res://Managers/game_manager.tscn"
+ResourceManager="*res://Managers/ResouceManager.gd"
+TurnManager="*res://Managers/turn_manager.tscn"
+InteractionCoordinator="*res://Managers/interaction_coordinator.gd"
+ProfessionManager="*res://Managers/profession_manager.gd"
 EventManager="*res://Managers/event_manager.gd"
 MarketManager="*res://Managers/market_manager.gd"
 AchievementManager="*res://Managers/achievement_manager.gd"
+FoodManager="*res://Managers/food_manager.gd"
 
 [display]
 

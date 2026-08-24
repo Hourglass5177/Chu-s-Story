@@ -7,6 +7,8 @@ var _phase_backup: TurnManager.TurnPhase
 var _player_index_backup: int
 var _hud_backup: HUD
 var _market_backup: Array[非遗牌]
+var _session_seed_backup: int
+var _runtime_profile_backup: GameManager.RuntimeProfile
 
 func before_each() -> void:
 	_food_deck_backup.assign(ResourceManager.食物牌库)
@@ -16,6 +18,8 @@ func before_each() -> void:
 	_player_index_backup = TurnManager.now_player_index
 	_hud_backup = ResourceManager.hud
 	_market_backup = MarketManager.get_inventory()
+	_session_seed_backup = GameManager.get_session_seed()
+	_runtime_profile_backup = GameManager.runtime_profile
 	MarketManager.reset_for_new_game()
 	ResourceManager.hud = null
 
@@ -30,10 +34,11 @@ func after_each() -> void:
 	MarketManager.reset_for_new_game()
 	for card: 非遗牌 in _market_backup:
 		MarketManager.deposit_card(card, &"test_restore")
+	GameManager.configure_session(_session_seed_backup, _runtime_profile_backup)
 
 func test_two_dice_rolls_stay_in_2_to_12_and_center_near_7() -> void:
 	var player := PlayerClass.new()
-	seed(20260805)
+	GameManager.configure_session(20260805, GameManager.RuntimeProfile.HEADLESS_SIMULATION)
 	var total := 0
 	var minimum := 12
 	var maximum := 2
@@ -51,6 +56,8 @@ func test_two_dice_rolls_stay_in_2_to_12_and_center_near_7() -> void:
 
 func test_consumed_food_returns_once_and_cannot_duplicate() -> void:
 	var player := PlayerClass.new()
+	# PlayerClass 默认职业为美食博主（每回合可享用3张）；本回归验证普通职业的基础上限。
+	player.player_types = PlayerClass.PlayerCharacter.魔术博主
 	var food := 食物牌.new()
 	var second_food := 食物牌.new()
 	food.card_name = "回库测试食物"
@@ -131,6 +138,53 @@ func test_used_feiyi_is_removed_and_applies_effect() -> void:
 	assert_eq(player.current_energy, 6)
 	assert_false(player.非遗牌手牌.has(card))
 	assert_true(MarketManager.get_inventory().has(card), "已使用的非国家级非遗牌应自动进入全局研究所")
+	player.free()
+
+
+func test_folk_music_and_festival_rewards_are_consistently_500() -> void:
+	var folk_count := 0
+	var festival_count := 0
+	for region: MapSection.REGION in ResourceManager.地区非遗牌库:
+		for card: 非遗牌 in ResourceManager.地区非遗牌库[region]:
+			if card.category == 非遗牌.CardCategory.民间音乐:
+				folk_count += 1
+				assert_eq(card.effect_value, 500, card.card_name)
+				assert_string_contains(card.effect_description, "500", card.card_name)
+				assert_false(card.effect_description.contains("750"), card.card_name)
+			elif card.category == 非遗牌.CardCategory.节日庆典:
+				festival_count += 1
+				assert_eq(card.effect_value, 500, card.card_name)
+				assert_string_contains(card.effect_description, "3 点精力点数和 500 积分点", card.card_name)
+	assert_eq(folk_count, 19)
+	assert_eq(festival_count, 5)
+
+	var player := PlayerClass.new()
+	player.current_money = 0
+	var music := 非遗牌.new()
+	music.card_name = "民间音乐测试"
+	music.category = 非遗牌.CardCategory.民间音乐
+	ResourceManager.feiyi_execute_effect(player, music)
+	assert_eq(player.current_money, 500)
+
+	var festival_region := MapSection.REGION.未知
+	var festival_card: 非遗牌 = null
+	for region: MapSection.REGION in ResourceManager.地区非遗牌库:
+		for card: 非遗牌 in ResourceManager.地区非遗牌库[region]:
+			if card.category == 非遗牌.CardCategory.节日庆典:
+				festival_region = region
+				festival_card = card
+				break
+		if festival_card != null:
+			break
+	assert_not_null(festival_card)
+	var festival_deck_backup: Array = ResourceManager.地区非遗牌库[festival_region].duplicate()
+	ResourceManager.地区非遗牌库[festival_region].assign([festival_card])
+	player.current_energy = 5
+	player.current_money = 0
+	assert_eq(ResourceManager.draw_regional_feiyi_free(player, festival_region, false), festival_card)
+	assert_eq(player.current_energy, 8)
+	assert_eq(player.current_money, 500)
+	ResourceManager.地区非遗牌库[festival_region].assign(festival_deck_backup)
 	player.free()
 
 func test_score_combo_uses_highest_category_tier_only() -> void:

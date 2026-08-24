@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ProfessionDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Cards/DataStructure/profession_definition.gd" id="1_definition"]
+
+[resource]
+script = ExtResource("1_definition")
+profession_id = &"travel_blogger"
+profession_type = 4
+profession_name = "旅行博主"
+skill_name = "风景奖励"
+description = "路过风景格时精力消耗-1；每次到达风景区，获得250积分点。"
+short_description = "风景格减耗1，到达获得250积分点"
+scenery_arrival_money = 250
+scenery_movement_discount = 1

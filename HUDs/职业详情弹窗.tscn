@@ -1,0 +1,172 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://HUDs/职业详情弹窗.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://arts/1x/资源 10.png" id="2_panel"]
+[ext_resource type="FontFile" path="res://arts/像素字体.ttf" id="3_font"]
+[ext_resource type="Texture2D" path="res://arts/控件/close.png" id="4_close"]
+[ext_resource type="Texture2D" path="res://arts/1x/close.png" id="5_mask"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_panel"]
+texture = ExtResource("2_panel")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_status"]
+bg_color = Color(0.965, 0.866, 0.667, 0.72)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.608, 0.337, 0.188, 0.68)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
+
+[node name="职业详情弹窗" type="Control"]
+process_mode = 3
+z_index = 80
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+script = ExtResource("1_script")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0.12, 0.07, 0.04, 0.5)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -780.0
+offset_top = -520.0
+offset_right = 780.0
+offset_bottom = 520.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_panel")
+
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 320.0
+offset_top = 58.0
+offset_right = -320.0
+offset_bottom = 145.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.94, 0.77, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 70
+text = "职业技能"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Content" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 205.0
+offset_top = 185.0
+offset_right = -205.0
+offset_bottom = -145.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 72
+
+[node name="Portrait" type="TextureRect" parent="Panel/Content"]
+custom_minimum_size = Vector2(470, 690)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Info" type="VBoxContainer" parent="Panel/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 24
+
+[node name="ProfessionName" type="Label" parent="Panel/Content/Info"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.29, 0.14, 0.08, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 68
+text = "职业"
+
+[node name="SkillName" type="Label" parent="Panel/Content/Info"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.36, 0.13, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 52
+text = "技能"
+
+[node name="Divider" type="HSeparator" parent="Panel/Content/Info"]
+layout_mode = 2
+
+[node name="Description" type="Label" parent="Panel/Content/Info"]
+custom_minimum_size = Vector2(1, 300)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.32, 0.21, 0.14, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 43
+text = "技能描述"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="StatusPanel" type="PanelContainer" parent="Panel/Content/Info"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_status")
+
+[node name="Status" type="Label" parent="Panel/Content/Info/StatusPanel"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 38
+text = "技能可用"
+
+[node name="BtnClose" type="TextureButton" parent="Panel"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -275.0
+offset_top = -28.0
+offset_right = 42.0
+offset_bottom = 289.0
+grow_horizontal = 0
+focus_mode = 2
+texture_normal = ExtResource("4_close")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Mask" type="TextureRect" parent="Panel/BtnClose"]
+visible = false
+modulate = Color(0, 0, 0, 0.392157)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_mask")
+expand_mode = 1
+stretch_mode = 5

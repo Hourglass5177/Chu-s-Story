@@ -6,6 +6,10 @@
 
 [resource]
 script = ExtResource("3_j0hr8")
+food_id = &"e_zhou_yu_wan"
+food_type = 0
+cost = 150
+effect_description = "精力 +2"
 card_type = 2
 card_name = "鄂州鱼丸"
 image_of_front = ExtResource("2_pgvkc")

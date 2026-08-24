@@ -9,9 +9,9 @@ func _ready() -> void:
 	#$Player.start_coord = Vector3i(0,0,0)
 	#$Player2.start_coord = Vector3i(7, -6, -1)
 	#TurnManager.start_game(players)
-	init_game()
+	await init_game()
 
-func init_game():
+func init_game() -> void:
 	player_data = GameManager.player_data
 	var players:Array[PlayerClass] = []
 	var player_scene = preload("res://Players/player.tscn")

@@ -1,0 +1,48 @@
+name: Beta Verify
+
+on:
+  push:
+  pull_request:
+    branches: [Release]
+  workflow_dispatch:
+    inputs:
+      full_balance:
+        description: Run the 600-match balance batch
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  verify:
+    runs-on: windows-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Godot 4.6.2
+        shell: pwsh
+        run: |
+          $archive = Join-Path $env:RUNNER_TEMP 'godot.zip'
+          $install = Join-Path $env:RUNNER_TEMP 'godot-4.6.2'
+          Invoke-WebRequest 'https://github.com/godotengine/godot/releases/download/4.6.2-stable/Godot_v4.6.2-stable_win64.exe.zip' -OutFile $archive
+          Expand-Archive -LiteralPath $archive -DestinationPath $install
+          $console = Get-ChildItem -LiteralPath $install -Filter '*_console.exe' -Recurse | Select-Object -First 1
+          if ($null -eq $console) { throw 'Godot console executable was not found.' }
+          "GODOT4_CONSOLE=$($console.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Import, test, and simulate smoke matches
+        shell: pwsh
+        run: ./tools/verify_beta.ps1 -GodotPath $env:GODOT4_CONSOLE
+
+      - name: Full balance batch
+        if: github.event_name == 'workflow_dispatch' && inputs.full_balance
+        shell: pwsh
+        run: ./tools/run_balance_simulation.ps1 -GodotPath $env:GODOT4_CONSOLE
+
+      - name: Upload verification artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: beta-verification-${{ github.run_number }}
+          path: artifacts/
+          if-no-files-found: warn

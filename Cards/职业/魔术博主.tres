@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ProfessionDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Cards/DataStructure/profession_definition.gd" id="1_definition"]
+
+[resource]
+script = ExtResource("1_definition")
+profession_id = &"magic_blogger"
+profession_type = 1
+profession_name = "魔术博主"
+skill_name = "牌堆操控"
+description = "抽取非遗牌和事件牌时，改为一次性抽取三张，选择其中一张，将其余牌以任意顺序放回牌堆。牌堆不足时有多少抽多少。"
+short_description = "抽3选1并排列其余牌"
+draw_count = 3
+can_reorder_draws = true

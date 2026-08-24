@@ -42,10 +42,10 @@ enum REGION{
 }
 const TYPE_TO_EFFECT = {
 	CardCategory.戏曲表演:"行动阶段，可以消耗此牌，获得 3 点精力。",
-	CardCategory.民间音乐:"行动阶段，可以消耗此牌，获得 750 点积分点。",
+	CardCategory.民间音乐:"行动阶段，可以消耗此牌，获得 500 点积分点。",
 	CardCategory.手工技艺:"移动阶段，可以消耗此牌，使可移动最大步数翻倍。",
 	CardCategory.神话传说:"任意时候可以消耗此牌。当其他玩家的食物牌或事件牌效果即将作用于你时，可无效化自己受到的部分，或将该部分转移给另一名合法玩家。",
-	CardCategory.节日庆典:"获得此牌时，立即获得 3 点精力点数和 750 积分点。",
+	CardCategory.节日庆典:"获得此牌时，立即获得 3 点精力点数和 500 积分点。",
 	CardCategory.武术拳法:"拥有此牌时，移动阶段第一次移动时消耗精力点数-1（不重复叠加）。",
 	CardCategory.国家级非遗:"国家级非遗，此牌的基础分数为 5 。"
 }
@@ -70,7 +70,7 @@ enum EffectType {
 }
 
 @export var effect_type: EffectType = EffectType.NONE
-@export var effect_value: int = 0 # 比如加750积分，这里就填 750
+@export var effect_value: int = 0 # 比如加500积分，这里就填 500
 @export var passive: bool = false
 @export var destroy_after_use: bool = false
 @export var unbreakable:bool = false

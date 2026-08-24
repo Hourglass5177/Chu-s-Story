@@ -85,6 +85,78 @@ func test_path_prefers_energy_then_steps_and_honors_both_limits() -> void:
 		section.free()
 	map.free()
 
+
+func test_travel_scenery_discount_is_used_by_path_cost_and_reachability() -> void:
+	var map := MAP.new()
+	var start := Vector3i.ZERO
+	var flat_scenery := Vector3i(1, -1, 0)
+	var mountain_scenery := Vector3i(2, -2, 0)
+	_add_section(map, start, 0)
+	_add_section(map, flat_scenery, 1)
+	_add_section(map, mountain_scenery, 2)
+	map.grid_map[flat_scenery].type = MapSection.SectionType.风景
+	map.grid_map[mountain_scenery].type = MapSection.SectionType.风景
+	map.grid_map[mountain_scenery].landform = MapSection.LandForm.山地
+
+	var traveler := PlayerClass.new()
+	traveler.player_types = PlayerClass.PlayerCharacter.旅行博主
+	traveler.now_pos = start
+	traveler.maxMove = 2
+	traveler.current_energy = 1
+	map.grid_map[start].is_occupied = true
+	TurnManager.players.assign([traveler])
+	TurnManager.player_num = 1
+	TurnManager.now_player_index = 0
+	TurnManager.now_phase = TurnManager.TurnPhase.MOVING
+	TurnManager.GameOn = true
+
+	var path := map._best_path(start, mountain_scenery, 2, 1, traveler)
+	assert_eq(path.get("cost", -1), 1, "平原风景应为0，山地风景应为1")
+	map._show_reachable_areas()
+	assert_true(map.grid_map[flat_scenery].is_reachable)
+	assert_true(map.grid_map[mountain_scenery].is_reachable, "减耗必须进入可达范围计算")
+
+	traveler.player_types = PlayerClass.PlayerCharacter.美食博主
+	assert_true(map._best_path(start, mountain_scenery, 2, 1, traveler).is_empty(), "普通职业仍需原始3点精力")
+
+	for section: MapSection in map.grid_map.values():
+		section.free()
+	traveler.free()
+	map.free()
+
+
+func test_travel_discount_can_make_a_scenic_detour_the_preferred_route() -> void:
+	var map := MAP.new()
+	var start := Vector3i.ZERO
+	var short_step := Vector3i(1, -1, 0)
+	var scenic_a := Vector3i(0, -1, 1)
+	var scenic_b := Vector3i(1, -2, 1)
+	var target := Vector3i(2, -2, 0)
+	_add_section(map, start, 0)
+	_add_section(map, short_step, 1)
+	_add_section(map, scenic_a, 1)
+	_add_section(map, scenic_b, 1)
+	_add_section(map, target, 1)
+	map.grid_map[scenic_a].type = MapSection.SectionType.风景
+	map.grid_map[scenic_b].type = MapSection.SectionType.风景
+	var traveler := PlayerClass.new()
+	traveler.player_types = PlayerClass.PlayerCharacter.旅行博主
+	var regular := PlayerClass.new()
+	regular.player_types = PlayerClass.PlayerCharacter.美食博主
+
+	var traveler_path := map._best_path(start, target, 3, 10, traveler)
+	assert_eq(traveler_path["coordinates"], [scenic_a, scenic_b, target])
+	assert_eq(traveler_path["cost"], 1, "旅行博主应优先选择减耗后的风景路线")
+	var regular_path := map._best_path(start, target, 3, 10, regular)
+	assert_eq(regular_path["coordinates"], [short_step, target])
+	assert_eq(regular_path["cost"], 2, "普通职业仍应选择更短且更省精力的路线")
+
+	for section: MapSection in map.grid_map.values():
+		section.free()
+	traveler.free()
+	regular.free()
+	map.free()
+
 func test_reachable_areas_refresh_from_new_position_with_remaining_steps() -> void:
 	var map := MAP.new()
 	var origin := Vector3i.ZERO
@@ -118,6 +190,32 @@ func test_reachable_areas_refresh_from_new_position_with_remaining_steps() -> vo
 	for section: MapSection in map.grid_map.values():
 		section.free()
 	player.free()
+	map.free()
+
+func test_event_section_choice_reuses_reachable_highlight_and_routes_click_without_moving() -> void:
+	var map := MAP.new()
+	_add_section(map, Vector3i.ZERO, 1)
+	_add_section(map, Vector3i(1, -1, 0), 1)
+	_add_section(map, Vector3i(0, -1, 1), 1)
+	var first: MapSection = map.grid_map[Vector3i.ZERO]
+	var second: MapSection = map.grid_map[Vector3i(1, -1, 0)]
+	var excluded: MapSection = map.grid_map[Vector3i(0, -1, 1)]
+	watch_signals(map)
+
+	map.begin_event_section_choice(17, [first, second])
+	assert_true(map.is_event_section_choice_active())
+	assert_true(first.is_reachable)
+	assert_true(second.is_reachable)
+	assert_false(excluded.is_reachable)
+	assert_eq(await map._on_section_clicked(second), "event choice")
+	assert_signal_emitted_with_parameters(map, "event_section_selected", [17, second])
+
+	map.end_event_section_choice(17)
+	assert_false(map.is_event_section_choice_active())
+	assert_false(first.is_reachable)
+	assert_false(second.is_reachable)
+	for section: MapSection in map.grid_map.values():
+		section.free()
 	map.free()
 
 func test_completed_partial_move_requests_a_new_reachable_area_refresh() -> void:

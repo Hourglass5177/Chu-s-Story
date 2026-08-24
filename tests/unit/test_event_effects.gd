@@ -16,6 +16,7 @@ func before_each() -> void:
 	_event_discard_backup.assign(ResourceManager.事件弃牌堆)
 	_regional_decks_backup = ResourceManager.地区非遗牌库.duplicate(true)
 	_market_backup = MarketManager.get_inventory()
+	ProfessionManager.reset_for_new_game()
 
 func after_each() -> void:
 	_teardown_scenario()
@@ -26,6 +27,7 @@ func after_each() -> void:
 	MarketManager.reset_for_new_game()
 	for card: 非遗牌 in _market_backup:
 		MarketManager.deposit_card(card, &"test_restore")
+	ProfessionManager.reset_for_new_game()
 
 func test_every_available_event_completes_a_deterministic_resolution() -> void:
 	var cards: Array[事件牌] = []
@@ -36,7 +38,7 @@ func test_every_available_event_completes_a_deterministic_resolution() -> void:
 		if card.is_available():
 			cards.append(card)
 	cards.sort_custom(func(first: 事件牌, second: 事件牌) -> bool: return first.event_id < second.event_id)
-	assert_eq(cards.size(), 39)
+	assert_eq(cards.size(), 40)
 
 	for index in cards.size():
 		var card: 事件牌 = cards[index]
@@ -55,14 +57,41 @@ func test_every_available_event_completes_a_deterministic_resolution() -> void:
 		assert_true(_event_specific_contract_holds(card.event_id), card.card_name + " 的确定性效果契约未满足")
 		_teardown_scenario()
 
+func test_zuo_shou_yu_li_uses_lifestyle_bloggers_zero_work_cost() -> void:
+	_setup_scenario(&"zuo_shou_yu_li")
+	_players[0].player_types = PlayerClass.PlayerCharacter.生活博主
+	_players[0].current_energy = 0
+	var card := load("res://Cards/事件牌/坐收渔利.tres") as 事件牌
+	await EventManager.resolve_event(_players[0], card)
+	assert_eq(_players[0].current_energy, 0)
+	assert_eq(_players[0].current_money, 1375)
+
+func test_explicit_scenery_events_trigger_travel_blogger_bonus() -> void:
+	_setup_scenario(&"chen_jin_ti_yan")
+	_players[0].player_types = PlayerClass.PlayerCharacter.旅行博主
+	var immersion := load("res://Cards/事件牌/沉浸体验.tres") as 事件牌
+	await EventManager.resolve_event(_players[0], immersion)
+	assert_eq(_players[0].current_money, 1250)
+
+	_setup_scenario(&"you_mu_cheng_huai")
+	_players[0].player_types = PlayerClass.PlayerCharacter.旅行博主
+	var roam := load("res://Cards/事件牌/游目骋怀.tres") as 事件牌
+	await EventManager.resolve_event(_players[0], roam)
+	assert_true(_players[0].事件牌手牌.has(roam))
+	await EventManager.request_play_retained_event(_players[0], roam)
+	assert_eq(_players[0].current_money, 1250)
+
 func _setup_scenario(event_id: StringName) -> void:
 	_teardown_scenario()
 	EventManager.reset_for_new_game()
+	ProfessionManager.reset_for_new_game()
 	MarketManager.reset_for_new_game()
 	EventManager.bind_runtime(null, null)
 	EventManager.choice_strategy = func(request: EventChoiceRequest):
 		if request.options.is_empty():
 			return null
+		if request.multiple:
+			return request.options.slice(0, request.max_selections)
 		if request.kind == EventChoiceRequest.ChoiceKind.格子:
 			if event_id == &"yi_jing_xun_zong":
 				for option in request.options:
@@ -147,6 +176,7 @@ func _teardown_scenario() -> void:
 	TurnManager.players.clear()
 	TurnManager.map = null
 	EventManager.reset_for_new_game()
+	ProfessionManager.reset_for_new_game()
 	for player: PlayerClass in _players:
 		if is_instance_valid(player):
 			player.free()
@@ -191,6 +221,8 @@ func _event_specific_contract_holds(event_id: StringName) -> bool:
 				and _players[1].current_money == 1125 and _players[1].current_energy == 5
 		&"pou_duo_yi_gua":
 			return _players.all(func(player: PlayerClass) -> bool: return player.current_money == 1000)
+		&"gu_zhu_yi_zhi":
+			return ProfessionManager.get_blocked_turns(_players[0]) == 4
 		&"ba_geng_xie_ye":
 			return EventManager.get_status_remaining(_players[0], &"work_banned") == 3
 		&"yi_chuang_zeng_shou":

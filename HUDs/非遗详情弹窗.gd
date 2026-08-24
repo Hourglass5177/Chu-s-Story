@@ -1,6 +1,8 @@
 extends Panel
 class_name 非遗详情弹窗
 
+signal detail_closed
+
 @onready var card_image = $TextureRect as TextureRect
 @onready var lbl_name = $VBoxContainer/LblName as Label
 @onready var lbl_score = $VBoxContainer/LblScore as Label
@@ -8,9 +10,10 @@ class_name 非遗详情弹窗
 @onready var lbl_cate = $VBoxContainer/LblCate as Label
 @onready var lbl_effect = $VBoxContainer/LblEffect as Label
 
-var current_card: 非遗牌
+var current_card: 非遗牌 = null
+var _owns_pause: bool = false
 
-func _ready():
+func _ready() -> void:
 	#btn_use.pressed.connect(_on_use_pressed)
 	$BtnClose.pressed.connect(_on_close_pressed)
 	hide()
@@ -27,7 +30,9 @@ func _ready():
 		$BtnClose.button_up.connect(func(): mask.modulate = Color(0, 0, 0, 0.4))   # 松开恢复
 
 # 打开面板并填充数据
-func show_detail(card_data: 非遗牌, player: PlayerClass):
+func show_detail(card_data: 非遗牌, _player: PlayerClass) -> void:
+	if card_data == null:
+		return
 	current_card = card_data
 	card_image.texture = card_data.image_of_front
 	lbl_name.text = "【名称】" + card_data.card_name
@@ -35,9 +40,20 @@ func show_detail(card_data: 非遗牌, player: PlayerClass):
 	lbl_desc.text = "【描述】" + card_data.description
 	lbl_cate.text = "【类别】" + 非遗牌.CardCategory.find_key(card_data.category)
 	lbl_effect.text = "【效果】" + card_data.effect_description
+	if not visible:
+		_owns_pause = not get_tree().paused
+		if _owns_pause:
+			get_tree().paused = true
 	show()
-	get_tree().paused = true
 
-func _on_close_pressed():
+func _on_close_pressed() -> void:
+	close_detail()
+
+func close_detail() -> void:
+	if not visible:
+		return
 	hide()
-	get_tree().paused = false
+	if _owns_pause:
+		get_tree().paused = false
+	_owns_pause = false
+	detail_closed.emit()

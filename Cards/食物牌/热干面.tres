@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="食物牌" load_steps=4 format=3]
+
+[ext_resource type="Texture2D" path="res://arts/食物牌/食物牌（牌背）.jpg" id="1_back"]
+[ext_resource type="Texture2D" path="res://arts/食物牌/数字版/完全版-v1/热干面.png" id="2_front"]
+[ext_resource type="Script" path="res://Cards/DataStructure/食物牌.gd" id="3_script"]
+
+[resource]
+script = ExtResource("3_script")
+food_id = &"re_gan_mian"
+food_type = 1
+cost = 250
+effect_description = "获得与当前剩余精力相等的精力。"
+card_type = 2
+card_name = "热干面"
+image_of_front = ExtResource("2_front")
+image_of_back = ExtResource("1_back")
+description = "获得与当前剩余精力相等的精力。"
+metadata/_custom_type_script = "res://Cards/DataStructure/食物牌.gd"
