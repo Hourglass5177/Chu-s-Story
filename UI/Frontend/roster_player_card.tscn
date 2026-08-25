@@ -1,0 +1,151 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://UI/Frontend/roster_player_card.gd" id="1_script"]
+[ext_resource type="Theme" path="res://UI/Frontend/frontend_theme.tres" id="2_theme"]
+
+[node name="RosterPlayerCard" type="PanelContainer"]
+custom_minimum_size = Vector2(620, 430)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 0
+focus_mode = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_script")
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Header" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="SlotBadge" type="PanelContainer" parent="Content/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SlotLabel" type="Label" parent="Content/Header/SlotBadge"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.976, 0.902, 1)
+theme_override_colors/font_outline_color = Color(0.18, 0.09, 0.06, 0.65)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 30
+text = "P1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ControlBadge" type="PanelContainer" parent="Content/Header"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ControlLabel" type="Label" parent="Content/Header/ControlBadge"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.933, 0.78, 1)
+theme_override_font_sizes/font_size = 22
+text = "AI"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeaderSpacer" type="Control" parent="Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="ReadyBadge" type="PanelContainer" parent="Content/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ReadyLabel" type="Label" parent="Content/Header/ReadyBadge"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.976, 0.902, 1)
+theme_override_font_sizes/font_size = 22
+text = "就绪"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PortraitFrame" type="PanelContainer" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 190)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Portrait" type="TextureRect" parent="Content/PortraitFrame"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="InfoRow" type="HBoxContainer" parent="Content"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 14
+
+[node name="NameBlock" type="VBoxContainer" parent="Content/InfoRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="PlayerName" type="Label" parent="Content/InfoRow/NameBlock"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.184, 0.094, 0.071, 1)
+theme_override_font_sizes/font_size = 42
+text = "玩家1"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="InfoDivider" type="ColorRect" parent="Content/InfoRow"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.706, 0.502, 0.294, 0.52)
+
+[node name="MetaBlock" type="VBoxContainer" parent="Content/InfoRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="ProfessionLabel" type="Label" parent="Content/InfoRow/MetaBlock"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.471, 0.259, 0.153, 1)
+theme_override_font_sizes/font_size = 32
+text = "美食博主"
+horizontal_alignment = 1
+vertical_alignment = 2
+text_overrun_behavior = 3
+
+[node name="RegionLabel" type="Label" parent="Content/InfoRow/MetaBlock"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.365, 0.251, 0.192, 1)
+theme_override_font_sizes/font_size = 30
+text = "武汉"
+horizontal_alignment = 1
+vertical_alignment = 0
+text_overrun_behavior = 3

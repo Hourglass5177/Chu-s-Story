@@ -8,6 +8,8 @@ var player_data: Array = []
 var runtime_profile: RuntimeProfile = RuntimeProfile.NORMAL
 var _session_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _session_seed: int = 0
+var _active_session_setup: SessionSetup = null
+var _local_session_prepared: bool = false
 
 func _ready() -> void:
 	configure_session()
@@ -42,6 +44,39 @@ func pick_from(values: Array):
 	if values.is_empty():
 		return null
 	return values[_session_rng.randi_range(0, values.size() - 1)]
+
+## Starts a fresh local session in the only safe order: choose the new world's RNG
+## first, then rebuild/shuffle runtime resources with that RNG, then publish setup.
+## This keeps the reported seed and the actual opening decks replayable.
+func begin_local_session(setup: SessionSetup, seed_value: int = -1) -> Error:
+	if setup == null or setup.mode != SessionSetup.GameMode.LOCAL:
+		return ERR_INVALID_PARAMETER
+	if not setup.validate().is_empty():
+		return ERR_INVALID_DATA
+	configure_session(seed_value, RuntimeProfile.NORMAL)
+	reset_session()
+	return prepare_local_session(setup)
+
+## 原子提交本地开局配置。重复提交同一配置视为幂等成功；
+## 不同配置必须先 reset_session()，避免快速重复确认覆盖已经开始加载的对局。
+func prepare_local_session(setup: SessionSetup) -> Error:
+	if setup == null or setup.mode != SessionSetup.GameMode.LOCAL:
+		return ERR_INVALID_PARAMETER
+	if not setup.validate().is_empty():
+		return ERR_INVALID_DATA
+	var candidate: SessionSetup = setup.duplicate_snapshot()
+	candidate.normalize_display_names()
+	if _local_session_prepared:
+		return OK if _active_session_setup != null and _active_session_setup.is_equivalent_to(candidate) else ERR_ALREADY_EXISTS
+	_active_session_setup = candidate
+	player_data.assign(candidate.to_legacy_player_data())
+	_local_session_prepared = true
+	return OK
+
+
+## 返回独立快照，调用者无法修改 GameManager 内已经提交的配置。
+func get_active_session_setup() -> SessionSetup:
+	return _active_session_setup.duplicate_snapshot() if _active_session_setup != null else null
 
 ## 清理上一局的全部运行时绑定。每个管理器都通过能力检查调用，便于系统分阶段接入。
 func reset_session(rebuild_resources: bool = true) -> void:
@@ -84,6 +119,8 @@ func reset_session(rebuild_resources: bool = true) -> void:
 	_call_if_available(food_manager, &"reset_session")
 
 	player_data.clear()
+	_active_session_setup = null
+	_local_session_prepared = false
 
 ## 正式结算界面的“返回主菜单”入口。
 func return_to_main_menu(scene_path: String = MAIN_MENU_SCENE) -> Error:

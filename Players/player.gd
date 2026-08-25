@@ -35,6 +35,8 @@ func _ready() -> void:
 # 玩家的基础属性 [cite: 1]
 @export var player_name: String = "Player"
 @export var player_types: PlayerCharacter = PlayerCharacter.美食博主
+## 本阶段仅记录席位类型；电脑玩家仍由同一台设备顺序操作，不启用 AI。
+@export var is_bot: bool = false
 
 @export var current_energy: int = 6 
 @export var max_energy: int = 12

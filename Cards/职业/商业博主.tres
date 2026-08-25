@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ProfessionDefinition" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="ProfessionDefinition" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://Cards/DataStructure/profession_definition.gd" id="1_definition"]
+[ext_resource type="Texture2D" path="res://arts/素材合集/sprite及立绘/Sprite/角色/商业博主.png" id="2_portrait"]
 
 [resource]
 script = ExtResource("1_definition")
@@ -10,6 +11,7 @@ profession_name = "商业博主"
 skill_name = "交易优惠"
 description = "开局积分点+500；非遗五折；每次光临食物商店可免费刷新1次。"
 short_description = "开局+500；非遗五折；每次光临免费刷新1次"
+selection_portrait = ExtResource("2_portrait")
 market_buy_multiplier = 0.5
 food_shop_refreshes = 1
 starting_money_bonus = 500

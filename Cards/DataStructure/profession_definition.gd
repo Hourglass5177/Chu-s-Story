@@ -11,6 +11,8 @@ class_name ProfessionDefinition
 @export var skill_name: String = ""
 @export_multiline var description: String = ""
 @export var short_description: String = ""
+## 前端选角页使用的临时大立绘。职业与角色仍保持一一绑定。
+@export var selection_portrait: Texture2D = null
 
 @export_group("规则参数")
 @export_range(1, 10, 1) var food_use_limit: int = 1

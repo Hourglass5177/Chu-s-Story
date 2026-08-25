@@ -1,0 +1,256 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://UI/Frontend/player_setup_page.gd" id="1_script"]
+[ext_resource type="Theme" path="res://UI/Frontend/frontend_theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" path="res://arts/地图/地图.png" id="3_map"]
+
+[node name="PlayerSetupPage" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+transition_target_path = NodePath("SafeArea/PagePanel")
+script = ExtResource("1_script")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.184, 0.094, 0.071, 0.54)
+
+[node name="SafeArea" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 48
+
+[node name="PagePanel" type="PanelContainer" parent="SafeArea"]
+custom_minimum_size = Vector2(1900, 1260)
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="SafeArea/PagePanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="HBoxContainer" parent="SafeArea/PagePanel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="SlotLabel" type="Label" parent="SafeArea/PagePanel/Content/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.784, 0.4, 0.153, 1)
+theme_override_colors/font_outline_color = Color(1, 0.965, 0.851, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 56
+text = "P1"
+
+[node name="ControlKindLabel" type="Label" parent="SafeArea/PagePanel/Content/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.365, 0.251, 0.192, 1)
+theme_override_font_sizes/font_size = 30
+text = "真人"
+vertical_alignment = 1
+
+[node name="HeaderSpacer" type="Control" parent="SafeArea/PagePanel/Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="ProgressLabel" type="Label" parent="SafeArea/PagePanel/Content/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.365, 0.251, 0.192, 1)
+theme_override_font_sizes/font_size = 32
+text = "1 / 1"
+vertical_alignment = 1
+
+[node name="NameRow" type="HBoxContainer" parent="SafeArea/PagePanel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="NameLabel" type="Label" parent="SafeArea/PagePanel/Content/NameRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "名字"
+vertical_alignment = 1
+
+[node name="NameInput" type="LineEdit" parent="SafeArea/PagePanel/Content/NameRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(720, 68)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+placeholder_text = "P1"
+select_all_on_focus = true
+
+[node name="MainRow" type="HBoxContainer" parent="SafeArea/PagePanel/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="ProfessionColumn" type="VBoxContainer" parent="SafeArea/PagePanel/Content/MainRow"]
+custom_minimum_size = Vector2(1010, 720)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.65
+theme_override_constants/separation = 14
+
+[node name="ProfessionTitle" type="Label" parent="SafeArea/PagePanel/Content/MainRow/ProfessionColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "选择职业"
+
+[node name="ProfessionGrid" type="GridContainer" parent="SafeArea/PagePanel/Content/MainRow/ProfessionColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 18
+theme_override_constants/v_separation = 18
+columns = 3
+
+[node name="DetailPanel" type="PanelContainer" parent="SafeArea/PagePanel/Content/MainRow"]
+custom_minimum_size = Vector2(455, 720)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DetailContent" type="VBoxContainer" parent="SafeArea/PagePanel/Content/MainRow/DetailPanel"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Portrait" type="TextureRect" parent="SafeArea/PagePanel/Content/MainRow/DetailPanel/DetailContent"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(390, 410)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ProfessionName" type="Label" parent="SafeArea/PagePanel/Content/MainRow/DetailPanel/DetailContent"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "请选择职业"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="SkillName" type="Label" parent="SafeArea/PagePanel/Content/MainRow/DetailPanel/DetailContent"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.784, 0.4, 0.153, 1)
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="SkillDescription" type="Label" parent="SafeArea/PagePanel/Content/MainRow/DetailPanel/DetailContent"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.365, 0.251, 0.192, 1)
+theme_override_font_sizes/font_size = 28
+vertical_alignment = 0
+autowrap_mode = 2
+
+[node name="BirthplaceColumn" type="VBoxContainer" parent="SafeArea/PagePanel/Content/MainRow"]
+custom_minimum_size = Vector2(590, 720)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="BirthplaceTitle" type="Label" parent="SafeArea/PagePanel/Content/MainRow/BirthplaceColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "选择出生点"
+
+[node name="BirthplacePreview" type="Label" parent="SafeArea/PagePanel/Content/MainRow/BirthplaceColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.365, 0.251, 0.192, 1)
+theme_override_font_sizes/font_size = 28
+text = "请选择出生点"
+
+[node name="BirthMapFrame" type="PanelContainer" parent="SafeArea/PagePanel/Content/MainRow/BirthplaceColumn"]
+custom_minimum_size = Vector2(560, 340)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BirthMap" type="AspectRatioContainer" parent="SafeArea/PagePanel/Content/MainRow/BirthplaceColumn/BirthMapFrame"]
+unique_name_in_owner = true
+layout_mode = 2
+ratio = 1.506
+stretch_mode = 2
+
+[node name="MapTexture" type="TextureRect" parent="SafeArea/PagePanel/Content/MainRow/BirthplaceColumn/BirthMapFrame/BirthMap"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_map")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BirthplaceHotspots" type="Control" parent="SafeArea/PagePanel/Content/MainRow/BirthplaceColumn/BirthMapFrame/BirthMap"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+
+[node name="ListHint" type="Label" parent="SafeArea/PagePanel/Content/MainRow/BirthplaceColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.459, 0.341, 0.282, 1)
+theme_override_font_sizes/font_size = 24
+text = "方向键选择"
+
+[node name="BirthplaceList" type="VBoxContainer" parent="SafeArea/PagePanel/Content/MainRow/BirthplaceColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Message" type="Label" parent="SafeArea/PagePanel/Content"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.784, 0.243, 0.141, 1)
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Separator" type="HSeparator" parent="SafeArea/PagePanel/Content"]
+layout_mode = 2
+
+[node name="Actions" type="HBoxContainer" parent="SafeArea/PagePanel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PreviousButton" type="Button" parent="SafeArea/PagePanel/Content/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 76)
+layout_mode = 2
+focus_mode = 2
+text = "返回"
+
+[node name="ActionSpacer" type="Control" parent="SafeArea/PagePanel/Content/Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="ConfirmButton" type="Button" parent="SafeArea/PagePanel/Content/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 76)
+layout_mode = 2
+focus_mode = 2
+text = "确认"

@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ProfessionDefinition" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="ProfessionDefinition" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://Cards/DataStructure/profession_definition.gd" id="1_definition"]
+[ext_resource type="Texture2D" path="res://arts/素材合集/sprite及立绘/Sprite/角色/生活博主.png" id="2_portrait"]
 
 [resource]
 script = ExtResource("1_definition")
@@ -10,4 +11,5 @@ profession_name = "生活博主"
 skill_name = "轻松打工"
 description = "打工不消耗精力。"
 short_description = "打工不消耗精力"
+selection_portrait = ExtResource("2_portrait")
 work_energy_cost = 0

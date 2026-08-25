@@ -1,0 +1,246 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://UI/Frontend/roster_page.gd" id="1_script"]
+[ext_resource type="Theme" path="res://UI/Frontend/frontend_theme.tres" id="2_theme"]
+
+[sub_resource type="StyleBoxFlat" id="Style_roster_panel"]
+bg_color = Color(0.992, 0.943, 0.817, 0.99)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.639, 0.357, 0.196, 0.94)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+content_margin_left = 34.0
+content_margin_top = 28.0
+content_margin_right = 34.0
+content_margin_bottom = 28.0
+shadow_color = Color(0.12, 0.055, 0.035, 0.28)
+shadow_size = 18
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="Style_lineup_panel"]
+bg_color = Color(0.886, 0.737, 0.451, 0.34)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.812, 0.557, 0.286, 0.74)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+content_margin_left = 20.0
+content_margin_top = 18.0
+content_margin_right = 20.0
+content_margin_bottom = 18.0
+
+[sub_resource type="StyleBoxFlat" id="Style_preview_panel"]
+bg_color = Color(1, 0.957, 0.842, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.839, 0.604, 0.306, 0.9)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+
+[node name="RosterPage" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+initial_focus_path = NodePath("SafeArea/PagePanel/Content/Footer/PreviousButton")
+transition_target_path = NodePath("SafeArea/PagePanel")
+script = ExtResource("1_script")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.184, 0.094, 0.071, 0.5)
+
+[node name="SafeArea" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 72
+theme_override_constants/margin_top = 42
+theme_override_constants/margin_right = 72
+theme_override_constants/margin_bottom = 42
+
+[node name="PagePanel" type="PanelContainer" parent="SafeArea"]
+custom_minimum_size = Vector2(1040, 720)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_roster_panel")
+
+[node name="Content" type="VBoxContainer" parent="SafeArea/PagePanel"]
+layout_mode = 2
+theme_override_constants/separation = 13
+
+[node name="Header" type="HBoxContainer" parent="SafeArea/PagePanel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="HeaderCopy" type="VBoxContainer" parent="SafeArea/PagePanel/Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 1
+
+[node name="Eyebrow" type="Label" parent="SafeArea/PagePanel/Content/Header/HeaderCopy"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.784, 0.4, 0.153, 1)
+theme_override_font_sizes/font_size = 23
+text = "本地游戏 · 最终确认"
+
+[node name="Title" type="Label" parent="SafeArea/PagePanel/Content/Header/HeaderCopy"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "阵容确认"
+
+[node name="Hint" type="Label" parent="SafeArea/PagePanel/Content/Header/HeaderCopy"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.365, 0.251, 0.192, 1)
+theme_override_font_sizes/font_size = 24
+text = "检查队伍，选择席位可修改"
+
+[node name="ReadyPanel" type="PanelContainer" parent="SafeArea/PagePanel/Content/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+
+[node name="ReadyContent" type="VBoxContainer" parent="SafeArea/PagePanel/Content/Header/ReadyPanel"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ReadyCountLabel" type="Label" parent="SafeArea/PagePanel/Content/Header/ReadyPanel/ReadyContent"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.976, 0.902, 1)
+theme_override_font_sizes/font_size = 40
+text = "0 / 0"
+horizontal_alignment = 1
+
+[node name="ReadyCaption" type="Label" parent="SafeArea/PagePanel/Content/Header/ReadyPanel/ReadyContent"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.851, 0.541, 1)
+theme_override_font_sizes/font_size = 22
+text = "等待配置"
+horizontal_alignment = 1
+
+[node name="LineupPanel" type="PanelContainer" parent="SafeArea/PagePanel/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("Style_lineup_panel")
+
+[node name="LineupCenter" type="CenterContainer" parent="SafeArea/PagePanel/Content/LineupPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CardsFlow" type="HFlowContainer" parent="SafeArea/PagePanel/Content/LineupPanel/LineupCenter"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 20
+alignment = 1
+last_wrap_alignment = 2
+
+[node name="PreviewPanel" type="PanelContainer" parent="SafeArea/PagePanel/Content"]
+custom_minimum_size = Vector2(0, 112)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_preview_panel")
+
+[node name="PreviewContent" type="HBoxContainer" parent="SafeArea/PagePanel/Content/PreviewPanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PreviewAccent" type="ColorRect" parent="SafeArea/PagePanel/Content/PreviewPanel/PreviewContent"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.839, 0.416, 0.239, 1)
+
+[node name="PreviewCopy" type="VBoxContainer" parent="SafeArea/PagePanel/Content/PreviewPanel/PreviewContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="PreviewIdentity" type="Label" parent="SafeArea/PagePanel/Content/PreviewPanel/PreviewContent/PreviewCopy"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.184, 0.094, 0.071, 1)
+theme_override_font_sizes/font_size = 30
+text = "选择席位查看详情"
+text_overrun_behavior = 3
+
+[node name="PreviewMeta" type="Label" parent="SafeArea/PagePanel/Content/PreviewPanel/PreviewContent/PreviewCopy"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.471, 0.259, 0.153, 1)
+theme_override_font_sizes/font_size = 24
+text_overrun_behavior = 3
+
+[node name="PreviewSkill" type="Label" parent="SafeArea/PagePanel/Content/PreviewPanel/PreviewContent/PreviewCopy"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.365, 0.251, 0.192, 1)
+theme_override_font_sizes/font_size = 22
+text_overrun_behavior = 3
+
+[node name="ValidationError" type="Label" parent="SafeArea/PagePanel/Content"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.62, 0.18, 0.12, 1)
+theme_override_font_sizes/font_size = 24
+text = "阵容未准备好"
+horizontal_alignment = 1
+
+[node name="Footer" type="HBoxContainer" parent="SafeArea/PagePanel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="PreviousButton" type="Button" parent="SafeArea/PagePanel/Content/Footer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 76)
+layout_mode = 2
+focus_mode = 2
+text = "上一步"
+
+[node name="FooterSpacer" type="Control" parent="SafeArea/PagePanel/Content/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="StartButton" type="Button" parent="SafeArea/PagePanel/Content/Footer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 82)
+layout_mode = 2
+focus_mode = 2
+text = "开始游戏"

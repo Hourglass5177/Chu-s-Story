@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ProfessionDefinition" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="ProfessionDefinition" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://Cards/DataStructure/profession_definition.gd" id="1_definition"]
+[ext_resource type="Texture2D" path="res://arts/素材合集/sprite及立绘/Sprite/角色/魔术博主.png" id="2_portrait"]
 
 [resource]
 script = ExtResource("1_definition")
@@ -10,5 +11,6 @@ profession_name = "魔术博主"
 skill_name = "牌堆操控"
 description = "抽取非遗牌和事件牌时，改为一次性抽取三张，选择其中一张，将其余牌以任意顺序放回牌堆。牌堆不足时有多少抽多少。"
 short_description = "抽3选1并排列其余牌"
+selection_portrait = ExtResource("2_portrait")
 draw_count = 3
 can_reorder_draws = true

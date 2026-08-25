@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ProfessionDefinition" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="ProfessionDefinition" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://Cards/DataStructure/profession_definition.gd" id="1_definition"]
+[ext_resource type="Texture2D" path="res://arts/素材合集/sprite及立绘/Sprite/角色/美食博主.png" id="2_portrait"]
 
 [resource]
 script = ExtResource("1_definition")
@@ -10,4 +11,5 @@ profession_name = "美食博主"
 skill_name = "多享食物"
 description = "行动阶段可多享用2次食物。"
 short_description = "每回合可享用3张食物"
+selection_portrait = ExtResource("2_portrait")
 food_use_limit = 3

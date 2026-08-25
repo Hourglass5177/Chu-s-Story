@@ -52,6 +52,13 @@ func test_six_definitions_are_complete_unique_and_match_player_enum() -> void:
 	assert_string_contains(explorer.description, "准备阶段和结束阶段")
 
 
+func test_all_profession_definitions_have_selection_portraits() -> void:
+	var definitions: Array[ProfessionDefinition] = ProfessionManager.get_all_definitions()
+	assert_eq(definitions.size(), PlayerClass.PlayerCharacter.size())
+	for definition: ProfessionDefinition in definitions:
+		assert_not_null(definition.selection_portrait, "%s 缺少选角立绘" % definition.profession_name)
+
+
 func test_dynamic_query_and_rule_helpers_follow_current_profession() -> void:
 	assert_eq(ProfessionManager.get_definition(_first).profession_id, &"food_blogger")
 	assert_eq(ProfessionManager.get_food_use_limit(_first), 3)
