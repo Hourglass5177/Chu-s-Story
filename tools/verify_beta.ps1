@@ -78,7 +78,7 @@ if ($gutText -notmatch 'All tests passed!' -or $gutText -match '(?m)^Failing Tes
 $smokeRoot = Join-Path $projectRoot 'artifacts\verify\simulation-smoke'
 $matches = @()
 foreach ($playerCount in @(2, 3, 6)) {
-    foreach ($strategyName in @('legal_random', 'balanced_greedy')) {
+	foreach ($strategyName in @('legal_random', 'survival_greedy', 'score_greedy')) {
         $groupDir = Join-Path $smokeRoot "players-$playerCount\$strategyName"
         $groupOutput = $groupDir.Replace('\', '/')
         Invoke-GodotStep "simulation-smoke-$playerCount-$strategyName" @(
@@ -91,8 +91,8 @@ foreach ($playerCount in @(2, 3, 6)) {
         $matches += @(Get-Content -LiteralPath $matchesPath -Raw | ConvertFrom-Json)
     }
 }
-if ($matches.Count -ne 6 -or @($matches | Where-Object { $_.aborted }).Count -gt 0) {
-    throw '模拟冒烟必须完成 2/3/6 人 × 两种策略共 6 局，且不得异常终止。'
+if ($matches.Count -ne 9 -or @($matches | Where-Object { $_.aborted }).Count -gt 0) {
+	throw '模拟冒烟必须完成 2/3/6 人 × 三种策略共 9 局，且不得异常终止。'
 }
 
-Write-Host "Beta 验证通过：$($testMatch.Groups[1].Value) 项测试，6 局模拟冒烟。"
+Write-Host "Beta 验证通过：$($testMatch.Groups[1].Value) 项测试，9 局模拟冒烟。"

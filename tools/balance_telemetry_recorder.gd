@@ -5,16 +5,27 @@ var _report: Dictionary = {}
 var _players: Array = []
 var _connections: Array[Dictionary] = []
 var _food_start_state: Dictionary[int, Dictionary] = {}
+var _initial_professions: Dictionary[int, String] = {}
+var _profession_turns: Dictionary[int, Dictionary] = {}
 
-func start_match(seed_value: int, player_count: int, strategy: StringName, players: Array) -> void:
+func start_match(config: SimulationMatchConfig, players: Array) -> void:
 	_disconnect_all()
 	_food_start_state.clear()
 	_players = players.duplicate()
+	_initial_professions.clear()
+	_profession_turns.clear()
+	for player: PlayerClass in _players:
+		var profession_name := ProfessionManager.get_definition(player).profession_name
+		_initial_professions[player.player_index] = profession_name
+		_profession_turns[player.player_index] = {}
 	_report = {
-		"schema_version": 1,
-		"seed": seed_value,
-		"player_count": player_count,
-		"strategy": String(strategy),
+		"schema_version": 2,
+		"seed": config.world_seed,
+		"world_seed": config.world_seed,
+		"decision_seed": config.decision_seed,
+		"player_count": config.player_count,
+		"strategy": String(SimulationDecisionProvider.strategy_name(config.strategy)),
+		"match_config": config.to_dictionary(),
 		"turns": 0,
 		"aborted": false,
 		"abort_reason": "",
@@ -30,6 +41,9 @@ func start_match(seed_value: int, player_count: int, strategy: StringName, playe
 		"market": {},
 		"achievements": {},
 		"achievement_claims": [],
+		"profession_changes": [],
+		"eliminations": [],
+		"first_elimination_turn": -1,
 	}
 	_connect(ResourceManager.money_changed, _on_money_changed)
 	_connect(ResourceManager.energy_changed, _on_energy_changed)
@@ -44,6 +58,8 @@ func start_match(seed_value: int, player_count: int, strategy: StringName, playe
 	_connect(MarketManager.transaction_completed, _on_market_transaction)
 	_connect(AchievementManager.achievement_claimed, _on_achievement_claimed)
 	_connect(TurnManager.turn_completed, _on_turn_completed)
+	_connect(TurnManager.player_eliminated, _on_player_eliminated)
+	_connect(ProfessionManager.profession_changed, _on_profession_changed)
 
 func finish_match(result: GameResult = null, abort_reason: String = "") -> Dictionary:
 	if not abort_reason.is_empty():
@@ -62,6 +78,9 @@ func finish_match(result: GameResult = null, abort_reason: String = "") -> Dicti
 		final_players.append({
 			"player_index": player.player_index,
 			"profession": ProfessionManager.get_definition(player).profession_name,
+			"initial_profession": String(_initial_professions.get(player.player_index, "未知")),
+			"final_profession": ProfessionManager.get_definition(player).profession_name,
+			"profession_turns": _profession_turns.get(player.player_index, {}).duplicate(true),
 			"alive": player.alive,
 			"money": player.current_money,
 			"energy": player.current_energy,
@@ -76,9 +95,13 @@ func finish_match(result: GameResult = null, abort_reason: String = "") -> Dicti
 			if entry.is_winner:
 				winners.append(entry.player_index)
 		_report["winners"] = winners
+		var champion_credit := 1.0 / maxf(winners.size(), 1)
+		_report["champion_credit"] = champion_credit
 	_disconnect_all()
 	_players.clear()
 	_food_start_state.clear()
+	_initial_professions.clear()
+	_profession_turns.clear()
 	return _report.duplicate(true)
 
 func get_report() -> Dictionary:
@@ -165,6 +188,25 @@ func _on_achievement_claimed(player: PlayerClass, card: 成就牌) -> void:
 
 func _on_turn_completed(_player: PlayerClass, turn_number: int) -> void:
 	_report["turns"] = maxi(int(_report.get("turns", 0)), turn_number)
+	if _player != null:
+		var profession_name := ProfessionManager.get_definition(_player).profession_name
+		var exposure: Dictionary = _profession_turns.get(_player.player_index, {})
+		exposure[profession_name] = int(exposure.get(profession_name, 0)) + 1
+		_profession_turns[_player.player_index] = exposure
+
+func _on_player_eliminated(player: PlayerClass, turn_number: int) -> void:
+	_report["eliminations"].append({"turn": turn_number, "player": _player_id(player)})
+	if int(_report.get("first_elimination_turn", -1)) < 0:
+		_report["first_elimination_turn"] = turn_number
+
+func _on_profession_changed(first: PlayerClass, second: PlayerClass) -> void:
+	_report["profession_changes"].append({
+		"turn": TurnManager.now_turn,
+		"first": _player_id(first),
+		"first_profession": ProfessionManager.get_definition(first).profession_name if first != null else "",
+		"second": _player_id(second),
+		"second_profession": ProfessionManager.get_definition(second).profession_name if second != null else "",
+	})
 
 func _json_safe_breakdown(breakdown: Dictionary) -> Dictionary:
 	return {

@@ -1,0 +1,362 @@
+[
+  {
+    "name": "柏杨豆干",
+    "description": "抽取一张恩施市非遗牌。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 1,
+    "output": "柏杨豆干.png",
+    "sha256": "8cdce337d6a74b45946883d2790b190ef3d1532c80b152e9e7d12655d979cff6"
+  },
+  {
+    "name": "赤壁肉糕",
+    "description": "积分点+500。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 1,
+    "output": "赤壁肉糕.png",
+    "sha256": "78d5c965318534d20f8ac6aadc887b957ab24cac71e4604381e103ad603ff181"
+  },
+  {
+    "name": "东坡饼",
+    "description": "精力+3。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 1,
+    "output": "东坡饼.png",
+    "sha256": "5564170dad89ef14385c239f597333c77ec88de3f5949574b81466512a212ce6"
+  },
+  {
+    "name": "杜家鸡",
+    "description": "下个移动阶段移动消耗精力-4。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "杜家鸡.png",
+    "sha256": "682b3d1934054b8daf1104edd198bd4f6ece99169de53c99fc350087c1cbff7a"
+  },
+  {
+    "name": "黄石港饼",
+    "description": "精力+2；跳过下两个移动阶段，且跳过时精力+2。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "黄石港饼.png",
+    "sha256": "dec724065f35b1b899ba67c74294069c4956a73fa1d2d580ae4a1ca95bedb85f"
+  },
+  {
+    "name": "黄州东坡肉",
+    "description": "抽取一张黄冈市非遗牌。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 1,
+    "output": "黄州东坡肉.png",
+    "sha256": "b889fb6977ecc00aae479c71f18e5b65656c814787911987420eacd5cb45d603"
+  },
+  {
+    "name": "蕲春酸米粉",
+    "description": "下两个移动阶段，免除消耗的前2点精力。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "蕲春酸米粉.png",
+    "sha256": "374322e0aeceffe9c7547493cd025cf1330545e4a14ae87a51f5e179a2fa20d4"
+  },
+  {
+    "name": "荆门三蒸",
+    "description": "随机获得三张省/市级食物牌。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 1,
+    "output": "荆门三蒸.png",
+    "sha256": "657d1e2fa6a9a5e3f624617917bb34d3ae60a67fd753e8921678e9e66de2a8ef"
+  },
+  {
+    "name": "麻城肉糕",
+    "description": "精力+3。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 1,
+    "output": "麻城肉糕.png",
+    "sha256": "a177b31aa635c614e0e7f9d026613c6a5ca810574a01fe617770168081d25991"
+  },
+  {
+    "name": "毛嘴卤鸡",
+    "description": "所有玩家精力+1并支付你100积分点。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "毛嘴卤鸡.png",
+    "sha256": "a6bdd7779563001f3a81043ee84ce50c3e2b8e0f14ad48226dfefb049977a652"
+  },
+  {
+    "name": "沔阳三蒸",
+    "description": "精力+2，随机获得一张食物牌。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "沔阳三蒸.png",
+    "sha256": "c77635e18b891a1115878d513a4325a182770d61fa47df506f28611f9c97554f"
+  },
+  {
+    "name": "皮条鳝鱼（竹节鳝鱼）",
+    "description": "精力+2；下两个回合开始时各精力+1。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "皮条鳝鱼（竹节鳝鱼）.png",
+    "sha256": "5bec2567420c9e704bace8d86f9af57d3a2c931d2127ba72e43fad88ab5bc05d"
+  },
+  {
+    "name": "千张扣肉",
+    "description": "精力-1，从非遗研究所随机抽取一张非遗卡牌。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "千张扣肉.png",
+    "sha256": "2bd69421b501e6ad6cab0a7f05fcf8bf1f6b400cb7d82e9e1355cf1480a2a1ac"
+  },
+  {
+    "name": "热干面",
+    "description": "获得与当前剩余精力相等的精力。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "热干面.png",
+    "sha256": "f58aa618495521e9c5e65a24f6e4080549f8e19fd85e4d2d26ca44115fa6a650"
+  },
+  {
+    "name": "三合汤",
+    "description": "选择一位玩家，相互交换一张非遗卡牌。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "三合汤.png",
+    "sha256": "a765800e5a325daa5afa703cf4b145d0b1d6e23df312350f8195953d1cf6276b"
+  },
+  {
+    "name": "三游神仙鸡",
+    "description": "积分点+500。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 1,
+    "output": "三游神仙鸡.png",
+    "sha256": "c35b7196c609f44f75889eeecc78ccf66c57773544905f9bf19fe08c1763901a"
+  },
+  {
+    "name": "沙窝豆丝",
+    "description": "精力+3。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 1,
+    "output": "沙窝豆丝.png",
+    "sha256": "3c70d072a22f769951930a4ed8a2c5cccd6d9a7293fcf8e2e8da33d9822f18cd"
+  },
+  {
+    "name": "尚香风干鸡",
+    "description": "下个移动阶段最大可移动步数翻倍。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "尚香风干鸡.png",
+    "sha256": "ac4a43f447a14ac676a0ffef27d960eba2cde217a5ccb94c73be1756256605a7"
+  },
+  {
+    "name": "神农架腊肉",
+    "description": "精力+1；下四个回合开始时各精力+1。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "神农架腊肉.png",
+    "sha256": "c9a068334d17b1981239693774f20e8afaf271b35ed0e1605650b635f93a1acc"
+  },
+  {
+    "name": "随州蜜枣",
+    "description": "所有玩家精力+1并支付你100积分点。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "随州蜜枣.png",
+    "sha256": "ecd4cfdd3ec070be6b2e3797dd65d77475dbd876d8c7e87569ff58270654f747"
+  },
+  {
+    "name": "天门三蒸",
+    "description": "精力+1，随机获得两张省/市级食物牌。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "天门三蒸.png",
+    "sha256": "b657711f939f564195387cc05202049b59832cea963f24b77d3dc34d51a96c7e"
+  },
+  {
+    "name": "通山包坨",
+    "description": "精力+4；跳过下个移动阶段。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 1,
+    "output": "通山包坨.png",
+    "sha256": "db5fbcac40226cd7c182553bb08b00819ef7bf56b193b1b9ded59ea7702a84c1"
+  },
+  {
+    "name": "土家腊肉",
+    "description": "下个移动阶段最大可移动步数翻倍。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "土家腊肉.png",
+    "sha256": "985f6981b6cf7dedb1798d14c77f3cc658545c20fe755bb559fe6db0dca438c6"
+  },
+  {
+    "name": "土家抬格子",
+    "description": "下个移动阶段最大可移动步数+4。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "土家抬格子.png",
+    "sha256": "9dccce5e335b0c6d3af3660b7d4f184da4d75d8b572f2403904c673f713bfeec"
+  },
+  {
+    "name": "团风狗脚",
+    "description": "获得一张【金蝉脱壳】。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 1,
+    "output": "团风狗脚.png",
+    "sha256": "139e70fd7d0c905093c4c3d08dd72e9ceb7ccbf43d188440d74e465eb36d057d"
+  },
+  {
+    "name": "武穴佛手山药",
+    "description": "移动阶段最大可移动步数永久额外+1。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "武穴佛手山药.png",
+    "sha256": "952a2540b3c2be2436f59875c42baee78af0756870e0c18eaa72809adc0f8f0b"
+  },
+  {
+    "name": "武穴酥糖",
+    "description": "精力+1；所有玩家支付你50积分点。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "武穴酥糖.png",
+    "sha256": "10af179d0e376d65b7607e7142ae359028d39cead62a47b51528f909ad6e59e4"
+  },
+  {
+    "name": "襄阳缠蹄",
+    "description": "令一名其他玩家支付你200积分点。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "襄阳缠蹄.png",
+    "sha256": "9d9b36d69d0c306e0571ecc31a7342b408300dab535a9f04c2e7df2ed77e2481"
+  },
+  {
+    "name": "孝感米酒（神霖牌）",
+    "description": "下个移动阶段最大可移动步数+4。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "孝感米酒（神霖牌）.png",
+    "sha256": "52173e4fc06b00a1abd9b002fcaf9099e64302f7bd3a55ee89e519d022ff5f90"
+  },
+  {
+    "name": "宜昌小面",
+    "description": "精力+3。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 1,
+    "output": "宜昌小面.png",
+    "sha256": "3caa3a1f4e10545868470f665810f4988adff0931e86a2e665752687f8de3984"
+  },
+  {
+    "name": "英山鱼面",
+    "description": "移动阶段最大可移动步数永久额外+1。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "英山鱼面.png",
+    "sha256": "6dfce459846db18824c83c52bb41588f53b335e3df15bc5e7f562e9a39b3bb1b"
+  },
+  {
+    "name": "油焖大虾",
+    "description": "下个移动阶段移动消耗精力-4。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "油焖大虾.png",
+    "sha256": "f0160db2287477c84805e4fbbe4ebef6b7986fa1b95de26f0c79e33a22b2363e"
+  },
+  {
+    "name": "枣阳酸浆面",
+    "description": "选择一名玩家，你与其精力各+1，且均跳过下个移动阶段和行动阶段。",
+    "price": 250,
+    "font_size": 37,
+    "line_count": 3,
+    "output": "枣阳酸浆面.png",
+    "sha256": "cc57b971ca85c957b7a9b0157a34274084a0632ede227b87221ce93e7efb9a03"
+  },
+  {
+    "name": "张关合渣",
+    "description": "选择一名其他玩家，你与其精力各+4。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "张关合渣.png",
+    "sha256": "10b7205318e7a24cecbaaf8d2bde47020a7d8d102d9418b27424034fb5eea999"
+  },
+  {
+    "name": "竹山懒豆腐",
+    "description": "选择一位玩家，相互交换一张非遗卡牌。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "竹山懒豆腐.png",
+    "sha256": "b90b8d5e32e08ab99ffbc85259d55cac799802247de23e0ccd842dc44ee7aed7"
+  },
+  {
+    "name": "竹溪碗糕",
+    "description": "精力+3。",
+    "price": 250,
+    "font_size": 42,
+    "line_count": 1,
+    "output": "竹溪碗糕.png",
+    "sha256": "19db09881f261236c9f2425968571bb168a1d7a740718d3c1c40970a61d69dd7"
+  },
+  {
+    "name": "房县黄酒",
+    "description": "在非遗研究所中亮出4张非遗牌，然后你可以获得其中至多两张。",
+    "price": 500,
+    "font_size": 39,
+    "line_count": 2,
+    "output": "房县黄酒.png",
+    "sha256": "51d598acb0690b568e46ad80f09582cd4f2c0426eb794d2fa4786fa7558d7247"
+  },
+  {
+    "name": "荆州鱼糕",
+    "description": "精力+6。",
+    "price": 500,
+    "font_size": 42,
+    "line_count": 1,
+    "output": "荆州鱼糕.png",
+    "sha256": "e04d98b107c30459bfeb5dc03bf0548af293de13b2a92159772965e16b07cac9"
+  },
+  {
+    "name": "青砖茶",
+    "description": "移动阶段精力消耗永久-1。",
+    "price": 500,
+    "font_size": 42,
+    "line_count": 1,
+    "output": "青砖茶.png",
+    "sha256": "2154f32d1431abc4f8375d4d547f1bc3cd49ddae42a4b21ed3461ab386fd31db"
+  },
+  {
+    "name": "土家油茶汤",
+    "description": "每轮打工获得的积分点永久+250。",
+    "price": 500,
+    "font_size": 42,
+    "line_count": 2,
+    "output": "土家油茶汤.png",
+    "sha256": "bb9002909b3df15c8c5a52ee1683f7806a584a7e0dea8139cdf96e6a4005b808"
+  }
+]

@@ -99,12 +99,21 @@ func test_leaving_focus_keeps_the_current_camera_center() -> void:
 func test_every_scenery_section_has_a_display_name() -> void:
 	var map_scene := preload("res://地图/map.tscn").instantiate()
 	var scenery_count := 0
+	var sections_by_location: Dictionary[Vector3i, MapSection] = {}
 	for city in map_scene.get_node("MapSprite").get_children():
 		for section in city.get_children():
-			if section is MapSection and section.type == MapSection.SectionType.风景:
-				scenery_count += 1
-				assert_false(section.scenery_name.is_empty(), section.section_name)
+			if section is MapSection:
+				sections_by_location[section.location_index] = section
+				if section.type == MapSection.SectionType.风景:
+					scenery_count += 1
+					assert_false(section.scenery_name.is_empty(), section.section_name)
 	assert_eq(scenery_count, 21)
+	var heritage_section := sections_by_location[Vector3i(15, -18, 3)]
+	assert_eq(heritage_section.type, MapSection.SectionType.非遗, "咸宁2是非遗点，不得错误发放风景奖励")
+	assert_true(heritage_section.scenery_name.is_empty())
+	var jiugong_section := sections_by_location[Vector3i(17, -20, 3)]
+	assert_eq(jiugong_section.type, MapSection.SectionType.风景, "九宫山风景属性必须落在地图图标对应格")
+	assert_eq(jiugong_section.scenery_name, "九宫山")
 	var sample_section := preload("res://地图/map_section.tscn").instantiate() as MapSection
 	var highlight_material := sample_section.get_node("NormalHoverHighlight").material as ShaderMaterial
 	assert_not_null(highlight_material)

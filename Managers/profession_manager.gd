@@ -91,7 +91,6 @@ func apply_starting_bonuses() -> void:
 		if bonus <= 0:
 			continue
 		ResourceManager.modify_money(player, bonus, "职业技能：开局奖励")
-		notify_skill_triggered(player, "开局积分点 +%d" % bonus)
 
 
 func get_registered_players() -> Array[PlayerClass]:

@@ -2,7 +2,7 @@
 
 本项目是荆楚非遗主题桌游《楚物志》的 Godot 数字孪生版本，由华中科技大学新闻学院和法学院联合项目组开发。
 
-当前版本：**beta 0.2.0**（Godot 4.6.2）
+当前版本：**beta 0.2.1**（Godot 4.6.2）
 
 ## 当前功能
 
@@ -24,9 +24,9 @@
 ./tools/verify_beta.ps1 -GodotPath "路径\Godot_v4.6.2-stable_win64_console.exe"
 ```
 
-该命令执行干净导入、主场景启动、全部 GUT 测试及 2/3/6 人两种策略的 6 局模拟冒烟，并校验测试数量不为零。运行前应关闭正在占用本项目的 Godot 编辑器。
+该命令执行干净导入、主场景启动、全部 GUT 测试及 2/3/6 人三种策略的 9 局模拟冒烟，并校验测试数量不为零。运行前应关闭正在占用本项目的 Godot 编辑器。
 
-标准 600 局平衡批次：
+标准 972 局平衡批次：
 
 ```powershell
 ./tools/run_balance_simulation.ps1 -GodotPath "路径\Godot_v4.6.2-stable_win64_console.exe"

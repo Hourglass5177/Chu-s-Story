@@ -4,6 +4,7 @@ signal phase_changed(new_phase: TurnPhase)
 signal next_phase(target_phase: TurnPhase)
 signal game_finished(result: GameResult)
 signal turn_completed(player: PlayerClass, turn_number: int)
+signal player_eliminated(player: PlayerClass, turn_number: int)
 signal modal_state_changed(snapshot: Dictionary)
 
 const NO_END_REASON: int = -1
@@ -320,7 +321,11 @@ func now_turn_end() -> void:
 	# 淘汰只能在完整回合结束、即将交接玩家的这一刻判断。
 	# 移动或行动中精力为 0 的玩家仍可继续 ACTION 并使用食物恢复。
 	if now_player_index >= 0 and now_player_index < players.size():
-		await players[now_player_index].resolve_turn_end_elimination()
+		var ending_player: PlayerClass = players[now_player_index]
+		var was_alive := ending_player.alive
+		await ending_player.resolve_turn_end_elimination()
+		if was_alive and not ending_player.alive:
+			player_eliminated.emit(ending_player, now_turn)
 	# 返回主菜单并快速开始新局时，旧局的 END 协程不得继续操作新局状态。
 	if ending_session_generation != _session_generation or ending_turn_epoch != _turn_epoch:
 		if ending_session_generation == _session_generation:

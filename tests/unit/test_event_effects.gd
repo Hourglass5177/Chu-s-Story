@@ -276,8 +276,8 @@ func _event_specific_contract_holds(event_id: StringName) -> bool:
 		&"jin_ji_bi_xian":
 			return EventManager.is_loss_immune(_players[0])
 		&"bai_ge_zheng_liu":
-			return _players.any(func(player: PlayerClass) -> bool: return player.current_money != 1000) \
-				and _players.all(func(player: PlayerClass) -> bool: return absi(player.current_money - 1000) in [0, 200])
+			# 三轮总点数允许平局；平局按正式规则无奖惩，不能被测试误判为未结算。
+			return _players.all(func(player: PlayerClass) -> bool: return absi(player.current_money - 1000) in [0, 200])
 		&"ri_xing_qian_li":
 			return _players[0].now_pos != Vector3i(0, 0, 0)
 		&"miao_shou_hui_chun", &"you_mu_cheng_huai", &"chang_xing_wu_zu", &"jin_chan_tuo_qiao", &"yi_hua_jie_mu":

@@ -21,6 +21,8 @@ func test_sixty_food_resources_have_unique_ids_levels_prices_and_faces() -> void
 		assert_false(card.effect_description.is_empty(), card.card_name)
 		assert_eq(card.cost, card.get_default_cost(), card.card_name)
 		counts[card.food_type] = int(counts.get(card.food_type, 0)) + 1
+		if card.food_type != 食物牌.FoodType.市级:
+			assert_string_contains(card.image_of_front.resource_path, "/完全版-v2/", card.card_name)
 	assert_eq(cards.size(), 60)
 	assert_eq(counts[食物牌.FoodType.市级], 20)
 	assert_eq(counts[食物牌.FoodType.省级], 36)
@@ -74,6 +76,30 @@ func test_high_level_resource_copy_matches_the_formal_food_table_verbatim() -> v
 		assert_eq(card.cost, int(row["price"]), "%s 的价格必须与策划表一致" % card.card_name)
 		checked += 1
 	assert_eq(checked, 40)
+
+func test_v2_face_manifest_keeps_exact_copy_and_adaptive_readable_type() -> void:
+	var manifest_path := "res://arts/食物牌/数字版/完全版-v2/manifest.json"
+	var parsed = JSON.parse_string(FileAccess.get_file_as_string(manifest_path))
+	assert_true(parsed is Array)
+	if not parsed is Array:
+		return
+	var rows: Array = parsed
+	assert_eq(rows.size(), 40)
+	var expected := {}
+	for line: String in FileAccess.get_file_as_string("res://docs/食物牌效果与价格表（省级与国家级）.md").split("\n"):
+		if not line.begins_with("|"):
+			continue
+		var columns := line.split("|", false)
+		if columns.size() >= 4 and columns[2].strip_edges().is_valid_int():
+			expected[columns[0].strip_edges()] = columns[1].strip_edges()
+	for row: Dictionary in rows:
+		var name := str(row.get("name", ""))
+		assert_eq(str(row.get("description", "")), str(expected.get(name, "")), name)
+		assert_between(int(row.get("font_size", 0)), 32, 42, name)
+		assert_between(int(row.get("line_count", 0)), 1, 3, name)
+		assert_true(FileAccess.file_exists("res://arts/食物牌/数字版/完全版-v2/%s" % row.get("output", "")), name)
+	assert_true(FileAccess.file_exists(ProjectSettings.globalize_path("res://docs/牌面验收/食物牌v2总览.png")))
+	assert_true(FileAccess.file_exists(ProjectSettings.globalize_path("res://docs/牌面验收/食物牌v2总览-100%.png")))
 
 func test_filtered_draw_preserves_unmatched_relative_order() -> void:
 	var city_a := _food(&"city_a", 食物牌.FoodType.市级)

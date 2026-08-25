@@ -50,6 +50,7 @@ var _event_map_source_name: String = ""
 var _event_no_effect_pending: bool = false
 var _active_profession_map_request: ProfessionSectionChoiceRequest = null
 var _profession_map_restore_focus_mode: bool = false
+var _profession_map_view_changed_by_user: bool = false
 var _profession_map_focus_player: PlayerClass = null
 var _profession_map_session_generation: int = -1
 var _profession_map_turn_epoch: int = -1
@@ -112,6 +113,7 @@ var card_hand_animator: CardHandAnimator
 var profession_detail_overlay: ProfessionDetailPanel
 var profession_draw_overlay: ProfessionDrawPanel
 var profession_skill_toast: ProfessionSkillToast
+var event_presentation_director: EventPresentationDirector
 const EVENT_OVERLAY_SCENE := preload("res://HUDs/event_overlay.tscn")
 const MARKET_OVERLAY_SCENE := preload("res://HUDs/研究所弹窗.tscn")
 const SCORE_OVERLAY_SCENE := preload("res://HUDs/计分详情弹窗.tscn")
@@ -122,6 +124,7 @@ const CARD_HAND_ANIMATOR_SCENE := preload("res://HUDs/card_hand_animator.tscn")
 const PROFESSION_DETAIL_SCENE := preload("res://HUDs/职业详情弹窗.tscn")
 const PROFESSION_DRAW_SCENE := preload("res://HUDs/职业抽牌弹窗.tscn")
 const PROFESSION_SKILL_TOAST_SCENE := preload("res://HUDs/职业技能提示.tscn")
+const EVENT_PRESENTATION_DIRECTOR_SCRIPT := preload("res://HUDs/event_presentation_director.gd")
 func _ready() -> void:
 	map_container.resized.connect(_on_container_resized)
 	_spawn_map_in_hud()
@@ -137,6 +140,7 @@ func _ready() -> void:
 	_update_view_mode_hint()
 	map_container.gui_input.connect(_on_map_container_gui_input)
 	_setup_event_ui()
+	_setup_event_presentation()
 	_setup_market_ui()
 	_setup_score_ui()
 	_setup_achievement_ui()
@@ -182,6 +186,64 @@ func _setup_event_ui() -> void:
 
 func get_event_overlay() -> EventOverlay:
 	return event_overlay
+
+func _setup_event_presentation() -> void:
+	event_presentation_director = EVENT_PRESENTATION_DIRECTOR_SCRIPT.new() as EventPresentationDirector
+	add_child(event_presentation_director)
+	event_presentation_director.bind(self)
+
+func capture_camera_state() -> Dictionary:
+	return {
+		"focus_mode": is_focus_mode,
+		"map_zoom_factor": map_zoom_factor,
+		"global_position": _global_camera_position,
+		"camera_position": map_camera.position,
+		"camera_zoom": map_camera.zoom,
+	}
+
+func focus_camera_for_event(player: PlayerClass, duration: float = 0.35) -> void:
+	if player == null or not is_instance_valid(player):
+		return
+	var target_zoom := global_zoom * maxf(map_zoom_factor, MAP_FOCUS_ENTRY_ZOOM_FACTOR)
+	var target_pos := _clamp_camera_position(player.position, target_zoom)
+	_stop_camera_tween()
+	if duration <= 0.0 or GameManager.is_headless_simulation():
+		map_camera.zoom = target_zoom
+		map_camera.position = target_pos
+		return
+	_camera_tween = create_tween().set_parallel(true).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	_camera_tween.tween_property(map_camera, "zoom", target_zoom, duration)
+	_camera_tween.tween_property(map_camera, "position", target_pos, duration)
+
+func restore_camera_state(snapshot: Dictionary, duration: float = 0.4) -> void:
+	if snapshot.is_empty():
+		return
+	_stop_camera_tween()
+	is_focus_mode = bool(snapshot.get("focus_mode", false))
+	map_zoom_factor = float(snapshot.get("map_zoom_factor", map_zoom_factor))
+	_global_camera_position = snapshot.get("global_position", _global_camera_position)
+	_update_view_mode_hint()
+	var target_position: Vector2 = snapshot.get("camera_position", map_camera.position)
+	var target_zoom: Vector2 = snapshot.get("camera_zoom", map_camera.zoom)
+	if duration <= 0.0 or GameManager.is_headless_simulation():
+		map_camera.position = target_position
+		map_camera.zoom = target_zoom
+		return
+	_camera_tween = create_tween().set_parallel(true).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	_camera_tween.tween_property(map_camera, "zoom", target_zoom, duration)
+	_camera_tween.tween_property(map_camera, "position", target_position, duration)
+
+func begin_event_presentation(card: 事件牌) -> void:
+	if event_presentation_director != null and card != null:
+		event_presentation_director.begin_sequence(card.event_id, card.card_name)
+
+func finish_event_presentation(summary: String = "") -> void:
+	if event_presentation_director != null:
+		await event_presentation_director.finish_sequence(summary)
+
+func cancel_event_presentation(reason: StringName = &"cancelled") -> void:
+	if event_presentation_director != null:
+		event_presentation_director.cancel_and_restore(reason)
 
 func _setup_market_ui() -> void:
 	market_overlay = MARKET_OVERLAY_SCENE.instantiate() as 研究所弹窗
@@ -285,13 +347,14 @@ func _on_profession_section_choice_requested(request: ProfessionSectionChoiceReq
 	btn_food.disabled = true
 	btn_end_turn.disabled = true
 	_profession_map_restore_focus_mode = is_focus_mode
+	_profession_map_view_changed_by_user = false
 	_profession_map_focus_player = request.player
 	_profession_map_session_generation = TurnManager.get_session_generation()
 	_profession_map_turn_epoch = TurnManager.get_turn_epoch()
 	_profession_map_phase = TurnManager.now_phase
 	if is_focus_mode:
 		_leave_focus_at_current_camera()
-	btn_view_toggle.disabled = true
+	btn_view_toggle.disabled = false
 	current_status.text = "【%s】请选择移动终点" % request.source_name
 	information.text = request.source_description
 
@@ -329,10 +392,14 @@ func complete_profession_section_choice(
 		and TurnManager.players[TurnManager.now_player_index] == player
 	if still_owns_view:
 		btn_view_toggle.disabled = false
-		if _profession_map_restore_focus_mode:
+		var desired_focus_mode: bool = is_focus_mode if _profession_map_view_changed_by_user else _profession_map_restore_focus_mode
+		if desired_focus_mode:
 			_set_focus_mode(true)
 			update_camera_view_for_player(player, 0.25)
+		elif is_focus_mode:
+			_leave_focus_at_current_camera()
 	_profession_map_restore_focus_mode = false
+	_profession_map_view_changed_by_user = false
 	_profession_map_focus_player = null
 	_profession_map_session_generation = -1
 	_profession_map_turn_epoch = -1
@@ -643,6 +710,8 @@ func _on_container_resized():
 	update_camera_view(0.0)
 
 func _on_view_toggle_pressed():
+	if _profession_map_focus_player != null:
+		_profession_map_view_changed_by_user = true
 	if is_focus_mode:
 		_leave_focus_at_current_camera()
 	else:

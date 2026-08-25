@@ -99,9 +99,11 @@ func test_commercial_starting_bonus_is_once_only_and_does_not_follow_profession_
 	_first.player_types = PlayerClass.PlayerCharacter.商业博主
 	_first.current_money = 500
 	_second.current_money = 500
+	watch_signals(ProfessionManager)
 	ProfessionManager.apply_starting_bonuses()
 	assert_eq(_first.current_money, 1000)
 	assert_eq(_second.current_money, 500)
+	assert_signal_not_emitted(ProfessionManager, "skill_triggered", "开局被动到账不得弹出职业技能提示")
 	ProfessionManager.apply_starting_bonuses()
 	assert_eq(_first.current_money, 1000, "重复初始化不得补发")
 	assert_true(ProfessionManager.swap_professions(_first, _second))

@@ -216,17 +216,17 @@ func test_achievement_score_refreshes_immediately_but_finishes_only_at_turn_end(
 
 
 func test_group_energy_event_awards_the_first_resolved_player_not_the_trigger_player() -> void:
-	# 复现实际观察：P2 触发群体事件，但存活玩家按 P1、P2 的顺序结算。
+	# 美美与共从触发者开始沿顺位结算，因此 P2 应先取得全局唯一成就。
 	TurnManager.now_player_index = 1
 	_first.current_energy = 11
 	_second.current_energy = 11
 	await EventManager._event_mei_mei_yu_gong(_second)
 	assert_eq(
 		AchievementManager.get_achievement_owner(AchievementManager.ID_CHAO_YUE_REN_LEI),
-		_first,
-		"群体事件应由实际最先达到12点精力的玩家领取，而不是默认归事件触发者"
+		_second,
+		"群体事件必须从事件触发者开始沿顺位结算"
 	)
-	assert_true(AchievementManager.get_owned_achievements(_second).is_empty())
+	assert_true(AchievementManager.get_owned_achievements(_first).is_empty())
 
 
 func test_upgrade_destroys_an_eliminated_players_tao_tie_and_refreshes_both_scores() -> void:

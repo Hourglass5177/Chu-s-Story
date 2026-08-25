@@ -65,10 +65,14 @@ func _ready() -> void:
 	_choice_timer.timeout.connect(_on_choice_timeout)
 
 func bind_runtime(target_hud: HUD, overlay: Control = null) -> void:
+	if hud != null and hud != target_hud:
+		hud.cancel_event_presentation(&"runtime_rebind")
 	hud = target_hud
 	event_overlay = overlay
 
 func reset_for_new_game() -> void:
+	if hud != null:
+		hud.cancel_event_presentation(&"session_reset")
 	_cancel_all_resolution_contexts()
 	if _pending_request != null:
 		InteractionCoordinator.cancel(_pending_request.request_id, &"event_reset")
@@ -535,6 +539,10 @@ func resolve_event(player: PlayerClass, card: 事件牌) -> void:
 		if hud != null:
 			hud._update_game_informs("%s 获得事件牌【%s】。" % [player.player_name, card.card_name])
 	else:
+		if event_overlay != null:
+			event_overlay.hide()
+		if hud != null:
+			hud.begin_event_presentation(card)
 		var effect_state_before := _capture_effect_state()
 		await _execute_event(player, card)
 		if _is_resolution_context_cancelled(resolution_context):
@@ -544,6 +552,10 @@ func resolve_event(player: PlayerClass, card: 事件牌) -> void:
 			if _is_resolution_context_cancelled(resolution_context):
 				return
 		effect_applied = effect_state_before != _capture_effect_state()
+		if hud != null:
+			await hud.finish_event_presentation("结算完成" if effect_applied else "无事发生！")
+			if _is_resolution_context_cancelled(resolution_context):
+				return
 		ResourceManager.discard_event(card)
 	var summary := "事件【%s】结算完成。" % card.card_name if effect_applied else "事件【%s】：无事发生！" % card.card_name
 	event_finished.emit(player, card, summary)
@@ -798,7 +810,14 @@ func _teleport_player(player: PlayerClass, section: MapSection) -> bool:
 	player.position = player.map.to_local(section.global_position)
 	if player.hud != null:
 		player.hud._update_player_stats(player)
-		player.hud.update_camera_view(0.25)
+		if player.hud.event_presentation_director != null \
+				and not player.hud.event_presentation_director.active_event_id.is_empty():
+			player.hud.event_presentation_director.note_map_action(
+				player,
+				"%s → %s%d" % [player.player_name, MapSection.REGION.find_key(section.region), section.logical_index]
+			)
+		else:
+			player.hud.update_camera_view(0.25)
 	return true
 
 func _swap_player_positions(first: PlayerClass, second: PlayerClass) -> void:
@@ -820,7 +839,11 @@ func _swap_player_positions(first: PlayerClass, second: PlayerClass) -> void:
 		hud._update_player_stats(second)
 		# ALT 聚焦模式的相机目标取自当前玩家的位置；换位后需要立即重算。
 		# 非聚焦模式下 update_camera_view() 会继续保持全图视角。
-		hud.update_camera_view(0.25)
+		if hud.event_presentation_director != null \
+				and not hud.event_presentation_director.active_event_id.is_empty():
+			hud.event_presentation_director.note_map_action(first, "%s 与 %s 互换位置" % [first.player_name, second.player_name])
+		else:
+			hud.update_camera_view(0.25)
 
 func _non_national_feiyi(player: PlayerClass) -> Array[非遗牌]:
 	var result: Array[非遗牌] = []
@@ -988,12 +1011,38 @@ func _resolve_incoming_effect(
 	redirect_validator: Callable = Callable()
 ) -> bool:
 	var resolution_context := _current_resolution_context
+	var presentation: EventPresentationDirector = hud.event_presentation_director if hud != null else null
+	var uses_sequential_presentation := presentation != null \
+			and not presentation.active_event_id.is_empty() \
+			and presentation.get_tier(presentation.active_event_id) == EventPresentationDirector.Tier.SEQUENTIAL \
+			and presentation.active_event_id != &"mei_mei_yu_gong"
+	if uses_sequential_presentation:
+		await presentation.focus_player(target, prompt)
+		if _is_resolution_context_cancelled(resolution_context):
+			return false
 	var final_target := await _resolve_effect_target(effect_source, target, effect_kind, prompt, allow_reaction, redirect_validator)
 	if _is_resolution_context_cancelled(resolution_context):
 		return false
 	if final_target == null:
+		if uses_sequential_presentation:
+			await presentation.show_status_applied(target, "效果已抵消")
 		return false
+	if uses_sequential_presentation and final_target != target:
+		await presentation.focus_player(final_target, "效果转移至 %s" % final_target.player_name)
+		if _is_resolution_context_cancelled(resolution_context):
+			return false
+	var money_before := final_target.current_money
+	var energy_before := final_target.current_energy
 	apply_callable.call(final_target)
+	if uses_sequential_presentation:
+		var energy_delta := final_target.current_energy - energy_before
+		var money_delta := final_target.current_money - money_before
+		if energy_delta != 0:
+			await presentation.show_resource_delta(final_target, &"energy", energy_delta)
+		elif money_delta != 0:
+			await presentation.show_resource_delta(final_target, &"money", money_delta)
+		else:
+			await presentation.show_status_applied(final_target, prompt)
 	return true
 
 func _can_be_forced_to_work(player: PlayerClass) -> bool:
@@ -1024,17 +1073,30 @@ func _event_zuo_shou_yu_li(source: PlayerClass) -> void:
 			return
 		if work_section == null:
 			continue
+		if hud != null and hud.event_presentation_director != null:
+			await hud.event_presentation_director.focus_player(final_worker, "%s 前往打工" % final_worker.player_name)
+			if _is_resolution_context_cancelled(resolution_context):
+				return
 		_teleport_player(final_worker, work_section)
+		var energy_before := final_worker.current_energy
 		var work_energy_cost: int = ProfessionManager.get_work_energy_cost(final_worker)
 		if work_energy_cost > 0:
 			ResourceManager.modify_energy(final_worker, -work_energy_cost, "事件：坐收渔利打工消耗")
+		if hud != null and hud.event_presentation_director != null and final_worker.current_energy != energy_before:
+			await hud.event_presentation_director.show_resource_delta(final_worker, &"energy", final_worker.current_energy - energy_before)
 		var salary: int = FoodManager.adjust_work_income(final_worker, 250)
 		if final_worker == source:
 			_apply_money(final_worker, salary, "事件：坐收渔利工资")
+			if hud != null and hud.event_presentation_director != null:
+				await hud.event_presentation_director.show_resource_delta(final_worker, &"money", salary)
 		else:
 			var worker_share: int = salary / 2
 			_apply_money(final_worker, worker_share, "事件：坐收渔利工资分成")
 			_apply_money(source, salary - worker_share, "事件：坐收渔利工资分成")
+			if hud != null and hud.event_presentation_director != null:
+				await hud.event_presentation_director.show_resource_delta(final_worker, &"money", worker_share)
+				await hud.event_presentation_director.focus_player(source, "%s 分得工资" % source.player_name)
+				await hud.event_presentation_director.show_resource_delta(source, &"money", salary - worker_share)
 
 func _event_bai_ge_zheng_liu(source: PlayerClass) -> void:
 	var resolution_context := _current_resolution_context
@@ -1043,8 +1105,8 @@ func _event_bai_ge_zheng_liu(source: PlayerClass) -> void:
 		return
 	var source_rolls: Array[int] = []
 	var opponent_rolls: Array[int] = []
-	source_rolls.append(_roll_2d6())
-	opponent_rolls.append(_roll_2d6())
+	source_rolls.append(await _roll_2d6_presented(source))
+	opponent_rolls.append(await _roll_2d6_presented(opponent))
 	var source_team: Array[PlayerClass] = [source]
 	var opponent_team: Array[PlayerClass] = [opponent]
 	for player: PlayerClass in _alive_players():
@@ -1058,8 +1120,8 @@ func _event_bai_ge_zheng_liu(source: PlayerClass) -> void:
 		else:
 			opponent_team.append(player)
 	for _index in 2:
-		source_rolls.append(_roll_2d6())
-		opponent_rolls.append(_roll_2d6())
+		source_rolls.append(await _roll_2d6_presented(source))
+		opponent_rolls.append(await _roll_2d6_presented(opponent))
 	var source_total: int = 0
 	var opponent_total: int = 0
 	for value: int in source_rolls:
@@ -1103,7 +1165,10 @@ func _show_bai_ge_result(
 		opponent.player_name, _format_rolls(opponent_rolls), opponent_total,
 		result_text,
 	]
-	await _choose_option(source, prompt, [true], PackedStringArray(["结算"]))
+	if hud != null and hud.event_presentation_director != null:
+		await hud.event_presentation_director.show_status_applied(source, prompt)
+	else:
+		await _choose_option(source, prompt, [true], PackedStringArray(["结算"]))
 	if _is_resolution_context_cancelled(resolution_context):
 		return
 
@@ -1185,11 +1250,46 @@ func _apply_swap_job(target: PlayerClass, source: PlayerClass) -> void:
 
 func _event_mei_mei_yu_gong(source: PlayerClass) -> void:
 	var resolution_context := _current_resolution_context
-	for player: PlayerClass in _alive_players():
-		var amount := _roll_2d6()
-		await _resolve_incoming_effect(source, player, &"event", "美美与共：获得%d点精力" % amount, _apply_energy.bind(amount, "事件：美美与共"))
+	for player: PlayerClass in _alive_players_from(source):
+		if hud != null and hud.event_presentation_director != null:
+			await hud.event_presentation_director.focus_player(player, "%s 准备投骰" % player.player_name)
+			if _is_resolution_context_cancelled(resolution_context):
+				return
+		var amount := _roll_d6()
+		if hud != null and hud.event_presentation_director != null:
+			await hud.event_presentation_director.show_dice(player, [amount])
+			if _is_resolution_context_cancelled(resolution_context):
+				return
+		var final_target := await _resolve_effect_target(source, player, &"event", "美美与共：获得%d点精力" % amount, true)
 		if _is_resolution_context_cancelled(resolution_context):
 			return
+		if final_target == null:
+			if hud != null and hud.event_presentation_director != null:
+				await hud.event_presentation_director.show_status_applied(player, "效果已抵消")
+			continue
+		if final_target != player and hud != null and hud.event_presentation_director != null:
+			await hud.event_presentation_director.focus_player(final_target, "效果转移至 %s" % final_target.player_name)
+			if _is_resolution_context_cancelled(resolution_context):
+				return
+		var energy_before := final_target.current_energy
+		_apply_energy(final_target, amount, "事件：美美与共")
+		var actual_delta := final_target.current_energy - energy_before
+		if hud != null and hud.event_presentation_director != null:
+			await hud.event_presentation_director.show_resource_delta(final_target, &"energy", actual_delta)
+			if _is_resolution_context_cancelled(resolution_context):
+				return
+
+func _alive_players_from(source: PlayerClass) -> Array[PlayerClass]:
+	var result: Array[PlayerClass] = []
+	var players: Array[PlayerClass] = TurnManager.players
+	var start := players.find(source)
+	if start < 0:
+		return _alive_players()
+	for offset: int in players.size():
+		var candidate: PlayerClass = players[posmod(start + offset, players.size())]
+		if candidate.alive:
+			result.append(candidate)
+	return result
 
 func _event_yang_jing_xu_rui(player: PlayerClass) -> void:
 	ResourceManager.modify_energy(player, player.current_energy, "事件：养精蓄锐")
@@ -1379,13 +1479,12 @@ func _event_tong_tai_jing_ji(source: PlayerClass) -> void:
 		return
 	var source_card: 非遗牌 = GameManager.pick_from(source_cards) as 非遗牌
 	var target_card: 非遗牌 = GameManager.pick_from(target_cards) as 非遗牌
-	var result_text := "%s 抽到【%s】（%d级）\n%s 抽到【%s】（%d级）" % [
-		source.player_name, target_card.card_name, target_card.rarity,
-		target.player_name, source_card.card_name, source_card.rarity,
+	var result_text := "%s：%d级　%s：%d级" % [
+		source.player_name, source_card.rarity, target.player_name, target_card.rarity,
 	]
 	if source_card.rarity > target_card.rarity:
 		result_text += "\n%s 获胜" % source.player_name
-		await _choose_option(source, result_text, [true], PackedStringArray(["结算"]), false)
+		await _show_tong_tai_result(source, source_card, target, target_card, result_text)
 		if _is_resolution_context_cancelled(resolution_context):
 			return
 		_apply_money(source, 100, "事件：同台竞技")
@@ -1394,7 +1493,7 @@ func _event_tong_tai_jing_ji(source: PlayerClass) -> void:
 			return
 	elif source_card.rarity < target_card.rarity:
 		result_text += "\n%s 获胜" % target.player_name
-		await _choose_option(source, result_text, [true], PackedStringArray(["结算"]), false)
+		await _show_tong_tai_result(source, source_card, target, target_card, result_text)
 		if _is_resolution_context_cancelled(resolution_context):
 			return
 		_apply_money(source, -100, "事件：同台竞技")
@@ -1403,13 +1502,25 @@ func _event_tong_tai_jing_ji(source: PlayerClass) -> void:
 			return
 	else:
 		result_text += "\n同级，双方各得50积分点"
-		await _choose_option(source, result_text, [true], PackedStringArray(["结算"]), false)
+		await _show_tong_tai_result(source, source_card, target, target_card, result_text)
 		if _is_resolution_context_cancelled(resolution_context):
 			return
 		_apply_money(source, 50, "事件：同台竞技平局")
 		await _resolve_incoming_effect(source, target, &"event", "同台竞技：获得50积分点", _apply_money.bind(50, "事件：同台竞技平局"))
 		if _is_resolution_context_cancelled(resolution_context):
 			return
+
+func _show_tong_tai_result(
+	source: PlayerClass,
+	source_card: 非遗牌,
+	target: PlayerClass,
+	target_card: 非遗牌,
+	result_text: String
+) -> void:
+	if hud != null and hud.event_presentation_director != null:
+		await hud.event_presentation_director.show_card_duel(source, source_card, target, target_card, result_text)
+	else:
+		await _choose_option(source, result_text, [true], PackedStringArray(["结算"]), false)
 
 func _event_yi_shi_hui_you(source: PlayerClass) -> void:
 	var resolution_context := _current_resolution_context
@@ -1457,8 +1568,8 @@ func _event_ri_xing_qian_li(player: PlayerClass) -> void:
 
 func _event_yi_jing_xun_zong(player: PlayerClass) -> void:
 	var resolution_context := _current_resolution_context
-	var first := _roll_2d6()
-	var second := _roll_2d6()
+	var first := await _roll_2d6_presented(player)
+	var second := await _roll_2d6_presented(player)
 	var steps = await _choose_option(player, "艺径寻踪：选择移动点数", [first, second], PackedStringArray([str(first), str(second)]))
 	if _is_resolution_context_cancelled(resolution_context):
 		return
@@ -1642,6 +1753,16 @@ func _record_scenery_check_in(player: PlayerClass, section: MapSection) -> bool:
 
 func _roll_2d6() -> int:
 	return GameManager.randi_between(1, 6) + GameManager.randi_between(1, 6)
+
+func _roll_d6() -> int:
+	return GameManager.randi_between(1, 6)
+
+func _roll_2d6_presented(player: PlayerClass) -> int:
+	var values: Array[int] = [_roll_d6(), _roll_d6()]
+	if hud != null and hud.event_presentation_director != null:
+		await hud.event_presentation_director.focus_player(player, "%s 准备投骰" % player.player_name)
+		await hud.event_presentation_director.show_dice(player, values)
+	return values[0] + values[1]
 
 func try_revive_player(dying_player: PlayerClass) -> bool:
 	if dying_player == null or dying_player.current_energy > 0:

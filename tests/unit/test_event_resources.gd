@@ -78,6 +78,12 @@ func test_four_market_events_use_versioned_digital_card_faces() -> void:
 			assert_lte(absi(size.x - expected_size.x), 1, "四张数字版牌面宽度差不得超过1像素")
 			assert_lte(absi(size.y - expected_size.y), 1, "四张数字版牌面高度差不得超过1像素")
 
+func test_mei_mei_yu_gong_uses_one_d6_and_versioned_face() -> void:
+	var card := load(EVENT_DIR + "/美美与共.tres") as 事件牌
+	assert_string_contains(card.description, "一枚六面骰")
+	assert_false(card.description.contains("两枚"))
+	assert_string_contains(card.image_of_front.resource_path, "/beta-0.2.1/")
+
 func test_discarded_event_does_not_return_to_draw_pile() -> void:
 	var deck_before := ResourceManager.事件牌库.duplicate()
 	var discard_before := ResourceManager.事件弃牌堆.duplicate()

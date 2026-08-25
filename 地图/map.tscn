@@ -1356,11 +1356,10 @@ cost = 2
 position = Vector2(1862, 1233)
 scale = Vector2(1.2500006, 1.2500005)
 section_name = "咸宁2"
-scenery_name = "九宫山"
 location_index = Vector3i(15, -18, 3)
 region = 13
 logical_index = 139
-type = 5
+type = 1
 
 [node name="MapSection60" parent="MapSprite/咸宁" unique_id=1512973991 instance=ExtResource("2_gp7by")]
 position = Vector2(1676.0001, 1341)
@@ -1416,9 +1415,11 @@ logical_index = 145
 position = Vector2(2042, 1342)
 scale = Vector2(1.2500006, 1.2500005)
 section_name = "咸宁9"
+scenery_name = "九宫山"
 location_index = Vector3i(17, -20, 3)
 region = 13
 logical_index = 146
+type = 5
 landform = 1
 cost = 2
 

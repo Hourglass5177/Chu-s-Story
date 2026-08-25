@@ -499,16 +499,19 @@ func test_explorer_camera_restores_only_after_movement_and_binds_the_actor() -> 
 	ProfessionManager.section_choice_resolved.connect(hud._on_profession_section_choice_resolved, CONNECT_ONE_SHOT)
 	var choose_target := func(request: ProfessionSectionChoiceRequest) -> void:
 		hud._on_profession_section_choice_requested(request)
+		assert_false(hud.btn_view_toggle.disabled, "探险选点期间 ALT 必须保持可用")
+		hud._on_view_toggle_pressed()
+		assert_true(hud.is_focus_mode, "探险选点期间应能立即切换到追踪视角")
 		ProfessionManager.submit_section_choice(request.request_id, target)
 	ProfessionManager.section_choice_requested.connect(choose_target, CONNECT_ONE_SHOT)
 
 	player._begin_profession_end_move()
 
-	assert_false(hud.is_focus_mode, "选项刚确定时仍应保持全局视角，不能提前恢复追踪")
+	assert_true(hud.is_focus_mode, "玩家手动切换的追踪视角必须在技能移动期间保持")
 	assert_eq(hud.leave_focus_count, 1, "探险选点必须通过保留当前镜头中心的统一入口解除追踪")
 	assert_eq(hud._global_camera_position, displayed_center, "进入探险选点不得跳向陈旧的全局中心或其他玩家")
 	assert_eq(camera.position, displayed_center, "进入探险选点本身不得产生额外运镜")
-	assert_true(hud.btn_view_toggle.disabled, "棋子技能移动完成前 ALT 必须保持锁定")
+	assert_false(hud.btn_view_toggle.disabled, "棋子技能移动期间 ALT 不得被锁定")
 	assert_true(hud.camera_focus_targets.is_empty(), "选项确定不等于技能移动完成")
 	await get_tree().create_timer(0.35).timeout
 	assert_eq(player.now_pos, target.location_index)
