@@ -40,6 +40,13 @@ func test_every_high_level_food_has_an_effect_dispatch() -> void:
 	assert_eq(found.size(), 40)
 	assert_eq(FoodManager.IMPLEMENTED_FOOD_IDS.size(), 40)
 
+
+func test_mao_zui_keeps_card_copy_verbatim_and_exposes_its_digital_ruling_separately() -> void:
+	var card := load("res://Cards/食物牌/毛嘴卤鸡.tres") as 食物牌
+	assert_not_null(card)
+	assert_eq(card.effect_description, "所有玩家精力+1并支付你100积分点。")
+	assert_eq(card.ruling_note, "余额不足时支付当前全部余额，仍然精力+1。")
+
 func test_high_level_resource_copy_matches_the_formal_food_table_verbatim() -> void:
 	var source := FileAccess.get_file_as_string("res://docs/食物牌效果与价格表（省级与国家级）.md")
 	var expected: Dictionary[String, Dictionary] = {}

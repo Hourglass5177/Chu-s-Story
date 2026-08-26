@@ -8,6 +8,7 @@ class_name 研究所弹窗
 @onready var sell_tab: Button = $页签/出售
 @onready var scroll_container: ScrollContainer = $ScrollContainer
 @onready var card_grid: GridContainer = $ScrollContainer/CardGrid
+@onready var guide_button: Button = $BtnGuide
 @onready var close_button: TextureButton = $BtnClose
 
 var hud: HUD = null
@@ -22,12 +23,27 @@ var _event_selected_cards: Array[非遗牌] = []
 func _ready() -> void:
 	buy_tab.pressed.connect(_show_buy_page)
 	sell_tab.pressed.connect(_show_sell_page)
+	guide_button.pressed.connect(_open_guide)
 	close_button.pressed.connect(close_market)
 	MarketManager.inventory_changed.connect(_on_inventory_changed)
 	EventManager.choice_resolved.connect(_on_event_choice_resolved)
 	EventManager.interaction_finished.connect(_on_event_interaction_finished)
 	set_process(false)
 	hide()
+
+
+func _open_guide() -> void:
+	if hud == null or not is_instance_valid(hud):
+		hud = get_tree().get_first_node_in_group("HUD") as HUD
+	if hud == null:
+		return
+	hud.open_game_guide(GuideOpenContext.new(
+		GuideOpenContext.Source.MARKET,
+		&"market_economy",
+		&"market",
+		&"global_research_market",
+		guide_button
+	))
 
 func _process(_delta: float) -> void:
 	if _event_request == null:

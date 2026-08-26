@@ -5,12 +5,14 @@ const MAIN_MAP_SCRIPT: Script = preload("res://main_map.gd")
 var _player_data_backup: Array = []
 var _active_setup_backup: SessionSetup = null
 var _prepared_backup: bool = false
+var _target_score_backup: int = SessionSetup.DEFAULT_TARGET_SCORE
 
 
 func before_each() -> void:
 	_player_data_backup = GameManager.player_data.duplicate(true)
 	_active_setup_backup = GameManager._active_session_setup
 	_prepared_backup = GameManager._local_session_prepared
+	_target_score_backup = GameManager._configured_target_score
 	GameManager.player_data.clear()
 	GameManager._active_session_setup = null
 	GameManager._local_session_prepared = false
@@ -20,6 +22,7 @@ func after_each() -> void:
 	GameManager.player_data = _player_data_backup.duplicate(true)
 	GameManager._active_session_setup = _active_setup_backup
 	GameManager._local_session_prepared = _prepared_backup
+	GameManager._configured_target_score = _target_score_backup
 
 
 func test_resize_slots_preserves_existing_players_and_defaults_new_bots() -> void:
@@ -66,6 +69,7 @@ func test_validate_allows_duplicate_display_names() -> void:
 
 func test_snapshot_and_legacy_mapping_are_independent_from_the_draft() -> void:
 	var setup := _valid_setup()
+	setup.target_score = 30
 	setup.players[0].display_name = "  "
 	var snapshot := setup.duplicate_snapshot()
 	var legacy := snapshot.to_legacy_player_data()
@@ -73,6 +77,7 @@ func test_snapshot_and_legacy_mapping_are_independent_from_the_draft() -> void:
 	setup.players[0].profession_type = PlayerClass.PlayerCharacter.商业博主
 
 	assert_eq(snapshot.players[0].display_name, "  ")
+	assert_eq(snapshot.target_score, 30)
 	assert_eq(legacy[0], {
 		"name": "P1",
 		"location": "十堰",
@@ -84,6 +89,7 @@ func test_snapshot_and_legacy_mapping_are_independent_from_the_draft() -> void:
 func test_game_manager_commits_deep_snapshot_and_keeps_legacy_compatibility() -> void:
 	var setup := _valid_setup()
 	setup.players[0].display_name = "阿楚"
+	setup.target_score = 25
 	assert_eq(GameManager.prepare_local_session(setup), OK)
 	assert_eq(GameManager.player_data, [{
 		"name": "阿楚",
@@ -94,9 +100,19 @@ func test_game_manager_commits_deep_snapshot_and_keeps_legacy_compatibility() ->
 
 	setup.players[0].display_name = "污染快照"
 	var active := GameManager.get_active_session_setup()
+	assert_eq(GameManager.get_target_score(), 25)
 	assert_eq(active.players[0].display_name, "阿楚")
 	active.players[0].display_name = "污染返回值"
 	assert_eq(GameManager.get_active_session_setup().players[0].display_name, "阿楚")
+
+
+func test_target_score_accepts_only_the_four_formal_options() -> void:
+	var setup := _valid_setup()
+	for target: int in SessionSetup.TARGET_SCORE_OPTIONS:
+		setup.target_score = target
+		assert_true(setup.validate().is_empty(), "%d分应为合法目标" % target)
+	setup.target_score = 19
+	assert_has(setup.validate(), "目标分数须为15、20、25或30分")
 
 
 func test_prepare_is_idempotent_for_same_setup_and_rejects_a_different_one() -> void:

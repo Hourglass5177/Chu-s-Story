@@ -84,6 +84,19 @@ func test_mei_mei_yu_gong_uses_one_d6_and_versioned_face() -> void:
 	assert_false(card.description.contains("两枚"))
 	assert_string_contains(card.image_of_front.resource_path, "/beta-0.2.1/")
 
+func test_resource_descriptions_follow_current_digital_rulings() -> void:
+	var bai_ge := load(EVENT_DIR + "/百舸争流.tres") as 事件牌
+	var yi_jing := load(EVENT_DIR + "/艺径寻踪.tres") as 事件牌
+	var you_mu := load(EVENT_DIR + "/游目骋怀.tres") as 事件牌
+	var jian_wang := load(EVENT_DIR + "/鉴往知来.tres") as 事件牌
+	var emergency := load(EVENT_DIR + "/紧急避险.tres") as 事件牌
+	assert_string_contains(bai_ge.description, "三次2D6")
+	assert_string_contains(yi_jing.description, "两次2D6")
+	assert_string_contains(you_mu.description, "固定获得5点精力")
+	assert_false(you_mu.description.contains("正常奖励外"))
+	assert_string_contains(jian_wang.description, "库存非空时必须选择1张")
+	assert_string_contains(emergency.description, "本回合行动阶段")
+
 func test_discarded_event_does_not_return_to_draw_pile() -> void:
 	var deck_before := ResourceManager.事件牌库.duplicate()
 	var discard_before := ResourceManager.事件弃牌堆.duplicate()

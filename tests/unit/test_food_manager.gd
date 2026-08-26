@@ -96,6 +96,22 @@ func test_work_bonus_changes_normal_and_forced_work_basis() -> void:
 	assert_eq(FoodManager.adjust_work_income(_source, 250), 500)
 
 
+func test_mao_zui_lu_ji_uses_partial_payment_without_blocking_energy_gain() -> void:
+	_source.current_money = 0
+	_target.current_money = 60
+	_third.current_money = 0
+	_source.current_energy = 5
+	_target.current_energy = 5
+	_third.current_energy = 5
+	var card := _food(&"mao_zui_lu_ji", 食物牌.FoodType.省级)
+	card.card_name = "毛嘴卤鸡"
+	assert_true(await FoodManager._resolve_effect(_source, card, FoodManager._session_token))
+	assert_eq(_source.current_money, 60)
+	assert_eq(_target.current_money, 0)
+	assert_eq(_third.current_money, 0)
+	assert_eq([_source.current_energy, _target.current_energy, _third.current_energy], [6, 6, 6])
+
+
 func test_delayed_begin_recovery_and_movement_modifiers_report_their_sources() -> void:
 	await FoodManager._resolve_effect(_source, _food(&"pi_tiao_shan_yu", 食物牌.FoodType.省级), FoodManager._session_token)
 	FoodManager.on_phase_entered(_source, TurnManager.TurnPhase.BEGIN)

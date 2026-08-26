@@ -49,6 +49,7 @@ var _ending_turn: bool = false
 var map: MAP
 var hud: HUD
 var _last_game_result: GameResult = null
+var target_score: int = SessionSetup.DEFAULT_TARGET_SCORE
 
 @onready var turn_timer: Timer = $TurnTimer
 
@@ -68,6 +69,7 @@ func start_game(player_nodes: Array[PlayerClass]) -> void:
 		push_error("TurnManager.start_game: 至少需要一名玩家。")
 		return
 	now_turn = 0
+	target_score = GameManager.get_target_score()
 	_turn_epoch = 0
 	_ending_turn = false
 	now_player_index = 0
@@ -390,21 +392,30 @@ func has_player_reached_score_limit() -> bool:
 		# 避免缓存分数因刚完成的手牌或成就事务而滞后。
 		var breakdown: Dictionary = ResourceManager.get_score_breakdown(player)
 		player.current_score = int(breakdown.get("total_score", 0))
-		if player.current_score >= 20:
+		if player.current_score >= target_score:
 			return true
 	return false
 
 func has_reached_elimination_limit() -> bool:
+	# 单人局的失败由回合末精力归零单独裁定，不使用“累计淘汰”条件。
+	if players.size() <= 1:
+		return false
 	var eliminated_count := 0
 	for player: PlayerClass in players:
 		if not player.alive:
 			eliminated_count += 1
-	# 正式多人局固定累计淘汰两人；单人仅用于调试。
-	var elimination_limit := 1 if players.size() <= 1 else 2
-	return eliminated_count >= elimination_limit
+	# 正式多人局（包括两人局）固定累计淘汰两人。
+	return eliminated_count >= 2
 
 func get_current_end_reason() -> int:
 	var reached_score_limit: bool = has_player_reached_score_limit()
+	if players.size() == 1:
+		# 单人同一结算点同时达标且精力归零时，达标优先判为胜利。
+		if reached_score_limit:
+			return EndReason.SCORE_LIMIT
+		if not players[0].alive:
+			return EndReason.SOLO_DEFEAT
+		return NO_END_REASON
 	var reached_elimination_limit: bool = has_reached_elimination_limit()
 	if reached_score_limit and reached_elimination_limit:
 		return EndReason.BOTH
@@ -464,6 +475,7 @@ func reset_session() -> void:
 	movement_lock_active = false
 	_movement_resume_time = 0.0
 	_last_game_result = null
+	target_score = SessionSetup.DEFAULT_TARGET_SCORE
 	ProfessionManager.reset_session()
 	map = null
 	hud = null
@@ -499,12 +511,12 @@ func _build_game_result(reason: int) -> GameResult:
 			candidate["player"] as PlayerClass,
 			candidate["breakdown"] as Dictionary,
 			rank,
-			rank == 1
+			rank == 1 and reason != EndReason.SOLO_DEFEAT
 		)
 		entries.append(entry)
 		previous_score = score
 		previous_rank = rank
-	return GameResult.new(reason, now_turn, entries)
+	return GameResult.new(reason, now_turn, entries, target_score)
 
 func _ranked_player_precedes(first: Dictionary, second: Dictionary) -> bool:
 	var first_score: int = int(first["score"])

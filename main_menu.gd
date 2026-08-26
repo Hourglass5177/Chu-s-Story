@@ -16,6 +16,7 @@ const STEPPER_SCENE: PackedScene = preload("res://UI/Frontend/number_stepper.tsc
 const CARD_SCENE: PackedScene = preload("res://UI/Frontend/stateful_card.tscn")
 const PLAYER_SETUP_SCENE: PackedScene = preload("res://UI/Frontend/player_setup_page.tscn")
 const ROSTER_SCENE: PackedScene = preload("res://UI/Frontend/roster_page.tscn")
+const GAME_GUIDE_SCENE: PackedScene = preload("res://UI/GameGuide/digital_game_guide.tscn")
 const FRONTEND_THEME: Theme = preload("res://UI/Frontend/frontend_theme.tres")
 const SESSION_LAUNCHER_SCRIPT: Script = preload("res://UI/Frontend/frontend_session_launcher.gd")
 const TITLE_TEXTURE: Texture2D = preload("res://arts/素材合集/主界面（启动+首页）/游戏标题.png")
@@ -43,6 +44,7 @@ var _shell: Control
 
 var _human_stepper: FrontendNumberStepper
 var _bot_stepper: FrontendNumberStepper
+var _target_score_stepper: FrontendNumberStepper
 var _total_label: Label
 var _count_syncing := false
 
@@ -69,6 +71,8 @@ var _loading_label: Label
 var _loading_timer: Timer
 var _loading_dot_count := 0
 var _session_launcher: FrontendSessionLauncher = SESSION_LAUNCHER_SCRIPT.new() as FrontendSessionLauncher
+var _game_guide: DigitalGameGuide
+var _home_rules_button: Button
 
 
 func _ready() -> void:
@@ -103,6 +107,14 @@ func set_local_player_counts(human_count: int, bot_count: int) -> bool:
 	if _draft.resize_slots(human_count, bot_count) != OK:
 		return false
 	_draft.mode = SessionSetup.GameMode.LOCAL
+	_sync_count_view()
+	return true
+
+
+func set_target_score(target_score: int) -> bool:
+	if not SessionSetup.TARGET_SCORE_OPTIONS.has(target_score):
+		return false
+	_draft.target_score = target_score
 	_sync_count_view()
 	return true
 
@@ -191,10 +203,11 @@ func _build_frontend() -> void:
 	_build_loading_page()
 	_build_toast_layer()
 	_build_modal_layer()
+	_build_game_guide()
 
 
 func _capture_and_hide_legacy_nodes() -> void:
-	# 旧 Demo 节点仍保留用于读取说明/制作人员文字，但不得再参与显示、
+	# 旧 Demo 节点仅保留制作人员文字；游戏说明已由数字版指南取代。它们不得参与显示、
 	# 焦点或鼠标命中。不要依赖一份容易漏项的节点名称列表。
 	for child: Node in get_children():
 		_disable_legacy_input_tree(child)
@@ -229,12 +242,11 @@ func _build_home_page() -> void:
 	body.add_child(buttons)
 	var start_button := _new_button("开始游戏", buttons, Vector2(580, 92))
 	var rules_button := _new_button("游戏说明", buttons, Vector2(580, 82))
+	_home_rules_button = rules_button
 	var credits_button := _new_button("制作人员", buttons, Vector2(580, 82))
 	var exit_button := _new_button("退出游戏", buttons, Vector2(580, 82))
 	start_button.pressed.connect(func() -> void: show_screen(SCREEN_MODE))
-	rules_button.pressed.connect(func() -> void:
-		_show_text_modal("游戏说明", _read_legacy_text("RulesPanel/ScrollContainer/Label"), rules_button)
-	)
+	rules_button.pressed.connect(func() -> void: open_game_guide())
 	credits_button.pressed.connect(func() -> void:
 		_show_text_modal("制作人员", _read_legacy_text("CreditsPanel/Label"), credits_button)
 	)
@@ -270,7 +282,7 @@ func _build_mode_page() -> void:
 
 
 func _build_count_page() -> void:
-	var page := _create_page(SCREEN_LOCAL_COUNT, "本地游戏", "选择玩家", Vector2(1260, 820))
+	var page := _create_page(SCREEN_LOCAL_COUNT, "本地游戏", "选择玩家", Vector2(1260, 940))
 	var body := page.get_node("%Body") as VBoxContainer
 	body.add_child(_new_label("设置席位", 34, HORIZONTAL_ALIGNMENT_CENTER))
 	_human_stepper = STEPPER_SCENE.instantiate() as FrontendNumberStepper
@@ -286,6 +298,14 @@ func _build_count_page() -> void:
 	_total_label = _new_label("总人数：1 / 6", 42, HORIZONTAL_ALIGNMENT_CENTER)
 	_total_label.add_theme_color_override("font_color", FrontendStyle.GOLD)
 	body.add_child(_total_label)
+	_target_score_stepper = STEPPER_SCENE.instantiate() as FrontendNumberStepper
+	_target_score_stepper.caption = "目标分数"
+	_target_score_stepper.minimum = 15
+	_target_score_stepper.maximum = 30
+	_target_score_stepper.step_size = 5
+	_target_score_stepper.current_value = SessionSetup.DEFAULT_TARGET_SCORE
+	_target_score_stepper.value_suffix = " 分"
+	body.add_child(_target_score_stepper)
 	var note := _new_label("电脑玩家暂由本地操作", 30, HORIZONTAL_ALIGNMENT_CENTER)
 	note.add_theme_color_override("font_color", FrontendStyle.BROWN)
 	body.add_child(note)
@@ -302,6 +322,10 @@ func _build_count_page() -> void:
 		if not _count_syncing:
 			_request_count_change(_human_stepper.get_value(), value)
 	)
+	_target_score_stepper.value_changed.connect(func(value: int) -> void:
+		if not _count_syncing:
+			set_target_score(value)
+	)
 	_human_stepper.boundary_pressed.connect(func(_direction: int) -> void: _show_toast("已到人数上限"))
 	_bot_stepper.boundary_pressed.connect(func(_direction: int) -> void: _show_toast("已到人数上限"))
 	back_button.pressed.connect(func() -> void: show_screen(SCREEN_MODE))
@@ -310,15 +334,21 @@ func _build_count_page() -> void:
 	var human_increase := _human_stepper.get_node("%Increase") as Button
 	var bot_decrease := _bot_stepper.get_node("%Decrease") as Button
 	var bot_increase := _bot_stepper.get_node("%Increase") as Button
+	var score_decrease := _target_score_stepper.get_node("%Decrease") as Button
+	var score_increase := _target_score_stepper.get_node("%Increase") as Button
 	human_decrease.focus_neighbor_bottom = human_decrease.get_path_to(bot_decrease)
 	human_increase.focus_neighbor_bottom = human_increase.get_path_to(bot_increase)
 	bot_decrease.focus_neighbor_top = bot_decrease.get_path_to(human_decrease)
 	bot_increase.focus_neighbor_top = bot_increase.get_path_to(human_increase)
-	bot_decrease.focus_neighbor_bottom = bot_decrease.get_path_to(back_button)
-	bot_increase.focus_neighbor_bottom = bot_increase.get_path_to(next_button)
-	back_button.focus_neighbor_top = back_button.get_path_to(bot_decrease)
+	bot_decrease.focus_neighbor_bottom = bot_decrease.get_path_to(score_decrease)
+	bot_increase.focus_neighbor_bottom = bot_increase.get_path_to(score_increase)
+	score_decrease.focus_neighbor_top = score_decrease.get_path_to(bot_decrease)
+	score_increase.focus_neighbor_top = score_increase.get_path_to(bot_increase)
+	score_decrease.focus_neighbor_bottom = score_decrease.get_path_to(back_button)
+	score_increase.focus_neighbor_bottom = score_increase.get_path_to(next_button)
+	back_button.focus_neighbor_top = back_button.get_path_to(score_decrease)
 	back_button.focus_neighbor_right = back_button.get_path_to(next_button)
-	next_button.focus_neighbor_top = next_button.get_path_to(bot_increase)
+	next_button.focus_neighbor_top = next_button.get_path_to(score_increase)
 	next_button.focus_neighbor_left = next_button.get_path_to(back_button)
 	page.initial_focus_path = page.get_path_to(human_increase)
 
@@ -467,6 +497,7 @@ func _sync_count_view() -> void:
 	_human_stepper.set_value(_draft.human_count, false)
 	_bot_stepper.set_value(_draft.bot_count, false)
 	_total_label.text = "总人数：%d / %d" % [_draft.players.size(), SessionSetup.MAX_PLAYERS]
+	_target_score_stepper.set_value(_draft.target_score, false)
 	_count_syncing = false
 
 
@@ -582,6 +613,46 @@ func _build_modal_layer() -> void:
 	_modal_body = VBoxContainer.new()
 	_modal_body.add_theme_constant_override("separation", 24)
 	_modal_panel.add_child(_modal_body)
+
+
+func _build_game_guide() -> void:
+	_game_guide = GAME_GUIDE_SCENE.instantiate() as DigitalGameGuide
+	_game_guide.name = "DigitalGameGuide"
+	_game_guide.set_ui_preferences(_preferences)
+	_game_guide.set_shortcut_enabled(false)
+	_shell.add_child(_game_guide)
+	_game_guide.guide_closed.connect(_on_game_guide_closed)
+
+
+func open_game_guide(context: GuideOpenContext = null) -> bool:
+	if _game_guide == null or _modal_layer.visible:
+		return false
+	var current_page := _pages.get(_current_screen) as FrontendScreen
+	if current_page != null:
+		current_page.set_interaction_enabled(false)
+	var open_context := context
+	if open_context == null:
+		open_context = GuideOpenContext.new(
+			GuideOpenContext.Source.MAIN_MENU,
+			&"guide_home",
+			&"",
+			&"",
+			_home_rules_button
+		)
+	return _game_guide.open_guide(open_context)
+
+
+func get_game_guide() -> DigitalGameGuide:
+	return _game_guide
+
+
+func _on_game_guide_closed(context: GuideOpenContext) -> void:
+	var current_page := _pages.get(_current_screen) as FrontendScreen
+	if current_page != null:
+		current_page.set_interaction_enabled(true)
+	var return_focus := context.get_return_focus() if context != null else null
+	if return_focus != null and is_instance_valid(return_focus) and return_focus.is_visible_in_tree() and return_focus.focus_mode != Control.FOCUS_NONE:
+		return_focus.grab_focus()
 
 
 func _show_text_modal(title_text: String, body_text: String, return_focus: Control) -> void:
@@ -725,7 +796,7 @@ func _read_legacy_text(node_path: String) -> String:
 
 
 func _draft_has_meaningful_changes() -> bool:
-	if _draft.human_count != 1 or _draft.bot_count != 0:
+	if _draft.human_count != 1 or _draft.bot_count != 0 or _draft.target_score != SessionSetup.DEFAULT_TARGET_SCORE:
 		return true
 	for player: PlayerSetup in _draft.players:
 		if _player_has_meaningful_config(player):

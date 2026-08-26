@@ -1,6 +1,8 @@
 extends GutTest
 
 const EVENT_DIR := "res://Cards/事件牌"
+## 固定让【艺径寻踪】的首次 2D6 至少为 3，专门覆盖“终点为非遗点时免费学习”分支。
+const YI_JING_XUN_ZONG_CONTRACT_SEED := 4133
 
 var _food_deck_backup: Array[卡牌基类]
 var _event_deck_backup: Array[事件牌]
@@ -9,8 +11,14 @@ var _regional_decks_backup: Dictionary
 var _market_backup: Array[非遗牌]
 var _players: Array[PlayerClass] = []
 var _map: MAP = null
+var _game_seed_backup: int
+var _runtime_profile_backup: GameManager.RuntimeProfile
+var _target_score_backup: int
 
 func before_each() -> void:
+	_game_seed_backup = GameManager.get_session_seed()
+	_runtime_profile_backup = GameManager.runtime_profile
+	_target_score_backup = GameManager.get_target_score()
 	_food_deck_backup.assign(ResourceManager.食物牌库)
 	_event_deck_backup.assign(ResourceManager.事件牌库)
 	_event_discard_backup.assign(ResourceManager.事件弃牌堆)
@@ -28,6 +36,7 @@ func after_each() -> void:
 	for card: 非遗牌 in _market_backup:
 		MarketManager.deposit_card(card, &"test_restore")
 	ProfessionManager.reset_for_new_game()
+	GameManager.configure_session(_game_seed_backup, _runtime_profile_backup, _target_score_backup)
 
 func test_every_available_event_completes_a_deterministic_resolution() -> void:
 	var cards: Array[事件牌] = []
@@ -43,7 +52,8 @@ func test_every_available_event_completes_a_deterministic_resolution() -> void:
 	for index in cards.size():
 		var card: 事件牌 = cards[index]
 		_setup_scenario(card.event_id)
-		seed(4100 + index)
+		var event_seed := YI_JING_XUN_ZONG_CONTRACT_SEED if card.event_id == &"yi_jing_xun_zong" else 4100 + index
+		GameManager.configure_session(event_seed, GameManager.RuntimeProfile.HEADLESS_SIMULATION)
 		await EventManager.resolve_event(_players[0], card)
 
 		assert_false(EventManager.resolving, card.card_name + " 结算后必须退出事件模态")

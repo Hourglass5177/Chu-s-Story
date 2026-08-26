@@ -114,6 +114,8 @@ var profession_detail_overlay: ProfessionDetailPanel
 var profession_draw_overlay: ProfessionDrawPanel
 var profession_skill_toast: ProfessionSkillToast
 var event_presentation_director: EventPresentationDirector
+var game_guide: DigitalGameGuide
+var guide_button: Button
 const EVENT_OVERLAY_SCENE := preload("res://HUDs/event_overlay.tscn")
 const MARKET_OVERLAY_SCENE := preload("res://HUDs/研究所弹窗.tscn")
 const SCORE_OVERLAY_SCENE := preload("res://HUDs/计分详情弹窗.tscn")
@@ -125,6 +127,8 @@ const PROFESSION_DETAIL_SCENE := preload("res://HUDs/职业详情弹窗.tscn")
 const PROFESSION_DRAW_SCENE := preload("res://HUDs/职业抽牌弹窗.tscn")
 const PROFESSION_SKILL_TOAST_SCENE := preload("res://HUDs/职业技能提示.tscn")
 const EVENT_PRESENTATION_DIRECTOR_SCRIPT := preload("res://HUDs/event_presentation_director.gd")
+const GAME_GUIDE_SCENE := preload("res://UI/GameGuide/digital_game_guide.tscn")
+const FRONTEND_THEME := preload("res://UI/Frontend/frontend_theme.tres")
 func _ready() -> void:
 	map_container.resized.connect(_on_container_resized)
 	_spawn_map_in_hud()
@@ -148,6 +152,10 @@ func _ready() -> void:
 	_setup_card_hand_animation()
 	_setup_profession_ui()
 	_setup_map_tooltip()
+	_setup_game_guide()
+	phase_label.mouse_filter = Control.MOUSE_FILTER_STOP
+	phase_label.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	phase_label.gui_input.connect(_on_phase_label_gui_input)
 	score_label.mouse_filter = Control.MOUSE_FILTER_STOP
 	score_label.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	score_label.gui_input.connect(_on_score_label_gui_input)
@@ -171,6 +179,85 @@ func _ready() -> void:
 		$BtnClose.mouse_exited.connect(func(): mask.hide())
 		$BtnClose.button_down.connect(func(): mask.modulate = Color(0, 0, 0, 0.7)) # 按下更黑
 		$BtnClose.button_up.connect(func(): mask.modulate = Color(0, 0, 0, 0.4))   # 松开恢复
+
+
+func _setup_game_guide() -> void:
+	guide_button = Button.new()
+	guide_button.name = "GuideButton"
+	guide_button.text = "?"
+	guide_button.tooltip_text = "游戏指南 · F1"
+	guide_button.theme = FRONTEND_THEME
+	guide_button.z_index = 50
+	guide_button.focus_mode = Control.FOCUS_ALL
+	guide_button.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	guide_button.position = Vector2(-320, 30)
+	guide_button.size = Vector2(82, 82)
+	guide_button.pressed.connect(func() -> void: open_game_guide())
+	add_child(guide_button)
+	game_guide = GAME_GUIDE_SCENE.instantiate() as DigitalGameGuide
+	game_guide.name = "DigitalGameGuide"
+	game_guide.set_shortcut_enabled(true)
+	add_child(game_guide)
+
+
+func get_game_guide() -> DigitalGameGuide:
+	return game_guide
+
+
+func open_game_guide(context: GuideOpenContext = null) -> bool:
+	if game_guide == null:
+		return false
+	var open_context := context
+	if open_context == null:
+		if _hovered_map_section != null and is_instance_valid(_hovered_map_section):
+			var section := _hovered_map_section
+			var topic_id := &"map_movement" if section.type == MapSection.SectionType.一般 else &"functional_tiles"
+			open_context = GuideOpenContext.new(
+				GuideOpenContext.Source.MAP_SECTION,
+				topic_id,
+				&"map_section",
+				StringName("%d,%d,%d" % [section.location_index.x, section.location_index.y, section.location_index.z]),
+				guide_button
+			)
+		else:
+			open_context = GuideOpenContext.new(
+				GuideOpenContext.Source.HUD,
+				&"turn_phases",
+				&"phase",
+				&"",
+				guide_button
+			)
+	_cancel_map_pointer_state()
+	return game_guide.open_guide(open_context)
+
+
+func _cancel_map_pointer_state() -> void:
+	_map_drag_candidate = false
+	_map_dragging = false
+	_map_drag_distance = 0.0
+	_hovered_map_section = null
+	if _map_tooltip_timer != null:
+		_map_tooltip_timer.stop()
+	if _map_tooltip != null:
+		_map_tooltip.hide()
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.is_action_pressed("guide_toggle") and game_guide != null and not game_guide.is_guide_open():
+		open_game_guide()
+		get_viewport().set_input_as_handled()
+
+
+func _on_phase_label_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		open_game_guide(GuideOpenContext.new(
+			GuideOpenContext.Source.PHASE,
+			&"turn_phases",
+			&"phase",
+			&"",
+			phase_label
+		))
+		get_viewport().set_input_as_handled()
 
 func _setup_event_ui() -> void:
 	event_overlay = EVENT_OVERLAY_SCENE.instantiate() as EventOverlay
@@ -894,7 +981,7 @@ func _position_map_tooltip() -> void:
 	_map_tooltip.position = target
 
 func _get_map_section_tooltip_text(section: MapSection) -> String:
-	return section.get_tooltip_text()
+	return "%s\nF1：相关规则" % section.get_tooltip_text()
 
 func _process(delta: float):
 	if _active_event_map_request != null:
@@ -965,7 +1052,7 @@ func _update_player_stats(player: PlayerClass) -> void:
 		return
 	money_label.text = str(player.current_money)
 	energy_label.text = str(player.current_energy) + "/" + str(player.max_energy)
-	score_label.text = "总分数：" + str(player.current_score) + "分"
+	score_label.text = "总分数：%d / %d" % [player.current_score, TurnManager.target_score]
 	name_label.text = player.player_name
 	立绘精二.texture = player.立绘精二
 	var profession_label := $"玩家信息/职业背景/职业" as Label

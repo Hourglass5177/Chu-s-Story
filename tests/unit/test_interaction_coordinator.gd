@@ -113,6 +113,51 @@ func test_session_reset_wakes_waiter_with_reason_and_clears_modal() -> void:
 	assert_eq(result.cancel_reason, &"session_reset")
 	assert_eq(TurnManager.get_modal_snapshot().depth, 0)
 
+func test_suspend_freezes_timeout_and_blocks_background_submission() -> void:
+	var ticket := InteractionCoordinator.begin_interaction(
+		&"guide_suspend", 0.12, func(_active: InteractionTicket): return "超时"
+	)
+	await wait_seconds(0.03)
+	var lease := InteractionCoordinator.suspend_active(&"digital_guide")
+	var frozen_time := InteractionCoordinator.get_time_left(ticket.interaction_id)
+	assert_gt(lease, 0)
+	assert_true(InteractionCoordinator.is_active_suspended())
+	assert_false(InteractionCoordinator.submit(ticket.interaction_id, "穿透提交"))
+	assert_false(InteractionCoordinator.update_preview(ticket.interaction_id, "穿透预览"))
+	assert_false(InteractionCoordinator.resolve_timeout(ticket.interaction_id))
+	await wait_seconds(0.16)
+	assert_true(ticket.is_waiting(), "指南打开期间请求不得超时")
+	assert_almost_eq(InteractionCoordinator.get_time_left(ticket.interaction_id), frozen_time, 0.02)
+	assert_true(InteractionCoordinator.resume_active(lease))
+	assert_false(InteractionCoordinator.is_active_suspended())
+	await wait_seconds(frozen_time + 0.05)
+	var result := await InteractionCoordinator.await_result(ticket)
+	assert_true(result.timed_out)
+	assert_eq(result.value, "超时")
+
+func test_nested_suspend_resumes_only_after_last_valid_lease() -> void:
+	var ticket := InteractionCoordinator.begin_interaction(&"nested_suspend", 5.0)
+	var first := InteractionCoordinator.suspend_active(&"guide")
+	var second := InteractionCoordinator.suspend_active(&"nested_detail")
+	assert_eq(InteractionCoordinator.get_active_snapshot().suspend_depth, 2)
+	assert_true(InteractionCoordinator.resume_active(first))
+	assert_true(InteractionCoordinator.is_active_suspended())
+	assert_false(InteractionCoordinator.submit(ticket.interaction_id, true))
+	assert_false(InteractionCoordinator.resume_active(first), "重复释放不得影响仍有效的挂起")
+	assert_true(InteractionCoordinator.resume_active(second))
+	assert_true(InteractionCoordinator.submit(ticket.interaction_id, true))
+	assert_true((await InteractionCoordinator.await_result(ticket)).value)
+
+func test_session_reset_invalidates_suspend_lease_without_resuming_old_request() -> void:
+	var ticket := InteractionCoordinator.begin_interaction(&"old_session", 5.0)
+	var lease := InteractionCoordinator.suspend_active(&"guide")
+	InteractionCoordinator.reset_session(false)
+	assert_false(InteractionCoordinator.resume_active(lease))
+	assert_false(InteractionCoordinator.is_active_suspended())
+	var result := await InteractionCoordinator.await_result(ticket)
+	assert_eq(result.state, InteractionTicket.State.CANCELLED)
+	assert_eq(result.cancel_reason, &"session_reset")
+
 func test_fifty_mixed_interactions_leave_no_ticket_or_modal_state() -> void:
 	for index: int in 50:
 		var policy := TurnManager.ModalResumePolicy.RESUME_REMAINING \

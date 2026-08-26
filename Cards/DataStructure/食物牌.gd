@@ -20,6 +20,8 @@ const COSTOFTYPE = {
 @export var food_type: FoodType = FoodType.市级
 @export var cost: int = 150
 @export_multiline var effect_description: String = "精力 +2"
+## 不改动牌面原文；仅在已发现条目的详细规则中补充必要数字版裁定。
+@export_multiline var ruling_note: String = ""
 
 func get_default_cost() -> int:
 	return int(COSTOFTYPE.get(food_type, 150))

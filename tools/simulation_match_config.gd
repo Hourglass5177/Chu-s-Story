@@ -7,6 +7,9 @@ var match_index: int
 var base_seed: int
 var world_seed: int
 var decision_seed: int
+var target_score: int = SessionSetup.DEFAULT_TARGET_SCORE:
+	set(value):
+		target_score = normalize_target_score(value)
 var locations: Array[String] = []
 var professions: Array[String] = []
 
@@ -31,6 +34,7 @@ func to_dictionary() -> Dictionary:
 		"base_seed": base_seed,
 		"world_seed": world_seed,
 		"decision_seed": decision_seed,
+		"target_score": target_score,
 		"locations": locations.duplicate(),
 		"professions": professions.duplicate(),
 	}
@@ -44,6 +48,10 @@ static func from_dictionary(data: Dictionary) -> SimulationMatchConfig:
 	)
 	config.world_seed = int(data.get("world_seed", config.world_seed))
 	config.decision_seed = int(data.get("decision_seed", config.decision_seed))
+	config.target_score = int(data.get("target_score", SessionSetup.DEFAULT_TARGET_SCORE))
 	config.locations.assign(data.get("locations", []))
 	config.professions.assign(data.get("professions", []))
 	return config
+
+static func normalize_target_score(value: int) -> int:
+	return value if SessionSetup.TARGET_SCORE_OPTIONS.has(value) else SessionSetup.DEFAULT_TARGET_SCORE

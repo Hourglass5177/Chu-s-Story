@@ -66,7 +66,7 @@ func enter_screen(animated := true) -> void:
 		return
 
 	var serial := _transition_serial
-	_transition = create_tween().set_parallel(true)
+	_transition = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS).set_parallel(true)
 	_transition.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	_transition.tween_property(self, "modulate:a", 1.0, duration)
 	if target != null:
@@ -89,7 +89,7 @@ func exit_screen(animated := true, hide_when_finished := true) -> void:
 		return
 
 	var serial := _transition_serial
-	_transition = create_tween().set_parallel(true)
+	_transition = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS).set_parallel(true)
 	_transition.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	_transition.tween_property(self, "modulate:a", 0.0, duration)
 	if target != null:

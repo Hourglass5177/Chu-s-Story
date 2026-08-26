@@ -6,15 +6,19 @@ class_name ProfessionDetailPanel
 @onready var skill_name: Label = $Panel/Content/Info/SkillName
 @onready var description: Label = $Panel/Content/Info/Description
 @onready var status: Label = $Panel/Content/Info/StatusPanel/Status
+@onready var guide_button: Button = $Panel/BtnGuide
 @onready var close_button: TextureButton = $Panel/BtnClose
 @onready var close_mask: TextureRect = $Panel/BtnClose/Mask
 
 var _player: PlayerClass = null
+var _hud: HUD = null
 var _owns_modal := false
 
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	_hud = get_tree().get_first_node_in_group("HUD") as HUD
+	guide_button.pressed.connect(_open_guide)
 	close_button.pressed.connect(close_panel)
 	_setup_close_button_feedback()
 	hide()
@@ -36,6 +40,25 @@ func show_for_player(player: PlayerClass) -> void:
 	TurnManager.begin_modal_resolution()
 	_owns_modal = true
 	close_button.grab_focus()
+
+
+func _open_guide() -> void:
+	if _player == null:
+		return
+	if _hud == null or not is_instance_valid(_hud):
+		_hud = get_tree().get_first_node_in_group("HUD") as HUD
+	if _hud == null:
+		return
+	var definition := ProfessionManager.get_definition(_player)
+	if definition == null:
+		return
+	_hud.open_game_guide(GuideOpenContext.new(
+		GuideOpenContext.Source.PROFESSION,
+		&"professions",
+		DiscoveryManager.KIND_PROFESSION,
+		definition.profession_id,
+		guide_button
+	))
 
 
 func close_panel() -> void:

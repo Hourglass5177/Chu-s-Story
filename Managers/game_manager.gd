@@ -10,12 +10,18 @@ var _session_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _session_seed: int = 0
 var _active_session_setup: SessionSetup = null
 var _local_session_prepared: bool = false
+var _configured_target_score: int = SessionSetup.DEFAULT_TARGET_SCORE
 
 func _ready() -> void:
 	configure_session()
 
-func configure_session(seed_value: int = -1, profile: RuntimeProfile = RuntimeProfile.NORMAL) -> int:
+func configure_session(
+	seed_value: int = -1,
+	profile: RuntimeProfile = RuntimeProfile.NORMAL,
+	target_score: int = SessionSetup.DEFAULT_TARGET_SCORE
+) -> int:
 	runtime_profile = profile
+	_configured_target_score = target_score if SessionSetup.TARGET_SCORE_OPTIONS.has(target_score) else SessionSetup.DEFAULT_TARGET_SCORE
 	if seed_value < 0:
 		_session_rng.randomize()
 		_session_seed = _session_rng.seed
@@ -26,6 +32,11 @@ func configure_session(seed_value: int = -1, profile: RuntimeProfile = RuntimePr
 
 func get_session_seed() -> int:
 	return _session_seed
+
+func get_target_score() -> int:
+	if _active_session_setup != null:
+		return _active_session_setup.target_score
+	return _configured_target_score
 
 func is_headless_simulation() -> bool:
 	return runtime_profile == RuntimeProfile.HEADLESS_SIMULATION
@@ -53,7 +64,7 @@ func begin_local_session(setup: SessionSetup, seed_value: int = -1) -> Error:
 		return ERR_INVALID_PARAMETER
 	if not setup.validate().is_empty():
 		return ERR_INVALID_DATA
-	configure_session(seed_value, RuntimeProfile.NORMAL)
+	configure_session(seed_value, RuntimeProfile.NORMAL, setup.target_score)
 	reset_session()
 	return prepare_local_session(setup)
 
@@ -69,6 +80,7 @@ func prepare_local_session(setup: SessionSetup) -> Error:
 	if _local_session_prepared:
 		return OK if _active_session_setup != null and _active_session_setup.is_equivalent_to(candidate) else ERR_ALREADY_EXISTS
 	_active_session_setup = candidate
+	_configured_target_score = candidate.target_score
 	player_data.assign(candidate.to_legacy_player_data())
 	_local_session_prepared = true
 	return OK

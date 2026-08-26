@@ -90,6 +90,28 @@ theme_override_fonts/font = ExtResource("2_ng1lp")
 theme_override_font_sizes/font_size = 70
 text = "余额：—"
 
+[node name="BtnGuide" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 72)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -767.5
+offset_top = 88.0
+offset_right = -617.5
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 2
+theme_override_colors/font_color = Color(0.32, 0.16, 0.1, 1)
+theme_override_colors/font_hover_color = Color(0.32, 0.16, 0.1, 1)
+theme_override_fonts/font = ExtResource("2_ng1lp")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_refresh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_refresh_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_refresh_hover")
+text = "指南"
+
 [node name="BtnRefresh" type="Button" parent="."]
 visible = false
 custom_minimum_size = Vector2(230, 72)

@@ -9,6 +9,7 @@ const EVENT_CARD_BACK := preload("res://arts/事件卡/事件牌（牌背）.png
 @onready var _prompt_label: Label = %PromptLabel
 @onready var _countdown_label: Label = %CountdownLabel
 @onready var _timer_panel: PanelContainer = $PopupFrame/Header/TimerPanel
+@onready var _guide_button: Button = %GuideButton
 @onready var _instruction_label: Label = %InstructionLabel
 @onready var _step_label: Label = %StepLabel
 @onready var _options_box: VBoxContainer = %OptionsBox
@@ -18,6 +19,7 @@ var _active_request: EventChoiceRequest = null
 var _deadline_msec: int = 0
 var _timeout_seconds: float = 15.0
 var _current_card_name: String = ""
+var _current_event_id: StringName = &""
 var _showing_retained_preview: bool = false
 var _retained_preview_owns_pause: bool = false
 
@@ -32,17 +34,22 @@ func _ready() -> void:
 	EventManager.reaction_requested.connect(_on_reaction_requested)
 	EventManager.choice_resolved.connect(_on_choice_resolved)
 	EventManager.interaction_finished.connect(_on_interaction_finished)
+	_guide_button.pressed.connect(_open_event_guide)
 
 func _process(_delta: float) -> void:
 	if not visible or _active_request == null:
 		return
-	var remaining := maxf(float(_deadline_msec - Time.get_ticks_msec()) / 1000.0, 0.0)
+	var remaining := EventManager.get_choice_time_left(_active_request.request_id)
+	if remaining <= 0.0:
+		remaining = maxf(float(_deadline_msec - Time.get_ticks_msec()) / 1000.0, 0.0)
 	_countdown_label.text = "剩余 %02d 秒" % int(ceil(remaining))
 	_timeout_bar.value = remaining / maxf(_timeout_seconds, 0.001) * 100.0
 
 func _on_event_revealed(player: PlayerClass, card: 事件牌) -> void:
 	_showing_retained_preview = false
 	_current_card_name = card.card_name
+	_current_event_id = card.event_id
+	_guide_button.visible = true
 	_context_label.text = "%s · 事件牌" % player.player_name
 	_title_label.text = "【%s】" % card.card_name
 	_prompt_label.text = card.description
@@ -148,6 +155,8 @@ func _on_interaction_finished(_player: PlayerClass) -> void:
 func _reset_and_hide() -> void:
 	_active_request = null
 	_current_card_name = ""
+	_current_event_id = &""
+	_guide_button.visible = false
 	_showing_retained_preview = false
 	_card_image.texture = null
 	_timer_panel.show()
@@ -167,6 +176,8 @@ func show_retained_card_detail(player: PlayerClass, card: 事件牌) -> void:
 	_showing_retained_preview = true
 	_active_request = null
 	_current_card_name = card.card_name
+	_current_event_id = card.event_id
+	_guide_button.visible = true
 	_context_label.text = "%s · 私密" % player.player_name
 	_title_label.text = "【%s】" % card.card_name
 	_prompt_label.text = "%s\n\n时机：%s" % [card.description, EventManager.get_retained_event_usage_hint(card, player)]
@@ -212,6 +223,19 @@ func _release_retained_preview_pause() -> void:
 func _on_retained_use_pressed(player: PlayerClass, card: 事件牌) -> void:
 	close_retained_card_detail()
 	EventManager.request_play_retained_event(player, card)
+
+
+func _open_event_guide() -> void:
+	var hud := get_tree().get_first_node_in_group("HUD") as HUD
+	if hud == null:
+		return
+	hud.open_game_guide(GuideOpenContext.new(
+		GuideOpenContext.Source.CARD,
+		&"event_response",
+		DiscoveryManager.KIND_EVENT,
+		_current_event_id,
+		_guide_button
+	))
 
 func _clear_options() -> void:
 	if _options_box == null:

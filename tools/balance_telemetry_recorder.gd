@@ -95,7 +95,7 @@ func finish_match(result: GameResult = null, abort_reason: String = "") -> Dicti
 			if entry.is_winner:
 				winners.append(entry.player_index)
 		_report["winners"] = winners
-		var champion_credit := 1.0 / maxf(winners.size(), 1)
+		var champion_credit := 0.0 if winners.is_empty() else 1.0 / float(winners.size())
 		_report["champion_credit"] = champion_credit
 	_disconnect_all()
 	_players.clear()

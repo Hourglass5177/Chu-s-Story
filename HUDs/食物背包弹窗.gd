@@ -63,8 +63,22 @@ func _create_food_item_ui(card: 食物牌, player: PlayerClass) -> void:
 	var item_box = FOOD_CARD_VIEW_SCRIPT.new()
 	item_box.setup(card, hud.default_font, "享用", _resolving or not card.can_use(player))
 	item_box.action_requested.connect(func(selected: 食物牌): _on_food_used(selected, player))
+	item_box.guide_requested.connect(_open_food_guide)
 	_tooltip.bind(item_box.icon, card)
 	grid_container.add_child(item_box)
+
+
+func _open_food_guide(card: 食物牌, source: Control) -> void:
+	if hud == null or card == null:
+		return
+	DiscoveryManager.record_food_face_presented(card)
+	hud.open_game_guide(GuideOpenContext.new(
+		GuideOpenContext.Source.CARD,
+		&"food_system",
+		DiscoveryManager.KIND_FOOD,
+		card.food_id,
+		source
+	))
 
 func _on_food_used(card: 食物牌, player: PlayerClass) -> void:
 	if _resolving or not card.can_use(player):

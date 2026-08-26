@@ -8,10 +8,13 @@ enum GameMode { LOCAL, NETWORK, TUTORIAL }
 
 const MIN_PLAYERS: int = 1
 const MAX_PLAYERS: int = 6
+const DEFAULT_TARGET_SCORE: int = 20
+const TARGET_SCORE_OPTIONS: Array[int] = [15, 20, 25, 30]
 
 @export var mode: GameMode = GameMode.LOCAL
 @export_range(1, MAX_PLAYERS, 1) var human_count: int = 1
 @export_range(0, MAX_PLAYERS - 1, 1) var bot_count: int = 0
+@export var target_score: int = DEFAULT_TARGET_SCORE
 @export var players: Array[PlayerSetup] = []
 
 
@@ -39,6 +42,8 @@ func validate() -> PackedStringArray:
 	if not _counts_are_valid(human_count, bot_count):
 		errors.append("玩家总数须为1至6人，且至少有1名真人玩家")
 		return errors
+	if not TARGET_SCORE_OPTIONS.has(target_score):
+		errors.append("目标分数须为15、20、25或30分")
 	var expected_count: int = human_count + bot_count
 	if players.size() != expected_count:
 		errors.append("玩家配置数量与人数不一致")
@@ -87,6 +92,7 @@ func duplicate_snapshot() -> SessionSetup:
 	snapshot.mode = mode
 	snapshot.human_count = human_count
 	snapshot.bot_count = bot_count
+	snapshot.target_score = target_score
 	snapshot.players.clear()
 	for player: PlayerSetup in players:
 		snapshot.players.append(player.duplicate_snapshot() if player != null else null)
@@ -95,9 +101,10 @@ func duplicate_snapshot() -> SessionSetup:
 
 func is_equivalent_to(other: SessionSetup) -> bool:
 	if other == null \
-			or mode != other.mode \
-			or human_count != other.human_count \
-			or bot_count != other.bot_count \
+		or mode != other.mode \
+		or human_count != other.human_count \
+		or bot_count != other.bot_count \
+		or target_score != other.target_score \
 			or players.size() != other.players.size():
 		return false
 	for index: int in players.size():

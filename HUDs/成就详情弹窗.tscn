@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://HUDs/成就详情弹窗.gd" id="1_script"]
 [ext_resource type="Texture2D" path="res://arts/1x/资源 10.png" id="2_panel"]
@@ -9,6 +9,30 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_panel"]
 texture = ExtResource("2_panel")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_guide"]
+bg_color = Color(0.953, 0.819, 0.565, 0.96)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.482, 0.243, 0.153, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_guide_hover"]
+bg_color = Color(0.733, 0.373, 0.22, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.42, 0.2, 0.12, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="成就详情弹窗" type="Control"]
 process_mode = 3
@@ -116,6 +140,24 @@ theme_override_font_sizes/font_size = 44
 text = "达成条件"
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="BtnGuide" type="Button" parent="Panel"]
+custom_minimum_size = Vector2(170, 68)
+layout_mode = 1
+offset_left = 104.0
+offset_top = 72.0
+offset_right = 274.0
+offset_bottom = 140.0
+focus_mode = 2
+theme_override_colors/font_color = Color(0.32, 0.16, 0.1, 1)
+theme_override_colors/font_hover_color = Color(1, 0.94, 0.77, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.94, 0.77, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_guide")
+theme_override_styles/hover = SubResource("StyleBoxFlat_guide_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_guide_hover")
+text = "指南"
 
 [node name="BtnClose" type="TextureButton" parent="Panel"]
 process_mode = 3

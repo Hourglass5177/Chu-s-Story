@@ -591,17 +591,15 @@ func get_score_breakdown(player: PlayerClass) -> Dictionary:
 	if categories.size() >= 5:
 		category_combo_bonus += 5
 
-	# 地域组合分同样只取“同城 5 张”一次；集齐一个城市的所有牌则各计一次。
+	# 每个满足条件的城市分别计算“同城 5 张”和“集齐全市”；江汉三市仍只计一次。
 	# 按枚举顺序遍历，保证多城同时达成时的显示不受 Dictionary 顺序影响。
-	var five_card_awarded := false
 	for region_value in range(MapSection.REGION.size()):
 		var region: MapSection.REGION = region_value
 		if not regions.has(region):
 			continue
 		var region_count: int = regions[region]
-		if region_count >= 5 and not five_card_awarded:
-			region_combo_bonus = 5
-			five_card_awarded = true
+		if region_count >= 5:
+			region_combo_bonus += 5
 			_add_region_score_annotation(region_annotations, region, "触发同城5张得分+5")
 		var region_total: int = 地区非遗牌上限字典.get(region, 0)
 		if region_total > 0 and region_count >= region_total:

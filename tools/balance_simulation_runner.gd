@@ -56,7 +56,7 @@ func _quit_with_status(exit_code: int) -> void:
 	get_tree().quit(exit_code)
 
 func _run_match(config: SimulationMatchConfig) -> Dictionary:
-	GameManager.configure_session(config.world_seed, GameManager.RuntimeProfile.HEADLESS_SIMULATION)
+	GameManager.configure_session(config.world_seed, GameManager.RuntimeProfile.HEADLESS_SIMULATION, config.target_score)
 	GameManager.reset_session()
 	GameManager.player_data = _build_player_data(config)
 	_active_strategy = SimulationDecisionProvider.new(config.strategy, config.decision_seed)
@@ -306,7 +306,9 @@ func _wait_for_quiescence(max_frames: int = 240) -> bool:
 	return false
 
 func _can_close_out_by_elimination(player: PlayerClass) -> bool:
-	if player == null:
+	# 单人局没有“累计淘汰 2 人”的胜利路径；唯一玩家存活不能被模拟策略
+	# 误判为已经可以靠淘汰条件收官。
+	if player == null or TurnManager.players.size() <= 1:
 		return false
 	var alive_count := 0
 	var player_score := int(ResourceManager.get_score_breakdown(player).get("total_score", player.current_score))

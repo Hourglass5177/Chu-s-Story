@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="楚物志"
-config/version="beta 0.3.0"
+config/version="beta 0.4.0"
 run/main_scene="uid://bpggqwetns32d"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/image="uid://conv21o25i7e4"
@@ -28,6 +28,7 @@ EventManager="*res://Managers/event_manager.gd"
 MarketManager="*res://Managers/market_manager.gd"
 AchievementManager="*res://Managers/achievement_manager.gd"
 FoodManager="*res://Managers/food_manager.gd"
+DiscoveryManager="*res://Managers/discovery_manager.gd"
 
 [display]
 

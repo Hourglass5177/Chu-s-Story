@@ -142,11 +142,17 @@ func submit_choice(request_id: int, choice) -> void:
 			unique_choices.append(selected)
 	elif choice != null and not _pending_request.options.has(choice):
 		return
-	_pending_choice = choice
+	var candidate_choice = choice.duplicate() if choice is Array else choice
 	if InteractionCoordinator.submit(request_id, choice):
+		_pending_choice = candidate_choice
+		return
+	# 协调器仍持有这个请求时，提交失败表示它正被指南挂起或已不再接收输入。
+	# 不能跌入旧式兼容路径，否则背景 UI 会在说明页上方偷偷结束选择。
+	if _coordinator_owns_request(request_id):
 		return
 	# 兼容测试夹具和仍在迁移中的外部调用：它们会直接构造旧式请求，
 	# 但不能因此让地图选择界面永久等待一个并不存在的协调器票据。
+	_pending_choice = candidate_choice
 	_choice_waiting = false
 	if _choice_timer != null:
 		_choice_timer.stop()
@@ -161,18 +167,28 @@ func submit_choice_preview(request_id: int, choice: Array) -> void:
 	for selected in choice:
 		if not _pending_request.options.has(selected):
 			return
-	_pending_choice = choice.duplicate()
-	InteractionCoordinator.update_preview(request_id, _pending_choice)
+	var candidate_preview := choice.duplicate()
+	if InteractionCoordinator.update_preview(request_id, candidate_preview):
+		_pending_choice = candidate_preview
+		return
+	if _coordinator_owns_request(request_id):
+		return
+	# 只为没有协调器票据的旧式测试夹具保留本地预览。
+	_pending_choice = candidate_preview
 
 func get_choice_time_left(request_id: int = -1) -> float:
 	if not _choice_waiting or _pending_request == null:
 		return 0.0
 	if request_id >= 0 and request_id != _pending_request.request_id:
 		return 0.0
-	var coordinated_time := InteractionCoordinator.get_time_left(request_id)
-	if coordinated_time > 0.0:
-		return coordinated_time
+	if _coordinator_owns_request(_pending_request.request_id):
+		return maxf(0.0, InteractionCoordinator.get_time_left(_pending_request.request_id))
 	return _choice_timer.time_left if _choice_timer != null else 0.0
+
+
+func _coordinator_owns_request(request_id: int) -> bool:
+	var snapshot: Dictionary = InteractionCoordinator.get_active_snapshot()
+	return int(snapshot.get("interaction_id", -1)) == request_id
 
 func _request_choice(request: EventChoiceRequest, is_reaction: bool = false):
 	var resolution_context := _current_resolution_context
@@ -237,6 +253,10 @@ func _on_choice_timeout() -> void:
 	if not _choice_waiting or _pending_request == null:
 		return
 	if InteractionCoordinator.resolve_timeout(_pending_request.request_id):
+		return
+	# 仍由协调器持有时，false 只表示尚未到期或正被指南挂起。
+	# 旧 Timer/隐藏 UI 的回调不能越权结算它。
+	if _coordinator_owns_request(_pending_request.request_id):
 		return
 	# 旧式请求的超时也遵循统一裁定，随后只结束一次 UI 生命周期。
 	if _pending_request.multiple:

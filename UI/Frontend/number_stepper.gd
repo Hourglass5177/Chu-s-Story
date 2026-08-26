@@ -28,6 +28,8 @@ signal boundary_pressed(direction: int)
 		current_value = clampi(value, minimum, maximum)
 		_sync_view()
 
+@export_range(1, 100, 1) var step_size := 1
+
 @export var value_suffix := " 人":
 	set(value):
 		value_suffix = value
@@ -84,14 +86,14 @@ func _on_decrease_pressed() -> void:
 	if current_value <= minimum:
 		boundary_pressed.emit(-1)
 		return
-	set_value(current_value - 1)
+	set_value(current_value - step_size)
 
 
 func _on_increase_pressed() -> void:
 	if current_value >= maximum:
 		boundary_pressed.emit(1)
 		return
-	set_value(current_value + 1)
+	set_value(current_value + step_size)
 
 
 func _sync_view() -> void:

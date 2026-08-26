@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cb5cdjbnpc5c6"]
+[gd_scene load_steps=10 format=3 uid="uid://cb5cdjbnpc5c6"]
 
 [ext_resource type="Texture2D" uid="uid://dd7ecbfvwpcjv" path="res://arts/1x/资源 10.png" id="1_f45lj"]
 [ext_resource type="Script" uid="uid://cdq4c0raxu70h" path="res://HUDs/非遗详情弹窗.gd" id="1_imxyn"]
@@ -9,6 +9,30 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x0v5x"]
 texture = ExtResource("1_f45lj")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_guide"]
+bg_color = Color(0.953, 0.819, 0.565, 0.96)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.482, 0.243, 0.153, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_guide_hover"]
+bg_color = Color(0.733, 0.373, 0.22, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.42, 0.2, 0.12, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="非遗详情弹窗" type="Panel" unique_id=914408683]
 process_mode = 3
@@ -134,6 +158,24 @@ theme_override_fonts/font = ExtResource("4_bqm6w")
 theme_override_font_sizes/font_size = 64
 text = "【效果】"
 autowrap_mode = 3
+
+[node name="BtnGuide" type="Button" parent="."]
+custom_minimum_size = Vector2(180, 72)
+layout_mode = 1
+offset_left = 104.0
+offset_top = 88.0
+offset_right = 284.0
+offset_bottom = 160.0
+focus_mode = 2
+theme_override_colors/font_color = Color(0.32, 0.16, 0.1, 1)
+theme_override_colors/font_hover_color = Color(1, 0.94, 0.77, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.94, 0.77, 1)
+theme_override_fonts/font = ExtResource("4_bqm6w")
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxFlat_guide")
+theme_override_styles/hover = SubResource("StyleBoxFlat_guide_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_guide_hover")
+text = "指南"
 
 [node name="BtnClose" type="TextureButton" parent="." unique_id=1881962062]
 layout_mode = 1

@@ -1,6 +1,7 @@
 extends GutTest
 
 const EVENT_OVERLAY_SCENE := preload("res://HUDs/event_overlay.tscn")
+const GUIDE_SCENE := preload("res://UI/GameGuide/digital_game_guide.tscn")
 const YOU_MU_CARD := preload("res://Cards/事件牌/游目骋怀.tres")
 const MIAO_SHOU_CARD := preload("res://Cards/事件牌/妙手回春.tres")
 const EXHAUSTED_CARD := preload("res://Cards/事件牌/精疲力尽.tres")
@@ -41,6 +42,7 @@ var _event_status_backup: Dictionary
 var _resource_hud_backup: HUD
 var _event_deck_backup: Array[事件牌] = []
 var _event_discard_backup: Array[事件牌] = []
+var _interaction_decision_provider_backup: Callable
 
 
 func before_each() -> void:
@@ -75,6 +77,8 @@ func before_each() -> void:
 func after_each() -> void:
 	TurnManager.turn_timer.stop()
 	EventManager.reset_for_new_game()
+	InteractionCoordinator.cancel_all(&"event_overlay_test_teardown")
+	InteractionCoordinator.decision_provider = _interaction_decision_provider_backup
 	EventManager.bind_runtime(_event_hud_backup, _event_overlay_backup)
 	EventManager.auto_resolve_choices = _auto_resolve_backup
 	EventManager.choice_strategy = _choice_strategy_backup
@@ -359,6 +363,50 @@ func test_revive_chain_stays_open_for_the_next_holder_and_closes_after_timeout()
 	assert_true(second_holder.事件牌手牌.has(second_card))
 
 
+func test_guide_freezes_event_overlay_countdown_and_blocks_background_resolution() -> void:
+	var card := EXHAUSTED_CARD as 事件牌
+	_player.current_energy = 6
+	_async_done = false
+	_run_regular_event(card)
+
+	assert_true(await _wait_until(func() -> bool: return _overlay._active_request != null))
+	await get_tree().process_frame
+	var request := _overlay._active_request
+	var countdown := _overlay.get_node("%CountdownLabel") as Label
+	var before_label := countdown.text
+	var before_time := EventManager.get_choice_time_left(request.request_id)
+	assert_gt(before_time, 14.0)
+
+	var guide := GUIDE_SCENE.instantiate() as DigitalGameGuide
+	add_child_autofree(guide)
+	await get_tree().process_frame
+	assert_true(guide.open_guide(GuideOpenContext.new(GuideOpenContext.Source.CARD, &"event_response"), false))
+	assert_true(InteractionCoordinator.is_active_suspended())
+	var frozen_time := EventManager.get_choice_time_left(request.request_id)
+	await _wait_always(1.05)
+	assert_almost_eq(EventManager.get_choice_time_left(request.request_id), frozen_time, 0.04)
+	assert_eq(countdown.text, before_label, "指南打开时事件弹窗倒计时标签不得变化")
+
+	EventManager.submit_choice(request.request_id, true)
+	EventManager._on_choice_timeout()
+	assert_same(EventManager._pending_request, request, "挂起期间旧事件 UI 提交和超时均不得结束当前请求")
+	assert_null(EventManager._pending_choice, "被指南挡住的后台提交不得污染最终选择值")
+	assert_true(request.request_id == int(InteractionCoordinator.get_active_snapshot().get("interaction_id", -1)))
+	assert_false(_async_done)
+
+	guide.close_guide(false)
+	assert_false(InteractionCoordinator.is_active_suspended())
+	assert_almost_eq(EventManager.get_choice_time_left(request.request_id), frozen_time, 0.06)
+	await _wait_always(1.05)
+	assert_ne(countdown.text, before_label, "关闭指南后倒计时标签应从原剩余时间继续")
+	EventManager.submit_choice(request.request_id, true)
+	assert_true(await _wait_until(func() -> bool: return _async_done, 60))
+	assert_false(_overlay.visible)
+	assert_null(_overlay._active_request)
+	assert_eq(_player.current_energy, 3)
+	assert_true(ResourceManager.事件弃牌堆.has(card))
+
+
 func _backup_autoload_state() -> void:
 	_players_backup.assign(TurnManager.players)
 	_player_num_backup = TurnManager.player_num
@@ -382,6 +430,7 @@ func _backup_autoload_state() -> void:
 	_resource_hud_backup = ResourceManager.hud
 	_event_deck_backup.assign(ResourceManager.事件牌库)
 	_event_discard_backup.assign(ResourceManager.事件弃牌堆)
+	_interaction_decision_provider_backup = InteractionCoordinator.decision_provider
 
 
 func _build_runtime_fixture() -> void:
@@ -451,3 +500,7 @@ func _wait_until(predicate: Callable, max_frames: int = 30) -> bool:
 			return true
 		await get_tree().process_frame
 	return bool(predicate.call())
+
+
+func _wait_always(seconds: float) -> void:
+	await get_tree().create_timer(seconds, true).timeout

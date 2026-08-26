@@ -1,14 +1,19 @@
 extends GutTest
 
+const BALANCE_RUNNER_SCRIPT := preload("res://tools/balance_simulation_runner.gd")
+
 var _saved_seed: int
 var _saved_profile: GameManager.RuntimeProfile
+var _saved_players: Array[PlayerClass] = []
 
 func before_each() -> void:
 	_saved_seed = GameManager.get_session_seed()
 	_saved_profile = GameManager.runtime_profile
+	_saved_players.assign(TurnManager.players)
 
 func after_each() -> void:
 	GameManager.configure_session(_saved_seed, _saved_profile)
+	TurnManager.players.assign(_saved_players)
 
 func test_standard_schedule_contains_972_matches() -> void:
 	var schedule := SimulationSchedule.build_standard(20260824, 108)
@@ -50,15 +55,44 @@ func test_decision_rng_does_not_advance_world_rng() -> void:
 	var provider := SimulationDecisionProvider.new(SimulationDecisionProvider.Strategy.LEGAL_RANDOM, 998877)
 	for _index: int in 30:
 		provider.pick_value([1, 2, 3, 4, 5])
-	var after_decisions := GameManager.randi_between(0, 1_000_000)
+	var after_decisions: int = GameManager.randi_between(0, 1_000_000)
 	GameManager.configure_session(445566, GameManager.RuntimeProfile.HEADLESS_SIMULATION)
-	var without_decisions := GameManager.randi_between(0, 1_000_000)
+	var without_decisions: int = GameManager.randi_between(0, 1_000_000)
 	assert_eq(after_decisions, without_decisions)
 
 func test_match_config_round_trips_for_replay() -> void:
 	var original := SimulationSchedule.build_match(6, SimulationDecisionProvider.Strategy.SCORE_GREEDY, 91, 777)
+	original.target_score = 25
 	var restored := SimulationMatchConfig.from_dictionary(original.to_dictionary())
 	assert_eq(restored.to_dictionary(), original.to_dictionary())
+	assert_eq(restored.target_score, 25)
+
+func test_match_config_normalizes_invalid_target_score_to_formal_default() -> void:
+	var config := SimulationSchedule.build_match(2, SimulationDecisionProvider.Strategy.LEGAL_RANDOM, 0, 777)
+	config.target_score = 19
+	assert_eq(config.target_score, SessionSetup.DEFAULT_TARGET_SCORE)
+
+	var restored := SimulationMatchConfig.from_dictionary({"target_score": 999})
+	assert_eq(restored.target_score, SessionSetup.DEFAULT_TARGET_SCORE)
+	assert_eq(int(restored.to_dictionary().target_score), SessionSetup.DEFAULT_TARGET_SCORE)
+
+func test_single_player_cannot_close_out_by_elimination_in_simulation() -> void:
+	var runner: Node = BALANCE_RUNNER_SCRIPT.new()
+	var player := PlayerClass.new()
+	TurnManager.players.assign([player])
+	assert_false(bool(runner.call(&"_can_close_out_by_elimination", player)))
+	TurnManager.players.clear()
+	player.free()
+	runner.free()
+
+func test_telemetry_records_zero_champion_credit_when_result_has_no_winner() -> void:
+	var config := SimulationSchedule.build_match(2, SimulationDecisionProvider.Strategy.LEGAL_RANDOM, 0, 777)
+	var recorder := BalanceTelemetryRecorder.new()
+	recorder.start_match(config, [])
+	var result := GameResult.new(GameResult.EndReason.SOLO_DEFEAT, 1, [])
+	var report := recorder.finish_match(result)
+	assert_eq(report.get("winners", []), [])
+	assert_eq(float(report.get("champion_credit", -1.0)), 0.0)
 
 func test_observation_exposes_own_cards_but_only_public_opponent_counts() -> void:
 	var original_players: Array[PlayerClass] = TurnManager.players.duplicate()

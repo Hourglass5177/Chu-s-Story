@@ -89,6 +89,7 @@ var _finish_emitted := false
 var _showing_details := false
 var _rank_old_positions: Dictionary = {}
 var _presentation_generation := 0
+var _is_solo_defeat := false
 
 
 func _ready() -> void:
@@ -114,6 +115,9 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if not visible or current_state in [PresentationState.HIDDEN, PresentationState.COMPLETE]:
+		return
+	var guide_overlay := get_tree().get_first_node_in_group(&"digital_game_guide") as CanvasItem
+	if guide_overlay != null and guide_overlay.visible:
 		return
 	if event is InputEventKey:
 		var key_event := event as InputEventKey
@@ -143,10 +147,15 @@ func present(result_snapshot: Variant, autoplay: bool = true) -> void:
 	if _entries.is_empty():
 		push_warning("GameResultOverlay 收到的结果中没有玩家。")
 		return
+	var end_reason: Variant = _read_value(result_snapshot, [&"end_reason", &"reason"], &"")
+	_is_solo_defeat = _is_solo_defeat_reason(end_reason)
 	_compute_competition_ranks()
 	_build_player_cards()
 	_build_detail_rows()
-	_reason_label.text = _reason_text(_read_value(result_snapshot, [&"end_reason", &"reason"], &""))
+	_reason_label.text = _reason_text(
+		end_reason,
+		int(_read_value(result_snapshot, [&"target_score"], SessionSetup.DEFAULT_TARGET_SCORE))
+	)
 	_title_label.text = "游戏结束"
 	_showing_details = false
 	_summary_page.show()
@@ -189,6 +198,7 @@ func reset_overlay(restore_pause: bool = true) -> void:
 	_clear_container(_winner_list)
 	_player_cards.clear()
 	_entries.clear()
+	_is_solo_defeat = false
 	current_state = PresentationState.HIDDEN
 	_showing_details = false
 	hide()
@@ -412,6 +422,17 @@ func _finalize_rank_reorder() -> void:
 
 
 func _start_winner_reveal() -> void:
+	if _is_solo_defeat:
+		_stage_label.text = "挑战失败"
+		_fixed_animation_player.play(&"winner_reveal")
+		_winner_showcase.hide()
+		_summary_page.show()
+		_sparkles.emitting = false
+		for card_state in _player_cards:
+			var panel := card_state["panel"] as PanelContainer
+			panel.modulate = Color.WHITE
+			panel.add_theme_stylebox_override("panel", _normal_card_style())
+		return
 	var winner_names := _winner_names()
 	_stage_label.text = "冠军 · %s" % "、".join(winner_names)
 	_fixed_animation_player.play(&"winner_reveal")
@@ -444,6 +465,16 @@ func _start_winner_reveal() -> void:
 
 func _finalize_winner_reveal() -> void:
 	_kill_active_tweens()
+	if _is_solo_defeat:
+		_winner_showcase.hide()
+		_summary_page.show()
+		_sparkles.emitting = false
+		for card_state in _player_cards:
+			var panel := card_state["panel"] as PanelContainer
+			panel.modulate = Color.WHITE
+			panel.scale = Vector2.ONE
+			panel.add_theme_stylebox_override("panel", _normal_card_style())
+		return
 	for child: Node in _winner_list.get_children():
 		if child is Control:
 			(child as Control).modulate.a = 1.0
@@ -481,12 +512,12 @@ func _apply_complete_visuals() -> void:
 	_score_step = SCORE_KEYS.size()
 	_sort_cards_immediately()
 	var winner_names := _winner_names()
-	_stage_label.text = "冠军 · %s" % "、".join(winner_names)
+	_stage_label.text = "挑战失败" if _is_solo_defeat else "冠军 · %s" % "、".join(winner_names)
 	for card_state in _player_cards:
 		var entry: Dictionary = card_state["entry"]
 		var panel := card_state["panel"] as PanelContainer
 		panel.scale = Vector2.ONE
-		panel.modulate = Color.WHITE if bool(entry["is_winner"]) else COLOR_NONWINNER
+		panel.modulate = Color.WHITE if _is_solo_defeat or bool(entry["is_winner"]) else COLOR_NONWINNER
 		panel.add_theme_stylebox_override("panel", _winner_card_style() if bool(entry["is_winner"]) else _normal_card_style())
 		(card_state["rank_label"] as Label).text = "第%d名" % int(entry["rank"])
 		for key in SCORE_KEYS:
@@ -499,8 +530,11 @@ func _apply_complete_visuals() -> void:
 		var achievement_row := card_state["achievement_row"] as HBoxContainer
 		achievement_row.visible = not (entry["achievements"] as Array).is_empty()
 		achievement_row.modulate.a = 1.0
-	_sparkles.restart()
-	_sparkles.emitting = true
+	if _is_solo_defeat:
+		_sparkles.emitting = false
+	else:
+		_sparkles.restart()
+		_sparkles.emitting = true
 
 
 func _sort_cards_immediately() -> void:
@@ -816,7 +850,7 @@ func _compute_competition_ranks() -> void:
 		if ordered_index == 0 or score != previous_score:
 			current_rank = ordered_index + 1
 		entry["rank"] = current_rank
-		entry["is_winner"] = current_rank == 1
+		entry["is_winner"] = not _is_solo_defeat and current_rank == 1
 		_entries[entry_index] = entry
 		previous_score = score
 
@@ -894,23 +928,34 @@ func _profession_text(value: Variant) -> String:
 	return text if not text.is_empty() else "玩家"
 
 
-func _reason_text(reason: Variant) -> String:
+func _reason_text(reason: Variant, target_score: int = SessionSetup.DEFAULT_TARGET_SCORE) -> String:
 	if reason is int:
 		match int(reason):
 			0:
-				return "达到20分"
+				return "达到%d分" % target_score
 			1:
 				return "累计淘汰2人"
 			2:
 				return "胜利条件达成"
+			3:
+				return "精力耗尽"
 	var text := str(reason).to_lower()
 	if "both" in text or "同时" in text or "全部" in text:
 		return "胜利条件达成"
 	if "elimination" in text or "淘汰" in text:
 		return "累计淘汰2人"
+	if "defeat" in text or "失败" in text or "耗尽" in text:
+		return "精力耗尽"
 	if "score" in text or "20" in text or "分数" in text:
-		return "达到20分"
+		return "达到%d分" % target_score
 	return "胜利条件达成"
+
+
+func _is_solo_defeat_reason(reason: Variant) -> bool:
+	if reason is int:
+		return int(reason) == GameResult.EndReason.SOLO_DEFEAT
+	var text := str(reason).to_lower()
+	return "solo_defeat" in text or "defeat" in text or "失败" in text or "耗尽" in text
 
 
 func _sum_entry_scores(entry: Dictionary) -> int:

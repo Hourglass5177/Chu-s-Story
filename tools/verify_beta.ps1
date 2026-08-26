@@ -56,6 +56,15 @@ if ($openEditors -and -not $AllowOpenEditor) {
     throw '检测到当前 Godot 编辑器正在占用本项目。请关闭编辑器后重试，或明确使用 -AllowOpenEditor（将跳过清理导入）。'
 }
 
+$pythonCommand = Get-Command python -ErrorAction SilentlyContinue
+if ($null -eq $pythonCommand) {
+    throw '未找到 Python，无法校验数字版游戏指南生成结果。'
+}
+& $pythonCommand.Source (Join-Path $projectRoot 'tools\build_game_guide_catalog.py') --check
+if ($LASTEXITCODE -ne 0) {
+    throw '数字版游戏指南源稿与运行时目录不同步。请重新运行 tools/build_game_guide_catalog.py。'
+}
+
 if (-not $SkipCleanImport -and -not $openEditors) {
     $cachePath = [System.IO.Path]::GetFullPath((Join-Path $projectRoot '.godot'))
     if ($cachePath.StartsWith($projectRoot, [System.StringComparison]::OrdinalIgnoreCase) -and (Test-Path -LiteralPath $cachePath)) {

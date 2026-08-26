@@ -10,6 +10,7 @@ food_id = &"mao_zui_lu_ji"
 food_type = 1
 cost = 250
 effect_description = "所有玩家精力+1并支付你100积分点。"
+ruling_note = "余额不足时支付当前全部余额，仍然精力+1。"
 card_type = 2
 card_name = "毛嘴卤鸡"
 image_of_front = ExtResource("2_front")

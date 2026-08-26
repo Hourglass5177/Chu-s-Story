@@ -10,6 +10,9 @@ var _active_ticket: InteractionTicket = null
 var _active_result: InteractionResult = null
 var _results_by_id: Dictionary[int, InteractionResult] = {}
 var _timer: Timer = null
+var _suspend_sequence: int = 0
+var _suspend_leases: Dictionary[int, Dictionary] = {}
+var _suspended_time_left: float = 0.0
 
 func _ready() -> void:
 	_timer = Timer.new()
@@ -63,15 +66,61 @@ func await_result(ticket: InteractionTicket) -> InteractionResult:
 	return InteractionResult.new(ticket.interaction_id, ticket.state, null, ticket.state == InteractionTicket.State.TIMED_OUT, &"result_released")
 
 func submit(interaction_id: int, value) -> bool:
-	if not _owns_waiting(interaction_id):
+	if is_active_suspended() or not _owns_waiting(interaction_id):
 		return false
 	return _finish(_active_ticket, InteractionResult.new(interaction_id, InteractionTicket.State.RESOLVED, value))
 
 func update_preview(interaction_id: int, value) -> bool:
-	if not _owns_waiting(interaction_id):
+	if is_active_suspended() or not _owns_waiting(interaction_id):
 		return false
 	_active_ticket.preview = value
 	return true
+
+func suspend_active(owner: StringName) -> int:
+	if _active_ticket == null or not _active_ticket.is_waiting() or not _ticket_context_is_current(_active_ticket):
+		return -1
+	_suspend_sequence += 1
+	var lease_id := _suspend_sequence
+	if _suspend_leases.is_empty():
+		_suspended_time_left = get_time_left(_active_ticket.interaction_id)
+		if _timer != null:
+			_timer.stop()
+	_suspend_leases[lease_id] = {
+		"owner": owner,
+		"interaction_id": _active_ticket.interaction_id,
+		"session_generation": _active_ticket.session_generation,
+		"turn_epoch": _active_ticket.turn_epoch,
+	}
+	return lease_id
+
+func resume_active(lease_id: int) -> bool:
+	if not _suspend_leases.has(lease_id):
+		return false
+	var lease: Dictionary = _suspend_leases[lease_id]
+	_suspend_leases.erase(lease_id)
+	if not _suspend_leases.is_empty():
+		return true
+	var context_matches := (
+		_active_ticket != null
+		and _active_ticket.is_waiting()
+		and _active_ticket.interaction_id == int(lease.get("interaction_id", -1))
+		and _active_ticket.session_generation == int(lease.get("session_generation", -1))
+		and _active_ticket.turn_epoch == int(lease.get("turn_epoch", -1))
+		and _ticket_context_is_current(_active_ticket)
+	)
+	if not context_matches:
+		_suspended_time_left = 0.0
+		return false
+	if _active_ticket.timeout_seconds > 0.0:
+		if _suspended_time_left <= 0.0:
+			_on_timeout()
+		else:
+			_timer.start(_suspended_time_left)
+	_suspended_time_left = 0.0
+	return true
+
+func is_active_suspended() -> bool:
+	return not _suspend_leases.is_empty()
 
 func cancel(interaction_id: int, reason: StringName = &"cancelled") -> bool:
 	if not _owns_waiting(interaction_id):
@@ -88,17 +137,19 @@ func cancel_all(reason: StringName = &"session_reset") -> void:
 func get_active_snapshot() -> Dictionary:
 	if _active_ticket == null or not _active_ticket.is_waiting():
 		return {}
-	return {"interaction_id": _active_ticket.interaction_id, "owner": _active_ticket.owner, "session_generation": _active_ticket.session_generation, "turn_epoch": _active_ticket.turn_epoch, "time_left": get_time_left(_active_ticket.interaction_id), "modal_lease_id": _active_ticket.modal_lease_id}
+	return {"interaction_id": _active_ticket.interaction_id, "owner": _active_ticket.owner, "session_generation": _active_ticket.session_generation, "turn_epoch": _active_ticket.turn_epoch, "time_left": get_time_left(_active_ticket.interaction_id), "modal_lease_id": _active_ticket.modal_lease_id, "suspended": is_active_suspended(), "suspend_depth": _suspend_leases.size()}
 
 func get_time_left(interaction_id: int = -1) -> float:
 	if _active_ticket == null or not _active_ticket.is_waiting() or _timer == null:
 		return 0.0
 	if interaction_id >= 0 and interaction_id != _active_ticket.interaction_id:
 		return 0.0
+	if is_active_suspended():
+		return _suspended_time_left
 	return _timer.time_left
 
 func resolve_timeout(interaction_id: int) -> bool:
-	if not _owns_waiting(interaction_id):
+	if is_active_suspended() or not _owns_waiting(interaction_id):
 		return false
 	_on_timeout()
 	return true
@@ -127,6 +178,7 @@ func reset_session(clear_decision_provider: bool = true) -> void:
 	_sequence += 1
 	if _timer != null:
 		_timer.stop()
+	_clear_suspend_leases()
 
 func _owns_waiting(interaction_id: int) -> bool:
 	return _active_ticket != null and _active_ticket.is_waiting() and _active_ticket.interaction_id == interaction_id and _ticket_context_is_current(_active_ticket)
@@ -154,6 +206,7 @@ func _finish(ticket: InteractionTicket, result: InteractionResult) -> bool:
 		return false
 	if _timer != null:
 		_timer.stop()
+	_clear_suspend_leases()
 	ticket.state = result.state
 	_active_result = result
 	_results_by_id[ticket.interaction_id] = result
@@ -174,3 +227,7 @@ func _release_ticket_payload(ticket: InteractionTicket) -> void:
 	if _active_ticket == ticket:
 		_active_ticket = null
 		_active_result = null
+
+func _clear_suspend_leases() -> void:
+	_suspend_leases.clear()
+	_suspended_time_left = 0.0

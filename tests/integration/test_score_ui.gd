@@ -35,6 +35,7 @@ func test_score_panel_shows_breakdown_and_rules_page() -> void:
 	assert_false(close_mask.visible)
 	assert_eq(panel.get_node("Panel/详情/基础分/数值").text, "3")
 	assert_eq(panel.get_node("Panel/详情/总分/数值").text, "3")
+	assert_eq(panel.get_node("Panel/详情/总分/名称").text, "总分 / %d" % TurnManager.target_score)
 	panel._toggle_rules()
 	assert_true(panel.get_node("Panel/规则内容").visible)
 	assert_eq(panel.get_node("Panel/计分规则").text, "返回")

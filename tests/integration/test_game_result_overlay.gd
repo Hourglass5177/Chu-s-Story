@@ -69,6 +69,44 @@ func test_accepts_typed_game_result_without_overlay_side_preload() -> void:
 	second.free()
 
 
+func test_solo_defeat_keeps_rank_but_has_no_champion_presentation() -> void:
+	var player := PlayerClass.new()
+	player.player_index = 0
+	player.player_name = "独行者"
+	player.player_types = PlayerClass.PlayerCharacter.探险博主
+	var entry := GameResultEntry.new(player, {
+		"base_score": 8,
+		"category_combo_score": 2,
+		"total_score": 10,
+	}, 1, false)
+	var typed_entries: Array[GameResultEntry] = [entry]
+	var result := GameResult.new(GameResult.EndReason.SOLO_DEFEAT, 4, typed_entries)
+
+	_overlay.present(result, false)
+
+	var entries := _overlay.get_normalized_entries()
+	assert_eq(entries.size(), 1)
+	assert_eq(entries[0]["rank"], 1, "单人失败仍保留最终排名")
+	assert_false(entries[0]["is_winner"], "精力耗尽的单人局不得被结算层重新推导为冠军")
+	assert_eq((_overlay.get_node("Frame/StagePanel/StageLabel") as Label).text, "挑战失败")
+	assert_false(_overlay.get_node("Frame/WinnerShowcase").visible)
+	assert_eq(_overlay.get_node("Frame/WinnerShowcase/WinnerList").get_child_count(), 0)
+	assert_false((_overlay.get_node("Sparkles") as CPUParticles2D).emitting)
+	player.free()
+
+
+func test_solo_defeat_reveal_step_does_not_start_champion_particles() -> void:
+	var snapshot := _make_snapshot([10])
+	snapshot["end_reason"] = GameResult.EndReason.SOLO_DEFEAT
+	_overlay.present(snapshot, true)
+	for _index in range(7):
+		_overlay.fast_forward_current_step()
+	assert_eq(_overlay.get_state_name(), &"WINNER_REVEAL")
+	assert_eq((_overlay.get_node("Frame/StagePanel/StageLabel") as Label).text, "挑战失败")
+	assert_false(_overlay.get_node("Frame/WinnerShowcase").visible)
+	assert_false((_overlay.get_node("Sparkles") as CPUParticles2D).emitting)
+
+
 func test_skip_reaches_complete_without_waiting_for_animation() -> void:
 	_overlay.present(_make_snapshot([20, 9]), true)
 	assert_eq(_overlay.get_state_name(), &"INTRO")
@@ -129,6 +167,19 @@ func test_enter_fast_forward_works_even_if_a_background_button_had_focus() -> vo
 	enter_event.keycode = KEY_ENTER
 	_overlay._input(enter_event)
 	assert_eq(_overlay.get_state_name(), &"SCORE_REVEAL")
+
+
+func test_visible_digital_guide_blocks_result_fast_forward_input() -> void:
+	var guide_overlay := Control.new()
+	guide_overlay.add_to_group(&"digital_game_guide")
+	add_child_autofree(guide_overlay)
+	guide_overlay.show()
+	_overlay.present(_make_snapshot([20, 9]), true)
+	var enter_event := InputEventKey.new()
+	enter_event.pressed = true
+	enter_event.keycode = KEY_ENTER
+	_overlay._input(enter_event)
+	assert_eq(_overlay.get_state_name(), &"INTRO", "数字指南打开时不得快进后台结算")
 
 
 func test_details_is_an_internal_page_and_navigation_uses_signals() -> void:

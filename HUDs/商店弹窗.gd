@@ -8,6 +8,7 @@ const FOOD_CARD_VIEW_SCRIPT := preload("res://HUDs/food_card_view.gd")
 @onready var lbl_money = $余额
 @onready var btn_close = $BtnClose
 @onready var btn_refresh: Button = $BtnRefresh
+@onready var btn_guide: Button = $BtnGuide
 var hud:HUD
 var current_player: PlayerClass
 var shop_foods: Array[食物牌] = []
@@ -20,6 +21,7 @@ var _tooltip: Control
 func _ready():
 	btn_close.pressed.connect(_on_leave)
 	btn_refresh.pressed.connect(_on_refresh_pressed)
+	btn_guide.pressed.connect(_open_guide)
 	hide()
 	hud = get_tree().get_first_node_in_group("HUD")
 	_tooltip = FOOD_TOOLTIP_SCRIPT.new()
@@ -37,6 +39,20 @@ func _ready():
 		$BtnClose.mouse_exited.connect(func(): mask.hide())
 		$BtnClose.button_down.connect(func(): mask.modulate = Color(0, 0, 0, 0.7)) 
 		$BtnClose.button_up.connect(func(): mask.modulate = Color(0, 0, 0, 0.4))   
+
+
+func _open_guide() -> void:
+	if hud == null or not is_instance_valid(hud):
+		hud = get_tree().get_first_node_in_group("HUD") as HUD
+	if hud == null:
+		return
+	hud.open_game_guide(GuideOpenContext.new(
+		GuideOpenContext.Source.SHOP,
+		&"food_system",
+		&"shop",
+		&"food_shop",
+		btn_guide
+	))
 
 func open_shop(player: PlayerClass) -> void:
 	if visible:
@@ -117,11 +133,25 @@ func _create_commodity_ui(card: 食物牌) -> void:
 	item_box.setup(card, display_font, "购买", current_player.current_money < card.cost, true)
 	item_box.modulate.a = 0.0
 	item_box.action_requested.connect(func(selected: 食物牌): _buy_food(selected, item_box))
+	item_box.guide_requested.connect(_open_food_guide)
 	_tooltip.bind(item_box.icon, card)
 	food_container.add_child(item_box)
 	var reveal_tween := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	reveal_tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	reveal_tween.tween_property(item_box, "modulate:a", 1.0, 0.18)
+
+
+func _open_food_guide(card: 食物牌, source: Control) -> void:
+	if hud == null or card == null:
+		return
+	DiscoveryManager.record_food_face_presented(card)
+	hud.open_game_guide(GuideOpenContext.new(
+		GuideOpenContext.Source.CARD,
+		&"food_system",
+		DiscoveryManager.KIND_FOOD,
+		card.food_id,
+		source
+	))
 
 func _buy_food(card: 食物牌, ui_node: Control) -> void:
 	if not shop_foods.has(card):

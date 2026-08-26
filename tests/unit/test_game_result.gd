@@ -26,6 +26,7 @@ var _result_backup: GameResult = null
 var _paused_backup: bool = false
 var _player_data_backup: Array = []
 var _created_players: Array[PlayerClass] = []
+var _target_score_backup: int = SessionSetup.DEFAULT_TARGET_SCORE
 
 func before_each() -> void:
 	_players_backup.assign(TurnManager.players)
@@ -40,6 +41,7 @@ func before_each() -> void:
 	_result_backup = TurnManager._last_game_result
 	_paused_backup = get_tree().paused
 	_player_data_backup = GameManager.player_data.duplicate(true)
+	_target_score_backup = TurnManager.target_score
 
 	get_tree().paused = false
 	TurnManager.turn_timer.stop()
@@ -52,6 +54,7 @@ func before_each() -> void:
 	TurnManager.modal_resolution_depth = 0
 	TurnManager.movement_lock_active = false
 	TurnManager._last_game_result = null
+	TurnManager.target_score = SessionSetup.DEFAULT_TARGET_SCORE
 	TurnManager.hud = null
 	TurnManager.map = null
 
@@ -73,6 +76,7 @@ func after_each() -> void:
 	TurnManager.hud = _hud_backup
 	TurnManager.map = _map_backup
 	TurnManager._last_game_result = _result_backup
+	TurnManager.target_score = _target_score_backup
 	GameManager.player_data = _player_data_backup.duplicate(true)
 	get_tree().paused = _paused_backup
 
@@ -175,6 +179,38 @@ func test_end_reason_reports_score_elimination_and_both_without_changing_two_pla
 	assert_eq(TurnManager.get_current_end_reason(), TurnManager.EndReason.ELIMINATION_LIMIT)
 	first.非遗牌手牌.append(score_card)
 	assert_eq(TurnManager.get_current_end_reason(), TurnManager.EndReason.BOTH)
+
+
+func test_configured_target_score_controls_end_reason_and_result_copy() -> void:
+	var first := _make_scored_player("P1", 0, 24, true)
+	var second := _make_scored_player("P2", 1, 3, true)
+	TurnManager.players.assign([first, second])
+	TurnManager.player_num = 2
+	TurnManager.target_score = 25
+	TurnManager.GameOn = true
+	assert_eq(TurnManager.get_current_end_reason(), TurnManager.NO_END_REASON)
+	first.非遗牌手牌.append(_make_score_card(1))
+	assert_eq(TurnManager.get_current_end_reason(), TurnManager.EndReason.SCORE_LIMIT)
+	var result := TurnManager.finish_game(TurnManager.EndReason.SCORE_LIMIT)
+	assert_eq(result.target_score, 25)
+	assert_eq(result.get_reason_text(), "达到25分")
+
+
+func test_solo_score_wins_over_same_checkpoint_elimination_otherwise_defeats() -> void:
+	var solo := _make_scored_player("单人", 0, 15, false)
+	TurnManager.players.assign([solo])
+	TurnManager.player_num = 1
+	TurnManager.target_score = 15
+	assert_false(TurnManager.has_reached_elimination_limit(), "单人失败不是累计淘汰条件")
+	assert_eq(TurnManager.get_current_end_reason(), TurnManager.EndReason.SCORE_LIMIT)
+
+	solo.非遗牌手牌.clear()
+	solo.current_score = 0
+	assert_eq(TurnManager.get_current_end_reason(), TurnManager.EndReason.SOLO_DEFEAT)
+	TurnManager.GameOn = true
+	var result := TurnManager.finish_game(TurnManager.EndReason.SOLO_DEFEAT)
+	assert_eq(result.get_reason_text(), "精力耗尽")
+	assert_true(result.winners.is_empty(), "单人失败不应把唯一玩家标为冠军")
 
 func test_player_died_notification_cannot_finish_before_turn_end_coordinator() -> void:
 	var first := _make_scored_player("P1", 0, 0, false)

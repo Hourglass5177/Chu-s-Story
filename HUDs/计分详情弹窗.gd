@@ -5,6 +5,7 @@ class_name ScoreDetailPanel
 @onready var details_container: VBoxContainer = $Panel/详情
 @onready var rules_label: Label = $Panel/规则内容
 @onready var rules_button: Button = $Panel/计分规则
+@onready var guide_button: Button = $Panel/指南
 @onready var close_button: TextureButton = $Panel/BtnClose
 @onready var close_mask: TextureRect = $Panel/BtnClose/mask
 
@@ -15,6 +16,7 @@ var _was_tree_paused := false
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	rules_button.pressed.connect(_toggle_rules)
+	guide_button.pressed.connect(_open_score_guide)
 	close_button.pressed.connect(close_panel)
 	_setup_close_button_feedback()
 	hide()
@@ -48,6 +50,19 @@ func _toggle_rules() -> void:
 	_showing_rules = not _showing_rules
 	_refresh_content()
 
+
+func _open_score_guide() -> void:
+	var hud := get_tree().get_first_node_in_group("HUD") as HUD
+	if hud == null:
+		return
+	hud.open_game_guide(GuideOpenContext.new(
+		GuideOpenContext.Source.SCORE,
+		&"scoring_victory",
+		&"score",
+		&"",
+		guide_button
+	))
+
 func _refresh_content() -> void:
 	if _showing_rules:
 		title_label.text = "计分规则"
@@ -73,11 +88,12 @@ func _refresh_content() -> void:
 			achievement_names.append("%s +%d" % [achievement.card_name, achievement.score_value])
 	$Panel/详情/成就明细.visible = not achievement_names.is_empty()
 	$Panel/详情/成就明细.text = " · ".join(achievement_names)
+	$Panel/详情/总分/名称.text = "总分 / %d" % TurnManager.target_score
 	$Panel/详情/总分/数值.text = str(int(breakdown.get("total_score", 0)))
 
 func _get_rules_text() -> String:
 	return "基础分：手牌上所有非遗牌的基础分之和。\n\n" \
 		+ "类别组合：同类3/5/10张得2/3/5分，只取最高一档；集齐5种类别再得5分。\n\n" \
 		+ "类别集齐：每集齐一个类别的全部实际牌得5分。\n\n" \
-		+ "地域组合：同城5张得5分（只计一次）；每集齐一市全部实际牌得2分；同时持有潜江、天门、仙桃非遗牌再得2分。\n\n" \
+		+ "地域组合：每个同城5张的城市各得5分；每集齐一市全部实际牌各得2分；同时持有潜江、天门、仙桃非遗牌再得2分。\n\n" \
 		+ "成就分：本局获得的成就牌分数之和。成就全局唯一，先达成者获得。"

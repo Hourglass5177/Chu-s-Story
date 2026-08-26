@@ -105,6 +105,46 @@ func test_score_breakdown_matches_total_and_marks_regional_combo() -> void:
 	ResourceManager.地区非遗牌上限字典 = region_limits_backup
 	player.free()
 
+
+func test_same_city_five_card_bonus_is_awarded_for_each_qualifying_city() -> void:
+	var player := PlayerClass.new()
+	var regions: Array[非遗牌.REGION] = [非遗牌.REGION.鄂州, 非遗牌.REGION.黄石]
+	var limits_backup := ResourceManager.地区非遗牌上限字典.duplicate(true)
+	for region: 非遗牌.REGION in regions:
+		ResourceManager.地区非遗牌上限字典[region] = 99
+		for index: int in 5:
+			var card := 非遗牌.new()
+			card.card_name = "%s组合%d" % [MapSection.REGION.find_key(region), index]
+			card.region = region
+			card.category = 非遗牌.CardCategory.戏曲表演
+			player.非遗牌手牌.append(card)
+	var breakdown := ResourceManager.get_score_breakdown(player)
+	assert_eq(int(breakdown["regional_combo_score"]), 10)
+	for region: 非遗牌.REGION in regions:
+		assert_has(breakdown["region_annotations"][region], "触发同城5张得分+5")
+	ResourceManager.地区非遗牌上限字典 = limits_backup
+	player.free()
+
+
+func test_each_completed_city_scores_and_jianghan_trio_is_added_only_once() -> void:
+	var player := PlayerClass.new()
+	var trio: Array[非遗牌.REGION] = [非遗牌.REGION.潜江, 非遗牌.REGION.天门, 非遗牌.REGION.仙桃]
+	var limits_backup := ResourceManager.地区非遗牌上限字典.duplicate(true)
+	for region: 非遗牌.REGION in trio:
+		ResourceManager.地区非遗牌上限字典[region] = 1
+		var card := 非遗牌.new()
+		card.card_name = "%s集齐测试" % MapSection.REGION.find_key(region)
+		card.region = region
+		card.category = 非遗牌.CardCategory.戏曲表演
+		player.非遗牌手牌.append(card)
+	var breakdown := ResourceManager.get_score_breakdown(player)
+	assert_eq(int(breakdown["regional_combo_score"]), 8, "三市集齐各+2，江汉三市组合另+2且只计一次")
+	for region: 非遗牌.REGION in trio:
+		assert_has(breakdown["region_annotations"][region], "触发集齐全市得分+2")
+		assert_has(breakdown["region_annotations"][region], "触发江汉三市得分+2（合计）")
+	ResourceManager.地区非遗牌上限字典 = limits_backup
+	player.free()
+
 func test_all_city_foods_use_two_energy_digital_card_faces() -> void:
 	var file_names := Array(DirAccess.get_files_at("res://Cards/食物牌"))
 	var checked := 0

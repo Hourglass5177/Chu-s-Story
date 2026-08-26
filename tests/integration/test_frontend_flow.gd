@@ -76,12 +76,13 @@ func test_legacy_controls_cannot_intercept_the_frontend() -> void:
 	var background := _menu.get_node_or_null("Background") as Control
 	assert_not_null(background)
 	assert_eq(background.mouse_filter, Control.MOUSE_FILTER_IGNORE)
-	for node_name: String in ["MainButtons", "SettingsPanel", "RulesPanel", "CreditsPanel"]:
+	for node_name: String in ["MainButtons", "SettingsPanel", "CreditsPanel"]:
 		var legacy := _menu.get_node_or_null(node_name) as Control
 		assert_not_null(legacy)
 		if legacy != null:
 			assert_false(legacy.visible)
 			assert_eq(legacy.mouse_filter, Control.MOUSE_FILTER_IGNORE)
+	assert_null(_menu.get_node_or_null("RulesPanel"), "过期长文本说明子树应从场景中移除")
 	var shell := _menu.get_node_or_null("FrontendShell") as Control
 	assert_not_null(shell)
 	assert_eq(shell.z_index, 100)
@@ -128,9 +129,12 @@ func test_scene_exposes_the_stable_frontend_contract() -> void:
 		&"get_current_screen",
 		&"get_draft_snapshot",
 		&"set_local_player_counts",
+		&"set_target_score",
 		&"show_screen",
 		&"request_mode",
 		&"request_start_once",
+		&"open_game_guide",
+		&"get_game_guide",
 	]:
 		assert_true(_menu.has_method(method_name), "主菜单缺少公开方法 %s" % method_name)
 	assert_true(_menu.has_signal(&"mode_requested"))
@@ -208,6 +212,30 @@ func test_player_count_boundaries_and_bot_defaults_are_visible_through_the_snaps
 		assert_eq(bot.display_name, "电脑%d" % index)
 		assert_true(bot.has_valid_profession())
 		assert_true(bot.has_valid_starting_region())
+
+
+func test_target_score_selection_is_preserved_in_the_frontend_snapshot() -> void:
+	assert_true(bool(_menu.call(&"set_target_score", 30)))
+	assert_eq((_menu.call(&"get_draft_snapshot") as SessionSetup).target_score, 30)
+	assert_false(bool(_menu.call(&"set_target_score", 18)))
+	assert_eq((_menu.call(&"get_draft_snapshot") as SessionSetup).target_score, 30)
+
+
+func test_target_score_only_change_requires_discard_confirmation() -> void:
+	_menu.call(&"show_screen", &"mode", false)
+	assert_true(bool(_menu.call(&"set_target_score", 30)))
+	var home_back := _find_button(_get_screen(&"mode"), "返回")
+	assert_not_null(home_back)
+	home_back.pressed.emit()
+	var modal := _find_named_control("ModalLayer")
+	assert_true(modal.visible)
+	assert_eq(_menu.call(&"get_current_screen"), &"mode")
+	await get_tree().process_frame
+	var discard := _find_button(modal, "放弃")
+	assert_not_null(discard)
+	discard.pressed.emit()
+	assert_eq(_menu.call(&"get_current_screen"), &"home")
+	assert_eq((_menu.call(&"get_draft_snapshot") as SessionSetup).target_score, SessionSetup.DEFAULT_TARGET_SCORE)
 
 
 func test_draft_getter_returns_an_independent_snapshot() -> void:
@@ -362,7 +390,7 @@ func test_roster_card_edit_returns_to_roster_and_keeps_the_change() -> void:
 	assert_true(snapshot.validate().is_empty())
 
 
-func test_modal_locks_background_focus_and_restores_the_entry_focus() -> void:
+func test_game_guide_locks_background_and_restores_the_entry_focus() -> void:
 	_menu.call(&"show_screen", &"home", false)
 	await get_tree().process_frame
 	var home := _get_screen(&"home")
@@ -372,21 +400,22 @@ func test_modal_locks_background_focus_and_restores_the_entry_focus() -> void:
 	assert_eq(get_viewport().gui_get_focus_owner(), rules_button)
 
 	rules_button.pressed.emit()
-	var modal := _find_named_control("ModalLayer")
-	assert_not_null(modal)
-	assert_true(modal.visible)
+	var guide := _menu.call(&"get_game_guide") as DigitalGameGuide
+	assert_not_null(guide)
+	assert_true(guide.is_guide_open())
+	assert_true(get_tree().paused)
+	assert_true(guide.can_process(), "指南根节点必须在暂停域继续处理")
 	assert_false(home.is_interaction_enabled())
-	assert_false(_has_focusable_descendant(home), "模态打开时背景页不应保留可聚焦控件")
-	var modal_focus := get_viewport().gui_get_focus_owner()
-	assert_true(modal_focus != null and modal.is_ancestor_of(modal_focus))
-
-	var close_button := _find_button(modal, "关闭")
-	assert_not_null(close_button)
-	close_button.pressed.emit()
+	assert_false(_has_focusable_descendant(home), "指南打开时背景页不应保留可聚焦控件")
 	await get_tree().process_frame
-	assert_false(modal.visible)
-	assert_true(home.is_interaction_enabled())
+	assert_eq(guide.screen_state, FrontendScreen.ScreenState.ACTIVE)
+	assert_true(_has_focusable_descendant(guide), "指南必须暴露键盘/手柄焦点目标")
+	guide.close_guide(false)
 	assert_eq(get_viewport().gui_get_focus_owner(), rules_button)
+	await get_tree().process_frame
+	assert_false(guide.is_guide_open())
+	assert_false(get_tree().paused)
+	assert_true(home.is_interaction_enabled())
 
 
 func test_rapid_screen_changes_leave_focus_only_on_the_visible_page() -> void:
