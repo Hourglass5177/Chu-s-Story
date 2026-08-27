@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene format=3 uid="uid://bj42xj3ln11tg"]
 
-[ext_resource type="Script" path="res://HUDs/研究所弹窗.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://arts/1x/资源 10.png" id="2_panel"]
-[ext_resource type="FontFile" path="res://arts/像素字体.ttf" id="3_font"]
-[ext_resource type="Texture2D" path="res://arts/控件/close.png" id="4_close"]
+[ext_resource type="Script" uid="uid://c2grjpbai58pw" path="res://HUDs/研究所弹窗.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dd7ecbfvwpcjv" path="res://arts/1x/资源 10.png" id="2_panel"]
+[ext_resource type="FontFile" uid="uid://b1potytyqa1t5" path="res://arts/像素字体.ttf" id="3_font"]
+[ext_resource type="Texture2D" uid="uid://b7clbspmqvqrf" path="res://arts/控件/close.png" id="4_close"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_panel"]
 texture = ExtResource("2_panel")
@@ -32,7 +32,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[node name="研究所弹窗" type="Panel"]
+[node name="研究所弹窗" type="Panel" unique_id=1891107327]
 process_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -48,7 +48,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_panel")
 script = ExtResource("1_script")
 
-[node name="标题" type="Label" parent="."]
+[node name="标题" type="Label" parent="." unique_id=1778487837]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -64,7 +64,7 @@ text = "非遗研究所"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="状态栏" type="HBoxContainer" parent="."]
+[node name="状态栏" type="HBoxContainer" parent="." unique_id=784936202]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -76,39 +76,38 @@ grow_horizontal = 2
 theme_override_constants/separation = 140
 alignment = 1
 
-[node name="余额" type="Label" parent="状态栏"]
+[node name="余额" type="Label" parent="状态栏" unique_id=1095774171]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.35, 0.2, 0.13, 1)
 theme_override_fonts/font = ExtResource("3_font")
 theme_override_font_sizes/font_size = 48
 text = "余额  —"
 
-[node name="购买次数" type="Label" parent="状态栏"]
+[node name="购买次数" type="Label" parent="状态栏" unique_id=1882829895]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.35, 0.2, 0.13, 1)
 theme_override_fonts/font = ExtResource("3_font")
 theme_override_font_sizes/font_size = 48
 text = "本次可购  3/3"
 
-[node name="BtnGuide" type="Button" parent="."]
+[node name="BtnGuide" type="Button" parent="." unique_id=1111381128]
 custom_minimum_size = Vector2(170, 68)
 layout_mode = 1
-offset_left = 104.0
-offset_top = 82.0
-offset_right = 274.0
-offset_bottom = 150.0
-focus_mode = 2
+offset_left = 201.5
+offset_top = 80.5
+offset_right = 371.5
+offset_bottom = 148.5
 theme_override_colors/font_color = Color(0.32, 0.16, 0.1, 1)
-theme_override_colors/font_hover_color = Color(1, 0.93, 0.78, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.93, 0.78, 1)
+theme_override_colors/font_hover_color = Color(1, 0.93, 0.78, 1)
 theme_override_fonts/font = ExtResource("3_font")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_tab")
-theme_override_styles/hover = SubResource("StyleBoxFlat_tab_active")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_tab_active")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tab_active")
 text = "指南"
 
-[node name="页签" type="HBoxContainer" parent="."]
+[node name="页签" type="HBoxContainer" parent="." unique_id=605007807]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -120,36 +119,36 @@ grow_horizontal = 2
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="购买" type="Button" parent="页签"]
+[node name="购买" type="Button" parent="页签" unique_id=957685621]
 custom_minimum_size = Vector2(240, 68)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.32, 0.16, 0.1, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.93, 0.78, 1)
+theme_override_colors/font_hover_color = Color(0.32, 0.16, 0.1, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = SubResource("StyleBoxFlat_tab")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tab_active")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tab")
 toggle_mode = true
 button_pressed = true
-theme_override_colors/font_color = Color(0.32, 0.16, 0.1, 1)
-theme_override_colors/font_hover_color = Color(0.32, 0.16, 0.1, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.93, 0.78, 1)
-theme_override_fonts/font = ExtResource("3_font")
-theme_override_font_sizes/font_size = 46
-theme_override_styles/normal = SubResource("StyleBoxFlat_tab")
-theme_override_styles/hover = SubResource("StyleBoxFlat_tab")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_tab_active")
 text = "购买"
 
-[node name="出售" type="Button" parent="页签"]
+[node name="出售" type="Button" parent="页签" unique_id=1544888248]
 custom_minimum_size = Vector2(240, 68)
 layout_mode = 2
-toggle_mode = true
 theme_override_colors/font_color = Color(0.32, 0.16, 0.1, 1)
-theme_override_colors/font_hover_color = Color(0.32, 0.16, 0.1, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.93, 0.78, 1)
+theme_override_colors/font_hover_color = Color(0.32, 0.16, 0.1, 1)
 theme_override_fonts/font = ExtResource("3_font")
 theme_override_font_sizes/font_size = 46
 theme_override_styles/normal = SubResource("StyleBoxFlat_tab")
-theme_override_styles/hover = SubResource("StyleBoxFlat_tab")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_tab_active")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tab")
+toggle_mode = true
 text = "出售"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=861791608]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -162,14 +161,14 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
 
-[node name="CardGrid" type="GridContainer" parent="ScrollContainer"]
+[node name="CardGrid" type="GridContainer" parent="ScrollContainer" unique_id=251912562]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/h_separation = 44
 theme_override_constants/v_separation = 28
 columns = 3
 
-[node name="BtnClose" type="TextureButton" parent="."]
+[node name="BtnClose" type="TextureButton" parent="." unique_id=1408020504]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 1

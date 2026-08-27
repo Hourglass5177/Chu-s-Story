@@ -42,6 +42,8 @@ var _slot_index := -1
 var _return_to_roster := false
 var _refreshing := false
 var _displayed_profession_type := PlayerSetup.UNSELECTED
+var _hovered_profession_type := PlayerSetup.UNSELECTED
+var _hovered_region := PlayerSetup.UNSELECTED
 var _profession_cards: Dictionary = {}
 var _region_buttons: Dictionary = {}
 var _hotspot_buttons: Dictionary = {}
@@ -78,6 +80,8 @@ func bind_setup(
 	_slot_index = slot_index
 	_return_to_roster = return_to_roster
 	_displayed_profession_type = PlayerSetup.UNSELECTED
+	_hovered_profession_type = PlayerSetup.UNSELECTED
+	_hovered_region = PlayerSetup.UNSELECTED
 	if is_node_ready():
 		refresh_view()
 		call_deferred("grab_initial_focus")
@@ -105,7 +109,7 @@ func refresh_view() -> void:
 
 	_refreshing = true
 	slot_label.text = "P%d" % (_slot_index + 1)
-	control_kind_label.text = "电脑" if player.is_bot() else "真人"
+	control_kind_label.text = "AI" if player.is_bot() else ""
 	progress_label.text = "%d / %d" % [_slot_index + 1, _setup.players.size()]
 	name_input.placeholder_text = "P%d" % (_slot_index + 1)
 	name_input.text = player.display_name
@@ -162,7 +166,8 @@ func _build_profession_cards() -> void:
 		card.activated.connect(_on_profession_activated.bind(profession_type))
 		card.activation_blocked.connect(_on_profession_blocked)
 		card.focus_entered.connect(_show_profession_details.bind(profession_type))
-		card.mouse_entered.connect(_show_profession_details.bind(profession_type))
+		card.mouse_entered.connect(_on_profession_mouse_entered.bind(profession_type))
+		card.mouse_exited.connect(_on_profession_mouse_exited.bind(profession_type))
 		_profession_cards[profession_type] = card
 
 
@@ -185,7 +190,8 @@ func _build_birthplace_controls() -> void:
 		birthplace_list.add_child(list_button)
 		list_button.pressed.connect(_on_region_activated.bind(region))
 		list_button.focus_entered.connect(_show_region_preview.bind(region))
-		list_button.mouse_entered.connect(_show_region_preview.bind(region))
+		list_button.mouse_entered.connect(_on_region_mouse_entered.bind(region))
+		list_button.mouse_exited.connect(_on_region_mouse_exited.bind(region))
 		_region_buttons[region] = list_button
 
 		var hotspot := Button.new()
@@ -208,7 +214,8 @@ func _build_birthplace_controls() -> void:
 		hotspot.add_to_group(&"frontend_birthplace_hotspot")
 		birthplace_hotspots.add_child(hotspot)
 		hotspot.pressed.connect(_on_region_activated.bind(region))
-		hotspot.mouse_entered.connect(_show_region_preview.bind(region))
+		hotspot.mouse_entered.connect(_on_region_mouse_entered.bind(region))
+		hotspot.mouse_exited.connect(_on_region_mouse_exited.bind(region))
 		_hotspot_buttons[region] = hotspot
 
 
@@ -314,6 +321,34 @@ func _clear_profession_details() -> void:
 	skill_description_label.text = ""
 
 
+func _on_profession_mouse_entered(profession_type: int) -> void:
+	_hovered_profession_type = profession_type
+	_show_profession_details(profession_type)
+
+
+func _on_profession_mouse_exited(profession_type: int) -> void:
+	if _hovered_profession_type != profession_type:
+		return
+	_hovered_profession_type = PlayerSetup.UNSELECTED
+	# 卡片之间切换时，下一张卡的 mouse_entered 会先更新该值；延后一帧可避免
+	# 预览短暂闪回已选职业。
+	call_deferred("_restore_default_profession_preview_after_hover")
+
+
+func _restore_default_profession_preview_after_hover() -> void:
+	if _hovered_profession_type != PlayerSetup.UNSELECTED:
+		return
+	var player := _get_current_player()
+	if player != null and player.has_valid_profession():
+		_show_profession_details(player.profession_type)
+		return
+	var default_type := _first_profession_type()
+	if default_type == PlayerSetup.UNSELECTED:
+		_clear_profession_details()
+	else:
+		_show_profession_details(default_type)
+
+
 func _show_region_preview(region: int) -> void:
 	if not MapSection.出生点坐标.has(region):
 		birthplace_preview_label.text = "请选择出生点"
@@ -323,6 +358,30 @@ func _show_region_preview(region: int) -> void:
 		birthplace_preview_label.text = "%s  ·  P%d已选" % [_region_name(region), owner + 1]
 	else:
 		birthplace_preview_label.text = "出生点：%s" % _region_name(region)
+
+
+func _on_region_mouse_entered(region: int) -> void:
+	_hovered_region = region
+	_show_region_preview(region)
+
+
+func _on_region_mouse_exited(region: int) -> void:
+	if _hovered_region != region:
+		return
+	_hovered_region = PlayerSetup.UNSELECTED
+	# 在列表按钮或地图热点之间移动时，新控件的 mouse_entered
+	# 会先更新该值；延迟恢复可避免标题短暂闪回已选起点。
+	call_deferred("_restore_default_region_preview_after_hover")
+
+
+func _restore_default_region_preview_after_hover() -> void:
+	if _hovered_region != PlayerSetup.UNSELECTED:
+		return
+	var player := _get_current_player()
+	if player != null and player.has_valid_starting_region():
+		_show_region_preview(player.starting_region)
+	else:
+		_show_region_preview(PlayerSetup.UNSELECTED)
 
 
 func _on_name_changed(value: String) -> void:

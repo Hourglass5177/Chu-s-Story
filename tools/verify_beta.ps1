@@ -49,9 +49,14 @@ if ($versionText -notmatch '^4\.6\.2') {
     throw "需要 Godot 4.6.2，当前为：$versionText"
 }
 
-$escapedRoot = [regex]::Escape($projectRoot)
+$normalizedProjectRoot = $projectRoot.Replace('\', '/')
 $openEditors = Get-CimInstance Win32_Process -Filter "Name LIKE 'Godot%.exe'" -ErrorAction SilentlyContinue |
-    Where-Object { $_.CommandLine -match $escapedRoot -and $_.CommandLine -notmatch '--headless' }
+    Where-Object {
+        $commandLine = [string]$_.CommandLine
+        $normalizedCommandLine = $commandLine.Replace('\', '/')
+        $normalizedCommandLine.IndexOf($normalizedProjectRoot, [System.StringComparison]::OrdinalIgnoreCase) -ge 0 -and
+            $normalizedCommandLine -notmatch '(?i)(^|\s)--headless(\s|$)'
+    }
 if ($openEditors -and -not $AllowOpenEditor) {
     throw '检测到当前 Godot 编辑器正在占用本项目。请关闭编辑器后重试，或明确使用 -AllowOpenEditor（将跳过清理导入）。'
 }

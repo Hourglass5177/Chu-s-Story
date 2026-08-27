@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene format=3 uid="uid://cmlvpu6i2wm3f"]
 
-[ext_resource type="Script" path="res://HUDs/成就详情弹窗.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://arts/1x/资源 10.png" id="2_panel"]
-[ext_resource type="Texture2D" path="res://arts/成就卡/成就卡（牌背）.png" id="3_card"]
-[ext_resource type="FontFile" path="res://arts/像素字体.ttf" id="4_font"]
-[ext_resource type="Texture2D" path="res://arts/控件/close.png" id="5_close"]
-[ext_resource type="Texture2D" path="res://arts/1x/close.png" id="6_mask"]
+[ext_resource type="Script" uid="uid://c2rwn4vcb8v1u" path="res://HUDs/成就详情弹窗.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dd7ecbfvwpcjv" path="res://arts/1x/资源 10.png" id="2_panel"]
+[ext_resource type="Texture2D" uid="uid://cluhbpko3q13q" path="res://arts/成就卡/成就卡（牌背）.png" id="3_card"]
+[ext_resource type="FontFile" uid="uid://b1potytyqa1t5" path="res://arts/像素字体.ttf" id="4_font"]
+[ext_resource type="Texture2D" uid="uid://b7clbspmqvqrf" path="res://arts/控件/close.png" id="5_close"]
+[ext_resource type="Texture2D" uid="uid://plvuejng3g68" path="res://arts/1x/close.png" id="6_mask"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_panel"]
 texture = ExtResource("2_panel")
@@ -34,7 +34,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="成就详情弹窗" type="Control"]
+[node name="成就详情弹窗" type="Control" unique_id=1535608895]
 process_mode = 3
 z_index = 24
 layout_mode = 3
@@ -46,7 +46,7 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_script")
 
-[node name="Dim" type="ColorRect" parent="."]
+[node name="Dim" type="ColorRect" parent="." unique_id=1930541037]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,7 +56,7 @@ grow_vertical = 2
 mouse_filter = 1
 color = Color(0.12, 0.07, 0.04, 0.42)
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1901298604]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -71,7 +71,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_panel")
 
-[node name="Title" type="Label" parent="Panel"]
+[node name="Title" type="Label" parent="Panel" unique_id=1036176031]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -87,7 +87,7 @@ text = "成就"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Content" type="HBoxContainer" parent="Panel"]
+[node name="Content" type="HBoxContainer" parent="Panel" unique_id=1408449117]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,19 +100,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 72
 
-[node name="CardImage" type="TextureRect" parent="Panel/Content"]
+[node name="CardImage" type="TextureRect" parent="Panel/Content" unique_id=1869091981]
 custom_minimum_size = Vector2(440, 620)
 layout_mode = 2
 texture = ExtResource("3_card")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Info" type="VBoxContainer" parent="Panel/Content"]
+[node name="Info" type="VBoxContainer" parent="Panel/Content" unique_id=1083751853]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 30
 
-[node name="Name" type="Label" parent="Panel/Content/Info"]
+[node name="Name" type="Label" parent="Panel/Content/Info" unique_id=700318131]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.29, 0.14, 0.08, 1)
 theme_override_fonts/font = ExtResource("4_font")
@@ -120,17 +120,17 @@ theme_override_font_sizes/font_size = 68
 text = "成就名称"
 vertical_alignment = 1
 
-[node name="Score" type="Label" parent="Panel/Content/Info"]
+[node name="Score" type="Label" parent="Panel/Content/Info" unique_id=1240695224]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.75, 0.38, 0.12, 1)
 theme_override_fonts/font = ExtResource("4_font")
 theme_override_font_sizes/font_size = 56
 text = "+2分"
 
-[node name="Divider" type="HSeparator" parent="Panel/Content/Info"]
+[node name="Divider" type="HSeparator" parent="Panel/Content/Info" unique_id=1884106020]
 layout_mode = 2
 
-[node name="Description" type="Label" parent="Panel/Content/Info"]
+[node name="Description" type="Label" parent="Panel/Content/Info" unique_id=21445869]
 custom_minimum_size = Vector2(1, 260)
 layout_mode = 2
 size_flags_vertical = 3
@@ -141,25 +141,24 @@ text = "达成条件"
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="BtnGuide" type="Button" parent="Panel"]
+[node name="BtnGuide" type="Button" parent="Panel" unique_id=1095163127]
 custom_minimum_size = Vector2(170, 68)
 layout_mode = 1
-offset_left = 104.0
-offset_top = 72.0
-offset_right = 274.0
-offset_bottom = 140.0
-focus_mode = 2
+offset_left = 187.0
+offset_top = 85.0
+offset_right = 357.0
+offset_bottom = 153.0
 theme_override_colors/font_color = Color(0.32, 0.16, 0.1, 1)
-theme_override_colors/font_hover_color = Color(1, 0.94, 0.77, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.94, 0.77, 1)
+theme_override_colors/font_hover_color = Color(1, 0.94, 0.77, 1)
 theme_override_fonts/font = ExtResource("4_font")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_guide")
-theme_override_styles/hover = SubResource("StyleBoxFlat_guide_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_guide_hover")
+theme_override_styles/hover = SubResource("StyleBoxFlat_guide_hover")
 text = "指南"
 
-[node name="BtnClose" type="TextureButton" parent="Panel"]
+[node name="BtnClose" type="TextureButton" parent="Panel" unique_id=950599044]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 1
@@ -170,12 +169,11 @@ offset_top = -28.0
 offset_right = 42.0
 offset_bottom = 289.0
 grow_horizontal = 0
-focus_mode = 2
 texture_normal = ExtResource("5_close")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="Mask" type="TextureRect" parent="Panel/BtnClose"]
+[node name="Mask" type="TextureRect" parent="Panel/BtnClose" unique_id=1446672104]
 visible = false
 modulate = Color(0, 0, 0, 0.392157)
 layout_mode = 1

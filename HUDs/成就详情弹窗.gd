@@ -49,7 +49,8 @@ func _open_guide() -> void:
 		&"achievements",
 		DiscoveryManager.KIND_ACHIEVEMENT,
 		_card.achievement_id,
-		guide_button
+		guide_button,
+		&"current_achievements"
 	))
 
 

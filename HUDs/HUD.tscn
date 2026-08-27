@@ -18,10 +18,12 @@
 [ext_resource type="Texture2D" uid="uid://dv5tmg3pvybts" path="res://arts/1x/资源 25.png" id="13_koecs"]
 [ext_resource type="Texture2D" uid="uid://cbp4umacubqfi" path="res://arts/控件/left.png" id="13_uaqhe"]
 [ext_resource type="Texture2D" uid="uid://rg30iaom72fv" path="res://arts/1x/right.png" id="14_d7akv"]
-[ext_resource type="Texture2D" uid="uid://b7clbspmqvqrf" path="res://arts/控件/close.png" id="14_ytx7x"]
-[ext_resource type="Texture2D" uid="uid://plvuejng3g68" path="res://arts/1x/close.png" id="15_koecs"]
+[ext_resource type="Texture2D" uid="uid://buxsnctve2ke7" path="res://arts/控件/close_round_button.svg" id="14_ytx7x"]
 [ext_resource type="PackedScene" uid="uid://cm1kw23jddbnc" path="res://HUDs/食物背包弹窗.tscn" id="21_eb20h"]
 [ext_resource type="PackedScene" uid="uid://dh48ddr23kk4b" path="res://HUDs/商店弹窗.tscn" id="22_4r6rv"]
+[ext_resource type="Texture2D" uid="uid://ddbbh8443sono" path="res://arts/控件/guide_round_button.svg" id="23_guide"]
+[ext_resource type="Texture2D" uid="uid://bsncikkjlddgs" path="res://arts/控件/pause_round_button.svg" id="24_pause"]
+[ext_resource type="Script" path="res://HUDs/top_icon_button.gd" id="25_top_icon"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_4r6rv"]
 device = -1
@@ -523,7 +525,7 @@ grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_co0a7")
 theme_override_font_sizes/font_size = 80
-text = "总分数：0分"
+text = "总分数：0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -545,18 +547,88 @@ alignment = 1
 position = Vector2(257, 54)
 texture = ExtResource("14_d7akv")
 
-[node name="BtnClose" type="TextureButton" parent="." unique_id=718526081]
+[node name="BtnGuide" type="TextureButton" parent="." unique_id=276286165]
+process_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -216.0
-offset_top = -66.0
-offset_right = 64.0
-offset_bottom = 214.0
+offset_left = -470.0
+offset_top = -5.0
+offset_right = -340.0
+offset_bottom = 125.0
 grow_horizontal = 0
+tooltip_text = "游戏指南 · F1"
+focus_neighbor_right = NodePath("../BtnPause")
+accessibility_name = "游戏指南"
+texture_normal = ExtResource("23_guide")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("25_top_icon")
+
+[node name="mask" type="TextureRect" parent="BtnGuide" unique_id=1229851228]
+visible = false
+modulate = Color(0, 0, 0, 0.4)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("23_guide")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnPause" type="TextureButton" parent="." unique_id=1770841461]
+process_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -340.0
+offset_top = -5.0
+offset_right = -210.0
+offset_bottom = 125.0
+grow_horizontal = 0
+tooltip_text = "暂停"
+focus_neighbor_left = NodePath("../BtnGuide")
+focus_neighbor_right = NodePath("../BtnClose")
+accessibility_name = "暂停"
+texture_normal = ExtResource("24_pause")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("25_top_icon")
+
+[node name="mask" type="TextureRect" parent="BtnPause" unique_id=128413341]
+visible = false
+modulate = Color(0, 0, 0, 0.4)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("24_pause")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnClose" type="TextureButton" parent="." unique_id=718526081]
+process_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -210.0
+offset_top = -5.0
+offset_right = -80.0
+offset_bottom = 125.0
+grow_horizontal = 0
+tooltip_text = "退出游戏"
+focus_neighbor_left = NodePath("../BtnPause")
+accessibility_name = "退出游戏"
 texture_normal = ExtResource("14_ytx7x")
 ignore_texture_size = true
-stretch_mode = 4
+stretch_mode = 5
+script = ExtResource("25_top_icon")
 metadata/_edit_group_ = true
 
 [node name="mask" type="TextureRect" parent="BtnClose" unique_id=1073166334]
@@ -569,7 +641,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("15_koecs")
+texture = ExtResource("14_ytx7x")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="非遗详情弹窗" parent="." unique_id=914408683 instance=ExtResource("8_k31s0")]
 visible = false

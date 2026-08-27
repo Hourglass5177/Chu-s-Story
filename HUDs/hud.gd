@@ -75,6 +75,10 @@ static func get_focus_entry_zoom_factor(_current_factor: float) -> float:
 static func get_view_mode_hint_text(focus_mode: bool) -> String:
 	return "【ALT】切换视角：%s\n【滚轮】视角缩放" % ("追踪" if focus_mode else "全局")
 
+
+static func get_score_display_text(score: int) -> String:
+	return "总分数：%d" % score
+
 # 之前我们算好的留白参数，原封不动保留
 const MAP_REAL_SIZE = Vector2(2560, 1600)
 const margin_top = 250.0 - 250
@@ -115,7 +119,9 @@ var profession_draw_overlay: ProfessionDrawPanel
 var profession_skill_toast: ProfessionSkillToast
 var event_presentation_director: EventPresentationDirector
 var game_guide: DigitalGameGuide
-var guide_button: Button
+var guide_button: BaseButton
+var pause_button: BaseButton
+var pause_overlay: PauseOverlay
 const EVENT_OVERLAY_SCENE := preload("res://HUDs/event_overlay.tscn")
 const MARKET_OVERLAY_SCENE := preload("res://HUDs/研究所弹窗.tscn")
 const SCORE_OVERLAY_SCENE := preload("res://HUDs/计分详情弹窗.tscn")
@@ -128,7 +134,7 @@ const PROFESSION_DRAW_SCENE := preload("res://HUDs/职业抽牌弹窗.tscn")
 const PROFESSION_SKILL_TOAST_SCENE := preload("res://HUDs/职业技能提示.tscn")
 const EVENT_PRESENTATION_DIRECTOR_SCRIPT := preload("res://HUDs/event_presentation_director.gd")
 const GAME_GUIDE_SCENE := preload("res://UI/GameGuide/digital_game_guide.tscn")
-const FRONTEND_THEME := preload("res://UI/Frontend/frontend_theme.tres")
+const PAUSE_OVERLAY_SCENE := preload("res://HUDs/PauseOverlay/pause_overlay.tscn")
 func _ready() -> void:
 	map_container.resized.connect(_on_container_resized)
 	_spawn_map_in_hud()
@@ -152,6 +158,7 @@ func _ready() -> void:
 	_setup_card_hand_animation()
 	_setup_profession_ui()
 	_setup_map_tooltip()
+	_setup_pause_ui()
 	_setup_game_guide()
 	phase_label.mouse_filter = Control.MOUSE_FILTER_STOP
 	phase_label.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
@@ -168,36 +175,28 @@ func _ready() -> void:
 	map_camera.limit_top = -margin_top
 	map_camera.limit_right = MAP_REAL_SIZE.x + margin_x
 	map_camera.limit_bottom = MAP_REAL_SIZE.y + margin_bottom
-	if $BtnClose.texture_normal:
-		var bitmap = BitMap.new()
-		# 读取原图的透明通道数据
-		bitmap.create_from_image_alpha($BtnClose.texture_normal.get_image())
-		# 将其设为按钮的点击遮罩
-		$BtnClose.texture_click_mask = bitmap
-		var mask = $BtnClose/mask
-		$BtnClose.mouse_entered.connect(func(): mask.show())
-		$BtnClose.mouse_exited.connect(func(): mask.hide())
-		$BtnClose.button_down.connect(func(): mask.modulate = Color(0, 0, 0, 0.7)) # 按下更黑
-		$BtnClose.button_up.connect(func(): mask.modulate = Color(0, 0, 0, 0.4))   # 松开恢复
+
+
+func _setup_pause_ui() -> void:
+	pause_button = $BtnPause as BaseButton
+	pause_button.pressed.connect(_on_pause_pressed)
+	pause_overlay = PAUSE_OVERLAY_SCENE.instantiate() as PauseOverlay
+	pause_overlay.name = "PauseOverlay"
+	add_child(pause_overlay)
 
 
 func _setup_game_guide() -> void:
-	guide_button = Button.new()
-	guide_button.name = "GuideButton"
-	guide_button.text = "?"
-	guide_button.tooltip_text = "游戏指南 · F1"
-	guide_button.theme = FRONTEND_THEME
-	guide_button.z_index = 50
-	guide_button.focus_mode = Control.FOCUS_ALL
-	guide_button.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	guide_button.position = Vector2(-320, 30)
-	guide_button.size = Vector2(82, 82)
+	guide_button = $BtnGuide as BaseButton
 	guide_button.pressed.connect(func() -> void: open_game_guide())
-	add_child(guide_button)
 	game_guide = GAME_GUIDE_SCENE.instantiate() as DigitalGameGuide
 	game_guide.name = "DigitalGameGuide"
 	game_guide.set_shortcut_enabled(true)
 	add_child(game_guide)
+
+
+func _on_pause_pressed() -> void:
+	if pause_overlay != null:
+		pause_overlay.open_pause()
 
 
 func get_game_guide() -> DigitalGameGuide:
@@ -212,12 +211,14 @@ func open_game_guide(context: GuideOpenContext = null) -> bool:
 		if _hovered_map_section != null and is_instance_valid(_hovered_map_section):
 			var section := _hovered_map_section
 			var topic_id := &"map_movement" if section.type == MapSection.SectionType.一般 else &"functional_tiles"
+			var object_kind := DiscoveryManager.KIND_SCENERY if section.type == MapSection.SectionType.风景 else &"map_section"
 			open_context = GuideOpenContext.new(
 				GuideOpenContext.Source.MAP_SECTION,
 				topic_id,
-				&"map_section",
+				object_kind,
 				StringName("%d,%d,%d" % [section.location_index.x, section.location_index.y, section.location_index.z]),
-				guide_button
+				guide_button,
+				_guide_section_for_map_section(section)
 			)
 		else:
 			open_context = GuideOpenContext.new(
@@ -225,7 +226,8 @@ func open_game_guide(context: GuideOpenContext = null) -> bool:
 				&"turn_phases",
 				&"phase",
 				&"",
-				guide_button
+				guide_button,
+				_guide_section_for_phase(TurnManager.now_phase)
 			)
 	_cancel_map_pointer_state()
 	return game_guide.open_guide(open_context)
@@ -255,9 +257,50 @@ func _on_phase_label_gui_input(event: InputEvent) -> void:
 			&"turn_phases",
 			&"phase",
 			&"",
-			phase_label
+			phase_label,
+			_guide_section_for_phase(TurnManager.now_phase)
 		))
 		get_viewport().set_input_as_handled()
+
+
+func _guide_section_for_phase(phase: TurnManager.TurnPhase) -> StringName:
+	match phase:
+		TurnManager.TurnPhase.BEGIN:
+			return &"begin_phase"
+		TurnManager.TurnPhase.ROLL_DICE:
+			return &"dice_phase"
+		TurnManager.TurnPhase.MOVING:
+			return &"moving_phase"
+		TurnManager.TurnPhase.ACTION:
+			return &"action_phase"
+		TurnManager.TurnPhase.END:
+			return &"end_phase"
+		_:
+			return &"begin_phase"
+
+
+func _guide_section_for_map_section(section: MapSection) -> StringName:
+	if section == null:
+		return &"hex_regions"
+	match section.type:
+		MapSection.SectionType.一般:
+			return &"hex_regions"
+		MapSection.SectionType.非遗:
+			return &"feiyi_tile"
+		MapSection.SectionType.事件:
+			return &"event_tile"
+		MapSection.SectionType.打工:
+			return &"work_tile"
+		MapSection.SectionType.商店:
+			return &"food_shop_tile"
+		MapSection.SectionType.风景:
+			return &"scenery_tile"
+		MapSection.SectionType.研究所:
+			return &"market_tile"
+		MapSection.SectionType.起点:
+			return &"plain_and_start"
+		_:
+			return &"hex_regions"
 
 func _setup_event_ui() -> void:
 	event_overlay = EVENT_OVERLAY_SCENE.instantiate() as EventOverlay
@@ -1052,7 +1095,7 @@ func _update_player_stats(player: PlayerClass) -> void:
 		return
 	money_label.text = str(player.current_money)
 	energy_label.text = str(player.current_energy) + "/" + str(player.max_energy)
-	score_label.text = "总分数：%d / %d" % [player.current_score, TurnManager.target_score]
+	score_label.text = get_score_display_text(player.current_score)
 	name_label.text = player.player_name
 	立绘精二.texture = player.立绘精二
 	var profession_label := $"玩家信息/职业背景/职业" as Label

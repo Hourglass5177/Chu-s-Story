@@ -77,7 +77,8 @@ func _open_food_guide(card: 食物牌, source: Control) -> void:
 		&"food_system",
 		DiscoveryManager.KIND_FOOD,
 		card.food_id,
-		source
+		source,
+		&"card_text_priority"
 	))
 
 func _on_food_used(card: 食物牌, player: PlayerClass) -> void:

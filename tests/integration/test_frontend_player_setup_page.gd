@@ -72,6 +72,54 @@ func test_free_card_and_map_hotspot_update_the_same_player_draft() -> void:
 	assert_true(_find_hotspot(region).button_pressed)
 
 
+func test_profession_preview_returns_to_selected_card_after_hover_leaves() -> void:
+	# 先耗尽页面进入时安排的初始焦点，避免它在断言期间碰巧改写预览。
+	await get_tree().process_frame
+	var selected_type := PlayerClass.PlayerCharacter.旅行博主
+	var hovered_type := PlayerClass.PlayerCharacter.商业博主
+	var selected_card := _find_profession_card(selected_type)
+	var hovered_card := _find_profession_card(hovered_type)
+	selected_card._activate()
+
+	hovered_card.mouse_entered.emit()
+	assert_eq(_page.profession_name_label.text, "商业博主")
+	hovered_card.mouse_exited.emit()
+	await get_tree().process_frame
+
+	var selected_definition := ProfessionManager.get_definition_by_type(selected_type)
+	assert_eq(_page.profession_name_label.text, "旅行博主")
+	assert_same(_page.portrait.texture, selected_definition.selection_portrait)
+
+
+func test_birthplace_preview_returns_to_selected_region_after_hover_leaves() -> void:
+	var selected_region := MapSection.REGION.恩施
+	var hovered_region := MapSection.REGION.十堰
+	_find_region_button(selected_region).pressed.emit()
+	assert_eq(_page.birthplace_preview_label.text, "出生点：恩施")
+
+	var hovered_list_button := _find_region_button(hovered_region)
+	hovered_list_button.mouse_entered.emit()
+	assert_eq(_page.birthplace_preview_label.text, "出生点：十堰")
+	hovered_list_button.mouse_exited.emit()
+	await get_tree().process_frame
+	assert_eq(
+		_page.birthplace_preview_label.text,
+		"出生点：恩施",
+		"移出起点列表后应恢复当前已选起点"
+	)
+
+	var hovered_hotspot := _find_hotspot(hovered_region)
+	hovered_hotspot.mouse_entered.emit()
+	assert_eq(_page.birthplace_preview_label.text, "出生点：十堰")
+	hovered_hotspot.mouse_exited.emit()
+	await get_tree().process_frame
+	assert_eq(
+		_page.birthplace_preview_label.text,
+		"出生点：恩施",
+		"移出地图热点后应恢复当前已选起点"
+	)
+
+
 func test_confirm_normalizes_empty_name_and_returns_to_the_requested_destination() -> void:
 	_setup.players[0].display_name = "   "
 	_setup.players[0].profession_type = PlayerClass.PlayerCharacter.生活博主

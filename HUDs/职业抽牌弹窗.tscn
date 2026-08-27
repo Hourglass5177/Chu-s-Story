@@ -1,8 +1,12 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene format=3 uid="uid://cham24xykw21v"]
 
-[ext_resource type="Script" path="res://HUDs/职业抽牌弹窗.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://arts/1x/资源 10.png" id="2_frame"]
-[ext_resource type="FontFile" path="res://arts/像素字体.ttf" id="3_font"]
+[ext_resource type="Script" uid="uid://l73h4spyxrhw" path="res://HUDs/职业抽牌弹窗.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dd7ecbfvwpcjv" path="res://arts/1x/资源 10.png" id="2_frame"]
+[ext_resource type="FontFile" uid="uid://b1potytyqa1t5" path="res://arts/像素字体.ttf" id="3_font"]
+
+[sub_resource type="Theme" id="Theme_draw"]
+default_font = ExtResource("3_font")
+default_font_size = 30
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_frame"]
 texture = ExtResource("2_frame")
@@ -31,11 +35,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="Theme" id="Theme_draw"]
-default_font = ExtResource("3_font")
-default_font_size = 30
-
-[node name="职业抽牌弹窗" type="Control"]
+[node name="职业抽牌弹窗" type="Control" unique_id=1717891423]
 process_mode = 3
 z_index = 110
 layout_mode = 3
@@ -44,11 +44,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 0
 theme = SubResource("Theme_draw")
 script = ExtResource("1_script")
 
-[node name="Dim" type="ColorRect" parent="."]
+[node name="Dim" type="ColorRect" parent="." unique_id=1930266362]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,7 +57,7 @@ grow_vertical = 2
 mouse_filter = 1
 color = Color(0.078, 0.047, 0.031, 0.72)
 
-[node name="Frame" type="Panel" parent="."]
+[node name="Frame" type="Panel" parent="." unique_id=1516039166]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -73,36 +72,34 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_frame")
 
-[node name="Header" type="HBoxContainer" parent="Frame"]
+[node name="Header" type="HBoxContainer" parent="Frame" unique_id=1824019331]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 180.0
-offset_top = 66.0
+offset_left = 203.0
+offset_top = 87.0
 offset_right = -180.0
 offset_bottom = 150.0
 grow_horizontal = 2
 
-[node name="Title" type="Label" parent="Frame/Header"]
+[node name="Title" type="Label" parent="Frame/Header" unique_id=1112832587]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.94, 0.77, 1)
 theme_override_font_sizes/font_size = 60
 text = "魔术博主 · 择牌"
 
-[node name="Context" type="Label" parent="Frame/Header"]
+[node name="Context" type="Label" parent="Frame/Header" unique_id=787864593]
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_colors/font_color = Color(1, 0.91, 0.7, 1)
 theme_override_colors/font_outline_color = Color(0.25, 0.11, 0.06, 0.8)
 theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 30
 text = "P1"
 
-[node name="Countdown" type="Label" parent="Frame/Header"]
+[node name="Countdown" type="Label" parent="Frame/Header" unique_id=691287481]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_colors/font_color = Color(1, 0.82, 0.38, 1)
 theme_override_colors/font_outline_color = Color(0.22, 0.09, 0.04, 0.9)
 theme_override_constants/outline_size = 4
@@ -110,7 +107,7 @@ theme_override_font_sizes/font_size = 38
 text = "剩余 15 秒"
 horizontal_alignment = 2
 
-[node name="Hint" type="Label" parent="Frame"]
+[node name="Hint" type="Label" parent="Frame" unique_id=772198335]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -124,7 +121,7 @@ theme_override_font_sizes/font_size = 30
 text = "选择一张 · 调整其余牌序"
 horizontal_alignment = 1
 
-[node name="CardsRow" type="HBoxContainer" parent="Frame"]
+[node name="CardsRow" type="HBoxContainer" parent="Frame" unique_id=1612932193]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -138,7 +135,7 @@ grow_vertical = 2
 theme_override_constants/separation = 34
 alignment = 1
 
-[node name="Confirm" type="Button" parent="Frame"]
+[node name="Confirm" type="Button" parent="Frame" unique_id=956672777]
 custom_minimum_size = Vector2(300, 76)
 layout_mode = 1
 anchors_preset = 7
@@ -156,6 +153,6 @@ theme_override_colors/font_color = Color(1, 0.96, 0.86, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 38
 theme_override_styles/normal = SubResource("StyleBoxFlat_confirm")
-theme_override_styles/hover = SubResource("StyleBoxFlat_confirm_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_confirm_hover")
+theme_override_styles/hover = SubResource("StyleBoxFlat_confirm_hover")
 text = "确定"

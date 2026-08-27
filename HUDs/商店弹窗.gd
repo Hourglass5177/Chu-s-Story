@@ -51,7 +51,8 @@ func _open_guide() -> void:
 		&"food_system",
 		&"shop",
 		&"food_shop",
-		btn_guide
+		btn_guide,
+		&"levels_prices"
 	))
 
 func open_shop(player: PlayerClass) -> void:
@@ -150,7 +151,8 @@ func _open_food_guide(card: 食物牌, source: Control) -> void:
 		&"food_system",
 		DiscoveryManager.KIND_FOOD,
 		card.food_id,
-		source
+		source,
+		&"card_text_priority"
 	))
 
 func _buy_food(card: 食物牌, ui_node: Control) -> void:

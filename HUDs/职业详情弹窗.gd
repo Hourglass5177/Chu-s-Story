@@ -57,7 +57,8 @@ func _open_guide() -> void:
 		&"professions",
 		DiscoveryManager.KIND_PROFESSION,
 		definition.profession_id,
-		guide_button
+		guide_button,
+		definition.profession_id
 	))
 
 

@@ -9,7 +9,7 @@ class CameraToggleProbe extends HUD:
 	func _update_view_mode_hint() -> void:
 		pass
 
-func test_score_panel_shows_breakdown_and_rules_page() -> void:
+func test_score_panel_shows_breakdown_and_uses_the_unified_guide_for_rules() -> void:
 	var was_paused := get_tree().paused
 	get_tree().paused = false
 	var panel := preload("res://HUDs/计分详情弹窗.tscn").instantiate() as ScoreDetailPanel
@@ -36,9 +36,10 @@ func test_score_panel_shows_breakdown_and_rules_page() -> void:
 	assert_eq(panel.get_node("Panel/详情/基础分/数值").text, "3")
 	assert_eq(panel.get_node("Panel/详情/总分/数值").text, "3")
 	assert_eq(panel.get_node("Panel/详情/总分/名称").text, "总分 / %d" % TurnManager.target_score)
-	panel._toggle_rules()
-	assert_true(panel.get_node("Panel/规则内容").visible)
-	assert_eq(panel.get_node("Panel/计分规则").text, "返回")
+	assert_false(panel.get_node("Panel/规则内容").visible, "计分弹窗不得继续维护第二份规则长文本")
+	assert_false(panel.get_node("Panel/指南").visible, "统一入口后不应再并列显示含义重复的指南按钮")
+	assert_eq(panel.get_node("Panel/计分规则").text, "计分规则")
+	assert_gt(panel.rules_button.pressed.get_connections().size(), 0, "计分规则按钮必须连接到统一游戏指南")
 	panel.close_panel()
 	assert_false(panel.visible)
 	assert_false(get_tree().paused)
@@ -46,6 +47,9 @@ func test_score_panel_shows_breakdown_and_rules_page() -> void:
 	get_tree().paused = was_paused
 
 func test_map_zoom_limits_and_tooltip_copy_are_fixed() -> void:
+	assert_eq(HUD.get_score_display_text(0), "总分数：0")
+	assert_eq(HUD.get_score_display_text(25), "总分数：25")
+	assert_false("/" in HUD.get_score_display_text(25), "HUD 只显示当前总分，目标分数留在计分详情中")
 	assert_eq(HUD.clamp_map_zoom_factor(0.25), 1.0)
 	assert_eq(HUD.clamp_map_zoom_factor(2.0), 2.0)
 	assert_eq(HUD.clamp_map_zoom_factor(9.0), 3.0)
@@ -71,6 +75,28 @@ func test_map_zoom_limits_and_tooltip_copy_are_fixed() -> void:
 	scenery.cost = 2
 	assert_eq(scenery.get_tooltip_text(), "十堰16 · 山地 · 风景（武当山）\n精力消耗：2\n首次到达后获得3点精力")
 	scenery.free()
+
+
+func test_hud_top_controls_share_one_visual_family_and_stay_below_modal_masks() -> void:
+	var hud_scene := preload("res://HUDs/HUD.tscn").instantiate()
+	var guide := hud_scene.get_node("BtnGuide") as TextureButton
+	var pause := hud_scene.get_node("BtnPause") as TextureButton
+	var close := hud_scene.get_node("BtnClose") as TextureButton
+	for button: TextureButton in [guide, pause, close]:
+		assert_not_null(button)
+		assert_true(button is HUDTopIconButton)
+		assert_eq(button.size, close.size, "指南、暂停和退出按钮必须使用同一规格")
+		assert_eq(button.size, Vector2(130, 130), "顶栏按钮应保持用户调整后的紧凑规格")
+		assert_eq(button.z_index, 0, "顶栏按钮不得越过弹窗遮罩")
+		var mask := button.get_node("mask") as TextureRect
+		assert_not_null(mask)
+		assert_same(mask.texture, button.texture_normal, "悬浮反馈必须沿用各自图标，而不是叠出错误的 X")
+	var backpack := hud_scene.get_node("食物背包弹窗") as Control
+	var modal_backdrop := backpack.get_node("Panel") as Control
+	assert_gt(backpack.z_index + modal_backdrop.z_index, guide.z_index, "背包暗色遮罩必须同时覆盖指南、暂停和退出")
+	assert_lte(guide.get_rect().end.x, pause.get_rect().position.x, "指南与暂停按钮的命中矩形不得重叠")
+	assert_lte(pause.get_rect().end.x, close.get_rect().position.x, "暂停与退出按钮的命中矩形不得重叠")
+	hud_scene.free()
 
 func test_leaving_focus_keeps_the_current_camera_center() -> void:
 	var hud := CameraToggleProbe.new()

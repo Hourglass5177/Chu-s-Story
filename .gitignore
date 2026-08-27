@@ -4,3 +4,5 @@
 /artifacts/*
 !/artifacts/.gdignore
 *.tmp
+__pycache__/
+*.py[cod]

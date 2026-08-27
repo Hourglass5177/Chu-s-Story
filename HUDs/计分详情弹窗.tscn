@@ -258,9 +258,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -330.0
+offset_left = -150.0
 offset_top = -154.0
-offset_right = -20.0
+offset_right = 150.0
 offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -274,6 +274,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_button_hover")
 text = "计分规则"
 
 [node name="指南" type="Button" parent="Panel"]
+visible = false
 custom_minimum_size = Vector2(300, 74)
 layout_mode = 1
 anchors_preset = 7

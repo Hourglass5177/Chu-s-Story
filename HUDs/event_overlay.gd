@@ -234,7 +234,8 @@ func _open_event_guide() -> void:
 		&"event_response",
 		DiscoveryManager.KIND_EVENT,
 		_current_event_id,
-		_guide_button
+		_guide_button,
+		&"draw_discard"
 	))
 
 func _clear_options() -> void:

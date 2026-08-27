@@ -2,14 +2,20 @@ extends Node
 
 const OUTPUT_PATH := "res://tmp/gameplay-hud-validation.png"
 const EVENT_OUTPUT_PATH := "res://tmp/gameplay-event-validation.png"
+const GUIDE_CAPTURE_DIR := "res://arts/游戏指南/实机截图/v1"
 
 func _ready() -> void:
 	var interactive_timeout_test := "--interactive-preview" in OS.get_cmdline_user_args()
 	var retained_hand_preview := "--retained-hand-preview" in OS.get_cmdline_user_args()
 	var market_preview := "--market-preview" in OS.get_cmdline_user_args()
+	var shop_preview := "--shop-preview" in OS.get_cmdline_user_args()
+	var score_preview := "--score-preview" in OS.get_cmdline_user_args()
+	var guide_capture := "--guide-capture" in OS.get_cmdline_user_args()
+	if guide_capture:
+		DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(GUIDE_CAPTURE_DIR))
 	GameManager.player_data = [
-		{"name": "验证甲", "job": "美食博主", "location": "十堰"},
-		{"name": "验证乙", "job": "商业博主", "location": "随州"},
+		{"name": "P1" if guide_capture else "验证甲", "job": "美食博主", "location": "十堰"},
+		{"name": "P2" if guide_capture else "验证乙", "job": "商业博主", "location": "随州"},
 	]
 	var game_scene := load("res://main_map.tscn") as PackedScene
 	var game := game_scene.instantiate()
@@ -30,13 +36,50 @@ func _ready() -> void:
 	RenderingServer.force_draw(false)
 	await get_tree().process_frame
 	var image := get_viewport().get_texture().get_image()
-	var hud_output_path := "res://tmp/gameplay-retained-hand-validation.png" if retained_hand_preview else OUTPUT_PATH
+	var hud_output_path := (
+		"%s/对局全景.png" % GUIDE_CAPTURE_DIR
+		if guide_capture
+		else ("res://tmp/gameplay-retained-hand-validation.png" if retained_hand_preview else OUTPUT_PATH)
+	)
 	var error := image.save_png(hud_output_path)
 	if error != OK:
 		push_error("游戏 HUD 预览保存失败：%s" % error_string(error))
 		get_tree().quit(1)
 		return
 	print("游戏 HUD 预览已保存：", ProjectSettings.globalize_path(hud_output_path))
+	if shop_preview:
+		TurnManager.change_phase(TurnManager.TurnPhase.ACTION)
+		hud.open_shop_panel(player)
+		for _frame in 3:
+			await get_tree().process_frame
+		RenderingServer.force_draw(false)
+		await get_tree().process_frame
+		var shop_path := "%s/食物商店.png" % GUIDE_CAPTURE_DIR if guide_capture else "res://tmp/gameplay-shop-validation.png"
+		var shop_error := get_viewport().get_texture().get_image().save_png(shop_path)
+		if shop_error != OK:
+			push_error("商店 UI 预览保存失败：%s" % error_string(shop_error))
+			get_tree().quit(1)
+			return
+		print("商店 UI 预览已保存：", ProjectSettings.globalize_path(shop_path))
+		get_tree().quit()
+		return
+
+	if score_preview:
+		hud.score_overlay.open_for_player(player)
+		for _frame in 3:
+			await get_tree().process_frame
+		RenderingServer.force_draw(false)
+		await get_tree().process_frame
+		var score_path := "%s/计分详情.png" % GUIDE_CAPTURE_DIR if guide_capture else "res://tmp/gameplay-score-validation.png"
+		var score_error := get_viewport().get_texture().get_image().save_png(score_path)
+		if score_error != OK:
+			push_error("计分详情预览保存失败：%s" % error_string(score_error))
+			get_tree().quit(1)
+			return
+		print("计分详情预览已保存：", ProjectSettings.globalize_path(score_path))
+		get_tree().quit()
+		return
+
 	if market_preview:
 		TurnManager.change_phase(TurnManager.TurnPhase.ACTION)
 		player.arrival_id = 1
@@ -49,12 +92,13 @@ func _ready() -> void:
 		RenderingServer.force_draw(false)
 		await get_tree().process_frame
 		var market_image := get_viewport().get_texture().get_image()
-		var market_error := market_image.save_png("res://tmp/gameplay-market-validation.png")
+		var market_path := "%s/非遗研究所.png" % GUIDE_CAPTURE_DIR if guide_capture else "res://tmp/gameplay-market-validation.png"
+		var market_error := market_image.save_png(market_path)
 		if market_error != OK:
 			push_error("研究所 UI 预览保存失败：%s" % error_string(market_error))
 			get_tree().quit(1)
 			return
-		print("研究所 UI 预览已保存：", ProjectSettings.globalize_path("res://tmp/gameplay-market-validation.png"))
+		print("研究所 UI 预览已保存：", ProjectSettings.globalize_path(market_path))
 		print("研究所模态状态：阶段=", TurnManager.TurnPhase.find_key(TurnManager.now_phase), "，计时器暂停=", TurnManager.turn_timer.is_stopped(), "，模态深度=", TurnManager.modal_resolution_depth)
 		get_tree().quit()
 		return
@@ -97,12 +141,13 @@ func _ready() -> void:
 	RenderingServer.force_draw(false)
 	await get_tree().process_frame
 	var event_image := get_viewport().get_texture().get_image()
-	var event_error := event_image.save_png(EVENT_OUTPUT_PATH)
+	var event_path := "%s/事件选择.png" % GUIDE_CAPTURE_DIR if guide_capture else EVENT_OUTPUT_PATH
+	var event_error := event_image.save_png(event_path)
 	if event_error != OK:
 		push_error("游戏事件 UI 预览保存失败：%s" % error_string(event_error))
 		get_tree().quit(1)
 		return
-	print("游戏事件 UI 预览已保存：", ProjectSettings.globalize_path(EVENT_OUTPUT_PATH))
+	print("游戏事件 UI 预览已保存：", ProjectSettings.globalize_path(event_path))
 	print("事件层可见：", hud.get_event_overlay().visible)
 	print("普通按钮禁用状态：行动=", hud.btn_action.disabled, "，食物=", hud.btn_food.disabled, "，结束回合=", hud.btn_end_turn.disabled)
 	print("事件模态运行状态：阶段=", TurnManager.TurnPhase.find_key(TurnManager.now_phase), "，计时器暂停=", TurnManager.turn_timer.is_stopped(), "，模态深度=", TurnManager.modal_resolution_depth)

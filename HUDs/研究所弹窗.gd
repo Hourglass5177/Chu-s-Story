@@ -42,7 +42,8 @@ func _open_guide() -> void:
 		&"market_economy",
 		&"market",
 		&"global_research_market",
-		guide_button
+		guide_button,
+		&"market_prices"
 	))
 
 func _process(_delta: float) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://UI/GameGuide/digital_game_guide.gd" id="1_script"]
 [ext_resource type="Theme" path="res://UI/Frontend/frontend_theme.tres" id="2_theme"]
@@ -46,6 +46,22 @@ content_margin_top = 24.0
 content_margin_right = 28.0
 content_margin_bottom = 24.0
 
+[sub_resource type="StyleBoxFlat" id="Style_preview"]
+bg_color = Color(0.984, 0.936, 0.812, 0.995)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.839, 0.604, 0.306, 0.96)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+content_margin_left = 28.0
+content_margin_top = 24.0
+content_margin_right = 28.0
+content_margin_bottom = 24.0
+
 [node name="DigitalGameGuide" type="Control" groups=["digital_game_guide"]]
 visible = false
 process_mode = 3
@@ -59,7 +75,7 @@ grow_vertical = 2
 mouse_filter = 0
 mouse_force_pass_scroll_events = false
 theme = ExtResource("2_theme")
-initial_focus_path = NodePath("SafeArea/Frame/Layout/Header/CloseButton")
+initial_focus_path = NodePath("SafeArea/Frame/Layout/Header/BackButton")
 transition_target_path = NodePath("SafeArea/Frame")
 script = ExtResource("1_script")
 
@@ -102,6 +118,13 @@ theme_override_constants/separation = 16
 layout_mode = 2
 theme_override_constants/separation = 16
 
+[node name="BackButton" type="Button" parent="SafeArea/Frame/Layout/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(132, 68)
+layout_mode = 2
+focus_mode = 2
+text = "返回"
+
 [node name="DrawerButton" type="Button" parent="SafeArea/Frame/Layout/Header"]
 unique_name_in_owner = true
 visible = false
@@ -111,6 +134,7 @@ focus_mode = 2
 text = "目录"
 
 [node name="Brand" type="Label" parent="SafeArea/Frame/Layout/Header"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.784, 0.4, 0.153, 1)
 theme_override_font_sizes/font_size = 28
@@ -121,7 +145,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.459, 0.341, 0.282, 1)
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 27
 text = "首页"
 vertical_alignment = 1
 
@@ -179,14 +203,14 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 focus_mode = 2
-text = "3分钟上手"
+text = "快速上手"
 
 [node name="RulesButton" type="Button" parent="SafeArea/Frame/Layout/Body/Sidebar/SidebarContent"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 focus_mode = 2
-text = "规则图鉴"
+text = "规则介绍"
 
 [node name="CompendiumButton" type="Button" parent="SafeArea/Frame/Layout/Body/Sidebar/SidebarContent"]
 unique_name_in_owner = true
@@ -218,7 +242,7 @@ size_flags_vertical = 3
 [node name="Shortcut" type="Label" parent="SafeArea/Frame/Layout/Body/Sidebar/SidebarContent"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.973, 0.906, 0.737, 0.72)
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 24
 text = "F1 · 随时查看"
 horizontal_alignment = 1
 
@@ -231,6 +255,14 @@ theme_override_styles/panel = SubResource("Style_content")
 [node name="ContentLayout" type="VBoxContainer" parent="SafeArea/Frame/Layout/Body/ContentPanel"]
 layout_mode = 2
 theme_override_constants/separation = 14
+
+[node name="GroupNavigation" type="HFlowContainer" parent="SafeArea/Frame/Layout/Body/ContentPanel/ContentLayout"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
 
 [node name="ArticleScroll" type="ScrollContainer" parent="SafeArea/Frame/Layout/Body/ContentPanel/ContentLayout"]
 unique_name_in_owner = true
@@ -278,3 +310,88 @@ custom_minimum_size = Vector2(210, 68)
 layout_mode = 2
 focus_mode = 2
 text = "下一步"
+
+[node name="MediaPreview" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 50
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="MediaPreviewBackdrop" type="ColorRect" parent="MediaPreview"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.055, 0.028, 0.018, 0.92)
+
+[node name="MediaPreviewSafeArea" type="MarginContainer" parent="MediaPreview"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_constants/margin_left = 72
+theme_override_constants/margin_top = 56
+theme_override_constants/margin_right = 72
+theme_override_constants/margin_bottom = 56
+
+[node name="MediaPreviewPanel" type="PanelContainer" parent="MediaPreview/MediaPreviewSafeArea"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_styles/panel = SubResource("Style_preview")
+
+[node name="Layout" type="VBoxContainer" parent="MediaPreview/MediaPreviewSafeArea/MediaPreviewPanel"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Header" type="HBoxContainer" parent="MediaPreview/MediaPreviewSafeArea/MediaPreviewPanel/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MediaPreviewCaption" type="Label" parent="MediaPreview/MediaPreviewSafeArea/MediaPreviewPanel/Layout/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.294, 0.157, 0.118, 1)
+theme_override_font_sizes/font_size = 30
+text = "规则配图"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MediaPreviewClose" type="Button" parent="MediaPreview/MediaPreviewSafeArea/MediaPreviewPanel/Layout/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(132, 64)
+layout_mode = 2
+focus_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "关闭"
+
+[node name="MediaPreviewLine" type="HSeparator" parent="MediaPreview/MediaPreviewSafeArea/MediaPreviewPanel/Layout"]
+layout_mode = 2
+
+[node name="MediaPreviewImage" type="TextureRect" parent="MediaPreview/MediaPreviewSafeArea/MediaPreviewPanel/Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2

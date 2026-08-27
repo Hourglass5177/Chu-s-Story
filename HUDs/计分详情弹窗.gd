@@ -10,13 +10,16 @@ class_name ScoreDetailPanel
 @onready var close_mask: TextureRect = $Panel/BtnClose/mask
 
 var _player: PlayerClass = null
-var _showing_rules := false
 var _was_tree_paused := false
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	rules_button.pressed.connect(_toggle_rules)
+	rules_button.pressed.connect(_open_score_guide)
 	guide_button.pressed.connect(_open_score_guide)
+	# 计分规则只维护在统一游戏指南中。旧的内嵌长文本节点保留在场景里，
+	# 便于兼容已有场景引用，但不再显示或形成第二套规则入口。
+	rules_label.hide()
+	guide_button.hide()
 	close_button.pressed.connect(close_panel)
 	_setup_close_button_feedback()
 	hide()
@@ -36,7 +39,6 @@ func open_for_player(player: PlayerClass) -> void:
 	if player == null:
 		return
 	_player = player
-	_showing_rules = false
 	_was_tree_paused = get_tree().paused
 	_refresh_content()
 	show()
@@ -45,11 +47,6 @@ func open_for_player(player: PlayerClass) -> void:
 func close_panel() -> void:
 	hide()
 	get_tree().paused = _was_tree_paused
-
-func _toggle_rules() -> void:
-	_showing_rules = not _showing_rules
-	_refresh_content()
-
 
 func _open_score_guide() -> void:
 	var hud := get_tree().get_first_node_in_group("HUD") as HUD
@@ -60,17 +57,11 @@ func _open_score_guide() -> void:
 		&"scoring_victory",
 		&"score",
 		&"",
-		guide_button
+		rules_button,
+		&"base_score"
 	))
 
 func _refresh_content() -> void:
-	if _showing_rules:
-		title_label.text = "计分规则"
-		rules_button.text = "返回"
-		details_container.hide()
-		rules_label.show()
-		rules_label.text = _get_rules_text()
-		return
 	var breakdown := ResourceManager.get_score_breakdown(_player)
 	title_label.text = "计分详情"
 	rules_button.text = "计分规则"
@@ -90,10 +81,3 @@ func _refresh_content() -> void:
 	$Panel/详情/成就明细.text = " · ".join(achievement_names)
 	$Panel/详情/总分/名称.text = "总分 / %d" % TurnManager.target_score
 	$Panel/详情/总分/数值.text = str(int(breakdown.get("total_score", 0)))
-
-func _get_rules_text() -> String:
-	return "基础分：手牌上所有非遗牌的基础分之和。\n\n" \
-		+ "类别组合：同类3/5/10张得2/3/5分，只取最高一档；集齐5种类别再得5分。\n\n" \
-		+ "类别集齐：每集齐一个类别的全部实际牌得5分。\n\n" \
-		+ "地域组合：每个同城5张的城市各得5分；每集齐一市全部实际牌各得2分；同时持有潜江、天门、仙桃非遗牌再得2分。\n\n" \
-		+ "成就分：本局获得的成就牌分数之和。成就全局唯一，先达成者获得。"

@@ -4,6 +4,7 @@ class_name 非遗详情弹窗
 signal detail_closed
 
 @onready var card_image = $TextureRect as TextureRect
+@onready var title_label = $标题 as Label
 @onready var lbl_name = $VBoxContainer/LblName as Label
 @onready var lbl_score = $VBoxContainer/LblScore as Label
 @onready var lbl_desc = $VBoxContainer/LblDesc as Label
@@ -37,13 +38,15 @@ func _ready() -> void:
 func show_detail(card_data: 非遗牌, _player: PlayerClass) -> void:
 	if card_data == null:
 		return
+	var content := FeiyiDetailContent.build(card_data)
 	current_card = card_data
-	card_image.texture = card_data.image_of_front
-	lbl_name.text = "【名称】" + card_data.card_name
-	lbl_score.text = "【分数】" + str(card_data.base_score) + " 分"
-	lbl_desc.text = "【描述】" + card_data.description
-	lbl_cate.text = "【类别】" + 非遗牌.CardCategory.find_key(card_data.category)
-	lbl_effect.text = "【效果】" + card_data.effect_description
+	title_label.text = String(content.get("heading", ""))
+	card_image.texture = content.get("texture") as Texture2D
+	lbl_name.text = String(content.get("name", ""))
+	lbl_cate.text = String(content.get("category", ""))
+	lbl_score.text = String(content.get("score", ""))
+	lbl_desc.text = String(content.get("description", ""))
+	lbl_effect.text = String(content.get("effect", ""))
 	if not visible:
 		_owns_pause = not get_tree().paused
 		if _owns_pause:
@@ -63,7 +66,8 @@ func _open_guide() -> void:
 		&"feiyi_cards",
 		DiscoveryManager.KIND_FEIYI,
 		StringName(current_card.resource_path),
-		guide_button
+		guide_button,
+		&"active_use"
 	))
 
 func _on_close_pressed() -> void:

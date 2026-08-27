@@ -63,17 +63,42 @@ func _prepare_guide_capture(menu: MainMenu, screen_name: StringName) -> void:
 		return
 	guide.open_guide(GuideOpenContext.new(GuideOpenContext.Source.MAIN_MENU), false)
 	match screen_name:
+		&"guide_media_preview":
+			guide.call(&"_render_home")
+			var preview_button := _find_named_descendant(guide, "GuideMediaPreviewButton") as Button
+			if preview_button != null:
+				preview_button.pressed.emit()
 		&"guide_quick":
 			guide.call(&"_open_topic_by_index", &"quick", 2)
+		&"guide_session_modes":
+			guide.call(&"_render_topic", &"goal_resources", &"mode_selection")
+		&"guide_player_setup":
+			guide.call(&"_render_topic", &"goal_resources", &"player_setup")
 		&"guide_rules":
 			guide.call(&"_render_topic", &"map_movement")
+		&"guide_turn_begin":
+			guide.call(&"_render_topic", &"turn_phases", &"begin_phase")
 		&"guide_compendium":
 			var food_ids := DiscoveryManager.get_known_ids(DiscoveryManager.KIND_FOOD)
 			for index: int in mini(2, food_ids.size()):
 				(DiscoveryManager._discovered[DiscoveryManager.KIND_FOOD] as Dictionary)[food_ids[index]] = true
 			guide.call(&"_render_compendium", DiscoveryManager.KIND_FOOD, 0)
+		&"guide_compendium_feiyi":
+			guide.call(&"_render_compendium", DiscoveryManager.KIND_FEIYI, 0)
+		&"guide_compendium_scenery":
+			guide.call(&"_render_compendium", DiscoveryManager.KIND_SCENERY, 0)
 		_:
 			guide.call(&"_render_home")
+
+
+func _find_named_descendant(root: Node, expected_name: String) -> Node:
+	for child: Node in root.get_children():
+		if child.name == expected_name:
+			return child
+		var nested := _find_named_descendant(child, expected_name)
+		if nested != null:
+			return nested
+	return null
 
 
 func _configure_capture_players(menu: MainMenu, player_count: int) -> void:

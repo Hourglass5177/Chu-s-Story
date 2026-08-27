@@ -88,8 +88,12 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if _modal_layer != null and _modal_layer.visible and event.is_action_pressed("ui_cancel"):
-		_close_modal(false)
+	if _modal_layer != null and _modal_layer.visible:
+		if event.is_action_pressed("ui_cancel"):
+			_close_modal(false)
+			get_viewport().set_input_as_handled()
+		return
+	if event.is_action_pressed("guide_toggle") and open_game_guide():
 		get_viewport().set_input_as_handled()
 
 
@@ -625,7 +629,9 @@ func _build_game_guide() -> void:
 
 
 func open_game_guide(context: GuideOpenContext = null) -> bool:
-	if _game_guide == null or _modal_layer.visible:
+	# 加载页是一次性会话提交边界。此时打开任何新模态都会让玩家误以为
+	# 加载停滞，也可能把旧前端留在即将切换的场景上。
+	if _game_guide == null or _modal_layer.visible or _start_locked:
 		return false
 	var current_page := _pages.get(_current_screen) as FrontendScreen
 	if current_page != null:
@@ -639,7 +645,10 @@ func open_game_guide(context: GuideOpenContext = null) -> bool:
 			&"",
 			_home_rules_button
 		)
-	return _game_guide.open_guide(open_context)
+	var opened := _game_guide.open_guide(open_context)
+	if not opened and current_page != null:
+		current_page.set_interaction_enabled(true)
+	return opened
 
 
 func get_game_guide() -> DigitalGameGuide:

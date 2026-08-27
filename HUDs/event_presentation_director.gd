@@ -9,6 +9,8 @@ signal sequence_finished(event_id: StringName)
 enum Tier { CONCISE, MAP_ACTION, SEQUENTIAL }
 
 const STEP_SECONDS := 1.5
+const COMPACT_PANEL_SIZE := Vector2(720.0, 176.0)
+const CARD_PANEL_HEIGHT := 396.0
 const PIXEL_FONT := preload("res://arts/像素字体.ttf")
 const PRESENTATION_TIERS: Dictionary = {
 	&"zuo_shou_yu_li": Tier.SEQUENTIAL, &"bai_ge_zheng_liu": Tier.SEQUENTIAL,
@@ -68,9 +70,8 @@ func begin_sequence(event_id: StringName, title: String) -> void:
 	_title.text = "【%s】" % title
 	_message.text = "结算中…"
 	_card_row.visible = false
-	_panel.custom_minimum_size.y = 150.0
+	_panel.custom_minimum_size.y = COMPACT_PANEL_SIZE.y
 	_panel.visible = true
-	mouse_filter = Control.MOUSE_FILTER_STOP
 	sequence_started.emit(event_id)
 
 func focus_player(player: PlayerClass, message: String = "") -> void:
@@ -128,11 +129,11 @@ func show_card_duel(
 	_right_caption.text = "%s · %s" % [second.player_name, second_card.card_name if second_card != null else "无牌"]
 	_message.text = result_text
 	_card_row.visible = true
-	_panel.custom_minimum_size.y = 370.0
+	_panel.custom_minimum_size.y = CARD_PANEL_HEIGHT
 	step_started.emit(&"card_duel", first)
 	await _wait_step(STEP_SECONDS)
 	_card_row.visible = false
-	_panel.custom_minimum_size.y = 150.0
+	_panel.custom_minimum_size.y = COMPACT_PANEL_SIZE.y
 	step_finished.emit(&"card_duel", first)
 
 func note_map_action(player: PlayerClass, message: String) -> void:
@@ -161,8 +162,7 @@ func finish_sequence(summary: String = "") -> void:
 	_camera_snapshot.clear()
 	_panel.visible = false
 	_card_row.visible = false
-	_panel.custom_minimum_size.y = 150.0
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_panel.custom_minimum_size.y = COMPACT_PANEL_SIZE.y
 	sequence_finished.emit(finished_id)
 
 func fast_forward_current_step() -> void:
@@ -178,8 +178,7 @@ func cancel_and_restore(_reason: StringName = &"cancelled") -> void:
 	_camera_snapshot.clear()
 	_panel.visible = false
 	_card_row.visible = false
-	_panel.custom_minimum_size.y = 150.0
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_panel.custom_minimum_size.y = COMPACT_PANEL_SIZE.y
 	_fast_forward_requested = false
 
 func restore_camera_state() -> void:
@@ -196,7 +195,7 @@ func _wait_step(seconds: float) -> void:
 		await get_tree().process_frame
 	_fast_forward_requested = false
 
-func _gui_input(event: InputEvent) -> void:
+func _on_panel_gui_input(event: InputEvent) -> void:
 	if active_event_id.is_empty():
 		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -210,52 +209,75 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func _build_ui() -> void:
 	_panel = PanelContainer.new()
+	_panel.name = "EventSettlementPanel"
 	_panel.set_anchors_preset(Control.PRESET_CENTER_TOP)
-	_panel.position = Vector2(-330, 205)
-	_panel.size = Vector2(660, 150)
-	_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_panel.position = Vector2(-COMPACT_PANEL_SIZE.x * 0.5, 184)
+	_panel.size = COMPACT_PANEL_SIZE
+	_panel.custom_minimum_size = COMPACT_PANEL_SIZE
+	_panel.mouse_filter = Control.MOUSE_FILTER_STOP
+	_panel.gui_input.connect(_on_panel_gui_input)
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color("d8b27b")
-	style.border_color = Color("704231")
-	style.set_border_width_all(5)
-	style.set_corner_radius_all(18)
+	style.bg_color = Color("f4dfb5")
+	style.border_color = Color("9f603b")
+	style.set_border_width_all(4)
+	style.set_corner_radius_all(16)
+	style.shadow_color = Color(0.16, 0.08, 0.04, 0.28)
+	style.shadow_size = 10
 	_panel.add_theme_stylebox_override("panel", style)
 	add_child(_panel)
+	var margin := MarginContainer.new()
+	margin.name = "ContentMargin"
+	margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	margin.add_theme_constant_override("margin_left", 28)
+	margin.add_theme_constant_override("margin_top", 14)
+	margin.add_theme_constant_override("margin_right", 28)
+	margin.add_theme_constant_override("margin_bottom", 18)
+	_panel.add_child(margin)
 	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 4)
-	_panel.add_child(box)
+	box.name = "SettlementContent"
+	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_theme_constant_override("separation", 7)
+	margin.add_child(box)
 	_title = Label.new()
+	_title.name = "EventSettlementTitle"
+	_title.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_title.add_theme_font_override("font", PIXEL_FONT)
-	_title.add_theme_font_size_override("font_size", 30)
+	_title.add_theme_font_size_override("font_size", 44)
 	_title.add_theme_color_override("font_color", Color("4b281e"))
 	box.add_child(_title)
 	_message = Label.new()
+	_message.name = "EventSettlementMessage"
+	_message.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_message.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_message.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_message.add_theme_font_override("font", PIXEL_FONT)
-	_message.add_theme_font_size_override("font_size", 34)
+	_message.add_theme_font_size_override("font_size", 30)
 	_message.add_theme_color_override("font_color", Color("2d1a14"))
 	box.add_child(_message)
 	_card_row = HBoxContainer.new()
+	_card_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_card_row.alignment = BoxContainer.ALIGNMENT_CENTER
 	_card_row.add_theme_constant_override("separation", 32)
 	box.add_child(_card_row)
 	var left_column := VBoxContainer.new()
 	var right_column := VBoxContainer.new()
 	for column: VBoxContainer in [left_column, right_column]:
+		column.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		column.custom_minimum_size = Vector2(180, 190)
 		_card_row.add_child(column)
 	_left_card = TextureRect.new()
 	_right_card = TextureRect.new()
 	for card_view: TextureRect in [_left_card, _right_card]:
+		card_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		card_view.custom_minimum_size = Vector2(120, 160)
 		card_view.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		card_view.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	_left_caption = Label.new()
 	_right_caption = Label.new()
 	for caption: Label in [_left_caption, _right_caption]:
+		caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		caption.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		caption.add_theme_font_override("font", PIXEL_FONT)

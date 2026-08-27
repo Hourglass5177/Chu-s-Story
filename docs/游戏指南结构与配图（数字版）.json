@@ -1,0 +1,322 @@
+{
+  "schema_version": 3,
+  "home": {
+    "id": "home",
+    "group_id": "intro",
+    "display_title": "《楚物志》游戏指南"
+  },
+  "quick_parent_heading": "一、快速上手",
+  "media_fallbacks": {
+    "compendium_preview": [
+      "res://arts/食物牌/食物牌（牌背）.jpg",
+      "res://arts/事件卡/事件牌（牌背）.png",
+      "res://arts/成就卡/成就卡（牌背）.png"
+    ],
+    "retained_events": [
+      "res://arts/事件卡/事件牌（牌背）.png"
+    ],
+    "achievements": [
+      "res://arts/成就卡/成就卡（牌背）.png"
+    ]
+  },
+  "aliases": {
+    "quick_scoring": "scoring_victory"
+  },
+  "quick_topics": [
+    {
+      "heading": "1. 基本目标",
+      "id": "quick_goal",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "旅程从脚下开始", "id": "journey"}
+      ]
+    },
+    {
+      "heading": "2. 成为非物质文化遗产传承人",
+      "id": "quick_feiyi",
+      "default_group": {"id": "card_core", "title": ""},
+      "groups": []
+    },
+    {
+      "heading": "3. 局内资源",
+      "id": "quick_resources",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "积分点让你有选择，精力让你走得更远", "id": "resource_roles"}
+      ]
+    },
+    {
+      "heading": "4. 我的回合，抽卡！",
+      "id": "quick_turn",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "准备 → 掷骰 → 移动 → 行动 → 结束", "id": "phase_flow"}
+      ]
+    },
+    {
+      "heading": "5. 移动阶段：千里之行，始于足下",
+      "id": "quick_move",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "先看蓝色终点，再看路径消耗", "id": "reachable_routes"},
+        {"heading": "一个简单例子", "id": "movement_example"}
+      ]
+    },
+    {
+      "heading": "6. 行动阶段：落子无悔",
+      "id": "quick_action",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "落点格子决定这一回合做什么", "id": "landing_actions"},
+        {"heading": "有些效果会把你送到别处", "id": "special_movement"}
+      ]
+    }
+  ],
+  "rule_topics": [
+    {
+      "heading": "一、开始一局",
+      "id": "goal_resources",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "1. 选择游戏模式", "id": "mode_selection"},
+        {"heading": "2. 决定谁来旅行", "id": "player_setup"},
+        {"heading": "3. 初始状态", "id": "initial_state"}
+      ]
+    },
+    {
+      "heading": "二、先看懂你的桌面",
+      "id": "interface_overview",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "1. 左侧：当前玩家", "id": "current_player_panel"},
+        {"heading": "2. 中央：地图", "id": "map_panel"},
+        {"heading": "3. 下方：信息与操作", "id": "info_actions_panel"},
+        {"heading": "4. 右侧：手牌与分数", "id": "hand_score_panel"}
+      ]
+    },
+    {
+      "heading": "三、一个完整回合",
+      "id": "turn_phases",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "1. 准备阶段", "id": "begin_phase"},
+        {"heading": "2. 掷骰阶段", "id": "dice_phase"},
+        {"heading": "3. 移动阶段", "id": "moving_phase"},
+        {"heading": "4. 行动阶段", "id": "action_phase"},
+        {"heading": "5. 结束阶段", "id": "end_phase"},
+        {"heading": "6. 跳过阶段与延迟效果", "id": "skipped_and_delayed"}
+      ]
+    },
+    {
+      "heading": "四、地图、地形与移动",
+      "id": "map_movement",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "1. 六角格与地域", "id": "hex_regions"},
+        {"heading": "2. 每走一格要付多少精力", "id": "terrain_cost"},
+        {"heading": "3. 步数和精力是两道门槛", "id": "dual_constraints"},
+        {"heading": "4. 路线怎样选", "id": "route_choice"},
+        {"heading": "5. 普通移动与特殊移动", "id": "normal_and_special"},
+        {"heading": "6. 看世界的两种视角", "id": "camera_modes"}
+      ]
+    },
+    {
+      "heading": "五、到达之后：地图上的地点",
+      "id": "functional_tiles",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "1. 普通格与起点", "id": "plain_and_start"},
+        {"heading": "2. 非遗点", "id": "feiyi_tile"},
+        {"heading": "3. 风景格", "id": "scenery_tile"},
+        {"heading": "4. 事件格", "id": "event_tile"},
+        {"heading": "5. 食物商店", "id": "food_shop_tile"},
+        {"heading": "6. 打工格", "id": "work_tile"},
+        {"heading": "7. 非遗研究所", "id": "market_tile"}
+      ]
+    },
+    {
+      "heading": "六、非遗牌：知识就是力量",
+      "id": "feiyi_cards",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "1. 七个类别", "id": "categories"},
+        {"heading": "2. 主动使用", "id": "active_use"},
+        {"heading": "3. 持有与获得时效果", "id": "on_hold_and_obtain"},
+        {"heading": "4. 神话传说的响应", "id": "myth_response"},
+        {"heading": "5. 国家级非遗", "id": "national_feiyi"},
+        {"heading": "6. 失去、赠送与交换", "id": "hand_transfer"}
+      ]
+    },
+    {
+      "heading": "七、食物牌：民以食为天",
+      "id": "food_system",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "1. 等级、数量与价格", "id": "levels_prices"},
+        {"heading": "2. 享用时机", "id": "consume_timing"},
+        {"heading": "3. 一张食物怎样结算", "id": "resolution_order"},
+        {"heading": "4. 立即、延迟与永久效果", "id": "duration"},
+        {"heading": "5. 多人食物与响应", "id": "multiplayer_response"},
+        {"heading": "6. 牌面文字是最终答案", "id": "card_text_priority"}
+      ]
+    },
+    {
+      "heading": "八、事件牌：不成功，便成仁",
+      "id": "event_response",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "1. 抽取与弃牌", "id": "draw_discard"},
+        {"heading": "2. 五张可以保留的事件", "id": "retained_events"},
+        {"heading": "3. 选择与倒计时", "id": "choice_timeout"},
+        {"heading": "4. 资源或目标不足", "id": "insufficient_resources"},
+        {"heading": "5. 响应链", "id": "response_chain"},
+        {"heading": "6. 妙手回春", "id": "revival_response"},
+        {"heading": "7. 移动事件", "id": "movement_events"}
+      ]
+    },
+    {
+      "heading": "九、经济系统：决定上层建筑",
+      "id": "market_economy",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "1. 支付不会超过余额", "id": "bounded_payment"},
+        {"heading": "2. 商店里的消费", "id": "shop_spending"},
+        {"heading": "3. 打工里的收入", "id": "work_income"},
+        {"heading": "4. 研究所价格", "id": "market_prices"}
+      ]
+    },
+    {
+      "heading": "十、职业：三百六十行，行行出状元",
+      "id": "professions",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "1. 美食博主", "id": "food_blogger"},
+        {"heading": "2. 魔术博主", "id": "magic_blogger"},
+        {"heading": "3. 探险博主", "id": "adventure_blogger"},
+        {"heading": "4. 商业博主", "id": "business_blogger"},
+        {"heading": "5. 旅行博主", "id": "travel_blogger"},
+        {"heading": "6. 生活博主", "id": "life_blogger"},
+        {"heading": "7. 职业交换与技能封锁", "id": "swap_and_block"}
+      ]
+    },
+    {
+      "heading": "十一、成就：挑战不可能",
+      "id": "achievements",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "1. 怎样获得成就", "id": "claiming"},
+        {"heading": "2. 当前六项成就", "id": "current_achievements"},
+        {"heading": "3. 哪些行为会计入进度", "id": "progress"},
+        {"heading": "4. 成就升级", "id": "upgrade"}
+      ]
+    },
+    {
+      "heading": "十二、分数怎样计算",
+      "id": "scoring_victory",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "1. 非遗基础分", "id": "base_score"},
+        {"heading": "2. 类别数量组合", "id": "category_quantity"},
+        {"heading": "3. 类别集齐", "id": "category_completion"},
+        {"heading": "4. 地域组合", "id": "region_score"},
+        {"heading": "5. 成就分", "id": "achievement_score"},
+        {"heading": "6. 一份完整例子", "id": "full_example"},
+        {"heading": "7. 分数会随手牌变化", "id": "recalculation"}
+      ]
+    },
+    {
+      "heading": "十三、淘汰、结束与最终排名",
+      "id": "game_end",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "1. 精力为0时先把回合走完", "id": "zero_energy_timing"},
+        {"heading": "2. 淘汰之后", "id": "after_elimination"},
+        {"heading": "3. 多人局什么时候结束", "id": "multiplayer_end"},
+        {"heading": "4. 单人局", "id": "solo_end"},
+        {"heading": "5. 达标的人不一定是冠军", "id": "trigger_not_champion"},
+        {"heading": "6. 并列与名次", "id": "ties_and_ranks"},
+        {"heading": "7. 正式结算", "id": "final_results"}
+      ]
+    },
+    {
+      "heading": "十四、常见裁定",
+      "id": "digital_rulings",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "1. “可以”与“必须”", "id": "optional_and_mandatory"},
+        {"heading": "2. “最多”与“最大合法数量”", "id": "maximum_legal_amount"},
+        {"heading": "3. “所有玩家”与“其他玩家”", "id": "all_and_others"},
+        {"heading": "4. 并列最高、并列最低", "id": "tied_extremes"},
+        {"heading": "5. 最近地点与等距", "id": "nearest_and_ties"},
+        {"heading": "6. “未来N次阶段”", "id": "future_phases"},
+        {"heading": "7. 到达、路过、传送与换位", "id": "arrival_terms"},
+        {"heading": "8. “无事发生”", "id": "nothing_happens"},
+        {"heading": "9. 隐藏信息", "id": "hidden_information"},
+        {"heading": "10. 数量以当前版本为准", "id": "dynamic_counts"}
+      ]
+    },
+    {
+      "heading": "十五、操作与探索图鉴",
+      "id": "controls_compendium",
+      "default_group": {"id": "overview", "title": ""},
+      "groups": [
+        {"heading": "1. 常用操作", "id": "controls"},
+        {"heading": "2. 随时查规则", "id": "context_guide"},
+        {"heading": "3. 探索图鉴", "id": "discovery_compendium"}
+      ]
+    }
+  ],
+  "media": [
+    {
+      "id": "home_hero",
+      "match": "当前工程的正常对局实机画面",
+      "topic_id": "home",
+      "group_id": "intro",
+      "provider": "dynamic",
+      "paths": [
+        "res://arts/游戏指南/实机截图/v1/对局全景.png"
+      ],
+      "layout": "full",
+      "fit": "contain",
+      "min_item_width": 0,
+      "target_width_ratio": 1.0,
+      "alt": "《楚物志》对局中的玩家信息、地图、操作与手牌区域",
+      "dynamic_kind": "guide_capture",
+      "dynamic_id": "home_hero",
+      "requirements": []
+    },
+    {"id":"quick_goal_route","match":"真实对局中的非遗格悬浮信息截图","topic_id":"quick_goal","group_id":"journey","provider":"static","paths":["res://arts/游戏指南/实机截图/v4/地图格悬浮信息.png"],"captions":["孝感117 · 平原 · 非遗；精力消耗1"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":1.0,"alt":"真实地图格悬浮信息直接显示孝感117号、平原地形、精力消耗1和非遗功能","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"quick_feiyi_card_anatomy","match":"并列展示三张来自不同地区的真实非遗牌","topic_id":"quick_feiyi","group_id":"card_core","provider":"static","paths":["res://arts/非遗卡牌/武汉/汉绣.jpg","res://arts/非遗卡牌/潜江/潜江民歌.jpg","res://arts/非遗卡牌/十堰/武当武术.jpg"],"captions":["武汉 · 汉绣","潜江 · 潜江民歌","十堰 · 武当武术"],"layout":"gallery","fit":"contain","min_item_width":320,"target_width_ratio":1.0,"max_columns":3,"alt":"来自武汉、潜江和十堰的三张非遗牌，展示地区、类别、基础分与效果","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"quick_resources_cards","match":"初始积分点与精力，以及非遗牌和成就牌","topic_id":"quick_resources","group_id":"resource_roles","provider":"static","paths":["res://arts/游戏指南/实机截图/v3/初始积分点与精力.png","res://arts/非遗卡牌/武汉/汉绣.jpg","res://arts/成就卡/成就卡（牌背）.png"],"captions":["积分点与精力","非遗牌","成就牌"],"layout":"gallery","fit":"contain","min_item_width":300,"target_width_ratio":1.0,"max_columns":3,"alt":"玩家面板中的积分点和精力，以及非遗牌与成就牌","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"quick_turn_flow","match":"五段式横向流程图","topic_id":"quick_turn","group_id":"phase_flow","provider":"dynamic","paths":["res://arts/游戏指南/示意图/v1/2D6掷骰.png","res://arts/游戏指南/实机截图/v4/移动阶段-用户原图.png","res://arts/游戏指南/实机截图/v3/行动阶段按钮.png"],"captions":["掷骰","移动","行动"],"layout":"sequence","fit":"contain","min_item_width":220,"target_width_ratio":1.0,"alt":"准备、掷骰、移动、行动与结束的回合流程","dynamic_kind":"guide_capture","dynamic_id":"quick_turn_flow","requirements":[]},
+    {"id":"quick_move_route","match":"直接使用真实移动阶段的原始截图","topic_id":"quick_move","group_id":"movement_example","provider":"static","paths":["res://arts/游戏指南/实机截图/v4/移动阶段-用户原图.png"],"captions":["棋子所在格就是起点，蓝色格是当前可选终点"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":1.0,"alt":"用户提供的真实移动阶段原图，保留玩家棋子和蓝色可达格，没有额外的起终点或路线标记","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"quick_action_landing","match":"行动阶段的可用按钮","topic_id":"quick_action","group_id":"landing_actions","provider":"static","paths":["res://arts/游戏指南/实机截图/v3/行动阶段按钮.png"],"captions":["落点不同，可用行动也不同"],"layout":"portrait","fit":"contain","min_item_width":420,"target_width_ratio":0.65,"alt":"真实行动阶段中的行动、食物和结束按钮","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"quick_action_special_movement","match":"事件要求在地图上选择移动终点","topic_id":"quick_action","group_id":"special_movement","provider":"static","paths":["res://arts/游戏指南/实机截图/v3/事件移动-地图选点.png"],"captions":["沉浸体验：事件移动会直接在地图上高亮合法终点"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":1.0,"alt":"沉浸体验事件要求玩家在地图上选择移动终点","dynamic_kind":"","dynamic_id":"","requirements":[{"kind":"event","id":"chen_jin_ti_yan"}]},
+    {"id":"session_modes","match":"模式选择弹窗与人数设置弹窗","topic_id":"goal_resources","group_id":"mode_selection","provider":"dynamic","paths":["res://arts/游戏指南/实机截图/v4/模式选择弹窗.png","res://arts/游戏指南/实机截图/v4/人数设置弹窗.png"],"captions":["选择游戏模式","设置玩家人数与目标分数"],"layout":"pair","fit":"contain","min_item_width":520,"target_width_ratio":1.0,"alt":"只保留弹窗本体的本地游戏模式与玩家人数设置","dynamic_kind":"guide_capture","dynamic_id":"session_modes","requirements":[]},
+    {"id":"session_player_setup","match":"选角页使用一张完整界面图","topic_id":"goal_resources","group_id":"player_setup","provider":"dynamic","paths":["res://arts/游戏指南/实机截图/v1/玩家设置.png","res://arts/游戏指南/实机截图/v1/阵容总览.png"],"captions":["逐位设置玩家","确认本局阵容"],"layout":"sequence","fit":"contain","min_item_width":560,"target_width_ratio":1.0,"alt":"玩家设置与阵容总览","dynamic_kind":"guide_capture","dynamic_id":"session_player_setup","requirements":[]},
+    {"id":"session_initial_hud","match":"500积分点、6/12精力、0分","topic_id":"goal_resources","group_id":"initial_state","provider":"static","paths":["res://arts/游戏指南/实机截图/v2/玩家信息近景.png"],"layout":"portrait","fit":"contain","min_item_width":420,"target_width_ratio":0.65,"alt":"玩家信息区显示初始积分点、精力和总分","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"interface_current_player","match":"只截取正常对局左侧玩家信息栏","topic_id":"interface_overview","group_id":"current_player_panel","provider":"static","paths":["res://arts/游戏指南/实机截图/v4/界面-左侧玩家.png"],"captions":["当前玩家、职业、积分点与精力"],"layout":"portrait","fit":"contain","min_item_width":420,"target_width_ratio":0.62,"alt":"左侧玩家信息栏的真实对局裁图","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"interface_map","match":"只截取正常对局中央地图","topic_id":"interface_overview","group_id":"map_panel","provider":"static","paths":["res://arts/游戏指南/实机截图/v4/界面-中央地图.png"],"captions":["棋子、六角格、地域边界与地点图标"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":1.0,"alt":"中央地图的真实对局裁图","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"interface_info_actions","match":"只截取正常对局下方信息栏与操作按钮","topic_id":"interface_overview","group_id":"info_actions_panel","provider":"static","paths":["res://arts/游戏指南/实机截图/v4/界面-下方信息与操作.png"],"captions":["真实结算信息与行动、食物、结束按钮"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":1.0,"alt":"下方信息栏与操作按钮的真实对局裁图","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"interface_hand_score","match":"只截取正常对局右侧手牌与分数栏","topic_id":"interface_overview","group_id":"hand_score_panel","provider":"static","paths":["res://arts/游戏指南/实机截图/v4/界面-右侧手牌与分数.png"],"captions":["非遗牌、成就牌与底部总分"],"layout":"portrait","fit":"contain","min_item_width":420,"target_width_ratio":0.62,"alt":"右侧手牌与分数栏的真实对局裁图","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"turn_dice_phase","match":"两枚六面骰点数相加","topic_id":"turn_phases","group_id":"dice_phase","provider":"static","paths":["res://arts/游戏指南/示意图/v1/2D6掷骰.png"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":0.9,"alt":"两枚六面骰的点数相加，得到本回合基础移动步数","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"turn_moving_phase","match":"移动阶段的蓝色可达终点","topic_id":"turn_phases","group_id":"moving_phase","provider":"static","paths":["res://arts/游戏指南/实机截图/v4/移动阶段-用户原图.png"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":1.0,"alt":"移动阶段中以蓝色高亮显示的真实可达地块","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"turn_action_phase","match":"行动阶段按钮","topic_id":"turn_phases","group_id":"action_phase","provider":"static","paths":["res://arts/游戏指南/实机截图/v3/行动阶段按钮.png"],"layout":"portrait","fit":"contain","min_item_width":420,"target_width_ratio":0.65,"alt":"行动阶段中的行动、食物和结束按钮","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"map_hex_tooltip","match":"使用真实地图格悬浮信息截图","topic_id":"map_movement","group_id":"hex_regions","provider":"static","paths":["res://arts/游戏指南/实机截图/v4/地图格悬浮信息.png"],"captions":["孝感地域·平原地形·非遗功能，进入精力消耗1"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":1.0,"alt":"悬浮信息直接显示地域、编号、地形、精力消耗和非遗功能","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"map_route_choice","match":"不要额外绘制起点、终点或路线","topic_id":"map_movement","group_id":"route_choice","provider":"static","paths":["res://arts/游戏指南/实机截图/v4/移动阶段-用户原图.png"],"captions":["原始移动阶段画面：棋子所在格与蓝色可达地块"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":1.0,"alt":"真实移动阶段截图，不使用人工起终点或伪造路线","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"functional_feiyi_detail","match":"获得非遗后的真实详情弹窗","topic_id":"functional_tiles","group_id":"feiyi_tile","provider":"static","paths":["res://arts/游戏指南/实机截图/v3/非遗详情-潜江民歌.png"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":0.9,"alt":"潜江民歌非遗牌的真实详情弹窗","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"functional_event","match":"事件公开并在地图选择终点","topic_id":"functional_tiles","group_id":"event_tile","provider":"static","paths":["res://arts/游戏指南/实机截图/v3/事件公开-沉浸体验.png","res://arts/游戏指南/实机截图/v3/事件移动-地图选点.png"],"captions":["先公开事件与效果","需要移动时，再回到地图选择终点"],"layout":"sequence","fit":"contain","min_item_width":560,"target_width_ratio":1.0,"alt":"沉浸体验事件从公开到地图选点的真实流程","dynamic_kind":"","dynamic_id":"","requirements":[{"kind":"event","id":"chen_jin_ti_yan"}]},
+    {"id":"functional_shop","match":"商店完整实机图","topic_id":"functional_tiles","group_id":"food_shop_tile","provider":"static","paths":["res://arts/游戏指南/实机截图/v3/食物商店.png"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":1.0,"alt":"食物商店的商品、价格、购买按钮与余额","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"functional_market","match":"gameplay-market-validation.png","topic_id":"functional_tiles","group_id":"market_tile","provider":"dynamic","paths":["res://arts/游戏指南/实机截图/v1/非遗研究所.png"],"layout":"sequence","fit":"contain","min_item_width":0,"target_width_ratio":0.9,"alt":"非遗研究所的购买与出售页","dynamic_kind":"guide_capture","dynamic_id":"functional_market","requirements":[]},
+    {"id":"feiyi_active_detail","match":"查看非遗牌面与效果","topic_id":"feiyi_cards","group_id":"active_use","provider":"static","paths":["res://arts/游戏指南/实机截图/v3/非遗详情-潜江民歌.png"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":0.9,"alt":"非遗详情页展示牌面、介绍、效果和操作区域","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"food_levels","match":"市级、省级、国家级各一张真实牌面","topic_id":"food_system","group_id":"levels_prices","provider":"dynamic","paths":["res://arts/食物牌/数字版/蒿子粑粑.png","res://arts/食物牌/数字版/完全版-v2/枣阳酸浆面.png","res://arts/食物牌/数字版/完全版-v2/荆州鱼糕.png"],"captions":["市级 · 150积分点","省级 · 250积分点","国家级 · 500积分点"],"layout":"gallery","fit":"contain","min_item_width":320,"target_width_ratio":1.0,"max_columns":3,"alt":"市级、省级和国家级食物牌；未发现时只显示牌背","dynamic_kind":"food_levels","dynamic_id":"food_levels","requirements":[]},
+    {"id":"food_backpack_use","match":"食物背包与享用按钮","topic_id":"food_system","group_id":"consume_timing","provider":"static","paths":["res://arts/游戏指南/实机截图/v3/食物背包.png"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":1.0,"alt":"行动阶段打开的食物背包，展示食物牌和享用按钮","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"retained_events_dynamic","match":"五个保留事件卡位","topic_id":"event_response","group_id":"retained_events","provider":"dynamic","paths":["res://arts/事件卡/事件牌（牌背）.png"],"layout":"gallery","fit":"contain","min_item_width":240,"target_width_ratio":1.0,"alt":"可保留事件牌","dynamic_kind":"retained_events","dynamic_id":"retained_events","requirements":[]},
+    {"id":"event_movement_sequence","match":"事件公开后回到地图选择移动终点","topic_id":"event_response","group_id":"movement_events","provider":"static","paths":["res://arts/游戏指南/实机截图/v3/事件公开-沉浸体验.png","res://arts/游戏指南/实机截图/v3/事件移动-地图选点.png"],"captions":["公开沉浸体验","在地图选择合法终点"],"layout":"sequence","fit":"contain","min_item_width":560,"target_width_ratio":1.0,"alt":"沉浸体验事件公开后切换到地图选择移动终点","dynamic_kind":"","dynamic_id":"","requirements":[{"kind":"event","id":"chen_jin_ti_yan"}]},
+    {"id":"market_shop_spending","match":"商店商品、价格与余额","topic_id":"market_economy","group_id":"shop_spending","provider":"static","paths":["res://arts/游戏指南/实机截图/v3/食物商店.png"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":1.0,"alt":"食物商店中商品价格、购买按钮和当前余额","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"profession_gallery","match":"六职业使用真实水墨立绘","topic_id":"professions","group_id":"overview","provider":"static","paths":["res://arts/素材合集/sprite及立绘/水墨风格立绘/美食博主.png","res://arts/素材合集/sprite及立绘/水墨风格立绘/魔术博主.png","res://arts/素材合集/sprite及立绘/水墨风格立绘/探险博主.png","res://arts/素材合集/sprite及立绘/水墨风格立绘/商业博主.png","res://arts/素材合集/sprite及立绘/水墨风格立绘/旅行博主.png","res://arts/素材合集/sprite及立绘/水墨风格立绘/生活博主.png"],"captions":["美食博主","魔术博主","探险博主","商业博主","旅行博主","生活博主"],"layout":"gallery","fit":"contain","min_item_width":420,"target_width_ratio":1.0,"max_columns":2,"alt":"六种职业的角色立绘","dynamic_kind":"","dynamic_id":"","requirements":[]},
+    {"id":"achievement_claim_flow","match":"公共机制页固定使用成就牌背","topic_id":"achievements","group_id":"claiming","provider":"dynamic","paths":["res://arts/成就卡/成就卡（牌背）.png"],"layout":"sequence","fit":"contain","min_item_width":300,"target_width_ratio":1.0,"alt":"成就从公共目标进入玩家成就区","dynamic_kind":"achievements","dynamic_id":"achievement_claim_flow","requirements":[]},
+    {"id":"score_breakdown","match":"真实计分详情弹窗全宽展示","topic_id":"scoring_victory","group_id":"overview","provider":"dynamic","paths":["res://arts/游戏指南/实机截图/v1/计分详情.png"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":1.0,"alt":"计分详情中的各项分数与总分","dynamic_kind":"guide_capture","dynamic_id":"score_breakdown","requirements":[]},
+    {"id":"discovery_compendium_preview","match":"探索图鉴截取同一分类","topic_id":"controls_compendium","group_id":"discovery_compendium","provider":"dynamic","paths":["res://arts/食物牌/食物牌（牌背）.jpg","res://arts/事件卡/事件牌（牌背）.png","res://arts/成就卡/成就卡（牌背）.png"],"captions":["食物","事件","成就"],"layout":"gallery","fit":"contain","min_item_width":320,"target_width_ratio":1.0,"max_columns":3,"alt":"已发现与未发现的探索图鉴卡位","dynamic_kind":"compendium_preview","dynamic_id":"discovery_compendium","requirements":[]}
+  ]
+}

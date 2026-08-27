@@ -418,6 +418,37 @@ func test_game_guide_locks_background_and_restores_the_entry_focus() -> void:
 	assert_true(home.is_interaction_enabled())
 
 
+func test_f1_opens_the_guide_from_the_main_menu_and_restores_focus() -> void:
+	_menu.call(&"show_screen", &"home", false)
+	await get_tree().process_frame
+	var home := _get_screen(&"home")
+	var rules_button := _find_button(home, "游戏说明")
+	assert_not_null(rules_button)
+	rules_button.grab_focus()
+	await _send_ui_action(&"guide_toggle")
+	var guide := _menu.call(&"get_game_guide") as DigitalGameGuide
+	assert_true(guide.is_guide_open(), "指南标注 F1 随时查看，主菜单也必须响应")
+	if not guide.is_guide_open():
+		return
+	assert_eq(guide.get("_context").source, GuideOpenContext.Source.MAIN_MENU)
+	guide.close_guide(false)
+	await get_tree().process_frame
+	assert_same(get_viewport().gui_get_focus_owner(), rules_button)
+
+
+func test_loading_lock_rejects_guide_modal_and_keeps_the_session_handoff_atomic() -> void:
+	_make_live_draft_valid()
+	var launcher := FakeSessionLauncher.new()
+	_menu.call(&"set_session_launcher", launcher)
+	assert_true(bool(_menu.call(&"request_start_once")))
+	assert_eq(_menu.call(&"get_current_screen"), &"loading")
+	assert_false(bool(_menu.call(&"open_game_guide")), "加载锁定后不得再叠加指南模态")
+	await _send_ui_action(&"guide_toggle")
+	var guide := _menu.call(&"get_game_guide") as DigitalGameGuide
+	assert_false(guide.is_guide_open())
+	assert_true(bool(_menu.get("_start_locked")))
+
+
 func test_rapid_screen_changes_leave_focus_only_on_the_visible_page() -> void:
 	var resting_positions: Dictionary[StringName, Vector2] = {}
 	for screen_name: StringName in STABLE_SCREENS:
@@ -552,7 +583,9 @@ func test_loading_renders_before_prepare_and_prepare_failure_returns_to_roster()
 	assert_eq(_menu.call(&"get_current_screen"), &"loading")
 	await get_tree().process_frame
 	assert_eq(launcher.prepare_calls, 0, "加载页至少应先完成一帧")
-	await get_tree().create_timer(0.32, true, false, true).timeout
+	assert_true(await _wait_until(func() -> bool:
+		return launcher.prepare_calls == 1 and _menu.call(&"get_current_screen") == &"roster"
+	), "加载失败回滚不得依赖固定动画时长")
 
 	assert_eq(launcher.prepare_calls, 1)
 	assert_gte(launcher.prepare_frame - request_frame, 2)
@@ -570,7 +603,9 @@ func test_successful_loading_submission_is_emitted_once_and_stays_locked_for_sce
 	watch_signals(_menu)
 
 	assert_true(bool(_menu.call(&"request_start_once")))
-	await get_tree().create_timer(0.32, true, false, true).timeout
+	assert_true(await _wait_until(func() -> bool:
+		return launcher.scene_calls == 1
+	), "会话交接不得依赖固定动画时长")
 
 	assert_eq(launcher.prepare_calls, 1)
 	assert_eq(launcher.scene_calls, 1)
@@ -747,6 +782,15 @@ func _send_ui_action(action: StringName) -> void:
 	released.pressed = false
 	Input.parse_input_event(released)
 	await get_tree().process_frame
+
+
+func _wait_until(predicate: Callable, max_seconds: float = 1.0) -> bool:
+	var deadline := Time.get_ticks_msec() + int(max_seconds * 1000.0)
+	while Time.get_ticks_msec() <= deadline:
+		if predicate.call():
+			return true
+		await get_tree().process_frame
+	return bool(predicate.call())
 
 
 func _has_focusable_descendant(root: Node) -> bool:

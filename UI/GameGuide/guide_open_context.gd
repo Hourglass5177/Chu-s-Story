@@ -15,6 +15,7 @@ enum Source {
 
 var source: Source = Source.MAIN_MENU
 var topic_id: StringName = &"guide_home"
+var section_id: StringName = &""
 var object_kind: StringName = &""
 var object_id: StringName = &""
 var return_focus: WeakRef = null
@@ -27,10 +28,12 @@ func _init(
 	p_topic_id: StringName = &"guide_home",
 	p_object_kind: StringName = &"",
 	p_object_id: StringName = &"",
-	p_return_focus: Control = null
+	p_return_focus: Control = null,
+	p_section_id: StringName = &""
 ) -> void:
 	source = p_source
 	topic_id = p_topic_id
+	section_id = p_section_id
 	object_kind = p_object_kind
 	object_id = p_object_id
 	return_focus = weakref(p_return_focus) if p_return_focus != null else null
