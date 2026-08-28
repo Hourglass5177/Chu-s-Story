@@ -947,7 +947,7 @@ func _swap_player_positions(first: PlayerClass, second: PlayerClass) -> void:
 
 func _non_national_feiyi(player: PlayerClass) -> Array[非遗牌]:
 	var result: Array[非遗牌] = []
-	for card: 非遗牌 in player.非遗牌手牌:
+	for card: 非遗牌 in ResourceManager.get_effective_feiyi_cards(player):
 		if card.category != 非遗牌.CardCategory.国家级非遗:
 			result.append(card)
 	return result
@@ -1014,7 +1014,7 @@ func _eligible_response_cards(target: PlayerClass, effect_kind: StringName) -> A
 		elif event_card.event_id == &"yi_hua_jie_mu" and has_redirect_target:
 			cards.append(event_card)
 	if effect_kind in [&"event", &"food"]:
-		for feiyi: 非遗牌 in target.非遗牌手牌:
+		for feiyi: 非遗牌 in ResourceManager.get_effective_feiyi_cards(target):
 			if feiyi.category == 非遗牌.CardCategory.神话传说:
 				cards.append(feiyi)
 	return cards
@@ -1315,15 +1315,19 @@ func _event_wen_hua_xin_feng(source: PlayerClass) -> void:
 	var resolution_context := _current_resolution_context
 	var players := _alive_players()
 	var maximum := 0
+	var effective_cards_by_player: Dictionary[PlayerClass, Array] = {}
 	for player: PlayerClass in players:
-		maximum = maxi(maximum, player.非遗牌手牌.size())
+		var effective_cards: Array[非遗牌] = ResourceManager.get_effective_feiyi_cards(player)
+		effective_cards_by_player[player] = effective_cards
+		maximum = maxi(maximum, effective_cards.size())
 	for player: PlayerClass in players:
-		if player.非遗牌手牌.size() == maximum:
+		var effective_cards: Array = effective_cards_by_player.get(player, [])
+		if effective_cards.size() == maximum:
 			await _resolve_incoming_effect(source, player, &"event", "文化新风：非遗牌数量最多奖励", _apply_money.bind(100, "事件：文化新风"))
 			if _is_resolution_context_cancelled(resolution_context):
 				return
 		var has_national := false
-		for card: 非遗牌 in player.非遗牌手牌:
+		for card: 非遗牌 in effective_cards:
 			if card.category == 非遗牌.CardCategory.国家级非遗:
 				has_national = true
 				break
@@ -1737,7 +1741,7 @@ func _event_tong_xing_feng_cai(source: PlayerClass) -> void:
 
 func _event_guo_bao_hu_hang() -> void:
 	for player: PlayerClass in _alive_players():
-		for card: 非遗牌 in player.非遗牌手牌:
+		for card: 非遗牌 in ResourceManager.get_effective_feiyi_cards(player):
 			if card.category == 非遗牌.CardCategory.国家级非遗:
 				add_status(player, &"free_move_phases", 2, "国宝护航")
 				break

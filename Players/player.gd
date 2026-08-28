@@ -434,7 +434,7 @@ func move_along_path(path_pixels: Array[Vector2], total_cost: int, target_grid_p
 	var movement_turn_epoch: int = TurnManager.get_turn_epoch()
 	var movement_origin: Vector3i = now_pos
 	if not 武术拳法已生效:
-		for card in 非遗牌手牌:
+		for card: 非遗牌 in ResourceManager.get_effective_feiyi_cards(self):
 			if card.category == 非遗牌.CardCategory.武术拳法:
 				total_cost = maxi(total_cost-1, 0)
 				武术拳法已生效 = true

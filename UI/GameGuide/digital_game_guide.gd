@@ -5,8 +5,9 @@ signal guide_opened(context: GuideOpenContext)
 signal guide_closed(context: GuideOpenContext)
 signal topic_opened(topic_id: StringName)
 signal ui_feedback_requested(cue: StringName)
+signal replay_requested(task_id: StringName)
 
-enum ViewMode { HOME, TOPIC, RULES_INDEX, COMPENDIUM, ENTRY }
+enum ViewMode { HOME, TOPIC, RULES_INDEX, COMPENDIUM, ENTRY, MINIGAME_GALLERY }
 
 const PAGE_SIZE: int = 12
 const COMPENDIUM_KINDS: Array[StringName] = [
@@ -33,9 +34,11 @@ const KIND_BACKS: Dictionary = {
 }
 const GUIDE_FEIYI_DETAIL_SCRIPT := preload("res://UI/GameGuide/components/guide_feiyi_detail.gd")
 const FEIYI_DETAIL_CONTENT_SOURCE := preload("res://UI/Shared/feiyi_detail_content.gd")
+const MINIGAME_GALLERY_SCENE := preload("res://UI/GameGuide/components/minigame_gallery.tscn")
 
 static var _last_read_topic_id: StringName = &""
 static var _reading_history: Array[StringName] = []
+static var _developer_view_enabled: bool = false
 
 @onready var _safe_area: MarginContainer = %SafeArea
 @onready var _frame: PanelContainer = %Frame
@@ -55,6 +58,7 @@ static var _reading_history: Array[StringName] = []
 @onready var _quick_button: Button = %QuickButton
 @onready var _rules_button: Button = %RulesButton
 @onready var _compendium_button: Button = %CompendiumButton
+@onready var _minigame_button: Button = %MinigameButton
 @onready var _continue_button: Button = %ContinueButton
 @onready var _context_button: Button = %ContextButton
 @onready var _footer_line: HSeparator = %FooterLine
@@ -124,6 +128,7 @@ func _ready() -> void:
 	_quick_button.pressed.connect(func() -> void: _open_topic_by_index(&"quick", 0))
 	_rules_button.pressed.connect(_render_rules_index)
 	_compendium_button.pressed.connect(func() -> void: _render_compendium(_compendium_kind, 0))
+	_minigame_button.pressed.connect(_render_minigame_gallery)
 	_continue_button.pressed.connect(_continue_reading)
 	_context_button.pressed.connect(_open_context_topic)
 	_drawer_button.pressed.connect(_toggle_drawer)
@@ -142,6 +147,7 @@ func open_guide(context: GuideOpenContext = null, animated: bool = true) -> bool
 	if _opened and not _closing:
 		if context != null:
 			_context = context
+			_sync_context_navigation_visibility()
 			_open_context_destination()
 		return true
 	_lifecycle_serial += 1
@@ -153,8 +159,9 @@ func open_guide(context: GuideOpenContext = null, animated: bool = true) -> bool
 		_direction_navigation_engaged = false
 		_left_pointer_button_held = false
 		_context = context if context != null else GuideOpenContext.new()
+		_sync_developer_view_label()
 		_continue_button.visible = not _last_read_topic_id.is_empty() and _catalog.has_topic(_last_read_topic_id)
-		_context_button.visible = _context.source != GuideOpenContext.Source.MAIN_MENU
+		_sync_context_navigation_visibility()
 		_open_context_destination()
 		_focus_after_enter = true
 		var animate_reopen := _should_animate(animated)
@@ -162,6 +169,7 @@ func open_guide(context: GuideOpenContext = null, animated: bool = true) -> bool
 		guide_opened.emit(_context)
 		return true
 	_context = context if context != null else GuideOpenContext.new()
+	_sync_developer_view_label()
 	_turn_modal_lease = TurnManager.acquire_modal(
 		&"digital_game_guide",
 		TurnManager.ModalResumePolicy.RESUME_REMAINING,
@@ -174,7 +182,7 @@ func open_guide(context: GuideOpenContext = null, animated: bool = true) -> bool
 	_left_pointer_button_held = false
 	_disable_background_focus()
 	_continue_button.visible = not _last_read_topic_id.is_empty() and _catalog.has_topic(_last_read_topic_id)
-	_context_button.visible = _context.source != GuideOpenContext.Source.MAIN_MENU
+	_sync_context_navigation_visibility()
 	_open_context_destination()
 	_focus_after_enter = true
 	var animate_open := _should_animate(animated)
@@ -233,6 +241,22 @@ func navigate_to(topic_id: StringName, section_id: StringName = &"") -> bool:
 	return true
 
 
+func is_developer_view_enabled() -> bool:
+	return _developer_view_enabled
+
+
+func is_main_menu_context() -> bool:
+	return _is_main_menu_context()
+
+
+func open_minigame_gallery() -> bool:
+	return _render_minigame_gallery()
+
+
+func restore_current_focus() -> void:
+	_request_current_view_focus()
+
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("guide_toggle"):
 		if is_guide_open():
@@ -250,6 +274,14 @@ func _input(event: InputEvent) -> void:
 		else:
 			return
 		get_viewport().set_input_as_handled()
+		return
+	if _is_developer_view_shortcut(event):
+		if OS.is_debug_build() and is_guide_open():
+			_developer_view_enabled = not _developer_view_enabled
+			_sync_developer_view_label()
+			_refresh_current_view_for_developer_toggle()
+			ui_feedback_requested.emit(&"developer_view_enabled" if _developer_view_enabled else &"player_view_enabled")
+			get_viewport().set_input_as_handled()
 		return
 	if not is_guide_open():
 		return
@@ -362,7 +394,8 @@ func _render_home() -> void:
 	_clear_article()
 	_render_home_intro()
 	var cards := GridContainer.new()
-	cards.columns = 1 if _narrow_layout else 3
+	var main_menu_context := _is_main_menu_context()
+	cards.columns = 1 if _narrow_layout else (2 if main_menu_context else 3)
 	cards.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	cards.add_theme_constant_override("h_separation", 18)
 	cards.add_theme_constant_override("v_separation", 18)
@@ -370,6 +403,8 @@ func _render_home() -> void:
 	_home_primary_button = _add_home_card(cards, "快速上手", "六步了解核心玩法", "res://arts/地图/地图完整版.png", func() -> void: _open_topic_by_index(&"quick", 0))
 	_add_home_card(cards, "规则介绍", "按主题查找正式裁定", "res://arts/事件卡/事件牌（牌背）.png", _render_rules_index)
 	_add_home_card(cards, "探索图鉴", "翻开旅途中见过的内容", "res://arts/成就卡/成就卡（牌背）.png", func() -> void: _render_compendium(_compendium_kind, 0))
+	if main_menu_context:
+		_add_home_card(cards, "小游戏图鉴", "重温已经解锁的传承任务", "res://arts/任务卡/任务卡（牌背）.png", _render_minigame_gallery)
 	var quick_actions := HFlowContainer.new()
 	quick_actions.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	quick_actions.add_theme_constant_override("h_separation", 14)
@@ -738,7 +773,7 @@ func _resolve_dynamic_media(entry: Dictionary) -> Array[Dictionary]:
 	for pair: Dictionary in kinds_and_ids:
 		var kind := StringName(pair.get("kind", &""))
 		var entry_id := StringName(pair.get("id", &""))
-		var discovered := DiscoveryManager.is_discovered(kind, entry_id)
+		var discovered := _is_discovered_for_view(kind, entry_id)
 		var texture: Texture2D = null
 		var caption := "未发现"
 		if discovered:
@@ -771,10 +806,10 @@ func _resolve_food_level_media(entry: Dictionary) -> Array[Dictionary]:
 			if resource is 食物牌 and (resource as 食物牌).food_type == food_type:
 				selected_id = food_id
 				selected_card = resource as 食物牌
-				if DiscoveryManager.is_discovered(DiscoveryManager.KIND_FOOD, food_id):
+				if _is_discovered_for_view(DiscoveryManager.KIND_FOOD, food_id):
 					break
 		var level_name: String = String(食物牌.FoodType.find_key(food_type))
-		var discovered := selected_card != null and DiscoveryManager.is_discovered(DiscoveryManager.KIND_FOOD, selected_id)
+		var discovered := selected_card != null and _is_discovered_for_view(DiscoveryManager.KIND_FOOD, selected_id)
 		var texture := selected_card.image_of_front if discovered else _get_card_back(DiscoveryManager.KIND_FOOD)
 		if texture == null:
 			continue
@@ -808,7 +843,7 @@ func _requirements_met(requirements: Variant) -> bool:
 		var entry_id := StringName(str(requirement.get("id", "")))
 		if not [DiscoveryManager.KIND_FOOD, DiscoveryManager.KIND_EVENT, DiscoveryManager.KIND_ACHIEVEMENT].has(kind):
 			return false
-		if entry_id.is_empty() or not DiscoveryManager.is_discovered(kind, entry_id):
+		if entry_id.is_empty() or not _is_discovered_for_view(kind, entry_id):
 			return false
 	return true
 
@@ -918,6 +953,79 @@ func _first_matching_group(topic: ManualTopic, query: String) -> StringName:
 	return StringName(groups[0].get("id", &"")) if not groups.is_empty() else &""
 
 
+func _render_minigame_gallery() -> bool:
+	# DigitalGameGuide 同时被主菜单和局内 HUD 实例化。入口隐藏只是第一层；
+	# 这里再次校验来源，防止局内脚本或测试误调用私有渲染函数而越过边界。
+	if not _is_main_menu_context():
+		return false
+	_close_drawer_for_destination()
+	_set_primary_navigation_enabled(true)
+	_view_mode = ViewMode.MINIGAME_GALLERY
+	_update_sidebar_selection(&"minigame")
+	_current_topic_id = &""
+	_current_section_id = &""
+	_current_group_id = &""
+	_current_entry_kind = &""
+	_current_entry_id = &""
+	_group_navigation.visible = false
+	_search.visible = false
+	_breadcrumb.text = "小游戏图鉴"
+	_update_back_button()
+	_set_footer_visible(false)
+	_clear_article()
+	_add_label(_article, "小游戏图鉴", 50, FrontendStyle.BROWN_DARK)
+	var progress := _discovery_progress_for_view(DiscoveryManager.KIND_MINIGAME)
+	_add_label(
+		_article,
+		"已解锁 %d / %d" % [int(progress.discovered), int(progress.total)],
+		31,
+		FrontendStyle.ORANGE
+	)
+	if _developer_view_enabled:
+		_add_wrapped_label(_article, "开发者视图 · 本次进程内显示全部小游戏，不会写入图鉴存档。", 25, FrontendStyle.BROWN_MUTED)
+	var gallery := MINIGAME_GALLERY_SCENE.instantiate() as GuideMinigameGallery
+	gallery.name = "MinigameGallery"
+	_article.add_child(gallery)
+	gallery.replay_requested.connect(func(task_id: StringName) -> void:
+		if _is_main_menu_context() and _is_discovered_for_view(DiscoveryManager.KIND_MINIGAME, task_id):
+			replay_requested.emit(task_id)
+	)
+	gallery.configure(_get_minigame_gallery_entries(), _narrow_layout)
+	_request_current_view_focus()
+	return true
+
+
+func _get_minigame_gallery_entries() -> Array[Dictionary]:
+	var entries: Array[Dictionary] = []
+	for task_id: StringName in DiscoveryManager.get_known_ids(DiscoveryManager.KIND_MINIGAME):
+		var unlocked := _is_discovered_for_view(DiscoveryManager.KIND_MINIGAME, task_id)
+		var entry: Dictionary = {
+			"unlocked": unlocked,
+		}
+		# 锁定槽位绝不能读取或携带 Definition 的名称、说明和辅助文本。
+		# 这样即使展示组件或无障碍树之后改动，也没有可被意外泄露的数据。
+		if unlocked:
+			entry["task_id"] = task_id
+			var definition := _find_card_resource(DiscoveryManager.KIND_MINIGAME, task_id) as HeritageTaskDefinition
+			if definition != null:
+				entry["thumbnail"] = definition.gallery_thumbnail
+				entry["heritage_name"] = definition.heritage_name
+				entry["task_name"] = definition.display_name
+				entry["goal"] = definition.hook
+				entry["operation"] = _minigame_operation_text(definition)
+		entries.append(entry)
+	return entries
+
+
+func _minigame_operation_text(definition: HeritageTaskDefinition) -> String:
+	if definition == null:
+		return ""
+	var control_hint := definition.control_hint.strip_edges()
+	if not control_hint.is_empty():
+		return control_hint
+	return "；".join(definition.instructions)
+
+
 func _render_compendium(kind: StringName, page: int) -> void:
 	_close_drawer_for_destination()
 	_set_primary_navigation_enabled(true)
@@ -940,7 +1048,7 @@ func _render_compendium(kind: StringName, page: int) -> void:
 	_update_back_button()
 	_clear_article()
 	_add_label(_article, "探索图鉴", 50, FrontendStyle.BROWN_DARK)
-	var progress := DiscoveryManager.get_discovery_progress(kind)
+	var progress := _discovery_progress_for_view(kind)
 	var progress_text := "%s · 已发现 %d / %d" % [KIND_LABELS[kind], progress.discovered, progress.total]
 	if _has_active_compendium_filters(kind):
 		progress_text += " · 当前 %d 张" % ids.size()
@@ -1163,7 +1271,7 @@ func _compendium_column_count() -> int:
 
 
 func _add_compendium_card(parent: Control, kind: StringName, entry_id: StringName, local_index: int) -> void:
-	var discovered := DiscoveryManager.is_discovered(kind, entry_id)
+	var discovered := _is_discovered_for_view(kind, entry_id)
 	var panel := PanelContainer.new()
 	panel.name = "Entry%d" % local_index if discovered else "LockedEntry%d" % local_index
 	panel.custom_minimum_size = Vector2(280, 470)
@@ -1183,7 +1291,14 @@ func _add_compendium_card(parent: Control, kind: StringName, entry_id: StringNam
 	if discovered:
 		var data := _get_entry_data(kind, entry_id)
 		title = String(data.get("title", "未命名"))
-		image.texture = data.get("texture") as Texture2D
+		if _achievement_needs_generated_front(kind, entry_id):
+			# “游山玩水”目前没有正式牌面，Resource 为了不虚构美术而让
+			# front/back 共用统一牌背。图鉴已解锁时不能继续把牌背伪装成
+			# 正面，因此只在指南中生成一张明确的信息正面。
+			image.visible = false
+			_add_generated_achievement_front(content, entry_id, Vector2(260, 360))
+		else:
+			image.texture = data.get("texture") as Texture2D
 	else:
 		image.texture = _get_card_back(kind)
 	var title_label := _add_label(content, title, 30, FrontendStyle.BROWN_DARK if discovered else FrontendStyle.BROWN_MUTED)
@@ -1216,7 +1331,7 @@ func _card_overlay_style(background: Color, border: Color, width: int) -> StyleB
 
 
 func _render_entry_detail(kind: StringName, entry_id: StringName) -> bool:
-	if not DiscoveryManager.is_discovered(kind, entry_id):
+	if not _is_discovered_for_view(kind, entry_id):
 		return false
 	var data := _get_entry_data(kind, entry_id)
 	if data.is_empty():
@@ -1260,7 +1375,12 @@ func _render_feiyi_entry_content(entry_id: StringName) -> void:
 func _render_generic_entry_content(kind: StringName, entry_id: StringName, data: Dictionary) -> void:
 	_add_label(_article, String(data.get("title", "")), 50, FrontendStyle.BROWN_DARK)
 	var texture := data.get("texture") as Texture2D
-	if texture != null:
+	if _achievement_needs_generated_front(kind, entry_id):
+		var center := CenterContainer.new()
+		center.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_article.add_child(center)
+		_add_generated_achievement_front(center, entry_id, Vector2(430, 590))
+	elif texture != null:
 		var media := ManualMediaBlock.new()
 		_article.add_child(media)
 		media.media_preview_requested.connect(_open_media_preview)
@@ -1277,11 +1397,59 @@ func _render_generic_entry_content(kind: StringName, entry_id: StringName, data:
 		_add_wrapped_label(_article, description, 30, FrontendStyle.BROWN)
 
 
+func _achievement_needs_generated_front(kind: StringName, entry_id: StringName) -> bool:
+	if kind != DiscoveryManager.KIND_ACHIEVEMENT:
+		return false
+	var resource := _find_card_resource(kind, entry_id)
+	if not resource is 成就牌:
+		return false
+	var card := resource as 成就牌
+	if card.image_of_front == null:
+		return true
+	if card.image_of_front == card.image_of_back:
+		return true
+	var front_path := card.image_of_front.resource_path
+	var back_path := card.image_of_back.resource_path if card.image_of_back != null else ""
+	return not front_path.is_empty() and front_path == back_path
+
+
+func _add_generated_achievement_front(parent: Control, entry_id: StringName, minimum_size: Vector2) -> Control:
+	var resource := _find_card_resource(DiscoveryManager.KIND_ACHIEVEMENT, entry_id)
+	if not resource is 成就牌:
+		return null
+	var card := resource as 成就牌
+	var front := PanelContainer.new()
+	front.name = "GeneratedAchievementFront"
+	front.custom_minimum_size = minimum_size
+	front.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	front.set_meta(&"achievement_id", entry_id)
+	front.set_meta(&"guide_generated_front", true)
+	front.add_theme_stylebox_override(
+		"panel",
+		FrontendStyle.make_box(Color("#FFF4D8"), FrontendStyle.GOLD, 4, 18, Vector4(20, 24, 20, 24))
+	)
+	parent.add_child(front)
+
+	var content := VBoxContainer.new()
+	content.alignment = BoxContainer.ALIGNMENT_CENTER
+	content.add_theme_constant_override("separation", 18)
+	front.add_child(content)
+	var eyebrow := _add_label(content, "成就", 24, FrontendStyle.ORANGE)
+	eyebrow.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var name_label := _add_wrapped_label(content, card.card_name, 38, FrontendStyle.BROWN_DARK)
+	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var rule := _add_wrapped_label(content, card.description, 25, FrontendStyle.BROWN)
+	rule.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var score := _add_label(content, "+%d分" % card.score_value, 34, FrontendStyle.ORANGE)
+	score.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	return front
+
+
 func _render_discovered_search_results(query: String) -> void:
 	var normalized := query.strip_edges().to_lower()
 	for kind: StringName in COMPENDIUM_KINDS:
 		for entry_id: StringName in DiscoveryManager.get_known_ids(kind):
-			if not DiscoveryManager.is_discovered(kind, entry_id):
+			if not _is_discovered_for_view(kind, entry_id):
 				continue
 			var data := _get_entry_data(kind, entry_id)
 			var searchable := "%s\n%s" % [data.get("title", ""), data.get("description", "")]
@@ -1359,6 +1527,8 @@ func _ensure_resource_path_index(kind: StringName) -> void:
 			indexed_id = (resource as 事件牌).event_id
 		elif kind == DiscoveryManager.KIND_ACHIEVEMENT and resource is 成就牌:
 			indexed_id = (resource as 成就牌).achievement_id
+		elif kind == DiscoveryManager.KIND_MINIGAME and resource is HeritageTaskDefinition:
+			indexed_id = (resource as HeritageTaskDefinition).task_id
 		if not indexed_id.is_empty():
 			_resource_path_index["%s:%s" % [kind, indexed_id]] = path
 
@@ -1543,7 +1713,7 @@ func _handle_back() -> void:
 				_render_rules_index(_last_rules_query)
 			else:
 				_render_home()
-		ViewMode.RULES_INDEX, ViewMode.COMPENDIUM:
+		ViewMode.RULES_INDEX, ViewMode.COMPENDIUM, ViewMode.MINIGAME_GALLERY:
 			_render_home()
 
 
@@ -1566,7 +1736,7 @@ func _toggle_drawer() -> void:
 
 
 func _grab_first_sidebar_focus() -> void:
-	for button: Button in [_home_button, _quick_button, _rules_button, _compendium_button, _continue_button, _context_button]:
+	for button: Button in [_home_button, _quick_button, _rules_button, _compendium_button, _minigame_button, _continue_button, _context_button]:
 		if button.visible and not button.disabled and button.focus_mode != Control.FOCUS_NONE:
 			button.grab_focus()
 			return
@@ -1579,12 +1749,14 @@ func _update_sidebar_selection(selected: StringName) -> void:
 		&"quick": _quick_button,
 		&"rules": _rules_button,
 		&"compendium": _compendium_button,
+		&"minigame": _minigame_button,
 	}
 	var labels: Dictionary = {
 		&"home": "指南首页",
 		&"quick": "快速上手",
 		&"rules": "规则介绍",
 		&"compendium": "探索图鉴",
+		&"minigame": "小游戏图鉴",
 	}
 	for key: StringName in buttons:
 		var button := buttons[key] as Button
@@ -1657,6 +1829,8 @@ func _rebuild_current_view_after_breakpoint() -> void:
 			_render_compendium(_compendium_kind, _compendium_page)
 		ViewMode.ENTRY:
 			_render_entry_detail(_current_entry_kind, _current_entry_id)
+		ViewMode.MINIGAME_GALLERY:
+			_render_minigame_gallery()
 
 
 func _add_home_card(parent: Control, title: String, subtitle: String, media_path: String, callback: Callable) -> Button:
@@ -1961,8 +2135,14 @@ func _on_media_preview_root_input(event: InputEvent) -> void:
 
 
 func _set_primary_navigation_enabled(enabled: bool) -> void:
-	for button: Button in [_home_button, _quick_button, _rules_button, _compendium_button, _continue_button, _context_button]:
+	for button: Button in [_home_button, _quick_button, _rules_button, _compendium_button, _minigame_button, _continue_button, _context_button]:
 		button.disabled = not enabled
+
+
+func _sync_context_navigation_visibility() -> void:
+	var main_menu_context := _is_main_menu_context()
+	_minigame_button.visible = main_menu_context
+	_context_button.visible = not main_menu_context
 
 
 func _render_catalog_error(detail: String = "") -> void:
@@ -2014,3 +2194,54 @@ func _ensure_input_action() -> void:
 		var gamepad_back := InputEventJoypadButton.new()
 		gamepad_back.button_index = JOY_BUTTON_BACK
 		InputMap.action_add_event("guide_toggle", gamepad_back)
+
+
+func _is_main_menu_context() -> bool:
+	return _context != null and _context.source == GuideOpenContext.Source.MAIN_MENU
+
+
+func _is_discovered_for_view(kind: StringName, entry_id: StringName) -> bool:
+	if _developer_view_enabled and DiscoveryManager.get_known_ids(kind).has(entry_id):
+		return true
+	return DiscoveryManager.is_discovered(kind, entry_id)
+
+
+func _discovery_progress_for_view(kind: StringName) -> Dictionary:
+	if _developer_view_enabled:
+		var total := DiscoveryManager.get_known_ids(kind).size()
+		return {"discovered": total, "total": total}
+	return DiscoveryManager.get_discovery_progress(kind)
+
+
+func _is_developer_view_shortcut(event: InputEvent) -> bool:
+	if not event is InputEventKey:
+		return false
+	var key := event as InputEventKey
+	if not key.pressed or key.echo:
+		return false
+	var is_d := key.keycode == KEY_D or key.physical_keycode == KEY_D
+	return is_d and key.ctrl_pressed and key.shift_pressed and not key.alt_pressed and not key.meta_pressed
+
+
+func _sync_developer_view_label() -> void:
+	if not is_instance_valid(_brand):
+		return
+	_brand.text = "楚物志 · 游戏指南 · 开发者视图" if _developer_view_enabled else "楚物志 · 游戏指南"
+
+
+func _refresh_current_view_for_developer_toggle() -> void:
+	match _view_mode:
+		ViewMode.HOME:
+			_render_home()
+		ViewMode.TOPIC:
+			_render_topic(_current_topic_id, _current_section_id)
+		ViewMode.RULES_INDEX:
+			_render_rules_index(_last_rules_query, false)
+		ViewMode.COMPENDIUM:
+			_render_compendium(_compendium_kind, _compendium_page)
+		ViewMode.ENTRY:
+			if not _render_entry_detail(_current_entry_kind, _current_entry_id):
+				_render_compendium(_current_entry_kind, _page_for_entry(_current_entry_kind, _current_entry_id))
+		ViewMode.MINIGAME_GALLERY:
+			if not _render_minigame_gallery():
+				_render_home()

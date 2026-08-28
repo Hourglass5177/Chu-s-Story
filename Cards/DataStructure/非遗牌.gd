@@ -47,7 +47,7 @@ const TYPE_TO_EFFECT = {
 	CardCategory.神话传说:"任意时候可以消耗此牌。当其他玩家的食物牌或事件牌效果即将作用于你时，可无效化自己受到的部分，或将该部分转移给另一名合法玩家。",
 	CardCategory.节日庆典:"获得此牌时，立即获得 3 点精力点数和 500 积分点。",
 	CardCategory.武术拳法:"拥有此牌时，移动阶段第一次移动时消耗精力点数-1（不重复叠加）。",
-	CardCategory.国家级非遗:"国家级非遗，此牌的基础分数为 5 。"
+	CardCategory.国家级非遗:"完成传承任务后，此牌解锁5分并参与组合计分。"
 }
 # 导出变量
 @export var region: REGION = REGION.鄂州 # 地域 [cite: 1]
@@ -60,6 +60,9 @@ const TYPE_TO_EFFECT = {
 		emit_changed()
 @export var rarity: int = 1 # 稀有度 [cite: 1]
 @export var base_score: int = 0
+## 国家级非遗对应的传承任务。非国家级牌保持为空。
+## 运行时是否完成任务由 HeritageTaskManager 保存，不写回共享 Resource。
+@export var inheritance_task_id: StringName = &""
 
 enum EffectType { 
 	NONE, 

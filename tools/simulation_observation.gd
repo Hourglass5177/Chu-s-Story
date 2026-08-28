@@ -33,7 +33,7 @@ static func capture(player: PlayerClass) -> SimulationObservation:
 			"position": candidate.now_pos,
 			"food_count": candidate.食物牌手牌.size(),
 			"event_count": candidate.事件牌手牌.size(),
-			"feiyi_count": candidate.非遗牌手牌.size(),
+			"feiyi_count": ResourceManager.get_effective_feiyi_cards(candidate).size(),
 		})
 	for card: 食物牌 in player.食物牌手牌:
 		observation.own_food_ids.append(card.food_id)

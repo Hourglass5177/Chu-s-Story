@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/xia_lian_dan_shu.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://d2q3k4t8ddwhb" path="res://arts/非遗卡牌/荆门/夏氏炼丹术及其祖传秘方.jpg" id="3"]
+[resource]
+script = ExtResource("1")
+task_id = &"xia_lian_dan_shu"
+display_name = "守炉候火"
+heritage_name = "夏氏炼丹术及其祖传秘方"
+region = "荆门"
+hook = "按住升温，松开回落，让火候留在移动区间内。"
+instructions = PackedStringArray("按住升温", "松开降温", "守住最佳火候带")
+control_hint = "按住鼠标左键、确认键或手柄主键"
+cultural_link = "只表现持续照看火候的判断，不提供真实配方或制剂步骤。"
+duration_seconds = 23.0
+task_scene = ExtResource("2")
+gallery_thumbnail = ExtResource("3")
+prototype_asset_note = "暂用对应国家级非遗牌正面。"
+future_asset_slot = "独立任务缩略图（640×400）。"

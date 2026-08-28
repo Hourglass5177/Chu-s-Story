@@ -45,7 +45,7 @@ func _show_reachable_areas() -> void:
 	var available_energy: int = current_player.current_energy
 	available_energy += FoodManager.get_preview_movement_discount(current_player)
 	if not current_player.武术拳法已生效:
-		for card:非遗牌 in current_player.非遗牌手牌:
+		for card: 非遗牌 in ResourceManager.get_effective_feiyi_cards(current_player):
 			if card.category == 非遗牌.CardCategory.武术拳法:
 				available_energy += 1
 				break
@@ -265,7 +265,7 @@ func _on_section_clicked(target_section: MapSection) -> String:
 	if EventManager.has_free_move_this_phase(current_player) or (EventManager.can_ignore_special_terrain_this_phase(current_player) and target_section.landform != MapSection.LandForm.平原):
 		max_energy = 1 << 30
 	if not current_player.武术拳法已生效:
-		for card:非遗牌 in current_player.非遗牌手牌:
+		for card: 非遗牌 in ResourceManager.get_effective_feiyi_cards(current_player):
 			if card.category == 非遗牌.CardCategory.武术拳法:
 				max_energy += 1
 				break

@@ -46,15 +46,21 @@ class FakeSessionLauncher:
 
 var _menu: Control
 var _paused_backup := false
+var _discovery_backup: Dictionary
+var _known_discovery_ids_backup: Dictionary
 
 
 func before_each() -> void:
 	_paused_backup = get_tree().paused
+	_discovery_backup = DiscoveryManager._discovered.duplicate(true)
+	_known_discovery_ids_backup = DiscoveryManager._known_ids.duplicate(true)
 	_menu = MAIN_MENU_SCENE.instantiate() as Control
 	add_child_autofree(_menu)
 
 
 func after_each() -> void:
+	DiscoveryManager._discovered = _discovery_backup.duplicate(true)
+	DiscoveryManager._known_ids = _known_discovery_ids_backup.duplicate(true)
 	get_tree().paused = _paused_backup
 
 
@@ -425,6 +431,34 @@ func test_f1_opens_the_guide_from_the_main_menu_and_restores_focus() -> void:
 	guide.close_guide(false)
 	await get_tree().process_frame
 	assert_same(get_viewport().gui_get_focus_owner(), rules_button)
+
+
+func test_main_menu_replays_an_unlocked_minigame_in_practice_mode() -> void:
+	const TASK_ID := &"ezhou_diaohua_jianzhi"
+	DiscoveryManager.clear_runtime_cache()
+	assert_true(DiscoveryManager.get_known_ids(DiscoveryManager.KIND_MINIGAME).has(TASK_ID))
+	assert_true(DiscoveryManager.record_discovery(DiscoveryManager.KIND_MINIGAME, TASK_ID))
+	assert_true(bool(_menu.call(&"open_game_guide")))
+	var guide := _menu.call(&"get_game_guide") as DigitalGameGuide
+	assert_true(guide.open_minigame_gallery())
+	watch_signals(_menu)
+	guide.replay_requested.emit(TASK_ID)
+	assert_signal_emitted_with_parameters(_menu, "minigame_practice_requested", [TASK_ID])
+	var host := _menu.get("_practice_host") as HeritageTaskHost
+	assert_not_null(host)
+	if host == null:
+		return
+	assert_not_null(host.context)
+	assert_true(host.context.practice_mode)
+	assert_eq(host.context.task_id, TASK_ID)
+	assert_false(guide.is_interaction_enabled(), "练习层打开时，下面的指南不得继续接收操作")
+	host.task_finished.emit(HeritageTaskResult.cancelled(TASK_ID, &"test_result"))
+	assert_same(_menu.get("_practice_host"), host, "结算完成后应保留 Host 的结果页")
+	assert_false(guide.is_interaction_enabled(), "结果页返回前不得恢复下层指南")
+	host.emit_signal(&"return_requested")
+	assert_null(_menu.get("_practice_host"))
+	assert_true(guide.is_guide_open())
+	assert_true(guide.is_interaction_enabled())
 
 
 func test_loading_lock_rejects_guide_modal_and_keeps_the_session_handoff_atomic() -> void:

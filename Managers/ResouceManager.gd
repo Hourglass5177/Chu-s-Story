@@ -172,6 +172,9 @@ func remove_feiyi_card(player: PlayerClass, card: 非遗牌, refresh: bool = tru
 func transfer_feiyi_card(source: PlayerClass, target: PlayerClass, card: 非遗牌) -> bool:
 	if source == null or target == null or source == target or card == null:
 		return false
+	# 国家级非遗绑定持有者的传承进度，不能通过赠送或事件转移绕开任务。
+	if card.category == 非遗牌.CardCategory.国家级非遗:
+		return false
 	if not source.非遗牌手牌.has(card) or target.非遗牌手牌.has(card):
 		return false
 	source.非遗牌手牌.erase(card)
@@ -183,6 +186,9 @@ func transfer_feiyi_card(source: PlayerClass, target: PlayerClass, card: 非遗�
 
 func swap_feiyi_cards(first: PlayerClass, first_card: 非遗牌, second: PlayerClass, second_card: 非遗牌) -> bool:
 	if first == null or second == null or first == second or first_card == null or second_card == null:
+		return false
+	if first_card.category == 非遗牌.CardCategory.国家级非遗 \
+			or second_card.category == 非遗牌.CardCategory.国家级非遗:
 		return false
 	if not first.非遗牌手牌.has(first_card) or not second.非遗牌手牌.has(second_card):
 		return false
@@ -254,6 +260,34 @@ func _emit_feiyi_hand_changed(player: PlayerClass, refresh: bool) -> void:
 			and TurnManager.players[TurnManager.now_player_index] == player:
 		hud.refresh_feiyi_list(player)
 		hud._update_player_stats(player)
+
+## 统一的“当前可参与计分与组合”判定。国家级非遗在传承完成前视为无效牌；
+## 其他类别始终有效。精简测试树没有 HeritageTaskManager 时也必须保持锁定默认值。
+func is_effective_feiyi_card(card: 非遗牌) -> bool:
+	if card == null:
+		return false
+	if card.category != 非遗牌.CardCategory.国家级非遗:
+		return true
+	var task_manager: Node = get_node_or_null("/root/HeritageTaskManager")
+	return task_manager != null \
+		and task_manager.has_method("is_effective_card") \
+		and bool(task_manager.call("is_effective_card", card))
+
+
+func get_effective_feiyi_cards(player: PlayerClass) -> Array[非遗牌]:
+	var effective_cards: Array[非遗牌] = []
+	if player == null:
+		return effective_cards
+	for card: 非遗牌 in player.非遗牌手牌:
+		if is_effective_feiyi_card(card):
+			effective_cards.append(card)
+	return effective_cards
+
+
+## 传承状态变化不会改变手牌数组，但会改变计分与牌面显示。
+func refresh_feiyi_effective_state(player: PlayerClass) -> void:
+	if player != null:
+		_emit_feiyi_hand_changed(player, true)
 
 # 2. 发牌中心
 func draw_card(player: PlayerClass, deck_type: 卡牌基类.CardType, region: MapSection.REGION, collection_cost: int = 1, reveal_feiyi_detail: bool = false) -> 卡牌基类:
@@ -584,7 +618,7 @@ func get_score_breakdown(player: PlayerClass) -> Dictionary:
 	var region_combo_bonus: int = 0
 	var region_completion_bonus: int = 0
 	var region_annotations: Dictionary = {}
-	for card:非遗牌 in player.非遗牌手牌:
+	for card:非遗牌 in get_effective_feiyi_cards(player):
 		base_score += card.base_score
 		
 		categories[card.category] = categories.get(card.category, 0) + 1

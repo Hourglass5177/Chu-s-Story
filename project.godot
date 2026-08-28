@@ -11,11 +11,15 @@ config_version=5
 [application]
 
 config/name="楚物志"
-config/version="beta 0.4.0"
+config/version="beta 0.5.0"
 run/main_scene="uid://bpggqwetns32d"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/image="uid://conv21o25i7e4"
 config/icon="uid://gforsoryh67s"
+
+[audio]
+
+driver/enable_input=true
 
 [autoload]
 
@@ -23,6 +27,7 @@ GameManager="*res://Managers/game_manager.tscn"
 ResourceManager="*res://Managers/ResouceManager.gd"
 TurnManager="*res://Managers/turn_manager.tscn"
 InteractionCoordinator="*res://Managers/interaction_coordinator.gd"
+HeritageTaskManager="*res://Managers/heritage_task_manager.gd"
 ProfessionManager="*res://Managers/profession_manager.gd"
 EventManager="*res://Managers/event_manager.gd"
 MarketManager="*res://Managers/market_manager.gd"

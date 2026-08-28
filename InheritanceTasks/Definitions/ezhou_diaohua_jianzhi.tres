@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/ezhou_diaohua_jianzhi.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://8icmwjyyn7em" path="res://arts/非遗卡牌/鄂州/鄂州雕花剪纸.jpg" id="3"]
+[resource]
+script = ExtResource("1")
+task_id = &"ezhou_diaohua_jianzhi"
+display_name = "一刀成花"
+heritage_name = "鄂州雕花剪纸"
+region = "鄂州"
+hook = "沿连续刻线行刀，不要切断纸桥。"
+instructions = PackedStringArray("按住行刀", "沿刻线走到终点")
+control_hint = "鼠标拖动；方向键/摇杆移动，按住确认键行刀"
+cultural_link = "以刻刀在蜡盘上雕刻叠纸，一次留下多张相同花样。"
+duration_seconds = 25.0
+task_scene = ExtResource("2")
+gallery_thumbnail = ExtResource("3")
+prototype_asset_note = "暂用对应国家级非遗牌正面。"
+future_asset_slot = "独立任务缩略图（640×400）。"

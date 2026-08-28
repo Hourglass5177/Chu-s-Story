@@ -1,7 +1,7 @@
 {
   "schema_version": 3,
   "source_path": "res://docs/游戏规则与引导（重写稿）.md",
-  "source_sha256": "44ed7dbbb0aadc317790cffc966984459fac51135ed4557542c69b954378f295",
+  "source_sha256": "e2df24a3ceb89793fda674ea463faa423eabdf213e87e7ab7550c84f6ece6324",
   "media_source_path": "res://docs/游戏指南结构与配图（数字版）.json",
   "media_source_sha256": "220abd8cd8ed84ed252d6523930dfb9b17610722733c725833887c91151daeb3",
   "home": {
@@ -192,7 +192,7 @@
             },
             {
               "id": "quick_feiyi.card_core.bullets.01.item.03",
-              "text": "**基础分：** 只要牌仍在手中，它的基础分就会计入总分。基础分为0的牌仍可组成类别和地域奖励。",
+              "text": "**基础分：** 除未传承的国家级非遗外，只要牌仍在手中，它的基础分就会计入总分。非国家级中基础分为0的牌仍可组成类别和地域奖励。",
               "requirements": []
             },
             {
@@ -221,7 +221,7 @@
           "id": "quick_feiyi.card_core.paragraph.05",
           "group_id": "card_core",
           "type": "paragraph",
-          "text": "国家级非遗具有极高的单张分数，但不能使用、卖出或被夺走，也没有特殊效果。",
+          "text": "国家级非遗刚获得时，分数位置显示“？”，需要完成牌面详情中的传承任务才能解锁。未传承时按0分计算，也不参加任何类别、地域、成就或事件条件；成功传承后，这张牌恢复5分并重新进入全部收藏判定。国家级非遗不能卖出、购买、赠送、偷取、交换或转移。",
           "requirements": []
         },
         {
@@ -2620,7 +2620,10 @@
           "section_ids": [
             "feiyi_cards.national_feiyi.heading.01",
             "feiyi_cards.national_feiyi.paragraph.01",
-            "feiyi_cards.national_feiyi.paragraph.02"
+            "feiyi_cards.national_feiyi.paragraph.02",
+            "feiyi_cards.national_feiyi.bullets.01",
+            "feiyi_cards.national_feiyi.paragraph.03",
+            "feiyi_cards.national_feiyi.paragraph.04"
           ]
         },
         {
@@ -2725,7 +2728,7 @@
               "cells": [
                 "国家级非遗",
                 "5",
-                "正常收集与计分，当前不能使用"
+                "完成对应传承任务后，恢复5分与全部组合资格"
               ],
               "requirements": []
             }
@@ -2879,14 +2882,51 @@
           "id": "feiyi_cards.national_feiyi.paragraph.01",
           "group_id": "national_feiyi",
           "type": "paragraph",
-          "text": "国家级非遗的单张基础分为5，没有特殊效果。",
+          "text": "国家级非遗的单张基础分为5，但刚抽到时尚未传承。分数圆标会显示“？”，这张牌暂时按0分计算，也不参与类别组合、地域组合、持牌数量、成就和事件条件。它仍会显示在手牌区，玩家可以照常阅读文化介绍。",
           "requirements": []
         },
         {
           "id": "feiyi_cards.national_feiyi.paragraph.02",
           "group_id": "national_feiyi",
           "type": "paragraph",
-          "text": "国家级非遗不会进入研究所，不能购买或出售。若某个效果要求“弃任意手牌”并弃掉国家级非遗，该牌直接离开本局。",
+          "text": "持牌玩家在自己的行动阶段打开详情，点击“传承任务”并支付1点精力，就会进入这张牌对应的小游戏。同一张牌每个行动阶段只能尝试一次：",
+          "requirements": []
+        },
+        {
+          "id": "feiyi_cards.national_feiyi.bullets.01",
+          "group_id": "national_feiyi",
+          "type": "bullets",
+          "items": [
+            {
+              "id": "feiyi_cards.national_feiyi.bullets.01.item.01",
+              "text": "成功后，这张牌在本局永久恢复5分，并重新参与所有非遗牌条件。",
+              "requirements": []
+            },
+            {
+              "id": "feiyi_cards.national_feiyi.bullets.01.item.02",
+              "text": "普通失败或主动退出都会消耗精力，也会用掉本行动阶段的尝试次数；下一个自己的行动阶段可以再试。",
+              "requirements": []
+            },
+            {
+              "id": "feiyi_cards.national_feiyi.bullets.01.item.03",
+              "text": "场景无法加载、麦克风不可用、权限被拒绝或评分模块异常属于技术故障。系统会退还精力并撤销本次尝试记录。",
+              "requirements": []
+            }
+          ],
+          "requirements": []
+        },
+        {
+          "id": "feiyi_cards.national_feiyi.paragraph.03",
+          "group_id": "national_feiyi",
+          "type": "paragraph",
+          "text": "精力恰好为1时也可以开始任务。精力扣至0不会立刻淘汰玩家，仍要等完整回合结束时按统一规则判断。",
+          "requirements": []
+        },
+        {
+          "id": "feiyi_cards.national_feiyi.paragraph.04",
+          "group_id": "national_feiyi",
+          "type": "paragraph",
+          "text": "国家级非遗不会进入研究所，不能购买、出售、赠送、偷取、交换或转移。若某个效果要求“弃任意手牌”并弃掉国家级非遗，该牌直接离开本局。",
           "requirements": []
         },
         {
@@ -2921,12 +2961,12 @@
             },
             {
               "id": "feiyi_cards.hand_transfer.bullets.01.item.03",
-              "text": "赠送、偷取或交换只改变持有者，不经过研究所。",
+              "text": "赠送、偷取或交换只适用于非国家级牌，只改变持有者，不经过研究所。",
               "requirements": []
             },
             {
               "id": "feiyi_cards.hand_transfer.bullets.01.item.04",
-              "text": "国家级牌不能进入研究所。",
+              "text": "国家级牌不能进入研究所，也不能在玩家之间转移。",
               "requirements": []
             }
           ],
@@ -2936,7 +2976,7 @@
           "id": "feiyi_cards.hand_transfer.paragraph.02",
           "group_id": "hand_transfer",
           "type": "paragraph",
-          "text": "因此，手里的一张0分牌也可能很重要。它可能正好维持“五种不同类别”、某座城市的第五张牌，或一个类别的集齐条件。出手前可以先点开总分查看明细。",
+          "text": "因此，手里一张基础分为0的非国家级牌也可能很重要。它可能正好维持“五种不同类别”、某座城市的第五张牌，或一个类别的集齐条件。出手前可以先点开总分查看明细。未传承国家级非遗不适用这一条。",
           "requirements": []
         }
       ]
@@ -5146,7 +5186,7 @@
       "id": "scoring_victory",
       "category": "rules",
       "title": "十二、分数怎样计算",
-      "summary": "总分只看结算当下仍在玩家手里的非遗牌与仍然持有的成就。积分点、精力、食物牌和事件牌本身不直接计分。",
+      "summary": "总分只看结算当下仍在玩家手里的有效非遗牌与仍然持有的成就。未传承国家级非遗虽然留在手牌区，但按0分计算，也不参加后面的类别与地域条件。积分点、精力、食物牌和事件牌本身不直接计分。",
       "summary_id": "scoring_victory.overview.paragraph.01",
       "summary_requirements": [],
       "groups": [
@@ -5168,7 +5208,8 @@
             "scoring_victory.base_score.heading.01",
             "scoring_victory.base_score.paragraph.01",
             "scoring_victory.base_score.table.01",
-            "scoring_victory.base_score.paragraph.02"
+            "scoring_victory.base_score.paragraph.02",
+            "scoring_victory.base_score.paragraph.03"
           ]
         },
         {
@@ -5206,7 +5247,8 @@
             "scoring_victory.region_score.bullets.01",
             "scoring_victory.region_score.paragraph.02",
             "scoring_victory.region_score.paragraph.03",
-            "scoring_victory.region_score.paragraph.04"
+            "scoring_victory.region_score.paragraph.04",
+            "scoring_victory.region_score.paragraph.05"
           ]
         },
         {
@@ -5294,7 +5336,7 @@
           "id": "scoring_victory.base_score.paragraph.01",
           "group_id": "base_score",
           "type": "paragraph",
-          "text": "把当前持有的每张非遗基础分相加：",
+          "text": "把当前持有的每张有效非遗基础分相加：",
           "requirements": []
         },
         {
@@ -5373,7 +5415,14 @@
           "id": "scoring_victory.base_score.paragraph.02",
           "group_id": "base_score",
           "type": "paragraph",
-          "text": "0分牌仍然可以组成类别、地域与集齐奖励，也可能带来强力能力。基础分低，不等于这张牌没有价值。",
+          "text": "表中的国家级基础分只在传承成功后生效。未传承时，牌面显示“？”，这一张在计分明细中按0处理。",
+          "requirements": []
+        },
+        {
+          "id": "scoring_victory.base_score.paragraph.03",
+          "group_id": "base_score",
+          "type": "paragraph",
+          "text": "非国家级中基础分为0的牌仍然可以组成类别、地域与集齐奖励，也可能带来强力能力。未传承国家级非遗是唯一例外：在完成传承前，它不参加这些条件。",
           "requirements": []
         },
         {
@@ -5467,7 +5516,7 @@
           "id": "scoring_victory.category_quantity.paragraph.04",
           "group_id": "category_quantity",
           "type": "paragraph",
-          "text": "此外，只要手里至少出现五种不同类别，再加5分。这里说的是“持有五种类别”，不是“集齐五个完整类别”。国家级非遗也算一种类别。",
+          "text": "此外，只要手里至少出现五种不同类别，再加5分。这里说的是“持有五种类别”，不是“集齐五个完整类别”。已经传承的国家级非遗算一种类别，未传承牌不算。",
           "requirements": []
         },
         {
@@ -5489,7 +5538,7 @@
           "id": "scoring_victory.category_completion.paragraph.02",
           "group_id": "category_completion",
           "type": "paragraph",
-          "text": "“全部”按当前版本实际资源计算，不沿用旧说明书中的固定张数，也不会把不存在的空类别当作自动集齐。",
+          "text": "“全部”按当前版本实际资源计算，不沿用旧说明书中的固定张数，也不会把不存在的空类别当作自动集齐。集齐国家级类别时，玩家不仅要持有全部实际国家级非遗，还要让这些牌全部完成传承。",
           "requirements": []
         },
         {
@@ -5546,18 +5595,25 @@
           "id": "scoring_victory.region_score.paragraph.02",
           "group_id": "region_score",
           "type": "paragraph",
-          "text": "另有一项江汉三市组合：同时持有潜江、天门、仙桃至少各一张，加2分。这个奖励只算一次，不会随三市卡牌数量重复增加。",
+          "text": "这里的张数与集齐条件都只统计有效非遗。某座城市的国家级非遗尚未传承时，它不会增加该市张数，也不能帮助玩家集齐该市。",
           "requirements": []
         },
         {
           "id": "scoring_victory.region_score.paragraph.03",
           "group_id": "region_score",
           "type": "paragraph",
-          "text": "三座城市各自的集齐奖励仍可与江汉三市叠加。例如当前版本中，若某位玩家集齐潜江、天门与仙桃三市，三座城市各加2分，再获得江汉三市2分，地域部分共加8分。",
+          "text": "另有一项江汉三市组合：同时持有潜江、天门、仙桃至少各一张，加2分。这个奖励只算一次，不会随三市卡牌数量重复增加。",
           "requirements": []
         },
         {
           "id": "scoring_victory.region_score.paragraph.04",
+          "group_id": "region_score",
+          "type": "paragraph",
+          "text": "三座城市各自的集齐奖励仍可与江汉三市叠加。例如当前版本中，若某位玩家集齐潜江、天门与仙桃三市，三座城市各加2分，再获得江汉三市2分，地域部分共加8分。",
+          "requirements": []
+        },
+        {
+          "id": "scoring_victory.region_score.paragraph.05",
           "group_id": "region_score",
           "type": "paragraph",
           "text": "右侧手牌区会按城市整理卡牌。某项地域组合达成时，对应城市下方会写出加分来源。",
@@ -6540,6 +6596,8 @@
             "controls_compendium.discovery_compendium.bullets.01",
             "controls_compendium.discovery_compendium.paragraph.02",
             "controls_compendium.discovery_compendium.paragraph.03",
+            "controls_compendium.discovery_compendium.paragraph.04",
+            "controls_compendium.discovery_compendium.paragraph.05",
             "controls_compendium.discovery_compendium.media.discovery_compendium_preview"
           ]
         }
@@ -6712,6 +6770,20 @@
           "group_id": "discovery_compendium",
           "type": "paragraph",
           "text": "图鉴只记录见过什么，不会给单局增加分数，也不会跨局保留成就或手牌。",
+          "requirements": []
+        },
+        {
+          "id": "controls_compendium.discovery_compendium.paragraph.04",
+          "group_id": "discovery_compendium",
+          "type": "paragraph",
+          "text": "从主菜单打开游戏指南时，探索图鉴还会显示“小游戏图鉴”。某项传承任务第一次真正进入小游戏场景后便永久解锁，成功、失败或主动退出都不影响发现结果。已解锁任务可以在这里练习；练习不读取对局数据，也不会改变手牌、精力、分数、成就或发现进度。",
+          "requirements": []
+        },
+        {
+          "id": "controls_compendium.discovery_compendium.paragraph.05",
+          "group_id": "discovery_compendium",
+          "type": "paragraph",
+          "text": "局内打开的指南不显示小游戏图鉴。未发现任务只显示“未发现”，不会公开对应非遗、任务名称、玩法或关键词。",
           "requirements": []
         },
         {

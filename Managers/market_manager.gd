@@ -53,7 +53,7 @@ func get_tradable_cards(player: PlayerClass) -> Array[非遗牌]:
 	var cards: Array[非遗牌] = []
 	if player == null:
 		return cards
-	for card: 非遗牌 in player.非遗牌手牌:
+	for card: 非遗牌 in ResourceManager.get_effective_feiyi_cards(player):
 		if is_tradable(card):
 			cards.append(card)
 	return cards

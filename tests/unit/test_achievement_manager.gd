@@ -2,9 +2,13 @@ extends GutTest
 
 var _first: PlayerClass
 var _second: PlayerClass
+var _required_feiyi_backup: Dictionary
+var _required_scenery_backup: Dictionary
 
 
 func before_each() -> void:
+	_required_feiyi_backup = AchievementManager._required_shennongjia_feiyi_paths.duplicate(true)
+	_required_scenery_backup = AchievementManager._required_shennongjia_scenery_ids.duplicate(true)
 	_first = PlayerClass.new()
 	_first.player_name = "成就测试P1"
 	_second = PlayerClass.new()
@@ -14,6 +18,8 @@ func before_each() -> void:
 
 
 func after_each() -> void:
+	AchievementManager._required_shennongjia_feiyi_paths = _required_feiyi_backup.duplicate(true)
+	AchievementManager._required_shennongjia_scenery_ids = _required_scenery_backup.duplicate(true)
 	AchievementManager.reset_for_new_game([])
 	_first.free()
 	_second.free()
@@ -170,7 +176,9 @@ func test_wildman_uses_actual_shennongjia_resources_and_scenery() -> void:
 	assert_gt(shennongjia_scenery.size(), 0)
 	for section: MapSection in shennongjia_scenery:
 		AchievementManager.record_scenery_check_in(_first, section)
-	assert_eq(AchievementManager.get_achievement_owner(AchievementManager.ID_YE_REN), _first)
+	assert_null(AchievementManager.get_achievement_owner(AchievementManager.ID_YE_REN), "未传承国家级牌不得完成收藏成就")
+	var progress := AchievementManager.get_progress(_first, AchievementManager.ID_YE_REN)
+	assert_lt(int(progress[&"feiyi_current"]), int(progress[&"feiyi_target"]))
 	map_root.free()
 
 
@@ -179,12 +187,11 @@ func test_central_hand_transfer_signal_rechecks_wildman_without_manual_evaluatio
 	for file_name: String in DirAccess.get_files_at(AchievementManager.SHENNONGJIA_FEIYI_DIR):
 		if file_name.ends_with(".tres"):
 			var card := ResourceLoader.load(AchievementManager.SHENNONGJIA_FEIYI_DIR.path_join(file_name)) as 非遗牌
-			if card != null:
+			if card != null and card.category != 非遗牌.CardCategory.国家级非遗:
 				required_cards.append(card)
 	assert_gt(required_cards.size(), 0)
 	var final_card: 非遗牌 = required_cards.pop_back()
-	for card: 非遗牌 in required_cards:
-		ResourceManager.add_feiyi_card(_first, card, false)
+	AchievementManager._required_shennongjia_feiyi_paths = {final_card.resource_path: true}
 	ResourceManager.add_feiyi_card(_second, final_card, false)
 	var packed_map := ResourceLoader.load(AchievementManager.MAP_SCENE_PATH) as PackedScene
 	var map_root: Node = packed_map.instantiate()

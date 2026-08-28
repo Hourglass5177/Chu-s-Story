@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/ti_qin_xi.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://tq33p7el7fng" path="res://arts/非遗卡牌/咸宁/提琴戏.jpg" id="3"]
+[resource]
+script = ExtResource("1")
+task_id = &"ti_qin_xi"
+display_name = "顺弓成句"
+heritage_name = "提琴戏"
+region = "咸宁"
+hook = "左右运弓，让弓毛标记始终跟住旋律带。"
+instructions = PackedStringArray("观察旋律带", "持续左右跟随")
+control_hint = "左右键/摇杆移动；鼠标横向移动"
+cultural_link = "抓住提琴作为主奏乐器的运弓动作，不把它误称为二胡。"
+duration_seconds = 25.0
+task_scene = ExtResource("2")
+gallery_thumbnail = ExtResource("3")
+prototype_asset_note = "暂用对应国家级非遗牌正面。"
+future_asset_slot = "独立任务缩略图（640×400）。"

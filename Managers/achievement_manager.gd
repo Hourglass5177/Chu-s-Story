@@ -390,7 +390,7 @@ func _section_id(section: MapSection) -> StringName:
 
 func _count_owned_required_shennongjia_feiyi(player: PlayerClass) -> int:
 	var owned_paths: Dictionary[String, bool] = {}
-	for card: 非遗牌 in player.非遗牌手牌:
+	for card: 非遗牌 in ResourceManager.get_effective_feiyi_cards(player):
 		if card != null and _required_shennongjia_feiyi_paths.has(card.resource_path):
 			owned_paths[card.resource_path] = true
 	return owned_paths.size()

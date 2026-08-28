@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/xingshan_min_ge.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://dmorlbwfcy7vl" path="res://arts/非遗卡牌/宜昌/兴山民歌.jpg" id="3"]
+[resource]
+script = ExtResource("1")
+task_id = &"xingshan_min_ge"
+display_name = "山谷寻音"
+heritage_name = "兴山民歌"
+region = "宜昌"
+hook = "上下调音，让两道回声波纹重合后确认。"
+instructions = PackedStringArray("上下寻找目标音位", "波纹重合时确认", "三音找到两音")
+control_hint = "上下键/摇杆调音，确认键提交；鼠标纵向拖动并松开"
+cultural_link = "寻找兴山民歌独特音位，而不是把它纠正到常规音高。"
+duration_seconds = 25.0
+task_scene = ExtResource("2")
+gallery_thumbnail = ExtResource("3")
+prototype_asset_note = "暂用对应国家级非遗牌正面。"
+future_asset_slot = "独立任务缩略图（640×400）。"

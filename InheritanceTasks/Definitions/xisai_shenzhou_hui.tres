@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/xisai_shenzhou_hui.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://cir3j1tv6pljh" path="res://arts/非遗卡牌/黄石/西塞神舟会.jpg" id="3"]
+[resource]
+script = ExtResource("1")
+task_id = &"xisai_shenzhou_hui"
+display_name = "送舟入江"
+heritage_name = "西塞神舟会"
+region = "黄石"
+hook = "抵消水流，让神舟稳稳留在中央水道。"
+instructions = PackedStringArray("观察水势", "反向操舵回正")
+control_hint = "左右键/摇杆操舵；鼠标左右拖动"
+cultural_link = "取神舟会最后的送舟仪式，不把它做成龙舟竞速。"
+duration_seconds = 25.0
+task_scene = ExtResource("2")
+gallery_thumbnail = ExtResource("3")
+prototype_asset_note = "暂用对应国家级非遗牌正面。"
+future_asset_slot = "独立任务缩略图（640×400）。"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/gu_pen_ge.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://bb7fxibaemdbw" path="res://arts/非遗卡牌/荆州/鼓盆歌.jpg" id="3"]
+[resource]
+script = ExtResource("1")
+task_id = &"gu_pen_ge"
+display_name = "听鼓接板"
+heritage_name = "鼓盆歌"
+region = "荆州"
+hook = "听清短鼓板，再用同一个按键原样敲回。"
+instructions = PackedStringArray("先听一遍", "随后复现停顿与落点", "三轮通过两轮")
+control_hint = "鼠标左键、确认键或手柄主键敲击"
+cultural_link = "对应自击鼓板演唱与听众呼应的关系。"
+duration_seconds = 25.0
+task_scene = ExtResource("2")
+gallery_thumbnail = ExtResource("3")
+prototype_asset_note = "暂用对应国家级非遗牌正面。"
+future_asset_slot = "独立任务缩略图（640×400）。"

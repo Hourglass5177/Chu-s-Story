@@ -238,7 +238,7 @@ func _event_specific_contract_holds(event_id: StringName) -> bool:
 		&"yi_chuang_zeng_shou":
 			return _players[0].current_energy == 8
 		&"wen_hua_xin_feng":
-			return _players[0].current_money == 1200
+			return _players[0].current_money == 1100 and _players[1].current_money == 1100
 		&"jiao_huan_ren_sheng":
 			return _players[0].player_types == PlayerClass.PlayerCharacter.商业博主
 		&"mei_mei_yu_gong":
@@ -282,7 +282,9 @@ func _event_specific_contract_holds(event_id: StringName) -> bool:
 		&"yi_jing_xun_zong":
 			return _players[0].now_pos == Vector3i(3, -3, 0) and _players[0].current_energy == 3 and _players[0].非遗牌手牌.size() == 4
 		&"guo_bao_hu_hang":
-			return EventManager.get_status_remaining(_players[0], &"free_move_phases") == 2 and EventManager.get_status_remaining(_players[1], &"free_move_phases") == 0
+			return _players.all(func(player: PlayerClass) -> bool:
+				return EventManager.get_status_remaining(player, &"free_move_phases") == 0
+			)
 		&"jin_ji_bi_xian":
 			return EventManager.is_loss_immune(_players[0])
 		&"bai_ge_zheng_liu":

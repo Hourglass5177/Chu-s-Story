@@ -56,7 +56,8 @@ func test_left_navigation_and_home_entry_cards_accept_real_pointer_clicks() -> v
 	var quick_button := _guide.get_node("%QuickButton") as Button
 	var rules_button := _guide.get_node("%RulesButton") as Button
 	var compendium_button := _guide.get_node("%CompendiumButton") as Button
-	for button: Button in [home_button, quick_button, rules_button, compendium_button]:
+	var minigame_button := _guide.get_node("%MinigameButton") as Button
+	for button: Button in [home_button, quick_button, rules_button, compendium_button, minigame_button]:
 		assert_not_null(button)
 		assert_true(button.is_visible_in_tree(), "%s 必须实际可见" % button.name)
 		assert_false(button.disabled, "%s 不得被禁用" % button.name)
@@ -77,6 +78,11 @@ func test_left_navigation_and_home_entry_cards_accept_real_pointer_clicks() -> v
 	assert_signal_emitted(compendium_button, "pressed")
 	assert_eq(int(_guide.get("_view_mode")), DigitalGameGuide.ViewMode.COMPENDIUM)
 
+	watch_signals(minigame_button)
+	assert_true(await _real_pointer_click(minigame_button))
+	assert_signal_emitted(minigame_button, "pressed")
+	assert_eq(int(_guide.get("_view_mode")), DigitalGameGuide.ViewMode.MINIGAME_GALLERY)
+
 	watch_signals(home_button)
 	assert_true(await _real_pointer_click(home_button))
 	assert_signal_emitted(home_button, "pressed")
@@ -85,6 +91,7 @@ func test_left_navigation_and_home_entry_cards_accept_real_pointer_clicks() -> v
 	var entry_expectations: Array[Dictionary] = [
 		{"prefix": "快速上手", "mode": DigitalGameGuide.ViewMode.TOPIC, "category": &"quick"},
 		{"prefix": "规则介绍", "mode": DigitalGameGuide.ViewMode.RULES_INDEX, "category": &""},
+		{"prefix": "小游戏图鉴", "mode": DigitalGameGuide.ViewMode.MINIGAME_GALLERY, "category": &""},
 		{"prefix": "探索图鉴", "mode": DigitalGameGuide.ViewMode.COMPENDIUM, "category": &""},
 	]
 	for expected: Dictionary in entry_expectations:

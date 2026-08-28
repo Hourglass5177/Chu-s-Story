@@ -101,6 +101,7 @@ func start_game(player_nodes: Array[PlayerClass]) -> void:
 	var achievement_manager: Node = get_node_or_null("/root/AchievementManager")
 	if achievement_manager != null and achievement_manager.has_method("reset_for_new_game"):
 		achievement_manager.call("reset_for_new_game", players)
+	HeritageTaskManager.reset_for_new_game(players)
 	ProfessionManager.apply_starting_bonuses()
 	now_turn_start()
 
@@ -640,6 +641,7 @@ func reset_session() -> void:
 	_movement_resume_time = 0.0
 	_last_game_result = null
 	target_score = SessionSetup.DEFAULT_TARGET_SCORE
+	HeritageTaskManager.reset_session()
 	ProfessionManager.reset_session()
 	map = null
 	hud = null

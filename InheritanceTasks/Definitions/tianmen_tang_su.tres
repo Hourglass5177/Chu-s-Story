@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/tianmen_tang_su.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://cyc4n7nc65wjy" path="res://arts/非遗卡牌/天门/天门糖塑.jpg" id="3"]
+[resource]
+script = ExtResource("1")
+task_id = &"tianmen_tang_su"
+display_name = "一口成形"
+heritage_name = "天门糖塑"
+region = "天门"
+hook = "按住送气，在糖坯进入金色轮廓时及时收住。"
+instructions = PackedStringArray("按住送气", "进入目标区后松开", "连续完成三段轮廓")
+control_hint = "按住并松开鼠标左键、确认键或手柄主键"
+cultural_link = "抓住吹塑成形这一鲜明动作，不呈现可照做的热糖工艺。"
+duration_seconds = 23.0
+task_scene = ExtResource("2")
+gallery_thumbnail = ExtResource("3")
+prototype_asset_note = "暂用对应国家级非遗牌正面。"
+future_asset_slot = "独立任务缩略图（640×400）。"

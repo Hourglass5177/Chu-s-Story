@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$GodotPath = $env:GODOT4_CONSOLE,
     [switch]$AllowOpenEditor,

@@ -11,7 +11,7 @@ func setup(data: 非遗牌):
 	# 设置牌面贴图
 	texture_normal = card_data.image_of_front
 	# 设置左上角分数
-	$ScoreBadge/BaseScore.text = str(card_data.base_score)
+	$ScoreBadge/BaseScore.text = str(HeritageTaskManager.get_display_score(card_data))
 	tooltip_text = card_data.card_name 
 	
 func _ready():

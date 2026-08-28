@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/tujia_saye_erhe.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://c7bdemgw0qehi" path="res://arts/非遗卡牌/宜昌/土家族撒叶儿嗬.jpg" id="3"]
+[resource]
+script = ExtResource("1")
+task_id = &"tujia_saye_erhe"
+display_name = "应鼓而舞"
+heritage_name = "土家族撒叶儿嗬"
+region = "宜昌"
+hook = "看清领舞方向，在应和拍踩下对应脚步。"
+instructions = PackedStringArray("观察方向", "在鼓点到来时应和")
+control_hint = "左、上/确认、右方向键；摇杆或点击屏幕左中右"
+cultural_link = "表现歌师击鼓叫歌、舞者随鼓应节的关系。"
+duration_seconds = 25.0
+task_scene = ExtResource("2")
+gallery_thumbnail = ExtResource("3")
+prototype_asset_note = "暂用对应国家级非遗牌正面。"
+future_asset_slot = "独立任务缩略图（640×400）。"

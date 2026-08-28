@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/yandi_shennong_chuanshuo.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://rlsmvgcqy0hv" path="res://arts/非遗卡牌/神农架/炎帝神农传说.jpg" id="3"]
+[resource]
+script = ExtResource("1")
+task_id = &"yandi_shennong_chuanshuo"
+display_name = "踏架登峰"
+heritage_name = "炎帝神农传说"
+region = "神农架"
+hook = "沿山石与木架向上，抵达最高的采药台。"
+instructions = PackedStringArray("左右移动", "跳过断崖", "跌落后从最近落脚点继续")
+control_hint = "方向键/摇杆移动，确认键跳跃；鼠标移动指向并点击跳跃"
+cultural_link = "以相传的架木攀缘为动作核心，不展示真实采药知识。"
+duration_seconds = 30.0
+task_scene = ExtResource("2")
+gallery_thumbnail = ExtResource("3")
+prototype_asset_note = "暂用对应国家级非遗牌正面。"
+future_asset_slot = "独立任务缩略图（640×400）。"

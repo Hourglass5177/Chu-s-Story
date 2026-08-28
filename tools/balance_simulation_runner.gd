@@ -185,7 +185,7 @@ func _choose_movement_target(player: PlayerClass, options: Array[MapSection]) ->
 			continue
 		var actual_cost := int(path.cost)
 		if not player.武术拳法已生效:
-			for card: 非遗牌 in player.非遗牌手牌:
+			for card: 非遗牌 in ResourceManager.get_effective_feiyi_cards(player):
 				if card.category == 非遗牌.CardCategory.武术拳法:
 					actual_cost = maxi(actual_cost - 1, 0)
 					break

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/xiabaoping_minjian_gushi.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://ctyl04kwrari2" path="res://arts/非遗卡牌/宜昌/下堡坪民间故事.jpg" id="3"]
+[resource]
+script = ExtResource("1")
+task_id = &"xiabaoping_minjian_gushi"
+display_name = "口耳相传"
+heritage_name = "下堡坪民间故事"
+region = "宜昌"
+hook = "记住故事图标出现的顺序，再原样传给下一位听众。"
+instructions = PackedStringArray("先看一串图标", "按原顺序复现", "三串通过两串")
+control_hint = "鼠标点击；方向键/摇杆移动选框，确认键选择"
+cultural_link = "不考陌生故事知识，只体验听住一段、再传下去。"
+duration_seconds = 30.0
+task_scene = ExtResource("2")
+gallery_thumbnail = ExtResource("3")
+prototype_asset_note = "暂用对应国家级非遗牌正面。"
+future_asset_slot = "独立任务缩略图（640×400）。"

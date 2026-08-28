@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/jingzhou_hua_gu_xi.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://bj01tcuiap85c" path="res://arts/非遗卡牌/仙桃/荆州花鼓戏.jpg" id="3"]
+[resource]
+script = ExtResource("1")
+task_id = &"jingzhou_hua_gu_xi"
+display_name = "一唱众和"
+heritage_name = "荆州花鼓戏"
+region = "仙桃"
+hook = "在唱句之后按住接入帮腔，并在句尾松开。"
+instructions = PackedStringArray("等待帮腔时窗", "按住接入", "句尾松开")
+control_hint = "按住并松开鼠标左键、确认键或手柄主键"
+cultural_link = "玩家站在众和的位置，体验一唱众和而非独自炫技。"
+duration_seconds = 25.0
+task_scene = ExtResource("2")
+gallery_thumbnail = ExtResource("3")
+prototype_asset_note = "暂用对应国家级非遗牌正面。"
+future_asset_slot = "独立任务缩略图（640×400）。"

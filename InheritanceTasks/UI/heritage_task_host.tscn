@@ -1,0 +1,294 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://InheritanceTasks/UI/heritage_task_host.gd" id="1_host"]
+
+[sub_resource type="StyleBoxFlat" id="StylePanel"]
+bg_color = Color(0.98, 0.91, 0.71, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.48, 0.25, 0.16, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleHeader"]
+bg_color = Color(0.36, 0.18, 0.13, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+
+[node name="HeritageTaskHost" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+script = ExtResource("1_host")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.08, 0.045, 0.03, 0.78)
+
+[node name="SafeMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = 28.0
+offset_right = -48.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="SafeMargin"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StylePanel")
+
+[node name="Layout" type="VBoxContainer" parent="SafeMargin/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Header" type="PanelContainer" parent="SafeMargin/Panel/Layout"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleHeader")
+
+[node name="HeaderRow" type="HBoxContainer" parent="SafeMargin/Panel/Layout/Header"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Titles" type="VBoxContainer" parent="SafeMargin/Panel/Layout/Header/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HeritageLabel" type="Label" parent="SafeMargin/Panel/Layout/Header/HeaderRow/Titles"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.77, 0.35, 1)
+theme_override_font_sizes/font_size = 21
+text = "非遗名称"
+
+[node name="TitleLabel" type="Label" parent="SafeMargin/Panel/Layout/Header/HeaderRow/Titles"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.96, 0.82, 1)
+theme_override_font_sizes/font_size = 34
+text = "传承任务"
+
+[node name="TimeLabel" type="Label" parent="SafeMargin/Panel/Layout/Header/HeaderRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.64, 1)
+theme_override_font_sizes/font_size = 26
+text = "25秒"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AbortButton" type="Button" parent="SafeMargin/Panel/Layout/Header/HeaderRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130, 60)
+layout_mode = 2
+focus_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "退出"
+
+[node name="PauseButton" type="Button" parent="SafeMargin/Panel/Layout/Header/HeaderRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130, 60)
+layout_mode = 2
+focus_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "暂停"
+
+[node name="TaskContainer" type="Control" parent="SafeMargin/Panel/Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(640, 320)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="Footer" type="VBoxContainer" parent="SafeMargin/Panel/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HookLabel" type="Label" parent="SafeMargin/Panel/Layout/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.27, 0.15, 0.11, 1)
+theme_override_font_sizes/font_size = 22
+text = "一句目标"
+horizontal_alignment = 1
+
+[node name="ControlLabel" type="Label" parent="SafeMargin/Panel/Layout/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.32, 0.24, 1)
+theme_override_font_sizes/font_size = 18
+text = "操作提示"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="SafeMargin/Panel/Layout/Footer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+show_percentage = false
+
+[node name="PausePanel" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.08, 0.045, 0.03, 0.82)
+
+[node name="Box" type="VBoxContainer" parent="PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -145.0
+offset_right = 220.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="PausePanel/Box"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.96, 0.82, 1)
+theme_override_font_sizes/font_size = 42
+text = "已暂停"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="PausePanel/Box"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "继续"
+
+[node name="PauseExitButton" type="Button" parent="PausePanel/Box"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "退出任务"
+
+[node name="ExitConfirm" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.08, 0.045, 0.03, 0.86)
+
+[node name="Box" type="VBoxContainer" parent="ExitConfirm"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -145.0
+offset_right = 280.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 18
+
+[node name="Label" type="Label" parent="ExitConfirm/Box"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.96, 0.82, 1)
+theme_override_font_sizes/font_size = 32
+text = "退出会消耗本次挑战机会。"
+horizontal_alignment = 1
+
+[node name="CancelExitButton" type="Button" parent="ExitConfirm/Box"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "继续挑战"
+
+[node name="ConfirmExitButton" type="Button" parent="ExitConfirm/Box"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "确认退出"
+
+[node name="ResultPanel" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.08, 0.045, 0.03, 0.84)
+
+[node name="Box" type="VBoxContainer" parent="ResultPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -390.0
+offset_top = -190.0
+offset_right = 390.0
+offset_bottom = 190.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 28
+
+[node name="ResultTitle" type="Label" parent="ResultPanel/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.77, 0.35, 1)
+theme_override_font_sizes/font_size = 52
+text = "传承完成"
+horizontal_alignment = 1
+
+[node name="ResultMessage" type="Label" parent="ResultPanel/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 0.96, 0.82, 1)
+theme_override_font_sizes/font_size = 28
+text = "任务结果"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ReturnButton" type="Button" parent="ResultPanel/Box"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "返回"

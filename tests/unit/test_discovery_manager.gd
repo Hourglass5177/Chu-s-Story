@@ -1,15 +1,35 @@
 extends GutTest
 
 const TEST_PATH := "user://discovery-test.cfg"
+const EXPECTED_MINIGAME_IDS: Array[StringName] = [
+	&"ezhou_diaohua_jianzhi",
+	&"huangmei_xi",
+	&"xisai_shenzhou_hui",
+	&"xia_lian_dan_shu",
+	&"gu_pen_ge",
+	&"yandi_shennong_chuanshuo",
+	&"tianmen_tang_su",
+	&"han_ju",
+	&"jingzhou_hua_gu_xi",
+	&"ti_qin_xi",
+	&"laohekou_si_xian",
+	&"dong_yong_chuanshuo",
+	&"tujia_saye_erhe",
+	&"xiabaoping_minjian_gushi",
+	&"xingshan_min_ge",
+]
 
 var _original_path: String
 var _original_discovered: Dictionary
+var _original_known_ids: Dictionary
 
 
 func before_each() -> void:
 	_original_path = DiscoveryManager._storage_path
 	_original_discovered = DiscoveryManager._discovered.duplicate(true)
+	_original_known_ids = DiscoveryManager._known_ids.duplicate(true)
 	_remove_test_file()
+	DiscoveryManager.clear_runtime_cache()
 	DiscoveryManager.configure_storage_path(TEST_PATH)
 
 
@@ -18,6 +38,7 @@ func after_each() -> void:
 	DiscoveryManager._storage_path = _original_path
 	DiscoveryManager._test_storage_enabled = false
 	DiscoveryManager._discovered = _original_discovered.duplicate(true)
+	DiscoveryManager._known_ids = _original_known_ids.duplicate(true)
 
 
 func test_public_kinds_are_open_and_hidden_kinds_start_locked() -> void:
@@ -27,7 +48,7 @@ func test_public_kinds_are_open_and_hidden_kinds_start_locked() -> void:
 		assert_true(DiscoveryManager.is_discovered(kind, ids[0]))
 		var progress := DiscoveryManager.get_discovery_progress(kind)
 		assert_eq(progress.discovered, progress.total)
-	for kind: StringName in [DiscoveryManager.KIND_FOOD, DiscoveryManager.KIND_EVENT, DiscoveryManager.KIND_ACHIEVEMENT]:
+	for kind: StringName in [DiscoveryManager.KIND_FOOD, DiscoveryManager.KIND_EVENT, DiscoveryManager.KIND_ACHIEVEMENT, DiscoveryManager.KIND_MINIGAME]:
 		var ids := DiscoveryManager.get_known_ids(kind)
 		assert_gt(ids.size(), 0)
 		assert_false(DiscoveryManager.is_discovered(kind, ids[0]))
@@ -66,11 +87,39 @@ func test_actual_resource_totals_are_dynamic_and_unique() -> void:
 	assert_eq(DiscoveryManager.get_known_ids(DiscoveryManager.KIND_ACHIEVEMENT).size(), 6)
 	assert_eq(DiscoveryManager.get_known_ids(DiscoveryManager.KIND_PROFESSION).size(), 6)
 	assert_eq(DiscoveryManager.get_known_ids(DiscoveryManager.KIND_SCENERY).size(), 21)
-	for kind: StringName in [DiscoveryManager.KIND_FOOD, DiscoveryManager.KIND_EVENT, DiscoveryManager.KIND_ACHIEVEMENT]:
+	var actual_minigame_ids := DiscoveryManager.get_known_ids(DiscoveryManager.KIND_MINIGAME)
+	var expected_minigame_ids := EXPECTED_MINIGAME_IDS.duplicate()
+	actual_minigame_ids.sort()
+	expected_minigame_ids.sort()
+	assert_eq(actual_minigame_ids, expected_minigame_ids, "小游戏图鉴只能使用 15 个 Definition 的稳定 ID")
+	for kind: StringName in [DiscoveryManager.KIND_FOOD, DiscoveryManager.KIND_EVENT, DiscoveryManager.KIND_ACHIEVEMENT, DiscoveryManager.KIND_MINIGAME]:
 		var slot_ids := DiscoveryManager.get_known_ids(kind)
 		var lexical_ids := slot_ids.duplicate()
 		lexical_ids.sort()
 		assert_ne(slot_ids, lexical_ids, "%s 的隐藏卡位不得使用可推断的拼音顺序" % kind)
+
+
+func test_legacy_version_one_save_without_minigame_key_remains_compatible() -> void:
+	var food_id := DiscoveryManager.get_known_ids(DiscoveryManager.KIND_FOOD)[0]
+	var config := ConfigFile.new()
+	config.set_value("meta", "version", 1)
+	config.set_value("discoveries", "food", PackedStringArray([String(food_id)]))
+	assert_eq(config.save(TEST_PATH), OK)
+	DiscoveryManager.configure_storage_path(TEST_PATH)
+	assert_true(DiscoveryManager.is_discovered(DiscoveryManager.KIND_FOOD, food_id))
+	assert_eq(DiscoveryManager.get_discovery_progress(DiscoveryManager.KIND_MINIGAME).discovered, 0)
+
+
+func test_minigame_unlock_is_idempotent_and_persists_by_stable_task_id() -> void:
+	var task_ids := DiscoveryManager.get_known_ids(DiscoveryManager.KIND_MINIGAME)
+	assert_eq(task_ids.size(), 15)
+	if task_ids.is_empty():
+		return
+	var task_id := task_ids[0]
+	assert_true(DiscoveryManager.record_discovery(DiscoveryManager.KIND_MINIGAME, task_id))
+	assert_false(DiscoveryManager.record_discovery(DiscoveryManager.KIND_MINIGAME, task_id))
+	DiscoveryManager.configure_storage_path(TEST_PATH)
+	assert_true(DiscoveryManager.is_discovered(DiscoveryManager.KIND_MINIGAME, task_id))
 
 
 func test_typed_gameplay_signals_unlock_event_and_achievement_once() -> void:

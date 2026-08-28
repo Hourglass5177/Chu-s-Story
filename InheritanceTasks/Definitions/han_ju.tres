@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/han_ju.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://dfaxb0jejjc4h" path="res://arts/非遗卡牌/武汉/汉剧.jpg" id="3"]
+[resource]
+script = ExtResource("1")
+task_id = &"han_ju"
+display_name = "皮黄换轨"
+heritage_name = "汉剧"
+region = "武汉"
+hook = "在西皮与二黄两轨间切换，接住落下的旋律片段。"
+instructions = PackedStringArray("看清下一枚音符", "按一次切换轨道")
+control_hint = "鼠标左键、确认键或手柄主键切换"
+cultural_link = "把汉剧以西皮、二黄为主的皮黄合流关系直接画成双轨。"
+duration_seconds = 25.0
+task_scene = ExtResource("2")
+gallery_thumbnail = ExtResource("3")
+prototype_asset_note = "暂用对应国家级非遗牌正面。"
+future_asset_slot = "独立任务缩略图（640×400）。"

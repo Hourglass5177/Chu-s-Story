@@ -9,6 +9,7 @@ signal ui_scale_changed(value: float)
 signal reduce_motion_changed(enabled: bool)
 signal ui_sound_enabled_changed(enabled: bool)
 signal ui_feedback_requested(cue: StringName)
+signal minigame_practice_requested(task_id: StringName)
 
 const MAIN_MAP_SCENE := "res://main_map.tscn"
 const PAGE_SCENE: PackedScene = preload("res://UI/Frontend/frontend_page.tscn")
@@ -17,6 +18,9 @@ const CARD_SCENE: PackedScene = preload("res://UI/Frontend/stateful_card.tscn")
 const PLAYER_SETUP_SCENE: PackedScene = preload("res://UI/Frontend/player_setup_page.tscn")
 const ROSTER_SCENE: PackedScene = preload("res://UI/Frontend/roster_page.tscn")
 const GAME_GUIDE_SCENE: PackedScene = preload("res://UI/GameGuide/digital_game_guide.tscn")
+const HERITAGE_TASK_HOST_SCENE: PackedScene = preload("res://InheritanceTasks/UI/heritage_task_host.tscn")
+const HERITAGE_TASK_DEFINITION_ROOT: String = "res://InheritanceTasks/Definitions"
+const VOCAL_SCORER_PATH := "res://InheritanceTasks/Common/onnx_crepe_vocal_scorer.gd"
 const FRONTEND_THEME: Theme = preload("res://UI/Frontend/frontend_theme.tres")
 const SESSION_LAUNCHER_SCRIPT: Script = preload("res://UI/Frontend/frontend_session_launcher.gd")
 const TITLE_TEXTURE: Texture2D = preload("res://arts/素材合集/主界面（启动+首页）/游戏标题.png")
@@ -75,6 +79,9 @@ var _pending_session_snapshot: SessionSetup
 var _session_launcher: FrontendSessionLauncher = SESSION_LAUNCHER_SCRIPT.new() as FrontendSessionLauncher
 var _game_guide: DigitalGameGuide
 var _home_rules_button: Button
+var _practice_host: HeritageTaskHost = null
+var _practice_vocal_scorer: VocalScorer = null
+var _practice_definition_paths: Dictionary = {}
 
 
 func _ready() -> void:
@@ -96,9 +103,12 @@ func _exit_tree() -> void:
 	_pending_session_snapshot = null
 	if _loading_timer != null:
 		_loading_timer.stop()
+	_discard_practice_host()
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if is_instance_valid(_practice_host):
+		return
 	if _modal_layer != null and _modal_layer.visible:
 		if event.is_action_pressed("ui_cancel"):
 			_close_modal(false)
@@ -678,12 +688,13 @@ func _build_game_guide() -> void:
 	_game_guide.set_shortcut_enabled(false)
 	_shell.add_child(_game_guide)
 	_game_guide.guide_closed.connect(_on_game_guide_closed)
+	_game_guide.replay_requested.connect(_on_minigame_replay_requested)
 
 
 func open_game_guide(context: GuideOpenContext = null) -> bool:
 	# 加载页是一次性会话提交边界。此时打开任何新模态都会让玩家误以为
 	# 加载停滞，也可能把旧前端留在即将切换的场景上。
-	if _game_guide == null or _modal_layer.visible or _start_locked:
+	if _game_guide == null or _modal_layer.visible or _start_locked or is_instance_valid(_practice_host):
 		return false
 	var current_page := _pages.get(_current_screen) as FrontendScreen
 	if current_page != null:
@@ -714,6 +725,84 @@ func _on_game_guide_closed(context: GuideOpenContext) -> void:
 	var return_focus := context.get_return_focus() if context != null else null
 	if return_focus != null and is_instance_valid(return_focus) and return_focus.is_visible_in_tree() and return_focus.focus_mode != Control.FOCUS_NONE:
 		return_focus.grab_focus()
+
+
+func _on_minigame_replay_requested(task_id: StringName) -> void:
+	if is_instance_valid(_practice_host) or _game_guide == null or not _game_guide.is_guide_open() or not _game_guide.is_main_menu_context():
+		return
+	var known_ids := DiscoveryManager.get_known_ids(DiscoveryManager.KIND_MINIGAME)
+	if not known_ids.has(task_id):
+		return
+	if not DiscoveryManager.is_discovered(DiscoveryManager.KIND_MINIGAME, task_id) and not _game_guide.is_developer_view_enabled():
+		return
+	var definition := _load_practice_definition(task_id)
+	if definition == null:
+		_show_toast("任务暂不可用")
+		return
+	minigame_practice_requested.emit(task_id)
+	_game_guide.set_interaction_enabled(false)
+	_game_guide.set_process_input(false)
+	_practice_host = HERITAGE_TASK_HOST_SCENE.instantiate() as HeritageTaskHost
+	_practice_host.name = "MinigamePracticeHost"
+	_practice_host.z_index = 2100
+	_shell.add_child(_practice_host)
+	# Host 自己负责结算结果页。主菜单只在玩家明确按下结果页的“返回”后
+	# 恢复下层指南，不能因 task_finished 提前销毁结果页。
+	_practice_host.return_requested.connect(_on_practice_return_requested, CONNECT_ONE_SHOT)
+	var seed := maxi(int(Time.get_ticks_usec() & 0x7fffffff), 1)
+	var context := HeritageTaskRunContext.new(task_id, null, null, 0, 0, seed, true)
+	if definition.microphone_required:
+		var scorer_script := load(VOCAL_SCORER_PATH) as Script
+		if scorer_script != null:
+			_practice_vocal_scorer = scorer_script.new() as VocalScorer
+			context.services[&"vocal_scorer"] = _practice_vocal_scorer
+	_practice_host.configure(definition, context)
+	_practice_host.begin()
+
+
+func _on_practice_return_requested() -> void:
+	_discard_practice_host()
+	if _game_guide != null:
+		_game_guide.set_process_input(true)
+		if _game_guide.is_guide_open():
+			_game_guide.set_interaction_enabled(true)
+			_game_guide.restore_current_focus()
+
+
+func _discard_practice_host() -> void:
+	if _practice_vocal_scorer != null:
+		_practice_vocal_scorer.cancel_capture()
+	_practice_vocal_scorer = null
+	if not is_instance_valid(_practice_host):
+		_practice_host = null
+		return
+	var return_callable := Callable(self, "_on_practice_return_requested")
+	if _practice_host.return_requested.is_connected(return_callable):
+		_practice_host.return_requested.disconnect(return_callable)
+	_practice_host.queue_free()
+	_practice_host = null
+
+
+func _load_practice_definition(task_id: StringName) -> HeritageTaskDefinition:
+	if _practice_definition_paths.is_empty():
+		_index_practice_definitions(HERITAGE_TASK_DEFINITION_ROOT)
+	var path := String(_practice_definition_paths.get(task_id, ""))
+	return ResourceLoader.load(path) as HeritageTaskDefinition if not path.is_empty() else null
+
+
+func _index_practice_definitions(root_path: String) -> void:
+	var directory := DirAccess.open(root_path)
+	if directory == null:
+		return
+	for child_dir: String in directory.get_directories():
+		_index_practice_definitions(root_path.path_join(child_dir))
+	for file_name: String in directory.get_files():
+		if not file_name.ends_with(".tres") and not file_name.ends_with(".tres.remap"):
+			continue
+		var path := root_path.path_join(file_name.trim_suffix(".remap"))
+		var definition := ResourceLoader.load(path) as HeritageTaskDefinition
+		if definition != null and not definition.task_id.is_empty():
+			_practice_definition_paths[definition.task_id] = path
 
 
 func _show_text_modal(title_text: String, body_text: String, return_focus: Control) -> void:
@@ -796,6 +885,7 @@ func _build_toast_layer() -> void:
 	_toast_layer = Control.new()
 	_toast_layer.name = "ToastLayer"
 	_toast_layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_toast_layer.z_index = 2200
 	_toast_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_shell.add_child(_toast_layer)
 	var margin := MarginContainer.new()

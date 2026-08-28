@@ -219,6 +219,14 @@ layout_mode = 2
 focus_mode = 2
 text = "探索图鉴"
 
+[node name="MinigameButton" type="Button" parent="SafeArea/Frame/Layout/Body/Sidebar/SidebarContent"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+focus_mode = 2
+text = "小游戏图鉴"
+
 [node name="ContinueButton" type="Button" parent="SafeArea/Frame/Layout/Body/Sidebar/SidebarContent"]
 unique_name_in_owner = true
 visible = false

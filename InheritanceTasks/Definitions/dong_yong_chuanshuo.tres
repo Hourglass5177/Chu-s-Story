@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/dong_yong_chuanshuo.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://bwisn1kq0wssk" path="res://arts/非遗卡牌/孝感/董永传说.jpg" id="3"]
+[resource]
+script = ExtResource("1")
+task_id = &"dong_yong_chuanshuo"
+display_name = "槐荫穿梭"
+heritage_name = "董永传说"
+region = "孝感"
+hook = "等经线完全打开，按下按钮送出梭子。"
+instructions = PackedStringArray("观察经线开合", "开口完全对齐时送梭")
+control_hint = "鼠标左键、确认键或手柄主键送梭"
+cultural_link = "借传说流变中的织锦图景，让每次穿梭留下完整纹样。"
+duration_seconds = 25.0
+task_scene = ExtResource("2")
+gallery_thumbnail = ExtResource("3")
+prototype_asset_note = "暂用对应国家级非遗牌正面。"
+future_asset_slot = "独立任务缩略图（640×400）。"

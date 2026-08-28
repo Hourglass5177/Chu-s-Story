@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/huangmei_xi.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://bbij13w7c7hrb" path="res://arts/非遗卡牌/黄冈/黄梅戏.jpg" id="3"]
+[resource]
+script = ExtResource("1")
+task_id = &"huangmei_xi"
+display_name = "一句入戏"
+heritage_name = "黄梅戏"
+region = "黄冈"
+hook = "先听完整唱腔，再连续唱出两句。"
+instructions = PackedStringArray("听完整示范", "倒数后连续录唱两句", "等待本地模型评分")
+control_hint = "需要麦克风；录唱期间不要播放原唱"
+cultural_link = "从《女驸马》唱段入门，只比较相对音高、节奏和完整度。"
+duration_seconds = 45.0
+task_scene = ExtResource("2")
+microphone_required = true
+gallery_thumbnail = ExtResource("3")
+prototype_asset_note = "暂用对应国家级非遗牌正面。"
+future_asset_slot = "独立任务缩略图（640×400）。"
+reference_video_path = "res://arts/非遗媒体资源/数字版/黄梅戏-女驸马-传承任务-v1.ogv"
+reference_audio_path = "res://arts/非遗媒体资源/数字版/黄梅戏-女驸马-参考唱段-v1.ogg"
+reference_analysis_path = "res://arts/非遗媒体资源/数字版/黄梅戏-女驸马-参考分析-v1.json"

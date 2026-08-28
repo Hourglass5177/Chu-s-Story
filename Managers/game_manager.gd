@@ -130,6 +130,9 @@ func reset_session(rebuild_resources: bool = true) -> void:
 	var food_manager: Node = get_node_or_null("/root/FoodManager")
 	_call_if_available(food_manager, &"reset_session")
 
+	var heritage_task_manager: Node = get_node_or_null("/root/HeritageTaskManager")
+	_call_if_available(heritage_task_manager, &"reset_session")
+
 	player_data.clear()
 	_active_session_setup = null
 	_local_session_prepared = false

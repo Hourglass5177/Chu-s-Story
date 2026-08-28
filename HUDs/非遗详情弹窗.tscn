@@ -159,6 +159,46 @@ theme_override_font_sizes/font_size = 64
 text = "【效果】"
 autowrap_mode = 3
 
+[node name="TaskPanel" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 112)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_guide")
+
+[node name="Content" type="HBoxContainer" parent="VBoxContainer/TaskPanel"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Status" type="Label" parent="VBoxContainer/TaskPanel/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.32, 0.16, 0.1, 1)
+theme_override_fonts/font = ExtResource("4_bqm6w")
+theme_override_font_sizes/font_size = 36
+text = "未传承"
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="VBoxContainer/TaskPanel/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.28, 0.18, 1)
+theme_override_fonts/font = ExtResource("4_bqm6w")
+theme_override_font_sizes/font_size = 28
+text = "消耗1精力"
+vertical_alignment = 1
+
+[node name="TaskButton" type="Button" parent="VBoxContainer/TaskPanel/Content"]
+custom_minimum_size = Vector2(240, 84)
+layout_mode = 2
+focus_mode = 2
+theme_override_colors/font_color = Color(0.32, 0.16, 0.1, 1)
+theme_override_colors/font_hover_color = Color(1, 0.94, 0.77, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.94, 0.77, 1)
+theme_override_fonts/font = ExtResource("4_bqm6w")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("StyleBoxFlat_guide")
+theme_override_styles/hover = SubResource("StyleBoxFlat_guide_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_guide_hover")
+text = "传承任务"
+
 [node name="BtnGuide" type="Button" parent="."]
 custom_minimum_size = Vector2(180, 72)
 layout_mode = 1

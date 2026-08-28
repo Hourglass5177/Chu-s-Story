@@ -12,6 +12,7 @@ const KIND_EVENT := &"event"
 const KIND_ACHIEVEMENT := &"achievement"
 const KIND_PROFESSION := &"profession"
 const KIND_SCENERY := &"scenery"
+const KIND_MINIGAME := &"minigame"
 
 const ALL_KINDS: Array[StringName] = [
 	KIND_FEIYI,
@@ -20,6 +21,7 @@ const ALL_KINDS: Array[StringName] = [
 	KIND_ACHIEVEMENT,
 	KIND_PROFESSION,
 	KIND_SCENERY,
+	KIND_MINIGAME,
 ]
 const PUBLIC_KINDS: Array[StringName] = [KIND_FEIYI, KIND_PROFESSION, KIND_SCENERY]
 const RESOURCE_ROOTS: Dictionary = {
@@ -27,6 +29,7 @@ const RESOURCE_ROOTS: Dictionary = {
 	KIND_FOOD: "res://Cards/食物牌",
 	KIND_EVENT: "res://Cards/事件牌",
 	KIND_ACHIEVEMENT: "res://Cards/成就牌",
+	KIND_MINIGAME: "res://InheritanceTasks/Definitions",
 }
 
 var _storage_path: String = DEFAULT_STORAGE_PATH
@@ -213,6 +216,10 @@ func _resource_entry_id(kind: StringName, resource: Resource, path: String) -> S
 		return (resource as 事件牌).event_id
 	if kind == KIND_ACHIEVEMENT and resource is 成就牌:
 		return (resource as 成就牌).achievement_id
+	if kind == KIND_MINIGAME and resource is HeritageTaskDefinition:
+		# 传承小游戏使用 Definition 内显式声明的稳定 ID。不要把资源路径写进
+		# 永久存档，否则策划整理文件名或目录时会让玩家丢失解锁记录。
+		return (resource as HeritageTaskDefinition).task_id
 	return &""
 
 

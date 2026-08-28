@@ -441,7 +441,7 @@ func _alive_players() -> Array[PlayerClass]:
 
 func _non_national_feiyi(player: PlayerClass) -> Array[非遗牌]:
 	var result: Array[非遗牌] = []
-	for card: 非遗牌 in player.非遗牌手牌:
+	for card: 非遗牌 in ResourceManager.get_effective_feiyi_cards(player):
 		if card.category != 非遗牌.CardCategory.国家级非遗:
 			result.append(card)
 	return result

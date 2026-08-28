@@ -1,0 +1,15 @@
+[configuration]
+
+entry_symbol = "chuwuzhi_audio_library_init"
+compatibility_minimum = "4.5"
+reloadable = false
+
+[libraries]
+
+windows.debug.x86_64 = "res://InheritanceTasks/AudioNative/bin/chuwuzhi_audio.windows.x86_64.dll"
+windows.release.x86_64 = "res://InheritanceTasks/AudioNative/bin/chuwuzhi_audio.windows.x86_64.dll"
+
+[dependencies]
+
+windows.debug.x86_64 = { "res://InheritanceTasks/AudioNative/bin/onnxruntime.dll": "" }
+windows.release.x86_64 = { "res://InheritanceTasks/AudioNative/bin/onnxruntime.dll": "" }

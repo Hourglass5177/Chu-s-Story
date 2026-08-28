@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/laohekou_si_xian.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://cmm6xgqcfmgad" path="res://arts/非遗卡牌/襄阳/老河口丝弦.jpg" id="3"]
+[resource]
+script = ExtResource("1")
+task_id = &"laohekou_si_xian"
+display_name = "一拨成曲"
+heritage_name = "老河口丝弦"
+region = "襄阳"
+hook = "随光带上下换弦，让拨片跟住旋律。"
+instructions = PackedStringArray("观察旋律光带", "上下换弦持续跟随")
+control_hint = "上下键/摇杆移动；鼠标纵向移动"
+cultural_link = "以弹拨乐器沿丝弦流动的动作表现级进与加花。"
+duration_seconds = 25.0
+task_scene = ExtResource("2")
+gallery_thumbnail = ExtResource("3")
+prototype_asset_note = "暂用对应国家级非遗牌正面。"
+future_asset_slot = "独立任务缩略图（640×400）。"
