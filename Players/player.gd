@@ -25,7 +25,7 @@ func _ready() -> void:
 		print(player_name, "已挂载到地图")
 	now_pos = start_coord
 	position = map.to_local(map.grid_map[start_coord].global_position) 
-	map.grid_map[start_coord].is_occupied = true
+	map.occupy_player_section(self, map.grid_map[start_coord])
 	_init_character()
 	if material:
 		material = material.duplicate()
@@ -158,10 +158,10 @@ func _on_phase_changed(new_phase: TurnManager.TurnPhase):
 				emit_next_phase(TurnManager.TurnPhase.ACTION)
 				return
 			hud._update_game_informs("玩家"+player_name+" 掷骰子中…")
-			if not GameManager.is_headless_simulation():
-				await get_tree().create_timer(1).timeout
-			movement_multiplier_applied = false
-			maxMove = FoodManager.adjust_movement_steps(self, do_roll_dice())
+			var roll_session_generation: int = TurnManager.get_session_generation()
+			var roll_turn_epoch: int = TurnManager.get_turn_epoch()
+			if not await _resolve_roll_dice_phase(roll_session_generation, roll_turn_epoch):
+				return
 		TurnManager.TurnPhase.MOVING:
 			pass
 		TurnManager.TurnPhase.ACTION:
@@ -185,6 +185,17 @@ func _append_delayed_effect_messages(messages: Array[String]) -> void:
 		hud._update_game_informs(message)
 	else:
 		hud.information.text += "\n" + message
+
+
+func _resolve_roll_dice_phase(session_generation: int, turn_epoch: int) -> bool:
+	if not GameManager.is_headless_simulation():
+		# process_always=false：真正的暂停必须冻结掷骰演出与规则提交。
+		await get_tree().create_timer(1.0, false).timeout
+	if not _owns_turn_phase_context(session_generation, turn_epoch, TurnManager.TurnPhase.ROLL_DICE):
+		return false
+	movement_multiplier_applied = false
+	maxMove = FoodManager.adjust_movement_steps(self, do_roll_dice())
+	return true
 
 ## BEGIN/END 阶段各一次的可选职业移动。同步取得模态锁，避免 1 秒阶段计时抢跑。
 func _begin_profession_begin_move() -> void:
@@ -226,15 +237,18 @@ func _begin_profession_phase_move(phase: TurnManager.TurnPhase) -> void:
 			options.append(section)
 	if options.is_empty():
 		return
-	var modal_token: int = TurnManager.begin_modal_resolution()
-	_resolve_profession_phase_move(options, phase, turn_session_generation, turn_epoch, modal_token)
+	var modal_lease: int = TurnManager.acquire_modal(
+		&"profession_phase_move",
+		TurnManager.ModalResumePolicy.RESUME_REMAINING
+	)
+	_resolve_profession_phase_move(options, phase, turn_session_generation, turn_epoch, modal_lease)
 
 func _resolve_profession_phase_move(
 	options: Array[MapSection],
 	phase: TurnManager.TurnPhase,
 	turn_session_generation: int,
 	turn_epoch: int,
-	modal_token: int
+	modal_lease: int
 ) -> void:
 	var selected := await ProfessionManager.request_section_choice(
 		self,
@@ -242,13 +256,14 @@ func _resolve_profession_phase_move(
 		"邻格探索",
 		"请选择相邻格子"
 	)
-	if turn_session_generation != TurnManager.get_session_generation():
-		if is_instance_valid(hud):
-			hud.complete_profession_section_choice(self, turn_session_generation, turn_epoch, phase)
+	if not _owns_current_profession_phase(turn_session_generation, turn_epoch, phase):
+		_release_stale_profession_modal(modal_lease, turn_session_generation, turn_epoch, phase)
 		return
-	var owns_phase := _owns_current_profession_phase(turn_session_generation, turn_epoch, phase)
-	if selected != null and owns_phase:
+	if selected != null:
 		var moved: bool = await _move_to_adjacent_for_profession(selected, phase, turn_session_generation, turn_epoch)
+		if not _owns_current_profession_phase(turn_session_generation, turn_epoch, phase):
+			_release_stale_profession_modal(modal_lease, turn_session_generation, turn_epoch, phase)
+			return
 		if moved:
 			if is_working:
 				is_working = false
@@ -260,11 +275,32 @@ func _resolve_profession_phase_move(
 			hud._update_game_informs("【邻格探索】未移动。")
 	elif hud != null and TurnManager.GameOn:
 		hud._update_game_informs("【邻格探索】未移动。")
-	TurnManager.end_modal_resolution(false, true, modal_token)
+	TurnManager.release_modal(modal_lease)
 	if is_instance_valid(hud):
 		hud.complete_profession_section_choice(self, turn_session_generation, turn_epoch, phase)
 
+
+func _release_stale_profession_modal(
+	modal_lease: int,
+	session_generation: int,
+	turn_epoch: int,
+	phase: TurnManager.TurnPhase
+) -> void:
+	if session_generation != TurnManager.get_session_generation():
+		return
+	TurnManager.release_modal(modal_lease, TurnManager.ModalResumePolicy.NO_RESUME)
+	if is_instance_valid(hud):
+		hud.complete_profession_section_choice(self, session_generation, turn_epoch, phase)
+
 func _owns_current_profession_phase(
+	turn_session_generation: int,
+	turn_epoch: int,
+	phase: TurnManager.TurnPhase
+) -> bool:
+	return _owns_turn_phase_context(turn_session_generation, turn_epoch, phase)
+
+
+func _owns_turn_phase_context(
 	turn_session_generation: int,
 	turn_epoch: int,
 	phase: TurnManager.TurnPhase
@@ -276,7 +312,6 @@ func _owns_current_profession_phase(
 		and TurnManager.now_player_index >= 0 \
 		and TurnManager.now_player_index < TurnManager.players.size() \
 		and TurnManager.players[TurnManager.now_player_index] == self \
-		and onTurn \
 		and alive
 
 ## 技能移动本身永不立即触发格子。BEGIN 只登记本回合 ACTION 到达；END 不登记。
@@ -293,7 +328,7 @@ func _move_to_adjacent_for_profession(
 	var old_coordinate := now_pos
 	var old_section: MapSection = map.grid_map.get(now_pos) as MapSection
 	var old_position := position
-	target_section.is_occupied = true
+	map.occupy_player_section(self, target_section)
 	if GameManager.is_headless_simulation():
 		position = map.to_local(target_section.global_position)
 	else:
@@ -302,12 +337,12 @@ func _move_to_adjacent_for_profession(
 		await tween.finished
 	if turn_session_generation >= 0 \
 			and (not _owns_current_profession_phase(turn_session_generation, turn_epoch, phase) or now_pos != old_coordinate):
-		target_section.is_occupied = _is_section_occupied_by_other_player(target_section)
+		map.vacate_player_section(self, target_section)
 		if now_pos == old_coordinate:
 			position = old_position
 		return false
 	if old_section != null:
-		old_section.is_occupied = false
+		map.vacate_player_section(self, old_section)
 	now_pos = target_section.location_index
 	if phase == TurnManager.TurnPhase.BEGIN:
 		_record_action_arrival(target_section, false)
@@ -340,16 +375,6 @@ func has_current_action_arrival_at(coordinate: Vector3i) -> bool:
 		and last_action_arrival_turn_epoch == TurnManager.get_turn_epoch() \
 		and last_action_arrival_session_generation == TurnManager.get_session_generation()
 
-func _is_section_occupied_by_other_player(section: MapSection) -> bool:
-	if section == null:
-		return false
-	for candidate: PlayerClass in TurnManager.players:
-		if candidate == self or not is_instance_valid(candidate) or not candidate.alive:
-			continue
-		if candidate.map == map and candidate.now_pos == section.location_index:
-			return true
-	return false
-
 func _adjacent_coordinates() -> Array[Vector3i]:
 	var result: Array[Vector3i] = []
 	for direction: Vector3i in 常量.MOVE:
@@ -365,24 +390,33 @@ func resolve_turn_end_elimination() -> bool:
 	print("玩家 ", player_name, "回合结束")
 	if not alive or current_energy > 0:
 		return false
+	var elimination_session_generation: int = TurnManager.get_session_generation()
+	var elimination_turn_epoch: int = TurnManager.get_turn_epoch()
 	if await EventManager.try_revive_player(self):
+		if elimination_session_generation != TurnManager.get_session_generation() \
+				or elimination_turn_epoch != TurnManager.get_turn_epoch() \
+				or not TurnManager.GameOn:
+			return false
 		if hud != null:
 			hud._update_game_informs("玩家 %s 被【妙手回春】复活，恢复3点精力！" % player_name)
+		return false
+	if elimination_session_generation != TurnManager.get_session_generation() \
+			or elimination_turn_epoch != TurnManager.get_turn_epoch() \
+			or not TurnManager.GameOn:
 		return false
 	print("玩家 ", player_name,"体力耗尽，被淘汰！")
 	alive = false
 	var game_finished: bool = TurnManager.player_died(self)
 	if map != null and map.grid_map.has(now_pos):
-		map.grid_map[now_pos].is_occupied = false
+		map.vacate_player_section(self, map.grid_map[now_pos])
 	hide()
 	if game_finished:
 		return true
 	if hud != null:
 		hud._update_game_informs("玩家 " + player_name + "精力耗尽，被淘汰！分数：" + str(current_score))
-	if is_inside_tree() and not GameManager.is_headless_simulation():
-		get_tree().paused = true
-		await get_tree().create_timer(2.5, true).timeout
-		get_tree().paused = false
+	# 展示等待由常驻的 TurnManager 在读取本结果后执行。
+	# Player 不持有跨场景的延迟协程，防止旧玩家节点被释放后
+	# 协程恢复并解锁新局。
 	return false
 
 # --- 实体动作逻辑 ---
@@ -396,6 +430,9 @@ func do_roll_dice() -> int:
 func move_along_path(path_pixels: Array[Vector2], total_cost: int, target_grid_pos: Vector3i) -> bool:
 	if path_pixels.is_empty() or not TurnManager.begin_movement_lock():
 		return false
+	var movement_session_generation: int = TurnManager.get_session_generation()
+	var movement_turn_epoch: int = TurnManager.get_turn_epoch()
+	var movement_origin: Vector3i = now_pos
 	if not 武术拳法已生效:
 		for card in 非遗牌手牌:
 			if card.category == 非遗牌.CardCategory.武术拳法:
@@ -419,11 +456,15 @@ func move_along_path(path_pixels: Array[Vector2], total_cost: int, target_grid_p
 			var target_loacal = map.to_local(point)
 			tween.tween_property(self, "position", target_loacal, 0.2).set_trans(Tween.TRANS_LINEAR)
 		await tween.finished
+	if not _owns_turn_phase_context(movement_session_generation, movement_turn_epoch, TurnManager.TurnPhase.MOVING) \
+			or now_pos != movement_origin:
+		TurnManager.end_movement_lock()
+		return false
 	print(player_name, " 移动完毕。")
-	map.grid_map[now_pos].is_occupied = false
+	var departure_section: MapSection = map.grid_map[now_pos]
 	now_pos = target_grid_pos # 更新逻辑坐标
 	var arrival_section: MapSection = map.grid_map[now_pos]
-	arrival_section.is_occupied = true
+	map.transfer_player_occupancy(self, departure_section, arrival_section)
 	_record_action_arrival(arrival_section, true)
 	hud._update_player_stats(self)
 	hud.update_camera_view(0.5)

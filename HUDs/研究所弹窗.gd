@@ -15,7 +15,9 @@ var hud: HUD = null
 var current_player: PlayerClass = null
 var current_arrival_id: int = -1
 var _showing_buy: bool = true
-var _modal_owned: bool = false
+var _modal_lease: int = -1
+var _modal_session_generation: int = -1
+var _modal_turn_epoch: int = -1
 var _event_request: EventChoiceRequest = null
 var _event_cards: Array[非遗牌] = []
 var _event_selected_cards: Array[非遗牌] = []
@@ -67,8 +69,13 @@ func open_market(player: PlayerClass) -> void:
 	close_button.show()
 	close_button.disabled = false
 	show()
-	TurnManager.begin_modal_resolution()
-	_modal_owned = true
+	_modal_session_generation = TurnManager.get_session_generation()
+	_modal_turn_epoch = TurnManager.get_turn_epoch()
+	if TurnManager.GameOn:
+		_modal_lease = TurnManager.acquire_modal(
+			&"research_market",
+			TurnManager.ModalResumePolicy.RESET_ACTION
+		)
 	if hud != null:
 		hud.btn_action.disabled = true
 		hud.btn_food.disabled = true
@@ -91,7 +98,9 @@ func open_event_choice(request: EventChoiceRequest) -> bool:
 	_event_request = request
 	_event_cards.assign(cards)
 	_event_selected_cards.clear()
-	_modal_owned = false
+	_modal_lease = -1
+	_modal_session_generation = -1
+	_modal_turn_epoch = -1
 	title_label.text = request.source_name if not request.source_name.is_empty() else "非遗研究所"
 	balance_label.text = request.prompt
 	balance_label.show()
@@ -119,13 +128,24 @@ func close_market() -> void:
 			EventManager.submit_choice(_event_request.request_id, null)
 		return
 	hide()
-	if _modal_owned:
-		TurnManager.end_modal_resolution(true)
-		_modal_owned = false
-	if hud != null:
+	var same_context: bool = _release_market_modal()
+	if same_context and hud != null and is_instance_valid(hud):
 		hud._update_button_states(TurnManager.now_phase)
 	current_player = null
 	current_arrival_id = -1
+
+
+func _release_market_modal() -> bool:
+	var same_context: bool = (
+		_modal_session_generation == TurnManager.get_session_generation()
+		and _modal_turn_epoch == TurnManager.get_turn_epoch()
+	)
+	if _modal_lease >= 0 and same_context:
+		TurnManager.release_modal(_modal_lease)
+	_modal_lease = -1
+	_modal_session_generation = -1
+	_modal_turn_epoch = -1
+	return same_context
 
 func _show_buy_page() -> void:
 	if _event_request != null:

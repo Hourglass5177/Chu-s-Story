@@ -10,7 +10,9 @@ class_name ScoreDetailPanel
 @onready var close_mask: TextureRect = $Panel/BtnClose/mask
 
 var _player: PlayerClass = null
-var _was_tree_paused := false
+var _modal_lease: int = -1
+var _modal_session_generation: int = -1
+var _modal_turn_epoch: int = -1
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -39,14 +41,16 @@ func open_for_player(player: PlayerClass) -> void:
 	if player == null:
 		return
 	_player = player
-	_was_tree_paused = get_tree().paused
+	if not visible:
+		_begin_modal()
 	_refresh_content()
 	show()
-	get_tree().paused = true
 
 func close_panel() -> void:
+	if not visible:
+		return
 	hide()
-	get_tree().paused = _was_tree_paused
+	_release_modal()
 
 func _open_score_guide() -> void:
 	var hud := get_tree().get_first_node_in_group("HUD") as HUD
@@ -81,3 +85,25 @@ func _refresh_content() -> void:
 	$Panel/详情/成就明细.text = " · ".join(achievement_names)
 	$Panel/详情/总分/名称.text = "总分 / %d" % TurnManager.target_score
 	$Panel/详情/总分/数值.text = str(int(breakdown.get("total_score", 0)))
+
+
+func _begin_modal() -> void:
+	_modal_session_generation = TurnManager.get_session_generation()
+	_modal_turn_epoch = TurnManager.get_turn_epoch()
+	_modal_lease = TurnManager.acquire_modal(
+		&"score_detail",
+		TurnManager.ModalResumePolicy.RESUME_REMAINING,
+		true
+	)
+
+
+func _release_modal() -> void:
+	var same_context: bool = (
+		_modal_session_generation == TurnManager.get_session_generation()
+		and _modal_turn_epoch == TurnManager.get_turn_epoch()
+	)
+	if _modal_lease >= 0 and same_context:
+		TurnManager.release_modal(_modal_lease)
+	_modal_lease = -1
+	_modal_session_generation = -1
+	_modal_turn_epoch = -1

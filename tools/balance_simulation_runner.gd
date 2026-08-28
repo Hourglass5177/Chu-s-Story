@@ -4,6 +4,7 @@ const PLAYER_COUNTS: Array[int] = [2, 3, 6]
 const TURN_CAP: int = 500
 const WALL_TIME_CAP_MSEC: int = 10000
 const ACTION_CAP: int = 32
+const STARTUP_FRAME_CAP: int = 120
 
 var _matches_per_mode: int = 108
 var _base_seed: int = 20260824
@@ -63,15 +64,17 @@ func _run_match(config: SimulationMatchConfig) -> Dictionary:
 	InteractionCoordinator.decision_provider = _active_strategy.decide
 	var scene := (load("res://main_map.tscn") as PackedScene).instantiate()
 	get_tree().root.add_child(scene)
-	for _frame: int in 10:
+	var startup_ready := false
+	for _frame: int in STARTUP_FRAME_CAP:
 		await get_tree().process_frame
 		if TurnManager.GameOn and TurnManager.players.size() == config.player_count:
+			startup_ready = true
 			break
 	var players: Array = []
 	players.assign(TurnManager.players)
 	var recorder := BalanceTelemetryRecorder.new()
 	recorder.start_match(config, players)
-	var abort_reason := ""
+	var abort_reason := "" if startup_ready else "startup_not_ready"
 	var started_at := Time.get_ticks_msec()
 	while TurnManager.GameOn and TurnManager.now_turn <= TURN_CAP:
 		if Time.get_ticks_msec() - started_at > WALL_TIME_CAP_MSEC:
@@ -87,9 +90,19 @@ func _run_match(config: SimulationMatchConfig) -> Dictionary:
 	report["match_index"] = config.match_index
 	report["match_config"] = config.to_dictionary()
 	report["profession_schedule"] = _profession_schedule(players)
+	report["startup_ready"] = startup_ready
+	report["started_player_count"] = players.size()
+	report["result_present"] = result != null
+	report["game_on"] = TurnManager.GameOn
+	report["result_turn_number"] = result.turn_number if result != null else 0
+	report["result_entry_count"] = result.entries.size() if result != null else 0
 	report["modal_snapshot"] = TurnManager.get_modal_snapshot()
 	report["interaction_snapshot"] = InteractionCoordinator.get_active_snapshot()
-	if not abort_reason.is_empty():
+	report["map_choice_active"] = TurnManager.map != null \
+			and is_instance_valid(TurnManager.map) \
+			and TurnManager.map.is_section_choice_active()
+	BalanceTelemetryRecorder.apply_report_contract(report, config.player_count)
+	if bool(report.get("aborted", false)):
 		InteractionCoordinator.cancel_all(&"simulation_abort")
 		TurnManager.invalidate_all_modals(&"simulation_abort")
 	# 先解除所有 Autoload 对玩家、HUD 与地图的强引用并恢复暂停树，

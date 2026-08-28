@@ -16,6 +16,7 @@ class EventResolutionContext extends RefCounted:
 	var resolution_id: int
 	var cancelled: bool = false
 	var source_card: 事件牌 = null
+	var modal_lease_id: int = -1
 
 	func _init(current_session_token: int, current_resolution_id: int, card: 事件牌 = null) -> void:
 		session_token = current_session_token
@@ -74,6 +75,7 @@ func reset_for_new_game() -> void:
 	if hud != null:
 		hud.cancel_event_presentation(&"session_reset")
 	_cancel_all_resolution_contexts()
+	_release_revive_modal()
 	if _pending_request != null:
 		InteractionCoordinator.cancel(_pending_request.request_id, &"event_reset")
 	_session_token += 1
@@ -85,9 +87,28 @@ func reset_for_new_game() -> void:
 	_status_by_player.clear()
 	_phase_message_by_player.clear()
 	_skip_current_action_after_event = false
-	_revive_modal_owned = false
 	auto_resolve_choices = false
 	choice_strategy = Callable()
+	if _choice_timer != null:
+		_choice_timer.stop()
+	interaction_finished.emit(null)
+
+
+## 只取消当前尚未完成的交互事务，不清空本局持续状态或牌库。
+## TurnManager 在回合交接发现脏状态时调用；旧协程会通过 resolution context
+## 失效检查自行退出，不能继续修改下一位玩家的回合。
+func cancel_active_resolution(reason: StringName = &"cancelled") -> void:
+	if hud != null:
+		hud.cancel_event_presentation(reason)
+	if _pending_request != null:
+		InteractionCoordinator.cancel(_pending_request.request_id, reason)
+	_cancel_all_resolution_contexts()
+	_release_revive_modal()
+	resolving = false
+	_pending_request = null
+	_pending_choice = null
+	_choice_waiting = false
+	_skip_current_action_after_event = false
 	if _choice_timer != null:
 		_choice_timer.stop()
 	interaction_finished.emit(null)
@@ -105,6 +126,9 @@ func _begin_resolution_context(card: 事件牌 = null) -> EventResolutionContext
 func _finish_resolution_context(context: EventResolutionContext) -> void:
 	if context == null:
 		return
+	# 正常路径应在进入这里前按明确策略释放。这个防线保证以后
+	# 新增早退分支时也不会把事件模态留给下一个回合。
+	_release_resolution_modal(context, TurnManager.ModalResumePolicy.NO_RESUME)
 	_active_resolution_contexts.erase(context)
 	_resolution_context_stack.erase(context)
 	_current_resolution_context = _resolution_context_stack.back() if not _resolution_context_stack.is_empty() else null
@@ -113,9 +137,34 @@ func _finish_resolution_context(context: EventResolutionContext) -> void:
 func _cancel_all_resolution_contexts() -> void:
 	for context: EventResolutionContext in _active_resolution_contexts:
 		context.cancelled = true
+		_release_resolution_modal(context, TurnManager.ModalResumePolicy.NO_RESUME)
 	_active_resolution_contexts.clear()
 	_resolution_context_stack.clear()
 	_current_resolution_context = null
+
+
+func _acquire_resolution_modal(
+	context: EventResolutionContext,
+	owner: StringName,
+	resume_policy: TurnManager.ModalResumePolicy
+) -> int:
+	if context == null:
+		return -1
+	if context.modal_lease_id >= 0:
+		return context.modal_lease_id
+	context.modal_lease_id = TurnManager.acquire_modal(owner, resume_policy)
+	return context.modal_lease_id
+
+
+func _release_resolution_modal(
+	context: EventResolutionContext,
+	resume_policy_override: int = -1
+) -> bool:
+	if context == null or context.modal_lease_id < 0:
+		return false
+	var lease_id := context.modal_lease_id
+	context.modal_lease_id = -1
+	return TurnManager.release_modal(lease_id, resume_policy_override)
 
 
 func _is_resolution_context_cancelled(context: EventResolutionContext) -> bool:
@@ -196,22 +245,25 @@ func _request_choice(request: EventChoiceRequest, is_reaction: bool = false):
 		return null
 	if request.options.is_empty():
 		return null
+	# EventManager 只有一组 pending 状态。新请求必须先确认没有既有请求，且只有
+	# InteractionCoordinator 接受票据后才能发布 pending；否则并发失败会覆盖并清空
+	# 仍在等待的首个请求，表现为选择界面卡死到超时。
+	if _choice_waiting or _pending_request != null:
+		push_warning("EventManager: 仍有事件选择等待中，拒绝新请求。")
+		return null
 	# 外部玩法（目前主要是食物）只复用本管理器的选择和响应链，
 	# 不属于一张事件牌的完整结算，因此不会在末尾发送 interaction_finished。
 	# 明确要求遮罩随本次选择关闭，避免永久停留在“结算中”。
 	request.close_overlay_on_resolve = resolution_context == null
 	request.timeout_seconds = CHOICE_TIMEOUT_SECONDS
-	_pending_request = request
-	_pending_choice = [] if request.multiple else null
-	_choice_waiting = true
 	var ticket := InteractionCoordinator.begin_interaction(&"event", request.timeout_seconds, _resolve_choice_timeout, TurnManager.ModalResumePolicy.NO_RESUME, false, {"request": request})
 	if ticket == null:
-		_pending_request = null
-		_pending_choice = null
-		_choice_waiting = false
 		return null
 	request.request_id = ticket.interaction_id
 	_request_sequence = maxi(_request_sequence, request.request_id)
+	_pending_request = request
+	_pending_choice = [] if request.multiple else null
+	_choice_waiting = true
 	if request.multiple:
 		InteractionCoordinator.update_preview(request.request_id, _pending_choice)
 	if is_reaction:
@@ -225,13 +277,15 @@ func _request_choice(request: EventChoiceRequest, is_reaction: bool = false):
 		var automatic = _default_multiple_choice(request) if request.multiple else (null if request.optional else request.options[0])
 		InteractionCoordinator.submit(request.request_id, automatic)
 	var interaction_result: InteractionResult = await InteractionCoordinator.await_result(ticket)
-	_choice_waiting = false
+	if _pending_request == request:
+		_choice_waiting = false
 	choice_resolved.emit(request.request_id, interaction_result.timed_out)
 	if _is_resolution_context_cancelled(resolution_context):
 		return null
 	var result = interaction_result.value
-	_pending_request = null
-	_pending_choice = null
+	if _pending_request == request:
+		_pending_request = null
+		_pending_choice = null
 	return result
 
 func _resolve_choice_timeout(ticket: InteractionTicket):
@@ -430,7 +484,13 @@ func open_retained_event_menu(player: PlayerClass) -> void:
 		return
 	var resolution_context := _begin_resolution_context()
 	resolving = true
-	TurnManager.begin_modal_resolution()
+	_acquire_resolution_modal(
+		resolution_context,
+		&"retained_event_menu",
+		TurnManager.ModalResumePolicy.RESET_ACTION
+			if TurnManager.now_phase == TurnManager.TurnPhase.ACTION
+			else TurnManager.ModalResumePolicy.RESUME_REMAINING
+	)
 	var request := EventChoiceRequest.new(player, "选择要使用的保留事件牌", playable, _labels_for_cards(playable), true, EventChoiceRequest.ChoiceKind.卡牌)
 	var selected = await _request_choice(request)
 	if _is_resolution_context_cancelled(resolution_context):
@@ -441,9 +501,11 @@ func open_retained_event_menu(player: PlayerClass) -> void:
 		if _is_resolution_context_cancelled(resolution_context):
 			return
 	resolving = false
-	TurnManager.end_modal_resolution(
-		TurnManager.now_phase == TurnManager.TurnPhase.ACTION,
-		TurnManager.now_phase == TurnManager.TurnPhase.MOVING
+	_release_resolution_modal(
+		resolution_context,
+		TurnManager.ModalResumePolicy.RESET_ACTION
+			if TurnManager.now_phase == TurnManager.TurnPhase.ACTION
+			else TurnManager.ModalResumePolicy.RESUME_REMAINING
 	)
 	_finish_resolution_context(resolution_context)
 	interaction_finished.emit(player)
@@ -477,14 +539,22 @@ func request_play_retained_event(player: PlayerClass, card: 事件牌) -> void:
 		return
 	var resolution_context := _begin_resolution_context(card)
 	resolving = true
-	TurnManager.begin_modal_resolution()
+	_acquire_resolution_modal(
+		resolution_context,
+		&"retained_event",
+		TurnManager.ModalResumePolicy.RESET_ACTION
+			if TurnManager.now_phase == TurnManager.TurnPhase.ACTION
+			else TurnManager.ModalResumePolicy.RESUME_REMAINING
+	)
 	await play_retained_event(player, card)
 	if _is_resolution_context_cancelled(resolution_context):
 		return
 	resolving = false
-	TurnManager.end_modal_resolution(
-		TurnManager.now_phase == TurnManager.TurnPhase.ACTION,
-		TurnManager.now_phase == TurnManager.TurnPhase.MOVING
+	_release_resolution_modal(
+		resolution_context,
+		TurnManager.ModalResumePolicy.RESET_ACTION
+			if TurnManager.now_phase == TurnManager.TurnPhase.ACTION
+			else TurnManager.ModalResumePolicy.RESUME_REMAINING
 	)
 	_finish_resolution_context(resolution_context)
 	interaction_finished.emit(player)
@@ -536,7 +606,11 @@ func resolve_event(player: PlayerClass, card: 事件牌) -> void:
 	var resolution_context := _begin_resolution_context(card)
 	resolving = true
 	_skip_current_action_after_event = false
-	TurnManager.begin_modal_resolution()
+	_acquire_resolution_modal(
+		resolution_context,
+		&"event_resolution",
+		TurnManager.ModalResumePolicy.RESET_ACTION
+	)
 	gameplay_event_triggered.emit(player, card)
 	event_revealed.emit(player, card)
 	if _is_resolution_context_cancelled(resolution_context):
@@ -584,7 +658,12 @@ func resolve_event(player: PlayerClass, card: 事件牌) -> void:
 	resolving = false
 	var skip_current_action := _skip_current_action_after_event
 	_skip_current_action_after_event = false
-	TurnManager.end_modal_resolution(not skip_current_action)
+	_release_resolution_modal(
+		resolution_context,
+		TurnManager.ModalResumePolicy.NO_RESUME
+			if skip_current_action
+			else TurnManager.ModalResumePolicy.RESET_ACTION
+	)
 	_finish_resolution_context(resolution_context)
 	interaction_finished.emit(player)
 	if skip_current_action and TurnManager.GameOn and TurnManager.now_phase == TurnManager.TurnPhase.ACTION:
@@ -823,10 +902,9 @@ func _teleport_player(player: PlayerClass, section: MapSection) -> bool:
 	if player == null or section == null or player.map == null:
 		return false
 	var old_section: MapSection = player.map.grid_map.get(player.now_pos)
-	if old_section != null:
-		old_section.is_occupied = false
+	player.map.vacate_player_section(player, old_section)
 	player.now_pos = section.location_index
-	section.is_occupied = true
+	player.map.occupy_player_section(player, section)
 	player.position = player.map.to_local(section.global_position)
 	if player.hud != null:
 		player.hud._update_player_stats(player)
@@ -848,12 +926,14 @@ func _swap_player_positions(first: PlayerClass, second: PlayerClass) -> void:
 	if first_section == null or second_section == null:
 		return
 	var first_pos := first.now_pos
+	first.map.vacate_player_section(first, first_section)
+	first.map.vacate_player_section(second, second_section)
 	first.now_pos = second.now_pos
 	second.now_pos = first_pos
+	first.map.occupy_player_section(first, second_section)
+	first.map.occupy_player_section(second, first_section)
 	first.position = first.map.to_local(second_section.global_position)
 	second.position = second.map.to_local(first_section.global_position)
-	first_section.is_occupied = true
-	second_section.is_occupied = true
 	if hud != null:
 		hud._update_player_stats(first)
 		hud._update_player_stats(second)
@@ -1819,7 +1899,7 @@ func try_revive_player(dying_player: PlayerClass) -> bool:
 			ResourceManager.modify_energy(dying_player, 3, "事件：妙手回春")
 			dying_player.show()
 			if dying_player.map != null and dying_player.map.grid_map.has(dying_player.now_pos):
-				dying_player.map.grid_map[dying_player.now_pos].is_occupied = true
+				dying_player.map.occupy_player_section(dying_player, dying_player.map.grid_map[dying_player.now_pos])
 			end_modal_if_owned()
 			_finish_resolution_context(resolution_context)
 			interaction_finished.emit(holder)
@@ -1831,13 +1911,22 @@ func try_revive_player(dying_player: PlayerClass) -> bool:
 	return false
 
 var _revive_modal_owned: bool = false
+var _revive_modal_lease: int = -1
 
 func begin_modal_if_needed() -> void:
 	if not TurnManager.is_modal_resolution_active():
-		TurnManager.begin_modal_resolution()
+		_revive_modal_lease = TurnManager.acquire_modal(
+			&"event_revive",
+			TurnManager.ModalResumePolicy.NO_RESUME
+		)
 		_revive_modal_owned = true
 
 func end_modal_if_owned() -> void:
-	if _revive_modal_owned:
-		TurnManager.end_modal_resolution(false)
-		_revive_modal_owned = false
+	_release_revive_modal()
+
+
+func _release_revive_modal() -> void:
+	if _revive_modal_lease >= 0:
+		TurnManager.release_modal(_revive_modal_lease, TurnManager.ModalResumePolicy.NO_RESUME)
+	_revive_modal_lease = -1
+	_revive_modal_owned = false

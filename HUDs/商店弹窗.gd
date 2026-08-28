@@ -13,9 +13,9 @@ var hud:HUD
 var current_player: PlayerClass
 var shop_foods: Array[食物牌] = []
 var _refresh_used_this_visit: bool = false
-var _owns_modal: bool = false
-var _owns_tree_pause: bool = false
+var _modal_lease: int = -1
 var _turn_session_generation: int = -1
+var _turn_epoch: int = -1
 var _tooltip: Control
 
 func _ready():
@@ -61,15 +61,15 @@ func open_shop(player: PlayerClass) -> void:
 	current_player = player
 	_refresh_used_this_visit = false
 	_turn_session_generation = TurnManager.get_session_generation()
-	_owns_modal = TurnManager.GameOn
-	if _owns_modal:
-		TurnManager.begin_modal_resolution()
-	_owns_tree_pause = not get_tree().paused
+	_turn_epoch = TurnManager.get_turn_epoch()
+	_modal_lease = TurnManager.acquire_modal(
+		&"food_shop",
+		TurnManager.ModalResumePolicy.RESUME_REMAINING,
+		true
+	)
 	show()
 	if hud != null:
 		hud.btn_action.disabled = true
-	if _owns_tree_pause:
-		get_tree().paused = true
 	lbl_money.text = "余额：" + str(player.current_money) + " 点"
 	
 	# 从裁判那里进货 3 张牌
@@ -191,11 +191,13 @@ func _on_leave() -> void:
 	current_player = null
 	
 	hide()
-	if _owns_modal and _turn_session_generation == TurnManager.get_session_generation():
-		TurnManager.end_modal_resolution(false, true)
-	if _owns_tree_pause:
-		get_tree().paused = false
-	_owns_modal = false
-	_owns_tree_pause = false
+	var same_context: bool = (
+		_turn_session_generation == TurnManager.get_session_generation()
+		and _turn_epoch == TurnManager.get_turn_epoch()
+	)
+	if _modal_lease >= 0 and same_context:
+		TurnManager.release_modal(_modal_lease)
+	_modal_lease = -1
 	_turn_session_generation = -1
+	_turn_epoch = -1
 	

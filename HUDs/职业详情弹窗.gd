@@ -12,7 +12,9 @@ class_name ProfessionDetailPanel
 
 var _player: PlayerClass = null
 var _hud: HUD = null
-var _owns_modal := false
+var _modal_lease: int = -1
+var _modal_session_generation: int = -1
+var _modal_turn_epoch: int = -1
 
 
 func _ready() -> void:
@@ -37,8 +39,13 @@ func show_for_player(player: PlayerClass) -> void:
 	description.text = str(definition.description)
 	_refresh_status()
 	show()
-	TurnManager.begin_modal_resolution()
-	_owns_modal = true
+	_modal_session_generation = TurnManager.get_session_generation()
+	_modal_turn_epoch = TurnManager.get_turn_epoch()
+	if TurnManager.GameOn:
+		_modal_lease = TurnManager.acquire_modal(
+			&"profession_detail",
+			TurnManager.ModalResumePolicy.RESUME_REMAINING
+		)
 	close_button.grab_focus()
 
 
@@ -67,9 +74,19 @@ func close_panel() -> void:
 		return
 	hide()
 	_player = null
-	if _owns_modal:
-		TurnManager.end_modal_resolution(false, true)
-		_owns_modal = false
+	_release_modal()
+
+
+func _release_modal() -> void:
+	var same_context: bool = (
+		_modal_session_generation == TurnManager.get_session_generation()
+		and _modal_turn_epoch == TurnManager.get_turn_epoch()
+	)
+	if _modal_lease >= 0 and same_context:
+		TurnManager.release_modal(_modal_lease)
+	_modal_lease = -1
+	_modal_session_generation = -1
+	_modal_turn_epoch = -1
 
 
 func _refresh_status() -> void:

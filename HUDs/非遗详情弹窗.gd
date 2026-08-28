@@ -14,7 +14,9 @@ signal detail_closed
 
 var current_card: 非遗牌 = null
 var _hud: HUD = null
-var _owns_pause: bool = false
+var _modal_lease: int = -1
+var _modal_session_generation: int = -1
+var _modal_turn_epoch: int = -1
 
 func _ready() -> void:
 	#btn_use.pressed.connect(_on_use_pressed)
@@ -48,9 +50,7 @@ func show_detail(card_data: 非遗牌, _player: PlayerClass) -> void:
 	lbl_desc.text = String(content.get("description", ""))
 	lbl_effect.text = String(content.get("effect", ""))
 	if not visible:
-		_owns_pause = not get_tree().paused
-		if _owns_pause:
-			get_tree().paused = true
+		_begin_modal()
 	show()
 
 
@@ -77,7 +77,27 @@ func close_detail() -> void:
 	if not visible:
 		return
 	hide()
-	if _owns_pause:
-		get_tree().paused = false
-	_owns_pause = false
+	_release_modal()
 	detail_closed.emit()
+
+
+func _begin_modal() -> void:
+	_modal_session_generation = TurnManager.get_session_generation()
+	_modal_turn_epoch = TurnManager.get_turn_epoch()
+	_modal_lease = TurnManager.acquire_modal(
+		&"feiyi_detail",
+		TurnManager.ModalResumePolicy.RESUME_REMAINING,
+		true
+	)
+
+
+func _release_modal() -> void:
+	var same_context: bool = (
+		_modal_session_generation == TurnManager.get_session_generation()
+		and _modal_turn_epoch == TurnManager.get_turn_epoch()
+	)
+	if _modal_lease >= 0 and same_context:
+		TurnManager.release_modal(_modal_lease)
+	_modal_lease = -1
+	_modal_session_generation = -1
+	_modal_turn_epoch = -1

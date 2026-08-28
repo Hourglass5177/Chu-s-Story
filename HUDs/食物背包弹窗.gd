@@ -8,9 +8,9 @@ const FOOD_CARD_VIEW_SCRIPT := preload("res://HUDs/food_card_view.gd")
 @onready var btn_close = $BtnClose
 var hud:HUD
 var _tooltip: Control
-var _modal_token: int = -1
-var _owns_modal: bool = false
-var _owns_tree_pause: bool = false
+var _modal_lease: int = -1
+var _modal_session_generation: int = -1
+var _modal_turn_epoch: int = -1
 var _resolving: bool = false
 
 func _ready():
@@ -50,13 +50,9 @@ func open_backpack(player: PlayerClass) -> void:
 		for card in player.食物牌手牌:
 			_create_food_item_ui(card, player)
 			
+	if _modal_session_generation < 0:
+		_begin_modal()
 	show()
-	if not _owns_modal and TurnManager.GameOn:
-		_modal_token = TurnManager.begin_modal_resolution()
-		_owns_modal = true
-	if not _owns_tree_pause and not get_tree().paused:
-		get_tree().paused = true
-		_owns_tree_pause = true
 
 # 纯代码动态生成单个食物 UI 项
 func _create_food_item_ui(card: 食物牌, player: PlayerClass) -> void:
@@ -97,10 +93,26 @@ func _on_close():
 	if _resolving:
 		return
 	hide()
-	if _owns_modal:
-		TurnManager.end_modal_resolution(false, true, _modal_token)
-	if _owns_tree_pause:
-		get_tree().paused = false
-	_owns_modal = false
-	_owns_tree_pause = false
-	_modal_token = -1
+	_release_modal()
+
+
+func _begin_modal() -> void:
+	_modal_session_generation = TurnManager.get_session_generation()
+	_modal_turn_epoch = TurnManager.get_turn_epoch()
+	_modal_lease = TurnManager.acquire_modal(
+		&"food_backpack",
+		TurnManager.ModalResumePolicy.RESUME_REMAINING,
+		true
+	)
+
+
+func _release_modal() -> void:
+	var same_context: bool = (
+		_modal_session_generation == TurnManager.get_session_generation()
+		and _modal_turn_epoch == TurnManager.get_turn_epoch()
+	)
+	if _modal_lease >= 0 and same_context:
+		TurnManager.release_modal(_modal_lease)
+	_modal_lease = -1
+	_modal_session_generation = -1
+	_modal_turn_epoch = -1

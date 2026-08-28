@@ -85,6 +85,31 @@ func _clear_all_highlights() -> void:
 	for section:MapSection in grid_map.values():
 		section.is_reachable = false
 
+
+## 玩家占用的唯一写入口。MapSection 内部按玩家实例计数，因此事件允许的
+## 多人同格不会在其中一人离开时误把整格标记为空。
+func occupy_player_section(player: PlayerClass, section: MapSection) -> void:
+	if player == null or section == null:
+		return
+	section.add_occupant(player)
+
+
+func vacate_player_section(player: PlayerClass, section: MapSection) -> void:
+	if player == null or section == null:
+		return
+	section.remove_occupant(player)
+	# 兼容旧场景/测试只写 is_occupied=true 的占用标记。setter 仅清除
+	# legacy 标志，不会删除同格其他玩家的正式登记。
+	section.is_occupied = false
+
+
+func transfer_player_occupancy(player: PlayerClass, from_section: MapSection, to_section: MapSection) -> void:
+	if player == null or to_section == null:
+		return
+	if from_section != to_section:
+		vacate_player_section(player, from_section)
+	occupy_player_section(player, to_section)
+
 func begin_event_section_choice(request_id: int, sections: Array[MapSection]) -> void:
 	begin_section_choice(&"event", request_id, sections)
 

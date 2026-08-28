@@ -312,12 +312,22 @@ func draw_event_card_with_profession(player: PlayerClass) -> 事件牌:
 func _request_profession_draw_choice(player: PlayerClass, candidates: Array, deck_kind: StringName) -> ProfessionDrawResult:
 	var owns_modal: bool = bool(TurnManager.GameOn)
 	var turn_session_generation: int = TurnManager.get_session_generation()
-	var modal_token: int = -1
+	var turn_epoch: int = TurnManager.get_turn_epoch()
+	var modal_lease: int = -1
 	if owns_modal:
-		modal_token = TurnManager.begin_modal_resolution()
+		modal_lease = TurnManager.acquire_modal(
+			&"profession_draw_choice",
+			TurnManager.ModalResumePolicy.RESUME_REMAINING
+		)
 	var result: ProfessionDrawResult = await ProfessionManager.request_draw_choice(player, candidates, deck_kind)
-	if owns_modal and turn_session_generation == TurnManager.get_session_generation():
-		TurnManager.end_modal_resolution(false, true, modal_token)
+	var same_context: bool = (
+		turn_session_generation == TurnManager.get_session_generation()
+		and turn_epoch == TurnManager.get_turn_epoch()
+	)
+	if owns_modal and modal_lease >= 0 and same_context:
+		TurnManager.release_modal(modal_lease)
+	if not same_context:
+		return ProfessionDrawResult.new(null, [], true)
 	return result
 
 func _take_top_cards(deck: Array, count: int) -> Array:

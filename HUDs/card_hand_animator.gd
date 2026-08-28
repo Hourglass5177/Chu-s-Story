@@ -17,7 +17,9 @@ var _playing: bool = false
 var _hidden_gain_cards: Array[卡牌基类] = []
 var _active_tween: Tween = null
 var _generation: int = 0
-var _owns_modal: bool = false
+var _modal_lease: int = -1
+var _modal_session_generation: int = -1
+var _modal_turn_epoch: int = -1
 var _waiting_for_detail: bool = false
 
 
@@ -67,9 +69,15 @@ func enqueue(
 	})
 	if kind in [ResourceManager.CardHandVisualKind.获得, ResourceManager.CardHandVisualKind.转移] and not _hidden_gain_cards.has(card):
 		_hidden_gain_cards.append(card)
-	if block_gameplay and not _owns_modal and TurnManager.GameOn and not TurnManager.is_modal_resolution_active():
-		TurnManager.begin_modal_resolution()
-		_owns_modal = true
+	# 动画可能由事件/食物等已有模态内部触发；它仍必须持有自己的嵌套租约，
+	# 否则外层先结束时会在卡牌动画尚未完成前恢复阶段计时。
+	if block_gameplay and _modal_lease < 0 and TurnManager.GameOn:
+		_modal_session_generation = TurnManager.get_session_generation()
+		_modal_turn_epoch = TurnManager.get_turn_epoch()
+		_modal_lease = TurnManager.acquire_modal(
+			&"card_hand_animation",
+			TurnManager.ModalResumePolicy.RESUME_REMAINING
+		)
 	if not _playing:
 		_play_queue.call_deferred()
 
@@ -134,10 +142,17 @@ func _play_queue() -> void:
 
 
 func _release_owned_modal() -> void:
-	if not _owns_modal:
+	if _modal_lease < 0:
 		return
-	_owns_modal = false
-	TurnManager.end_modal_resolution(false, true)
+	var same_context: bool = (
+		_modal_session_generation == TurnManager.get_session_generation()
+		and _modal_turn_epoch == TurnManager.get_turn_epoch()
+	)
+	if same_context:
+		TurnManager.release_modal(_modal_lease)
+	_modal_lease = -1
+	_modal_session_generation = -1
+	_modal_turn_epoch = -1
 
 
 func _play_gain(request: Dictionary) -> void:

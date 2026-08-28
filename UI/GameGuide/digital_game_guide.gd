@@ -83,10 +83,6 @@ var _opened: bool = false
 var _closing: bool = false
 var _narrow_layout: bool = false
 var _drawer_open: bool = false
-var _was_tree_paused: bool = false
-var _owns_tree_pause: bool = false
-var _open_session_generation: int = -1
-var _open_turn_epoch: int = -1
 var _turn_modal_lease: int = -1
 var _interaction_suspend_lease: int = -1
 var _resource_index: Dictionary = {}
@@ -166,10 +162,11 @@ func open_guide(context: GuideOpenContext = null, animated: bool = true) -> bool
 		guide_opened.emit(_context)
 		return true
 	_context = context if context != null else GuideOpenContext.new()
-	_was_tree_paused = get_tree().paused
-	_open_session_generation = TurnManager.get_session_generation()
-	_open_turn_epoch = TurnManager.get_turn_epoch()
-	_turn_modal_lease = TurnManager.acquire_modal(&"digital_game_guide", TurnManager.ModalResumePolicy.RESUME_REMAINING) if TurnManager.GameOn else -1
+	_turn_modal_lease = TurnManager.acquire_modal(
+		&"digital_game_guide",
+		TurnManager.ModalResumePolicy.RESUME_REMAINING,
+		true
+	)
 	_interaction_suspend_lease = InteractionCoordinator.suspend_active(&"digital_game_guide")
 	_opened = true
 	_closing = false
@@ -181,9 +178,8 @@ func open_guide(context: GuideOpenContext = null, animated: bool = true) -> bool
 	_open_context_destination()
 	_focus_after_enter = true
 	var animate_open := _should_animate(animated)
-	# 全屏遮罩出现前先暂停后台；FrontendScreen 的 Tween 使用 PROCESS 模式，
-	# 因而仍能在暂停树中完成入场动画。
-	_take_tree_pause()
+	# acquire_modal 已在全屏遮罩出现前暂停后台；FrontendScreen 的 Tween 使用
+	# PROCESS 模式，因而仍能在暂停树中完成入场动画。
 	enter_screen(animate_open)
 	guide_opened.emit(_context)
 	return true
@@ -309,33 +305,19 @@ func _exit_tree() -> void:
 func _finalize_close(restore_focus: bool) -> void:
 	_close_media_preview(false)
 	var closed_context := _context
-	var owned_tree_pause := _owns_tree_pause
 	_opened = false
 	_closing = false
 	_focus_after_enter = false
 	_direction_navigation_engaged = false
 	_left_pointer_button_held = false
 	_drawer_open = false
-	_owns_tree_pause = false
 	if _turn_modal_lease >= 0:
 		TurnManager.release_modal(_turn_modal_lease)
 	_turn_modal_lease = -1
-	var tree := get_tree()
-	var same_runtime_context: bool = (
-		_open_session_generation == TurnManager.get_session_generation()
-		and _open_turn_epoch == TurnManager.get_turn_epoch()
-	)
-	var terminal_pause: bool = not TurnManager.GameOn and TurnManager.get_game_result() != null
-	# 只撤销指南自己建立、且仍属于同一局同一回合的暂停。终局或会话切换
-	# 已经接管暂停所有权时，旧指南绝不能把新状态重新放行。
-	if tree != null and owned_tree_pause and same_runtime_context and not terminal_pause:
-		tree.paused = _was_tree_paused
 	if _interaction_suspend_lease >= 0:
 		InteractionCoordinator.resume_active(_interaction_suspend_lease)
 	_interaction_suspend_lease = -1
 	_restore_background_focus()
-	_open_session_generation = -1
-	_open_turn_epoch = -1
 	if restore_focus and closed_context != null:
 		closed_context.restore_scroll_state()
 		var focus := closed_context.get_return_focus()
@@ -344,14 +326,6 @@ func _finalize_close(restore_focus: bool) -> void:
 	_context = null
 	if closed_context != null:
 		guide_closed.emit(closed_context)
-
-
-func _take_tree_pause() -> void:
-	var tree := get_tree()
-	if tree == null:
-		return
-	tree.paused = true
-	_owns_tree_pause = not _was_tree_paused
 
 
 func _open_context_destination() -> void:

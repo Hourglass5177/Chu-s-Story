@@ -9,8 +9,6 @@ var _modal_lease: int = -1
 var _interaction_suspend_lease: int = -1
 var _session_generation: int = -1
 var _turn_epoch: int = -1
-var _was_tree_paused := false
-var _owns_tree_pause := false
 
 
 func _ready() -> void:
@@ -35,16 +33,17 @@ func open_pause() -> bool:
 		return false
 	_session_generation = TurnManager.get_session_generation()
 	_turn_epoch = TurnManager.get_turn_epoch()
-	_was_tree_paused = get_tree().paused
 	_interaction_suspend_lease = InteractionCoordinator.suspend_active(&"pause_menu")
-	_modal_lease = TurnManager.acquire_modal(&"pause_menu", TurnManager.ModalResumePolicy.RESUME_REMAINING)
+	_modal_lease = TurnManager.acquire_modal(
+		&"pause_menu",
+		TurnManager.ModalResumePolicy.RESUME_REMAINING,
+		true
+	)
 	if _modal_lease < 0:
 		if _interaction_suspend_lease >= 0:
 			InteractionCoordinator.resume_active(_interaction_suspend_lease)
 		_clear_runtime_state()
 		return false
-	_owns_tree_pause = not _was_tree_paused
-	get_tree().paused = true
 	show()
 	continue_button.call_deferred(&"grab_focus")
 	return true
@@ -58,13 +57,10 @@ func close_pause() -> bool:
 		_session_generation == TurnManager.get_session_generation()
 		and _turn_epoch == TurnManager.get_turn_epoch()
 	)
-	var terminal_pause: bool = not TurnManager.GameOn and TurnManager.get_game_result() != null
-	if _modal_lease >= 0 and same_context and not terminal_pause:
+	if _modal_lease >= 0 and same_context:
 		TurnManager.release_modal(_modal_lease)
 	if _interaction_suspend_lease >= 0:
 		InteractionCoordinator.resume_active(_interaction_suspend_lease)
-	if _owns_tree_pause and same_context and not terminal_pause:
-		get_tree().paused = _was_tree_paused
 	_clear_runtime_state()
 	resumed.emit()
 	return true
@@ -101,5 +97,3 @@ func _clear_runtime_state() -> void:
 	_interaction_suspend_lease = -1
 	_session_generation = -1
 	_turn_epoch = -1
-	_was_tree_paused = false
-	_owns_tree_pause = false

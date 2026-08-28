@@ -412,6 +412,27 @@ func test_standalone_hand_animation_pauses_and_resumes_original_phase_time() -> 
 	assert_lte(TurnManager.turn_timer.time_left, 8.0)
 
 
+func test_hand_animation_keeps_its_own_lease_inside_an_existing_modal() -> void:
+	var card := load("res://Cards/事件牌/游目骋怀.tres") as 事件牌
+	TurnManager.turn_timer.start(8.0)
+	var outer_lease := TurnManager.acquire_modal(
+		&"animation_outer_event",
+		TurnManager.ModalResumePolicy.RESUME_REMAINING
+	)
+
+	assert_true(ResourceManager.add_event_card(_player, card))
+	assert_eq(TurnManager.modal_resolution_depth, 2, "外层结算与手牌动画必须各自持有租约")
+	assert_true(TurnManager.release_modal(outer_lease))
+	assert_eq(TurnManager.modal_resolution_depth, 1)
+	assert_true(TurnManager.turn_timer.is_stopped(), "外层先结束时，动画租约仍须阻止阶段计时恢复")
+
+	await _hud.card_hand_animator.animation_finished
+	await get_tree().process_frame
+	assert_eq(TurnManager.modal_resolution_depth, 0)
+	assert_false(TurnManager.turn_timer.is_stopped())
+	assert_gt(TurnManager.turn_timer.time_left, 7.0)
+
+
 func _run_event(card: 事件牌) -> void:
 	await EventManager.resolve_event(_player, card)
 	_async_done = true

@@ -43,6 +43,8 @@ var _modal_leases: Dictionary[int, Dictionary] = {}
 var _legacy_modal_stack: Array[int] = []
 var _root_modal_policy: ModalResumePolicy = ModalResumePolicy.NO_RESUME
 var _root_modal_lease_id: int = -1
+var _tree_pause_depth: int = 0
+var _tree_pause_restore_state: bool = false
 var _session_generation: int = 0
 var _turn_epoch: int = 0
 var _ending_turn: bool = false
@@ -78,6 +80,7 @@ func start_game(player_nodes: Array[PlayerClass]) -> void:
 	_last_game_result = null
 	modal_resolution_depth = 0
 	_modal_resolution_token += 1
+	_clear_tree_pause_ownership(false)
 	_modal_leases.clear()
 	_legacy_modal_stack.clear()
 	movement_lock_active = false
@@ -192,7 +195,11 @@ func end_movement_lock() -> void:
 func is_movement_locked() -> bool:
 	return movement_lock_active
 
-func acquire_modal(owner: StringName, resume_policy: ModalResumePolicy = ModalResumePolicy.NO_RESUME) -> int:
+func acquire_modal(
+	owner: StringName,
+	resume_policy: ModalResumePolicy = ModalResumePolicy.NO_RESUME,
+	pause_tree: bool = false
+) -> int:
 	if modal_resolution_depth == 0:
 		_modal_resolution_token += 1
 		_modal_resume_phase = now_phase
@@ -210,8 +217,11 @@ func acquire_modal(owner: StringName, resume_policy: ModalResumePolicy = ModalRe
 		"session_generation": _session_generation,
 		"turn_epoch": _turn_epoch,
 		"resume_policy": resume_policy,
+		"pause_tree": pause_tree,
 	}
 	modal_resolution_depth += 1
+	if pause_tree:
+		_acquire_tree_pause()
 	if not turn_timer.is_stopped():
 		turn_timer.stop()
 	modal_state_changed.emit(get_modal_snapshot())
@@ -226,9 +236,12 @@ func release_modal(lease_id: int, resume_policy_override: int = -1) -> bool:
 		return false
 	if lease_id == _root_modal_lease_id and resume_policy_override >= 0:
 		_root_modal_policy = resume_policy_override
+	var pauses_tree: bool = bool(lease.get("pause_tree", false))
 	_modal_leases.erase(lease_id)
 	_legacy_modal_stack.erase(lease_id)
 	modal_resolution_depth = maxi(modal_resolution_depth - 1, 0)
+	if pauses_tree:
+		_release_tree_pause()
 	if modal_resolution_depth > 0:
 		modal_state_changed.emit(get_modal_snapshot())
 		return true
@@ -247,6 +260,7 @@ func release_modal(lease_id: int, resume_policy_override: int = -1) -> bool:
 func invalidate_all_modals(reason: StringName = &"invalidated") -> void:
 	if OS.is_debug_build() and modal_resolution_depth > 0:
 		print_debug("清理模态租约：%s %s" % [reason, str(get_modal_snapshot())])
+	_clear_tree_pause_ownership(true)
 	_modal_leases.clear()
 	_legacy_modal_stack.clear()
 	modal_resolution_depth = 0
@@ -258,11 +272,19 @@ func invalidate_all_modals(reason: StringName = &"invalidated") -> void:
 
 func get_modal_snapshot() -> Dictionary:
 	var owners: Array[StringName] = []
+	var tree_pause_owners: Array[StringName] = []
 	for lease: Dictionary in _modal_leases.values():
-		owners.append(lease.get("owner", &"unknown"))
+		var owner: StringName = lease.get("owner", &"unknown")
+		owners.append(owner)
+		if bool(lease.get("pause_tree", false)):
+			tree_pause_owners.append(owner)
 	return {
 		"depth": modal_resolution_depth,
 		"owners": owners,
+		"tree_pause_depth": _tree_pause_depth,
+		"tree_pause_owners": tree_pause_owners,
+		"tree_paused": get_tree().paused if get_tree() != null else false,
+		"tree_pause_restore_state": _tree_pause_restore_state,
 		"resume_phase": _modal_resume_phase,
 		"resume_time": _modal_resume_time,
 		"session_generation": _modal_resume_session_generation,
@@ -301,6 +323,45 @@ func _clear_modal_resume_context() -> void:
 	_root_modal_policy = ModalResumePolicy.NO_RESUME
 	_root_modal_lease_id = -1
 
+
+func _acquire_tree_pause() -> void:
+	var tree := get_tree()
+	if _tree_pause_depth == 0:
+		_tree_pause_restore_state = tree.paused if tree != null else false
+	_tree_pause_depth += 1
+	if tree != null:
+		tree.paused = true
+
+
+func _release_tree_pause() -> void:
+	if _tree_pause_depth <= 0:
+		push_error("TurnManager._release_tree_pause: 暂停所有权计数已经归零。")
+		_tree_pause_depth = 0
+		return
+	_tree_pause_depth -= 1
+	if _tree_pause_depth > 0:
+		return
+	var tree := get_tree()
+	if tree != null:
+		tree.paused = true if _should_preserve_terminal_tree_pause() else _tree_pause_restore_state
+	_tree_pause_restore_state = false
+
+
+func _clear_tree_pause_ownership(restore_previous: bool) -> void:
+	if _tree_pause_depth > 0:
+		var tree := get_tree()
+		if tree != null:
+			if restore_previous and _should_preserve_terminal_tree_pause():
+				tree.paused = true
+			else:
+				tree.paused = _tree_pause_restore_state if restore_previous else false
+	_tree_pause_depth = 0
+	_tree_pause_restore_state = false
+
+
+func _should_preserve_terminal_tree_pause() -> bool:
+	return not GameOn and _last_game_result != null
+
 func is_modal_resolution_active() -> bool:
 	return modal_resolution_depth > 0
 
@@ -326,8 +387,29 @@ func now_turn_end() -> void:
 		var ending_player: PlayerClass = players[now_player_index]
 		var was_alive := ending_player.alive
 		await ending_player.resolve_turn_end_elimination()
+		# resolve_turn_end_elimination() 可能等待死亡响应。在读取玩家节点
+		# 之前必须先验证会话，否则返回主菜单后旧协程会读取已释放
+		# 的 Player，甚至把新局的暂停状态解开。
+		if ending_session_generation != _session_generation \
+				or ending_turn_epoch != _turn_epoch \
+				or not GameOn \
+				or not is_instance_valid(ending_player):
+			if ending_session_generation == _session_generation:
+				_ending_turn = false
+			return
 		if was_alive and not ending_player.alive:
 			player_eliminated.emit(ending_player, now_turn)
+			await _play_turn_end_elimination_presentation(
+				ending_session_generation,
+				ending_turn_epoch,
+				ending_player
+			)
+			if ending_session_generation != _session_generation \
+					or ending_turn_epoch != _turn_epoch \
+					or not GameOn:
+				if ending_session_generation == _session_generation:
+					_ending_turn = false
+				return
 	# 返回主菜单并快速开始新局时，旧局的 END 协程不得继续操作新局状态。
 	if ending_session_generation != _session_generation or ending_turn_epoch != _turn_epoch:
 		if ending_session_generation == _session_generation:
@@ -336,7 +418,17 @@ func now_turn_end() -> void:
 	if not GameOn:
 		_ending_turn = false
 		return
-	assert_runtime_quiescent("回合 %d 交接" % now_turn)
+	if not await recover_runtime_quiescence("回合 %d 交接" % now_turn):
+		push_error("TurnManager.now_turn_end: 运行时清理失败，拒绝交接下一位玩家。")
+		_ending_turn = false
+		if GameOn and now_phase == TurnPhase.END:
+			turn_timer.start(0.25)
+		return
+	# 清理过程会让已取消的 await 协程恢复；再次确认仍属于原会话和原回合。
+	if ending_session_generation != _session_generation or ending_turn_epoch != _turn_epoch or not GameOn:
+		if ending_session_generation == _session_generation:
+			_ending_turn = false
+		return
 	if now_player_index >= 0 and now_player_index < players.size():
 		turn_completed.emit(players[now_player_index], now_turn)
 	# 淘汰结算完成后再同时检查两项胜利条件，避免死亡回调抢先结束游戏。
@@ -356,6 +448,33 @@ func now_turn_end() -> void:
 	_ending_turn = false
 	now_turn_start()
 
+
+func _play_turn_end_elimination_presentation(
+	presentation_session_generation: int,
+	presentation_turn_epoch: int,
+	presented_player: PlayerClass = null
+) -> void:
+	if GameManager.is_headless_simulation() \
+			or presented_player == null \
+			or not is_instance_valid(presented_player) \
+			or not presented_player.is_inside_tree() \
+			or presentation_session_generation != _session_generation \
+			or presentation_turn_epoch != _turn_epoch \
+			or not GameOn:
+		return
+	# 延迟由常驻 TurnManager 持有，不绑在会随场景销毁的 Player 上。
+	# 新局或返回主菜单会先作废租约；旧等待恢复后只读代次，
+	# 不会无条件改写 SceneTree.paused。
+	var presentation_lease: int = acquire_modal(
+		&"turn_end_elimination",
+		ModalResumePolicy.NO_RESUME,
+		true
+	)
+	await get_tree().create_timer(2.5, true).timeout
+	if presentation_session_generation == _session_generation \
+			and presentation_turn_epoch == _turn_epoch:
+		release_modal(presentation_lease, ModalResumePolicy.NO_RESUME)
+
 func getNextPlayer(player_id: int) -> int:
 	if player_num <= 0:
 		return -1
@@ -366,16 +485,61 @@ func getNextPlayer(player_id: int) -> int:
 	return -1
 
 func assert_runtime_quiescent(context: String = "") -> bool:
-	var interaction_quiet := InteractionCoordinator.assert_quiescent(context)
+	var interaction_quiet := InteractionCoordinator.get_active_snapshot().is_empty()
 	var modal_quiet := modal_resolution_depth == 0 and _modal_leases.is_empty()
+	var tree_pause_quiet := _tree_pause_depth == 0
+	var tree_state_quiet := not (
+		GameOn
+		and _last_game_result == null
+		and get_tree() != null
+		and get_tree().paused
+		and _tree_pause_depth == 0
+	)
 	var map_quiet := map == null or not map.is_section_choice_active()
 	var event_quiet := not EventManager.resolving
-	var quiet := interaction_quiet and modal_quiet and map_quiet and event_quiet and not movement_lock_active
+	var quiet := interaction_quiet and modal_quiet and tree_pause_quiet and tree_state_quiet and map_quiet and event_quiet and not movement_lock_active
 	if not quiet and OS.is_debug_build():
-		push_error("运行时未归零（%s）：interaction=%s modal=%s map_choice=%s event=%s movement=%s" % [
-			context, str(get_active_interaction_snapshot()), str(get_modal_snapshot()), str(not map_quiet), str(not event_quiet), str(movement_lock_active)
+		push_error("运行时未归零（%s）：interaction=%s modal=%s tree_pause=%s map_choice=%s event=%s movement=%s" % [
+			context, str(get_active_interaction_snapshot()), str(get_modal_snapshot()), str(not tree_state_quiet), str(not map_quiet), str(not event_quiet), str(movement_lock_active)
 		])
 	return quiet
+
+
+## 只读检查当前运行时是否已经归零，不产生错误日志。
+## 回合交接允许先发现并清理可恢复的遗留状态；只有清理后仍不安静才报告错误。
+func _is_runtime_quiescent() -> bool:
+	var interaction_quiet := InteractionCoordinator.get_active_snapshot().is_empty()
+	var modal_quiet := modal_resolution_depth == 0 and _modal_leases.is_empty()
+	var tree_pause_quiet := _tree_pause_depth == 0
+	var tree_state_quiet := not (
+		GameOn
+		and _last_game_result == null
+		and get_tree() != null
+		and get_tree().paused
+		and _tree_pause_depth == 0
+	)
+	var map_quiet := map == null or not map.is_section_choice_active()
+	var event_quiet := not EventManager.resolving
+	return interaction_quiet and modal_quiet and tree_pause_quiet and tree_state_quiet and map_quiet and event_quiet and not movement_lock_active
+
+
+## 回合交接的 fail-closed 防线：先取消遗留交互并释放所有展示/模态状态，
+## 等待一帧让已取消的协程收尾，再复检。复检失败时调用者不得推进回合。
+func recover_runtime_quiescence(context: String = "") -> bool:
+	if _is_runtime_quiescent():
+		return true
+	var reason := StringName("turn_handoff_cleanup")
+	EventManager.cancel_active_resolution(reason)
+	InteractionCoordinator.cancel_all(reason)
+	if map != null:
+		map.end_section_choice()
+	invalidate_all_modals(reason)
+	if GameOn and _last_game_result == null and get_tree() != null:
+		get_tree().paused = false
+	movement_lock_active = false
+	_movement_resume_time = 0.0
+	await get_tree().process_frame
+	return assert_runtime_quiescent("%s（清理后）" % context)
 
 func get_active_interaction_snapshot() -> Dictionary:
 	return InteractionCoordinator.get_active_snapshot()

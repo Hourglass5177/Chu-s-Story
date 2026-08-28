@@ -1,6 +1,7 @@
 extends GutTest
 
 const MAIN_MENU_SCENE: PackedScene = preload("res://main_menu.tscn")
+const REAL_POINTER_DRIVER := preload("res://tests/helpers/real_pointer_driver.gd")
 const STABLE_SCREENS: Array[StringName] = [
 	&"home",
 	&"mode",
@@ -97,31 +98,21 @@ func test_home_start_button_accepts_a_real_pointer_click() -> void:
 	var isolated_menu := MAIN_MENU_SCENE.instantiate() as Control
 	isolated_viewport.add_child(isolated_menu)
 	await get_tree().process_frame
+	await get_tree().process_frame
+	var pointer = REAL_POINTER_DRIVER.new(isolated_viewport, get_tree())
 	var start_button := _find_button(_get_screen_from(isolated_menu, &"home"), "开始游戏")
 	assert_not_null(start_button)
 	if start_button == null:
 		return
-	var click_position := start_button.get_global_rect().get_center()
-	var motion := InputEventMouseMotion.new()
-	motion.position = click_position
-	motion.global_position = click_position
-	isolated_viewport.push_input(motion, false)
-	await get_tree().process_frame
-	assert_eq(isolated_viewport.gui_get_hovered_control(), start_button, "真实鼠标命中必须落到开始按钮")
-	var pressed := InputEventMouseButton.new()
-	pressed.button_index = MOUSE_BUTTON_LEFT
-	pressed.position = click_position
-	pressed.global_position = click_position
-	pressed.pressed = true
-	isolated_viewport.push_input(pressed, false)
-	var released := InputEventMouseButton.new()
-	released.button_index = MOUSE_BUTTON_LEFT
-	released.position = click_position
-	released.global_position = click_position
-	released.pressed = false
-	isolated_viewport.push_input(released, false)
-	await get_tree().process_frame
+	assert_same(await pointer.click(start_button), start_button, "开始按钮必须一次真实点击生效")
 	assert_eq(isolated_menu.call(&"get_current_screen"), &"mode")
+
+	var local_card := _find_card(_get_screen_from(isolated_menu, &"mode"), "本地游戏")
+	assert_not_null(local_card)
+	if local_card == null:
+		return
+	assert_same(await pointer.click(local_card), local_card, "页面切换后的本地游戏卡片也必须一次点击生效")
+	assert_eq(isolated_menu.call(&"get_current_screen"), &"local_count")
 
 
 func test_scene_exposes_the_stable_frontend_contract() -> void:

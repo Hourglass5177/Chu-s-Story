@@ -21,7 +21,9 @@ var _timeout_seconds: float = 15.0
 var _current_card_name: String = ""
 var _current_event_id: StringName = &""
 var _showing_retained_preview: bool = false
-var _retained_preview_owns_pause: bool = false
+var _retained_preview_modal_lease: int = -1
+var _retained_preview_session_generation: int = -1
+var _retained_preview_turn_epoch: int = -1
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -200,10 +202,8 @@ func show_retained_card_detail(player: PlayerClass, card: 事件牌) -> void:
 	close_button.text = "关闭"
 	close_button.pressed.connect(close_retained_card_detail)
 	_options_box.add_child(close_button)
+	_begin_retained_preview_modal()
 	show()
-	_retained_preview_owns_pause = not get_tree().paused
-	if _retained_preview_owns_pause:
-		get_tree().paused = true
 	close_button.grab_focus()
 
 
@@ -215,9 +215,25 @@ func close_retained_card_detail() -> void:
 
 
 func _release_retained_preview_pause() -> void:
-	if _retained_preview_owns_pause:
-		get_tree().paused = false
-		_retained_preview_owns_pause = false
+	var same_context: bool = (
+		_retained_preview_session_generation == TurnManager.get_session_generation()
+		and _retained_preview_turn_epoch == TurnManager.get_turn_epoch()
+	)
+	if _retained_preview_modal_lease >= 0 and same_context:
+		TurnManager.release_modal(_retained_preview_modal_lease)
+	_retained_preview_modal_lease = -1
+	_retained_preview_session_generation = -1
+	_retained_preview_turn_epoch = -1
+
+
+func _begin_retained_preview_modal() -> void:
+	_retained_preview_session_generation = TurnManager.get_session_generation()
+	_retained_preview_turn_epoch = TurnManager.get_turn_epoch()
+	_retained_preview_modal_lease = TurnManager.acquire_modal(
+		&"retained_event_detail",
+		TurnManager.ModalResumePolicy.RESUME_REMAINING,
+		true
+	)
 
 
 func _on_retained_use_pressed(player: PlayerClass, card: 事件牌) -> void:

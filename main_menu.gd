@@ -70,6 +70,8 @@ var _start_locked := false
 var _loading_label: Label
 var _loading_timer: Timer
 var _loading_dot_count := 0
+var _loading_request_generation := 0
+var _pending_session_snapshot: SessionSetup
 var _session_launcher: FrontendSessionLauncher = SESSION_LAUNCHER_SCRIPT.new() as FrontendSessionLauncher
 var _game_guide: DigitalGameGuide
 var _home_rules_button: Button
@@ -85,6 +87,15 @@ func _ready() -> void:
 	_build_frontend()
 	_connect_preferences()
 	show_screen(SCREEN_HOME, false)
+
+
+func _exit_tree() -> void:
+	# Loading is intentionally split across rendered frames. Invalidate its callbacks
+	# before this menu is destroyed so an abandoned draft cannot prepare a session.
+	_loading_request_generation += 1
+	_pending_session_snapshot = null
+	if _loading_timer != null:
+		_loading_timer.stop()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -567,15 +578,56 @@ func _mark_slot_touched(slot_index: int) -> void:
 
 
 func _begin_local_session(snapshot: SessionSetup) -> void:
-	await get_tree().process_frame
-	if not is_inside_tree() or not _start_locked:
+	# Do not use an await chain owned by the menu here. Scene changes and tests may
+	# destroy this node between frames, and Godot then reports a resumed dead
+	# coroutine while retaining the captured SessionSetup. One-shot callbacks are
+	# disconnected automatically with their target and keep the handoff cancellable.
+	_loading_request_generation += 1
+	_pending_session_snapshot = snapshot
+	_queue_loading_frame(_on_loading_first_frame, _loading_request_generation)
+
+
+func _queue_loading_frame(callback: Callable, generation: int) -> void:
+	var tree := get_tree()
+	if tree == null:
+		return
+	tree.process_frame.connect(callback.bind(generation), CONNECT_ONE_SHOT)
+
+
+func _is_loading_request_current(generation: int) -> bool:
+	return (
+		generation == _loading_request_generation
+		and _pending_session_snapshot != null
+		and is_inside_tree()
+		and _start_locked
+		and _current_screen == SCREEN_LOADING
+	)
+
+
+func _on_loading_first_frame(generation: int) -> void:
+	if not _is_loading_request_current(generation):
 		return
 	var loading_page := _pages.get(SCREEN_LOADING) as FrontendScreen
 	if loading_page != null and loading_page.screen_state != FrontendScreen.ScreenState.ACTIVE:
-		await loading_page.transition_finished
-	if not is_inside_tree() or not _start_locked or _current_screen != SCREEN_LOADING:
+		loading_page.transition_finished.connect(
+			_on_loading_transition_finished.bind(generation),
+			CONNECT_ONE_SHOT,
+		)
 		return
-	await get_tree().process_frame
+	_queue_loading_frame(_prepare_pending_local_session, generation)
+
+
+func _on_loading_transition_finished(_state: FrontendScreen.ScreenState, generation: int) -> void:
+	if not _is_loading_request_current(generation):
+		return
+	_queue_loading_frame(_prepare_pending_local_session, generation)
+
+
+func _prepare_pending_local_session(generation: int) -> void:
+	if not _is_loading_request_current(generation):
+		return
+	var snapshot := _pending_session_snapshot
+	_pending_session_snapshot = null
 	var error := _session_launcher.prepare_local_session(snapshot)
 	if error != OK:
 		_start_locked = false

@@ -62,9 +62,14 @@ func start_match(config: SimulationMatchConfig, players: Array) -> void:
 	_connect(ProfessionManager.profession_changed, _on_profession_changed)
 
 func finish_match(result: GameResult = null, abort_reason: String = "") -> Dictionary:
-	if not abort_reason.is_empty():
+	var effective_abort_reason := abort_reason
+	# 没有正式结果快照绝不能被序列化成一局“成功”的空对局。调用方仍会补充
+	# 启动、回合数和运行时归零等完整契约，这里先对最危险的假成功采取失败关闭。
+	if result == null:
+		effective_abort_reason = _join_abort_reasons(effective_abort_reason, "missing_game_result")
+	if not effective_abort_reason.is_empty():
 		_report["aborted"] = true
-		_report["abort_reason"] = abort_reason
+		_report["abort_reason"] = effective_abort_reason
 	_report["end_reason"] = result.end_reason if result != null else -1
 	var ranks: Dictionary[int, int] = {}
 	if result != null:
@@ -103,6 +108,81 @@ func finish_match(result: GameResult = null, abort_reason: String = "") -> Dicti
 	_initial_professions.clear()
 	_profession_turns.clear()
 	return _report.duplicate(true)
+
+## 校验一局自动对局能否作为平衡数据使用。该契约刻意只依赖报告字段，
+## 以便 runner、GUT 和外部 PowerShell 各自独立复核，而不是互相信任退出码。
+static func apply_report_contract(report: Dictionary, expected_player_count: int) -> PackedStringArray:
+	var errors := PackedStringArray()
+	if not bool(report.get("startup_ready", false)):
+		errors.append("startup_not_ready")
+	if int(report.get("player_count", -1)) != expected_player_count:
+		errors.append("configured_player_count_mismatch")
+	if int(report.get("started_player_count", -1)) != expected_player_count:
+		errors.append("started_player_count_mismatch")
+	var players_value: Variant = report.get("players", null)
+	if not players_value is Array or (players_value as Array).size() != expected_player_count:
+		errors.append("reported_player_count_mismatch")
+	if int(report.get("turns", 0)) <= 0:
+		errors.append("no_completed_turns")
+	if not bool(report.get("result_present", false)):
+		errors.append("missing_game_result")
+	if not report.has("game_on"):
+		errors.append("missing_game_state")
+	elif bool(report["game_on"]):
+		errors.append("game_still_running")
+	if int(report.get("result_turn_number", 0)) <= 0:
+		errors.append("invalid_result_turn")
+	if not GameResult.is_valid_end_reason(int(report.get("end_reason", -1))):
+		errors.append("invalid_end_reason")
+	if int(report.get("result_entry_count", -1)) != expected_player_count:
+		errors.append("result_entry_count_mismatch")
+
+	if not report.has("interaction_snapshot") or not report["interaction_snapshot"] is Dictionary:
+		errors.append("missing_interaction_snapshot")
+	elif not (report["interaction_snapshot"] as Dictionary).is_empty():
+		errors.append("interaction_not_quiescent")
+	if not report.has("modal_snapshot") or not report["modal_snapshot"] is Dictionary:
+		errors.append("missing_modal_snapshot")
+	else:
+		var modal_snapshot := report["modal_snapshot"] as Dictionary
+		if int(modal_snapshot.get("depth", -1)) != 0:
+			errors.append("modal_not_quiescent")
+		var owners_value: Variant = modal_snapshot.get("owners", null)
+		if not owners_value is Array or not (owners_value as Array).is_empty():
+			errors.append("modal_owners_not_empty")
+		if not modal_snapshot.has("tree_pause_depth") \
+				or not modal_snapshot.has("tree_pause_owners") \
+				or not modal_snapshot.has("tree_paused"):
+			errors.append("missing_tree_pause_state")
+		else:
+			if int(modal_snapshot["tree_pause_depth"]) != 0:
+				errors.append("tree_pause_not_quiescent")
+			var pause_owners: Variant = modal_snapshot["tree_pause_owners"]
+			if not pause_owners is Array or not (pause_owners as Array).is_empty():
+				errors.append("tree_pause_owners_not_empty")
+			# 正式终局会刻意保持 SceneTree 暂停，以运行结算层。
+			# 只有对局仍在运行时的无主暂停才是生命周期泄漏。
+			if bool(modal_snapshot["tree_paused"]) and bool(report.get("game_on", true)):
+				errors.append("scene_tree_still_paused")
+	if not report.has("map_choice_active"):
+		errors.append("missing_map_choice_state")
+	elif bool(report["map_choice_active"]):
+		errors.append("map_choice_not_quiescent")
+
+	report["validation_errors"] = Array(errors)
+	report["contract_valid"] = errors.is_empty()
+	if not errors.is_empty():
+		report["aborted"] = true
+		var contract_reason := "contract:%s" % ",".join(errors)
+		report["abort_reason"] = _join_abort_reasons(String(report.get("abort_reason", "")), contract_reason)
+	return errors
+
+static func _join_abort_reasons(first: String, second: String) -> String:
+	if first.is_empty():
+		return second
+	if second.is_empty() or first.split(";").has(second):
+		return first
+	return "%s;%s" % [first, second]
 
 func get_report() -> Dictionary:
 	return _report.duplicate(true)

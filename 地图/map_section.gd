@@ -6,7 +6,21 @@ var is_reachable: bool = false:
 		is_reachable = value
 		_apply_visual_state()
 var is_reached: bool = false
-var is_occupied: bool = false
+## 正式运行时按玩家实例登记，占用不再由单一布尔值承载。保留布尔 setter
+## 只兼容静态夹具和旧测试；当已有正式登记时，重复写 true 不会额外制造占用者。
+var _occupant_ids: Dictionary[int, bool] = {}
+var _legacy_occupied: bool = false
+var is_occupied: bool:
+	get:
+		return _legacy_occupied or not _occupant_ids.is_empty()
+	set(value):
+		if value:
+			if _occupant_ids.is_empty():
+				_legacy_occupied = true
+			else:
+				_legacy_occupied = false
+		else:
+			_legacy_occupied = false
 enum SectionType{
 	一般,
 	非遗,
@@ -106,6 +120,31 @@ var _base_scale := Vector2.ONE
 const ORIGINAL_MOVE_MODULATE := Color(1, 1, 1, 0.84705883)
 const ORIGINAL_MOVE_SELF_MODULATE := Color(1, 1, 1, 0.5882353)
 const ORIGINAL_MOVE_HOVER_MODULATE := Color(1.347, 0.589, 0.611, 1.0)
+
+
+func add_occupant(player: PlayerClass) -> void:
+	if player == null or not is_instance_valid(player):
+		return
+	_occupant_ids[player.get_instance_id()] = true
+
+
+func remove_occupant(player: PlayerClass) -> void:
+	if player == null:
+		return
+	_occupant_ids.erase(player.get_instance_id())
+
+
+func has_occupant(player: PlayerClass) -> bool:
+	return player != null and _occupant_ids.has(player.get_instance_id())
+
+
+func get_occupant_count() -> int:
+	return _occupant_ids.size() + (1 if _legacy_occupied else 0)
+
+
+func clear_occupants() -> void:
+	_occupant_ids.clear()
+	_legacy_occupied = false
 
 static func get_type_brief(section_type: SectionType) -> String:
 	match section_type:

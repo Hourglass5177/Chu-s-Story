@@ -11,7 +11,9 @@ class_name AchievementDetailPanel
 
 var _card: 成就牌 = null
 var _hud: HUD = null
-var _was_tree_paused: bool = false
+var _modal_lease: int = -1
+var _modal_session_generation: int = -1
+var _modal_turn_epoch: int = -1
 
 
 func _ready() -> void:
@@ -31,9 +33,9 @@ func show_detail(card: 成就牌) -> void:
 	name_label.text = card.card_name
 	score_label.text = "+%d分" % card.score_value
 	description_label.text = card.description
-	_was_tree_paused = get_tree().paused
+	if not visible:
+		_begin_modal()
 	show()
-	get_tree().paused = true
 	close_button.grab_focus()
 
 
@@ -55,9 +57,11 @@ func _open_guide() -> void:
 
 
 func close_panel() -> void:
+	if not visible:
+		return
 	hide()
 	_card = null
-	get_tree().paused = _was_tree_paused
+	_release_modal()
 
 
 func _setup_close_button_feedback() -> void:
@@ -70,3 +74,25 @@ func _setup_close_button_feedback() -> void:
 	close_button.mouse_exited.connect(func() -> void: close_mask.hide())
 	close_button.button_down.connect(func() -> void: close_mask.modulate = Color(0, 0, 0, 0.7))
 	close_button.button_up.connect(func() -> void: close_mask.modulate = Color(0, 0, 0, 0.4))
+
+
+func _begin_modal() -> void:
+	_modal_session_generation = TurnManager.get_session_generation()
+	_modal_turn_epoch = TurnManager.get_turn_epoch()
+	_modal_lease = TurnManager.acquire_modal(
+		&"achievement_detail",
+		TurnManager.ModalResumePolicy.RESUME_REMAINING,
+		true
+	)
+
+
+func _release_modal() -> void:
+	var same_context: bool = (
+		_modal_session_generation == TurnManager.get_session_generation()
+		and _modal_turn_epoch == TurnManager.get_turn_epoch()
+	)
+	if _modal_lease >= 0 and same_context:
+		TurnManager.release_modal(_modal_lease)
+	_modal_lease = -1
+	_modal_session_generation = -1
+	_modal_turn_epoch = -1
