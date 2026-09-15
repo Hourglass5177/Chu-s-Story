@@ -1,0 +1,364 @@
+{
+  "schema_version": 3,
+  "method": "built-in imagegen; deterministic slicing and technical alpha cleanup; original colors, 400px actor cells, 1000x600 stage",
+  "date": "2026-09-14",
+  "character_direction": "r4 travel face/proportion retained by user; motion still under review",
+  "source_manifest": "InheritanceTasks/Art/Pixel/v2/review/generated-motion-r4/manifest.json",
+  "culture": "Game-designed medicinal workshop, not a reconstruction of documented Xia equipment.",
+  "runtime": [
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/background.png",
+      "sha256": "6a2f34eb1bd8ab77ae4742d0ec7a0b1a0b2b090f20f884c1b7e001ce933d26a0",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 119868
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/vessel-occlusion.png",
+      "sha256": "928503cc7d045ca0f8d6990d84ab02e5c29d4e32a3c18d2cd14722c614d8bafb",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 4757
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/bellows-fixed.png",
+      "sha256": "c047c924c3e565977ea41fa2f8c3692341bfe53eb1253f907221b5316821a622",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 13173
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/shaft.png",
+      "sha256": "86ccef00e989f38c4bcb0241415df6f366aa65749ffe6fbae208db075b52f69e",
+      "size": [
+        15,
+        15
+      ],
+      "opaque_colors": 215
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/fire.png",
+      "sha256": "d5c6405a99dde3b5e72d170dbcb1e33218a22545a90ba60fcb2e23f969535d04",
+      "size": [
+        616,
+        462
+      ],
+      "opaque_colors": 19023
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/travel.png",
+      "sha256": "2adadc8d0881a322211af8b43092376db8cf09b265c9cb70154d28c1f18dd6c2",
+      "size": [
+        4800,
+        400
+      ],
+      "opaque_colors": 164204,
+      "source": "InheritanceTasks/Art/Pixel/v2/review/generated-motion-r4/character-handle-sheet.png",
+      "source_sha256": "8d3e5733ff7073b0e7c6a1a34cf7c9d6254c2e6a3c9ace8c3099c92a7bd870f6",
+      "technical_matte_pixels": 1204502,
+      "original_mode": "RGB",
+      "frame_size": [
+        400,
+        400
+      ],
+      "frame_count": 12,
+      "frame_durations": [
+        0.15,
+        0.13,
+        0.17,
+        0.12,
+        0.09,
+        0.1,
+        0.14,
+        0.16
+      ],
+      "color_reduction": false,
+      "ground_registration_y": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        3,
+        4,
+        4
+      ],
+      "native_alpha": false,
+      "status": "generated candidate; actual playback review required"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/cover-travel.png",
+      "sha256": "e46cf0ac171da3de6c7106ce89cdc83b31855552ca945b206f99887e5ca124b0",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 143083
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/life.png",
+      "sha256": "b93a37356ddd2f1f92cf88f6987eb0c9cd456ef1fbdc42c110eec0fe930b1148",
+      "size": [
+        4800,
+        400
+      ],
+      "opaque_colors": 177402,
+      "source": "InheritanceTasks/Art/Pixel/v3/source/alchemy/life-pump.png",
+      "source_sha256": "54f85415efb05148b3567708c73dc3dd5c8801882c3092d08f8a12f357060f6e",
+      "technical_matte_pixels": 1132698,
+      "original_mode": "RGB",
+      "frame_size": [
+        400,
+        400
+      ],
+      "frame_count": 12,
+      "frame_durations": [
+        0.15,
+        0.13,
+        0.17,
+        0.12,
+        0.09,
+        0.1,
+        0.14,
+        0.16
+      ],
+      "color_reduction": false,
+      "ground_registration_y": [
+        -4,
+        -4,
+        -4,
+        -4,
+        5,
+        4,
+        4,
+        4
+      ],
+      "native_alpha": false,
+      "status": "generated candidate; actual playback review required"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/cover-life.png",
+      "sha256": "6c17b17d897ecd0b54d8ea0d8ecbe097f4352c7b1101a8a67ca1aac58d446e2c",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 144617
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/business.png",
+      "sha256": "6d73418445f8d2de500a427cde5440a0932f17400cf8ff3b6a886d5272bae04a",
+      "size": [
+        4800,
+        400
+      ],
+      "opaque_colors": 169865,
+      "source": "InheritanceTasks/Art/Pixel/v3/source/alchemy/business-pump.png",
+      "source_sha256": "df49b8504cff6196052cd7324d99f3cb12e3599e39580c51b1bccc9856c46453",
+      "technical_matte_pixels": 1138351,
+      "original_mode": "RGB",
+      "frame_size": [
+        400,
+        400
+      ],
+      "frame_count": 12,
+      "frame_durations": [
+        0.15,
+        0.13,
+        0.17,
+        0.12,
+        0.09,
+        0.1,
+        0.14,
+        0.16
+      ],
+      "color_reduction": false,
+      "ground_registration_y": [
+        -10,
+        -10,
+        -10,
+        -10,
+        7,
+        7,
+        5,
+        4
+      ],
+      "native_alpha": false,
+      "status": "generated candidate; actual playback review required"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/cover-business.png",
+      "sha256": "d299a44979d90b507297ba229a3f94b536dc49bf130fdf5ca3c77d5853ade88c",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 144490
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/food.png",
+      "sha256": "62f5f2845026526d1b938d9d5059703de99648a6913b00ce382e69c250dfb4f6",
+      "size": [
+        4800,
+        400
+      ],
+      "opaque_colors": 181330,
+      "source": "InheritanceTasks/Art/Pixel/v3/source/alchemy/food-pump-r2.png",
+      "source_sha256": "653d6dde6ecc7452c69f9840aeb34a7ec7e49fa9a2ccb949e0473cc5d9a0b0d1",
+      "technical_matte_pixels": 1112427,
+      "original_mode": "RGB",
+      "frame_size": [
+        400,
+        400
+      ],
+      "frame_count": 12,
+      "frame_durations": [
+        0.15,
+        0.13,
+        0.17,
+        0.12,
+        0.09,
+        0.1,
+        0.14,
+        0.16
+      ],
+      "color_reduction": false,
+      "ground_registration_y": [
+        -10,
+        -10,
+        -10,
+        -10,
+        10,
+        6,
+        7,
+        7
+      ],
+      "native_alpha": false,
+      "status": "generated candidate; actual playback review required"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/cover-food.png",
+      "sha256": "b1cf09aa7e51bb304ee7266c880e00a02f80d9d54a8a357bfae164b810d598b1",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 146440
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/adventure.png",
+      "sha256": "afa12ce19ed7b091f6a0b2c3342b35755d22dc6e5931878dfebbb09feb804f88",
+      "size": [
+        4800,
+        400
+      ],
+      "opaque_colors": 180297,
+      "source": "InheritanceTasks/Art/Pixel/v3/source/alchemy/adventure-pump.png",
+      "source_sha256": "f54c5c712320ad581fff46416b63758ef4c9de066f69beba3d18bdf047afeedf",
+      "technical_matte_pixels": 1109964,
+      "original_mode": "RGB",
+      "frame_size": [
+        400,
+        400
+      ],
+      "frame_count": 12,
+      "frame_durations": [
+        0.15,
+        0.13,
+        0.17,
+        0.12,
+        0.09,
+        0.1,
+        0.14,
+        0.16
+      ],
+      "color_reduction": false,
+      "ground_registration_y": [
+        -6,
+        -6,
+        -6,
+        -6,
+        7,
+        7,
+        5,
+        5
+      ],
+      "native_alpha": false,
+      "status": "generated candidate; actual playback review required"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/cover-adventure.png",
+      "sha256": "3a27ae515eb2ad4574771c2668b0392aafb76d5f6bd0a68b41ba336e149ec158",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 144730
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/magic.png",
+      "sha256": "c65d411618e30291422d2cb8e93c697249d233ef4d8e8a8ab4ebfdfa8c2843ff",
+      "size": [
+        4800,
+        400
+      ],
+      "opaque_colors": 184187,
+      "source": "InheritanceTasks/Art/Pixel/v3/source/alchemy/magic-pump.png",
+      "source_sha256": "565f5b2a29453615052b643a40e2cc385482b12d7ce2cc6c5a4c2594123edc4b",
+      "technical_matte_pixels": 1126710,
+      "original_mode": "RGB",
+      "frame_size": [
+        400,
+        400
+      ],
+      "frame_count": 12,
+      "frame_durations": [
+        0.15,
+        0.13,
+        0.17,
+        0.12,
+        0.09,
+        0.1,
+        0.14,
+        0.16
+      ],
+      "color_reduction": false,
+      "ground_registration_y": [
+        -13,
+        -12,
+        -11,
+        -12,
+        2,
+        2,
+        2,
+        2
+      ],
+      "native_alpha": false,
+      "status": "generated candidate; actual playback review required"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/xia_lian_dan_shu/cover-magic.png",
+      "sha256": "4a0e453a192c881c233d653349dc9a940b2f595abcedd93809391c02ec264a4e",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 146525
+    }
+  ],
+  "available_characters": [
+    "travel",
+    "life",
+    "business",
+    "food",
+    "adventure",
+    "magic"
+  ],
+  "not_user_accepted_as_complete": true
+}

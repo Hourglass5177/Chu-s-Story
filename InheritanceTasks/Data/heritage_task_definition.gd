@@ -12,6 +12,8 @@ extends Resource
 @export_range(10.0, 60.0, 0.5) var duration_seconds: float = 25.0
 @export var task_scene: PackedScene = null
 @export var microphone_required: bool = false
+@export var music_chart: HeritageMusicChart = null
+@export var presentation: HeritageTaskPresentation = null
 
 @export_group("图鉴与原型素材")
 @export var gallery_thumbnail: Texture2D = null
@@ -42,3 +44,9 @@ func instantiate_task() -> HeritageTaskBase:
 	if is_instance_valid(instance):
 		instance.free()
 	return null
+
+
+func get_gallery_thumbnail() -> Texture2D:
+	if presentation != null and presentation.cover != null:
+		return presentation.cover
+	return gallery_thumbnail

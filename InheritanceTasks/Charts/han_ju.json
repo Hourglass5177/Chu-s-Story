@@ -1,0 +1,950 @@
+{
+  "version": 4,
+  "audio_path": "res://InheritanceTasks/Audio/rhythm-v4/han_ju-continuous.ogg",
+  "audio_sha256": "51bf6ea3f83925c4f8874138d787d26e2ec9550273301508bd2872526deb06ad",
+  "end_ms": 43800,
+  "events": [
+    {
+      "id": "han_ju-continuous-v4-00",
+      "time_ms": 2140,
+      "end_ms": 2140,
+      "kind": "switch",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "han_ju-continuous-v4-01",
+      "time_ms": 4830,
+      "end_ms": 4830,
+      "kind": "switch",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "han_ju-continuous-v4-02",
+      "time_ms": 7560,
+      "end_ms": 7560,
+      "kind": "switch",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "han_ju-continuous-v4-03",
+      "time_ms": 10210,
+      "end_ms": 10210,
+      "kind": "switch",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "han_ju-continuous-v4-04",
+      "time_ms": 13690,
+      "end_ms": 13690,
+      "kind": "switch",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "han_ju-continuous-v4-05",
+      "time_ms": 15820,
+      "end_ms": 15820,
+      "kind": "switch",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "han_ju-continuous-v4-06",
+      "time_ms": 18550,
+      "end_ms": 18550,
+      "kind": "switch",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "han_ju-continuous-v4-07",
+      "time_ms": 21140,
+      "end_ms": 21140,
+      "kind": "switch",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "han_ju-continuous-v4-08",
+      "time_ms": 24480,
+      "end_ms": 24480,
+      "kind": "switch",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "han_ju-continuous-v4-09",
+      "time_ms": 26730,
+      "end_ms": 26730,
+      "kind": "switch",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "han_ju-continuous-v4-10",
+      "time_ms": 28410,
+      "end_ms": 28410,
+      "kind": "switch",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "han_ju-continuous-v4-11",
+      "time_ms": 30260,
+      "end_ms": 30260,
+      "kind": "switch",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "han_ju-continuous-v4-12",
+      "time_ms": 33620,
+      "end_ms": 33620,
+      "kind": "switch",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "han_ju-continuous-v4-13",
+      "time_ms": 36130,
+      "end_ms": 36130,
+      "kind": "switch",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "han_ju-continuous-v4-14",
+      "time_ms": 38720,
+      "end_ms": 38720,
+      "kind": "switch",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "han_ju-continuous-v4-15",
+      "time_ms": 41040,
+      "end_ms": 41040,
+      "kind": "switch",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 2
+    }
+  ],
+  "presentation": [
+    {
+      "id": "han_ju-continuous-v4-00",
+      "time_ms": 2140,
+      "end_ms": 2140,
+      "kind": "switch",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "han_ju-continuous-v4-01",
+      "time_ms": 4830,
+      "end_ms": 4830,
+      "kind": "switch",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "han_ju-continuous-v4-02",
+      "time_ms": 7560,
+      "end_ms": 7560,
+      "kind": "switch",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "han_ju-continuous-v4-03",
+      "time_ms": 10210,
+      "end_ms": 10210,
+      "kind": "switch",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "han_ju-continuous-v4-04",
+      "time_ms": 13690,
+      "end_ms": 13690,
+      "kind": "switch",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "han_ju-continuous-v4-05",
+      "time_ms": 15820,
+      "end_ms": 15820,
+      "kind": "switch",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "han_ju-continuous-v4-06",
+      "time_ms": 18550,
+      "end_ms": 18550,
+      "kind": "switch",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "han_ju-continuous-v4-07",
+      "time_ms": 21140,
+      "end_ms": 21140,
+      "kind": "switch",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "han_ju-continuous-v4-08",
+      "time_ms": 24480,
+      "end_ms": 24480,
+      "kind": "switch",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "han_ju-continuous-v4-09",
+      "time_ms": 26730,
+      "end_ms": 26730,
+      "kind": "switch",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "han_ju-continuous-v4-10",
+      "time_ms": 28410,
+      "end_ms": 28410,
+      "kind": "switch",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "han_ju-continuous-v4-11",
+      "time_ms": 30260,
+      "end_ms": 30260,
+      "kind": "switch",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "han_ju-continuous-v4-12",
+      "time_ms": 33620,
+      "end_ms": 33620,
+      "kind": "switch",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "han_ju-continuous-v4-13",
+      "time_ms": 36130,
+      "end_ms": 36130,
+      "kind": "switch",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "han_ju-continuous-v4-14",
+      "time_ms": 38720,
+      "end_ms": 38720,
+      "kind": "switch",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "han_ju-continuous-v4-15",
+      "time_ms": 41040,
+      "end_ms": 41040,
+      "kind": "switch",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 2
+    }
+  ],
+  "sections": [],
+  "tutorial_audio_path": "res://InheritanceTasks/Audio/rhythm-v4/switch-lesson-0.ogg",
+  "feedback_key": "switch",
+  "production_status": "continuous_source_integrated_timing_listening_pending",
+  "annotation_note": "v4连续授权原声，原速原调，玩家输入不切断演出。明确游戏提示时间线；尚待逐句听审，不宣称真实帮腔、弓法或声腔转录。",
+  "choreography": [
+    {
+      "id": "han_ju-motion-000",
+      "actor": "actor",
+      "action": "cross",
+      "start_ms": 1040,
+      "end_ms": 2140,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "han_ju-continuous-v4-00",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-001",
+      "actor": "actor",
+      "action": "arrive",
+      "start_ms": 2140,
+      "end_ms": 2590,
+      "frames": [
+        3
+      ],
+      "event_id": "han_ju-continuous-v4-00",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-002",
+      "actor": "actor",
+      "action": "cross",
+      "start_ms": 3730,
+      "end_ms": 4830,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "han_ju-continuous-v4-01",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-003",
+      "actor": "actor",
+      "action": "arrive",
+      "start_ms": 4830,
+      "end_ms": 5280,
+      "frames": [
+        3
+      ],
+      "event_id": "han_ju-continuous-v4-01",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-004",
+      "actor": "actor",
+      "action": "cross",
+      "start_ms": 6460,
+      "end_ms": 7560,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "han_ju-continuous-v4-02",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-005",
+      "actor": "actor",
+      "action": "arrive",
+      "start_ms": 7560,
+      "end_ms": 8010,
+      "frames": [
+        3
+      ],
+      "event_id": "han_ju-continuous-v4-02",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-006",
+      "actor": "actor",
+      "action": "cross",
+      "start_ms": 9110,
+      "end_ms": 10210,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "han_ju-continuous-v4-03",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-007",
+      "actor": "actor",
+      "action": "arrive",
+      "start_ms": 10210,
+      "end_ms": 10660,
+      "frames": [
+        3
+      ],
+      "event_id": "han_ju-continuous-v4-03",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-008",
+      "actor": "actor",
+      "action": "cross",
+      "start_ms": 12590,
+      "end_ms": 13690,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "han_ju-continuous-v4-04",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-009",
+      "actor": "actor",
+      "action": "arrive",
+      "start_ms": 13690,
+      "end_ms": 14140,
+      "frames": [
+        3
+      ],
+      "event_id": "han_ju-continuous-v4-04",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-010",
+      "actor": "actor",
+      "action": "cross",
+      "start_ms": 14720,
+      "end_ms": 15820,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "han_ju-continuous-v4-05",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-011",
+      "actor": "actor",
+      "action": "arrive",
+      "start_ms": 15820,
+      "end_ms": 16270,
+      "frames": [
+        3
+      ],
+      "event_id": "han_ju-continuous-v4-05",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-012",
+      "actor": "actor",
+      "action": "cross",
+      "start_ms": 17450,
+      "end_ms": 18550,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "han_ju-continuous-v4-06",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-013",
+      "actor": "actor",
+      "action": "arrive",
+      "start_ms": 18550,
+      "end_ms": 19000,
+      "frames": [
+        3
+      ],
+      "event_id": "han_ju-continuous-v4-06",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-014",
+      "actor": "actor",
+      "action": "cross",
+      "start_ms": 20040,
+      "end_ms": 21140,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "han_ju-continuous-v4-07",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-015",
+      "actor": "actor",
+      "action": "arrive",
+      "start_ms": 21140,
+      "end_ms": 21590,
+      "frames": [
+        3
+      ],
+      "event_id": "han_ju-continuous-v4-07",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-016",
+      "actor": "actor",
+      "action": "cross",
+      "start_ms": 23380,
+      "end_ms": 24480,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "han_ju-continuous-v4-08",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-017",
+      "actor": "actor",
+      "action": "arrive",
+      "start_ms": 24480,
+      "end_ms": 24930,
+      "frames": [
+        3
+      ],
+      "event_id": "han_ju-continuous-v4-08",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-018",
+      "actor": "actor",
+      "action": "cross",
+      "start_ms": 25630,
+      "end_ms": 26730,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "han_ju-continuous-v4-09",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-019",
+      "actor": "actor",
+      "action": "arrive",
+      "start_ms": 26730,
+      "end_ms": 27180,
+      "frames": [
+        3
+      ],
+      "event_id": "han_ju-continuous-v4-09",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-020",
+      "actor": "actor",
+      "action": "cross",
+      "start_ms": 27310,
+      "end_ms": 28410,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "han_ju-continuous-v4-10",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-021",
+      "actor": "actor",
+      "action": "arrive",
+      "start_ms": 28410,
+      "end_ms": 28860,
+      "frames": [
+        3
+      ],
+      "event_id": "han_ju-continuous-v4-10",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-022",
+      "actor": "actor",
+      "action": "cross",
+      "start_ms": 29160,
+      "end_ms": 30260,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "han_ju-continuous-v4-11",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-023",
+      "actor": "actor",
+      "action": "arrive",
+      "start_ms": 30260,
+      "end_ms": 30710,
+      "frames": [
+        3
+      ],
+      "event_id": "han_ju-continuous-v4-11",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-024",
+      "actor": "actor",
+      "action": "cross",
+      "start_ms": 32520,
+      "end_ms": 33620,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "han_ju-continuous-v4-12",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-025",
+      "actor": "actor",
+      "action": "arrive",
+      "start_ms": 33620,
+      "end_ms": 34070,
+      "frames": [
+        3
+      ],
+      "event_id": "han_ju-continuous-v4-12",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-026",
+      "actor": "actor",
+      "action": "cross",
+      "start_ms": 35030,
+      "end_ms": 36130,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "han_ju-continuous-v4-13",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-027",
+      "actor": "actor",
+      "action": "arrive",
+      "start_ms": 36130,
+      "end_ms": 36580,
+      "frames": [
+        3
+      ],
+      "event_id": "han_ju-continuous-v4-13",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-028",
+      "actor": "actor",
+      "action": "cross",
+      "start_ms": 37620,
+      "end_ms": 38720,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "han_ju-continuous-v4-14",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-029",
+      "actor": "actor",
+      "action": "arrive",
+      "start_ms": 38720,
+      "end_ms": 39170,
+      "frames": [
+        3
+      ],
+      "event_id": "han_ju-continuous-v4-14",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-030",
+      "actor": "actor",
+      "action": "cross",
+      "start_ms": 39940,
+      "end_ms": 41040,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "han_ju-continuous-v4-15",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "han_ju-motion-031",
+      "actor": "actor",
+      "action": "arrive",
+      "start_ms": 41040,
+      "end_ms": 41490,
+      "frames": [
+        3
+      ],
+      "event_id": "han_ju-continuous-v4-15",
+      "direction": -1,
+      "cycle_ms": 0
+    }
+  ],
+  "tutorial_steps": [
+    {
+      "instruction": "亮相时选右灯",
+      "retry_hint": "亮相时选右灯",
+      "initial_lane": -1,
+      "required": "hit",
+      "duration_ms": 2400,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v4/switch-lesson-0.ogg",
+      "audio_sha256": "b4e9c473dddd3944ff9a640eb574ef1f0c70ac8b8f44146adad14b80e5380046",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v4/han_ju-continuous.ogg",
+      "source_in_ms": 640,
+      "source_out_ms": 3040,
+      "events": [
+        {
+          "id": "han_ju-continuous-v4-00",
+          "time_ms": 1500,
+          "end_ms": 1500,
+          "kind": "switch",
+          "direction": 1,
+          "cue_ms": 1100,
+          "round": 0
+        }
+      ],
+      "presentation": [
+        {
+          "id": "han_ju-continuous-v4-00",
+          "time_ms": 1500,
+          "end_ms": 1500,
+          "kind": "switch",
+          "direction": 1,
+          "cue_ms": 1100,
+          "round": 0
+        }
+      ],
+      "choreography": [
+        {
+          "id": "han_ju-motion-000",
+          "actor": "actor",
+          "action": "cross",
+          "start_ms": 400,
+          "end_ms": 1500,
+          "frames": [
+            0,
+            1,
+            2,
+            1
+          ],
+          "event_id": "han_ju-continuous-v4-00",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "han_ju-motion-001",
+          "actor": "actor",
+          "action": "arrive",
+          "start_ms": 1500,
+          "end_ms": 1950,
+          "frames": [
+            3
+          ],
+          "event_id": "han_ju-continuous-v4-00",
+          "direction": 1,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": []
+    },
+    {
+      "instruction": "左灯接亮相，再换右灯",
+      "retry_hint": "左灯接亮相，再换右灯",
+      "initial_lane": 1,
+      "required": "double",
+      "duration_ms": 5130,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v4/switch-lesson-1.ogg",
+      "audio_sha256": "a9a2eeeb6e755dbbcff2f8274c23a3d9276dc83b7d69274f8977a90a98bdf499",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v4/han_ju-continuous.ogg",
+      "source_in_ms": 3330,
+      "source_out_ms": 8460,
+      "events": [
+        {
+          "id": "han_ju-continuous-v4-01",
+          "time_ms": 1500,
+          "end_ms": 1500,
+          "kind": "switch",
+          "direction": -1,
+          "cue_ms": 1100,
+          "round": 0
+        },
+        {
+          "id": "han_ju-continuous-v4-02",
+          "time_ms": 4230,
+          "end_ms": 4230,
+          "kind": "switch",
+          "direction": 1,
+          "cue_ms": 1100,
+          "round": 0
+        }
+      ],
+      "presentation": [
+        {
+          "id": "han_ju-continuous-v4-01",
+          "time_ms": 1500,
+          "end_ms": 1500,
+          "kind": "switch",
+          "direction": -1,
+          "cue_ms": 1100,
+          "round": 0
+        },
+        {
+          "id": "han_ju-continuous-v4-02",
+          "time_ms": 4230,
+          "end_ms": 4230,
+          "kind": "switch",
+          "direction": 1,
+          "cue_ms": 1100,
+          "round": 0
+        }
+      ],
+      "choreography": [
+        {
+          "id": "han_ju-motion-002",
+          "actor": "actor",
+          "action": "cross",
+          "start_ms": 400,
+          "end_ms": 1500,
+          "frames": [
+            0,
+            1,
+            2,
+            1
+          ],
+          "event_id": "han_ju-continuous-v4-01",
+          "direction": -1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "han_ju-motion-003",
+          "actor": "actor",
+          "action": "arrive",
+          "start_ms": 1500,
+          "end_ms": 1950,
+          "frames": [
+            3
+          ],
+          "event_id": "han_ju-continuous-v4-01",
+          "direction": -1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "han_ju-motion-004",
+          "actor": "actor",
+          "action": "cross",
+          "start_ms": 3130,
+          "end_ms": 4230,
+          "frames": [
+            0,
+            1,
+            2,
+            1
+          ],
+          "event_id": "han_ju-continuous-v4-02",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "han_ju-motion-005",
+          "actor": "actor",
+          "action": "arrive",
+          "start_ms": 4230,
+          "end_ms": 4680,
+          "frames": [
+            3
+          ],
+          "event_id": "han_ju-continuous-v4-02",
+          "direction": 1,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": []
+    }
+  ]
+}

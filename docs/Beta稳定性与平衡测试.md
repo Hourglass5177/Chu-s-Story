@@ -1,6 +1,6 @@
 # Beta 稳定性与平衡测试
 
-适用版本：`beta 0.4.0`
+适用版本：`beta 0.5.0`；引擎 Godot 4.7，验证固定 4.7.2。
 
 ## 目标
 
@@ -39,8 +39,8 @@ PowerShell 入口按“人数 × 策略”将 9 组放入独立 Godot 进程，�
 ## 本地命令
 
 ```powershell
-./tools/verify_beta.ps1 -GodotPath "F:\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe"
-./tools/run_balance_simulation.ps1 -GodotPath "F:\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe"
+./tools/verify_beta.ps1 -GodotPath "F:\godot 4.7.2\Godot_v4.7.2-stable_win64_console.exe"
+./tools/run_balance_simulation.ps1 -GodotPath "F:\godot 4.7.2\Godot_v4.7.2-stable_win64_console.exe"
 ```
 
 平衡脚本可用参数：`-Players 2|3|6|all`、`-Strategy legal_random|survival_greedy|score_greedy|all`、`-Matches`、`-Seed`、`-ReplayMatch`、`-OutputDirectory`。`balanced_greedy` 仅作为 `survival_greedy` 的兼容别名。

@@ -1,0 +1,45 @@
+{
+  "version": 8,
+  "supersedes": "v7 REJECTED by user for elongated arms",
+  "method": "Reuse intact generated reference upper bodies with uniform scale; solve cart inclination and stance together; terrain-sampled feet and existing leg parts. No new raster painting or image generation this revision.",
+  "assets": [
+    {
+      "path": "InheritanceTasks/Art/Pixel/v3/runtime/dong/intact-pose-anchors-v8.json",
+      "sha256": "e159b324b81dfb44840f4606e907321092535bad624990c4d0c11f63c6d16a49"
+    },
+    {
+      "path": "InheritanceTasks/Presentation/Stages/dong_yong_chuanshuo_pixel.gd",
+      "sha256": "d7bc1b51d4dca63a176fb9c06fa05b6e5fecd04954f32c83c8801ebc0fb820d0"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v3/runtime/dong/adventure_blogger/reference.png",
+      "sha256": "81f8cc532226cf1adc52e7f1c58403584d5dbc880fd3ec003c9530a36981dac2"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v3/runtime/dong/business_blogger/reference.png",
+      "sha256": "c9c2ab05807d43817653dda819165c55260722d2360bc4f68aa6296d9dbf0778"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v3/runtime/dong/food_blogger/reference.png",
+      "sha256": "6f8b6309d74eea63ba5258961aa4805090881807ae08a552e23ad1ddabbac919"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v3/runtime/dong/life_blogger/reference.png",
+      "sha256": "bb412cec89815fc70e1c4847fe1860ebc81511802b6c98a2c39fe49caff92622"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v3/runtime/dong/magic_blogger/reference.png",
+      "sha256": "112e32c3a24296371893c1286e34d1f54b3dd4a586630e64221ca60931c7dba6"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v3/runtime/dong/travel_blogger/reference.png",
+      "sha256": "81a8ba7a33281b4bacbb260e6dcd6b19240d54ee2d9d760135dc5333d1f722dd"
+    }
+  ],
+  "actual_frames": "artifacts/dong-hand-connection-v8-final/",
+  "normal_input_clips": "artifacts/dong-anatomy-motion-v8-final/",
+  "verification": "27 tests / 8486 assertions in focused regression; six-keyboard run 23.8417s 0 stops with initial direct D; two motion recordings 24.3583s 0 stops using common driver throughout. Distinct input policies, unchanged route and scoring.",
+  "user_accepted": false,
+  "limitation": "Upper-body action currently uses the intact bent-arm pose with smooth body lean, not newly generated distinct forceful push/brake keyframes.",
+  "father_revision": "father-chibi-v8.json"
+}

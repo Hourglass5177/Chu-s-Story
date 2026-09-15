@@ -83,6 +83,7 @@ func test_snapshot_and_legacy_mapping_are_independent_from_the_draft() -> void:
 		"location": "十堰",
 		"job": "美食博主",
 		"is_bot": false,
+		"ai_difficulty": 1,
 	})
 
 
@@ -96,6 +97,7 @@ func test_game_manager_commits_deep_snapshot_and_keeps_legacy_compatibility() ->
 		"location": "十堰",
 		"job": "美食博主",
 		"is_bot": false,
+		"ai_difficulty": 1,
 	}])
 
 	setup.players[0].display_name = "污染快照"

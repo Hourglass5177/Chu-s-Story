@@ -1,10 +1,11 @@
 extends Node
 
-const OUTPUT_PATH := "res://tmp/gameplay-hud-validation.png"
-const EVENT_OUTPUT_PATH := "res://tmp/gameplay-event-validation.png"
+const OUTPUT_PATH := "res://artifacts/legacy-ui-preview/gameplay-hud-validation.png"
+const EVENT_OUTPUT_PATH := "res://artifacts/legacy-ui-preview/gameplay-event-validation.png"
 const GUIDE_CAPTURE_DIR := "res://arts/游戏指南/实机截图/v1"
 
 func _ready() -> void:
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUTPUT_PATH.get_base_dir()))
 	var interactive_timeout_test := "--interactive-preview" in OS.get_cmdline_user_args()
 	var retained_hand_preview := "--retained-hand-preview" in OS.get_cmdline_user_args()
 	var market_preview := "--market-preview" in OS.get_cmdline_user_args()
@@ -39,7 +40,7 @@ func _ready() -> void:
 	var hud_output_path := (
 		"%s/对局全景.png" % GUIDE_CAPTURE_DIR
 		if guide_capture
-		else ("res://tmp/gameplay-retained-hand-validation.png" if retained_hand_preview else OUTPUT_PATH)
+		else ("res://artifacts/legacy-ui-preview/gameplay-retained-hand-validation.png" if retained_hand_preview else OUTPUT_PATH)
 	)
 	var error := image.save_png(hud_output_path)
 	if error != OK:
@@ -54,7 +55,7 @@ func _ready() -> void:
 			await get_tree().process_frame
 		RenderingServer.force_draw(false)
 		await get_tree().process_frame
-		var shop_path := "%s/食物商店.png" % GUIDE_CAPTURE_DIR if guide_capture else "res://tmp/gameplay-shop-validation.png"
+		var shop_path := "%s/食物商店.png" % GUIDE_CAPTURE_DIR if guide_capture else "res://artifacts/legacy-ui-preview/gameplay-shop-validation.png"
 		var shop_error := get_viewport().get_texture().get_image().save_png(shop_path)
 		if shop_error != OK:
 			push_error("商店 UI 预览保存失败：%s" % error_string(shop_error))
@@ -70,7 +71,7 @@ func _ready() -> void:
 			await get_tree().process_frame
 		RenderingServer.force_draw(false)
 		await get_tree().process_frame
-		var score_path := "%s/计分详情.png" % GUIDE_CAPTURE_DIR if guide_capture else "res://tmp/gameplay-score-validation.png"
+		var score_path := "%s/计分详情.png" % GUIDE_CAPTURE_DIR if guide_capture else "res://artifacts/legacy-ui-preview/gameplay-score-validation.png"
 		var score_error := get_viewport().get_texture().get_image().save_png(score_path)
 		if score_error != OK:
 			push_error("计分详情预览保存失败：%s" % error_string(score_error))
@@ -92,7 +93,7 @@ func _ready() -> void:
 		RenderingServer.force_draw(false)
 		await get_tree().process_frame
 		var market_image := get_viewport().get_texture().get_image()
-		var market_path := "%s/非遗研究所.png" % GUIDE_CAPTURE_DIR if guide_capture else "res://tmp/gameplay-market-validation.png"
+		var market_path := "%s/非遗研究所.png" % GUIDE_CAPTURE_DIR if guide_capture else "res://artifacts/legacy-ui-preview/gameplay-market-validation.png"
 		var market_error := market_image.save_png(market_path)
 		if market_error != OK:
 			push_error("研究所 UI 预览保存失败：%s" % error_string(market_error))
@@ -109,7 +110,7 @@ func _ready() -> void:
 		RenderingServer.force_draw(false)
 		await get_tree().process_frame
 		var detail_image := get_viewport().get_texture().get_image()
-		var detail_error := detail_image.save_png("res://tmp/gameplay-retained-detail-validation.png")
+		var detail_error := detail_image.save_png("res://artifacts/legacy-ui-preview/gameplay-retained-detail-validation.png")
 		if detail_error != OK:
 			push_error("保留事件牌详情预览保存失败：%s" % error_string(detail_error))
 		hud.get_event_overlay().close_retained_card_detail()
@@ -175,7 +176,7 @@ func _run_real_timeout_test(hud: HUD, player: PlayerClass) -> void:
 	RenderingServer.force_draw(false)
 	await get_tree().process_frame
 	var after_image := get_viewport().get_texture().get_image()
-	var after_error := after_image.save_png("res://tmp/gameplay-event-timeout-after.png")
+	var after_error := after_image.save_png("res://artifacts/legacy-ui-preview/gameplay-event-timeout-after.png")
 	if after_error != OK:
 		push_error("真实事件超时后截图保存失败：%s" % error_string(after_error))
 	var elapsed_seconds := float(Time.get_ticks_msec() - started_at) / 1000.0

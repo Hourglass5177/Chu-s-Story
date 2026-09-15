@@ -1,19 +1,24 @@
-[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=5 format=3]
 [ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
 [ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/tujia_saye_erhe.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://c7bdemgw0qehi" path="res://arts/非遗卡牌/宜昌/土家族撒叶儿嗬.jpg" id="3"]
+[ext_resource type="Resource" path="res://InheritanceTasks/Charts/tujia_saye_erhe.tres" id="4"]
+[ext_resource type="Resource" path="res://InheritanceTasks/Art/Pixel/v3/resources/tujia_saye_erhe.tres" id="pixel_presentation"]
+
 [resource]
 script = ExtResource("1")
 task_id = &"tujia_saye_erhe"
-display_name = "应鼓而舞"
+display_name = "土家族撒叶儿嗬"
 heritage_name = "土家族撒叶儿嗬"
 region = "宜昌"
-hook = "看清领舞方向，在应和拍踩下对应脚步。"
-instructions = PackedStringArray("观察方向", "在鼓点到来时应和")
-control_hint = "左、上/确认、右方向键；摇杆或点击屏幕左中右"
-cultural_link = "表现歌师击鼓叫歌、舞者随鼓应节的关系。"
-duration_seconds = 25.0
+hook = "看领舞屈膝移重心，跟鼓落步。"
+instructions = PackedStringArray("同向看领舞；圈合上时落对应脚。")
+control_hint = "A / D 左右落步"
+cultural_link = "采用传习排练场景；人物同向，动作简化，不宣称是仪式实录。"
+duration_seconds = 40
 task_scene = ExtResource("2")
 gallery_thumbnail = ExtResource("3")
-prototype_asset_note = "暂用对应国家级非遗牌正面。"
-future_asset_slot = "独立任务缩略图（640×400）。"
+prototype_asset_note = "独立像素场景、六博主主题装束与动作；当前美术版本见表现资源台账。"
+future_asset_slot = "保留现有构图与判定，后续替换精细美术。"
+music_chart = ExtResource("4")
+presentation = ExtResource("pixel_presentation")

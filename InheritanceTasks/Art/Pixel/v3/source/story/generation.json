@@ -1,0 +1,26 @@
+[
+  {
+    "id": "water_cow",
+    "title": "水牛洞",
+    "source": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-10b69e11-4f7b-41da-91b9-cc3bb5f029e9.png",
+    "reference": "InheritanceTasks/Art/Pixel/v2/review/generated-motion-r4/workshop-keyframe.png",
+    "generator": "built-in image_gen.imagegen",
+    "native_alpha": false
+  },
+  {
+    "id": "tribute_rice",
+    "title": "秀水贡米",
+    "source": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-2f6317d7-f3ec-4432-a1fe-176989add6dc.png",
+    "reference": "InheritanceTasks/Art/Pixel/v2/review/generated-motion-r4/workshop-keyframe.png",
+    "generator": "built-in image_gen.imagegen",
+    "native_alpha": false
+  },
+  {
+    "id": "dragon_temple",
+    "title": "蛟龙寺",
+    "source": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-9d8c1ba0-3425-4fbc-8453-397d847b82fa.png",
+    "reference": "InheritanceTasks/Art/Pixel/v2/review/generated-motion-r4/workshop-keyframe.png",
+    "generator": "built-in image_gen.imagegen",
+    "native_alpha": false
+  }
+]

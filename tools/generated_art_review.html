@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>楚物志 · 生成美术与动作新稿</title>
+<style>
+:root{color-scheme:dark;--ink:#f1e3cf;--muted:#bdb3ad;--gold:#dfb475;--bg:#24212a;--panel:#312b32}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.5 system-ui,"Microsoft YaHei",sans-serif}
+main{max-width:1100px;margin:auto;padding:26px 24px 60px}h1{font-size:30px;margin:0 0 5px}h2{font-size:23px;margin:0 0 12px}p{color:var(--muted);margin:8px 0 18px}
+header{display:flex;justify-content:space-between;gap:18px;align-items:center}.badge{border:1px solid #796148;border-radius:20px;padding:6px 14px;font-size:15px;color:var(--gold);white-space:nowrap}
+section{margin-top:22px;padding:20px;border:1px solid #58484b;border-radius:12px;background:var(--panel)}
+.screen{background:#191820;border:6px solid #614a39;border-radius:9px;overflow:hidden;display:grid;place-items:center}.screen canvas{display:block;width:min(100%,calc((100vh - 385px)*5/3));height:auto;image-rendering:pixelated;aspect-ratio:5/3;touch-action:none;min-width:300px}
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}button,select{font:inherit;color:var(--ink);background:#4b3e40;border:1px solid #927257;border-radius:6px;min-height:48px;padding:8px 17px;cursor:pointer}
+button.primary{background:var(--gold);color:#2a2630;font-weight:600;min-width:165px;touch-action:none;user-select:none}button:focus-visible,select:focus-visible{outline:3px solid #f0cf96;outline-offset:3px}button:hover{filter:brightness(1.12)}button[aria-pressed=true]{background:#8f6643}
+kbd{font:inherit;display:inline-block;border:1px solid #b59c7a;border-bottom-width:3px;padding:0 8px;border-radius:4px}.state{color:#ecd2a5;min-width:5em;font-size:17px}.note{font-size:15px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.portrait{height:330px;background:#e7dcc9;display:grid;place-items:center;border-radius:8px}.portrait img{max-height:310px;max-width:96%;object-fit:contain}
+.keyframe{display:block;width:100%;height:auto;border-radius:6px}.links{display:flex;gap:18px;flex-wrap:wrap;margin-top:15px}a{color:var(--gold)}details{margin-top:20px}summary{cursor:pointer;color:var(--gold)}input[type=range]{width:min(350px,60vw);accent-color:var(--gold)}.hidden{display:none!important}
+@media(max-width:650px){main{padding:18px 10px}section{padding:12px}header{align-items:flex-start}h1{font-size:24px}.badge{font-size:12px}.grid{grid-template-columns:1fr}.portrait{height:280px}}
+</style>
+<main><header><div><h1>炼药作坊 · 生成新稿</h1><p>旅行博主原形象 · 全身鼓风与炉火联动</p></div><span class="badge">美术动作样板</span></header>
+<section><h2>试试鼓风</h2><p>按住 <kbd>空格</kbd> 或下方按钮，松开后收稳。</p>
+<div class="screen"><canvas id="stage" width="500" height="300" aria-label="旅行博主在炼药作坊鼓风，人物、活塞杆与炉火分别运动" tabindex="0"></canvas></div>
+<div class="controls"><button id="pump" class="primary">按住鼓风</button><button id="demo" aria-pressed="false">自动演示</button><button id="freeze" aria-pressed="false">暂停画面</button><span id="state" class="state" role="status">载入画面…</span></div>
+<details><summary>逐帧与边缘检查</summary><div class="controls"><label>动作帧 <input id="frame" aria-label="动作帧" type="range" min="0" max="7" value="0" step="1"></label><output id="frameLabel">1 / 8</output><select id="backdrop" aria-label="检查底色"><option value="scene">实际场景</option><option value="#1b1920">深色底</option><option value="#ffffff">白底</option><option value="#e7dcc9">米色底</option></select></div><p class="note">换工具后的第一组动作审稿。整条人物序列仍有少量脚位、衣形变化，需继续按播放效果修整。</p></details>
+<p class="note">当前只检验美术与联动，尚未替换正式关卡，也不包含正式温控评分。</p></section>
+<section><h2>生成原稿</h2><img class="keyframe" id="keyframe" alt="直接生成的旅行博主与专用炼药作坊完整构图"><div class="links"><a id="fullSource">查看原尺寸</a><a id="characterSource">人物动作原图</a><a id="fireSource">火焰动作原图</a></div></section>
+<section><h2>身份参考</h2><div class="grid"><div><p>保留原立绘的脸、眼睛、发型与帽子。</p><div class="portrait"><img src="/arts/素材合集/sprite及立绘/Sprite/角色/旅行博主.png" alt="旅行博主原立绘"></div></div><div><p>工作姿态</p><div class="portrait"><canvas id="portrait" width="250" height="300" aria-label="生成工作装角色静帧"></canvas></div></div></div></section>
+<p class="note">原文件、提示词与分层来源已保留。器物为游戏化作坊设计，尚未作为夏氏丹药真实设备复原定稿。其他十四关按各自接触与环境回应继续制作。</p>
+</main>
+<script>
+const base='/InheritanceTasks/Art/Pixel/v2/review/generated-motion-r4/';
+const names={plate:'workshop-clean-plate.png',key:'workshop-keyframe.png',actor:'character-handle-sheet.png',box:'pump-cycle-matte.png',fire:'fire-sheet.png'};
+const $=s=>document.querySelector(s);$('#keyframe').src=base+names.key;$('#fullSource').href=base+names.key;$('#characterSource').href=base+names.actor;$('#fireSource').href=base+names.fire;
+const stage=$('#stage'),ctx=stage.getContext('2d');ctx.imageSmoothingEnabled=false;
+let images={},actor,box,phase=0,frame=0,clock=0,last=0,air=0,heat=0,delayedAir=0,delayHistory=[],frozen=false,demo=false,manual=false,backdrop='scene';
+const held=new Set();const durations=[.15,.13,.17,.12,.09,.10,.14,.16];const total=durations.reduce((a,b)=>a+b,0);
+const x=90,y=86,scale=.45,boxShift=110;
+function load(name){return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(new Error(name));im.src=base+name;});}
+// Runtime compositing only: the generated source file remains unchanged.
+// This palette has no green clothing. Remove the technical green matte and
+// neutralize only green spill, retaining fully opaque illustrated outlines.
+function removeMatte(im){const c=document.createElement('canvas');c.width=im.width;c.height=im.height;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0);const d=g.getImageData(0,0,c.width,c.height);let removed=0;for(let i=0;i<d.data.length;i+=4){const r=d.data[i],gr=d.data[i+1],b=d.data[i+2];if(gr>r+18&&gr>b+18){d.data[i+3]=0;removed++;}else if(gr>Math.max(r,b)+4){d.data[i+1]=Math.max(r,b)+4;}}g.putImageData(d,0,0);c.dataset.removed=removed;return c;}
+function rectFor(n,im){const c=n%4,r=Math.floor(n/4),a=Math.round(c*im.width/4),b=Math.round(r*im.height/2);return[a,b,Math.round((c+1)*im.width/4)-a,Math.round((r+1)*im.height/2)-b];}
+function drawActor(g,n,ox=x,oy=y,s=scale){const a=rectFor(n,actor);g.save();if(g===ctx){const entry=316;g.beginPath();g.moveTo(ox,oy);g.lineTo(ox+a[2]*s,oy);g.lineTo(ox+a[2]*s,oy+247*s);g.lineTo(ox+entry*s,oy+247*s);g.lineTo(ox+entry*s,oy+278*s);g.lineTo(ox+a[2]*s,oy+278*s);g.lineTo(ox+a[2]*s,oy+a[3]*s);g.lineTo(ox,oy+a[3]*s);g.closePath();g.clip();}g.drawImage(actor,...a,ox,oy,a[2]*s,a[3]*s);g.restore();}
+function drawBox(){// One generated box frame is used in every state: no changing wood texture or dimensions.
+ for(const [sx,sy,sw,sh] of [[194,232,249,18],[201,250,242,28],[185,278,258,149]])ctx.drawImage(box,sx,sy,sw,sh,x+(sx+boxShift)*scale,y+sy*scale,sw*scale,sh*scale);
+ // The piston shaft is a repeated crop from the same generated wooden handle,
+ // clipped at the fixed entry. Its visible length changes, never the housing.
+ const start=[221,221,241,244,348,363,276,240][frame];
+ const entry=194+boxShift+12;const from=Math.min(start,entry);
+ if(from<entry)ctx.drawImage(box,76,255,15,15,x+from*scale,y+255*scale,(entry-from)*scale,15*scale);
+}
+function flame(row,phase,alpha=1){const im=images.fire;const sx=[41,403,765,1127][phase],top=[23,348,685][row],w=280,h=280;const outputW=77;const ratio=outputW/w;const dy=209-h*ratio;
+ ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=alpha;ctx.beginPath();ctx.rect(334,142,75,67);ctx.clip();ctx.drawImage(im,sx,top,w,h,333,dy,outputW,h*ratio);ctx.restore();
+ // The lower inlet shares intensity but has its own phase and smaller scale.
+ ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=alpha*.75;ctx.beginPath();ctx.rect(357,233,35,19);ctx.clip();ctx.drawImage(im,[41,403,765,1127][(phase+2)%4],top,w,h,356,250-h*.13,w*.13,h*.13);ctx.restore();}
+function potOcclusion(){// Restore the generated opaque vessel in front of the fire layer.
+ ctx.save();ctx.beginPath();const edge=[[341,174],[348,173],[349,166],[365,161],[368,156],[379,156],[380,161],[393,165],[398,169],[397,173],[404,174],[405,181],[399,186],[397,193],[393,200],[382,203],[362,202],[353,199],[349,191],[347,185],[342,183]];edge.forEach(([a,b],i)=>i?ctx.lineTo(a,b):ctx.moveTo(a,b));ctx.closePath();ctx.clip();ctx.drawImage(images.plate,0,0,500,300);ctx.restore();}
+function render(){ctx.clearRect(0,0,500,300);if(backdrop==='scene'){ctx.drawImage(images.plate,0,0,500,300);const ph=Math.floor(clock/.105)%4;const level=Math.min(1.99,heat*2);const row=Math.floor(level),mix=level-row;flame(row,ph,1-mix);if(mix>0)flame(row+1,ph,mix);potOcclusion();}else{ctx.fillStyle=backdrop;ctx.fillRect(0,0,500,300);}
+ drawBox();drawActor(ctx,frame);
+ $('#frameLabel').textContent=(frame+1)+' / 8';$('#frame').value=frame;
+ const active=held.size>0||demo&&clock%5<3;
+ $('#state').textContent=frozen?'画面已暂停':manual?'逐帧检查':active?(['握杆','拉风','蓄力','准备压风','压风','送风','收稳','归位'][frame]):phase>0?'收稳':'待机';
+ stage.dataset.frame=frame;stage.dataset.heat=heat.toFixed(3);stage.dataset.phase=phase.toFixed(3);stage.dataset.active=String(active);}
+function tick(ts){const dt=last?Math.min((ts-last)/1000,.05):0;last=ts;if(!frozen){clock+=dt;const active=held.size>0||(demo&&clock%5<3);if(!manual&&(active||phase>0)){phase+=dt*(active?1:1.35);if(phase>=total)phase=active?phase%total:0;let v=phase;frame=0;while(frame<7&&v>=durations[frame])v-=durations[frame++];}
+ const compress=!manual&&phase>0&&frame>=3&&frame<=5;
+ delayHistory.push([clock,compress?1:active?.32:0]);while(delayHistory.length>1&&delayHistory[1][0]<=clock-.14)delayHistory.shift();delayedAir=delayHistory[0]?.[1]||0;
+ const target=delayedAir;heat+=(target-heat)*(1-Math.exp(-dt/(target>heat?.20:.55)));}render();requestAnimationFrame(tick);}
+function press(source){held.add(source);manual=false;frozen=false;$('#freeze').textContent='暂停画面';$('#freeze').setAttribute('aria-pressed','false');demo=false;$('#demo').setAttribute('aria-pressed','false');}
+$('#pump').addEventListener('pointerdown',e=>{e.preventDefault();e.currentTarget.setPointerCapture(e.pointerId);press('pointer');});for(const ev of ['pointerup','pointercancel','lostpointercapture'])$('#pump').addEventListener(ev,()=>held.delete('pointer'));
+window.addEventListener('keydown',e=>{if(e.code==='Space'&&!['INPUT','SELECT'].includes(e.target.tagName)){e.preventDefault();if(!e.repeat)press('space');}});window.addEventListener('keyup',e=>{if(e.code==='Space'){e.preventDefault();held.delete('space');}});
+window.addEventListener('blur',()=>held.clear());document.addEventListener('visibilitychange',()=>{if(document.hidden){held.clear();frozen=true;$('#freeze').textContent='继续播放';$('#freeze').setAttribute('aria-pressed','true');}});
+$('#demo').onclick=()=>{demo=!demo;manual=false;frozen=false;clock=0;delayHistory=[];$('#demo').setAttribute('aria-pressed',String(demo));$('#freeze').textContent='暂停画面';$('#freeze').setAttribute('aria-pressed','false');};
+$('#freeze').onclick=()=>{frozen=!frozen;held.clear();if(!frozen&&manual){manual=false;phase=durations.slice(0,frame).reduce((a,b)=>a+b,0);}$('#freeze').textContent=frozen?'继续播放':'暂停画面';$('#freeze').setAttribute('aria-pressed',String(frozen));};
+$('#frame').oninput=e=>{frame=Number(e.target.value);manual=true;demo=false;frozen=true;$('#freeze').textContent='继续播放';$('#freeze').setAttribute('aria-pressed','true');$('#demo').setAttribute('aria-pressed','false');render();};$('#backdrop').onchange=e=>{backdrop=e.target.value;render();};
+Promise.all(Object.entries(names).map(async([key,name])=>{images[key]=await load(name);})).then(()=>{actor=removeMatte(images.actor);box=removeMatte(images.box);stage.dataset.ready='true';const p=$('#portrait').getContext('2d');p.imageSmoothingEnabled=false;drawActor(p,0,50,12,.67);requestAnimationFrame(tick);}).catch(e=>{$('#state').textContent='素材载入失败：'+e.message;});
+</script></html>

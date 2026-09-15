@@ -82,7 +82,7 @@ enum EffectType {
 # --- 留给未来实现的接口 ---
 # 判定当前时机是否满足使用条件
 func can_use(player: PlayerClass) -> bool:
-	if player == null or not TurnManager.GameOn:
+	if player == null or not TurnManager.GameOn or TurnManager.is_movement_locked() or not InteractionCoordinator.get_active_snapshot().is_empty():
 		return false
 	if TurnManager.now_player_index < 0 or TurnManager.now_player_index >= TurnManager.players.size():
 		return false

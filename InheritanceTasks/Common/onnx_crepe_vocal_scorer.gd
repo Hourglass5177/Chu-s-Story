@@ -45,6 +45,7 @@ var _worker_thread: Thread = null
 var _worker_generation: int = -1
 var _capture_paused: bool = false
 var _recording_segments: Array[Dictionary] = []
+var _native_capture: RefCounted = null
 
 
 func is_available() -> bool:
@@ -84,16 +85,31 @@ func begin_capture(reference_id: StringName, duration_seconds: float) -> Error:
 
 
 func finish_capture_and_score() -> Error:
-	if _state != CaptureState.RECORDING or _record_effect == null:
+	if _state != CaptureState.RECORDING or (_record_effect == null and _native_capture == null):
 		return ERR_UNCONFIGURED
+	if _native_capture != null and not bool(_native_capture.call("get_status").get("done", false)):
+		return ERR_BUSY
+	var capture_started_usec := Time.get_ticks_usec()
 	_state = CaptureState.SCORING
 	var scoring_generation: int = _generation
 	if not _capture_paused:
 		_collect_current_recording_segment()
 	var merged_recording: Dictionary = _merge_recording_segments(_recording_segments)
+	if _native_capture != null:
+		merged_recording = _native_capture.call("take_result")
+		merged_recording["reason"] = &"microphone_capture_failed"
+		merged_recording["message"] = "录音中断，请检查麦克风后重试"
 	_cleanup_capture_graph()
 	_capture_paused = false
 	_recording_segments.clear()
+	_trace_scoring("capture_finished", capture_started_usec)
+	if OS.is_debug_build():
+		var captured_bytes: PackedByteArray = merged_recording.get("pcm_bytes", PackedByteArray())
+		if merged_recording.has("samples"):
+			print("HUANGMEI_SCORING: capture_samples=%d rate=%d mono=true" % [
+				(merged_recording.samples as PackedFloat32Array).size(), int(merged_recording.sample_rate)])
+		else:
+			print("HUANGMEI_SCORING: capture_bytes=%d rate=%d stereo=%s" % [captured_bytes.size(), int(merged_recording.get("mix_rate", 0)), bool(merged_recording.get("stereo", false))])
 	if not bool(merged_recording.get("ok", false)):
 		_defer_technical_result(
 			scoring_generation,
@@ -115,6 +131,8 @@ func finish_capture_and_score() -> Error:
 		"mix_rate": int(merged_recording.get("mix_rate", 0)),
 		"stereo": bool(merged_recording.get("stereo", false)),
 	}
+	if merged_recording.has("samples"):
+		work["decoded"] = merged_recording
 	_active_reference_id = &""
 	_capture_duration_seconds = 0.0
 	_worker_thread = Thread.new()
@@ -137,6 +155,10 @@ func finish_capture_and_score() -> Error:
 
 
 func set_capture_paused(paused: bool) -> void:
+	if _native_capture != null:
+		_native_capture.call("set_paused", paused)
+		_capture_paused = paused
+		return
 	if _state != CaptureState.RECORDING or _record_effect == null:
 		return
 	if paused == _capture_paused:
@@ -173,19 +195,15 @@ func is_worker_running() -> bool:
 	return _worker_thread != null and _worker_thread.is_started()
 
 
+func get_capture_status() -> Dictionary:
+	return _native_capture.call("get_status") if _native_capture != null else {}
+
+
 func _get_availability_reason() -> StringName:
 	if OS.has_feature("headless") or DisplayServer.get_name() == "headless":
 		return &"microphone_unavailable_headless"
-	if not bool(ProjectSettings.get_setting("audio/driver/enable_input", false)):
-		return &"audio_input_disabled"
-	if OS.has_feature("android"):
-		var granted_permissions: PackedStringArray = OS.get_granted_permissions()
-		if not granted_permissions.has("android.permission.RECORD_AUDIO"):
-			return &"microphone_permission_denied"
-	if not ClassDB.class_exists(&"AudioStreamMicrophone"):
-		return &"microphone_stream_unavailable"
-	if AudioServer.get_input_device_list().is_empty():
-		return &"microphone_device_missing"
+	if OS.get_name() != "Windows" or not ClassDB.class_exists(&"WindowsVocalCapture"):
+		return &"microphone_adapter_unavailable"
 	if not ClassDB.class_exists(&"CrepePitchExtractor"):
 		return &"crepe_extension_unavailable"
 	if not FileAccess.file_exists(model_path):
@@ -195,30 +213,17 @@ func _get_availability_reason() -> StringName:
 	return &""
 
 
-func _create_capture_graph(root: Window) -> Error:
-	_record_bus_name = StringName("HuangmeiRecord_%d_%d" % [get_instance_id(), _generation])
-	AudioServer.add_bus()
-	var bus_index: int = AudioServer.get_bus_count() - 1
-	if bus_index < 0:
-		return ERR_CANT_CREATE
-	AudioServer.set_bus_name(bus_index, _record_bus_name)
-	AudioServer.set_bus_mute(bus_index, true)
-	_record_effect = AudioEffectRecord.new()
-	_record_effect.format = AudioStreamWAV.FORMAT_16_BITS
-	AudioServer.add_bus_effect(bus_index, _record_effect, 0)
-
-	_record_player = AudioStreamPlayer.new()
-	_record_player.name = String(_record_bus_name)
-	_record_player.process_mode = Node.PROCESS_MODE_ALWAYS
-	_record_player.bus = _record_bus_name
-	_record_player.stream = AudioStreamMicrophone.new()
-	root.add_child(_record_player)
-	_record_player.play()
-	_record_effect.set_recording_active(true)
-	return OK
+func _create_capture_graph(_root: Window) -> Error:
+	_native_capture = ClassDB.instantiate(&"WindowsVocalCapture") as RefCounted
+	if _native_capture == null:
+		return ERR_UNAVAILABLE
+	return OK if bool(_native_capture.call("start", _capture_duration_seconds, false)) else ERR_CANT_CREATE
 
 
 func _cleanup_capture_graph() -> void:
+	if _native_capture != null:
+		_native_capture.call("cancel")
+		_native_capture = null
 	if _record_effect != null and _record_effect.is_recording_active():
 		_record_effect.set_recording_active(false)
 	if is_instance_valid(_record_player):
@@ -251,12 +256,16 @@ func _collect_current_recording_segment() -> void:
 
 func _score_recording_worker(work: Dictionary) -> void:
 	var generation: int = int(work.get("generation", -1))
+	var phase_started_usec := Time.get_ticks_usec()
+	_trace_scoring("decode_started", phase_started_usec)
 	var decoded: Dictionary = _decode_recording(
 		work.get("pcm_bytes", PackedByteArray()) as PackedByteArray,
 		int(work.get("format", -1)),
 		int(work.get("mix_rate", 0)),
 		bool(work.get("stereo", false))
 	)
+	if work.has("decoded"):
+		decoded = work.decoded
 	if not bool(decoded.get("ok", false)):
 		call_deferred(
 			"_complete_worker",
@@ -268,6 +277,12 @@ func _score_recording_worker(work: Dictionary) -> void:
 		)
 		return
 
+	_trace_scoring("decode_finished", phase_started_usec)
+	var signal_check := _check_recording_signal(decoded.get("samples", PackedFloat32Array()))
+	if not bool(signal_check.ok):
+		call_deferred("_complete_worker", generation, signal_check)
+		return
+	phase_started_usec = Time.get_ticks_usec()
 	var extractor_result: Dictionary = _get_shared_extractor(str(work.get("model_path", "")))
 	if not bool(extractor_result.get("ok", false)):
 		call_deferred(
@@ -280,6 +295,8 @@ func _score_recording_worker(work: Dictionary) -> void:
 		)
 		return
 	var extractor: Object = extractor_result.get("extractor") as Object
+	_trace_scoring("model_ready", phase_started_usec)
+	phase_started_usec = Time.get_ticks_usec()
 	var extracted_variant: Variant = extractor.call(
 		&"extract_pitch",
 		decoded.get("samples", PackedFloat32Array()),
@@ -304,6 +321,8 @@ func _score_recording_worker(work: Dictionary) -> void:
 		)
 		return
 
+	_trace_scoring("inference_finished", phase_started_usec)
+	phase_started_usec = Time.get_ticks_usec()
 	var reference_result: Dictionary = _read_reference_analysis(
 		str(work.get("reference_path", DEFAULT_REFERENCE_ANALYSIS_PATH))
 	)
@@ -321,7 +340,38 @@ func _score_recording_worker(work: Dictionary) -> void:
 		extracted,
 		reference_result.get("analysis", {}) as Dictionary
 	)
+	_trace_scoring("comparison_finished", phase_started_usec)
+	if OS.is_debug_build():
+		# Bounded diagnostic numbers, never samples, lyrics or recognized speech.
+		print("HUANGMEI_RESULT: reason=%s score=%.1f lines=%s pitch=%.1f rhythm=%.1f" % [
+			payload.reason, payload.score, str(payload.line_scores), payload.pitch, payload.rhythm])
+		print("HUANGMEI_ALIGNMENT: ", JSON.stringify(payload.get("details", {})))
 	call_deferred("_complete_worker", generation, payload)
+
+
+static func _check_recording_signal(samples: PackedFloat32Array) -> Dictionary:
+	if samples.is_empty():
+		return _technical_payload(&"recording_empty", "没有录到声音，请检查麦克风")
+	var sum: float = 0.0
+	var squared: float = 0.0
+	for sample: float in samples:
+		if not is_finite(sample):
+			return _technical_payload(&"recording_invalid", "录音数据异常，请重试")
+		sum += sample
+		squared += sample * sample
+	var mean := sum / samples.size()
+	# Digital silence / DC is not evidence of a badly sung phrase. Do not run
+	# pitch inference on an empty signal (including WASAPI's zero-filled input).
+	var variance := maxf(0.0, squared / samples.size() - mean * mean)
+	if variance < 0.000000000001:
+		return _technical_payload(&"recording_no_signal", "没有录到有效声音，请检查麦克风是否静音")
+	return {"ok": true}
+
+
+static func _trace_scoring(stage: String, started_usec: int) -> void:
+	# Timings only; never log PCM, recognized lyrics, or any player recording.
+	if OS.is_debug_build():
+		print("HUANGMEI_SCORING: %s %.1fms" % [stage, (Time.get_ticks_usec() - started_usec) / 1000.0])
 
 
 func _complete_worker(generation: int, payload: Dictionary) -> void:

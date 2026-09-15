@@ -56,8 +56,10 @@ func test_each_line_threshold_can_block_an_otherwise_acceptable_average() -> voi
 			pitches[index] = _pitch_hz(63.0 - 7.0 * sin(progress * TAU))
 	var payload: Dictionary = HuangmeiVocalSimilarity.score(recording, _make_reference())
 	assert_true(bool(payload.ok))
-	assert_lt(float(payload.score), 60.0)
 	assert_eq(payload.reason, &"line_threshold_not_met")
+	assert_false(bool(payload.get("passed", true)))
+	assert_almost_eq(float(payload.score), float(payload.details.raw_score), 0.051,
+		"失败也应显示实际综合分，不能人为压到59分")
 	assert_lt(float((payload.line_scores as Array)[1]), 45.0)
 
 
@@ -72,7 +74,7 @@ func test_transposition_is_global_and_preserves_the_interval_between_lines() -> 
 			pitches[index] *= 2.0
 	var payload: Dictionary = HuangmeiVocalSimilarity.score(recording, _make_reference())
 	assert_true(bool(payload.ok))
-	assert_lt(float(payload.score), 60.0, "只能整体移调，不能把第二句单独移高八度")
+	assert_false(bool(payload.passed), "只能整体移调，不能把第二句单独移高八度：%s" % payload)
 
 
 func test_inter_line_gap_contributes_to_rhythm_without_changing_pitch() -> void:
@@ -97,6 +99,30 @@ func test_invalid_reference_returns_a_complete_technical_payload() -> void:
 	assert_false(bool(payload.ok))
 	assert_eq(payload.reason, &"reference_analysis_invalid")
 	_assert_required_payload_keys(payload)
+
+
+func test_pitch_alignment_uses_time_not_number_of_detected_frames() -> void:
+	var recording := _make_recording(1.0, 0.35)
+	# Identical singing, but the detector drops a small region in the first line.
+	# Removing those frames must not shift ALL later notes against the reference.
+	var confidences: PackedFloat32Array = recording.confidences
+	for index in range(20, 40):
+		confidences[index] = 0.0
+	var result := HuangmeiVocalSimilarity.score(recording, _make_reference())
+	assert_gte(float(result.pitch), 95.0)
+
+
+func test_completeness_is_independent_of_analysis_frame_rate() -> void:
+	var reference := _make_reference()
+	var baseline := HuangmeiVocalSimilarity.score(_make_recording(1.0, 0.35), reference)
+	var sparse := _make_recording(1.0, 0.35)
+	for key in ["times", "pitches", "confidences"]:
+		var original: PackedFloat32Array = sparse[key]
+		var reduced := PackedFloat32Array()
+		for i in range(0, original.size(), 2): reduced.append(original[i])
+		sparse[key] = reduced
+	var result := HuangmeiVocalSimilarity.score(sparse, reference)
+	assert_almost_eq(float(result.completeness), float(baseline.completeness), 1.0)
 
 
 func test_pcm16_decoder_downmixes_stereo_in_memory() -> void:

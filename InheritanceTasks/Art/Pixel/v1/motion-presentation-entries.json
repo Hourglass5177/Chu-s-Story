@@ -1,0 +1,222 @@
+[
+  {
+    "task_id": "yandi_shennong_chuanshuo",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/background-0.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/avatars.png",
+    "columns": 10,
+    "frame_size": [
+      48,
+      64
+    ],
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/yandi_shennong_chuanshuo_pixel.tscn",
+    "actions": {
+      "ready": [
+        0
+      ],
+      "idle": [
+        0
+      ],
+      "prepare": [
+        0
+      ],
+      "run": [
+        1,
+        2
+      ],
+      "action": [
+        1,
+        2
+      ],
+      "jump_short": [
+        3
+      ],
+      "jump_long": [
+        4
+      ],
+      "fall": [
+        5
+      ],
+      "land": [
+        6
+      ],
+      "miss": [
+        7
+      ],
+      "recover": [
+        8
+      ],
+      "gather": [
+        9
+      ]
+    },
+    "animation_speeds": {
+      "run": 8,
+      "push": 7,
+      "action": 7
+    },
+    "properties": {
+      "painter": "motion_yandi_shennong_chuanshuo",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/motion-art-generation-log.json",
+      "review_status": "normalized_pending_engine_review",
+      "cultural_note": "依博主身份制作的新绘像素衍生，动作不代表传统表演转录。"
+    }
+  },
+  {
+    "task_id": "dong_yong_chuanshuo",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/background-0.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/avatars.png",
+    "columns": 8,
+    "frame_size": [
+      128,
+      160
+    ],
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/dong_yong_chuanshuo_pixel.tscn",
+    "actions": {
+      "ready": [
+        0
+      ],
+      "idle": [
+        0
+      ],
+      "prepare": [
+        1
+      ],
+      "push": [
+        1,
+        2
+      ],
+      "action": [
+        1,
+        2
+      ],
+      "push_uphill": [
+        2
+      ],
+      "coast": [
+        3
+      ],
+      "release": [
+        3
+      ],
+      "brake": [
+        4
+      ],
+      "stop": [
+        5
+      ],
+      "steady": [
+        5
+      ],
+      "miss": [
+        5
+      ],
+      "recover": [
+        6
+      ],
+      "arrive": [
+        7
+      ]
+    },
+    "animation_speeds": {
+      "run": 8,
+      "push": 7,
+      "action": 7
+    },
+    "properties": {
+      "painter": "motion_dong_yong_chuanshuo",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/motion-art-generation-log.json",
+      "review_status": "normalized_pending_engine_review",
+      "cultural_note": "古装推车体验，木车为游戏化简化。"
+    }
+  },
+  {
+    "task_id": "xingshan_min_ge",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/background-0.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/avatars.png",
+    "columns": 2,
+    "frame_size": [
+      112,
+      160
+    ],
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/xingshan_min_ge_pixel.tscn",
+    "actions": {
+      "ready": [
+        0
+      ],
+      "prepare": [
+        0
+      ],
+      "action": [
+        1
+      ],
+      "wave": [
+        1
+      ],
+      "release": [
+        1
+      ],
+      "miss": [
+        0
+      ],
+      "recover": [
+        1
+      ]
+    },
+    "animation_speeds": {
+      "run": 8,
+      "push": 7,
+      "action": 7
+    },
+    "properties": {
+      "painter": "motion_xingshan_min_ge",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/motion-art-generation-log.json",
+      "review_status": "normalized_pending_engine_review",
+      "cultural_note": "依博主身份制作的新绘像素衍生，动作不代表传统表演转录。"
+    }
+  },
+  {
+    "task_id": "xisai_shenzhou_hui",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/xisai_shenzhou_hui/background-0.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/xisai_shenzhou_hui/avatars.png",
+    "columns": 2,
+    "frame_size": [
+      112,
+      160
+    ],
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/xisai_shenzhou_hui_pixel.tscn",
+    "actions": {
+      "ready": [
+        0
+      ],
+      "prepare": [
+        0
+      ],
+      "action": [
+        1
+      ],
+      "wave": [
+        1
+      ],
+      "release": [
+        1
+      ],
+      "miss": [
+        0
+      ],
+      "recover": [
+        1
+      ]
+    },
+    "animation_speeds": {
+      "run": 8,
+      "push": 7,
+      "action": 7
+    },
+    "properties": {
+      "painter": "motion_xisai_shenzhou_hui",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/motion-art-generation-log.json",
+      "review_status": "normalized_pending_engine_review",
+      "cultural_note": "依据非遗网与黄石市政府文字制作的楼台神舟；具体形制待真实视频核对。"
+    }
+  }
+]

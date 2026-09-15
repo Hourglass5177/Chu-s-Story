@@ -1,0 +1,423 @@
+[
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/background-0.png",
+    "source": "yandi_shennong_chuanshuo-background-atlas.png",
+    "sha256": "9086bf8a6aeaf42f1e51e46e6318bd5269b68d53f4be408dcf2ad1ea734fb56e",
+    "size": [
+      500,
+      300
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      500,
+      300
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/background-1.png",
+    "source": "yandi_shennong_chuanshuo-background-atlas.png",
+    "sha256": "2b4564ed763614af70e0c1344ed4f0c700731d00d191a23945ded248747844e7",
+    "size": [
+      500,
+      300
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      500,
+      300
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/background-2.png",
+    "source": "yandi_shennong_chuanshuo-background-atlas.png",
+    "sha256": "f69f1fc28b184b388d83c3882fcf65f10c736cb2c25bd2b1c44b4239bac40ac1",
+    "size": [
+      500,
+      300
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      500,
+      300
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/background-0.png",
+    "source": "dong_yong_chuanshuo-background.png",
+    "sha256": "b0ff87737b8a4de326fab2f2d3ea372d51d18c9933b3505cee3f08364b99c887",
+    "size": [
+      500,
+      300
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      500,
+      300
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/background-0.png",
+    "source": "xingshan_min_ge-background-atlas.png",
+    "sha256": "dc0ec03c454ed1c7513f53b8aae2bb21717eacc89bf1bfbe0ed44cd9862455be",
+    "size": [
+      500,
+      300
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      500,
+      300
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/background-1.png",
+    "source": "xingshan_min_ge-background-atlas.png",
+    "sha256": "ee3c9f2d1f5d8674c08fe4cc50c2a187ed2e4c25865583a3ac5e5d3fb79809d5",
+    "size": [
+      500,
+      300
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      500,
+      300
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/background-2.png",
+    "source": "xingshan_min_ge-background-atlas.png",
+    "sha256": "ef69d9e7b5d056d4e97c8db969e40336d220b3570f85e8485499410e692cb6dd",
+    "size": [
+      500,
+      300
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      500,
+      300
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/background-3.png",
+    "source": "xingshan_min_ge-background-atlas.png",
+    "sha256": "e7ac2ccb6bc4c9d1a3d9bd9753ca22d54880ce663484866176af41b2041f4936",
+    "size": [
+      500,
+      300
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      500,
+      300
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/xisai_shenzhou_hui/background-0.png",
+    "source": "xisai_shenzhou_hui-background.png",
+    "sha256": "a2702e684ccd25587542c892627247f835d2911144c22c76f4b77f68a511ece2",
+    "size": [
+      500,
+      300
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      500,
+      300
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/avatars.png",
+    "source": "yandi_shennong_chuanshuo-avatars-v2.png",
+    "size": [
+      48,
+      64
+    ],
+    "columns": 10,
+    "rows": 6,
+    "anchor": [
+      24.0,
+      62
+    ],
+    "status": "normalized_pending_engine_review",
+    "sha256": "ca616924436f0a9692bfcb80ee442c505f41b528dc929e20a506a431f20f35bb",
+    "texture_size": [
+      480,
+      384
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/avatars.png",
+    "source": "dong_yong_chuanshuo-avatars.png",
+    "size": [
+      128,
+      160
+    ],
+    "columns": 8,
+    "rows": 6,
+    "anchor": [
+      64.0,
+      158
+    ],
+    "status": "normalized_pending_engine_review",
+    "sha256": "3650ca051cc52cc998763ae371a3ea840491ebc22219976030dec931a9979d16",
+    "texture_size": [
+      1024,
+      960
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/outdoor-avatars.png",
+    "source": "river-field-avatars.png",
+    "size": [
+      112,
+      160
+    ],
+    "columns": 4,
+    "rows": 6,
+    "anchor": [
+      56.0,
+      158
+    ],
+    "status": "normalized_pending_engine_review"
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/xisai_shenzhou_hui/boat.png",
+    "source": "xisai_shenzhou_hui-boat.png",
+    "sha256": "97970a8a5f8c984544f93321dd844ad8b6b226216ca04ff66638542074177ddd",
+    "size": [
+      128,
+      176
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      128,
+      176
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/cart.png",
+    "source": "dong_yong_chuanshuo-cart-props.png",
+    "sha256": "23c34f6b4cb7bf0ed5a589cbbea0e737df4cfb9301042e1036874da653adb5aa",
+    "size": [
+      240,
+      84
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      240,
+      84
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/wheel.png",
+    "source": "dong_yong_chuanshuo-cart-props.png",
+    "sha256": "5aee68ebe3da40532277cbdc8044b3a26303a438a999c5700c37a6a49f0eb9ba",
+    "size": [
+      64,
+      64
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      64,
+      64
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/father.png",
+    "source": "dong_yong_chuanshuo-cart-props.png",
+    "sha256": "6ba1aece5909f17cc1f08abcf44b4e92a14d96619a41201334c0d287c97ae1f1",
+    "size": [
+      80,
+      112
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      80,
+      112
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/bundle.png",
+    "source": "dong_yong_chuanshuo-cart-props.png",
+    "sha256": "dcd01c3a032f5c219813e8d8765eb0350ff3460bae87314e97644faa9e19dcef",
+    "size": [
+      48,
+      40
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      48,
+      40
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/forest.png",
+    "source": "yandi_shennong_chuanshuo-terrain.png",
+    "sha256": "88f13d96b670a88a0bdbd13e73baab70fd15cce663da954d540bfa2ed779a968",
+    "size": [
+      96,
+      64
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      96,
+      64
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/creek.png",
+    "source": "yandi_shennong_chuanshuo-terrain.png",
+    "sha256": "baa8e41ae49d9b6e611904a6f512bda684d2218736a84cbef7af33e4f81db121",
+    "size": [
+      96,
+      64
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      96,
+      64
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/ridge.png",
+    "source": "yandi_shennong_chuanshuo-terrain.png",
+    "sha256": "2e3cfb2df211a93da30c0e84db150daf2be46a8cfbf1f97e30a22e10e95cb3bf",
+    "size": [
+      96,
+      64
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      96,
+      64
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/rock.png",
+    "source": "yandi_shennong_chuanshuo-terrain.png",
+    "sha256": "999daa1d93cb1f98d43156c05ba7894c8d0dfc0d9abdb154054f27c7bf0b5813",
+    "size": [
+      32,
+      20
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      32,
+      20
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/branch.png",
+    "source": "yandi_shennong_chuanshuo-terrain.png",
+    "sha256": "5194e43846209607968bc90f2aff254628484d9e3301ad917cd0192c9671c46a",
+    "size": [
+      112,
+      24
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      112,
+      24
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/marker.png",
+    "source": "yandi_shennong_chuanshuo-terrain.png",
+    "sha256": "f2b7cc883eb1ba02ec4e36a38ad8d171b1e9fefbd71c128544535c59e9b235cc",
+    "size": [
+      40,
+      64
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      40,
+      64
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/gate-bottom.png",
+    "source": "xingshan_min_ge-gates.png",
+    "sha256": "865d63d7153a199f24778444a1eb78588e933258099ed212f01cca4c8a3acfc2",
+    "size": [
+      96,
+      192
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      96,
+      192
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/gate-top.png",
+    "source": "xingshan_min_ge-gates.png",
+    "sha256": "0fe5172c9dbfdd7beda45fb2dee98c287a13a5c35ba6d8b39dbcfb037ac67037",
+    "size": [
+      96,
+      192
+    ],
+    "anchor": null,
+    "status": "normalized_pending_engine_review",
+    "texture_size": [
+      96,
+      192
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/hand-anchors.json",
+    "source": "motion-art-generation-log.json",
+    "status": "normalized_pending_engine_review",
+    "sha256": "550c90e7fa68849770eb96c7daf19bd11092f8bd1043cfe4d226ca20ea7512fa"
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/avatars.png",
+    "source": "motion-art-generation-log.json",
+    "status": "normalized_pending_engine_review",
+    "sha256": "4b095247c05988a14546d6105c465be8ad8bd4da887090aa70cb6990122a8ee7",
+    "texture_size": [
+      224,
+      960
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/bird.png",
+    "source": "motion-art-generation-log.json",
+    "status": "normalized_pending_engine_review",
+    "sha256": "38c7e115fe50084b9d52529fa803f27cf1bff09a8a387827a56cb2f25ea5a58a",
+    "texture_size": [
+      256,
+      128
+    ]
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v1/runtime/xisai_shenzhou_hui/avatars.png",
+    "source": "motion-art-generation-log.json",
+    "status": "normalized_pending_engine_review",
+    "sha256": "d673e68cae4ed6350f9f778e8de0526e237e8ab89a1a60fe70e905135e6a4158",
+    "texture_size": [
+      224,
+      960
+    ]
+  }
+]

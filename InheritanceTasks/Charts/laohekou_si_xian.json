@@ -1,0 +1,639 @@
+{
+  "version": 4,
+  "audio_path": "res://InheritanceTasks/Audio/rhythm-v4/laohekou_si_xian-continuous.ogg",
+  "audio_sha256": "f1be442a176b7ea0110d5d4082d766e0d399f88a6688b744b05ae1556d1dc4a5",
+  "end_ms": 41000,
+  "events": [
+    {
+      "id": "laohekou_si_xian-continuous-v4-00",
+      "time_ms": 2150,
+      "end_ms": 2150,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-01",
+      "time_ms": 3540,
+      "end_ms": 3540,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-02",
+      "time_ms": 5020,
+      "end_ms": 5020,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-03",
+      "time_ms": 6430,
+      "end_ms": 6430,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-04",
+      "time_ms": 8160,
+      "end_ms": 8160,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-05",
+      "time_ms": 8690,
+      "end_ms": 8690,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-06",
+      "time_ms": 10730,
+      "end_ms": 10730,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-07",
+      "time_ms": 12420,
+      "end_ms": 12420,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-08",
+      "time_ms": 13010,
+      "end_ms": 13010,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-09",
+      "time_ms": 15250,
+      "end_ms": 15250,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-10",
+      "time_ms": 17360,
+      "end_ms": 17360,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-11",
+      "time_ms": 17910,
+      "end_ms": 17910,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-12",
+      "time_ms": 20180,
+      "end_ms": 20180,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-13",
+      "time_ms": 22540,
+      "end_ms": 22540,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-14",
+      "time_ms": 23080,
+      "end_ms": 23080,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-15",
+      "time_ms": 25470,
+      "end_ms": 25470,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-16",
+      "time_ms": 27520,
+      "end_ms": 27520,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-17",
+      "time_ms": 28140,
+      "end_ms": 28140,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-18",
+      "time_ms": 30670,
+      "end_ms": 30670,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-19",
+      "time_ms": 32480,
+      "end_ms": 32480,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-20",
+      "time_ms": 34620,
+      "end_ms": 34620,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-21",
+      "time_ms": 35180,
+      "end_ms": 35180,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-22",
+      "time_ms": 37640,
+      "end_ms": 37640,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-23",
+      "time_ms": 38250,
+      "end_ms": 38250,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 3
+    }
+  ],
+  "presentation": [
+    {
+      "id": "laohekou_si_xian-continuous-v4-00",
+      "time_ms": 2150,
+      "end_ms": 2150,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-01",
+      "time_ms": 3540,
+      "end_ms": 3540,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-02",
+      "time_ms": 5020,
+      "end_ms": 5020,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-03",
+      "time_ms": 6430,
+      "end_ms": 6430,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-04",
+      "time_ms": 8160,
+      "end_ms": 8160,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-05",
+      "time_ms": 8690,
+      "end_ms": 8690,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-06",
+      "time_ms": 10730,
+      "end_ms": 10730,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-07",
+      "time_ms": 12420,
+      "end_ms": 12420,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-08",
+      "time_ms": 13010,
+      "end_ms": 13010,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-09",
+      "time_ms": 15250,
+      "end_ms": 15250,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-10",
+      "time_ms": 17360,
+      "end_ms": 17360,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-11",
+      "time_ms": 17910,
+      "end_ms": 17910,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-12",
+      "time_ms": 20180,
+      "end_ms": 20180,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-13",
+      "time_ms": 22540,
+      "end_ms": 22540,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-14",
+      "time_ms": 23080,
+      "end_ms": 23080,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-15",
+      "time_ms": 25470,
+      "end_ms": 25470,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-16",
+      "time_ms": 27520,
+      "end_ms": 27520,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-17",
+      "time_ms": 28140,
+      "end_ms": 28140,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-18",
+      "time_ms": 30670,
+      "end_ms": 30670,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-19",
+      "time_ms": 32480,
+      "end_ms": 32480,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-20",
+      "time_ms": 34620,
+      "end_ms": 34620,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-21",
+      "time_ms": 35180,
+      "end_ms": 35180,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-22",
+      "time_ms": 37640,
+      "end_ms": 37640,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "laohekou_si_xian-continuous-v4-23",
+      "time_ms": 38250,
+      "end_ms": 38250,
+      "kind": "tap",
+      "direction": 0,
+      "cue_ms": 1100,
+      "round": 3
+    }
+  ],
+  "sections": [],
+  "tutorial_audio_path": "res://InheritanceTasks/Audio/rhythm-v4/pluck-lesson-0.ogg",
+  "feedback_key": "pluck",
+  "production_status": "continuous_source_integrated_timing_listening_pending",
+  "annotation_note": "v4连续授权原声，原速原调，玩家输入不切断演出。明确游戏提示时间线；尚待逐句听审，不宣称真实帮腔、弓法或声腔转录。",
+  "choreography": [
+    {
+      "id": "laohekou_si_xian-continuous-partner_left",
+      "actor": "partner_left",
+      "action": "play_phrase",
+      "start_ms": 0,
+      "end_ms": 41000,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 1400
+    },
+    {
+      "id": "laohekou_si_xian-continuous-partner_right",
+      "actor": "partner_right",
+      "action": "play_phrase",
+      "start_ms": 0,
+      "end_ms": 41000,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 1400
+    }
+  ],
+  "tutorial_steps": [
+    {
+      "instruction": "跟着音乐，圈合上拨弦",
+      "retry_hint": "跟着音乐，圈合上拨弦",
+      "initial_lane": -1,
+      "required": "hit",
+      "duration_ms": 2400,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v4/pluck-lesson-0.ogg",
+      "audio_sha256": "936fb4e24c314f77e584cf850077b5b513e6c8112b6775e21070d899104da784",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v4/laohekou_si_xian-continuous.ogg",
+      "source_in_ms": 650,
+      "source_out_ms": 3050,
+      "events": [
+        {
+          "id": "laohekou_si_xian-continuous-v4-00",
+          "time_ms": 1500,
+          "end_ms": 1500,
+          "kind": "tap",
+          "direction": 0,
+          "cue_ms": 1100,
+          "round": 0
+        }
+      ],
+      "presentation": [
+        {
+          "id": "laohekou_si_xian-continuous-v4-00",
+          "time_ms": 1500,
+          "end_ms": 1500,
+          "kind": "tap",
+          "direction": 0,
+          "cue_ms": 1100,
+          "round": 0
+        }
+      ],
+      "choreography": [
+        {
+          "id": "laohekou_si_xian-continuous-partner_left",
+          "actor": "partner_left",
+          "action": "play_phrase",
+          "start_ms": 0,
+          "end_ms": 2400,
+          "frames": [
+            0,
+            1,
+            2,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 1400
+        },
+        {
+          "id": "laohekou_si_xian-continuous-partner_right",
+          "actor": "partner_right",
+          "action": "play_phrase",
+          "start_ms": 0,
+          "end_ms": 2400,
+          "frames": [
+            0,
+            1,
+            2,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 1400
+        }
+      ],
+      "sections": []
+    },
+    {
+      "instruction": "拨、松开、再拨",
+      "retry_hint": "拨、松开、再拨",
+      "initial_lane": -1,
+      "required": "double",
+      "duration_ms": 2930,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v4/pluck-lesson-1.ogg",
+      "audio_sha256": "16264b5e15726782b7706567e4d93ca931d854cda83af54f0a2b8f394147c5d6",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v4/laohekou_si_xian-continuous.ogg",
+      "source_in_ms": 6660,
+      "source_out_ms": 9590,
+      "events": [
+        {
+          "id": "laohekou_si_xian-continuous-v4-04",
+          "time_ms": 1500,
+          "end_ms": 1500,
+          "kind": "tap",
+          "direction": 0,
+          "cue_ms": 1100,
+          "round": 0
+        },
+        {
+          "id": "laohekou_si_xian-continuous-v4-05",
+          "time_ms": 2030,
+          "end_ms": 2030,
+          "kind": "tap",
+          "direction": 0,
+          "cue_ms": 1100,
+          "round": 0
+        }
+      ],
+      "presentation": [
+        {
+          "id": "laohekou_si_xian-continuous-v4-04",
+          "time_ms": 1500,
+          "end_ms": 1500,
+          "kind": "tap",
+          "direction": 0,
+          "cue_ms": 1100,
+          "round": 0
+        },
+        {
+          "id": "laohekou_si_xian-continuous-v4-05",
+          "time_ms": 2030,
+          "end_ms": 2030,
+          "kind": "tap",
+          "direction": 0,
+          "cue_ms": 1100,
+          "round": 0
+        }
+      ],
+      "choreography": [
+        {
+          "id": "laohekou_si_xian-continuous-partner_left",
+          "actor": "partner_left",
+          "action": "play_phrase",
+          "start_ms": 0,
+          "end_ms": 2930,
+          "frames": [
+            0,
+            1,
+            2,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 1400
+        },
+        {
+          "id": "laohekou_si_xian-continuous-partner_right",
+          "actor": "partner_right",
+          "action": "play_phrase",
+          "start_ms": 0,
+          "end_ms": 2930,
+          "frames": [
+            0,
+            1,
+            2,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 1400
+        }
+      ],
+      "sections": []
+    }
+  ]
+}

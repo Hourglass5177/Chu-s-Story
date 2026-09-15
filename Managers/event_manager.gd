@@ -254,6 +254,9 @@ func _request_choice(request: EventChoiceRequest, is_reaction: bool = false):
 	# 外部玩法（目前主要是食物）只复用本管理器的选择和响应链，
 	# 不属于一张事件牌的完整结算，因此不会在末尾发送 interaction_finished。
 	# 明确要求遮罩随本次选择关闭，避免永久停留在“结算中”。
+	_apply_choice_source(request, resolution_context)
+	if is_reaction:
+		request.purpose = &"reaction"
 	request.close_overlay_on_resolve = resolution_context == null
 	request.timeout_seconds = CHOICE_TIMEOUT_SECONDS
 	var ticket := InteractionCoordinator.begin_interaction(&"event", request.timeout_seconds, _resolve_choice_timeout, TurnManager.ModalResumePolicy.NO_RESUME, false, {"request": request})
@@ -273,7 +276,7 @@ func _request_choice(request: EventChoiceRequest, is_reaction: bool = false):
 	if choice_strategy.is_valid():
 		var chosen_by_strategy = choice_strategy.call(request)
 		InteractionCoordinator.submit(request.request_id, chosen_by_strategy)
-	elif auto_resolve_choices or event_overlay == null:
+	elif auto_resolve_choices or (event_overlay == null and not (request.requester != null and request.requester.is_bot and get_tree().get_first_node_in_group("AI_SESSION") != null)):
 		var automatic = _default_multiple_choice(request) if request.multiple else (null if request.optional else request.options[0])
 		InteractionCoordinator.submit(request.request_id, automatic)
 	var interaction_result: InteractionResult = await InteractionCoordinator.await_result(ticket)
@@ -771,11 +774,13 @@ func _choose_players(
 			selected.append(option as PlayerClass)
 	return selected
 
-func _choose_card(requester: PlayerClass, prompt: String, cards: Array, optional: bool = false):
+func _choose_card(requester: PlayerClass, prompt: String, cards: Array, optional: bool = false, purpose: StringName = &"choose", context: Dictionary = {}):
 	var resolution_context := _current_resolution_context
 	if cards.is_empty():
 		return null
 	var request := EventChoiceRequest.new(requester, prompt, cards, _labels_for_cards(cards), optional, EventChoiceRequest.ChoiceKind.卡牌)
+	request.purpose = &"hand_card" if purpose == &"choose" else purpose
+	request.decision_context = context.duplicate(true)
 	var selected = await _request_choice(request)
 	return null if _is_resolution_context_cancelled(resolution_context) else selected
 
@@ -805,16 +810,24 @@ func _choose_market_card(requester: PlayerClass, prompt: String, cards: Array[�
 	return null if _is_resolution_context_cancelled(resolution_context) else selected
 
 func _apply_choice_source(request: EventChoiceRequest, resolution_context: EventResolutionContext) -> void:
-	if request == null or resolution_context == null or resolution_context.source_card == null:
+	if request == null: return
+	if resolution_context == null or resolution_context.source_card == null:
+		var food_context: Dictionary = FoodManager.get_choice_context()
+		if not food_context.is_empty():
+			request.source_id = StringName(food_context.source_id)
+			request.decision_context.merge(food_context, false)
 		return
+	request.source_id = resolution_context.source_card.event_id
 	request.source_name = resolution_context.source_card.card_name
 	request.source_description = resolution_context.source_card.description
 
-func _choose_option(requester: PlayerClass, prompt: String, options: Array, labels: PackedStringArray, optional: bool = false):
+func _choose_option(requester: PlayerClass, prompt: String, options: Array, labels: PackedStringArray, optional: bool = false, purpose: StringName = &"choose", context: Dictionary = {}):
 	var resolution_context := _current_resolution_context
 	if options.is_empty():
 		return null
 	var request := EventChoiceRequest.new(requester, prompt, options, labels, optional, EventChoiceRequest.ChoiceKind.选项)
+	request.purpose = purpose
+	request.decision_context = context.duplicate(true)
 	var selected = await _request_choice(request)
 	return null if _is_resolution_context_cancelled(resolution_context) else selected
 
@@ -1035,7 +1048,8 @@ func _resolve_effect_target(
 	effect_kind: StringName,
 	prompt: String,
 	allow_reaction: bool = true,
-	redirect_validator: Callable = Callable()
+	redirect_validator: Callable = Callable(),
+	decision_context: Dictionary = {}
 ) -> PlayerClass:
 	var resolution_context := _current_resolution_context
 	if _is_resolution_context_cancelled(resolution_context):
@@ -1057,6 +1071,8 @@ func _resolve_effect_target(
 			true,
 			EventChoiceRequest.ChoiceKind.卡牌
 		)
+		request.decision_context = decision_context.duplicate(true)
+		request.decision_context["source"] = effect_source.player_index if effect_source != null else -1
 		var response = await _request_choice(request, true)
 		if _is_resolution_context_cancelled(resolution_context):
 			return null
@@ -1076,7 +1092,7 @@ func _resolve_effect_target(
 					effect_response_resolved.emit(effect_kind, &"cancel", target, null)
 					return null
 				effect_response_resolved.emit(effect_kind, &"redirect", target, redirected)
-				var resolved_target := await _resolve_effect_target(effect_source, redirected, effect_kind, prompt, true, redirect_validator)
+				var resolved_target := await _resolve_effect_target(effect_source, redirected, effect_kind, prompt, true, redirect_validator, decision_context)
 				return null if _is_resolution_context_cancelled(resolution_context) else resolved_target
 		elif response is 非遗牌:
 			var myth := response as 非遗牌
@@ -1095,7 +1111,7 @@ func _resolve_effect_target(
 					return null
 				if redirected != null:
 					effect_response_resolved.emit(effect_kind, &"redirect", target, redirected)
-					var resolved_target := await _resolve_effect_target(effect_source, redirected, effect_kind, prompt, true, redirect_validator)
+					var resolved_target := await _resolve_effect_target(effect_source, redirected, effect_kind, prompt, true, redirect_validator, decision_context)
 					return null if _is_resolution_context_cancelled(resolution_context) else resolved_target
 			effect_response_resolved.emit(effect_kind, &"cancel", target, null)
 			return null
@@ -1120,7 +1136,10 @@ func _resolve_incoming_effect(
 		await presentation.focus_player(target, prompt)
 		if _is_resolution_context_cancelled(resolution_context):
 			return false
-	var final_target := await _resolve_effect_target(effect_source, target, effect_kind, prompt, allow_reaction, redirect_validator)
+	var effect_context: Dictionary = {"effect_method": String(apply_callable.get_method())}
+	var arguments := apply_callable.get_bound_arguments()
+	if not arguments.is_empty() and (arguments[0] is int or arguments[0] is float): effect_context["amount"] = arguments[0]
+	var final_target := await _resolve_effect_target(effect_source, target, effect_kind, prompt, allow_reaction, redirect_validator, effect_context)
 	if _is_resolution_context_cancelled(resolution_context):
 		return false
 	if final_target == null:
@@ -1212,7 +1231,7 @@ func _event_bai_ge_zheng_liu(source: PlayerClass) -> void:
 	for player: PlayerClass in _alive_players():
 		if player in [source, opponent]:
 			continue
-		var team = await _choose_option(player, "百舸争流：%s 首骰 %d，%s 首骰 %d，请选择队伍" % [source.player_name, source_rolls[0], opponent.player_name, opponent_rolls[0]], [source, opponent], PackedStringArray([source.player_name, opponent.player_name]))
+		var team = await _choose_option(player, "百舸争流：%s 首骰 %d，%s 首骰 %d，请选择队伍" % [source.player_name, source_rolls[0], opponent.player_name, opponent_rolls[0]], [source, opponent], PackedStringArray([source.player_name, opponent.player_name]), false, &"choose_team", {"rolls": {source.player_index: source_rolls[0], opponent.player_index: opponent_rolls[0]}})
 		if _is_resolution_context_cancelled(resolution_context):
 			return
 		if team == source:
@@ -1528,7 +1547,7 @@ func _event_yi_cang_hu_huan(source: PlayerClass) -> void:
 		return
 	if target == null:
 		return
-	var accepted = await _choose_option(target, "%s 邀请交换非遗牌" % source.player_name, [true], PackedStringArray(["接受"]), true)
+	var accepted = await _choose_option(target, "%s 邀请交换非遗牌" % source.player_name, [true], PackedStringArray(["接受"]), true, &"exchange_accept", {"source": source.player_index})
 	if _is_resolution_context_cancelled(resolution_context):
 		return
 	if accepted != true:
@@ -1674,7 +1693,7 @@ func _event_yi_jing_xun_zong(player: PlayerClass) -> void:
 	var resolution_context := _current_resolution_context
 	var first := await _roll_2d6_presented(player)
 	var second := await _roll_2d6_presented(player)
-	var steps = await _choose_option(player, "艺径寻踪：选择移动点数", [first, second], PackedStringArray([str(first), str(second)]))
+	var steps = await _choose_option(player, "艺径寻踪：选择移动点数", [first, second], PackedStringArray([str(first), str(second)]), false, &"movement_steps")
 	if _is_resolution_context_cancelled(resolution_context):
 		return
 	if steps == null:
@@ -1889,7 +1908,7 @@ func try_revive_player(dying_player: PlayerClass) -> bool:
 			continue
 		begin_modal_if_needed()
 		interaction_was_shown = true
-		var decision = await _choose_option(holder, "%s 即将被淘汰，是否使用【妙手回春】？" % dying_player.player_name, [true], PackedStringArray(["使用并恢复3点精力"]), true)
+		var decision = await _choose_option(holder, "%s 即将被淘汰，是否使用【妙手回春】？" % dying_player.player_name, [true], PackedStringArray(["使用并恢复3点精力"]), true, &"revive", {"target": dying_player.player_index})
 		if _is_resolution_context_cancelled(resolution_context):
 			return false
 		if decision == true:

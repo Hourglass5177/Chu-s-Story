@@ -1,0 +1,398 @@
+[
+  {
+    "id": "home",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\开启界面\\拆分部件\\背景（正常）v001.png",
+    "runtime": "arts\\ui-main-v1\\home.png",
+    "sha256": "145e25972f8251390231bc9669313e09f5f553ce79e249f474d19118920c3f1c"
+  },
+  {
+    "id": "logo",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\01_品牌与Logo\\彩色logov2.png",
+    "runtime": "arts\\ui-main-v1\\logo.png",
+    "sha256": "b4e770bde3fc4dd7bc25bc9405c391b3b7f3e64cd898cff05adaa0a4e040b20b"
+  },
+  {
+    "id": "panel",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\04_局内界面\\卡牌详情\\界面底版.png",
+    "runtime": "arts\\ui-main-v1\\panel.png",
+    "sha256": "81c4e1f11d3850ab39a4e5c4b7d87bd1322078bfb290a3c534ff97ca15a5d32a"
+  },
+  {
+    "id": "content",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\04_局内界面\\卡牌详情\\右上文本框.png",
+    "runtime": "arts\\ui-main-v1\\content.png",
+    "sha256": "654c1f5416c063e4472f8c76d5dbd040734a95cf4c363eff63cc00f6371e1d91"
+  },
+  {
+    "id": "card",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\04_局内界面\\商店背包研究所\\食物商店\\食物底框.png",
+    "runtime": "arts\\ui-main-v1\\card.png",
+    "sha256": "25e423d0f75930904d18b383a34efea9a030107791887e1a6ffc5589c3a257f9"
+  },
+  {
+    "id": "guide_panel",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\05-教程与图鉴\\指南（原型）\\教程底版.png",
+    "runtime": "arts\\ui-main-v1\\guide_panel.png",
+    "sha256": "67d23f81d9d6bb34f36b890020772c20f9e9e5f82002c585417eaea8619d06c4"
+  },
+  {
+    "id": "guide_content",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\05-教程与图鉴\\指南（原型）\\正文底版.png",
+    "runtime": "arts\\ui-main-v1\\guide_content.png",
+    "sha256": "448cb8002978a71bdbc4d30d0cc5e6621264d2d3345d4b73d118df99ba7d92ef"
+  },
+  {
+    "id": "guide_sidebar",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\05-教程与图鉴\\指南（原型）\\章节底版.png",
+    "runtime": "arts\\ui-main-v1\\guide_sidebar.png",
+    "sha256": "f555657c26ec07e00cce3838118f5ab63c4e8fd5843da4891de2421461a6ee58"
+  },
+  {
+    "id": "chapter",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\05-教程与图鉴\\指南（原型）\\未选中章节.png",
+    "runtime": "arts\\ui-main-v1\\chapter.png",
+    "sha256": "67722032fbf23b2f415ee46eaf378ed74f97878e72d3500658b66ec13cc3fcde"
+  },
+  {
+    "id": "chapter_selected",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\05-教程与图鉴\\指南（原型）\\选中章节.png",
+    "runtime": "arts\\ui-main-v1\\chapter_selected.png",
+    "sha256": "4c2321462c5e9b90027e59e6a12d4aa71035ec0792e58376bddd7316ebf6671c"
+  },
+  {
+    "id": "close",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\02_通用UI\\按钮\\UI按钮图标_独立PNG\\05_关闭_危险操作.png",
+    "runtime": "arts\\ui-main-v1\\close.png",
+    "sha256": "ba515d86122131d1d8a4b6cc61ab1d81b3f8f0afdcbaee5896c692eb84b5826b"
+  },
+  {
+    "id": "guide",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\02_通用UI\\按钮\\UI按钮图标_独立PNG\\03_指南.png",
+    "runtime": "arts\\ui-main-v1\\guide.png",
+    "sha256": "19ae26b7160e67616f544b8184053872b9dc56ad142cee3f1c51de00fee65846"
+  },
+  {
+    "id": "pause",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\02_通用UI\\按钮\\UI按钮图标_独立PNG\\04_暂停.png",
+    "runtime": "arts\\ui-main-v1\\pause.png",
+    "sha256": "5773ca67d69ff8181d7ee51bc677bf29d971a79368f484d2a226464172925807"
+  },
+  {
+    "id": "back",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\02_通用UI\\按钮\\UI按钮图标_独立PNG\\06_返回.png",
+    "runtime": "arts\\ui-main-v1\\back.png",
+    "sha256": "1914afd26b2d683f676ae9e44e502a27cf55793bca283d0af1fa678c599da176"
+  },
+  {
+    "id": "hud_background",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\01_山水背景.png",
+    "runtime": "arts\\ui-main-v1\\hud_background.png",
+    "sha256": "bc6a5b5cab58c3d0aeac520fff51007ac02230b107d65cbc402c342cd1d659a0"
+  },
+  {
+    "id": "hud_left",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\03_左侧底板.png",
+    "runtime": "arts\\ui-main-v1\\hud_left.png",
+    "sha256": "9d4b43ed3ad6cdededeaf43ab99c83ed0e8fef1206cddcaa1415dee324b18aa7"
+  },
+  {
+    "id": "hud_name",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\06_姓名框.png",
+    "runtime": "arts\\ui-main-v1\\hud_name.png",
+    "sha256": "03d59dc663c0303fcc1e068003496c73ebd27e12c10a1d774bfb74186d81e8b0"
+  },
+  {
+    "id": "hud_resource",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\09_数值框.png",
+    "runtime": "arts\\ui-main-v1\\hud_resource.png",
+    "sha256": "df009ac24c0eac1587ee0e06ca388ea9acf8ca47267e813986f071841af8dc9e"
+  },
+  {
+    "id": "money",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\10_金币图标.png",
+    "runtime": "arts\\ui-main-v1\\money.png",
+    "sha256": "81fbe85b42c3dd896dd7d70aee285c36cbc713541659e1f16d9513c3b9d58c6b"
+  },
+  {
+    "id": "energy",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\11_体力图标.png",
+    "runtime": "arts\\ui-main-v1\\energy.png",
+    "sha256": "eda2253cddfcb6b68753f5791ba58d6b41ad397377f208048ada18585002099f"
+  },
+  {
+    "id": "hud_top",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\12_顶部底板.png",
+    "runtime": "arts\\ui-main-v1\\hud_top.png",
+    "sha256": "5bf39c9ba766b012fce6ce8365cc3d04b763fddd97b157d3915e64df7c69f4b2"
+  },
+  {
+    "id": "hud_right",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\21_右侧底板.png",
+    "runtime": "arts\\ui-main-v1\\hud_right.png",
+    "sha256": "2a46308a864ef83e17c45cc839959360e08bee2d0cbf334b081ed47d1cd21b35"
+  },
+  {
+    "id": "hud_score",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\23_总分框.png",
+    "runtime": "arts\\ui-main-v1\\hud_score.png",
+    "sha256": "48365486634cf9f692daf5108474baf217e0046512c23b0b8f94f018e4ff2734"
+  },
+  {
+    "id": "hud_bottom",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\24_底部底板.png",
+    "runtime": "arts\\ui-main-v1\\hud_bottom.png",
+    "sha256": "f3e0011b1d9e9bda6b794c028340897d6a13979cee4d26ffad3bbc981013cbf4"
+  },
+  {
+    "id": "primary_normal",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\02_通用UI\\按钮\\ui_button_primary_large_normal_v003.png",
+    "runtime": "arts\\ui-main-v1\\primary_normal.png",
+    "sha256": "4f165be10bd31e599fd197f7102e1e777f9659f845d638d7bea8d9508f6e1ac8"
+  },
+  {
+    "id": "primary_hover",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\02_通用UI\\按钮\\ui_button_primary_large_hover_v003.png",
+    "runtime": "arts\\ui-main-v1\\primary_hover.png",
+    "sha256": "de24790daa3b2ab2812c5776ec3342cbda501c3d6703a0764d06dbbab352cec7"
+  },
+  {
+    "id": "primary_pressed",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\02_通用UI\\按钮\\ui_button_primary_large_pressed_v003.png",
+    "runtime": "arts\\ui-main-v1\\primary_pressed.png",
+    "sha256": "b8e6fa0389884dabb8bd91ac05974e33f41327538530734c878d847ed669242c"
+  },
+  {
+    "id": "primary_disabled",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\02_通用UI\\按钮\\ui_button_primary_large_disabled_v003.png",
+    "runtime": "arts\\ui-main-v1\\primary_disabled.png",
+    "sha256": "4ab03e04ba27f51d95d469400e3ea350288ba19f6519958e8e34d8cd48bd8103"
+  },
+  {
+    "id": "secondary_normal",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\02_通用UI\\按钮\\ui_button_secondary_normal_v003.png",
+    "runtime": "arts\\ui-main-v1\\secondary_normal.png",
+    "sha256": "981aaeafae35bf97a58ef8e1b0e09baed7a1ed3e9581a44501aeedf157bfe042"
+  },
+  {
+    "id": "secondary_hover",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\02_通用UI\\按钮\\ui_button_secondary_hover_v003.png",
+    "runtime": "arts\\ui-main-v1\\secondary_hover.png",
+    "sha256": "4d554988b3f98bf5400a4fdf1c054e86f93355b0c3b63e4ea9c2ffbd966a667d"
+  },
+  {
+    "id": "secondary_pressed",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\02_通用UI\\按钮\\ui_button_secondary_pressed_v003.png",
+    "runtime": "arts\\ui-main-v1\\secondary_pressed.png",
+    "sha256": "26cf0f0c7d4b9c16ab006b68c29a7d7f0ece78b2b30e8efcbcdb39a8d06986b0"
+  },
+  {
+    "id": "secondary_disabled",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\02_通用UI\\按钮\\ui_button_secondary_disabled_v003.png",
+    "runtime": "arts\\ui-main-v1\\secondary_disabled.png",
+    "sha256": "a81855e5134bd553e86a6e303878911f1427dbef5a681c85fff573f10c60b5dd"
+  },
+  {
+    "id": "danger_normal",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\02_通用UI\\按钮\\ui_button_danger_normal_v003.png",
+    "runtime": "arts\\ui-main-v1\\danger_normal.png",
+    "sha256": "e522302daaff8484e7f33c56e87cf5fd7c1f1ae1e26dca15a41d8ee20dafb2c3"
+  },
+  {
+    "id": "danger_hover",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\02_通用UI\\按钮\\ui_button_danger_hover_v003.png",
+    "runtime": "arts\\ui-main-v1\\danger_hover.png",
+    "sha256": "01c3b1d5b506eacfef22709cfed91516dda017cbc6c6b2859aa2c8631479e6e5"
+  },
+  {
+    "id": "danger_pressed",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\02_通用UI\\按钮\\ui_button_danger_pressed_v003.png",
+    "runtime": "arts\\ui-main-v1\\danger_pressed.png",
+    "sha256": "6a2423eac7990d82b2594f525a494c352e952ab10ed8c4f1f73c3c3c045b2646"
+  },
+  {
+    "id": "dice_1",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\06_动画特效(仅有贴图)\\骰子\\立体效果\\vfx_dice_face_1_v003.png",
+    "runtime": "arts\\ui-main-v1\\dice_1.png",
+    "sha256": "1f379c32358ebeda081e71dc0653c80456418e9495187f9e0f32bbe01a63bf02"
+  },
+  {
+    "id": "dice_2",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\06_动画特效(仅有贴图)\\骰子\\立体效果\\vfx_dice_face_2_v003.png",
+    "runtime": "arts\\ui-main-v1\\dice_2.png",
+    "sha256": "b21b7e172b04204f79647b65dc90af1e6a399fd7f4e70290a28008918a413daf"
+  },
+  {
+    "id": "dice_3",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\06_动画特效(仅有贴图)\\骰子\\立体效果\\vfx_dice_face_3_v003.png",
+    "runtime": "arts\\ui-main-v1\\dice_3.png",
+    "sha256": "e761fc54cb17e542914ab17df65f6a3a44a5e6ee876ff24611a7ad11e31ff0fc"
+  },
+  {
+    "id": "dice_4",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\06_动画特效(仅有贴图)\\骰子\\立体效果\\vfx_dice_face_4_v003.png",
+    "runtime": "arts\\ui-main-v1\\dice_4.png",
+    "sha256": "3307bdc7dc3954cb7f1ae362f9ddb50c4bb3d86bccdecc113d94ea8d55dc389d"
+  },
+  {
+    "id": "dice_5",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\06_动画特效(仅有贴图)\\骰子\\立体效果\\vfx_dice_face_5_v003.png",
+    "runtime": "arts\\ui-main-v1\\dice_5.png",
+    "sha256": "6911f7bbc8013183f318f331af1b69527b470f6103161829edc2002db233492d"
+  },
+  {
+    "id": "dice_6",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\06_动画特效(仅有贴图)\\骰子\\立体效果\\vfx_dice_face_6_v003.png",
+    "runtime": "arts\\ui-main-v1\\dice_6.png",
+    "sha256": "75bcb0e9aa5d9b16f25d145bce29290ed642cfc049acbb291279d8e05a534b4c"
+  },
+  {
+    "id": "dice_shadow",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\06_动画特效(仅有贴图)\\骰子\\立体效果\\vfx_dice_shadow_v001.png",
+    "runtime": "arts\\ui-main-v1\\dice_shadow.png",
+    "sha256": "e649473ab0760b5273f558507cbe819ff4239ae71536f958d7efc81ee696987a"
+  },
+  {
+    "id": "dice_landing_ring",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\06_动画特效(仅有贴图)\\骰子\\立体效果\\vfx_dice_landing_ring_v001.png",
+    "runtime": "arts\\ui-main-v1\\dice_landing_ring.png",
+    "sha256": "c769c32aa2c2b9c4569f64057b064e3487b1858538a91988cb8b2b486244cc53"
+  },
+  {
+    "id": "ring_heritage",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\06_动画特效(仅有贴图)\\反馈特效\\vfx_hex_ring_heritage_v003.png",
+    "runtime": "arts\\ui-main-v1\\ring_heritage.png",
+    "sha256": "0476d4b404fc9d036e38bace9339e6c9da0ada661ae599f21ff72905125ab15f"
+  },
+  {
+    "id": "ring_event",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\06_动画特效(仅有贴图)\\反馈特效\\vfx_hex_ring_event_v003.png",
+    "runtime": "arts\\ui-main-v1\\ring_event.png",
+    "sha256": "75ed9e44edeade9ddb8a978b3accb2952914b631ba3b114e0b1eb9a0f762d091"
+  },
+  {
+    "id": "ring_work",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\06_动画特效(仅有贴图)\\反馈特效\\vfx_hex_ring_work_v003.png",
+    "runtime": "arts\\ui-main-v1\\ring_work.png",
+    "sha256": "e620af066a4b287de80367842c5e3c624070eaeae2e37fd0e2845f68e73c2e94"
+  },
+  {
+    "id": "ring_shop",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\06_动画特效(仅有贴图)\\反馈特效\\vfx_hex_ring_shop_v003.png",
+    "runtime": "arts\\ui-main-v1\\ring_shop.png",
+    "sha256": "57c275767d96732cc30fc580622660cabae4c858b83cc98c3631e70a32efdda9"
+  },
+  {
+    "id": "ring_scenery",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\06_动画特效(仅有贴图)\\反馈特效\\vfx_hex_ring_scenery_v003.png",
+    "runtime": "arts\\ui-main-v1\\ring_scenery.png",
+    "sha256": "de45f8948f663f5ed57417fd4d51dd1d511c030666de32f2fdb4ea6394313554"
+  },
+  {
+    "id": "ring_research",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\06_动画特效(仅有贴图)\\反馈特效\\vfx_hex_ring_research_v003.png",
+    "runtime": "arts\\ui-main-v1\\ring_research.png",
+    "sha256": "a93857e443121fda780d4bfcef03df6ad19e2fe3a105acd68f44cc3bc5196e33"
+  },
+  {
+    "id": "map_current",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\04_局内界面\\地图提示\\ui_map_current_v002.png",
+    "runtime": "arts\\ui-main-v1\\map_current.png",
+    "sha256": "34ba7c1bdf519895dc4243ccbc2f05524affb79c828488abfa2e1df0fa4e4a99"
+  },
+  {
+    "id": "map_target",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\04_局内界面\\地图提示\\ui_map_target_v003.png",
+    "runtime": "arts\\ui-main-v1\\map_target.png",
+    "sha256": "1f1b6797d422c48daf6ad2770cf0e32a8b1d690014f7ac15792a998a3bb9aabb"
+  },
+  {
+    "id": "map_reachable",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\04_局内界面\\地图提示\\ui_map_reachable_v003.png",
+    "runtime": "arts\\ui-main-v1\\map_reachable.png",
+    "sha256": "fceed69efb60900c51beba72b29946ab4c3912e0ba9c97514ec0b54cec068bc4"
+  },
+  {
+    "id": "map_route",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\04_局内界面\\地图提示\\ui_map_route_dot_v002.png",
+    "runtime": "arts\\ui-main-v1\\map_route.png",
+    "sha256": "a2dd9208d686f967cdb1e878de165eeaf470df1d0bec437ac04ce10a3efaeceb"
+  },
+  {
+    "id": "detail_card_frame",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\04_局内界面\\卡牌详情\\卡牌底框.png",
+    "runtime": "arts\\ui-main-v1\\detail_card_frame.png",
+    "sha256": "3b62af8a53dc0261a3b5179680c707adda4220745d804a00bd01116e5fdc3abb"
+  },
+  {
+    "id": "detail_header",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\04_局内界面\\卡牌详情\\顶部新事件.png",
+    "runtime": "arts\\ui-main-v1\\detail_header.png",
+    "sha256": "4b19bbd89ed2279ef77ba517d80d8cdfe2341fe71a16eece2132d90fa1a6a013"
+  },
+  {
+    "id": "detail_strip",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\04_局内界面\\卡牌详情\\关闭.png",
+    "runtime": "arts\\ui-main-v1\\detail_strip.png",
+    "sha256": "fe6f032741a39192d1a62a64eb1746624e16a6a752c0e45e334d888aae7f3247"
+  },
+  {
+    "id": "shop_header",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\04_局内界面\\商店背包研究所\\食物商店\\标题栏.png",
+    "runtime": "arts\\ui-main-v1\\shop_header.png",
+    "sha256": "629c95fb7d4a410c5138c0c1cc42144218281006634e6d88d9afbec0a9585dac"
+  },
+  {
+    "id": "balance_banner",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\04_局内界面\\商店背包研究所\\食物商店\\余额栏.png",
+    "runtime": "arts\\ui-main-v1\\balance_banner.png",
+    "sha256": "4b19bbd89ed2279ef77ba517d80d8cdfe2341fe71a16eece2132d90fa1a6a013"
+  },
+  {
+    "id": "refresh",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\04_局内界面\\商店背包研究所\\食物商店\\刷新.png",
+    "runtime": "arts\\ui-main-v1\\refresh.png",
+    "sha256": "1c97198c4de65497a6ffe8c6b4815324d526d7ba031c6d4a7d47ecbcfb149ffb"
+  },
+  {
+    "id": "hud_map_frame",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\02_地图卷轴.png",
+    "runtime": "arts\\ui-main-v1\\hud_map_frame.png",
+    "sha256": "b339be47371853370595f9dac9a14ec63e35ff1f356f3772ae49ea05cfb3618a"
+  },
+  {
+    "id": "hud_portrait_frame",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\05_头像圆底.png",
+    "runtime": "arts\\ui-main-v1\\hud_portrait_frame.png",
+    "sha256": "2421954d0f53e66784ed6c4936876b144d4923e08fbd51e88906aa6b90f08937"
+  },
+  {
+    "id": "hud_profession",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\07_职业框.png",
+    "runtime": "arts\\ui-main-v1\\hud_profession.png",
+    "sha256": "5d57cd2a2d4c62ea329345368dd0dc0812948a80e81453bf7a6c83640d30a2b1"
+  },
+  {
+    "id": "hud_card_slot",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\22_卡牌槽.png",
+    "runtime": "arts\\ui-main-v1\\hud_card_slot.png",
+    "sha256": "caa32fde471c7ea0f2d7891397e84be8431f97c2c6a8e892ae76cb38784e22e4"
+  },
+  {
+    "id": "hud_bottom_content",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\25_底部内容框.png",
+    "runtime": "arts\\ui-main-v1\\hud_bottom_content.png",
+    "sha256": "c26b321835b9c247ea9a196918d0ec344c932b6e0f10692ed90d3192c28592c4"
+  },
+  {
+    "id": "hud_action",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\26_金色按钮.png",
+    "runtime": "arts\\ui-main-v1\\hud_action.png",
+    "sha256": "fed6112722c1ae22d8500df119e1063515bac20ff8032e19a9568419eb8f4404"
+  },
+  {
+    "id": "hud_action_disabled",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\27_浅色按钮.png",
+    "runtime": "arts\\ui-main-v1\\hud_action_disabled.png",
+    "sha256": "cb5b2d4ea2aea106ff1a57eda846ce14dcf3ba15c3bcdb6017b25c2f3c51bcec"
+  }
+]

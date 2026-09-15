@@ -114,7 +114,10 @@ func test_unlocked_card_shows_thumbnail_heritage_goal_and_operation() -> void:
 			unlocked_entry = entry
 			break
 	assert_false(unlocked_entry.is_empty())
-	assert_same(unlocked_entry.get("thumbnail"), definition.gallery_thumbnail)
+	assert_not_null(definition.presentation)
+	var expected_cover := definition.presentation.cover
+	assert_not_null(expected_cover)
+	assert_same(unlocked_entry.get("thumbnail"), expected_cover)
 	assert_eq(unlocked_entry.get("heritage_name"), definition.heritage_name)
 	assert_eq(unlocked_entry.get("task_name"), definition.display_name)
 	assert_eq(unlocked_entry.get("goal"), definition.hook)
@@ -124,10 +127,11 @@ func test_unlocked_card_shows_thumbnail_heritage_goal_and_operation() -> void:
 		assert_true(expected in rendered, "已解锁卡应显示：%s" % expected)
 	var unlocked_panel := _first_node_named_with_prefix(_guide, "UnlockedTask") as Control
 	assert_not_null(unlocked_panel)
+	assert_eq(unlocked_panel.accessibility_name,definition.heritage_name,"只使用非遗名称，不拼接第二个玩法名称")
 	var thumbnail := _first_texture_rect(unlocked_panel)
 	assert_not_null(thumbnail)
 	if thumbnail != null:
-		assert_same(thumbnail.texture, definition.gallery_thumbnail)
+		assert_same(thumbnail.texture, expected_cover)
 
 
 func test_gallery_switches_between_three_column_and_single_column_layouts() -> void:

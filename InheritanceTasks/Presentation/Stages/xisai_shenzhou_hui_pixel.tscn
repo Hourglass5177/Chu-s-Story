@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://InheritanceTasks/Presentation/Stages/xisai_shenzhou_hui_pixel.gd" id="1"]
+
+[node name="PixelStage" type="Control"]
+layout_mode = 0
+offset_right = 1000.0
+offset_bottom = 600.0
+mouse_filter = 2
+script = ExtResource("1")

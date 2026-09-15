@@ -15,7 +15,7 @@ param(
 $ErrorActionPreference = 'Stop'
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 if ([string]::IsNullOrWhiteSpace($GodotPath)) {
-    $GodotPath = 'F:\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe'
+    $GodotPath = 'F:\godot 4.7.2\Godot_v4.7.2-stable_win64_console.exe'
 }
 if (-not (Test-Path -LiteralPath $GodotPath -PathType Leaf)) {
     throw '未找到 Godot 控制台程序；请通过 -GodotPath 或 GODOT4_CONSOLE 指定。'

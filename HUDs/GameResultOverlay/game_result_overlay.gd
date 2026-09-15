@@ -93,6 +93,8 @@ var _is_solo_defeat := false
 
 
 func _ready() -> void:
+	MainUI.typography(self)
+	for button: Button in [_details_button, _return_button, _quit_button, _skip_button]: MainUI.button(button)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	set_process(true)
 	set_process_input(true)
@@ -1065,7 +1067,8 @@ func _make_label(text_value: String, font_size: int, color: Color, alignment: in
 	label.text = text_value
 	label.horizontal_alignment = alignment as HorizontalAlignment
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.add_theme_font_size_override("font_size", font_size)
+	label.add_theme_font_override("font", MainUI.FONT)
+	label.add_theme_font_size_override("font_size", maxi(36, font_size))
 	label.add_theme_color_override("font_color", color)
 	return label
 

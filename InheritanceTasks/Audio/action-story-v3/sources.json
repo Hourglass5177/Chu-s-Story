@@ -1,0 +1,61 @@
+{
+  "version": 3,
+  "assets": [
+    {
+      "file": "puzzle-good.wav",
+      "seconds": 0.16,
+      "sha256": "7f6484e27128ca1ffc1659107643fe6f1768da5fc7f568dbf8b5ffdec00ad5ed",
+      "description": "Soft wooden tile contact",
+      "source": "Original deterministic digital synthesis; game feedback, not heritage recording."
+    },
+    {
+      "file": "paper-good.wav",
+      "seconds": 0.24,
+      "sha256": "65e64ec944d8577a69cb409fac12a414928194413568cd6df60ea985f61adc37",
+      "description": "Short paper release and knife scrape",
+      "source": "Original deterministic digital synthesis; game feedback, not heritage recording."
+    },
+    {
+      "file": "cart-good.wav",
+      "seconds": 0.34,
+      "sha256": "71d350f6c1be12ec5f4121a04fc1b99fb7077bc122ebbac6f289e62510b8879d",
+      "description": "Wooden cart settling / brake creak",
+      "source": "Original deterministic digital synthesis; game feedback, not heritage recording."
+    },
+    {
+      "file": "boat-good.wav",
+      "seconds": 0.32,
+      "sha256": "18d125ee29098fbf33799154a11a53e09e39f561fb9cded28584fd0b7042f988",
+      "description": "Gentle water settling",
+      "source": "Original deterministic digital synthesis; game feedback, not heritage recording."
+    },
+    {
+      "file": "puzzle-miss.wav",
+      "seconds": 0.24,
+      "sha256": "0f480d4b1226aa5cc022e96b17adb3eb10665f34e20a09b2d0c9defb8187743b",
+      "description": "Dull tile stop",
+      "source": "Original deterministic digital synthesis; game feedback, not heritage recording."
+    },
+    {
+      "file": "paper-miss.wav",
+      "seconds": 0.24,
+      "sha256": "06bdb4de6d4651c7c943c9ce770e89832c951b576b61296d24949ac0431875c0",
+      "description": "Short paper release and knife scrape",
+      "source": "Original deterministic digital synthesis; game feedback, not heritage recording."
+    },
+    {
+      "file": "cart-miss.wav",
+      "seconds": 0.34,
+      "sha256": "d2041165f4e980b4f347aae6430a2db4de779ed8ef2588542c3819598ea399a0",
+      "description": "Wooden cart settling / brake creak",
+      "source": "Original deterministic digital synthesis; game feedback, not heritage recording."
+    },
+    {
+      "file": "boat-miss.wav",
+      "seconds": 0.32,
+      "sha256": "e8d9f849474180753849e5cd48babc4c7cc6af2a23ba0bd6cd960ce5c91482d4",
+      "description": "Short collision splash",
+      "source": "Original deterministic digital synthesis; game feedback, not heritage recording."
+    }
+  ]
+}

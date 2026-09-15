@@ -142,7 +142,7 @@ func test_only_bot_slots_show_the_short_ai_badge() -> void:
 	assert_false((human_card.get_node("%ControlBadge") as PanelContainer).visible)
 	assert_eq((human_card.get_node("%ControlLabel") as Label).text, "")
 	assert_true((bot_card.get_node("%ControlBadge") as PanelContainer).visible)
-	assert_eq((bot_card.get_node("%ControlLabel") as Label).text, "AI")
+	assert_eq((bot_card.get_node("%ControlLabel") as Label).text, "AI·普通")
 
 
 func _mount_page(setup: SessionSetup) -> FrontendRosterPage:

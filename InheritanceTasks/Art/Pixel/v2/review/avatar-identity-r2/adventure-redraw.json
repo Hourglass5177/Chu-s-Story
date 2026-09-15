@@ -1,0 +1,39 @@
+{ "frames": [
+   {
+    "filename": "adventure-redraw.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 80, "h": 152 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 152 },
+    "sourceSize": { "w": 80, "h": 152 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.18.5-dev",
+  "format": "I8",
+  "size": { "w": 80, "h": 152 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "backpack - original olive field equipment", "opacity": 255, "blendMode": "normal" },
+   { "name": "trousers - original pale shorts", "opacity": 255, "blendMode": "normal" },
+   { "name": "boots - uneven original folds and grounded soles", "opacity": 255, "blendMode": "normal" },
+   { "name": "shirt sleeves - independent left and right contours", "opacity": 255, "blendMode": "normal" },
+   { "name": "red belt - original round brass buckle", "opacity": 255, "blendMode": "normal" },
+   { "name": "neck hair - swept short grey tails", "opacity": 255, "blendMode": "normal" },
+   { "name": "red neckerchief - original asymmetric knot", "opacity": 255, "blendMode": "normal" },
+   { "name": "white gloves - original confident raised hands", "opacity": 255, "blendMode": "normal" },
+   { "name": "face - distinct tapered jaw and original ear placement", "opacity": 255, "blendMode": "normal" },
+   { "name": "cap - original olive fitted hat silhouette", "opacity": 255, "blendMode": "normal" },
+   { "name": "red goggles - two separated lenses and bridge", "opacity": 255, "blendMode": "normal" },
+   { "name": "grey hair - broad asymmetric fringe not an equal spike crown", "opacity": 255, "blendMode": "normal" },
+   { "name": "anime eyes - confident slanted lids and warm brown irises", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "identity_study", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 0, "w": 80, "h": 152 }, "pivot": {"x": 39, "y": 149 } }] }
+  ]
+ }
+}

@@ -1,0 +1,262 @@
+[gd_resource type="Resource" script_class="HeritageTaskPresentation" format=3]
+
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_presentation.gd" id="script"]
+
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_avatar_appearance.gd" id="appearance"]
+
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v3/runtime/dong/background.png" id="bg"]
+
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v3/runtime/dong/cover.png" id="cover"]
+
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Presentation/Stages/dong_yong_chuanshuo_pixel.tscn" id="stage"]
+
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v3/runtime/dong/travel_blogger/reference.png" id="travel"]
+
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v3/runtime/dong/life_blogger/reference.png" id="life"]
+
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v3/runtime/dong/business_blogger/reference.png" id="business"]
+
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v3/runtime/dong/food_blogger/reference.png" id="food"]
+
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v3/runtime/dong/adventure_blogger/reference.png" id="adventure"]
+
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v3/runtime/dong/magic_blogger/reference.png" id="magic"]
+
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v3/runtime/dong/cover-travel.png" id="identity_cover_travel"]
+
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v3/runtime/dong/cover-life.png" id="identity_cover_life"]
+
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v3/runtime/dong/cover-business.png" id="identity_cover_business"]
+
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v3/runtime/dong/cover-food.png" id="identity_cover_food"]
+
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v3/runtime/dong/cover-adventure.png" id="identity_cover_adventure"]
+
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v3/runtime/dong/cover-magic.png" id="identity_cover_magic"]
+
+[sub_resource type="AtlasTexture" id="travel_0"]
+
+atlas = ExtResource("travel")
+
+region = Rect2(0,0,313,661)
+
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_travel"]
+
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("travel_0")}], "loop": false, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_0")}], "loop": false, "name": &"idle", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_0")}], "loop": false, "name": &"wave", "speed": 1.0}]
+
+[sub_resource type="Resource" id="appearance_travel"]
+
+script = ExtResource("appearance")
+
+avatar_id = &"travel_blogger"
+
+costume_id = &"dong_yong_chuanshuo"
+
+portrait = SubResource("travel_0")
+
+atlas = ExtResource("travel")
+
+sprite_frames = SubResource("frames_travel")
+
+frame_size = Vector2i(313,661)
+
+anchors = {&"feet": Vector2(156.5,661)}
+
+reference_note = "原博主身份的生成衍生。此 SpriteFrames 仅含准备／岸边静态姿势；董永保留完整生成上身与弯肘姿势，站位及车把联合求解，双腿独立落地，剪纸由刀手组件驱动。故事会与岸边共享乡村体验服，文化人物独立。"
+
+[sub_resource type="AtlasTexture" id="life_0"]
+
+atlas = ExtResource("life")
+
+region = Rect2(0,0,298,654)
+
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_life"]
+
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("life_0")}], "loop": false, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_0")}], "loop": false, "name": &"idle", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_0")}], "loop": false, "name": &"wave", "speed": 1.0}]
+
+[sub_resource type="Resource" id="appearance_life"]
+
+script = ExtResource("appearance")
+
+avatar_id = &"life_blogger"
+
+costume_id = &"dong_yong_chuanshuo"
+
+portrait = SubResource("life_0")
+
+atlas = ExtResource("life")
+
+sprite_frames = SubResource("frames_life")
+
+frame_size = Vector2i(298,654)
+
+anchors = {&"feet": Vector2(149.0,654)}
+
+reference_note = "原博主身份的生成衍生。此 SpriteFrames 仅含准备／岸边静态姿势；董永保留完整生成上身与弯肘姿势，站位及车把联合求解，双腿独立落地，剪纸由刀手组件驱动。故事会与岸边共享乡村体验服，文化人物独立。"
+
+[sub_resource type="AtlasTexture" id="business_0"]
+
+atlas = ExtResource("business")
+
+region = Rect2(0,0,344,682)
+
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_business"]
+
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("business_0")}], "loop": false, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_0")}], "loop": false, "name": &"idle", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_0")}], "loop": false, "name": &"wave", "speed": 1.0}]
+
+[sub_resource type="Resource" id="appearance_business"]
+
+script = ExtResource("appearance")
+
+avatar_id = &"business_blogger"
+
+costume_id = &"dong_yong_chuanshuo"
+
+portrait = SubResource("business_0")
+
+atlas = ExtResource("business")
+
+sprite_frames = SubResource("frames_business")
+
+frame_size = Vector2i(344,682)
+
+anchors = {&"feet": Vector2(172.0,682)}
+
+reference_note = "原博主身份的生成衍生。此 SpriteFrames 仅含准备／岸边静态姿势；董永保留完整生成上身与弯肘姿势，站位及车把联合求解，双腿独立落地，剪纸由刀手组件驱动。故事会与岸边共享乡村体验服，文化人物独立。"
+
+[sub_resource type="AtlasTexture" id="food_0"]
+
+atlas = ExtResource("food")
+
+region = Rect2(0,0,282,575)
+
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_food"]
+
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("food_0")}], "loop": false, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_0")}], "loop": false, "name": &"idle", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_0")}], "loop": false, "name": &"wave", "speed": 1.0}]
+
+[sub_resource type="Resource" id="appearance_food"]
+
+script = ExtResource("appearance")
+
+avatar_id = &"food_blogger"
+
+costume_id = &"dong_yong_chuanshuo"
+
+portrait = SubResource("food_0")
+
+atlas = ExtResource("food")
+
+sprite_frames = SubResource("frames_food")
+
+frame_size = Vector2i(282,575)
+
+anchors = {&"feet": Vector2(141.0,575)}
+
+reference_note = "原博主身份的生成衍生。此 SpriteFrames 仅含准备／岸边静态姿势；董永保留完整生成上身与弯肘姿势，站位及车把联合求解，双腿独立落地，剪纸由刀手组件驱动。故事会与岸边共享乡村体验服，文化人物独立。"
+
+[sub_resource type="AtlasTexture" id="adventure_0"]
+
+atlas = ExtResource("adventure")
+
+region = Rect2(0,0,348,588)
+
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_adventure"]
+
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("adventure_0")}], "loop": false, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_0")}], "loop": false, "name": &"idle", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_0")}], "loop": false, "name": &"wave", "speed": 1.0}]
+
+[sub_resource type="Resource" id="appearance_adventure"]
+
+script = ExtResource("appearance")
+
+avatar_id = &"adventure_blogger"
+
+costume_id = &"dong_yong_chuanshuo"
+
+portrait = SubResource("adventure_0")
+
+atlas = ExtResource("adventure")
+
+sprite_frames = SubResource("frames_adventure")
+
+frame_size = Vector2i(348,588)
+
+anchors = {&"feet": Vector2(174.0,588)}
+
+reference_note = "原博主身份的生成衍生。此 SpriteFrames 仅含准备／岸边静态姿势；董永保留完整生成上身与弯肘姿势，站位及车把联合求解，双腿独立落地，剪纸由刀手组件驱动。故事会与岸边共享乡村体验服，文化人物独立。"
+
+[sub_resource type="AtlasTexture" id="magic_0"]
+
+atlas = ExtResource("magic")
+
+region = Rect2(0,0,300,609)
+
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_magic"]
+
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("magic_0")}], "loop": false, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_0")}], "loop": false, "name": &"idle", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_0")}], "loop": false, "name": &"wave", "speed": 1.0}]
+
+[sub_resource type="Resource" id="appearance_magic"]
+
+script = ExtResource("appearance")
+
+avatar_id = &"magic_blogger"
+
+costume_id = &"dong_yong_chuanshuo"
+
+portrait = SubResource("magic_0")
+
+atlas = ExtResource("magic")
+
+sprite_frames = SubResource("frames_magic")
+
+frame_size = Vector2i(300,609)
+
+anchors = {&"feet": Vector2(150.0,609)}
+
+reference_note = "原博主身份的生成衍生。此 SpriteFrames 仅含准备／岸边静态姿势；董永保留完整生成上身与弯肘姿势，站位及车把联合求解，双腿独立落地，剪纸由刀手组件驱动。故事会与岸边共享乡村体验服，文化人物独立。"
+
+[resource]
+
+script = ExtResource("script")
+
+version = 3
+
+background = ExtResource("bg")
+
+cover = ExtResource("cover")
+
+avatar_appearances = {&"travel_blogger": SubResource("appearance_travel"), &"life_blogger": SubResource("appearance_life"), &"business_blogger": SubResource("appearance_business"), &"food_blogger": SubResource("appearance_food"), &"adventure_blogger": SubResource("appearance_adventure"), &"magic_blogger": SubResource("appearance_magic")}
+
+source_manifest_path = "res://InheritanceTasks/Art/Pixel/v3/action-art-manifest.json"
+
+stage_scene = ExtResource("stage")
+
+pixel_canvas_size = Vector2i(1000, 600)
+
+properties = {"native_pixel_scale": 1, "source_detail": "Full original RGBA crops retained, no palette reduction or low-resolution export", "status": "generated candidate; visual review and user acceptance remain separate"}
+
+
+avatar_covers = {&"travel_blogger": ExtResource("identity_cover_travel"), &"life_blogger": ExtResource("identity_cover_life"), &"business_blogger": ExtResource("identity_cover_business"), &"food_blogger": ExtResource("identity_cover_food"), &"adventure_blogger": ExtResource("identity_cover_adventure"), &"magic_blogger": ExtResource("identity_cover_magic")}

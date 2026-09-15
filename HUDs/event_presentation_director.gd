@@ -93,7 +93,11 @@ func show_dice(player: PlayerClass, values: Array[int]) -> void:
 		labels.append(str(value))
 	_message.text = "%s 掷出  %s 点" % [player.player_name, " · ".join(labels)]
 	step_started.emit(&"dice", player)
-	await _wait_step(STEP_SECONDS)
+	var generation := _generation
+	if hud != null:
+		await hud.show_dice_faces(player, values, func(): return generation == _generation and not active_event_id.is_empty())
+	else:
+		await _wait_step(STEP_SECONDS)
 	step_finished.emit(&"dice", player)
 
 func show_resource_delta(player: PlayerClass, kind: StringName, actual_delta: int) -> void:

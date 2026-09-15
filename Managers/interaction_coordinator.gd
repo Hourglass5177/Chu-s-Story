@@ -1,6 +1,8 @@
 extends Node
 
 signal interaction_started(ticket: InteractionTicket)
+## Emitted on a later frame, after the requesting manager has published its state.
+signal decision_requested(ticket: InteractionTicket)
 signal interaction_finished(ticket: InteractionTicket, result: InteractionResult)
 signal interaction_cancelled(ticket: InteractionTicket, reason: StringName)
 
@@ -38,6 +40,7 @@ func begin_interaction(
 	if acquire_modal:
 		_active_ticket.modal_lease_id = TurnManager.acquire_modal(owner, modal_policy)
 	interaction_started.emit(_active_ticket)
+	_publish_decision.call_deferred(_active_ticket)
 	if decision_provider.is_valid():
 		var provided = decision_provider.call(_active_ticket)
 		if provided is InteractionResult:
@@ -47,6 +50,10 @@ func begin_interaction(
 	elif timeout_seconds > 0.0:
 		_timer.start(timeout_seconds)
 	return _active_ticket
+
+func _publish_decision(ticket: InteractionTicket) -> void:
+	if ticket != null and _owns_waiting(ticket.interaction_id):
+		decision_requested.emit(ticket)
 
 func await_result(ticket: InteractionTicket) -> InteractionResult:
 	if ticket == null:

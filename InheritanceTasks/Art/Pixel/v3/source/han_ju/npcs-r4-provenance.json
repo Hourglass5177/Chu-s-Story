@@ -1,0 +1,31 @@
+{
+  "tool": "built-in imagegen",
+  "revision": "r4",
+  "source": "npcs-r4-green.png",
+  "source_sha256": "0b1a2398793e29fe660189db5d56f39f08c922f72c74d15858b44dc99a649c76",
+  "identity_reference": "npcs.png: 红衣白水袖、蓝色头冠的独立演员",
+  "style_reference": "本关旅行博主源图，仅用于头身与画法，不替换独立演员身份",
+  "cultural_status": "沿用已有参考服装设计；本次未新增真实戏服或身段考证",
+  "source_size": [
+    1448,
+    1086
+  ],
+  "exported_frame_size": [
+    362,
+    543
+  ],
+  "source_alpha": false,
+  "source_review": "八个走台与亮相关键姿势；并不代表已核对真实身段或完成流畅走台。",
+  "export_review": "保留原稿颜色和帧框，技术绿底转换；完整场景中未见棋盘格或明显绿边。",
+  "whole_scene_review": {
+    "status": "reviewed",
+    "files": [
+      "artifacts/music-host-v4/han_ju-teaching-1280.png"
+    ],
+    "notes": "对照玩家、后景演员、舞台、教学顶条及器物，未把单张角色稿当整景完成。"
+  },
+  "normal_speed_review": "pending",
+  "six_avatar_review": "pending",
+  "user_accepted": false,
+  "remaining": "连续动作、帧间接缝、真实演出考证与用户画面反馈继续单独检查。"
+}

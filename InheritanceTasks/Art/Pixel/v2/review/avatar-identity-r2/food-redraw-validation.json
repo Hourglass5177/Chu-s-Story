@@ -1,0 +1,22 @@
+{
+  "identity": "food",
+  "status": "static identity candidate, not user approved",
+  "size": [
+    88,
+    152
+  ],
+  "visible_colors": 24,
+  "alpha_values": [
+    0,
+    255
+  ],
+  "aseprite_reopen_exact": true,
+  "preview_exact_nearest4x": true,
+  "layers": 14,
+  "sha256": {
+    "food-redraw.aseprite": "fb4eb54f2f8f8df3538fd51eb2279823455f367636237dafe7d583e9d3493018",
+    "food-redraw.png": "3de5a38b7a36ec1839dc4b8bac6d714b04c5d55429da44ca9359438045bb81b6",
+    "food-redraw.json": "1bbaef1679be5647667a03cdc81b0ff0380ab000a69ccce5c90f6a0dc9933ef2",
+    "draw_food_identity_r2.lua": "bf1cf51df77da5fae9f97b5383b8fc004d0118c4081cab4c16df482f9476f55c"
+  }
+}

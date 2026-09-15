@@ -1,0 +1,30 @@
+{
+  "assets": [
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/ui/tv.png",
+      "sha256": "b8f2b65e1d1e56f0fb0e42b027566c0dcf6d8137de0db15721161ebcf1080401",
+      "source_sha256": "13db55d6ab515f80685cf4925d09586a69ff2b4a82aa6969c7f611a01d6f4970",
+      "original_mode": "RGB",
+      "size": [
+        576,
+        348
+      ],
+      "colors": 24,
+      "method": "built-in imagegen; shared-palette normalization, documented viewport mask or preserved native alpha"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/shenzhou/boat.png",
+      "sha256": "793920728b5fcd01f629025ba17716f88179920ff25b23e9c56145154d4ef812",
+      "source_sha256": "7c4878630523dad6af8e8760aea690abef6da317d72a408f91a6216e2b9bbe6a",
+      "original_mode": "RGBA",
+      "size": [
+        96,
+        96
+      ],
+      "colors": 32,
+      "method": "built-in imagegen; shared-palette normalization, documented viewport mask or preserved native alpha"
+    }
+  ],
+  "boat_shape_reference": "https://hswhj.huangshi.gov.cn/xwzx/gzdt/202307/t20230711_1031116.html",
+  "status": "generated and normalized, awaiting actual scene review"
+}

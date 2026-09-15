@@ -1,0 +1,33 @@
+{ "frames": [
+   {
+    "filename": "business-redraw.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 80, "h": 152 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 152 },
+    "sourceSize": { "w": 80, "h": 152 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.18.5-dev",
+  "image": "business-redraw.png",
+  "format": "I8",
+  "size": { "w": 80, "h": 152 },
+  "scale": "1",
+  "layers": [
+   { "name": "original profession props - banknotes and bags", "opacity": 255, "blendMode": "normal" },
+   { "name": "long tapered trousers and polished shoes", "opacity": 255, "blendMode": "normal" },
+   { "name": "suit - original crossed-arm silhouette and lapels", "opacity": 255, "blendMode": "normal" },
+   { "name": "folded hands - two readable cuffs", "opacity": 255, "blendMode": "normal" },
+   { "name": "face - high forehead and longer narrowing jaw", "opacity": 255, "blendMode": "normal" },
+   { "name": "silver hair - swept front volumes and curled sideburn", "opacity": 255, "blendMode": "normal" },
+   { "name": "relaxed grey violet eyes and separated brows", "opacity": 255, "blendMode": "normal" },
+   { "name": "upturned forked moustache - no beard mask", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "identity_study", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 0, "w": 80, "h": 152 }, "pivot": {"x": 40, "y": 149 } }] }
+  ]
+ }
+}

@@ -26,6 +26,11 @@ var _retained_preview_session_generation: int = -1
 var _retained_preview_turn_epoch: int = -1
 
 func _ready() -> void:
+	MainUI.apply(self)
+	$PopupFrame.texture = MainUI.texture("panel")
+	_timer_panel.add_theme_stylebox_override("panel", MainUI.box("content", 16))
+	_install_board_layout()
+	_step_label.hide()
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -37,6 +42,55 @@ func _ready() -> void:
 	EventManager.choice_resolved.connect(_on_choice_resolved)
 	EventManager.interaction_finished.connect(_on_interaction_finished)
 	_guide_button.pressed.connect(_open_event_guide)
+
+func _install_board_layout() -> void:
+	var frame := $PopupFrame as NinePatchRect
+	for side in [SIDE_LEFT, SIDE_TOP, SIDE_RIGHT, SIDE_BOTTOM]: frame.set_patch_margin(side, 0)
+	MainUI.surface(frame, "detail_header", "HeaderPlaque")
+	_guide_button.reparent(frame, false)
+	MainUI.guide_button(_guide_button)
+	_title_label.reparent(frame, false)
+	_context_label.reparent(frame, false)
+	var column := $PopupFrame/Content/ChoiceColumn
+	_timer_panel.reparent(column, false)
+	column.move_child(_timer_panel, 1)
+	$PopupFrame/Header.hide()
+	$PopupFrame/Content.add_theme_constant_override("separation", 64)
+	$PopupFrame/Content/CardShell.add_theme_stylebox_override("panel", MainUI.box("detail_card_frame", 52))
+	$PopupFrame/Content/CardShell.custom_minimum_size = Vector2(690, 0)
+	_card_image.custom_minimum_size = Vector2(0, 0)
+	$PopupFrame/Content/ChoiceColumn/PromptPanel.add_theme_stylebox_override("panel", MainUI.box("content", 48))
+	$PopupFrame/Content/ChoiceColumn/PromptPanel.custom_minimum_size.y = 310
+	_prompt_label.custom_minimum_size.y = 150
+	column.add_theme_constant_override("separation", 18)
+	_timer_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	MainUI.label(_prompt_label, 44)
+	MainUI.label(_title_label, 54, true)
+	_title_label.add_theme_color_override("font_color", Color("fff8e4"))
+	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	MainUI.label(_context_label, 38)
+	MainUI.pixel_label(_countdown_label, 48)
+	_options_box.child_entered_tree.connect(_style_option)
+	get_viewport().size_changed.connect(_layout_board)
+	_layout_board()
+
+func _style_option(node: Node) -> void:
+	if not node is Button: return
+	var button := node as Button
+	button.custom_minimum_size = Vector2(800, 140)
+	button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	MainUI.label(button, 44, true)
+
+func _layout_board() -> void:
+	var viewport := get_viewport_rect().size
+	var dimensions := Vector2(minf(2360, viewport.x-112), minf(1360, viewport.y-160))
+	MainUI.rect($PopupFrame, Rect2((viewport-dimensions)*0.5, dimensions))
+	MainUI.rect($PopupFrame/HeaderPlaque, Rect2(dimensions.x*0.5-480, -10, 960, 150))
+	MainUI.rect(_title_label, Rect2(dimensions.x*0.5-450, 10, 900, 110))
+	MainUI.rect(_guide_button, Rect2(56, 20, 220, 108))
+	MainUI.rect(_context_label, Rect2(100, 148, dimensions.x-200, 60))
+	MainUI.rect($PopupFrame/Content, Rect2(100, 230, dimensions.x-200, dimensions.y-320))
 
 func _process(_delta: float) -> void:
 	if not visible or _active_request == null:
@@ -78,6 +132,19 @@ func _on_reaction_requested(request: EventChoiceRequest) -> void:
 	_show_request(request, true)
 
 func _show_request(request: EventChoiceRequest, is_reaction: bool) -> void:
+	if request.requester != null and request.requester.is_bot:
+		_active_request = null
+		_clear_options()
+		hide()
+		return
+	if PrivateDecisionHandoff.needed() and request.kind == EventChoiceRequest.ChoiceKind.卡牌:
+		_clear_options()
+		_card_image.texture = EVENT_CARD_BACK
+		hide()
+		var handoff := PrivateDecisionHandoff.new()
+		add_child(handoff)
+		await handoff.wait_for_player(request.requester.player_name)
+		if int(InteractionCoordinator.get_active_snapshot().get("interaction_id", -1)) != request.request_id: return
 	_active_request = request
 	_timeout_seconds = request.timeout_seconds
 	_timer_panel.show()
@@ -107,6 +174,8 @@ func _show_request(request: EventChoiceRequest, is_reaction: bool) -> void:
 		if is_reaction and request.options[index] is 卡牌基类:
 			button.mouse_entered.connect(_show_response_card_preview.bind(request.options[index]))
 			button.focus_entered.connect(_show_response_card_preview.bind(request.options[index]))
+		MainUI.button(button)
+		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		_options_box.add_child(button)
 	if request.optional:
 		var pass_button := Button.new()
@@ -114,6 +183,7 @@ func _show_request(request: EventChoiceRequest, is_reaction: bool) -> void:
 		pass_button.focus_mode = Control.FOCUS_ALL
 		pass_button.text = "不使用" if is_reaction else "放弃"
 		pass_button.pressed.connect(_on_option_pressed.bind(null))
+		MainUI.button(pass_button, "secondary")
 		_options_box.add_child(pass_button)
 	if _options_box.get_child_count() > 0:
 		(_options_box.get_child(0) as Control).grab_focus()
@@ -196,11 +266,13 @@ func show_retained_card_detail(player: PlayerClass, card: 事件牌) -> void:
 		use_button.custom_minimum_size = Vector2(0, 76)
 		use_button.text = "使用"
 		use_button.pressed.connect(_on_retained_use_pressed.bind(player, card))
+		MainUI.button(use_button)
 		_options_box.add_child(use_button)
 	var close_button := Button.new()
 	close_button.custom_minimum_size = Vector2(0, 76)
 	close_button.text = "关闭"
 	close_button.pressed.connect(close_retained_card_detail)
+	MainUI.button(close_button, "secondary")
 	_options_box.add_child(close_button)
 	_begin_retained_preview_modal()
 	show()

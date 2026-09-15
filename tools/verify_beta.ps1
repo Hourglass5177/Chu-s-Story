@@ -14,7 +14,7 @@ function Resolve-GodotConsole([string]$candidate) {
     $candidates = @(
         $candidate,
         $env:GODOT,
-        'F:\Godot_v4.6.2-stable_win64.exe\Godot_v4.6.2-stable_win64_console.exe'
+        'F:\godot 4.7.2\Godot_v4.7.2-stable_win64_console.exe'
     ) | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
     foreach ($item in $candidates) {
         if (Test-Path -LiteralPath $item -PathType Leaf) {
@@ -25,7 +25,7 @@ function Resolve-GodotConsole([string]$candidate) {
         $command = Get-Command $commandName -ErrorAction SilentlyContinue
         if ($null -ne $command) { return $command.Source }
     }
-    throw '未找到 Godot 控制台程序。请通过 -GodotPath 或 GODOT4_CONSOLE 指定 Godot 4.6.2 console 可执行文件。'
+    throw '未找到 Godot 控制台程序。请通过 -GodotPath 或 GODOT4_CONSOLE 指定 Godot 4.7.2 console 可执行文件。'
 }
 
 $ExpectedGutErrorLines = @(
@@ -146,8 +146,8 @@ function Invoke-GodotStep([string]$name, [string[]]$arguments) {
 
 $GodotConsole = Resolve-GodotConsole $GodotPath
 $versionText = (& $GodotConsole --version 2>&1 | Out-String).Trim()
-if ($versionText -notmatch '^4\.6\.2') {
-    throw "需要 Godot 4.6.2，当前为：$versionText"
+if ($versionText -notmatch '^4\.7\.2(?:\.|\s|$)') {
+    throw "需要 Godot 4.7.2，当前为：$versionText"
 }
 
 $normalizedProjectRoot = $projectRoot.Replace('\', '/')

@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "status": "P1 visual review candidate, not user accepted",
+  "native_canvas": [
+    500,
+    300
+  ],
+  "logical_canvas": [
+    1000,
+    600
+  ],
+  "palette": "palette.json",
+  "authoring": "Aseprite indexed layers, tools/aseprite/draw_p1_assets.lua",
+  "tasks": [
+    "xia_lian_dan_shu",
+    "yandi_shennong_chuanshuo"
+  ],
+  "preserved": "All v1 and original blogger images remain unchanged",
+  "animation": "Per-action clocks; nonloop actions hold their last frame"
+}

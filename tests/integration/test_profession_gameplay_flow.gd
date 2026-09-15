@@ -45,6 +45,10 @@ class ProfessionProbeHUD extends HUD:
 		shop_open_count += 1
 		if shop_panel != null:
 			shop_panel.open_shop(player)
+		else:
+			var visit := FoodShopVisit.new()
+			visit.begin(player)
+			visit.close()
 
 
 class ProfessionProbePlayer extends PlayerClass:
@@ -243,7 +247,12 @@ func test_magic_draw_panel_makes_the_time_limit_explicit() -> void:
 	assert_eq(panel.countdown_label.text, "剩余 15 秒")
 	assert_eq(ProfessionDrawPanel.format_countdown(4.2), "剩余 05 秒")
 	var countdown_color := panel.countdown_label.get_theme_color("font_color")
-	assert_gt(countdown_color.r + countdown_color.g, 1.5, "倒计时应使用醒目的暖金色，而不是融入棕色标题栏")
+	# The revised panel uses cream paper rather than a brown title bar.
+	var ink := countdown_color.srgb_to_linear()
+	var paper := Color("fff2d5").srgb_to_linear()
+	var ink_luminance := ink.r * 0.2126 + ink.g * 0.7152 + ink.b * 0.0722
+	var paper_luminance := paper.r * 0.2126 + paper.g * 0.7152 + paper.b * 0.0722
+	assert_gte((paper_luminance + 0.05) / (ink_luminance + 0.05), 4.5, "倒计时文字应与浅色纸面保持足够对比")
 	panel.reset_panel()
 	await get_tree().process_frame
 

@@ -1,0 +1,110 @@
+{
+  "version": 4,
+  "source_size": [
+    1254,
+    1254
+  ],
+  "scaling": "source RGBA retained; display sizes live in the stage, not in destructively resized PNGs",
+  "reference_source_bounds": [
+    36,
+    71,
+    344,
+    682
+  ],
+  "neck": [
+    139.04765687053217,
+    316
+  ],
+  "head_source_bounds": [
+    409,
+    229,
+    284,
+    317
+  ],
+  "torso_source_bounds": [
+    743,
+    346,
+    230,
+    359
+  ],
+  "hand_source_bounds": [
+    1050,
+    471,
+    164,
+    104
+  ],
+  "upper-arm_source_bounds": [
+    106,
+    835,
+    132,
+    315
+  ],
+  "forearm_source_bounds": [
+    410,
+    853,
+    123,
+    308
+  ],
+  "thigh_source_bounds": [
+    689,
+    835,
+    154,
+    323
+  ],
+  "shin_source_bounds": [
+    1019,
+    862,
+    176,
+    299
+  ],
+  "contact_joints": {
+    "upper-arm": {
+      "start": [
+        57.49473240623683,
+        22.230509903076275
+      ],
+      "end": [
+        72.79777282850779,
+        240.528285077951
+      ],
+      "display_width": 15.0,
+      "clip_end_y": 265,
+      "opaque_cross_width": 119.07090812812672
+    },
+    "forearm": {
+      "start": [
+        51.75977478886456,
+        19.693775414451046
+      ],
+      "end": [
+        86.54301833568407,
+        282.8155853314528
+      ],
+      "display_width": 12.5,
+      "clip_end_y": 308,
+      "opaque_cross_width": 111.76953962267147
+    },
+    "hand": {
+      "wrist": [
+        11.497737556561086,
+        50.839819004524884
+      ],
+      "grip": [
+        114.8,
+        50.96
+      ],
+      "display_height": 16.0
+    },
+    "torso": {
+      "near_shoulder_uv": [
+        0.22,
+        0.27
+      ],
+      "far_shoulder_uv": [
+        0.8,
+        0.23
+      ]
+    }
+  },
+  "contact_note": "Palm wrist and grip are independent. Forearm ends on opaque wrist opening; do not aim at grip or texture center. Bone endpoints use opaque joint centroids. Arm width stays fixed when the shoulder moves; only the longitudinal axis stretches. The upper-arm spare bare cap is clipped before overlapping the forearm sleeve."
+}

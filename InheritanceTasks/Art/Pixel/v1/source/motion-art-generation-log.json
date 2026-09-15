@@ -1,0 +1,333 @@
+[
+  {
+    "asset": "yandi_shennong_chuanshuo-background-atlas",
+    "generator": "built-in imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-435b-7da0-8bd7-c57157bb229c\\exec-1cea8dc5-f2f9-4295-b041-bae9110636ee.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\yandi_shennong_chuanshuo-background-atlas.png",
+    "prompt": "Use case: stylized-concept. Production pixel-art background atlas for the Godot game 楚物志, the Shennong herb-gathering platform minigame. Make ONE image with THREE equal landscape panels stacked VERTICALLY, no gaps or borders; each panel exactly 5:3 ratio, combined image 5:9. Target logical regions 500x300 each. Reference image is ONLY the project's shared detailed 16-bit pixel-art style and warm material palette, do NOT reproduce its characters or green background. Panel 1 top: quiet Hubei forest understory, layered mossy trunks at far left and right, soft pale green light, distant hills and a few ferns; low-contrast open central field. Panel 2 middle: mountain creek ravine in the distance, pale blue stream below, soft grey-blue distant cliffs, a few trees on side edges, bright legible center. Panel 3 bottom: high mountain ridge under warm morning sky, layered jade and grey-blue peaks, wisps of pixel mist and sparse shrubs at outer edges. Every panel is a SIDE-VIEW background behind a platformer, never top-down or isometric. Omit all playable foreground ground, platforms, roads, bridges, spikes, characters, signs and UI. The live collision terrain will be drawn in front by the engine. Keep the lower 40% especially quiet and low contrast so separate platforms and a small character remain readable. Crisp hand-placed-looking 16-bit pixel clusters, stepped contours, grouped foliage, controlled highlights, subtle environmental detail, NO blur or smooth gradients or painterly strokes, NO text or watermark. Equal straight panel boundaries, scene fills full width of each panel.",
+    "references": [
+      "source/workshop_avatars.png"
+    ],
+    "status": "visually inspected: 3 equal scene regions, no UI or actors; runtime layering/500x300 normalization pending",
+    "layout": {
+      "columns": 1,
+      "rows": 3,
+      "target_cell": [
+        500,
+        300
+      ]
+    }
+  },
+  {
+    "asset": "dong_yong_chuanshuo-background",
+    "generator": "built-in imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-435b-7da0-8bd7-c57157bb229c\\exec-18d71c51-3e00-46a4-93a2-30aa8a207982.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\dong_yong_chuanshuo-background.png",
+    "prompt": "Use case: stylized-concept. Make one production BACKGROUND image for a side-scrolling Chinese folk-tale cart minigame, in detailed 16-bit pixel art. Canvas ratio exactly 5:3 (target game 500x300). The supplied image is a style reference only; no characters or equipment from it. Scene: a warm, gentle rural Hubei journey, ochre earth, pale brown village cottages far away on the left, bamboo and soft grass-green trees around the edges, rolling green fields and a pale blue river beyond in the middle distance, faint low mountains and a cream warm sky. Side-view landscape behind gameplay. The player, father and cart and the actual sloped road and bridge will be separate layers, so draw NO foreground road, NO bridge, NO vehicle, NO people. Keep the lower 45% as very quiet low-contrast earth-and-grass color fields without hard terrain contours; do not create misleading obstacles or slopes. Slightly denser trees on far left and right, open view in center, inviting and caring mood, clean readable silhouettes, grouped pixel foliage, stepped pixels rather than anti-aliased brushstrokes, restrained wood highlights and soft warm shadows. NO text, letters, captions, frames, UI or watermark. The image fills the entire canvas.",
+    "references": [
+      "source/workshop_avatars.png"
+    ],
+    "status": "visually inspected: empty playable foreground; runtime not verified",
+    "layout": {
+      "columns": 1,
+      "rows": 1,
+      "target_cell": [
+        500,
+        300
+      ]
+    }
+  },
+  {
+    "asset": "xingshan_min_ge-background-atlas",
+    "generator": "built-in imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-435b-7da0-8bd7-c57157bb229c\\exec-886b3574-4f9c-4b95-9cda-f68f12d7b873.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\xingshan_min_ge-background-atlas.png",
+    "prompt": "Use case: stylized-concept. ONE production pixel-art background atlas for a side-scrolling bird-flight minigame about Xingshan folk songs in Hubei. Make exactly FOUR equal landscape panels in a 2x2 grid, with no gaps, frames or divider lines. Each panel has ratio 5:3; entire image also 5:3; target each cell 500x300. Supplied image is ONLY pixel style/material reference, no copied characters. The journey develops in reading order: top-left sunrise over flooded rice paddies, gold cream light reflected in blue-green water and distant green hills; top-right small white-walled dark-tiled rural village among paddy fields, morning mist and a few willow trees; bottom-left an open river valley with a narrow pale-blue stream, gentle rock cliffs at distant edges, fresh leafy green vegetation; bottom-right expansive layered jade-green and grey-blue mountains beneath a large clear luminous morning sky. All four use a coherent detailed 16-bit pixel-art palette with dark green foreground-free edge foliage and lighter lower-contrast distance. These images sit BEHIND a flying bird and moving mountain gates: leave the central 65% of every panel clear with low contrast, distant details only. Do not paint foreground collision rocks, tunnels, literal gate rings, sharp foreground terrain, birds, people, UI, borders, captions or text. The different landscapes should be immediately distinguishable without labels. Crisp stepped pixel clusters, restrained highlights, rich environmental storytelling, no smooth vector graphics, no blur, no painterly brush strokes.",
+    "references": [
+      "source/workshop_avatars.png"
+    ],
+    "status": "visually inspected: four distinct landscape cells, no actors/foreground gates; runtime contrast and normalization pending",
+    "layout": {
+      "columns": 2,
+      "rows": 2,
+      "target_cell": [
+        500,
+        300
+      ]
+    }
+  },
+  {
+    "asset": "xisai_shenzhou_hui-background",
+    "generator": "built-in imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-435b-7da0-8bd7-c57157bb229c\\exec-9672cee4-48e7-4243-977a-6ccf8d6e8166.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\xisai_shenzhou_hui-background.png",
+    "prompt": "Use case: stylized-concept. ONE production 16-bit pixel-art background for the Xisai Shenzhou ritual-boat game, Hubei. Canvas 5:3, target 500x300. Reference only matches pixel-art style, not subject. View from slightly high behind a future foreground boat, looking forward along a broad Yangtze river. Grey teal river fills the lower 75 percent, pale jade distant banks and a low tree-covered hill around upper left, tiny distant white rural houses upper right, warm softly overcast sky in the top strip. Clear gentle river currents shown by small restrained horizontal/diagonal pixel ripples. Keep the central navigation area empty, calm and very low contrast with plentiful space for a wide ornate ritual boat to move sideways. Decorative reed tufts only at the very outer corners. NO boat, people, paddlers, bridges, docks, racing lanes, buoys, text, frames or UI. This is a separate background layer; the boat and channel guidance are added by the engine. Grouped crisp pixel shapes, stepped edges, soft atmosphere formed with discrete palette bands, no blur, no painterly strokes.",
+    "references": [
+      "source/workshop_avatars.png"
+    ],
+    "status": "visually inspected: rear-high river view, central water clear; runtime not verified",
+    "layout": {
+      "columns": 1,
+      "rows": 1,
+      "target_cell": [
+        500,
+        300
+      ]
+    }
+  },
+  {
+    "asset": "xingshan_min_ge-bird-seed",
+    "generator": "built-in imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-435b-7da0-8bd7-c57157bb229c\\exec-e70aae63-8019-46fb-8254-31670000a06a.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\xingshan_min_ge-bird-seed.png",
+    "prompt": "Use case: stylized-concept. One clean production sprite seed for a 16-bit pixel-art side-scrolling bird-flight game. ONE small swallow-like songbird, side profile FACING RIGHT, in a readable level gliding pose. Dark navy and charcoal outer contour, warm cream belly and face accent, subtle blue-grey wing feathers, a tiny warm ochre beak, forked tail. No species-identification claims: this is an original game bird. Crisp pixel clusters and hard edges, matching the detailed 16-bit game style of the reference, not an emoji or vector logo. Small friendly eye, real wing and tail silhouette, no human expression or accessories. Center the whole bird with generous padding so wings and tail are entirely visible. The gliding body silhouette should remain readable at 44x32 game pixels. Genuinely transparent background with alpha, NO checkerboard pattern, NO green backdrop, NO scenery, ground shadow, labels, text, UI, watermark. Reference is ONLY art-style guidance, do not reproduce any human character or bellows.",
+    "references": [
+      "source/workshop_avatars.png"
+    ],
+    "status": "visually inspected seed; alpha check pending, animation pending",
+    "layout": {
+      "columns": 1,
+      "rows": 1,
+      "target_cell": [
+        64,
+        64
+      ]
+    }
+  },
+  {
+    "asset": "xingshan_min_ge-bird-atlas",
+    "generator": "built-in imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-435b-7da0-8bd7-c57157bb229c\\exec-fc2ffb1f-9890-4938-8f11-b9d21c510abb.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\xingshan_min_ge-bird-atlas.png",
+    "prompt": "Use case: identity-preserve. Production sprite animation atlas derived from the supplied bird seed. Preserve EXACT same cute navy/charcoal bird, cream belly and face, ochre beak, forked tail, eye shape, pixel palette and body scale. Always FACE RIGHT. Make ONE image containing EXACTLY EIGHT equally sized square sprite cells, FOUR columns and TWO rows, read left-to-right then next row. No borders, gaps, labels or scenery. Transparent alpha background, never checkerboard. Keep the bird's BODY CENTRE at the same position within each cell, with ample room for wing tips and tail and without rescaling individual poses. The body is the same size in all cells. Eight key poses: 1 wings fully raised preparing a flap; 2 wings driven downward on a power stroke; 3 level glide with spread wings; 4 gentle nose-down descent with wings partly tucked; 5 brief collision-stagger with one wing tucked and body tilted slightly but same identity, no injury or gore; 6 recovering level flight with both wings opening; 7 landing, feet extending and wings braking; 8 settled with wings neatly folded, still facing right. Every pose must be recognizably different through wing, foot and tail configuration, not through scaling or changing the character. Crisp detailed 16-bit pixel clusters, hard stepped edges, intended final cell 64x64 and body approx 36x22 game pixels. Preserve alpha and all padding; no text, UI, hearts, stars, duplicate birds in one cell, watermark, or cast ground shadow.",
+    "references": [
+      "source/xingshan_min_ge-bird-seed.png"
+    ],
+    "status": "visually inspected: 8 differentiated key poses; common body anchors and alpha normalization pending",
+    "layout": {
+      "columns": 4,
+      "rows": 2,
+      "target_cell": [
+        64,
+        64
+      ],
+      "actions": {
+        "flap": [
+          0,
+          1
+        ],
+        "glide": [
+          2
+        ],
+        "descent": [
+          3
+        ],
+        "miss": [
+          4
+        ],
+        "recover": [
+          5
+        ],
+        "land": [
+          6,
+          7
+        ]
+      }
+    }
+  },
+  {
+    "asset": "xisai_shenzhou_hui-boat-draft-v1",
+    "generator": "built-in imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-435b-7da0-8bd7-c57157bb229c\\exec-1814a96f-0bc8-4f33-b9c7-03504279bfd2.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\xisai_shenzhou_hui-boat-draft-v1.png",
+    "prompt": "Use case: historical-scene. Create ONE isolated production pixel-art game asset of a Xisai Shenzhou festival ritual boat from Huangshi, Hubei. This is a stylized cultural-reference draft, not an archaeological reconstruction. Camera above and behind the boat: the broad stern is nearest at lower center, the bow points away toward upper center, with a slight oblique angle so roof layers and one side of hull remain readable. A fairly broad compact hull carrying TWO small ornate Chinese pavilion structures, layered upturned roofs, intricate red and warm-gold lattice rails, colorful festival-paper decoration, a central tall slender mast with a small golden pinwheel finial, modest lantern details. Warm-red, gold and deep muted teal accents, warm wood hull, crisp navy-brown outline. Depict a hand-crafted ritual object, not a huge ship or luxury cruise vessel. Sources describe assembled pavilions, mast, lamps, and a boat ceremonially sent to drift downstream. NO rowers, crew, seated people, paddles, racing seats, sail, engine, weapons, sea waves or dragon-boat competition. The broad pavilion boat should be the unmistakable silhouette. Genuinely transparent alpha background, no checkerboard, no shadow or water attached. Plenty of margin around all mast tips, flags, roof ornaments and hull. Crisp detailed 16-bit pixel-art clusters matching the style of the supplied reference, which is a STYLE REFERENCE ONLY; do not copy its characters or bellows. Intended game display around 120x160 pixels. No text, writing, UI, frames, labels or watermark.",
+    "references": [
+      "source/workshop_avatars.png"
+    ],
+    "status": "draft: visible checkerboard backdrop; alpha inspection/green-key correction pending; boat shape details await real-video check",
+    "layout": {
+      "columns": 1,
+      "rows": 1,
+      "target_cell": [
+        128,
+        176
+      ]
+    }
+  },
+  {
+    "asset": "xisai_shenzhou_hui-boat",
+    "generator": "built-in imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-435b-7da0-8bd7-c57157bb229c\\exec-cd500927-bab3-416a-8b6b-f051ad7de832.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\xisai_shenzhou_hui-boat.png",
+    "prompt": "Use case: background-extraction. Edit the supplied ritual-boat image ONLY to replace the entire grey-and-white checkerboard with perfectly uniform opaque chroma green #00FF00. Preserve the same exact boat, camera, two pavilions, mast, golden pinwheel, hull silhouette, red/gold/teal palette, pixel-art detailing, dimensions and framing. Replace the checkerboard also through all empty openings between mast streamers, beneath roof corners and inside rails where the background is visible. Do not repaint or change any actual boat colors. No shadows, gradients or checkerboard anywhere in the background. The boat remains the sole subject, fully contained with margin. No new text, border or labels.",
+    "references": [
+      "source/xisai_shenzhou_hui-boat-draft-v1.png",
+      "https://www.ihchina.cn/art/detail/id/14913.html",
+      "https://www.huangshi.gov.cn/jchs/hsfy/202210/t20221018_950352.html"
+    ],
+    "status": "visually inspected: checkerboard replaced with chroma green; cultural silhouette draft, physical details still await user video; runtime not verified",
+    "layout": {
+      "columns": 1,
+      "rows": 1,
+      "target_cell": [
+        128,
+        176
+      ],
+      "anchor": "lower hull centre"
+    }
+  },
+  {
+    "asset": "yandi_shennong_chuanshuo-avatars",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-435b-7da0-8bd7-c57157bb229c\\exec-5bea6f13-ffc9-4f0f-912b-ef57d8fb5ef8.png",
+    "project_path": "F:/Documents/楚物志/InheritanceTasks/Art/Pixel/v1/source/yandi_shennong_chuanshuo-avatars.png",
+    "prompt": "Game asset sprite-sheet, detailed charming 16-bit pixel art with crisp square pixels, absolutely flat chroma green #00FF00 background. Create EXACTLY 6 columns by 6 rows of full-body sprites, equal uniform cells, no lines labels or text. SIX different characters: one identity per ROW following the six people in supplied identity sheet left to right: row1 brown twin braids young woman; row2 brown half-up bun pale hair clip young woman; row3 mature silver curled hair and moustache man; row4 brown hair side red bow young woman; row5 gray short spiky hair young man with red scarf; row6 long dark hair gold pink forelock young man. Preserve those faces/hair identities, not original clothes. Each wears ancient Chinese herbalist rustic rolled-sleeve tunic, belt, trouser leg wraps, hiking shoes, SMALL bamboo herb basket on back. Personal accent colors distinguish them; no modern gear. All face screen right in three-quarter SIDE VIEW, 3.5 heads tall. Six columns for EACH row: 1 standing ready feet planted, 2 running right with one foot forward, 3 jumping up knees bent, 4 falling arms balanced legs down, 5 stumbling backward but safe, 6 kneeling picking a small herb. Feet/body base aligns same location per cell, consistent body and head scale throughout. Basket stays behind torso, shoes visible, no staff. Keep silhouettes readable at 48x64 pixel sprite. Full green margins around EVERY sprite, no overlap between cells, no motion lines or props outside own cell. Identity reference is only the people, generate new complete poses and outfits. Sheet wide enough each row has 6 complete figures.",
+    "references": [
+      "source/six-identities.png"
+    ],
+    "status": "inspected six identity rows and poses; superseded by expanded action version",
+    "layout": {
+      "columns": 6,
+      "rows": 6,
+      "target_cell": [
+        48,
+        64
+      ]
+    }
+  },
+  {
+    "asset": "yandi_shennong_chuanshuo-avatars-v2",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-435b-7da0-8bd7-c57157bb229c\\exec-1e529a9a-1da1-4163-a3de-23c0a0dee4d2.png",
+    "project_path": "F:/Documents/楚物志/InheritanceTasks/Art/Pixel/v1/source/yandi_shennong_chuanshuo-avatars-v2.png",
+    "prompt": "Expand the supplied six-row herbalist pixel character sheet into EXACTLY 10 COLUMNS and 6 ROWS, sixty separately drawn whole-body animation sprites in uniform square-ish cells. ONE identity per row same top to bottom as reference; preserve their exact outfit, face, hair, small herb basket, outline and palette. Flat uniform chroma green #00FF00 everywhere outside characters. No grid lines, labels, words or border. All face screen right, stable feet anchor, SAME BODY SCALE. Ten poses left to right in EVERY row: 1 idle standing; 2 running right left leg extended forward; 3 running right RIGHT leg extended forward (genuinely different stride); 4 LOW SHORT JUMP curled legs; 5 HIGH LONG JUMP arms forward and back leg trailing; 6 falling feet pointed down; 7 landing crouch feet touch floor; 8 safe stumble arms back; 9 regaining balance feet apart; 10 kneeling gathering one herb. Each frame isolated green margin, no overlap. Canvas wide enough to fit ten complete figures per row, 6 rows. Important: exactly 10 figures in every row. Crisp detailed 16-bit pixel art, not soft painted, no cast background shadow. This is game sprite asset, not a scene.",
+    "references": [
+      "source/yandi_shennong_chuanshuo-avatars.png"
+    ],
+    "status": "visually inspected 60 cells; generated strides subtle, requires in-engine review",
+    "layout": {
+      "columns": 10,
+      "rows": 6,
+      "target_cell": [
+        48,
+        64
+      ]
+    }
+  },
+  {
+    "asset": "dong_yong_chuanshuo-avatars",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-435b-7da0-8bd7-c57157bb229c\\exec-2c69c23f-ee17-401d-ae44-9401f518e570.png",
+    "project_path": "F:/Documents/楚物志/InheritanceTasks/Art/Pixel/v1/source/dong_yong_chuanshuo-avatars.png",
+    "prompt": "Game asset sprite-sheet, crisp detailed 16-bit pixel art, 3.5-head-tall characters. EXACTLY 8 columns by 6 rows. Each ROW is ONE of supplied six identity characters in original left-to-right order: twin-braids woman, half-up paleclip woman, silver curled-haired moustache mature man, brown side-redbow woman, gray short spikyhair redscarf man, long darkhair gold-pink forelock man. Preserve these faces/hair, change clothes to rustic ancient Chinese tunics rolled sleeves plain belts trousers soft shoes, earthy colors with respective accent colors. No modern accessories. All face screen RIGHT in side-threequarter view. Every character operates a wooden HANDCART positioned to their right OUTSIDE the cell; do NOT DRAW ANY CART, handles or separate props, draw hands meeting same invisible handle anchor at right waist level. Eight columns per row: 1 standing hands gently touching handle, 2 leaning forward pushing left foot forward, 3 pushing uphill deeper forward lean right foot forward, 4 upright walking coasting both hands still at handle, 5 BRAKING leaning BACK knees bent and arms taut holding fixed handle anchor, 6 stopped bracing hands to handle, 7 recovering balance one step forward, 8 relaxed smiling arrival hands rest on handle. Hands at the same right-side waist-height point in ALL poses, whole body scale and foot baseline consistent. Pure flat #00FF00 chroma green background, green padding each cell, no text or grid or labels, no overlap, no background shadows. Sixty? NO: exactly FORTY-EIGHT figures, 8 in each of 6 rows.",
+    "references": [
+      "source/six-identities.png"
+    ],
+    "status": "visually inspected 48 cells; hand positions require normalization/engine anchor review",
+    "layout": {
+      "columns": 8,
+      "rows": 6,
+      "target_cell": [
+        128,
+        160
+      ]
+    }
+  },
+  {
+    "asset": "dong_yong_chuanshuo-cart-props-draft",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-435b-7da0-8bd7-c57157bb229c\\exec-bde9ea6d-e1ad-47a9-8885-40fd23f3eb81.png",
+    "project_path": "F:/Documents/楚物志/InheritanceTasks/Art/Pixel/v1/source/dong_yong_chuanshuo-cart-props-draft.png",
+    "prompt": "A game prop asset sheet in detailed charming 16-bit pixel art. Uniform 2 columns by 2 rows, four separate objects on pure flat chroma green #00FF00, no checkerboard, no ground, no text. All objects in exact flat SIDE VIEW, pointing right, compatible with ancient rural China side-view pushing-cart game. Top LEFT: rustic wooden handcart BODY ONLY without wheels, simple wide low wooden seat platform with side slat rail, cloth seat cushion, two long push handles extending to the LEFT at waist height. The rear is left; seated passenger faces right. Show complete body and long left handles, woodgrain and joinery. Top RIGHT: ONE separate perfectly round wooden spoked WHEEL, side view with dark hub, wheel ready to rotate. Bottom LEFT: kind elderly father with white hair small beard, wearing plain pale blue ancient robe, seated SIDE VIEW facing right on an invisible cart seat, both hands gently holding invisible front side rails, knees and feet clearly visible, 3.5 head cartoon proportion, warm dignified smile. Bottom RIGHT: small tied cloth travel bundle with a water flask. Do not combine the objects. Empty green margin around each. Consistent pixel size and outline, warm wood tan and brown, muted blue robe. No animal, engine, steering wheel, bicycle or dragon. Individual cart is artistic historical simplification, rustic handcart not modern.",
+    "references": [],
+    "status": "draft wrong background, no runtime use; layout requires custom boxes",
+    "layout": {
+      "columns": 2,
+      "rows": 2
+    }
+  },
+  {
+    "asset": "dong_yong_chuanshuo-cart-props",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-435b-7da0-8bd7-c57157bb229c\\exec-91b6e95d-b391-4eea-8e65-93118538b433.png",
+    "project_path": "F:/Documents/楚物志/InheritanceTasks/Art/Pixel/v1/source/dong_yong_chuanshuo-cart-props.png",
+    "prompt": "Edit the supplied four-prop asset sheet. Replace ALL background/shadow/glow with perfectly flat opaque uniform pure #00FF00 chroma green. Also green through wheel spokes and empty cart rails. No residual brown/black vignette or shadow anywhere. Keep cart, wheel, bundle exactly positioned and same detailed pixel appearance. Redraw ONLY elderly father bottom-left in a friendlier 3.5-head chibi pixel art proportion (larger head and shorter body), preserving white bun, beard, pale blue plain ancient robe, seated facing right, dignified kind smile, hands resting forward on imaginary cart rail. Do not add text/grid/border. Four objects stay separate at same centers, fully contained. Background must be exactly #00FF00 everywhere around objects.",
+    "references": [
+      "source/dong_yong_chuanshuo-cart-props-draft.png"
+    ],
+    "status": "visually inspected; keyed four isolated props; historical simplified cart shape not verified reconstruction",
+    "layout": {
+      "boxes_normalized": [
+        [
+          0,
+          0,
+          0.6,
+          0.42
+        ],
+        [
+          0.64,
+          0,
+          1,
+          0.44
+        ],
+        [
+          0.18,
+          0.42,
+          0.5,
+          1
+        ],
+        [
+          0.62,
+          0.56,
+          0.92,
+          0.98
+        ]
+      ]
+    }
+  },
+  {
+    "asset": "yandi_shennong_chuanshuo-terrain",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-435b-7da0-8bd7-c57157bb229c\\exec-fa8e86dc-290b-4a7b-b767-65a05099a525.png",
+    "project_path": "F:/Documents/楚物志/InheritanceTasks/Art/Pixel/v1/source/yandi_shennong_chuanshuo-terrain.png",
+    "prompt": "One 2D game terrain prop atlas, EXACTLY 3 columns and 2 rows of six isolated components, all crisp detailed 16-bit pixel art, pure flat chroma green #00FF00 background. No text, labels, borders or UI. Top row three equal wide rectangular CUTAWAY PLATFORM blocks with perfectly straight horizontal solid top edge and flat vertical ends: first warm earth with moss-green top for forest; second dark slate rock with soft short grass edge for creek; third light mountain stone with sparse golden grass edge for high ridge. Platform top surface must align exactly level, no grass spikes above edge. Blocks fill most of each cell width but green margin all around. Bottom left one low dark rounded stumbling ROCK, wide and short, no tall spike. Bottom middle one LOW TREE BRANCH viewed side-on, almost horizontal dark wood log with a small leaves cluster upper side, clear lower edge; isolated branch no tree trunk. Bottom right small wooden trail marker post with a tied pale cloth ribbon and green herbal plant beside base, no text. These are platformer pieces for ancient China herbalist journey. No full scene, no characters, no overlapping props. Six props grouped in equal cells, each object separate, same visual pixel scale.",
+    "references": [],
+    "status": "visually inspected six terrain props; runtime fit to collision pending",
+    "layout": {
+      "columns": 3,
+      "rows": 2,
+      "target_cell": [
+        96,
+        64
+      ]
+    }
+  },
+  {
+    "asset": "river-field-avatars",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-435b-7da0-8bd7-c57157bb229c\\exec-c7896765-afc1-4a6c-a7df-7356ba9f4b0b.png",
+    "project_path": "F:/Documents/楚物志/InheritanceTasks/Art/Pixel/v1/source/river-field-avatars.png",
+    "prompt": "Game pixel-art character costume sprite atlas, EXACTLY 4 columns by 6 rows on pure flat opaque chroma green #00FF00 background. Six identity rows from supplied reference LEFT TO RIGHT: travel brown twin braids; life brown half-up bun pale hairclip; business silver curly hair and moustache mature man; food brown side-redbow; adventure short gray spiky hair red scarf; magic dark longer hair gold-pink forelock. Preserve faces and hair across every cell. New costumes and poses only. 3.5-head tall full bodies, crisp square pixels 16-bit game style. Columns 1 and 2 are MORNING RICEFIELD VISIT costume: light cream or muted pale green rustic rolled-sleeve blouse/tunic, simple trousers, cloth shoes, small straw sun hat hanging at back (not hiding hair). Column1 standing threequarter right listening to distant song with relaxed hands; column2 happily watching a bird depart raising one hand. Columns 3 and 4 are RIVERBANK RITUAL SEND-OFF costume: deep indigo simple Chinese jacket with warm red cloth waistband, trousers and shoes, no paddle or musical instrument. Column3 respectful standing on shore looking up-right hands together at waist; column4 waving goodbye up-right with one raised hand. Full figures in every cell, matching scale, feet same baseline; clear green gutters. No text labels grid, no background scene, no actual birds or boats. This is exactly twenty-four isolated figures, one identity consistently per row.",
+    "references": [
+      "source/six-identities.png"
+    ],
+    "status": "visually inspected all 24 identity/costume cells; runtime pending",
+    "layout": {
+      "columns": 4,
+      "rows": 6,
+      "target_cell": [
+        112,
+        160
+      ]
+    }
+  },
+  {
+    "asset": "xingshan_min_ge-gates",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-435b-7da0-8bd7-c57157bb229c\\exec-c93b6bcf-90fb-4c8c-b361-a8d8a0025cda.png",
+    "project_path": "F:/Documents/楚物志/InheritanceTasks/Art/Pixel/v1/source/xingshan_min_ge-gates.png",
+    "prompt": "Pixel game environment obstacle asset sheet on perfectly flat opaque #00FF00 green background. Exactly TWO isolated tall rock formations side by side. Left: an upright narrow tapered forested limestone peak, wide flat base at bottom, triangular-ish silhouette with blunt rounded tip at top. Right: an inverted hanging limestone overhang, wide flat base at top and tapered blunt tip pointing down. Each fills own vertical half-cell with green margins, never touch each other. Detailed 16-bit pixels, pale jade grey rock, dark slate crevices, restrained moss and a few tiny bushes on OUTSIDE flanks only. These frame a flying bird's clear mountain pass, so keep the tip silhouette clean and dark outlined. No background scenery, birds, characters, text, UI, border, white mist, glow or shadow. Two assets same color palette and thickness; rock surfaces read as real craggy mountain, not spikes or cones. Sheet 2 columns 1 row. Transparent intended but output exact green chroma for removal.",
+    "references": [],
+    "status": "inspected silhouette, alpha pending normalization check",
+    "layout": {
+      "columns": 2,
+      "rows": 1,
+      "target_cell": [
+        96,
+        192
+      ]
+    }
+  }
+]

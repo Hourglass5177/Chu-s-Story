@@ -1,0 +1,213 @@
+{
+  "source_files": [
+    {
+      "file": "source\\ezhou_diaohua_jianzhi-artwork-v2.png",
+      "sha256": "79bca924ca9386a4a61798209564d83088337b1d116ab1a5b8de8f384f0c9c5a"
+    },
+    {
+      "file": "source\\ezhou_diaohua_jianzhi-artwork.png",
+      "sha256": "ff28103eb19ce7cc5c7866c441ef0d3664486bcb0a1fc9422cc821805ef4798e"
+    },
+    {
+      "file": "source\\ezhou_diaohua_jianzhi-avatars.png",
+      "sha256": "d6417c2bb3210489968527e679ffdee5d76b6a0ccfb581a8962e10fb3e352642"
+    },
+    {
+      "file": "source\\ezhou_diaohua_jianzhi-background-v2.png",
+      "sha256": "455bdf8cfb0b4d49b9cbb59bdea2079e7e582873f14f7a227490f3cb162b3e10"
+    },
+    {
+      "file": "source\\ezhou_diaohua_jianzhi-background.png",
+      "sha256": "ad1b57b5c7dd0d90b2416791b10007ada68f28960c4e10a2362bad32e22eb47d"
+    },
+    {
+      "file": "source\\ezhou_diaohua_jianzhi-hands.png",
+      "sha256": "bb71463c0332a7aa5c425753b789fbec2564d79e9a935bfe35d806261dbdb635"
+    },
+    {
+      "file": "source\\gu_pen_ge-avatars.png",
+      "sha256": "bc87a06f45a9c866d2b18a6fe89d7ea8fb5a2cedc8f8c850a409df2e58c1198b"
+    },
+    {
+      "file": "source\\gu_pen_ge-background.png",
+      "sha256": "eb4353d58ce2d51631f908bf0e32cbedf529766a6bb68aa780185f0ca2101858"
+    },
+    {
+      "file": "source\\gu_pen_ge-teacher.png",
+      "sha256": "9efadcc18c5764e02fd1511bdd8c4bb0f62645f96db3db43235e0b2c320c4dc3"
+    },
+    {
+      "file": "source\\huangmei_xi-avatars.png",
+      "sha256": "4ca21fb584b4d2b80a949290c6d310ffc4438e976547d2a9865e1c2805053204"
+    },
+    {
+      "file": "source\\huangmei_xi-background.png",
+      "sha256": "d0529f103729163a8ad145ade425063588f15175a568e790898ff0a54835feaf"
+    },
+    {
+      "file": "source\\tianmen_tang_su-avatars.png",
+      "sha256": "7370077ae86056c51d1e3fa7070a792d1848cd948bc3b30397c917f12bd87dbb"
+    },
+    {
+      "file": "source\\tianmen_tang_su-background.png",
+      "sha256": "2739b66f96b23d127bdd9fb957b63aac5f18813324ce6ffc568b7dfcc9f4096a"
+    },
+    {
+      "file": "source\\tianmen_tang_su-bubbles.png",
+      "sha256": "96d99f998e5ee0fd6c2ce14d24a2cd0747a9b7071a87ddad100b28cf4017dff5"
+    }
+  ],
+  "runtime_files": [
+    {
+      "file": "runtime\\craft\\ezhou_diaohua_jianzhi-artwork.png",
+      "size": [
+        500,
+        300
+      ],
+      "sha256": "e47b861d62124e8f5b2e22673c65b819545014edfc1b2091afd80f7ede26bf97",
+      "transparent_pixels": 111670,
+      "status": "normalized; see craft engine review for actual validation"
+    },
+    {
+      "file": "runtime\\craft\\ezhou_diaohua_jianzhi-avatars.png",
+      "size": [
+        768,
+        768
+      ],
+      "sha256": "6df48db413f5aa221dd251d315146eab69c7b3c4736209d4b65246ec3294953b",
+      "transparent_pixels": 302691,
+      "status": "normalized; see craft engine review for actual validation"
+    },
+    {
+      "file": "runtime\\craft\\ezhou_diaohua_jianzhi-background.png",
+      "size": [
+        500,
+        300
+      ],
+      "sha256": "abc05f967b5c5ac4c4c5072dbcecec9423ff6a9cf8af8a7dce5d97e4e31b91cb",
+      "transparent_pixels": 0,
+      "status": "normalized; see craft engine review for actual validation"
+    },
+    {
+      "file": "runtime\\craft\\ezhou_diaohua_jianzhi-hands.png",
+      "size": [
+        480,
+        160
+      ],
+      "sha256": "cd4986004dc46e572bc48378d8dde90db7c686d8d81a8d0fa353d75d7dd623fd",
+      "transparent_pixels": 53155,
+      "status": "normalized; see craft engine review for actual validation"
+    },
+    {
+      "file": "runtime\\craft\\gu_pen_ge-avatars.png",
+      "size": [
+        768,
+        768
+      ],
+      "sha256": "95085ca6472184cbb7d18b46cca485c718b9dd5c6ca202b9d54551d642b03928",
+      "transparent_pixels": 331153,
+      "status": "normalized; see craft engine review for actual validation"
+    },
+    {
+      "file": "runtime\\craft\\gu_pen_ge-background.png",
+      "size": [
+        500,
+        300
+      ],
+      "sha256": "9bc2eabb68d425c411f177323156152120e5416df9e2de7e5895081cfe50c13c",
+      "transparent_pixels": 0,
+      "status": "normalized; see craft engine review for actual validation"
+    },
+    {
+      "file": "runtime\\craft\\gu_pen_ge-teacher.png",
+      "size": [
+        960,
+        160
+      ],
+      "sha256": "f5cb919d68ad0840231607b10cbf8bfdaf61a58fe4531cf8c181897d9f1e7ab8",
+      "transparent_pixels": 96320,
+      "status": "normalized; see craft engine review for actual validation"
+    },
+    {
+      "file": "runtime\\craft\\huangmei_xi-avatars.png",
+      "size": [
+        768,
+        768
+      ],
+      "sha256": "31c778af5f45deae0d1eee2f5312cb0ae452a3da492bfe62f4b7fb0d2334a9c3",
+      "transparent_pixels": 344512,
+      "status": "normalized; see craft engine review for actual validation"
+    },
+    {
+      "file": "runtime\\craft\\huangmei_xi-closed.png",
+      "size": [
+        500,
+        300
+      ],
+      "sha256": "41c0a1efad283e7f18a8019d1105d5e7afec7400edf9ffa904d007a70c8b2335",
+      "transparent_pixels": 0,
+      "status": "normalized; see craft engine review for actual validation"
+    },
+    {
+      "file": "runtime\\craft\\huangmei_xi-open.png",
+      "size": [
+        500,
+        300
+      ],
+      "sha256": "9b7acd5ce121995aa800901e980098274d589ef9cf6f68929b7b7ceacd44517e",
+      "transparent_pixels": 0,
+      "status": "normalized; see craft engine review for actual validation"
+    },
+    {
+      "file": "runtime\\craft\\tianmen_tang_su-avatars.png",
+      "size": [
+        768,
+        768
+      ],
+      "sha256": "ff3e364affaddbd644a4d73ca42d8f73cb35e60819820a13d99059c188f0dfaa",
+      "transparent_pixels": 342421,
+      "status": "normalized; see craft engine review for actual validation"
+    },
+    {
+      "file": "runtime\\craft\\tianmen_tang_su-background.png",
+      "size": [
+        500,
+        300
+      ],
+      "sha256": "9ae15f82b8ebf55cafb4404b9569d2a5376669bf3cf12e4eaeab3e195d458333",
+      "transparent_pixels": 0,
+      "status": "normalized; see craft engine review for actual validation"
+    },
+    {
+      "file": "runtime\\craft\\tianmen_tang_su-bubbles.png",
+      "size": [
+        960,
+        160
+      ],
+      "sha256": "cbec6bd2dec511102b8db34d6f6a3651666cbcd3ec9ef403c08e8595e358a5e2",
+      "transparent_pixels": 64945,
+      "status": "normalized; see craft engine review for actual validation"
+    }
+  ],
+  "generation_log": "source/craft-art-generation-log.json",
+  "identity_rows": [
+    "travel",
+    "life",
+    "business",
+    "food",
+    "adventure",
+    "magic"
+  ],
+  "avatar_columns": [
+    "ready",
+    "prepare",
+    "action",
+    "release",
+    "miss",
+    "recover"
+  ],
+  "cultural_pending": [
+    "鼓盆歌鼓板形制与握法、真实原声",
+    "鄂州雕花剪纸刻制近景与蜡盘操作"
+  ]
+}

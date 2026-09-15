@@ -1,0 +1,98 @@
+{
+  "version": 3,
+  "method": "User-approved generated master preserved in 320x384 cells; no palette reduction. 1000x600 art viewport and 2x world camera, with the same transform for ground/collisions/character.",
+  "records": [
+    {
+      "avatar": "travel",
+      "source_sha256": "5ffa37426ca1671297b33848bd02bb54726524dff226851c7f352ff665535060",
+      "run_frames": 8,
+      "passing_frames": [
+        2,
+        6
+      ],
+      "source_frame_size": [
+        320,
+        384
+      ],
+      "independent_frame_scaling": false,
+      "color_reduction": false
+    },
+    {
+      "avatar": "life",
+      "source_sha256": "594a23853c3aa0c3690bfbb82082f0c7c5b7b361f292797981457a6b526980b6",
+      "run_frames": 8,
+      "passing_frames": [
+        2,
+        6
+      ],
+      "source_frame_size": [
+        320,
+        384
+      ],
+      "independent_frame_scaling": false,
+      "color_reduction": false
+    },
+    {
+      "avatar": "business",
+      "source_sha256": "7cba295d6e65c92a7984e556fa81d983bff39887bd660f4e047f56cb99635ca5",
+      "run_frames": 8,
+      "passing_frames": [
+        2,
+        6
+      ],
+      "source_frame_size": [
+        320,
+        384
+      ],
+      "independent_frame_scaling": false,
+      "color_reduction": false
+    },
+    {
+      "avatar": "food",
+      "source_sha256": "f13943e8425a867c18bbb0effaa43e3158258d0fe1a495d5b4a3aabfd7a196c2",
+      "run_frames": 8,
+      "passing_frames": [
+        2,
+        6
+      ],
+      "source_frame_size": [
+        320,
+        384
+      ],
+      "independent_frame_scaling": false,
+      "color_reduction": false
+    },
+    {
+      "avatar": "adventure",
+      "source_sha256": "d1ce7e95388b236d1547731051e0d4f61916b439af093e3c4297c72a10a280e9",
+      "run_frames": 8,
+      "passing_frames": [
+        2,
+        6
+      ],
+      "source_frame_size": [
+        320,
+        384
+      ],
+      "independent_frame_scaling": false,
+      "color_reduction": false
+    },
+    {
+      "avatar": "magic",
+      "source_sha256": "f926a12ca2a2ad114d3df7e17d40f00c12e7786829ed61c481378c364670c16d",
+      "run_frames": 8,
+      "passing_frames": [
+        2,
+        6
+      ],
+      "source_frame_size": [
+        320,
+        384
+      ],
+      "independent_frame_scaling": false,
+      "color_reduction": false
+    }
+  ],
+  "terrain": "Generated static caps and soil; source crops fixed to world coordinates",
+  "validation": "User rejected 20x24 reduction; replacement engine playback pending"
+}

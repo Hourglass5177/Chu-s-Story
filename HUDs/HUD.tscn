@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://dh48ddr23kk4b" path="res://HUDs/商店弹窗.tscn" id="22_4r6rv"]
 [ext_resource type="Texture2D" uid="uid://ddbbh8443sono" path="res://arts/控件/guide_round_button.svg" id="23_guide"]
 [ext_resource type="Texture2D" uid="uid://bsncikkjlddgs" path="res://arts/控件/pause_round_button.svg" id="24_pause"]
-[ext_resource type="Script" path="res://HUDs/top_icon_button.gd" id="25_top_icon"]
+[ext_resource type="Script" uid="uid://nls5mg47fqvy" path="res://HUDs/top_icon_button.gd" id="25_top_icon"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_4r6rv"]
 device = -1

@@ -1,0 +1,34 @@
+{ "frames": [
+   {
+    "filename": "workshop-r1-48.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 500, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 500, "h": 300 },
+    "sourceSize": { "w": 500, "h": 300 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.18.5-dev",
+  "image": "workshop-r1-48-reopened.png",
+  "format": "I8",
+  "size": { "w": 500, "h": 300 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "01 quantized generated source / unretouched", "opacity": 255, "blendMode": "normal" },
+   { "name": "02 reversible isolated-color cleanup / quiet surfaces only", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "furnace body (baked source)", "data": "Candidate only: do not add the old furnace over this.", "keys": [{ "frame": 0, "bounds": {"x": 298, "y": 73, "w": 137, "h": 145 } }] },
+   { "name": "fire and medicine pot opening", "data": "Fire/medicine vessel currently baked into background.", "keys": [{ "frame": 0, "bounds": {"x": 339, "y": 131, "w": 69, "h": 48 } }] },
+   { "name": "bellows body (baked source)", "data": "Motion requires an independently reviewed moving section and clean plate.", "keys": [{ "frame": 0, "bounds": {"x": 215, "y": 149, "w": 90, "h": 61 } }] },
+   { "name": "bellows grip target", "data": "Proposed hand contact near (165,160).", "keys": [{ "frame": 0, "bounds": {"x": 158, "y": 154, "w": 22, "h": 12 } }] },
+   { "name": "proposed actor feet", "data": "Proposed native center (123,213); actual new sprite must be tested.", "keys": [{ "frame": 0, "bounds": {"x": 107, "y": 211, "w": 31, "h": 3 } }] },
+   { "name": "proposed actor occupied region", "data": "Actor in front of rear table, left of bellows. No avatar painted here.", "keys": [{ "frame": 0, "bounds": {"x": 77, "y": 94, "w": 97, "h": 122 } }] }
+  ]
+ }
+}

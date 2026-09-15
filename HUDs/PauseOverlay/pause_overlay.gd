@@ -12,6 +12,8 @@ var _turn_epoch: int = -1
 
 
 func _ready() -> void:
+	MainUI.apply(self)
+	$Center/Panel.add_theme_stylebox_override("panel", MainUI.box("panel", 0))
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	continue_button.pressed.connect(close_pause)
 	if not TurnManager.game_finished.is_connected(_on_game_finished):

@@ -1,0 +1,204 @@
+{
+  "schema_version": 3,
+  "assets": [
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/water_cow-1.png",
+      "sha256": "8b462f7fdc227ba5952f34c0755786b038e879208f8b52f450a269954f36a1ed",
+      "size": [
+        210,
+        210
+      ],
+      "source_sha256": "88b42ef8d26d782162de742c5f3866415252e8b327b6e9e9ddac87e57d489948",
+      "story_source": "https://news.hubeidaily.net/pc/c_2714369.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/water_cow-1-reference.png",
+      "sha256": "4d3891f5516d6a25a226df5d8c233e3f518b7f5f4f94d7eaebc52ca90b68bef9",
+      "size": [
+        126,
+        126
+      ],
+      "source_sha256": "88b42ef8d26d782162de742c5f3866415252e8b327b6e9e9ddac87e57d489948",
+      "story_source": "https://news.hubeidaily.net/pc/c_2714369.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/water_cow-2.png",
+      "sha256": "06eace16d179ba96611cce1e61cd596d7c932a68d0e65c76b1e7895a0d296bef",
+      "size": [
+        210,
+        210
+      ],
+      "source_sha256": "88b42ef8d26d782162de742c5f3866415252e8b327b6e9e9ddac87e57d489948",
+      "story_source": "https://news.hubeidaily.net/pc/c_2714369.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/water_cow-2-reference.png",
+      "sha256": "5ca90499b16ef823ea9a1b313d4ae811739c13bf92eeb8e3c7c3ae8fe7baaf2d",
+      "size": [
+        126,
+        126
+      ],
+      "source_sha256": "88b42ef8d26d782162de742c5f3866415252e8b327b6e9e9ddac87e57d489948",
+      "story_source": "https://news.hubeidaily.net/pc/c_2714369.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/water_cow-3.png",
+      "sha256": "0e3e5ef27fc888fc1a88f4658b4d87bd175c1756bd663d093d059bf1f5303c72",
+      "size": [
+        210,
+        210
+      ],
+      "source_sha256": "88b42ef8d26d782162de742c5f3866415252e8b327b6e9e9ddac87e57d489948",
+      "story_source": "https://news.hubeidaily.net/pc/c_2714369.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/water_cow-3-reference.png",
+      "sha256": "24e60c71ce6bbace596c7e69567e597967bea90c67dedfa3573206bf6a9a798b",
+      "size": [
+        126,
+        126
+      ],
+      "source_sha256": "88b42ef8d26d782162de742c5f3866415252e8b327b6e9e9ddac87e57d489948",
+      "story_source": "https://news.hubeidaily.net/pc/c_2714369.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/tribute_rice-1.png",
+      "sha256": "2ab6667ff6768e2c18d5bafff5d2462a478b7322ec282b4dd96ef8c8606c2717",
+      "size": [
+        210,
+        210
+      ],
+      "source_sha256": "17bbfd912e7827a1828558e4accdedcf28f765ce5fb9242b98d271c8680706bf",
+      "story_source": "https://news.hubeidaily.net/mobile/c_2999822.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/tribute_rice-1-reference.png",
+      "sha256": "5592ea080f3b0cc5f5e019e736ea274163a131dced68f55eefa9d735db4a08e4",
+      "size": [
+        126,
+        126
+      ],
+      "source_sha256": "17bbfd912e7827a1828558e4accdedcf28f765ce5fb9242b98d271c8680706bf",
+      "story_source": "https://news.hubeidaily.net/mobile/c_2999822.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/tribute_rice-2.png",
+      "sha256": "6cb62026d404715a4e085cb8f7e5ac0f168773387aaf3eef4435432a22479d81",
+      "size": [
+        210,
+        210
+      ],
+      "source_sha256": "17bbfd912e7827a1828558e4accdedcf28f765ce5fb9242b98d271c8680706bf",
+      "story_source": "https://news.hubeidaily.net/mobile/c_2999822.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/tribute_rice-2-reference.png",
+      "sha256": "8c19055df4e7b0cbbeaef77616922c2d3400745b902bee2495390bc86f16f3ea",
+      "size": [
+        126,
+        126
+      ],
+      "source_sha256": "17bbfd912e7827a1828558e4accdedcf28f765ce5fb9242b98d271c8680706bf",
+      "story_source": "https://news.hubeidaily.net/mobile/c_2999822.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/tribute_rice-3.png",
+      "sha256": "4d325c4029e7bc4ef9302d3a682dd79dec71fbb6009d6cee116faf5a0f7738da",
+      "size": [
+        210,
+        210
+      ],
+      "source_sha256": "17bbfd912e7827a1828558e4accdedcf28f765ce5fb9242b98d271c8680706bf",
+      "story_source": "https://news.hubeidaily.net/mobile/c_2999822.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/tribute_rice-3-reference.png",
+      "sha256": "c95e2111c4c99db6cd6b6f95409b98ff6774e285e8a08170a0d32279d047d6fe",
+      "size": [
+        126,
+        126
+      ],
+      "source_sha256": "17bbfd912e7827a1828558e4accdedcf28f765ce5fb9242b98d271c8680706bf",
+      "story_source": "https://news.hubeidaily.net/mobile/c_2999822.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/dragon_temple-1.png",
+      "sha256": "0d07c1fafd82f4718727fb6823d60393462589e312e24503fc646cb5d7779ff3",
+      "size": [
+        210,
+        210
+      ],
+      "source_sha256": "3ea1c5ef55f2fea03041c0f4422da41deb108190ed1dd757e6532cd9ab071797",
+      "story_source": "https://news.hubeidaily.net/pc/c_3216991.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/dragon_temple-1-reference.png",
+      "sha256": "f35c81b575d825ffb49548dacbe712166f94c6bb9a43907f15354153f12b3627",
+      "size": [
+        126,
+        126
+      ],
+      "source_sha256": "3ea1c5ef55f2fea03041c0f4422da41deb108190ed1dd757e6532cd9ab071797",
+      "story_source": "https://news.hubeidaily.net/pc/c_3216991.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/dragon_temple-2.png",
+      "sha256": "9a7b169547058849904729e8d6688dc1ddb12062ea4c9afe8d4486be14895048",
+      "size": [
+        210,
+        210
+      ],
+      "source_sha256": "3ea1c5ef55f2fea03041c0f4422da41deb108190ed1dd757e6532cd9ab071797",
+      "story_source": "https://news.hubeidaily.net/pc/c_3216991.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/dragon_temple-2-reference.png",
+      "sha256": "68899d877000a915c9076cd8778e0cbdeaffa276afc1ff8d067791abaed30915",
+      "size": [
+        126,
+        126
+      ],
+      "source_sha256": "3ea1c5ef55f2fea03041c0f4422da41deb108190ed1dd757e6532cd9ab071797",
+      "story_source": "https://news.hubeidaily.net/pc/c_3216991.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/dragon_temple-3.png",
+      "sha256": "ada310f13bfc74a43eb4a19ad2f5951db73f8984f50c1561ab41f480df4ed71f",
+      "size": [
+        210,
+        210
+      ],
+      "source_sha256": "3ea1c5ef55f2fea03041c0f4422da41deb108190ed1dd757e6532cd9ab071797",
+      "story_source": "https://news.hubeidaily.net/pc/c_3216991.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story/dragon_temple-3-reference.png",
+      "sha256": "9e8c4511d650fbf51a2902f0cadac7b3057eead5cccd4a002ec5e6babdf5e48e",
+      "size": [
+        126,
+        126
+      ],
+      "source_sha256": "3ea1c5ef55f2fea03041c0f4422da41deb108190ed1dd757e6532cd9ab071797",
+      "story_source": "https://news.hubeidaily.net/pc/c_3216991.html",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    }
+  ],
+  "culture": "Original illustrations adapted from local legends; published article images not reused. Water-cow middle panel corrected to walk into cave; dragon flood depicts no casualties."
+}

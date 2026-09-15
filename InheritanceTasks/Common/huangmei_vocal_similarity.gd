@@ -4,15 +4,15 @@ extends RefCounted
 ## Pure, deterministic comparison for the two Huangmei-opera lines.
 ##
 ## This comparator intentionally uses only voiced duration, relative pitch contour,
-## and timing. It never receives spectral/timbre features, so voice type, gender,
-## accent, and absolute key cannot affect the result.
+## and timing. The comparator compensates one global key; upstream pitch
+## extraction accuracy still depends on the signal and is not guaranteed here.
+
+const MelodyAlignment = preload("res://InheritanceTasks/Common/huangmei_melody_alignment.gd")
 
 const VOICED_CONFIDENCE: float = 0.35
 const MIN_PITCH_HZ: float = 55.0
 const MAX_PITCH_HZ: float = 1400.0
-const MIN_VOICED_FRAMES: int = 18
 const MIN_LINE_GAP_SECONDS: float = 0.12
-const CONTOUR_POINTS: int = 48
 const RHYTHM_POINTS: int = 24
 
 
@@ -47,30 +47,22 @@ static func score(extracted: Dictionary, reference: Dictionary) -> Dictionary:
 	var rhythm_lines: Array[float] = []
 	var line_scores: Array[float] = []
 	var enough_voice: bool = true
-	var global_transposition: float = _global_pitch_transposition(user_lines, reference_lines)
+	var alignment := MelodyAlignment.compare(user_lines, reference_lines)
 
 	for line_index: int in 2:
 		var user_line: Dictionary = user_lines[line_index]
 		var reference_line: Dictionary = reference_lines[line_index]
-		var reference_voiced_count: int = int(reference_line.get("voiced_count", 0))
-		var user_voiced_count: int = int(user_line.get("voiced_count", 0))
-		var minimum_for_line: int = maxi(
-			MIN_VOICED_FRAMES,
-			ceili(float(reference_voiced_count) * 0.35)
-		)
-		if user_voiced_count < minimum_for_line:
+		var reference_voice: float = float(reference_line.get("voiced_seconds", 0.0))
+		var user_voice: float = float(user_line.get("voiced_seconds", 0.0))
+		if user_voice < maxf(0.18, reference_voice * 0.35):
 			enough_voice = false
 
 		var completeness: float = clampf(
-			float(user_voiced_count) / maxf(float(reference_voiced_count), 1.0) * 100.0,
+			user_voice / maxf(reference_voice, 0.01) * 100.0,
 			0.0,
 			100.0
 		)
-		var pitch: float = _pitch_contour_score(
-			user_line,
-			reference_line,
-			global_transposition
-		)
+		var pitch: float = alignment.scores[line_index]
 		var line_rhythm: float = _line_rhythm_score(user_line, reference_line)
 		var rhythm: float = line_rhythm * 0.75 + gap_score * 0.25
 		var line_score: float = completeness * 0.10 + pitch * 0.55 + rhythm * 0.35
@@ -85,9 +77,6 @@ static func score(extracted: Dictionary, reference: Dictionary) -> Dictionary:
 	var raw_score: float = completeness_score * 0.10 + pitch_score * 0.55 + rhythm_score * 0.35
 	var every_line_passed: bool = line_scores[0] >= 45.0 and line_scores[1] >= 45.0
 	var passed: bool = enough_voice and every_line_passed and raw_score >= 60.0
-	# The task controller currently decides success from score >= 60. Preserve the
-	# per-line and voiced-audio gates by capping a gated failure below that mark.
-	var reported_score: float = raw_score if passed else minf(raw_score, 59.0)
 	var reason: StringName = &"completed"
 	var feedback: String = "两句的旋律和停顿都接上了"
 	if not enough_voice:
@@ -101,7 +90,7 @@ static func score(extracted: Dictionary, reference: Dictionary) -> Dictionary:
 		feedback = _feedback_for_weakest(completeness_score, pitch_score, rhythm_score)
 
 	return _gameplay_payload(
-		reported_score,
+		raw_score,
 		line_scores,
 		completeness_score,
 		pitch_score,
@@ -109,6 +98,15 @@ static func score(extracted: Dictionary, reference: Dictionary) -> Dictionary:
 		reason,
 		feedback,
 		{
+			"comparison_version": 3,
+			"line_error_pitch": alignment.error_scores,
+			"line_contour_factor": alignment.contour_factors,
+			"contour_correlations": alignment.correlations,
+			"transposition_semitones": alignment.transposition_semitones,
+			"max_alignment_seconds": alignment.max_alignment_seconds,
+			"matched_reference_fraction": alignment.matched_reference_fraction,
+			"octave_corrected_frames": alignment.octave_corrected_frames,
+			"reference_octave_corrected_frames": alignment.reference_octave_corrected_frames,
 			"line_completeness": completeness_lines,
 			"line_pitch": pitch_lines,
 			"line_rhythm": rhythm_lines,
@@ -218,6 +216,21 @@ static func _split_user_track(
 	var split_time: float = first_start + first_duration + expected_gap * 0.5
 	var first_end: int = -1
 	var second_start: int = -1
+	# A slightly longer first phrase must not have its last syllable assigned to
+	# the second line. Prefer the nearest real breath, within a bounded window.
+	var best_distance := 0.60
+	for position in voiced_indices.size() - 1:
+		var before: float = times[voiced_indices[position]]
+		var after: float = times[voiced_indices[position + 1]]
+		var middle := (before + after) * 0.5
+		if after - before >= MIN_LINE_GAP_SECONDS and absf(middle - split_time) < best_distance:
+			best_distance = absf(middle - split_time)
+			# Don't update the search origin as candidates are examined.
+			first_end = voiced_indices[position]
+			second_start = voiced_indices[position + 1]
+	if first_end >= 0 and second_start >= 0:
+		return [_slice_line(track, voiced_indices[0], first_end),
+			_slice_line(track, second_start, voiced_indices[voiced_indices.size() - 1])]
 	for voiced_index: int in voiced_indices:
 		if times[voiced_index] <= split_time:
 			first_end = voiced_index
@@ -270,54 +283,11 @@ static func _slice_line(track: Dictionary, first_index: int, last_index: int) ->
 		"voiced_times": voiced_times,
 		"voiced_pitches": voiced_pitches,
 		"voiced_count": voiced_pitches.size(),
+		"voiced_seconds": voiced_pitches.size() * _median_step(all_times),
 		"first_time": all_times[first_index],
 		"last_time": all_times[last_index],
 		"duration": maxf(all_times[last_index] - all_times[first_index], _median_step(all_times)),
 	}
-
-
-static func _pitch_contour_score(
-		user_line: Dictionary,
-		reference_line: Dictionary,
-		transposition: float
-) -> float:
-	var user_pitches: PackedFloat32Array = user_line.get("voiced_pitches", PackedFloat32Array())
-	var reference_pitches: PackedFloat32Array = reference_line.get(
-		"voiced_pitches", PackedFloat32Array()
-	)
-	if user_pitches.size() < 2 or reference_pitches.size() < 2:
-		return 0.0
-	var user_contour: Array[float] = _resample_pitch_contour(user_pitches, CONTOUR_POINTS)
-	var reference_contour: Array[float] = _resample_pitch_contour(reference_pitches, CONTOUR_POINTS)
-	var total_error: float = 0.0
-	for index: int in CONTOUR_POINTS:
-		total_error += absf((user_contour[index] - transposition) - reference_contour[index])
-	var mean_semitone_error: float = total_error / float(CONTOUR_POINTS)
-	return clampf(100.0 - mean_semitone_error * 18.0, 0.0, 100.0)
-
-
-static func _global_pitch_transposition(
-		user_lines: Array[Dictionary],
-		reference_lines: Array[Dictionary]
-) -> float:
-	var offsets: Array[float] = []
-	for line_index: int in mini(user_lines.size(), reference_lines.size()):
-		var user_pitches: PackedFloat32Array = user_lines[line_index].get(
-			"voiced_pitches", PackedFloat32Array()
-		)
-		var reference_pitches: PackedFloat32Array = reference_lines[line_index].get(
-			"voiced_pitches", PackedFloat32Array()
-		)
-		if user_pitches.size() < 2 or reference_pitches.size() < 2:
-			continue
-		var user_contour: Array[float] = _resample_pitch_contour(user_pitches, CONTOUR_POINTS)
-		var reference_contour: Array[float] = _resample_pitch_contour(
-			reference_pitches,
-			CONTOUR_POINTS
-		)
-		for point: int in CONTOUR_POINTS:
-			offsets.append(user_contour[point] - reference_contour[point])
-	return _median(offsets)
 
 
 static func _line_rhythm_score(user_line: Dictionary, reference_line: Dictionary) -> float:
@@ -362,23 +332,6 @@ static func _voiced_pattern(line: Dictionary, point_count: int) -> Array[float]:
 	for bucket: int in point_count:
 		if totals[bucket] > 0:
 			result[bucket] /= float(totals[bucket])
-	return result
-
-
-static func _resample_pitch_contour(pitches: PackedFloat32Array, point_count: int) -> Array[float]:
-	var result: Array[float] = []
-	if pitches.is_empty() or point_count <= 0:
-		return result
-	for point: int in point_count:
-		var position: float = (
-			float(point) / float(maxi(point_count - 1, 1)) * float(maxi(pitches.size() - 1, 0))
-		)
-		var left: int = clampi(floori(position), 0, pitches.size() - 1)
-		var right: int = mini(left + 1, pitches.size() - 1)
-		var fraction: float = position - float(left)
-		var left_value: float = _pitch_to_semitones(pitches[left])
-		var right_value: float = _pitch_to_semitones(pitches[right])
-		result.append(lerpf(left_value, right_value, fraction))
 	return result
 
 
@@ -429,10 +382,6 @@ static func _to_float_array(source: Variant) -> PackedFloat32Array:
 		for value: Variant in source:
 			result.append(float(value))
 	return result
-
-
-static func _pitch_to_semitones(pitch_hz: float) -> float:
-	return 12.0 * log(maxf(pitch_hz, 0.001)) / log(2.0)
 
 
 static func _ratio_similarity(actual: float, expected: float, steepness: float) -> float:
@@ -505,7 +454,8 @@ static func _gameplay_payload(
 		rounded_lines.append(displayed_line_score)
 	return {
 		"ok": true,
-		"score": _rounded(score_value),
+		"passed": bool(details.get("passed", false)),
+		"score": minf(_rounded(score_value), 59.9) if score_value < 60.0 else _rounded(score_value),
 		"line_scores": rounded_lines,
 		"completeness": _rounded(completeness_value),
 		"pitch": _rounded(pitch_value),

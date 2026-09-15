@@ -1,0 +1,45 @@
+{
+  "version": 3,
+  "source": "InheritanceTasks\\Art\\Pixel\\v3\\source\\xingshan\\bird.png",
+  "sha256": "685a26aae04fa09b7ac6ed1ff99309e7f8f442b881e5571c6decf2b2b501fc9a",
+  "frame_layout": [
+    4,
+    3
+  ],
+  "native_main": [
+    128,
+    128
+  ],
+  "native_followers": [
+    128,
+    128
+  ],
+  "export": "Source colors preserved; main and followers display at their original gameplay sizes in a 1000x600 art viewport.",
+  "actions": {
+    "flap": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "glide": [
+      6
+    ],
+    "descend": [
+      7
+    ],
+    "miss": [
+      8
+    ],
+    "recover": [
+      9
+    ],
+    "land": [
+      10,
+      11
+    ]
+  },
+  "rules": "No change to flight, gate route, song clock, collisions or scoring. Followers use existing independent history."
+}

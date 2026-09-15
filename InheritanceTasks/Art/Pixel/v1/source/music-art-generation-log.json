@@ -1,0 +1,343 @@
+[
+  {
+    "id": "laohekou_si_xian-background",
+    "prompt": "Use case: stylized-concept. Create ONE production raster BACKGROUND asset for a Chinese heritage pixel game, Laohekou silk-string ensemble. The supplied image is ONLY the pixel material, lighting and texture style reference, not a room to copy. Detailed 16-bit pixel art with crisp clusters, warm wood grain grouped in pixels, thin deliberate edges, no smooth painted blur. Aspect ratio 5:3, target 1500x900 (3x enlarged 500x300 pixel scene). A quiet daylight wooden music hall, straight-on slightly elevated view, broad traditional wooden lattice windows on back wall with soft cool blue-green daylight, warm brown plank floor, cream plaster, a small potted plant and two simple chairs only near the far edges. Entire lower middle performance area must be visibly empty and low contrast: leave spaces for three separately animated seated musicians in a shallow arc at normalized x=.24,y=.73, x=.50,y=.85, x=.76,y=.73. Player's large three-string lute and hands need clear space in the front center from x=.36 to .64 and y=.42 to .90. No characters, no instruments, no UI, no letters, no title, no border, no logos, no scenery that covers hands. Light concentrates gently on center, detailed decoration stays at upper back and outer edges. This is a complete reusable environment layer, not a promotional illustration.",
+    "generated_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-9a10-7233-8db6-62f552f74c11\\exec-77d659d4-60d3-4a26-a36b-eebaa9ef7993.png",
+    "path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\laohekou_si_xian-background.png",
+    "method": "built-in imagegen",
+    "date": "2026-09-13",
+    "status": "composition_checked_pending_engine_integration",
+    "composition": {
+      "canvas": [
+        500,
+        300
+      ],
+      "player_anchor": [
+        250,
+        255
+      ],
+      "npc_anchors": [
+        [
+          120,
+          219
+        ],
+        [
+          380,
+          219
+        ]
+      ],
+      "clear_player_region": [
+        180,
+        126,
+        140,
+        144
+      ]
+    },
+    "engine_static_review": {
+      "date": "2026-09-13",
+      "report": "artifacts/music-pixel-review/report.json",
+      "method": "180 staged Godot rendered poses across five scenes; not a gameplay test"
+    }
+  },
+  {
+    "id": "tujia_saye_erhe-background",
+    "prompt": "Use case: stylized-concept. ONE production environment background for the Tujia Saye'erhe village dance teaching minigame. Supplied image is PIXEL STYLE AND MATERIAL RENDERING REFERENCE ONLY. Detailed coherent 16-bit pixel art with crisp clusters, no smooth painting; 1500x900 landscape 5:3, designed as enlarged 500x300 pixel game art. View from slightly high BEHIND a dance formation toward the front of a sunny mountain-village stone clearing. NO PEOPLE anywhere, no drum, no instruments, no UI or letters. Wooden village houses occupy upper side edges, low distant blue-green mountains and mild daylight sky across upper third. Entire center and lower two thirds is open warm-grey stone paving with low-contrast large stone joints, no busy patterns. Preserve clear placement areas for animated front leader feet at (250,178), player dancer feet at (250,264), side dancers at (160,233) and (355,233), a drummer at (92,198), coordinates on 500x300 canvas. No objects or foliage across these areas or the path between them. The ground view must make left/right foot movement readable and same-facing rear views natural. Warm grey ground, muted green hills, dark timber, clean daylight, shadows only near edges. Distinct outdoor dance-training atmosphere, not a funeral ceremony, no crowds baked into the background, no decorative arrows or lanes.",
+    "generated_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-9a10-7233-8db6-62f552f74c11\\exec-0a690c60-0080-479a-94ac-79f3285ae781.png",
+    "path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\tujia_saye_erhe-background.png",
+    "method": "built-in imagegen",
+    "date": "2026-09-13",
+    "status": "composition_checked_pending_engine_integration",
+    "composition": {
+      "canvas": [
+        500,
+        300
+      ],
+      "player_anchor": [
+        250,
+        264
+      ],
+      "leader_anchor": [
+        250,
+        178
+      ],
+      "drummer_anchor": [
+        92,
+        198
+      ],
+      "dancer_anchors": [
+        [
+          160,
+          233
+        ],
+        [
+          355,
+          233
+        ]
+      ]
+    },
+    "engine_static_review": {
+      "date": "2026-09-13",
+      "report": "artifacts/music-pixel-review/report.json",
+      "method": "180 staged Godot rendered poses across five scenes; not a gameplay test"
+    }
+  },
+  {
+    "id": "jingzhou_hua_gu_xi-background",
+    "prompt": "Use case: stylized-concept. ONE reusable production background for Jingzhou Huagu opera interactive performance. Reference image1 is only the detailed 16-bit PIXEL ART style; image2 is authorized stage-film reference for the rustic flowering courtyard mood and wooden railing, do NOT copy actors, captions or filming graphics. Crisp intentional pixel clusters, clean material edges, no soft painting. Wide 5:3, 1500x900 intended for 500x300 game canvas. Bright intimate village theatre resembling a flower-walled garden: pale green wall, flowering pink vines at outer upper corners, low honey-wood railings, restrained potted flowers, warm daylight. Shallow raised wood performance platform across middle-left, empty clear floor for a main singer feet at (145,192) on 500x300 coordinates. Separate lower-right participation area with unobstructed floor for a player at (365,261) and partner at (438,245). Stage/front distinction obvious but one coherent courtyard space, no wall blocking sight between players and singer. Keep the center and front open for full animated figures, faces, sleeves and hand gestures. NO people, no instruments, no UI, no letters, no titles, no logos. Green/pink/wood palette, soft lower-contrast background details, different from a solemn red-curtain grand theatre. Entire background layer only.",
+    "generated_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-9a10-7233-8db6-62f552f74c11\\exec-68942a05-a5c2-4979-8bd9-5289973e6ab3.png",
+    "path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\jingzhou_hua_gu_xi-background.png",
+    "method": "built-in imagegen",
+    "date": "2026-09-13",
+    "status": "composition_checked_pending_engine_integration",
+    "composition": {
+      "canvas": [
+        500,
+        300
+      ],
+      "player_anchor": [
+        365,
+        261
+      ],
+      "singer_anchor": [
+        155,
+        156
+      ],
+      "partner_anchor": [
+        438,
+        245
+      ],
+      "note": "Singer feet aligned to top surface of generated raised platform."
+    },
+    "engine_static_review": {
+      "date": "2026-09-13",
+      "report": "artifacts/music-pixel-review/report.json",
+      "method": "180 staged Godot rendered poses across five scenes; not a gameplay test"
+    }
+  },
+  {
+    "id": "han_ju-background",
+    "prompt": "Use case: stylized-concept. Produce ONE game BACKGROUND asset for a Han opera followspot minigame, detailed crisp 16-bit pixel art consistent with reference1's material quality. Reference2 is authorized footage for the formal Han opera performance space and deep red / ink-green / warm gold stage mood only. DO NOT draw the filmed performers or lettering. Composition 1500x900, 5:3, to become 500x300 pixel background. Camera from the REAR OF AN AUDITORIUM facing the whole stage. Formal stage fills upper 80%, deep wine-red curtains at the two edges, dark muted green-gold architectural backdrop with restrained traditional border ornament, wide empty warm wooden stage floor with both left and right acting positions equally visible. Maintain sufficient base stage light even where there is no spotlight: dark colors but no black unreadable center. On 500x300 canvas, actor feet should be usable at x150 and x350, y205, with clear continuous travel across between. Empty fore-left corner at x45..140,y215..300 for a separately animated rear-view blogger and followspot lamp. A few very low dark seat backs along bottom right only, without people. NO people, no lamp, no spotlight beam, no instruments, no text, no logos, no UI, no frames. Spotlight, actors and operator are separately animated assets; background must not contain their shadows, bodies, or light cones. Keep stage readable and center low-contrast enough for tiny red/blue costumed figures.",
+    "generated_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-9a10-7233-8db6-62f552f74c11\\exec-1d45f9ba-3e60-40f7-a71a-1ae84de17bd4.png",
+    "path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\han_ju-background.png",
+    "method": "built-in imagegen",
+    "date": "2026-09-13",
+    "status": "composition_checked_pending_engine_integration",
+    "composition": {
+      "canvas": [
+        500,
+        300
+      ],
+      "operator_region": [
+        35,
+        217,
+        145,
+        83
+      ],
+      "actor_anchors": [
+        [
+          150,
+          205
+        ],
+        [
+          350,
+          205
+        ]
+      ],
+      "light_origin": [
+        145,
+        255
+      ]
+    },
+    "engine_static_review": {
+      "date": "2026-09-13",
+      "report": "artifacts/music-pixel-review/report.json",
+      "method": "180 staged Godot rendered poses across five scenes; not a gameplay test"
+    }
+  },
+  {
+    "id": "ti_qin_xi-background",
+    "prompt": "Use case: stylized-concept. ONE production pixel BACKGROUND for a Chongyang Tiqin opera musician minigame. Use supplied image ONLY as pixel material and crisp-cluster style reference. Detailed 16-bit pixel art, carefully controlled grouped pixels, no photoreal or smooth illustration. Landscape 5:3, 1500x900 intended for a 500x300 game canvas. Camera is beside the musicians' working area in front of a small village opera stage. In the back upper-left quadrant, a modest low-contrast small wooden stage with muted purple-grey curtains and a deep indigo backdrop; leave room for a separate distant singer at (115,146), 500x300 coordinates. The main foreground center-right must be spacious and EMPTY, reserved for a large waist-up seated musician holding a traditional upright fiddle at the waist, so show only unobtrusive warm wooden floor/bench surroundings here, no bench across the character: clear rectangle x155..465,y85..294. Keep the complete horizontal bow action range x150..465, y210..262 uncluttered. A dim timber pillar and simple hanging warm lamp at far right, low-contrast cloth and timber architecture around outer edges. Main colors deep blue, purple-grey, timber brown; gentle warm light in empty foreground so hands and instrument will stand out. No people, no instruments, no violin, no bow, no UI, no lyrics, no title, no lettering, no borders. Background should support a close foreground instrumental view rather than a wide ensemble.",
+    "generated_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-9a10-7233-8db6-62f552f74c11\\exec-cdcb75fd-6f8d-4f26-aa5a-a5d2c259f6ec.png",
+    "path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\ti_qin_xi-background.png",
+    "method": "built-in imagegen",
+    "date": "2026-09-13",
+    "status": "composition_checked_pending_engine_integration",
+    "composition": {
+      "canvas": [
+        500,
+        300
+      ],
+      "player_region": [
+        155,
+        90,
+        310,
+        204
+      ],
+      "singer_anchor": [
+        110,
+        104
+      ],
+      "bow_range": [
+        150,
+        465
+      ],
+      "note": "Distant singer feet aligned to stage floor at y104."
+    },
+    "engine_static_review": {
+      "date": "2026-09-13",
+      "report": "artifacts/music-pixel-review/report.json",
+      "method": "180 staged Godot rendered poses across five scenes; not a gameplay test"
+    }
+  },
+  {
+    "id": "music-npcs",
+    "prompt": "Use case: stylized-concept. Create ONE production NPC sprite animation atlas for a Chinese heritage pixel game, precise grid SIX COLUMNS by SEVEN ROWS, all 42 equal square cells. 1536x1792 canvas. Background completely uniform solid #00FF00, no labels, no borders, no scenery, no ground shadows. Detailed 16-bit pixel art; match reference1's clean cluster rendering, thin dark outline, warm skin and 3.5-head body proportions. Each row is ONE consistent independent NPC with unchanged scale, costume, head and facing across its six poses. Leave generous empty margins, entire feet/hands/held objects inside every cell. References2-5 only guide clothing/instrument categories, not real persons' identity; do not copy captions, logos, or photographic rendering.\nROW1: elderly woman seated with a horizontal Chinese guzheng zither on a low stand, muted red blouse, grey tied hair. Complete zither and both hands visible. Columns resting, hands prepare, pluck with fingers touching strings, finish phrase looking toward center, listening, nodding return.\nROW2: middle-aged man seated with a pear-shaped Chinese pipa held upright, plain dark-blue performance tunic. Same six actions: rest, prepare, pluck, finish toward center, listen, nod return. Complete lute neck and hands.\nROW3: Tujia teaching dance leader, seen FROM BEHIND at slight high angle, white short-sleeved shirt with restrained dark collar and waist trim, dark trousers, black cloth headwrap, shoes. Columns neutral feet, prepare LEFT weight shift, LEFT foot landing, prepare RIGHT, RIGHT foot landing, neutral recovered. Both feet fully visible, all six same rear view; never mirrored character.\nROW4: middle-aged Tujia drummer, front three-quarter view, white shirt/dark trousers/headwrap, large traditional red-brown barrel drum on a low stand, one wooden stick in each hand. Columns wait, sticks lift, contact drumhead, rebound, listen, reset. Drum/hands entirely visible, proportions constant.\nROW5: Jingzhou Huagu actress, pale mint-green rustic opera costume, modest pink flower hair ornaments, neat pink accents; reference3's lower-left green performer is costume guidance. Columns waiting, hand prepares, sings with open mouth and one sleeve lifted, hand closes to cue participants, attentive listening, warm nod. Full costume and face visible.\nROW6: Han opera actress inspired by reference4 costume: deep red long costume, white water sleeves, ornate but simplified red/silver flower headdress. Columns standing left-facing, prepare cross-stage, one walking step, standing right-facing, stationary expressive sleeve pose, composed finish. All full body, no floor; do not use Western gowns.\nROW7: Tiqin opera background actor inspired by reference5: plain blue long traditional robe, black soft cap, pale inner sleeve. Columns waiting, hand prepares, sings, closes phrase, listens, returns upright. Keep low saturation.\nAll rows are separate game sprites, NOT a composite scene or poster. Precise 6x7 equal grid and clean empty green separation are essential. Hands meet instruments in every pose. No extra people, no lettering.",
+    "generated_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-9a10-7233-8db6-62f552f74c11\\exec-d5281267-732b-4567-9874-3392106e25d7.png",
+    "path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\music-npcs.png",
+    "method": "built-in imagegen",
+    "date": "2026-09-13",
+    "status": "sprite_sheet_checked_pending_normalization_engine_review",
+    "grid": [
+      6,
+      7
+    ],
+    "row_ids": [
+      "guzheng_teacher",
+      "pipa_partner",
+      "dance_leader",
+      "dance_drummer",
+      "huagu_singer",
+      "hanju_actor",
+      "tiqin_actor"
+    ],
+    "dance_direction_columns": {
+      "left": 4,
+      "right": 2
+    },
+    "note": "NPC actions are game staging, not a transcription of filmed choreography.",
+    "engine_static_review": {
+      "date": "2026-09-13",
+      "report": "artifacts/music-pixel-review/report.json",
+      "method": "180 staged Godot rendered poses across five scenes; not a gameplay test"
+    }
+  },
+  {
+    "id": "laohekou_si_xian-avatars",
+    "prompt": "Use case: identity-preserve. ONE production 6 ROWS x 6 COLUMNS pixel sprite atlas, 1536x1536, equal square cells and large clean gutters. Reference1 defines the SIX player blogger identities in order; reference2 defines pixel style, outline, proportions and complete animation-sheet discipline. Same six identities, detailed 16-bit pixel art, approximately 3.5 heads tall, consistent scale, thin dark outlines and warm skin. SOLID uniform saturated #00FF00 background only; no text, no labels, no shadow, no stage.\nEach row is one blogger, every column same face/hair/costume/size/facing. Row1 travel girl brown-grey twin braids; row2 life girl half-up bun with ivory scrunchie; row3 mature man silver curled hair and moustache; row4 lively brown-haired girl with red side hair knot; row5 young man short spiky grey hair and small red accent; row6 androgynous young man long dark hair with gold front streaks and purple highlight. Remove all modern hats/backpacks; dress all in simple traditional performance tunic, fitted sleeves, restrained deep-blue or maroon collar trim, dark trousers and shoes.\nEvery sprite shows the complete seated musician on a small simple stool, holding a Chinese SANXIAN three-string lute: very long thin fretless neck leaning upward screen-right, small dark oval/rounded-rectangle resonator at the lap, THREE strings, left hand on neck and right hand plucking near resonator. Do not make a pipa, guitar, violin or Western cello. Full neck/headstock, stool feet, both hands and right-hand contact point must fit inside each cell. Row identities remain visible above instrument.\nSix columns are one coherent action strip: 1 READY holding the instrument; 2 PREPARE right fingertips draw back slightly; 3 PLUCK fingertips meet strings at resonator, small arm movement; 4 RELEASE after the pluck, wrist eases back; 5 MISS the player pauses with concerned expression but instrument remains secure; 6 RECOVER small relieved nod and hands return. No whole-body scaling, no costume drift, no horizontal flips. Each action must be readable by hand and wrist, not only a face change. Pixel-game production asset, not a poster.",
+    "generated_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-9a10-7233-8db6-62f552f74c11\\exec-5049621d-5bc1-4870-ae88-ce29cb2b9226.png",
+    "path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\laohekou_si_xian-avatars.png",
+    "method": "built-in imagegen",
+    "date": "2026-09-13",
+    "status": "composition inspected; normalization and engine QA pending",
+    "grid": [
+      6,
+      6
+    ],
+    "engine_static_review": {
+      "date": "2026-09-13",
+      "report": "artifacts/music-pixel-review/report.json",
+      "method": "180 staged Godot rendered poses across five scenes; not a gameplay test"
+    }
+  },
+  {
+    "id": "tujia_saye_erhe-avatars",
+    "prompt": "Use case: identity-preserve. ONE production pixel sprite atlas, EIGHT equal COLUMNS by SIX equal ROWS, landscape 2048x1536, generous uniform green gutters. Reference1 is identity reference; reference2 only style and stable animation-sheet discipline. Detailed 16-bit pixel art, approximately 3.5 heads tall, complete full body and feet, uniform saturated #00FF00 background, NO text, labels, arrows, stage, shadows. ALL characters face AWAY from viewer toward screen top, slight side profile only in recovery. Each row retains same identity and traditional practice outfit throughout. Rows top to bottom: travel girl brown-grey twin braids; life girl half-up bun and ivory scrunchie; mature man silver curled hair with mature shoulders; lively girl brown hair and red side knot; young man short spiky grey hair and small red collar accent; long dark-haired androgynous man with gold side streaks. No hats/backpacks. Plain off-white fitted sleeves and restrained dark woven collar/cuff trim, dark loose trousers, flat black shoes; inspired by respectful Tujia dance teaching, no caricature. The dark trousers keep each leg distinct. Feet at same planted baseline in every cell, both feet completely visible. Camera follows from behind so CHARACTER LEFT is IMAGE LEFT. Exactly eight poses left to right: 1 READY both feet on floor arms softly apart; 2 PREPARE LEFT knees bend, torso weight shifts right so left heel lifts; 3 LEFT STEP left foot clearly extends to IMAGE LEFT and plants flat, right foot supports; 4 PREPARE RIGHT knees bend weight shifts left, right heel lifts; 5 RIGHT STEP right foot clearly extends to IMAGE RIGHT and plants flat, left supports; 6 REST centered still posture both feet; 7 LATE STEP slight hesitant off-balance with bent knees but safe; 8 RECOVER back centered with calm shoulders. Left/right poses are separately drawn, never flipped whole-person copies. Clear changes in knees, hips and foot positions with consistent anatomy. Same character scale, same head/hair/clothes, no floating or cropped feet.",
+    "generated_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-9a10-7233-8db6-62f552f74c11\\exec-27b89daa-cfcc-42eb-a954-594b75dd6088.png",
+    "path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\tujia_saye_erhe-avatars.png",
+    "method": "built-in imagegen",
+    "date": "2026-09-13",
+    "status": "composition inspected; normalization and engine QA pending",
+    "grid": [
+      8,
+      6
+    ],
+    "left_step_column": 2,
+    "right_step_column": 4,
+    "engine_static_review": {
+      "date": "2026-09-13",
+      "report": "artifacts/music-pixel-review/report.json",
+      "method": "180 staged Godot rendered poses across five scenes; not a gameplay test"
+    }
+  },
+  {
+    "id": "jingzhou_hua_gu_xi-avatars",
+    "prompt": "Use case: identity-preserve. ONE production pixel sprite atlas, SIX equal COLUMNS by SIX equal ROWS, square 1536x1536, uniform broad gutters, flat saturated #00FF00 background ONLY. No text, arrows, stage, shadows. Reference1 defines six blogger identities, reference2 defines consistent warm detailed 16-bit pixel style and complete small-body animation sheets. All characters front three-quarter, 3.5 heads tall, full body feet visible, simple participating singers in a bright countryside Huagu opera activity. These are participants, not historical lead actors: NO elaborate headdress, NO painted opera masks obscuring face. Wear coordinated cream/mint-green fitted-sleeve traditional performance tops, restrained pink/maroon collar and sash accents, dark trousers, soft shoes. Each row same face hair outfit scale throughout. Six rows: 1 friendly girl brown-grey twin braids; 2 gentle girl half-up hair ivory scrunchie; 3 mature man silver curled hair with moustache; 4 lively girl brown hair red side knot; 5 youthful man short grey spikes red small accent; 6 long dark-haired androgynous man gold front streaks purple accent. Remove hats, backpacks, modern props.\nSix columns left to right 1 READY attentive listening closed mouth hands loosely gathered at waist; 2 PREPARE breath in, one hand rises near chest, lips just open; 3 ANSWER singing clear open mouth and steady supported posture, hand opens away from chest; 4 CLOSE VOICE lips close, hand and shoulders settle; 5 MISS early answer concerned face and raised apologetic hand, no humiliation; 6 RECOVER calm smile and low welcoming hand returning to next phrase. Each pose clearly changes hands, shoulders and mouth, no whole-person stretching. Keep hairstyle accessories, body dimensions, garment hem and floor baseline stable in every cell. Asset will animate both short and sustained sung answers; singular strong key poses, readable at 128 pixels.",
+    "generated_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-9a10-7233-8db6-62f552f74c11\\exec-af646f27-cc56-414e-af0e-767b7364925f.png",
+    "path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\jingzhou_hua_gu_xi-avatars.png",
+    "method": "built-in imagegen",
+    "date": "2026-09-13",
+    "status": "six identities and hand/mouth states inspected; engine QA pending",
+    "grid": [
+      6,
+      6
+    ],
+    "engine_static_review": {
+      "date": "2026-09-13",
+      "report": "artifacts/music-pixel-review/report.json",
+      "method": "180 staged Godot rendered poses across five scenes; not a gameplay test"
+    }
+  },
+  {
+    "id": "han_ju-avatars-candidate-v1",
+    "prompt": "Use case: identity-preserve. ONE production 6 ROWS x 6 COLUMNS sprite atlas, square 1536x1536 with equal cells and generous uniform green gutters. Detailed 16-bit pixel art, consistent approximately 3.5-head blogger characters. Reference1 is SIX identities; reference2 is pixel finish, outline and sheet discipline ONLY. Flat saturated #00FF00 background, no text, no grid lines, no shadow, no stage.\nEvery cell shows a complete human FOLLOWSPOT LIGHT OPERATOR with a small sturdy old theatre followspot lamp on tripod/stand. Camera behind and slightly to the operator's right, showing the BACK of hair and a little side face. Person stands at the LEFT of lamp, BOTH hands securely hold lamp's rear control handle, feet planted, dark navy simple fitted backstage clothes and shoes. Lamp is a dark metal barrel with vents, aiming diagonally away from viewer toward a distant stage. No projected beam drawn in the asset. Lamp and all three tripod feet fully fit cell. Keep person, stand and lamp same size and position.\nRows1 travel girl brown-grey twin braids; row2 life girl half-up hair ivory scrunchie; row3 mature man silver curled hair/moustache seen in profile; row4 brown hair girl red side knot; row5 short spiky grey hair young man red collar accent; row6 long dark hair gold side streaks and purple accent. Every column in a row MUST be same identity, hair and clothes. No hats.\nColumns: 1 READY LEFT lamp nose points upper-left, operator holds still; 2 PREPARE TO TURN arms tense gently, head looks toward upper-right, lamp still left; 3 RIGHT POSITION lamp barrel visibly rotated to upper-right, shoulders and wrists turn to keep hands on handle; 4 LEFT POSITION lamp barrel visibly rotated to upper-left, hands follow actual handle; 5 MISSED TURN concerned operator looks stageward, lamp right, one shoulder raised but hands stay on handle; 6 RECOVER LEFT relaxed steady posture, lamp left. The optical barrel must visibly rotate between left and right independently of unchanged tripod. Do NOT horizontally flip the whole person, do NOT exchange character identity. Right aim must not be portrayed by simply pointing a finger; hands control real lamp. Pixel-game asset, no UI.",
+    "generated_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-9a10-7233-8db6-62f552f74c11\\exec-e69d503e-d468-48c8-9f0a-f155b0033ead.png",
+    "path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\han_ju-avatars-candidate-v1.png",
+    "method": "built-in imagegen",
+    "date": "2026-09-13",
+    "status": "rejected: lamp direction change insufficient",
+    "grid": [
+      6,
+      6
+    ]
+  },
+  {
+    "id": "han_ju-avatars",
+    "prompt": "Edit this exact six rows by six columns green-background pixel sprite sheet. Preserve EVERY character identity, exact rear-view hairstyles, costume, pixel outlines, scale, row order, all 36 cells, equal cell grid and solid green. The defect is that ALL lamps currently point upper-right. FIX THE LAMP BARREL ORIENTATION in columns 1,2,4,6 in EVERY row, so their FRONT LENS is clearly at the UPPER LEFT of the tripod pivot, the REAR HANDLE is at the LOWER RIGHT of pivot. These columns show the LEFT stage lighting position. Tilt/rotate the metal barrel in depth about its stand; draw the visible lens edge on the LEFT end. The operator remains on same left side of tripod but reaches both arms across to the rear handle at lower-right. DO NOT flip whole sprites. Keep all six bloggers unchanged, including their hair ornaments and hair part. Columns3 and5 should remain aiming UPPER RIGHT, with front lens at upper right and handle lower left. The two orientations need a clear 60-degree yaw difference, not just slight changes in barrel length. Keep tripod fixed and feet planted. Hands, shoulders and wrist poses follow actual handle positions; no detached hands or detached lamps. No light beams, no arrows, no text. This is a surgical correction of device and arm pose, not redesign of characters.",
+    "generated_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-9a10-7233-8db6-62f552f74c11\\exec-da7596de-b41b-4eda-a7d3-9786f2cb66bc.png",
+    "path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\han_ju-avatars.png",
+    "method": "built-in imagegen",
+    "date": "2026-09-13",
+    "status": "corrected separate lamp directions; identities inspected; engine QA pending",
+    "grid": [
+      6,
+      6
+    ],
+    "engine_static_review": {
+      "date": "2026-09-13",
+      "report": "artifacts/music-pixel-review/report.json",
+      "method": "180 staged Godot rendered poses across five scenes; not a gameplay test"
+    }
+  },
+  {
+    "id": "ti_qin_xi-avatars-candidate-v1",
+    "prompt": "Use case: identity-preserve. ONE exact TWELVE equal COLUMNS by SIX equal ROWS landscape pixel animation atlas 3072x1536. Solid uniform saturated #00FF00 background; broad green gutters; no text, no labels, no stage. Detailed warm 16-bit pixel art, crisp consistent outlines, 3.5-head proportions. Reference1 defines six blogger identities and reference2 only sprite-sheet quality. This atlas contains 72 same-scale musicians, 12 poses per person. All face forward with slight three-quarter angle, showing head to thighs. Outfit: simple fitted-sleeve traditional musician tunic in deep blue or purple-grey with warm collar, no hat, no backpacks. Preserve each row's face, hair, hair ornament, height and clothing exactly in ALL12 cells: row1 brown-grey twin-braided girl; row2 half-up brown-haired girl ivory scrunchie; row3 mature man silver curled hair and moustache; row4 brown-haired girl red side knot; row5 short spiky grey-haired young man red accent; row6 longer dark-haired androgynous man gold front streaks purple accent.\nINSTRUMENT: a Chinese LOCAL UPRIGHT TIQIN FIDDLE, NOT a western violin. Small wooden cylindrical resonator pressed to the WAIST just below navel, thin vertical neck rises to upper chest/shoulder, left hand grips neck, right hand holds a long thin horizontal bow contacting strings over resonator. No instrument under chin, no cello between knees. Full cylinder, neck, BOTH hands and entire bow stay inside every cell. Hands meet actual contact points.\n12 columns left to right: 1 READY bow centered; 2 PREPARE LEFT right forearm bent drawing bow slightly screen-right; 3 SHORT LEFT bow moved a short distance screen-left; 4 LONG LEFT right forearm extends farther screen-left, bow slides through SAME string contact point; 5 CLOSE LEFT bow stops at left endpoint, wrist relaxes; 6 PREPARE RIGHT right forearm draws slightly screen-left; 7 SHORT RIGHT bow moves screen-right; 8 LONG RIGHT right forearm extends farther screen-right with SAME instrument/string contact; 9 CLOSE RIGHT bow stops at right endpoint; 10 REST bow gently at rest, mouth closed; 11 MISS concerned expression and paused hand; 12 RECOVER composed face ready to resume. The torso, instrument and left-hand grip stay stable, only the bow and right arm extend along their direction. NO whole-body mirroring and NO horizontal-flipped portraits. Bow direction must visibly differ between columns3/4 versus7/8. This is stylized GAMEPLAY bow motion, not an authentic performance transcription.",
+    "generated_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-9a10-7233-8db6-62f552f74c11\\exec-a45f411b-a341-4b89-b6c7-d79fb51675aa.png",
+    "path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\ti_qin_xi-avatars-candidate-v1.png",
+    "method": "built-in imagegen",
+    "date": "2026-09-13",
+    "status": "rejected: right bow repeats left extension",
+    "grid": [
+      12,
+      6
+    ]
+  },
+  {
+    "id": "ti_qin_xi-avatars",
+    "prompt": "Correct this exact 12 COLUMNS by 6 ROWS pixel sprite atlas. Keep the SAME72 characters, SAME six row identities, faces, hairstyles, costumes, instrument positions, pixel scale, equal cell grid, saturated green background. Do not redesign faces. A specific animation defect: columns7,8,9 currently repeat the LEFT-going bow pose of columns3,4,5. SURGICALLY REDRAW RIGHT FOREARM, WRIST and BOW in columns7,8,9 of ALL6rows. Their instrument remains upright at the same screen-right waist position, left hand still holds vertical neck. The bow stick must extend clearly to SCREEN RIGHT past the instrument. In column7 bow-holding hand moves to center of belly, right elbow is tucked, bow's long free end extends toward the RIGHT cell gutter. In column8 the bow-holding hand crosses belly almost to string contact, bow has slid far RIGHT so most visible bow length lies to RIGHT of instrument. In column9 stop at that RIGHT endpoint, wrist relaxed. Keep bow passing through the original string/resonator contact; straight continuous bow must not break. This is a horizontal SLIDING motion of the bow through strings, NOT a change in instrument orientation. Columns3,4,5 stay extending to SCREEN LEFT. Column6 prepare should show right elbow bent ready to slide toward right. DO NOT flip whole character, do not swap left/right hands on instrument, do not put instrument under chin. Ensure the long bow fits inside each cell; shrink all72 sprites equally a little if necessary to leave bow room. Preserve the six row identities exactly, all twelve columns per row. No text or arrows.",
+    "generated_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-9a10-7233-8db6-62f552f74c11\\exec-7791a790-3cf6-494f-b807-3c82a169ff0f.png",
+    "path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\ti_qin_xi-avatars.png",
+    "method": "built-in imagegen",
+    "date": "2026-09-13",
+    "status": "left/right bow corrected; six identities inspected; engine QA pending",
+    "grid": [
+      12,
+      6
+    ],
+    "cultural_note": "Waist posture is reference based; bow motion is game interpretation.",
+    "engine_static_review": {
+      "date": "2026-09-13",
+      "report": "artifacts/music-pixel-review/report.json",
+      "method": "180 staged Godot rendered poses across five scenes; not a gameplay test"
+    }
+  }
+]

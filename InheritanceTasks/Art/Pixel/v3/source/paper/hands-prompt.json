@@ -1,0 +1,7 @@
+{
+  "prompt": "Production asset sheet, top-down pixel art hands holding a small Chinese PAPER CARVING KNIFE, for a warm 16-bit craft game. SIX isolated sprites in exactly3columns2rows, each equal size, no labels. Each sprite is the SAME believable right hand and small narrow straight pointed carving blade, with blade point at upper left of each sprite, wrist at lower right, three visible fingers holding the slim wood handle, NO scissors, no kitchen knife, no full arm. Six matching sleeves only differ in cloth color, row-major: ochre, dusty rose, muted navy, brick red, forest green, muted purple. Hands same modest natural light skin, crisp outlines, restrained 12-color shading per sprite, no dithering or noise. Each image will be drawn about55x55 game pixels, so make the tool point visually exact and clean. Each wrist has gathered short cuff. Background must be a perfectly uniform pure green #00ff00 technical matte, no checkerboard, no shadows. Sprite outlines clean; all knife tips and grips identical relative positions across cells. Entire blade from point to grip visible, room around silhouettes. Cute anime pixel style consistent with a small Chinese craft worktable.",
+  "source": "paper_hands.png",
+  "generator": "built-in imagegen",
+  "background": "RGB green technical matte, separated during normalization; not native alpha",
+  "identity_scope": "Sleeve color follows the six selected bloggers. Actual face/identity is retained by preparation portrait; these overhead sprites contain only hand and sleeve."
+}

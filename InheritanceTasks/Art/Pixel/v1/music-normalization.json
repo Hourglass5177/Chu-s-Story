@@ -1,0 +1,486 @@
+[
+  {
+    "source": "source\\laohekou_si_xian-avatars.png",
+    "output": "runtime\\laohekou_si_xian-avatars.png",
+    "grid": [
+      6,
+      6
+    ],
+    "frame_size": [
+      128,
+      128
+    ],
+    "source_crops": [
+      {
+        "box": [
+          0,
+          19,
+          209,
+          208
+        ],
+        "scale": 0.5741626794258373
+      },
+      {
+        "box": [
+          0,
+          4,
+          209,
+          206
+        ],
+        "scale": 0.5741626794258373
+      },
+      {
+        "box": [
+          0,
+          6,
+          209,
+          198
+        ],
+        "scale": 0.5741626794258373
+      },
+      {
+        "box": [
+          0,
+          4,
+          209,
+          194
+        ],
+        "scale": 0.5741626794258373
+      },
+      {
+        "box": [
+          0,
+          7,
+          209,
+          198
+        ],
+        "scale": 0.5741626794258373
+      },
+      {
+        "box": [
+          0,
+          8,
+          209,
+          202
+        ],
+        "scale": 0.5741626794258373
+      }
+    ],
+    "row_edges": [
+      0,
+      211,
+      423,
+      624,
+      824,
+      1029,
+      1254
+    ],
+    "anchor_policy": "shared crop and scale per identity; bottom center",
+    "sha256": "3ba6ae7b0e6ee75a8e4ee5ee6ae69d7077b6c14814acde65b4237f891e6396ad"
+  },
+  {
+    "source": "source\\tujia_saye_erhe-avatars.png",
+    "output": "runtime\\tujia_saye_erhe-avatars.png",
+    "grid": [
+      8,
+      6
+    ],
+    "frame_size": [
+      128,
+      128
+    ],
+    "source_crops": [
+      {
+        "box": [
+          37,
+          13,
+          147,
+          180
+        ],
+        "scale": 0.718562874251497
+      },
+      {
+        "box": [
+          34,
+          3,
+          146,
+          177
+        ],
+        "scale": 0.6896551724137931
+      },
+      {
+        "box": [
+          33,
+          5,
+          149,
+          177
+        ],
+        "scale": 0.6976744186046512
+      },
+      {
+        "box": [
+          37,
+          6,
+          149,
+          173
+        ],
+        "scale": 0.718562874251497
+      },
+      {
+        "box": [
+          33,
+          5,
+          149,
+          178
+        ],
+        "scale": 0.6936416184971098
+      },
+      {
+        "box": [
+          33,
+          5,
+          148,
+          176
+        ],
+        "scale": 0.7017543859649122
+      }
+    ],
+    "row_edges": [
+      0,
+      183,
+      364,
+      546,
+      723,
+      905,
+      1086
+    ],
+    "anchor_policy": "shared crop and scale per identity; bottom center",
+    "sha256": "b50ebc3d67106eb3144d4dd490cafb44a621f1acba0f80a50faa3a5591bc6d7f"
+  },
+  {
+    "source": "source\\jingzhou_hua_gu_xi-avatars.png",
+    "output": "runtime\\jingzhou_hua_gu_xi-avatars.png",
+    "grid": [
+      6,
+      6
+    ],
+    "frame_size": [
+      128,
+      128
+    ],
+    "source_crops": [
+      {
+        "box": [
+          31,
+          15,
+          180,
+          215
+        ],
+        "scale": 0.6
+      },
+      {
+        "box": [
+          33,
+          5,
+          174,
+          216
+        ],
+        "scale": 0.5687203791469194
+      },
+      {
+        "box": [
+          36,
+          4,
+          177,
+          206
+        ],
+        "scale": 0.594059405940594
+      },
+      {
+        "box": [
+          26,
+          4,
+          171,
+          195
+        ],
+        "scale": 0.6282722513089005
+      },
+      {
+        "box": [
+          30,
+          3,
+          181,
+          202
+        ],
+        "scale": 0.6030150753768844
+      },
+      {
+        "box": [
+          28,
+          5,
+          181,
+          195
+        ],
+        "scale": 0.631578947368421
+      }
+    ],
+    "row_edges": [
+      0,
+      220,
+      439,
+      649,
+      847,
+      1053,
+      1254
+    ],
+    "anchor_policy": "shared crop and scale per identity; bottom center",
+    "sha256": "5b502e0511c6d37883b6865812a844bbe57d4da1b5c633b2054208a7f90513ab"
+  },
+  {
+    "source": "source\\han_ju-avatars.png",
+    "output": "runtime\\han_ju-avatars.png",
+    "grid": [
+      6,
+      6
+    ],
+    "frame_size": [
+      128,
+      128
+    ],
+    "source_crops": [
+      {
+        "box": [
+          3,
+          23,
+          195,
+          203
+        ],
+        "scale": 0.625
+      },
+      {
+        "box": [
+          3,
+          9,
+          197,
+          189
+        ],
+        "scale": 0.6185567010309279
+      },
+      {
+        "box": [
+          12,
+          12,
+          194,
+          195
+        ],
+        "scale": 0.6557377049180327
+      },
+      {
+        "box": [
+          6,
+          13,
+          196,
+          192
+        ],
+        "scale": 0.631578947368421
+      },
+      {
+        "box": [
+          5,
+          12,
+          197,
+          195
+        ],
+        "scale": 0.625
+      },
+      {
+        "box": [
+          8,
+          14,
+          195,
+          193
+        ],
+        "scale": 0.6417112299465241
+      }
+    ],
+    "row_edges": [
+      0,
+      213,
+      413,
+      621,
+      824,
+      1032,
+      1254
+    ],
+    "anchor_policy": "shared crop and scale per identity; bottom center",
+    "sha256": "6b1cb0cbf526800ed84ccd9aef4976a313bdd3912ea8e93698fb69bfc7feef0e"
+  },
+  {
+    "source": "source\\ti_qin_xi-avatars.png",
+    "output": "runtime\\ti_qin_xi-avatars.png",
+    "grid": [
+      12,
+      6
+    ],
+    "frame_size": [
+      128,
+      128
+    ],
+    "source_crops": [
+      {
+        "box": [
+          0,
+          16,
+          148,
+          147
+        ],
+        "scale": 0.8108108108108109
+      },
+      {
+        "box": [
+          0,
+          4,
+          148,
+          148
+        ],
+        "scale": 0.8108108108108109
+      },
+      {
+        "box": [
+          0,
+          2,
+          148,
+          145
+        ],
+        "scale": 0.8108108108108109
+      },
+      {
+        "box": [
+          0,
+          5,
+          148,
+          139
+        ],
+        "scale": 0.8108108108108109
+      },
+      {
+        "box": [
+          0,
+          3,
+          148,
+          145
+        ],
+        "scale": 0.8108108108108109
+      },
+      {
+        "box": [
+          0,
+          4,
+          148,
+          147
+        ],
+        "scale": 0.8108108108108109
+      }
+    ],
+    "row_edges": [
+      0,
+      150,
+      299,
+      447,
+      589,
+      737,
+      887
+    ],
+    "anchor_policy": "shared crop and scale per identity; bottom center",
+    "sha256": "26b37d609e0db13d01ed66b83f45623eb204621eb0ee1e7b556eaf3719bfca84"
+  },
+  {
+    "source": "source\\music-npcs.png",
+    "output": "runtime\\music-npcs.png",
+    "grid": [
+      6,
+      7
+    ],
+    "frame_size": [
+      128,
+      128
+    ],
+    "source_crops": [
+      {
+        "box": [
+          0,
+          12,
+          194,
+          179
+        ],
+        "scale": 0.6185567010309279
+      },
+      {
+        "box": [
+          26,
+          8,
+          164,
+          176
+        ],
+        "scale": 0.7142857142857143
+      },
+      {
+        "box": [
+          16,
+          6,
+          161,
+          178
+        ],
+        "scale": 0.6976744186046512
+      },
+      {
+        "box": [
+          16,
+          6,
+          176,
+          199
+        ],
+        "scale": 0.6217616580310881
+      },
+      {
+        "box": [
+          14,
+          6,
+          172,
+          188
+        ],
+        "scale": 0.6593406593406593
+      },
+      {
+        "box": [
+          18,
+          6,
+          174,
+          194
+        ],
+        "scale": 0.6382978723404256
+      },
+      {
+        "box": [
+          24,
+          5,
+          170,
+          193
+        ],
+        "scale": 0.6382978723404256
+      }
+    ],
+    "row_edges": [
+      0,
+      186,
+      367,
+      551,
+      756,
+      949,
+      1148,
+      1355
+    ],
+    "anchor_policy": "shared crop and scale per identity; bottom center",
+    "sha256": "56abc8d21dead87039034d14ae8eb770855f0dc2f87a9f8390f403bcce5565c4"
+  }
+]

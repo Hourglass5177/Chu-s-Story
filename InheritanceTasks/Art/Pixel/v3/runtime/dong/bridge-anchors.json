@@ -1,0 +1,8 @@
+{
+  "version": 4,
+  "source_image_size": [1774, 139],
+  "source_sha256": "7ddcef9fb86216e7eaab59c9512706d6c187867863c0c52b8ffac470328a18b0",
+  "surface_y_px": 68,
+  "logical_height": 32,
+  "note": "Upper plank walking face reaches source row 68; vertical dark board face starts at row 70. Align row 68 with the shared physical road height, not image row zero. This is a game art contact anchor."
+}

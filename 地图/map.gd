@@ -37,49 +37,9 @@ func _on_phase_changed(new_phase: TurnManager.TurnPhase):
 # --- 显示可达区域 ---
 func _show_reachable_areas() -> void:
 	_clear_all_highlights()
-	if TurnManager.is_movement_locked() or TurnManager.players.is_empty():
-		return
-	var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
-	var start_coord: Vector3i = current_player.now_pos
-	var max_steps: int = current_player.maxMove
-	var available_energy: int = current_player.current_energy
-	available_energy += FoodManager.get_preview_movement_discount(current_player)
-	if not current_player.武术拳法已生效:
-		for card: 非遗牌 in ResourceManager.get_effective_feiyi_cards(current_player):
-			if card.category == 非遗牌.CardCategory.武术拳法:
-				available_energy += 1
-				break
-
-	var states: Array[Dictionary] = _search_path_states(start_coord, max_steps, available_energy, current_player)
-	for state: Dictionary in states:
-		var coord: Vector3i = state["position"]
-		if coord == start_coord or not _is_state_active(state, states):
-			continue
-		grid_map[coord].is_reachable = true
-	# 免费移动阶段可选择骰子步数内的任意合法格；畅行无阻额外开放骰子步数内的特殊地形终点。
-	if EventManager.has_free_move_this_phase(current_player) or EventManager.can_ignore_special_terrain_this_phase(current_player):
-		var step_queue: Array[Vector3i] = [start_coord]
-		var step_distance: Dictionary[Vector3i, int] = {start_coord: 0}
-		while not step_queue.is_empty():
-			var step_pos: Vector3i = step_queue.pop_front()
-			for mov: Vector3i in 常量.MOVE:
-				var candidate: Vector3i = step_pos + mov
-				if not grid_map.has(candidate) or step_distance.has(candidate):
-					continue
-				var distance: int = step_distance[step_pos] + 1
-				if distance > max_steps:
-					continue
-				step_distance[candidate] = distance
-				step_queue.append(candidate)
-				var candidate_section: MapSection = grid_map[candidate]
-				var free_target := EventManager.has_free_move_this_phase(current_player)
-				var special_target := EventManager.can_ignore_special_terrain_this_phase(current_player) and candidate_section.landform != MapSection.LandForm.平原
-				if (free_target or special_target) and not candidate_section.is_occupied and not candidate_section.is_reached:
-					candidate_section.is_reachable = true
-	if EventManager.is_scenery_banned(current_player):
-		for section: MapSection in grid_map.values():
-			if section.type == MapSection.SectionType.风景:
-				section.is_reachable = false
+	if TurnManager.players.is_empty(): return
+	for section: MapSection in query_moves(TurnManager.players[TurnManager.now_player_index]):
+		section.is_reachable = true
 
 func _clear_all_highlights() -> void:
 	for section:MapSection in grid_map.values():
@@ -254,26 +214,51 @@ func _on_section_clicked(target_section: MapSection) -> String:
 		
 	var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
 	
-	var start_coord: Vector3i = current_player.now_pos
-	var target_coord: Vector3i = target_section.location_index
-	
-	if target_coord == start_coord:
-		return "not necessary"
-		
-	var max_energy = current_player.current_energy
-	max_energy += FoodManager.get_preview_movement_discount(current_player)
-	if EventManager.has_free_move_this_phase(current_player) or (EventManager.can_ignore_special_terrain_this_phase(current_player) and target_section.landform != MapSection.LandForm.平原):
-		max_energy = 1 << 30
-	if not current_player.武术拳法已生效:
-		for card: 非遗牌 in ResourceManager.get_effective_feiyi_cards(current_player):
-			if card.category == 非遗牌.CardCategory.武术拳法:
-				max_energy += 1
-				break
-	
-	var path_result: Dictionary = _best_path(start_coord, target_coord, current_player.maxMove, max_energy, current_player)
+	if current_player.is_bot:
+		return "computer controlled"
+	return await execute_move(current_player, target_section)
+
+func query_move(player: PlayerClass, target: MapSection) -> Dictionary:
+	return query_moves(player).get(target, {})
+
+## One bounded path search serves both highlights and all controllers.
+func query_moves(player: PlayerClass) -> Dictionary:
+	var results: Dictionary = {}
+	if player == null or not player.alive or not TurnManager.GameOn or TurnManager.now_phase != TurnManager.TurnPhase.MOVING or TurnManager.is_movement_locked(): return results
+	if TurnManager.now_player_index < 0 or TurnManager.now_player_index >= TurnManager.players.size() or TurnManager.players[TurnManager.now_player_index] != player: return results
+	var discount := FoodManager.get_preview_movement_discount(player)
+	var martial := 0
+	if not player.武术拳法已生效:
+		for card: 非遗牌 in ResourceManager.get_effective_feiyi_cards(player):
+			if card.category == 非遗牌.CardCategory.武术拳法: martial = 1
+	var available := player.current_energy + discount + martial
+	if EventManager.has_free_move_this_phase(player) or EventManager.can_ignore_special_terrain_this_phase(player): available = 1 << 28
+	var states := _search_path_states(player.now_pos, player.maxMove, available, player)
+	for index: int in states.size():
+		var state: Dictionary = states[index]
+		if state.position == player.now_pos or not _is_state_active(state, states): continue
+		var target: MapSection = grid_map[state.position]
+		if target.type == MapSection.SectionType.风景 and EventManager.is_scenery_banned(player): continue
+		var adjusted := EventManager.adjust_movement_cost(player, maxi(0, int(state.cost) - martial), int(state.steps), target)
+		var energy := maxi(0, adjusted - discount)
+		if energy > player.current_energy: continue
+		var best: Dictionary = results.get(target, {})
+		if not best.is_empty() and (int(best.cost) < int(state.cost) or (int(best.cost) == int(state.cost) and int(best.steps) <= int(state.steps))): continue
+		var coordinates: Array[Vector3i] = []
+		var cursor := index
+		while cursor >= 0 and states[cursor].position != player.now_pos:
+			coordinates.append(states[cursor].position)
+			cursor = int(states[cursor].parent)
+		coordinates.reverse()
+		results[target] = {"coordinates": coordinates, "cost": int(state.cost), "steps": int(state.steps), "energy": energy}
+	return results
+
+func execute_move(current_player: PlayerClass, target_section: MapSection) -> String:
+	if TurnManager.modal_resolution_depth > 0 or not InteractionCoordinator.get_active_snapshot().is_empty(): return "not available"
+	var path_result := query_move(current_player, target_section)
 	if path_result.is_empty():
-		print("无法到达该目标！")
-		return "error"
+		return "not available"
+	var target_coord := target_section.location_index
 
 	var path_pixels: Array[Vector2] = []
 	for coordinate: Vector3i in path_result["coordinates"]:

@@ -66,6 +66,8 @@ func validate() -> PackedStringArray:
 		)
 		if player.control_kind != expected_kind:
 			errors.append("%s席位类型无效" % label)
+		if not AIProfile.is_valid(int(player.ai_difficulty)):
+			errors.append("%s电脑难度无效" % label)
 		if not player.has_valid_profession():
 			errors.append("%s还未选择职业" % label)
 		elif used_professions.has(player.profession_type):

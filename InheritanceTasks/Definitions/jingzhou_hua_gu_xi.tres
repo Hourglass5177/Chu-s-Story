@@ -1,19 +1,24 @@
-[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=5 format=3]
 [ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
 [ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/jingzhou_hua_gu_xi.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://bj01tcuiap85c" path="res://arts/非遗卡牌/仙桃/荆州花鼓戏.jpg" id="3"]
+[ext_resource type="Resource" path="res://InheritanceTasks/Charts/jingzhou_hua_gu_xi.tres" id="4"]
+[ext_resource type="Resource" path="res://InheritanceTasks/Art/Pixel/v3/resources/jingzhou_hua_gu_xi.tres" id="pixel_presentation"]
+
 [resource]
 script = ExtResource("1")
 task_id = &"jingzhou_hua_gu_xi"
-display_name = "一唱众和"
+display_name = "荆州花鼓戏"
 heritage_name = "荆州花鼓戏"
 region = "仙桃"
-hook = "在唱句之后按住接入帮腔，并在句尾松开。"
-instructions = PackedStringArray("等待帮腔时窗", "按住接入", "句尾松开")
-control_hint = "按住并松开鼠标左键、确认键或手柄主键"
-cultural_link = "玩家站在众和的位置，体验一唱众和而非独自炫技。"
-duration_seconds = 25.0
+hook = "看演员收手示意，接上短应和或长应和。"
+instructions = PackedStringArray("短声点一下；长声按住，收圈时松开。")
+control_hint = "Space 接声"
+cultural_link = "采用《站花墙》连续录音；操作声为独立反馈，不把未确认段落标为真实帮腔声部。"
+duration_seconds = 39
 task_scene = ExtResource("2")
 gallery_thumbnail = ExtResource("3")
-prototype_asset_note = "暂用对应国家级非遗牌正面。"
-future_asset_slot = "独立任务缩略图（640×400）。"
+prototype_asset_note = "独立像素场景、六博主主题装束与动作；当前美术版本见表现资源台账。"
+future_asset_slot = "保留现有构图与判定，后续替换精细美术。"
+music_chart = ExtResource("4")
+presentation = ExtResource("pixel_presentation")

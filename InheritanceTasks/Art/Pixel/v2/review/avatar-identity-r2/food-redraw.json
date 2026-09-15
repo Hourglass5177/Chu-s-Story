@@ -1,0 +1,41 @@
+{ "frames": [
+   {
+    "filename": "food-redraw.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 88, "h": 152 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 88, "h": 152 },
+    "sourceSize": { "w": 88, "h": 152 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.18.5-dev",
+  "image": "food-redraw-reopened.png",
+  "format": "I8",
+  "size": { "w": 88, "h": 152 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "short bob and picture-right tied hair", "opacity": 255, "blendMode": "normal" },
+   { "name": "pink bow on the original picture-right side", "opacity": 255, "blendMode": "normal" },
+   { "name": "bare lower legs and dark skirt / original proportions", "opacity": 255, "blendMode": "normal" },
+   { "name": "white-blue chef blouse / soft sleeve masses", "opacity": 255, "blendMode": "normal" },
+   { "name": "white rounded chef collar / small visible neck", "opacity": 255, "blendMode": "normal" },
+   { "name": "pink apron and side ties / heart motif from original", "opacity": 255, "blendMode": "normal" },
+   { "name": "spoon and grasping left hand", "opacity": 255, "blendMode": "normal" },
+   { "name": "supporting right hand under serving tray", "opacity": 255, "blendMode": "normal" },
+   { "name": "serving tray / distinct rim plane", "opacity": 255, "blendMode": "normal" },
+   { "name": "bread rolls / grouped crust and cut lines", "opacity": 255, "blendMode": "normal" },
+   { "name": "face / original round cheek and angled chin", "opacity": 255, "blendMode": "normal" },
+   { "name": "parted curved bangs / broad original brown locks", "opacity": 255, "blendMode": "normal" },
+   { "name": "pink-white chef toque / grouped soft folds", "opacity": 255, "blendMode": "normal" },
+   { "name": "wide warm anime eyes / playful original expression", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "food_original_outfit_identity", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 0, "w": 88, "h": 152 }, "pivot": {"x": 44, "y": 149 } }] }
+  ]
+ }
+}

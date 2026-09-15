@@ -1,0 +1,646 @@
+{
+  "schema_version": 1,
+  "asset_set": "chuwuzhi-generated-motion-r4",
+  "record_date": "2026-09-14",
+  "status": "P1 browser art and motion candidate; not user accepted; not integrated into Godot",
+  "production_method": "Direct image generation; no Aseprite drawing for this candidate. Browser-only slicing, green-matte cleanup and compositing leave source files unchanged.",
+  "assets": [
+    {
+      "file": "workshop-keyframe.png",
+      "bytes": 1855117,
+      "size_px": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "sha256": "568453c6c046926083941136ccdc0d75029318e1faa1ead115b8b65afc3700e0",
+      "native_alpha": false,
+      "effective_alpha_range": [
+        255,
+        255
+      ],
+      "background": "opaque_full_scene",
+      "status": "review_reference_only",
+      "generator": "built-in image_gen.imagegen",
+      "generated_source_path": "F:/Tools/OpenAI/CodexHome/generated_images/01a08252-f1c9-7c52-ab42-f49111f72612/exec-40b2342b-84d1-48f5-9810-ac01ec331ffc.png",
+      "generated_source_exists_at_validation": true,
+      "generated_source_hash_matches": true,
+      "prompt": {
+        "file": "prompt-keyframe.txt",
+        "sha256": "18816f3c2d30b812763ca42cbd154e491cec0835d5323ad28e8bb0d369814654",
+        "record_origin": "Exact text retained in root task summary; saved here without changing content."
+      },
+      "used_by_review_html": true,
+      "review_uses": [
+        "page generated original section"
+      ],
+      "lineage_note": "Two reference paths and exact prompt restored from the root task retained summary.",
+      "associated_preceding_outputs": [],
+      "reference_ids": [
+        "original_travel_blogger",
+        "generated_workshop_r2"
+      ]
+    },
+    {
+      "file": "pump-cycle-sheet.png",
+      "bytes": 2658287,
+      "size_px": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "sha256": "dbb3fb13feb84d9b9d89cad73b261d6668d49b19d38f37830f0c7e6c708d8d4d",
+      "native_alpha": false,
+      "effective_alpha_range": [
+        255,
+        255
+      ],
+      "background": "opaque_painted_checkerboard",
+      "status": "archived_failed_alpha",
+      "generator": "built-in image_gen.imagegen",
+      "generated_source_path": "F:/Tools/OpenAI/CodexHome/generated_images/01a08252-f1c9-7c52-ab42-f49111f72612/exec-661f78bc-d679-4a3b-8fcc-a6aaa7aa3b24.png",
+      "generated_source_exists_at_validation": true,
+      "generated_source_hash_matches": true,
+      "prompt": {
+        "file": "prompt-pump.txt",
+        "sha256": "ad4f0f2a9045397f9f845c931d0aee5c5346eda689314bfea2fdf10ca8d6ee9d"
+      },
+      "used_by_review_html": false,
+      "review_uses": [],
+      "lineage_note": "根据提示词、输出用途和会话摘要关联；除 keyframe 两个身份/环境参考外，工具调用 referenced_image_paths 参数待核对。不得把这里的关联当作已核验的直接输入关系。",
+      "associated_preceding_outputs": [
+        "workshop-keyframe.png"
+      ]
+    },
+    {
+      "file": "pump-cycle-alpha-attempt.png",
+      "bytes": 2237283,
+      "size_px": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "sha256": "a316681570c7cc35e96b5708ef8419759c1aba145f3a0903a1848f05f4a45f0b",
+      "native_alpha": false,
+      "effective_alpha_range": [
+        255,
+        255
+      ],
+      "background": "opaque_painted_checkerboard",
+      "status": "archived_failed_alpha",
+      "generator": "built-in image_gen.imagegen",
+      "generated_source_path": "F:/Tools/OpenAI/CodexHome/generated_images/01a08252-f1c9-7c52-ab42-f49111f72612/exec-1b396c71-2e6f-460a-ae21-edcef40384f4.png",
+      "generated_source_exists_at_validation": true,
+      "generated_source_hash_matches": true,
+      "prompt": {
+        "file": "prompt-alpha-attempt.txt",
+        "sha256": "e4b306500528c1c6f699736904eb492c312889e1fc1471bc30543b14ef1108aa"
+      },
+      "used_by_review_html": false,
+      "review_uses": [],
+      "lineage_note": "根据提示词、输出用途和会话摘要关联；除 keyframe 两个身份/环境参考外，工具调用 referenced_image_paths 参数待核对。不得把这里的关联当作已核验的直接输入关系。",
+      "associated_preceding_outputs": [
+        "pump-cycle-sheet.png"
+      ]
+    },
+    {
+      "file": "pump-cycle-matte.png",
+      "bytes": 1733197,
+      "size_px": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "sha256": "62bc6b439cc3adba93a8c671cdca085a036a8d30164622437429bc6c0c8be522",
+      "native_alpha": false,
+      "effective_alpha_range": [
+        255,
+        255
+      ],
+      "background": "opaque_green_matte",
+      "status": "review_fixed_box_source_only",
+      "generator": "built-in image_gen.imagegen",
+      "generated_source_path": "F:/Tools/OpenAI/CodexHome/generated_images/01a08252-f1c9-7c52-ab42-f49111f72612/exec-ee73efe4-27f1-49db-a7d9-d0ecfbc982ee.png",
+      "generated_source_exists_at_validation": true,
+      "generated_source_hash_matches": true,
+      "prompt": {
+        "file": "prompt-matte.txt",
+        "sha256": "d725358533aa2ebcde58132ad159607df86a55f679e728c098b8561290df8cdc"
+      },
+      "used_by_review_html": true,
+      "review_uses": [
+        "first cell fixed box crops",
+        "first cell rod texture crop"
+      ],
+      "lineage_note": "根据提示词、输出用途和会话摘要关联；除 keyframe 两个身份/环境参考外，工具调用 referenced_image_paths 参数待核对。不得把这里的关联当作已核验的直接输入关系。",
+      "associated_preceding_outputs": [
+        "pump-cycle-alpha-attempt.png"
+      ]
+    },
+    {
+      "file": "workshop-clean-plate.png",
+      "bytes": 1792420,
+      "size_px": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "sha256": "9562cb53755376fc7d8f067000622d0ee1a54c3a950794804afbf2af1c8191dc",
+      "native_alpha": false,
+      "effective_alpha_range": [
+        255,
+        255
+      ],
+      "background": "opaque_scene_clean_plate",
+      "status": "review_composited",
+      "generator": "built-in image_gen.imagegen",
+      "generated_source_path": "F:/Tools/OpenAI/CodexHome/generated_images/01a08252-f1c9-7c52-ab42-f49111f72612/exec-ffb61ea4-567a-4867-a378-f3870c02d1ea.png",
+      "generated_source_exists_at_validation": true,
+      "generated_source_hash_matches": true,
+      "prompt": {
+        "file": "prompt-clean-plate.txt",
+        "sha256": "4eed4df8a8aa268af4e217af809b3418622028b34fe021b07eef43453c522c53"
+      },
+      "used_by_review_html": true,
+      "review_uses": [
+        "background"
+      ],
+      "lineage_note": "根据提示词、输出用途和会话摘要关联；除 keyframe 两个身份/环境参考外，工具调用 referenced_image_paths 参数待核对。不得把这里的关联当作已核验的直接输入关系。",
+      "associated_preceding_outputs": [
+        "workshop-keyframe.png"
+      ]
+    },
+    {
+      "file": "fire-sheet.png",
+      "bytes": 873703,
+      "size_px": [
+        1448,
+        1086
+      ],
+      "mode": "RGB",
+      "sha256": "95653814efdc45bdb3d9c319649f401ff08fa46df60970e797d04a4524c3c301",
+      "native_alpha": false,
+      "effective_alpha_range": [
+        255,
+        255
+      ],
+      "background": "opaque_black_matte",
+      "status": "review_composited",
+      "generator": "built-in image_gen.imagegen",
+      "generated_source_path": "F:/Tools/OpenAI/CodexHome/generated_images/01a08252-f1c9-7c52-ab42-f49111f72612/exec-f5b84d74-a516-4fc6-9b05-03e847e7f0c7.png",
+      "generated_source_exists_at_validation": true,
+      "generated_source_hash_matches": true,
+      "prompt": {
+        "file": "prompt-fire.txt",
+        "sha256": "1c1c158da84d5db998c333a0af304ad918d25afda1984378e63326046ea5f3ba"
+      },
+      "used_by_review_html": true,
+      "review_uses": [
+        "screen blended fire"
+      ],
+      "lineage_note": "prompt-fire.txt mentions a provided cartoon pixel-art medicine workshop, but exact image reference arguments were not retained in this ledger. Reference filename is unconfirmed.",
+      "associated_preceding_outputs": []
+    },
+    {
+      "file": "character-handle-sheet.png",
+      "bytes": 1535583,
+      "size_px": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "sha256": "8d3e5733ff7073b0e7c6a1a34cf7c9d6254c2e6a3c9ace8c3099c92a7bd870f6",
+      "native_alpha": false,
+      "effective_alpha_range": [
+        255,
+        255
+      ],
+      "background": "opaque_green_matte",
+      "status": "review_composited",
+      "generator": "built-in image_gen.imagegen",
+      "generated_source_path": "F:/Tools/OpenAI/CodexHome/generated_images/01a08252-f1c9-7c52-ab42-f49111f72612/exec-123c40e5-9ce0-4f59-9123-216a1100e1b8.png",
+      "generated_source_exists_at_validation": true,
+      "generated_source_hash_matches": true,
+      "prompt": {
+        "file": "prompt-character-layer.txt",
+        "sha256": "877ccd7d020c4cae5e663db83ec4216646defe3bc1e252780522803ea5c114b8"
+      },
+      "used_by_review_html": true,
+      "review_uses": [
+        "8 frame actor and moving rod",
+        "identity comparison portrait"
+      ],
+      "lineage_note": "根据提示词、输出用途和会话摘要关联；除 keyframe 两个身份/环境参考外，工具调用 referenced_image_paths 参数待核对。不得把这里的关联当作已核验的直接输入关系。",
+      "associated_preceding_outputs": [
+        "pump-cycle-matte.png"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "id": "original_travel_blogger",
+      "path": "arts/素材合集/sprite及立绘/Sprite/角色/旅行博主.png",
+      "purpose": "strict identity reference for keyframe",
+      "exists": true,
+      "sha256": "45c7306def58aa427caf70258664028ef4d1b26c221150a445ef5d15abccf2df",
+      "size_px": [
+        1279,
+        1844
+      ]
+    },
+    {
+      "id": "generated_workshop_r2",
+      "path": "InheritanceTasks/Art/Pixel/v2/review/generated-workshop/workshop-source-r2.png",
+      "purpose": "setting/layout reference for keyframe; not historical equipment reconstruction",
+      "exists": true,
+      "sha256": "b42751b5d38647bdb9ef2ff57f480996b615c91715a0e70c2a77a81d4612beeb",
+      "size_px": [
+        1619,
+        971
+      ]
+    }
+  ],
+  "keyframe_reference_ids": [
+    "original_travel_blogger",
+    "generated_workshop_r2"
+  ],
+  "preview": {
+    "source_path": "tools/generated_art_review.html",
+    "source_sha256_at_snapshot": "a51d660bdbe5d0fe4083fe1b787285b70df8fd42ae30a7142ab9d3ed41a84781",
+    "page_paths": [
+      "artifacts/pixel-v2/review-r4/index.html",
+      "artifacts/pixel-v2/review-r2/index.html"
+    ],
+    "canvas_size_px": [
+      500,
+      300
+    ],
+    "real_game_rules_present": false,
+    "audio_present": false,
+    "avatar": "travel only",
+    "actor": {
+      "file": "character-handle-sheet.png",
+      "layout": [
+        4,
+        2
+      ],
+      "source_rects_current_html": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          443,
+          444
+        ],
+        [
+          887,
+          0,
+          444,
+          444
+        ],
+        [
+          1331,
+          0,
+          443,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          443
+        ],
+        [
+          444,
+          444,
+          443,
+          443
+        ],
+        [
+          887,
+          444,
+          444,
+          443
+        ],
+        [
+          1331,
+          444,
+          443,
+          443
+        ]
+      ],
+      "frame_durations_seconds": [
+        0.15,
+        0.13,
+        0.17,
+        0.12,
+        0.09,
+        0.1,
+        0.14,
+        0.16
+      ],
+      "frame_labels": [
+        "握杆",
+        "拉风",
+        "蓄力",
+        "准备压风",
+        "压风",
+        "送风",
+        "收稳",
+        "归位"
+      ],
+      "loop_seconds": 1.06,
+      "origin_canvas_px": [
+        90,
+        86
+      ],
+      "uniform_scale": 0.45,
+      "contact_clip_note": "At local y 247..278, clip rod at fixed x 316; candidate composite, not accepted rig anchors."
+    },
+    "fixed_bellows": {
+      "file": "pump-cycle-matte.png",
+      "source_cell": 0,
+      "source_crops_xywh": [
+        [
+          194,
+          232,
+          249,
+          18
+        ],
+        [
+          201,
+          250,
+          242,
+          28
+        ],
+        [
+          185,
+          278,
+          258,
+          149
+        ]
+      ],
+      "source_x_offset_px": 110,
+      "rod_texture_crop_xywh": [
+        76,
+        255,
+        15,
+        15
+      ],
+      "rod_start_local_x_by_frame": [
+        221,
+        221,
+        241,
+        244,
+        348,
+        363,
+        276,
+        240
+      ],
+      "fixed_entry_local_x": 316,
+      "reason": "Generated box housing and iron bands deform in frames 5/6; reuse one rigid frame and animate character/rod separately."
+    },
+    "fire": {
+      "file": "fire-sheet.png",
+      "blend": "screen",
+      "frame_duration_seconds": 0.105,
+      "phase_count": 4,
+      "rows": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "source_rects_by_row": [
+        [
+          [
+            41,
+            23,
+            280,
+            280
+          ],
+          [
+            403,
+            23,
+            280,
+            280
+          ],
+          [
+            765,
+            23,
+            280,
+            280
+          ],
+          [
+            1127,
+            23,
+            280,
+            280
+          ]
+        ],
+        [
+          [
+            41,
+            348,
+            280,
+            280
+          ],
+          [
+            403,
+            348,
+            280,
+            280
+          ],
+          [
+            765,
+            348,
+            280,
+            280
+          ],
+          [
+            1127,
+            348,
+            280,
+            280
+          ]
+        ],
+        [
+          [
+            41,
+            685,
+            280,
+            280
+          ],
+          [
+            403,
+            685,
+            280,
+            280
+          ],
+          [
+            765,
+            685,
+            280,
+            280
+          ],
+          [
+            1127,
+            685,
+            280,
+            280
+          ]
+        ]
+      ],
+      "anchor_local_px": [
+        140,
+        280
+      ],
+      "upper_draw_base_canvas_px": [
+        333,
+        209
+      ],
+      "upper_draw_width_px": 77,
+      "upper_clip_xywh": [
+        334,
+        142,
+        75,
+        67
+      ],
+      "lower_draw_base_canvas_px": [
+        356,
+        250
+      ],
+      "lower_scale": 0.13,
+      "lower_clip_xywh": [
+        357,
+        233,
+        35,
+        19
+      ],
+      "lower_phase_offset": 2,
+      "air_delay_seconds": 0.14,
+      "heat_attack_seconds": 0.2,
+      "heat_release_seconds": 0.55,
+      "timing_status": "Trial preview timing, not culture-verified or user-approved.",
+      "pot_occlusion_polygon_canvas_px": [
+        [
+          341,
+          174
+        ],
+        [
+          348,
+          173
+        ],
+        [
+          349,
+          166
+        ],
+        [
+          365,
+          161
+        ],
+        [
+          368,
+          156
+        ],
+        [
+          379,
+          156
+        ],
+        [
+          380,
+          161
+        ],
+        [
+          393,
+          165
+        ],
+        [
+          398,
+          169
+        ],
+        [
+          397,
+          173
+        ],
+        [
+          404,
+          174
+        ],
+        [
+          405,
+          181
+        ],
+        [
+          399,
+          186
+        ],
+        [
+          397,
+          193
+        ],
+        [
+          393,
+          200
+        ],
+        [
+          382,
+          203
+        ],
+        [
+          362,
+          202
+        ],
+        [
+          353,
+          199
+        ],
+        [
+          349,
+          191
+        ],
+        [
+          347,
+          185
+        ],
+        [
+          342,
+          183
+        ]
+      ],
+      "pot_occlusion_method": "After screen-blended flames, repaint clean plate inside this polygon to keep the opaque medicine pot in front of fire."
+    },
+    "matte": {
+      "files": [
+        "character-handle-sheet.png",
+        "pump-cycle-matte.png"
+      ],
+      "runtime_rule": "G > R + 18 and G > B + 18 => alpha 0; otherwise G > max(R,B)+4 => clamp green channel to max(R,B)+4",
+      "alpha_output": "offscreen canvas only, not saved production PNG",
+      "originals_modified": false
+    }
+  },
+  "validation": {
+    "file_existence_and_hashes": "validated while writing this ledger",
+    "png_mode_dimensions_alpha": "read from source PNGs",
+    "source_sheet_audit": "artifacts/pixel-v2/review-r4/generated-sheet-audit.json",
+    "normal_speed_playback": "tracked by parent review, not certified by this file ledger",
+    "godot_integration": "not done",
+    "user_acceptance": "not given"
+  },
+  "known_limitations": [
+    "Opaque RGB source images: first two alpha attempts contain painted checkerboard; green/black matte later versions are not true alpha.",
+    "Generated actor has foot position, clothing and limb differences between frames.",
+    "Generation dimensions 1774x887 do not divide evenly into 4x2, so current HTML crop widths/heights differ by one source pixel.",
+    "Independent generated clean plate is not an exact pixel subtraction pair of the keyframe.",
+    "Current rod extension/occlusion requires contact review at maximum compression.",
+    "One travel blogger candidate only; five other identities and all fifteen complete scenes not produced here.",
+    "500x300 browser composition is not proof of finalized native pixel density or production cleanup."
+  ],
+  "culture_note": "Dedicated medicinal preparation workshop. Furnace, vessel and box bellows are game art candidates, not a verified reconstruction of Xia-family alchemy equipment.",
+  "approval_note": "The pump prompt phrase approved visual seed is a generation instruction inherited from this attempt, not evidence of actual user approval."
+}

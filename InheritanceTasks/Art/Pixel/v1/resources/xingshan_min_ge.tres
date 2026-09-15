@@ -1,0 +1,203 @@
+[gd_resource type="Resource" script_class="HeritageTaskPresentation" format=3]
+
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_presentation.gd" id="1"]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_avatar_appearance.gd" id="2"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/background-0.png" id="bg"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/avatars.png" id="atlas"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Presentation/Stages/xingshan_min_ge_pixel.tscn" id="stage"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/covers/xingshan_min_ge.png" id="cover"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/identities/travel/portrait.png" id="portrait_travel"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/identities/life/portrait.png" id="portrait_life"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/identities/business/portrait.png" id="portrait_business"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/identities/food/portrait.png" id="portrait_food"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/identities/adventure/portrait.png" id="portrait_adventure"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/identities/magic/portrait.png" id="portrait_magic"]
+
+[sub_resource type="AtlasTexture" id="travel_0"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 0, 112, 160)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="travel_1"]
+atlas = ExtResource("atlas")
+region = Rect2(112, 0, 112, 160)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_travel"]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("travel_0")}], "loop": true, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_0")}], "loop": true, "name": &"prepare", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_1")}], "loop": true, "name": &"action", "speed": 7.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_1")}], "loop": true, "name": &"wave", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_1")}], "loop": true, "name": &"release", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_0")}], "loop": true, "name": &"miss", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_1")}], "loop": true, "name": &"recover", "speed": 1.0}]
+
+[sub_resource type="Resource" id="avatar_travel"]
+script = ExtResource("2")
+avatar_id = &"travel_blogger"
+costume_id = &"xingshan_min_ge"
+portrait = SubResource("travel_0")
+sprite_frames = SubResource("frames_travel")
+atlas = ExtResource("atlas")
+frame_size = Vector2i(112, 160)
+anchors = {&"feet": Vector2(56.0, 158)}
+reference_note = "依原角色制作的像素衍生；传统装束与互动动作是游戏化表现。"
+
+[sub_resource type="AtlasTexture" id="life_0"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 160, 112, 160)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="life_1"]
+atlas = ExtResource("atlas")
+region = Rect2(112, 160, 112, 160)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_life"]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("life_0")}], "loop": true, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_0")}], "loop": true, "name": &"prepare", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_1")}], "loop": true, "name": &"action", "speed": 7.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_1")}], "loop": true, "name": &"wave", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_1")}], "loop": true, "name": &"release", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_0")}], "loop": true, "name": &"miss", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_1")}], "loop": true, "name": &"recover", "speed": 1.0}]
+
+[sub_resource type="Resource" id="avatar_life"]
+script = ExtResource("2")
+avatar_id = &"life_blogger"
+costume_id = &"xingshan_min_ge"
+portrait = SubResource("life_0")
+sprite_frames = SubResource("frames_life")
+atlas = ExtResource("atlas")
+frame_size = Vector2i(112, 160)
+anchors = {&"feet": Vector2(56.0, 158)}
+reference_note = "依原角色制作的像素衍生；传统装束与互动动作是游戏化表现。"
+
+[sub_resource type="AtlasTexture" id="business_0"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 320, 112, 160)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="business_1"]
+atlas = ExtResource("atlas")
+region = Rect2(112, 320, 112, 160)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_business"]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("business_0")}], "loop": true, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_0")}], "loop": true, "name": &"prepare", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_1")}], "loop": true, "name": &"action", "speed": 7.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_1")}], "loop": true, "name": &"wave", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_1")}], "loop": true, "name": &"release", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_0")}], "loop": true, "name": &"miss", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_1")}], "loop": true, "name": &"recover", "speed": 1.0}]
+
+[sub_resource type="Resource" id="avatar_business"]
+script = ExtResource("2")
+avatar_id = &"business_blogger"
+costume_id = &"xingshan_min_ge"
+portrait = SubResource("business_0")
+sprite_frames = SubResource("frames_business")
+atlas = ExtResource("atlas")
+frame_size = Vector2i(112, 160)
+anchors = {&"feet": Vector2(56.0, 158)}
+reference_note = "依原角色制作的像素衍生；传统装束与互动动作是游戏化表现。"
+
+[sub_resource type="AtlasTexture" id="food_0"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 480, 112, 160)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="food_1"]
+atlas = ExtResource("atlas")
+region = Rect2(112, 480, 112, 160)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_food"]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("food_0")}], "loop": true, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_0")}], "loop": true, "name": &"prepare", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_1")}], "loop": true, "name": &"action", "speed": 7.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_1")}], "loop": true, "name": &"wave", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_1")}], "loop": true, "name": &"release", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_0")}], "loop": true, "name": &"miss", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_1")}], "loop": true, "name": &"recover", "speed": 1.0}]
+
+[sub_resource type="Resource" id="avatar_food"]
+script = ExtResource("2")
+avatar_id = &"food_blogger"
+costume_id = &"xingshan_min_ge"
+portrait = SubResource("food_0")
+sprite_frames = SubResource("frames_food")
+atlas = ExtResource("atlas")
+frame_size = Vector2i(112, 160)
+anchors = {&"feet": Vector2(56.0, 158)}
+reference_note = "依原角色制作的像素衍生；传统装束与互动动作是游戏化表现。"
+
+[sub_resource type="AtlasTexture" id="adventure_0"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 640, 112, 160)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="adventure_1"]
+atlas = ExtResource("atlas")
+region = Rect2(112, 640, 112, 160)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_adventure"]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("adventure_0")}], "loop": true, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_0")}], "loop": true, "name": &"prepare", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_1")}], "loop": true, "name": &"action", "speed": 7.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_1")}], "loop": true, "name": &"wave", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_1")}], "loop": true, "name": &"release", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_0")}], "loop": true, "name": &"miss", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_1")}], "loop": true, "name": &"recover", "speed": 1.0}]
+
+[sub_resource type="Resource" id="avatar_adventure"]
+script = ExtResource("2")
+avatar_id = &"adventure_blogger"
+costume_id = &"xingshan_min_ge"
+portrait = SubResource("adventure_0")
+sprite_frames = SubResource("frames_adventure")
+atlas = ExtResource("atlas")
+frame_size = Vector2i(112, 160)
+anchors = {&"feet": Vector2(56.0, 158)}
+reference_note = "依原角色制作的像素衍生；传统装束与互动动作是游戏化表现。"
+
+[sub_resource type="AtlasTexture" id="magic_0"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 800, 112, 160)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="magic_1"]
+atlas = ExtResource("atlas")
+region = Rect2(112, 800, 112, 160)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_magic"]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("magic_0")}], "loop": true, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_0")}], "loop": true, "name": &"prepare", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_1")}], "loop": true, "name": &"action", "speed": 7.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_1")}], "loop": true, "name": &"wave", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_1")}], "loop": true, "name": &"release", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_0")}], "loop": true, "name": &"miss", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_1")}], "loop": true, "name": &"recover", "speed": 1.0}]
+
+[sub_resource type="Resource" id="avatar_magic"]
+script = ExtResource("2")
+avatar_id = &"magic_blogger"
+costume_id = &"xingshan_min_ge"
+portrait = SubResource("magic_0")
+sprite_frames = SubResource("frames_magic")
+atlas = ExtResource("atlas")
+frame_size = Vector2i(112, 160)
+anchors = {&"feet": Vector2(56.0, 158)}
+reference_note = "依原角色制作的像素衍生；传统装束与互动动作是游戏化表现。"
+
+[resource]
+script = ExtResource("1")
+background = ExtResource("bg")
+cover = ExtResource("cover")
+avatar_appearances = {&"travel_blogger": SubResource("avatar_travel"), &"life_blogger": SubResource("avatar_life"), &"business_blogger": SubResource("avatar_business"), &"food_blogger": SubResource("avatar_food"), &"adventure_blogger": SubResource("avatar_adventure"), &"magic_blogger": SubResource("avatar_magic")}
+properties = {"painter": "motion_xingshan_min_ge", "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/motion-art-generation-log.json", "review_status": "normalized_pending_engine_review", "cultural_note": "依博主身份制作的新绘像素衍生，动作不代表传统表演转录。"}
+source_manifest_path = "res://InheritanceTasks/Art/Pixel/v1/presentation-manifest.json"
+stage_scene = ExtResource("stage")

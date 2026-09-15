@@ -21,8 +21,14 @@ var _modal_turn_epoch: int = -1
 var _event_request: EventChoiceRequest = null
 var _event_cards: Array[非遗牌] = []
 var _event_selected_cards: Array[非遗牌] = []
+var _preview_image: TextureRect
+var _preview_name: Label
+var _preview_effect: Label
+var _preview_card: 非遗牌
 
 func _ready() -> void:
+	_build_selected_preview()
+	call_deferred("_install_board_ui")
 	buy_tab.pressed.connect(_show_buy_page)
 	sell_tab.pressed.connect(_show_sell_page)
 	guide_button.pressed.connect(_open_guide)
@@ -32,6 +38,47 @@ func _ready() -> void:
 	EventManager.interaction_finished.connect(_on_event_interaction_finished)
 	set_process(false)
 	hide()
+
+func _build_selected_preview() -> void:
+	var panel := PanelContainer.new()
+	panel.name = "SelectedPreview"
+	panel.add_theme_stylebox_override("panel", MainUI.box("detail_card_frame", 40))
+	add_child(panel)
+	var column := VBoxContainer.new()
+	column.add_theme_constant_override("separation", 18)
+	panel.add_child(column)
+	_preview_name = Label.new()
+	MainUI.label(_preview_name, 46, true)
+	_preview_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_preview_name.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	column.add_child(_preview_name)
+	_preview_image = TextureRect.new()
+	_preview_image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_preview_image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_preview_image.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_preview_image.custom_minimum_size = Vector2(0, 420)
+	column.add_child(_preview_image)
+	_preview_effect = Label.new()
+	MainUI.label(_preview_effect, 36)
+	_preview_effect.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_preview_effect.max_lines_visible = 3
+	_preview_effect.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	column.add_child(_preview_effect)
+	var details := Button.new()
+	details.text = "查看详情"
+	MainUI.button(details, "secondary")
+	details.custom_minimum_size = Vector2(390, 112)
+	details.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	details.pressed.connect(func():
+		if _preview_card != null and hud != null: hud.detail_panel.show_detail(_preview_card, current_player))
+	column.add_child(details)
+
+func _select_preview(card: 非遗牌) -> void:
+	_preview_card = card
+	_preview_image.texture = card.image_of_front if card != null else null
+	_preview_name.text = card.card_name if card != null else "藏品预览"
+	_preview_effect.text = card.description if card != null else "从右侧选择藏品，查看牌面与详情。"
+	_preview_effect.tooltip_text = _preview_effect.text
 
 
 func _open_guide() -> void:
@@ -174,6 +221,7 @@ func _refresh() -> void:
 		cards.assign(_event_cards)
 	else:
 		cards = MarketManager.get_inventory() if _showing_buy else MarketManager.get_tradable_cards(current_player)
+	_select_preview(_preview_card if cards.has(_preview_card) else (cards[0] if not cards.is_empty() else null))
 	if cards.is_empty():
 		var empty_label := Label.new()
 		empty_label.text = "暂无藏品" if _event_request != null or _showing_buy else "暂无可出售非遗牌"
@@ -209,8 +257,14 @@ func _create_card_item(card: 非遗牌) -> void:
 	image_button.ignore_texture_size = true
 	image_button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
 	image_button.tooltip_text = card.card_name
-	image_button.pressed.connect(_show_card_detail.bind(card))
+	image_button.pressed.connect(_select_preview.bind(card))
 	item.add_child(image_button)
+	var name_label := Label.new()
+	name_label.text = card.card_name
+	name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	MainUI.label(name_label, 38)
+	item.add_child(name_label)
 	var action_button := Button.new()
 	action_button.custom_minimum_size = Vector2(300, 62)
 	action_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
@@ -239,14 +293,7 @@ func _create_card_item(card: 非遗牌) -> void:
 	card_grid.add_child(item)
 
 func _style_action_button(button: Button) -> void:
-	button.add_theme_color_override("font_color", Color("5a3325"))
-	button.add_theme_color_override("font_hover_color", Color("5a3325"))
-	button.add_theme_color_override("font_pressed_color", Color("fff1cf"))
-	button.add_theme_color_override("font_disabled_color", Color("8d816e"))
-	button.add_theme_stylebox_override("normal", _button_style(Color("f2cf8c"), Color("7b3e27")))
-	button.add_theme_stylebox_override("hover", _button_style(Color("f8dea8"), Color("7b3e27")))
-	button.add_theme_stylebox_override("pressed", _button_style(Color("b65d38"), Color("67301f")))
-	button.add_theme_stylebox_override("disabled", _button_style(Color("d5c8aa"), Color("9d8c6b")))
+	MainUI.button(button)
 
 func _button_style(background: Color, border: Color) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
@@ -341,3 +388,6 @@ func _reset_event_mode() -> void:
 	if close_button != null:
 		close_button.show()
 		close_button.disabled = false
+
+func _install_board_ui() -> void:
+	BoardPanelLayout.install(self, "market", close_market)

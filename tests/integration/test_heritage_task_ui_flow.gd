@@ -154,6 +154,9 @@ func test_attempt_double_press_technical_rollback_result_and_modal_round_trip() 
 
 	var active_task := host.get_active_task()
 	assert_not_null(active_task)
+	assert_eq(active_task.run_state, HeritageTaskBase.RunState.IDLE)
+	assert_true(host.prepare_panel.visible)
+	host.start_from_preparation()
 	assert_same(
 		_viewport.gui_get_focus_owner(),
 		active_task,
@@ -237,6 +240,7 @@ func test_preparation_failure_does_not_emit_entry_or_unlock_minigame() -> void:
 	var context := HeritageTaskRunContext.new(definition.task_id)
 	host.configure(definition, context)
 	host.begin()
+	host.start_from_preparation()
 
 	assert_signal_emitted(host, "task_finished")
 	assert_signal_not_emitted(host, "task_entered")
@@ -262,11 +266,16 @@ func test_success_failure_and_manual_exit_all_unlock_after_real_entry() -> void:
 		context.forced_outcome = int(case_data[&"outcome"])
 		host.configure(definition, context)
 		host.begin()
+		host.start_from_preparation()
 		assert_signal_emitted(host, "task_entered", "%s 应在真正进入后公开" % task_id)
 		assert_true(DiscoveryManager.is_discovered(DiscoveryManager.KIND_MINIGAME, task_id))
 		await get_tree().process_frame
 		assert_signal_emitted(host, "task_finished", "%s 应正常保留结算结果" % task_id)
-		assert_true((host.get_node("ResultPanel") as Control).visible)
+		if int(case_data[&"outcome"]) == HeritageTaskResult.Status.MANUAL_ABORT:
+			assert_false((host.get_node("ResultPanel") as Control).visible)
+			assert_signal_emit_count(host, "return_requested", 1)
+		else:
+			assert_true((host.get_node("ResultPanel") as Control).visible)
 
 
 func test_task_host_and_huangmei_media_fit_supported_desktop_viewports() -> void:

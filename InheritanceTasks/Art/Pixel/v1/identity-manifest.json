@@ -1,0 +1,110 @@
+[
+  {
+    "id": "travel",
+    "source": "InheritanceTasks\\Art\\Pixel\\v1\\source\\identity-travel.png",
+    "source_sha256": "b332e2e7fb168d9d7020c00299ef8b43150008d1577060eb36ff3186ac755add",
+    "body_frame_size": [
+      112,
+      160
+    ],
+    "face_frame_size": [
+      80,
+      80
+    ],
+    "anchor": [
+      56,
+      156
+    ],
+    "status": "normalized_pending_engine_review"
+  },
+  {
+    "id": "life",
+    "source": "InheritanceTasks\\Art\\Pixel\\v1\\source\\identity-life.png",
+    "source_sha256": "46bb06ad22bc07edc60bd147936630c0ecb34193a700baa40ea8048b68a5b526",
+    "body_frame_size": [
+      112,
+      160
+    ],
+    "face_frame_size": [
+      80,
+      80
+    ],
+    "anchor": [
+      56,
+      156
+    ],
+    "status": "normalized_pending_engine_review"
+  },
+  {
+    "id": "business",
+    "source": "InheritanceTasks\\Art\\Pixel\\v1\\source\\identity-business.png",
+    "source_sha256": "391ada57a539c62522d666146e5274a6bd6afbb836a9db44554a250a1881496b",
+    "body_frame_size": [
+      112,
+      160
+    ],
+    "face_frame_size": [
+      80,
+      80
+    ],
+    "anchor": [
+      56,
+      156
+    ],
+    "status": "normalized_pending_engine_review"
+  },
+  {
+    "id": "food",
+    "source": "InheritanceTasks\\Art\\Pixel\\v1\\source\\identity-food.png",
+    "source_sha256": "679daaca9c4b3fcb0c375c4b3e91d6b350500eda38cd019f911678f12fe88354",
+    "body_frame_size": [
+      112,
+      160
+    ],
+    "face_frame_size": [
+      80,
+      80
+    ],
+    "anchor": [
+      56,
+      156
+    ],
+    "status": "normalized_pending_engine_review"
+  },
+  {
+    "id": "adventure",
+    "source": "InheritanceTasks\\Art\\Pixel\\v1\\source\\identity-adventure.png",
+    "source_sha256": "6b011007602fdae88102c09a434e6fd2cb3b25cec61676aa927eec69de69a7be",
+    "body_frame_size": [
+      112,
+      160
+    ],
+    "face_frame_size": [
+      80,
+      80
+    ],
+    "anchor": [
+      56,
+      156
+    ],
+    "status": "normalized_pending_engine_review"
+  },
+  {
+    "id": "magic",
+    "source": "InheritanceTasks\\Art\\Pixel\\v1\\source\\identity-magic.png",
+    "source_sha256": "c59ef2daefb4618cc381038cdbee62b45f623fb8ee2a08aefbacc87215263507",
+    "body_frame_size": [
+      112,
+      160
+    ],
+    "face_frame_size": [
+      80,
+      80
+    ],
+    "anchor": [
+      56,
+      156
+    ],
+    "status": "normalized_pending_engine_review"
+  }
+]

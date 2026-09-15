@@ -1,0 +1,63 @@
+[
+  {
+    "id": "life",
+    "source": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-30120bfd-5153-4614-9b6d-4e61c193b7b7.png",
+    "prompt_file": "life-prompt.txt",
+    "references": [
+      "arts/素材合集/sprite及立绘/Sprite/角色/生活博主.png",
+      "InheritanceTasks/Art/Pixel/v2/review/generated-motion-r4/character-handle-sheet.png"
+    ],
+    "generator": "built-in image_gen.imagegen"
+  },
+  {
+    "id": "business",
+    "source": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-78430321-b346-4b5e-aab3-98491fb9c80a.png",
+    "prompt_file": "business-prompt.txt",
+    "references": [
+      "arts/素材合集/sprite及立绘/Sprite/角色/商业博主.png",
+      "InheritanceTasks/Art/Pixel/v2/review/generated-motion-r4/character-handle-sheet.png"
+    ],
+    "generator": "built-in image_gen.imagegen"
+  },
+  {
+    "id": "food",
+    "source": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-e5d30a5b-64f2-4363-b2c8-61c1b6808ba6.png",
+    "prompt_file": "food-prompt.txt",
+    "references": [
+      "arts/素材合集/sprite及立绘/Sprite/角色/美食博主.png",
+      "InheritanceTasks/Art/Pixel/v2/review/generated-motion-r4/character-handle-sheet.png"
+    ],
+    "generator": "built-in image_gen.imagegen"
+  },
+  {
+    "id": "adventure",
+    "source": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-3e61501b-ff63-48e3-a3bd-f14044308da1.png",
+    "prompt_file": "adventure-prompt.txt",
+    "references": [
+      "arts/素材合集/sprite及立绘/Sprite/角色/探险博主.png",
+      "InheritanceTasks/Art/Pixel/v2/review/generated-motion-r4/character-handle-sheet.png"
+    ],
+    "generator": "built-in image_gen.imagegen"
+  },
+  {
+    "id": "magic",
+    "source": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-aabede55-f4fd-47b1-84ec-fe25cd3452ed.png",
+    "prompt_file": "magic-prompt.txt",
+    "references": [
+      "arts/素材合集/sprite及立绘/Sprite/角色/魔术博主.png",
+      "InheritanceTasks/Art/Pixel/v2/review/generated-motion-r4/character-handle-sheet.png"
+    ],
+    "generator": "built-in image_gen.imagegen"
+  },
+  {
+    "id": "food-r2",
+    "source": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-ad7f3de9-5109-44db-bc55-bbc585b34a5d.png",
+    "prompt_file": "food-pump-r2-prompt.txt",
+    "references": [
+      "food-pump.png",
+      "arts/素材合集/sprite及立绘/Sprite/角色/美食博主.png"
+    ],
+    "generator": "built-in image_gen.imagegen",
+    "correction": "side knot and bow moved to viewer-right; all other pose content preserved"
+  }
+]

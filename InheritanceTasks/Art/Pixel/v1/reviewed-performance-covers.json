@@ -1,0 +1,161 @@
+{
+  "date": "2026-09-13",
+  "method": "existing runtime layer composition; not an engine capture or gameplay proof",
+  "size": [
+    500,
+    300
+  ],
+  "new_art_generated": false,
+  "covers": [
+    {
+      "task_id": "huangmei_xi",
+      "reviewed_source": "InheritanceTasks/Art/Pixel/v1/runtime/cover-source/huangmei_xi.png",
+      "cover": "InheritanceTasks/Art/Pixel/v1/runtime/covers/huangmei_xi.png",
+      "background": "InheritanceTasks/Art/Pixel/v1/runtime/craft/huangmei_xi-open.png",
+      "layers": [
+        {
+          "source": "InheritanceTasks/Art/Pixel/v1/runtime/craft/huangmei_xi-avatars.png",
+          "column": 2,
+          "row": 0,
+          "frame_size": [
+            128,
+            128
+          ],
+          "rect": [
+            134,
+            14,
+            232,
+            232
+          ]
+        }
+      ],
+      "reason": "Open-stage background plus complete singing pose; the old opening capture showed an empty stage.",
+      "sha256": "7b25b69dc557e6dc36f9b6bac7763864563138a773adb21b74fc6861684813f8"
+    },
+    {
+      "task_id": "tianmen_tang_su",
+      "reviewed_source": "InheritanceTasks/Art/Pixel/v1/runtime/cover-source/tianmen_tang_su.png",
+      "cover": "InheritanceTasks/Art/Pixel/v1/runtime/covers/tianmen_tang_su.png",
+      "background": "InheritanceTasks/Art/Pixel/v1/runtime/craft/tianmen_tang_su-background.png",
+      "layers": [
+        {
+          "source": "InheritanceTasks/Art/Pixel/v1/runtime/craft/tianmen_tang_su-avatars.png",
+          "column": 2,
+          "row": 0,
+          "frame_size": [
+            128,
+            128
+          ],
+          "rect": [
+            20,
+            52,
+            232,
+            232
+          ]
+        },
+        {
+          "source": "InheritanceTasks/Art/Pixel/v1/runtime/craft/tianmen_tang_su-bubbles.png",
+          "column": 2,
+          "row": 0,
+          "frame_size": [
+            160,
+            160
+          ],
+          "rect": [
+            228,
+            103,
+            160,
+            160
+          ]
+        }
+      ],
+      "reason": "Inflated amber membrane visibly meets the existing blowing tube; cover composition only, no radius rule change.",
+      "sha256": "aa3334c453346de52ce1f7013e6cba86ecb96e1c70607bcd3b8c27fe2a285b26"
+    },
+    {
+      "task_id": "han_ju",
+      "reviewed_source": "InheritanceTasks/Art/Pixel/v1/runtime/cover-source/han_ju.png",
+      "cover": "InheritanceTasks/Art/Pixel/v1/runtime/covers/han_ju.png",
+      "background": "InheritanceTasks/Art/Pixel/v1/runtime/han_ju-background.png",
+      "layers": [
+        {
+          "source": "InheritanceTasks/Art/Pixel/v1/runtime/music-npcs.png",
+          "column": 4,
+          "row": 5,
+          "frame_size": [
+            128,
+            128
+          ],
+          "rect": [
+            286,
+            79,
+            132,
+            132
+          ]
+        },
+        {
+          "source": "InheritanceTasks/Art/Pixel/v1/runtime/han_ju-avatars.png",
+          "column": 2,
+          "row": 0,
+          "frame_size": [
+            128,
+            128
+          ],
+          "rect": [
+            10,
+            158,
+            142,
+            142
+          ]
+        }
+      ],
+      "reason": "Right-facing lamp barrel and tripod fully visible, pointing toward an actor on the right stage.",
+      "sha256": "d8f991cb1d71b58ff782328b284e20b4b07e69b4862328db9f981067f30755f8"
+    },
+    {
+      "task_id": "ti_qin_xi",
+      "reviewed_source": "InheritanceTasks/Art/Pixel/v1/runtime/cover-source/ti_qin_xi.png",
+      "cover": "InheritanceTasks/Art/Pixel/v1/runtime/covers/ti_qin_xi.png",
+      "background": "InheritanceTasks/Art/Pixel/v1/runtime/ti_qin_xi-background.png",
+      "layers": [
+        {
+          "source": "InheritanceTasks/Art/Pixel/v1/runtime/music-npcs.png",
+          "column": 2,
+          "row": 6,
+          "frame_size": [
+            128,
+            128
+          ],
+          "rect": [
+            65,
+            16,
+            89,
+            89
+          ]
+        },
+        {
+          "source": "InheritanceTasks/Art/Pixel/v1/runtime/ti_qin_xi-avatars.png",
+          "column": 7,
+          "row": 0,
+          "frame_size": [
+            128,
+            128
+          ],
+          "rect": [
+            156,
+            54,
+            243,
+            243
+          ]
+        }
+      ],
+      "reason": "The right long-bow pose makes the full bow, gripping hands, upright neck and cylinder at waist legible.",
+      "sha256": "3b1b38f10bec303a2f33f8aa1b4c483e5768926fc79f40b5e9b361f3123b5897"
+    }
+  ],
+  "retained_music_covers": {
+    "laohekou_si_xian": "Three musicians, full long-neck sanxian, resonator and hands already visible.",
+    "tujia_saye_erhe": "Leader/player feet, same-facing formation and drum already visible without clipping.",
+    "jingzhou_hua_gu_xi": "Lead actress on flower-wall stage and participant are both complete and visually distinct."
+  }
+}

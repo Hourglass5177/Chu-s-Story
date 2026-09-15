@@ -1,0 +1,629 @@
+[
+  {
+    "task_id": "xia_lian_dan_shu",
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/xia_lian_dan_shu_pixel.tscn",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/workshop-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/workshop-avatars.png",
+    "frame_size": [
+      128,
+      128
+    ],
+    "properties": {
+      "painter": "furnace",
+      "success_hint": "25秒结束时，炼制进度达到七成。",
+      "art_status": "六身份引擎状态已采样；新画面待用户验收"
+    },
+    "cover": "res://InheritanceTasks/Art/Pixel/v1/runtime/covers/xia_lian_dan_shu.png"
+  },
+  {
+    "task_id": "xiabaoping_minjian_gushi",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/story/background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/story/avatars.png",
+    "frame_size": [
+      128,
+      128
+    ],
+    "story_panels": [
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-1-pose-1.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-2-pose-1.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-3-pose-1.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-4-pose-3.png"
+    ],
+    "story_thumbnails": [
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/card-1.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/card-2.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/card-3.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/card-4.png"
+    ],
+    "properties": {
+      "painter": "story",
+      "success_hint": "看完四幕，在30秒内按故事顺序排好；第一次排错可调整后再提交。",
+      "art_status": "六身份引擎状态已采样；新画面待用户验收"
+    },
+    "story_animation": [
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-1-pose-1.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-1-pose-2.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-1-pose-3.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-2-pose-1.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-2-pose-2.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-2-pose-3.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-3-pose-1.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-3-pose-2.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-3-pose-3.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-4-pose-1.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-4-pose-2.png",
+      "res://InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-4-pose-3.png"
+    ],
+    "cover": "res://InheritanceTasks/Art/Pixel/v1/runtime/covers/xiabaoping_minjian_gushi.png"
+  },
+  {
+    "task_id": "tianmen_tang_su",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/tianmen_tang_su-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/tianmen_tang_su-avatars.png",
+    "frame_size": [
+      128,
+      128
+    ],
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/tianmen_tang_su_pixel.tscn",
+    "properties": {
+      "success_hint": "三次吹塑中，至少两次停在目标范围。",
+      "bubble_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/tianmen_tang_su-bubbles.png",
+      "art_status": "六身份引擎状态已采样；新画面待用户验收",
+      "cultural_note": "余胀和非线性增长为游戏机制，不是真实工艺参数。"
+    },
+    "cover": "res://InheritanceTasks/Art/Pixel/v1/runtime/covers/tianmen_tang_su.png"
+  },
+  {
+    "task_id": "gu_pen_ge",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/gu_pen_ge-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/gu_pen_ge-avatars.png",
+    "frame_size": [
+      128,
+      128
+    ],
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/gu_pen_ge_pixel.tscn",
+    "properties": {
+      "success_hint": "听清师傅的停顿，三轮中接好两轮。",
+      "teacher_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/gu_pen_ge-teacher.png",
+      "art_status": "六身份引擎状态已采样；新画面待用户验收；鼓板形制及原声待补",
+      "cultural_note": "明亮传习场景为新绘游戏表现；鼓板形制与握法待实拍核对。当前交互短音为合成反馈，非鼓盆歌录音。"
+    },
+    "cover": "res://InheritanceTasks/Art/Pixel/v1/runtime/covers/gu_pen_ge.png"
+  },
+  {
+    "task_id": "ezhou_diaohua_jianzhi",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/ezhou_diaohua_jianzhi-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/ezhou_diaohua_jianzhi-avatars.png",
+    "frame_size": [
+      128,
+      128
+    ],
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/ezhou_diaohua_jianzhi_pixel.tscn",
+    "properties": {
+      "success_hint": "从起点沿刻线完成最后一道边缘，少量偏离可以补救。",
+      "hands_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/ezhou_diaohua_jianzhi-hands.png",
+      "motif": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/ezhou_diaohua_jianzhi-artwork.png",
+      "art_status": "六身份引擎状态已采样；新画面待用户验收；刻制手势与蜡盘待核对",
+      "cultural_note": "双鸟花枝为原创镂空花样；现有路线构成成品上缘。"
+    },
+    "cover": "res://InheritanceTasks/Art/Pixel/v1/runtime/covers/ezhou_diaohua_jianzhi.png"
+  },
+  {
+    "task_id": "huangmei_xi",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/huangmei_xi-open.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/huangmei_xi-avatars.png",
+    "frame_size": [
+      128,
+      128
+    ],
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/huangmei_xi_pixel.tscn",
+    "properties": {
+      "success_hint": "两句均有效发声；综合至少60分，每句至少45分。",
+      "closed_curtain": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/huangmei_xi-closed.png",
+      "art_status": "六身份引擎状态已采样；新画面待用户验收；本次未录麦克风",
+      "cultural_note": "像素博主为《女驸马》主题角色扮演，口部动作不是实时音准反馈。"
+    },
+    "cover": "res://InheritanceTasks/Art/Pixel/v1/runtime/covers/huangmei_xi.png"
+  },
+  {
+    "task_id": "yandi_shennong_chuanshuo",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/background-0.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/avatars.png",
+    "columns": 10,
+    "frame_size": [
+      48,
+      64
+    ],
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/yandi_shennong_chuanshuo_pixel.tscn",
+    "actions": {
+      "ready": [
+        0
+      ],
+      "idle": [
+        0
+      ],
+      "prepare": [
+        0
+      ],
+      "run": [
+        1,
+        2
+      ],
+      "action": [
+        1,
+        2
+      ],
+      "jump_short": [
+        3
+      ],
+      "jump_long": [
+        4
+      ],
+      "fall": [
+        5
+      ],
+      "land": [
+        6
+      ],
+      "miss": [
+        7
+      ],
+      "recover": [
+        8
+      ],
+      "gather": [
+        9
+      ]
+    },
+    "animation_speeds": {
+      "run": 8,
+      "push": 7,
+      "action": 7
+    },
+    "properties": {
+      "painter": "motion_yandi_shennong_chuanshuo",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/motion-art-generation-log.json",
+      "review_status": "normalized_pending_engine_review",
+      "cultural_note": "依博主身份制作的新绘像素衍生，动作不代表传统表演转录。",
+      "art_status": "六身份引擎状态已采样；新画面待用户验收"
+    },
+    "cover": "res://InheritanceTasks/Art/Pixel/v1/runtime/covers/yandi_shennong_chuanshuo.png"
+  },
+  {
+    "task_id": "dong_yong_chuanshuo",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/background-0.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/avatars.png",
+    "columns": 8,
+    "frame_size": [
+      128,
+      160
+    ],
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/dong_yong_chuanshuo_pixel.tscn",
+    "actions": {
+      "ready": [
+        0
+      ],
+      "idle": [
+        0
+      ],
+      "prepare": [
+        1
+      ],
+      "push": [
+        1,
+        2
+      ],
+      "action": [
+        1,
+        2
+      ],
+      "push_uphill": [
+        2
+      ],
+      "coast": [
+        3
+      ],
+      "release": [
+        3
+      ],
+      "brake": [
+        4
+      ],
+      "stop": [
+        5
+      ],
+      "steady": [
+        5
+      ],
+      "miss": [
+        5
+      ],
+      "recover": [
+        6
+      ],
+      "arrive": [
+        7
+      ]
+    },
+    "animation_speeds": {
+      "run": 8,
+      "push": 7,
+      "action": 7
+    },
+    "properties": {
+      "painter": "motion_dong_yong_chuanshuo",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/motion-art-generation-log.json",
+      "review_status": "normalized_pending_engine_review",
+      "cultural_note": "古装推车体验，木车为游戏化简化。",
+      "art_status": "六身份引擎状态已采样；新画面待用户验收"
+    },
+    "cover": "res://InheritanceTasks/Art/Pixel/v1/runtime/covers/dong_yong_chuanshuo.png"
+  },
+  {
+    "task_id": "xingshan_min_ge",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/background-0.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/avatars.png",
+    "columns": 2,
+    "frame_size": [
+      112,
+      160
+    ],
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/xingshan_min_ge_pixel.tscn",
+    "actions": {
+      "ready": [
+        0
+      ],
+      "prepare": [
+        0
+      ],
+      "action": [
+        1
+      ],
+      "wave": [
+        1
+      ],
+      "release": [
+        1
+      ],
+      "miss": [
+        0
+      ],
+      "recover": [
+        1
+      ]
+    },
+    "animation_speeds": {
+      "run": 8,
+      "push": 7,
+      "action": 7
+    },
+    "properties": {
+      "painter": "motion_xingshan_min_ge",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/motion-art-generation-log.json",
+      "review_status": "normalized_pending_engine_review",
+      "cultural_note": "依博主身份制作的新绘像素衍生，动作不代表传统表演转录。",
+      "art_status": "六身份引擎状态已采样；新画面待用户验收"
+    },
+    "cover": "res://InheritanceTasks/Art/Pixel/v1/runtime/covers/xingshan_min_ge.png"
+  },
+  {
+    "task_id": "xisai_shenzhou_hui",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/xisai_shenzhou_hui/background-0.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/xisai_shenzhou_hui/avatars.png",
+    "columns": 2,
+    "frame_size": [
+      112,
+      160
+    ],
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/xisai_shenzhou_hui_pixel.tscn",
+    "actions": {
+      "ready": [
+        0
+      ],
+      "prepare": [
+        0
+      ],
+      "action": [
+        1
+      ],
+      "wave": [
+        1
+      ],
+      "release": [
+        1
+      ],
+      "miss": [
+        0
+      ],
+      "recover": [
+        1
+      ]
+    },
+    "animation_speeds": {
+      "run": 8,
+      "push": 7,
+      "action": 7
+    },
+    "properties": {
+      "painter": "motion_xisai_shenzhou_hui",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/motion-art-generation-log.json",
+      "review_status": "normalized_pending_engine_review",
+      "cultural_note": "依据非遗网与黄石市政府文字制作的楼台神舟；具体形制待真实视频核对。",
+      "art_status": "六身份引擎状态已采样；新画面待用户验收；神舟全貌形制待核对"
+    },
+    "cover": "res://InheritanceTasks/Art/Pixel/v1/runtime/covers/xisai_shenzhou_hui.png"
+  },
+  {
+    "task_id": "laohekou_si_xian",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/laohekou_si_xian-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/laohekou_si_xian-avatars.png",
+    "columns": 6,
+    "frame_size": [
+      128,
+      128
+    ],
+    "actions": {
+      "ready": [
+        0
+      ],
+      "prepare": [
+        1
+      ],
+      "action": [
+        2
+      ],
+      "hold": [
+        2
+      ],
+      "release": [
+        3
+      ],
+      "miss": [
+        4
+      ],
+      "recover": [
+        5
+      ],
+      "pluck": [
+        2
+      ],
+      "pluck_recover": [
+        3
+      ]
+    },
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/laohekou_si_xian_pixel.tscn",
+    "properties": {
+      "painter": "independent_music_stage",
+      "art_status": "六身份引擎状态已采样；新画面待用户验收",
+      "npc_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/music-npcs.png",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/music-art-generation-log.json",
+      "chart_review": "候选谱面尚未完成逐句听审；动作按游戏编排"
+    },
+    "cover": "res://InheritanceTasks/Art/Pixel/v1/runtime/covers/laohekou_si_xian.png"
+  },
+  {
+    "task_id": "tujia_saye_erhe",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/tujia_saye_erhe-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/tujia_saye_erhe-avatars.png",
+    "columns": 8,
+    "frame_size": [
+      128,
+      128
+    ],
+    "actions": {
+      "ready": [
+        0
+      ],
+      "prepare": [
+        1
+      ],
+      "prepare_left": [
+        1
+      ],
+      "step_left": [
+        2
+      ],
+      "prepare_right": [
+        3
+      ],
+      "step_right": [
+        4
+      ],
+      "rest": [
+        5
+      ],
+      "action": [
+        2
+      ],
+      "miss": [
+        6
+      ],
+      "recover": [
+        7
+      ],
+      "release": [
+        5
+      ]
+    },
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/tujia_saye_erhe_pixel.tscn",
+    "properties": {
+      "painter": "independent_music_stage",
+      "art_status": "六身份引擎状态已采样；新画面待用户验收",
+      "npc_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/music-npcs.png",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/music-art-generation-log.json",
+      "chart_review": "候选谱面尚未完成逐句听审；动作按游戏编排"
+    },
+    "cover": "res://InheritanceTasks/Art/Pixel/v1/runtime/covers/tujia_saye_erhe.png"
+  },
+  {
+    "task_id": "jingzhou_hua_gu_xi",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/jingzhou_hua_gu_xi-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/jingzhou_hua_gu_xi-avatars.png",
+    "columns": 6,
+    "frame_size": [
+      128,
+      128
+    ],
+    "actions": {
+      "ready": [
+        0
+      ],
+      "prepare": [
+        1
+      ],
+      "action": [
+        2
+      ],
+      "hold": [
+        2
+      ],
+      "release": [
+        3
+      ],
+      "miss": [
+        4
+      ],
+      "recover": [
+        5
+      ],
+      "voice_short": [
+        2
+      ],
+      "voice_sustain": [
+        2
+      ],
+      "voice_close": [
+        3
+      ]
+    },
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/jingzhou_hua_gu_xi_pixel.tscn",
+    "properties": {
+      "painter": "independent_music_stage",
+      "art_status": "六身份引擎状态已采样；新画面待用户验收",
+      "npc_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/music-npcs.png",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/music-art-generation-log.json",
+      "chart_review": "候选谱面尚未完成逐句听审；动作按游戏编排"
+    },
+    "cover": "res://InheritanceTasks/Art/Pixel/v1/runtime/covers/jingzhou_hua_gu_xi.png"
+  },
+  {
+    "task_id": "han_ju",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/han_ju-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/han_ju-avatars.png",
+    "columns": 6,
+    "frame_size": [
+      128,
+      128
+    ],
+    "actions": {
+      "ready": [
+        0
+      ],
+      "prepare": [
+        1
+      ],
+      "action": [
+        2
+      ],
+      "hold": [
+        2
+      ],
+      "release": [
+        3
+      ],
+      "miss": [
+        4
+      ],
+      "recover": [
+        5
+      ],
+      "spotlight_left": [
+        3
+      ],
+      "spotlight_right": [
+        2
+      ]
+    },
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/han_ju_pixel.tscn",
+    "properties": {
+      "painter": "independent_music_stage",
+      "art_status": "六身份引擎状态已采样；新画面待用户验收",
+      "npc_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/music-npcs.png",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/music-art-generation-log.json",
+      "chart_review": "候选谱面尚未完成逐句听审；动作按游戏编排"
+    },
+    "cover": "res://InheritanceTasks/Art/Pixel/v1/runtime/covers/han_ju.png"
+  },
+  {
+    "task_id": "ti_qin_xi",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/ti_qin_xi-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/ti_qin_xi-avatars.png",
+    "columns": 12,
+    "frame_size": [
+      128,
+      128
+    ],
+    "actions": {
+      "ready": [
+        0
+      ],
+      "prepare": [
+        1
+      ],
+      "prepare_left": [
+        1
+      ],
+      "bow_short_left": [
+        2
+      ],
+      "bow_long_left": [
+        3
+      ],
+      "bow_close_left": [
+        4
+      ],
+      "prepare_right": [
+        5
+      ],
+      "bow_short_right": [
+        6
+      ],
+      "bow_long_right": [
+        7
+      ],
+      "bow_close_right": [
+        8
+      ],
+      "rest": [
+        9
+      ],
+      "action": [
+        2
+      ],
+      "hold": [
+        3
+      ],
+      "release": [
+        4
+      ],
+      "miss": [
+        10
+      ],
+      "recover": [
+        11
+      ]
+    },
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/ti_qin_xi_pixel.tscn",
+    "properties": {
+      "painter": "independent_music_stage",
+      "art_status": "六身份引擎状态与连续长弓已采样；新画面待用户验收",
+      "npc_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/music-npcs.png",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/music-art-generation-log.json",
+      "chart_review": "候选谱面尚未完成逐句听审；动作按游戏编排",
+      "continuous_bow_layers": "res://InheritanceTasks/Art/Pixel/v1/runtime/tiqin-bow-v2/",
+      "continuous_bow_source": "res://InheritanceTasks/Art/Pixel/v1/source/tiqin-bow-layers-v2-generation.json",
+      "continuous_bow_status": "六身份左右保持25%/50%/75%普通Key与GPU画面已检查；运弓为游戏化推演"
+    },
+    "cover": "res://InheritanceTasks/Art/Pixel/v1/runtime/covers/ti_qin_xi.png"
+  }
+]

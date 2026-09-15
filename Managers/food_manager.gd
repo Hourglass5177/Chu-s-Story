@@ -17,6 +17,7 @@ const IMPLEMENTED_FOOD_IDS: Array[StringName] = [
 	&"zhu_xi_wan_gao", &"fang_xian_huang_jiu", &"jing_zhou_yu_gao", &"qing_zhuan_cha", &"tu_jia_you_cha_tang",
 ]
 
+var _choice_context: Dictionary = {}
 var _session_token: int = 0
 var _players: Array[PlayerClass] = []
 var _state_by_player: Dictionary = {}
@@ -25,6 +26,7 @@ var _phase_message_by_player: Dictionary = {}
 
 
 func reset_for_new_game(players: Array[PlayerClass] = []) -> void:
+	_choice_context.clear()
 	_session_token += 1
 	_players.assign(players)
 	_state_by_player.clear()
@@ -83,7 +85,9 @@ func consume_food(player: PlayerClass, card: 食物牌) -> FoodResolutionResult:
 	if not ResourceManager.remove_food_card(player, card):
 		_consuming_players.erase(player)
 		return FoodResolutionResult.new(false, false, "食物牌已不在手牌中。", card)
+	_choice_context = {"source_id": String(card.food_id), "source": player.player_index}
 	var applied: bool = await _resolve_effect(player, card, token)
+	if token == _session_token: _choice_context.clear()
 	if token != _session_token or not is_instance_valid(player):
 		return FoodResolutionResult.new(false, false, "结算已取消。", card)
 	player.food_used_count_this_turn += 1
@@ -221,20 +225,18 @@ func get_state_snapshot(player: PlayerClass) -> Dictionary:
 	return _state(player).duplicate(true)
 
 
+func get_choice_context() -> Dictionary:
+	return _choice_context.duplicate(true)
+
+
 func _resolve_effect(player: PlayerClass, card: 食物牌, token: int) -> bool:
 	var id := _food_id(card)
-	if card.food_type == 食物牌.FoodType.市级:
-		ResourceManager.modify_energy(player, CITY_ENERGY_GAIN, "食物：%s" % card.card_name)
+	var immediate := FoodEffectRules.immediate(String(id), int(card.food_type), player.current_energy)
+	if not immediate.is_empty():
+		if int(immediate.energy) != 0: ResourceManager.modify_energy(player, int(immediate.energy), "食物：%s" % card.card_name)
+		if int(immediate.money) != 0: ResourceManager.modify_money(player, int(immediate.money), "食物：%s" % card.card_name)
 		return true
 	match id:
-		&"dong_po_bing", &"ma_cheng_rou_gao", &"sha_wo_dou_si", &"yi_chang_xiao_mian", &"zhu_xi_wan_gao":
-			ResourceManager.modify_energy(player, 3, "食物：%s" % card.card_name)
-		&"jing_zhou_yu_gao":
-			ResourceManager.modify_energy(player, 6, "食物：荆州鱼糕")
-		&"chi_bi_rou_gao", &"san_you_shen_xian_ji":
-			ResourceManager.modify_money(player, 500, "食物：%s" % card.card_name)
-		&"re_gan_mian":
-			ResourceManager.modify_energy(player, player.current_energy, "食物：热干面")
 		&"bai_yang_dou_gan":
 			return await _draw_regional_feiyi(player, MapSection.REGION.恩施, token)
 		&"huang_zhou_dong_po_rou":

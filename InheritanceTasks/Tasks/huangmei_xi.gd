@@ -3,12 +3,15 @@ extends HeritageTaskBase
 enum Stage {
 	LISTENING,
 	COUNTDOWN,
+	OPENING_MICROPHONE,
 	RECORDING,
 	SCORING,
 }
 
 const COUNTDOWN_SECONDS: float = 2.0
 const RECORD_SECONDS: float = 13.65
+# Computer work has its own watchdog, never a player failure deadline.
+const SCORING_TIMEOUT_SECONDS: float = 60.0
 const FIRST_LINE_DURATION: float = 5.0
 const VIDEO_LINE_ONE_START: float = 0.4
 const VIDEO_LINE_TWO_START: float = 5.4
@@ -21,12 +24,29 @@ const FALLBACK_VIDEO_PATH := "res://arts/非遗媒体资源/数字版/黄梅戏-
 var _stage: Stage = Stage.LISTENING
 var _stage_time: float = 0.0
 var _scorer: VocalScorer = null
-var _technical_message: String = ""
+var _pending_score: Dictionary = {}
+
+
+func _ready() -> void:
+	super._ready()
+	resized.connect(_layout_pixel_lyrics)
+	_layout_pixel_lyrics()
+
+
+func _layout_pixel_lyrics() -> void:
+	if not is_node_ready(): return
+	var screen_scale := (get_viewport().get_stretch_transform() * get_global_transform_with_canvas()).get_scale().abs()
+	var physical_scale := maxf(.1,minf(screen_scale.x,screen_scale.y))
+	var font_size := maxi(28,ceili(20.0/physical_scale))
+	lyrics_label.add_theme_font_size_override("normal_font_size",font_size)
+	lyrics_label.add_theme_font_size_override("bold_font_size",font_size)
+	stage_label.add_theme_font_size_override("font_size",maxi(26,ceili(18.0/physical_scale)))
 
 
 func on_task_started() -> void:
 	_stage = Stage.LISTENING
 	_stage_time = 0.0
+	_pending_score.clear()
 	_scorer = context.get_service(&"vocal_scorer") as VocalScorer
 	if _scorer == null or not _scorer.is_available():
 		var reason: StringName = (
@@ -68,21 +88,39 @@ func task_tick(delta: float) -> void:
 			if _stage_time >= COUNTDOWN_SECONDS:
 				_begin_recording()
 		Stage.RECORDING:
-			_stage_time += delta
+			var capture := _scorer.get_capture_status()
+			if not capture.is_empty():
+				if not str(capture.get("error", "")).is_empty():
+					complete_technical_error(&"microphone_capture_failed", "录音中断，请检查麦克风后重试")
+					return
+				_stage_time = float(capture.get("seconds", 0.0))
+			else:
+				_stage_time += delta
 			set_progress(0.40 + minf(_stage_time / RECORD_SECONDS, 1.0) * 0.50)
 			stage_label.text = "正在录唱 · 第%d句" % (1 if _stage_time < FIRST_LINE_DURATION else 2)
 			_update_lyrics(_stage_time, false)
-			if _stage_time >= RECORD_SECONDS:
+			if bool(capture.get("done", false)) or (capture.is_empty() and _stage_time >= RECORD_SECONDS):
 				_finish_recording()
+		Stage.OPENING_MICROPHONE:
+			_stage_time += delta
+			var capture := _scorer.get_capture_status()
+			if not str(capture.get("error", "")).is_empty() or _stage_time > 5.0:
+				complete_technical_error(&"microphone_open_failed", "无法打开麦克风，请检查设备和录音权限")
+			elif bool(capture.get("ready", false)):
+				_stage = Stage.RECORDING
+				_stage_time = 0.0
 		Stage.SCORING:
 			_stage_time += delta
 			set_progress(0.90)
 			stage_label.text = "正在本地评分"
+			if _stage_time >= SCORING_TIMEOUT_SECONDS:
+				complete_technical_error(&"scoring_timeout", "本地评分未能完成，请重试")
 		_:
 			complete_technical_error(&"invalid_stage", "录唱流程发生错误")
 
 
 func on_task_finished(_result: HeritageTaskResult) -> void:
+	_pending_score.clear()
 	reference_video.stop()
 	if _scorer != null:
 		_scorer.cancel_capture()
@@ -91,8 +129,27 @@ func on_task_finished(_result: HeritageTaskResult) -> void:
 func on_suspension_changed(suspended: bool) -> void:
 	if _stage == Stage.LISTENING:
 		reference_video.paused = suspended
-	if _stage == Stage.RECORDING and _scorer != null:
+	if _stage in [Stage.RECORDING, Stage.OPENING_MICROPHONE] and _scorer != null:
 		_scorer.set_capture_paused(suspended)
+	if not suspended and not _pending_score.is_empty():
+		var payload := _pending_score
+		_pending_score = {}
+		_on_scoring_completed(payload)
+
+
+func is_task_clock_running() -> bool:
+	# Recording length comes from captured audio samples, not rendering speed.
+	return _stage not in [Stage.SCORING, Stage.OPENING_MICROPHONE, Stage.RECORDING]
+
+
+func get_time_display() -> String:
+	if _stage == Stage.SCORING:
+		return "评分中"
+	if _stage == Stage.OPENING_MICROPHONE:
+		return "准备中"
+	if _stage == Stage.RECORDING:
+		return "%d" % maxi(0, ceili(RECORD_SECONDS - _stage_time))
+	return super.get_time_display()
 
 
 func on_time_expired() -> void:
@@ -131,19 +188,30 @@ func _begin_recording() -> void:
 	_stage = Stage.RECORDING
 	_stage_time = 0.0
 	stage_label.text = "正在录唱 · 第1句"
+	if not _scorer.get_capture_status().is_empty():
+		_stage = Stage.OPENING_MICROPHONE
+		stage_label.text = "正在打开麦克风"
 	pulse_feedback(&"recording")
 
 
 func _finish_recording() -> void:
+	if not is_input_active() or _stage != Stage.RECORDING:
+		return
 	_stage = Stage.SCORING
 	_stage_time = 0.0
+	stage_label.text = "正在本地评分"
+	set_progress(0.90)
+	time_changed.emit(time_left)
 	var score_error: Error = _scorer.finish_capture_and_score()
 	if score_error != OK:
 		complete_technical_error(&"scoring_start_failed", "录音无法送入评分模块")
 
 
 func _on_scoring_completed(payload: Dictionary) -> void:
-	if not is_input_active() or _stage != Stage.SCORING:
+	if run_state not in [RunState.RUNNING, RunState.SUSPENDED] or _stage != Stage.SCORING:
+		return
+	if run_state == RunState.SUSPENDED:
+		_pending_score = payload.duplicate(true)
 		return
 	if not bool(payload.get("ok", false)):
 		complete_technical_error(
@@ -159,13 +227,14 @@ func _on_scoring_completed(payload: Dictionary) -> void:
 		complete_success(metrics, "两句都接上了")
 	else:
 		complete_failure(
-			&"vocal_similarity_low",
+			StringName(payload.get("reason", &"vocal_similarity_low")),
 			str(payload.get("feedback", "再听清收束拍的位置")),
 			metrics
 		)
 
 
 func _draw() -> void:
+	if draw_pixel_presentation(): return
 	draw_rect(Rect2(Vector2.ZERO, size), Color(0.16, 0.08, 0.12, 1.0), true)
 	var center_y: float = size.y * 0.48
 	var left: float = size.x * 0.10
@@ -184,3 +253,19 @@ func _update_lyrics(position: float, video_timeline: bool) -> void:
 		lyrics_label.text = "[center][color=#bda47d]为救李郎离家园[/color]　／　[color=#ffd66b][b]谁料皇榜中状元[/b][/color][/center]"
 	else:
 		lyrics_label.text = "[center][color=#ffd66b][b]为救李郎离家园[/b][/color]　／　[color=#bda47d]谁料皇榜中状元[/color][/center]"
+
+
+func get_presentation_state() -> Dictionary:
+	var motion: StringName = &"ready"
+	if _stage == Stage.COUNTDOWN or _stage == Stage.OPENING_MICROPHONE: motion = &"prepare"
+	elif _stage == Stage.RECORDING: motion = &"hold"
+	elif _stage == Stage.SCORING: motion = &"release"
+	if run_state == RunState.FINISHED: motion = &"recover"
+	return {"listening": _stage == Stage.LISTENING, "action": motion}
+
+
+func draw_pixel_overlay() -> void:
+	# Foreground text stays high resolution; the indicator reflects actual capture stage.
+	draw_rect(Rect2(28,477,944,117),Color(.12,.08,.07,.88))
+	if _stage == Stage.RECORDING:
+		draw_circle(Vector2(67,563),8,Color("ef735f"))

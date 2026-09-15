@@ -19,6 +19,8 @@ const VOCAL_SCORER_PATH := "res://InheritanceTasks/Common/onnx_crepe_vocal_score
 @onready var task_cost := $VBoxContainer/TaskPanel/Content/Cost as Label
 @onready var task_button := $VBoxContainer/TaskPanel/Content/TaskButton as Button
 
+var use_button: Button
+
 var current_card: 非遗牌 = null
 var current_player: PlayerClass = null
 var _hud: HUD = null
@@ -30,7 +32,14 @@ var _task_host: HeritageTaskHost = null
 var _vocal_scorer: VocalScorer = null
 
 func _ready() -> void:
-	#btn_use.pressed.connect(_on_use_pressed)
+	call_deferred("_install_board_ui")
+	use_button = Button.new()
+	use_button.name = "UseCard"
+	use_button.text = "使用此牌"
+	use_button.size_flags_horizontal = Control.SIZE_SHRINK_END
+	use_button.custom_minimum_size = Vector2(520, 112)
+	$VBoxContainer.add_child(use_button)
+	use_button.pressed.connect(_use_current_card)
 	_hud = get_tree().get_first_node_in_group("HUD") as HUD
 	guide_button.pressed.connect(_open_guide)
 	task_button.pressed.connect(_on_task_pressed)
@@ -64,7 +73,7 @@ func _render_current_card() -> void:
 	if current_card == null:
 		return
 	var content := FeiyiDetailContent.build(current_card, true)
-	title_label.text = String(content.get("heading", ""))
+	title_label.text = "国家级非遗" if current_card.category == 非遗牌.CardCategory.国家级非遗 else "非遗详情"
 	card_image.texture = content.get("texture") as Texture2D
 	lbl_name.text = String(content.get("name", ""))
 	lbl_cate.text = String(content.get("category", ""))
@@ -72,6 +81,9 @@ func _render_current_card() -> void:
 	lbl_desc.text = String(content.get("description", ""))
 	lbl_effect.text = String(content.get("effect", ""))
 	_refresh_task_panel()
+	use_button.visible = current_card.category != 非遗牌.CardCategory.国家级非遗
+	use_button.disabled = not _can_use_current_card()
+	use_button.tooltip_text = "使用后此牌移入研究所" if not use_button.disabled else "仅持有者可在满足牌面条件时使用"
 
 
 func _refresh_task_panel() -> void:
@@ -88,12 +100,13 @@ func _refresh_task_panel() -> void:
 		return
 	var check := HeritageTaskManager.get_attempt_check(current_player, current_card)
 	task_button.text = "传承任务"
-	task_button.disabled = check == null or not check.allowed or _active_attempt != null
+	task_button.disabled = check == null or not check.allowed or _active_attempt != null or (current_player != null and current_player.is_bot)
 	task_cost.text = "消耗1精力" if check != null and check.allowed else ""
 	task_status.text = "未传承" if check != null and check.allowed else (check.message if check != null else "当前不可挑战")
 
 
 func _on_task_pressed() -> void:
+	if current_player != null and current_player.is_bot: return
 	if _active_attempt != null or current_card == null or current_player == null:
 		return
 	var attempt := HeritageTaskManager.begin_attempt(current_player, current_card)
@@ -227,3 +240,16 @@ func _release_modal() -> void:
 	_modal_lease = -1
 	_modal_session_generation = -1
 	_modal_turn_epoch = -1
+
+func _can_use_current_card() -> bool:
+	return is_instance_valid(current_player) and current_card != null and not current_player.is_bot 		and TurnManager.GameOn and TurnManager.now_player_index < TurnManager.players.size() and TurnManager.players[TurnManager.now_player_index] == current_player 		and current_player.非遗牌手牌.has(current_card) and current_card.can_use(current_player)
+
+func _use_current_card() -> void:
+	if not _can_use_current_card(): return
+	var card := current_card
+	var player := current_player
+	close_detail()
+	ResourceManager.use_feiyi(player, card)
+
+func _install_board_ui() -> void:
+	BoardPanelLayout.install(self, "feiyi", close_detail)

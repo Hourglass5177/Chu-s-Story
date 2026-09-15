@@ -1,0 +1,67 @@
+{
+  "method": "Production-stage static composition using corrected original character crops and current boat assets.",
+  "script": "tools/capture_revision_covers.gd",
+  "is_playthrough_evidence": false,
+  "records": [
+    {
+      "task": "xisai_shenzhou_hui",
+      "avatar": "travel_blogger",
+      "file": "res://InheritanceTasks/Art/Pixel/v3/runtime/revision-covers/xisai_shenzhou_hui-travel_blogger.png"
+    },
+    {
+      "task": "xisai_shenzhou_hui",
+      "avatar": "life_blogger",
+      "file": "res://InheritanceTasks/Art/Pixel/v3/runtime/revision-covers/xisai_shenzhou_hui-life_blogger.png"
+    },
+    {
+      "task": "xisai_shenzhou_hui",
+      "avatar": "business_blogger",
+      "file": "res://InheritanceTasks/Art/Pixel/v3/runtime/revision-covers/xisai_shenzhou_hui-business_blogger.png"
+    },
+    {
+      "task": "xisai_shenzhou_hui",
+      "avatar": "food_blogger",
+      "file": "res://InheritanceTasks/Art/Pixel/v3/runtime/revision-covers/xisai_shenzhou_hui-food_blogger.png"
+    },
+    {
+      "task": "xisai_shenzhou_hui",
+      "avatar": "adventure_blogger",
+      "file": "res://InheritanceTasks/Art/Pixel/v3/runtime/revision-covers/xisai_shenzhou_hui-adventure_blogger.png"
+    },
+    {
+      "task": "xisai_shenzhou_hui",
+      "avatar": "magic_blogger",
+      "file": "res://InheritanceTasks/Art/Pixel/v3/runtime/revision-covers/xisai_shenzhou_hui-magic_blogger.png"
+    },
+    {
+      "task": "xingshan_min_ge",
+      "avatar": "travel_blogger",
+      "file": "res://InheritanceTasks/Art/Pixel/v3/runtime/revision-covers/xingshan_min_ge-travel_blogger.png"
+    },
+    {
+      "task": "xingshan_min_ge",
+      "avatar": "life_blogger",
+      "file": "res://InheritanceTasks/Art/Pixel/v3/runtime/revision-covers/xingshan_min_ge-life_blogger.png"
+    },
+    {
+      "task": "xingshan_min_ge",
+      "avatar": "business_blogger",
+      "file": "res://InheritanceTasks/Art/Pixel/v3/runtime/revision-covers/xingshan_min_ge-business_blogger.png"
+    },
+    {
+      "task": "xingshan_min_ge",
+      "avatar": "food_blogger",
+      "file": "res://InheritanceTasks/Art/Pixel/v3/runtime/revision-covers/xingshan_min_ge-food_blogger.png"
+    },
+    {
+      "task": "xingshan_min_ge",
+      "avatar": "adventure_blogger",
+      "file": "res://InheritanceTasks/Art/Pixel/v3/runtime/revision-covers/xingshan_min_ge-adventure_blogger.png"
+    },
+    {
+      "task": "xingshan_min_ge",
+      "avatar": "magic_blogger",
+      "file": "res://InheritanceTasks/Art/Pixel/v3/runtime/revision-covers/xingshan_min_ge-magic_blogger.png"
+    }
+  ]
+}

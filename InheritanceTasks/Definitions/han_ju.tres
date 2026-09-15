@@ -1,19 +1,24 @@
-[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=5 format=3]
 [ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
 [ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/han_ju.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://dfaxb0jejjc4h" path="res://arts/非遗卡牌/武汉/汉剧.jpg" id="3"]
+[ext_resource type="Resource" path="res://InheritanceTasks/Charts/han_ju.tres" id="4"]
+[ext_resource type="Resource" path="res://InheritanceTasks/Art/Pixel/v3/resources/han_ju.tres" id="pixel_presentation"]
+
 [resource]
 script = ExtResource("1")
 task_id = &"han_ju"
-display_name = "皮黄换轨"
+display_name = "汉剧"
 heritage_name = "汉剧"
 region = "武汉"
-hook = "在西皮与二黄两轨间切换，接住落下的旋律片段。"
-instructions = PackedStringArray("看清下一枚音符", "按一次切换轨道")
-control_hint = "鼠标左键、确认键或手柄主键切换"
-cultural_link = "把汉剧以西皮、二黄为主的皮黄合流关系直接画成双轨。"
-duration_seconds = 25.0
+hook = "在观众席后方控制追光，跟住演员的跨台与停留。"
+instructions = PackedStringArray("亮相时接住演员；站定时把灯留住。")
+control_hint = "A 左灯 / D 右灯"
+cultural_link = "采用《丛台别》连续录音；追光与走台是游戏编排，两侧不标为西皮或二黄。"
+duration_seconds = 40
 task_scene = ExtResource("2")
 gallery_thumbnail = ExtResource("3")
-prototype_asset_note = "暂用对应国家级非遗牌正面。"
-future_asset_slot = "独立任务缩略图（640×400）。"
+prototype_asset_note = "独立像素场景、六博主主题装束与动作；当前美术版本见表现资源台账。"
+future_asset_slot = "保留现有构图与判定，后续替换精细美术。"
+music_chart = ExtResource("4")
+presentation = ExtResource("pixel_presentation")

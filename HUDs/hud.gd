@@ -136,6 +136,7 @@ const EVENT_PRESENTATION_DIRECTOR_SCRIPT := preload("res://HUDs/event_presentati
 const GAME_GUIDE_SCENE := preload("res://UI/GameGuide/digital_game_guide.tscn")
 const PAUSE_OVERLAY_SCENE := preload("res://HUDs/PauseOverlay/pause_overlay.tscn")
 func _ready() -> void:
+	call_deferred("_install_artist_hud")
 	map_container.resized.connect(_on_container_resized)
 	_spawn_map_in_hud()
 	map = get_tree().get_first_node_in_group("MAP")
@@ -252,15 +253,18 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func _on_phase_label_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		open_game_guide(GuideOpenContext.new(
+		open_current_phase_guide(phase_label)
+		get_viewport().set_input_as_handled()
+
+func open_current_phase_guide(entry: Control) -> void:
+	open_game_guide(GuideOpenContext.new(
 			GuideOpenContext.Source.PHASE,
 			&"turn_phases",
 			&"phase",
 			&"",
-			phase_label,
+			entry,
 			_guide_section_for_phase(TurnManager.now_phase)
 		))
-		get_viewport().set_input_as_handled()
 
 
 func _guide_section_for_phase(phase: TurnManager.TurnPhase) -> StringName:
@@ -468,6 +472,7 @@ func _pulse_profession_label(player: PlayerClass) -> void:
 	tween.tween_property(label, "modulate", Color.WHITE, 0.24)
 
 func _on_profession_section_choice_requested(request: ProfessionSectionChoiceRequest) -> void:
+	if request.player != null and request.player.is_bot: return
 	if request == null or map == null or request.options.is_empty():
 		return
 	_active_profession_map_request = request
@@ -540,6 +545,7 @@ func complete_profession_section_choice(
 func _on_card_hand_visual_requested(kind: int, player: PlayerClass, card: 卡牌基类, other_player: PlayerClass, reveal_detail: bool) -> void:
 	if card_hand_animator == null or not TurnManager.GameOn or GameManager.is_headless_simulation():
 		return
+	if player != null and player.is_bot and (card is 食物牌 or card is 事件牌): return
 	card_hand_animator.enqueue(kind, player, card, other_player, reveal_detail)
 
 func _on_card_hand_animation_started(_kind: int, _player: PlayerClass, card: 卡牌基类) -> void:
@@ -589,6 +595,7 @@ func refresh_hand_after_animation(player: PlayerClass) -> void:
 	_update_player_stats(player)
 
 func show_collected_feiyi_detail_and_wait(player: PlayerClass, card: 非遗牌) -> void:
+	if player != null and player.is_bot: return
 	if not _can_display_player(player) or detail_panel == null:
 		return
 	detail_panel.show_detail(card, player)
@@ -679,6 +686,7 @@ func _on_event_modal_closed(_player: PlayerClass, _card: 事件牌, _summary: St
 	_update_button_states(TurnManager.now_phase)
 
 func _on_event_choice_requested(request: EventChoiceRequest) -> void:
+	if request.requester != null and request.requester.is_bot: return
 	if request.presentation == EventChoiceRequest.Presentation.研究所:
 		_event_map_source_name = request.source_name if not request.source_name.is_empty() else request.title
 		current_status.text = "【%s】请选择非遗牌" % _event_map_source_name
@@ -822,6 +830,9 @@ func _spawn_map_in_hud():
 func _on_container_resized():
 	if not is_instance_valid(map_instance): return
 	var ui_size = map_container.size
+	# Anchor changes emit an intermediate zero-size resize before layout settles.
+	# Retain the last camera state until the final nonzero rectangle arrives.
+	if ui_size.x <= 1.0 or ui_size.y <= 1.0: return
 	
 	# 计算全局视野的缩放比例
 	var padded_size = MAP_REAL_SIZE + Vector2(margin_x * 2, margin_top + margin_bottom)
@@ -1030,21 +1041,21 @@ func _process(delta: float):
 	if _active_event_map_request != null:
 		var choice_time_left := EventManager.get_choice_time_left(_active_event_map_request.request_id)
 		time_label.visible = choice_time_left > 0.0
-		time_label.text = " " + str(int(ceil(choice_time_left))) + " s"
+		time_label.text = "剩余 %d秒" % int(ceil(choice_time_left))
 	elif _active_profession_map_request != null:
 		var choice_time_left := ProfessionManager.get_section_choice_time_left(_active_profession_map_request.request_id)
 		time_label.visible = choice_time_left > 0.0
-		time_label.text = " " + str(int(ceil(choice_time_left))) + " s"
+		time_label.text = "剩余 %d秒" % int(ceil(choice_time_left))
 	elif timer and TurnManager.GameOn and timer.time_left > 0:
 		time_label.visible = true
-		time_label.text = " " + str(int(ceil(timer.time_left))) + " s"
+		time_label.text = "剩余 %d秒" % int(ceil(timer.time_left))
 	else:
 		time_label.visible = false
 	_position_map_tooltip()
 	
 func _on_turn_start(player_idx: int) -> void:
 	var current_player = TurnManager.players[player_idx]
-	turn_label.text = "回合数：" + str(TurnManager.now_turn) + " 当前玩家：" + current_player.player_name
+	turn_label.text = "第 %d 回合" % TurnManager.now_turn
 	_update_player_stats(current_player)
 	refresh_feiyi_list(current_player)
 
@@ -1102,9 +1113,12 @@ func _update_player_stats(player: PlayerClass) -> void:
 	profession_label.text = PlayerClass.PlayerCharacter.find_key(player.player_types)
 	profession_label.add_theme_color_override(
 		"font_color",
-		Color("8c7568") if ProfessionManager.get_blocked_turns(player) > 0 else Color.BLACK
+		Color("c1aa86") if ProfessionManager.get_blocked_turns(player) > 0 else Color("fff1d3")
 	)
-	current_status.text = "当前位置：" + MapSection.REGION.find_key(map.grid_map[player.now_pos].region) + str(map.grid_map[player.now_pos].location_index) + " - " + MapSection.SectionType.find_key(map.grid_map[player.now_pos].type)
+	var section: MapSection = map.grid_map[player.now_pos]
+	var location := String(MapSection.REGION.find_key(section.region))
+	if section.type != MapSection.SectionType.起点: location += " %d" % section.logical_index
+	current_status.text = "当前位置：%s · %s" % [location, MapSection.SectionType.find_key(section.type)]
 	if(TurnManager.now_phase == TurnManager.TurnPhase.MOVING):
 		_update_game_informs("剩余可移动：" + str(player.maxMove) + " 步")
 
@@ -1112,6 +1126,7 @@ func _update_game_informs(information_to_display: String) -> void:
 	information.text = information_to_display
 
 func _update_button_states(phase: TurnManager.TurnPhase) -> void:
+	btn_end_turn.text = "结束移动" if phase == TurnManager.TurnPhase.MOVING else "结束回合"
 	# 核心解耦：UI 自己决定什么时候按钮该亮起
 	btn_action.disabled = (phase != TurnManager.TurnPhase.ACTION)
 	btn_end_turn.disabled = (not phase in [TurnManager.TurnPhase.ACTION, TurnManager.TurnPhase.MOVING])
@@ -1123,6 +1138,11 @@ func _update_button_states(phase: TurnManager.TurnPhase) -> void:
 		return
 
 	var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
+	if current_player.is_bot:
+		btn_action.disabled = true
+		btn_food.disabled = true
+		btn_end_turn.disabled = true
+		return
 	var current_coord: Vector3i = current_player.now_pos
 	
 	if not map.grid_map.has(current_coord): return
@@ -1182,10 +1202,12 @@ func _on_btn_action_pressed() -> void:
 		ProfessionManager.submit_section_choice(_active_profession_map_request.request_id, null)
 		return
 	var current_player = TurnManager.players[TurnManager.now_player_index]
+	if current_player.is_bot: return
 	current_player.execute_tile_action()
 
 func _on_btn_end_turn_pressed() -> void:
 	var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
+	if current_player.is_bot: return
 	if current_player.is_working:
 		btn_end_turn.disabled = true
 		btn_action.disabled = true
@@ -1199,6 +1221,7 @@ func _on_btn_end_turn_pressed() -> void:
 
 func _on_btn_food_pressed() -> void:
 	var current_player = TurnManager.players[TurnManager.now_player_index]
+	if current_player.is_bot: return
 	if current_player.is_working:
 		await current_player.check_and_cancel_work()
 		
@@ -1241,13 +1264,15 @@ func refresh_feiyi_list(player: PlayerClass):
 		# 生成城市标题
 		var city_name = MapSection.REGION.keys()[city_int]
 		var city_label = Label.new()
-		city_label.text = "== " + city_name + " =="
+		city_label.text = city_name
 		city_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER # 文本居中
-		var title_color: Color = REGION_TITLE_COLORS.get(city_int, Color.BLACK)
+		# Card border colors include pale yellow; use a darker ink variant on the cream HUD.
+		var title_color: Color = (REGION_TITLE_COLORS.get(city_int, Color.BLACK) as Color).darkened(0.5)
 		city_label.add_theme_color_override("font_color", title_color)
 		city_label.add_theme_color_override("font_outline_color", title_color.darkened(0.55))
 		city_label.add_theme_constant_override("outline_size", 2)
-		city_label.add_theme_font_size_override("font_size", 64)
+		city_label.add_theme_font_size_override("font_size", 42)
+		city_label.add_theme_constant_override("outline_size", 0)
 		city_label.add_theme_font_override("font", default_font)
 		feiyi_list.add_child(city_label)
 		
@@ -1264,6 +1289,7 @@ func refresh_feiyi_list(player: PlayerClass):
 			var thumbnail = ThumbnailScene.instantiate()
 			grid.add_child(thumbnail)
 			thumbnail.setup(card)
+			thumbnail.custom_minimum_size = Vector2(170, 225)
 			
 			# 连接缩略图发出的信号
 			thumbnail.request_open_detail.connect(func(c): detail_panel.show_detail(c, player))
@@ -1275,7 +1301,7 @@ func refresh_feiyi_list(player: PlayerClass):
 			score_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			score_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			score_hint.add_theme_color_override("font_color", title_color.darkened(0.25))
-			score_hint.add_theme_font_size_override("font_size", 30)
+			score_hint.add_theme_font_size_override("font_size", 36)
 			score_hint.add_theme_font_override("font", default_font)
 			feiyi_list.add_child(score_hint)
 			
@@ -1294,6 +1320,19 @@ func refresh_event_list(player: PlayerClass) -> void:
 	if previous_achievement_section != null:
 		feiyi_list.remove_child(previous_achievement_section)
 		previous_achievement_section.queue_free()
+	if player.is_bot:
+		var hidden := Label.new()
+		hidden.name = "事件牌列表区"
+		hidden.text = "私密手牌\n食物 %d 张 · 保留事件 %d 张" % [player.食物牌手牌.size(), player.事件牌手牌.size()]
+		hidden.add_theme_font_override("font", default_font)
+		hidden.add_theme_font_size_override("font_size", 36)
+		hidden.add_theme_color_override("font_color", Color("51331f"))
+		hidden.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		hidden.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		hidden.custom_minimum_size.x = 340
+		feiyi_list.add_child(hidden)
+		refresh_achievement_list(player)
+		return
 	var visible_event_cards: Array[事件牌] = []
 	for card: 事件牌 in player.事件牌手牌:
 		if card_hand_animator == null or not card_hand_animator.should_hide_card(card):
@@ -1307,7 +1346,7 @@ func refresh_event_list(player: PlayerClass) -> void:
 		title.text = "事件牌"
 		title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		title.add_theme_color_override("font_color", Color.BLACK)
-		title.add_theme_font_size_override("font_size", 64)
+		title.add_theme_font_size_override("font_size", 42)
 		title.add_theme_font_override("font", default_font)
 		event_section.add_child(title)
 		var event_card_list := GridContainer.new()
@@ -1319,6 +1358,7 @@ func refresh_event_list(player: PlayerClass) -> void:
 			var thumbnail := EventThumbnailScene.instantiate() as 事件牌缩略图
 			event_card_list.add_child(thumbnail)
 			thumbnail.setup(card, player)
+			thumbnail.custom_minimum_size = Vector2(170, 225)
 			thumbnail.request_open_detail.connect(_open_event_card_detail.bind(player))
 			thumbnail.request_use_card.connect(_request_event_card_use.bind(player))
 	refresh_achievement_list(player)
@@ -1350,7 +1390,7 @@ func refresh_achievement_list(player: PlayerClass) -> void:
 	title.add_theme_color_override("font_color", Color(0.55, 0.28, 0.11, 1))
 	title.add_theme_color_override("font_outline_color", Color(0.31, 0.13, 0.05, 1))
 	title.add_theme_constant_override("outline_size", 2)
-	title.add_theme_font_size_override("font_size", 64)
+	title.add_theme_font_size_override("font_size", 42)
 	title.add_theme_font_override("font", default_font)
 	section.add_child(title)
 	var grid := GridContainer.new()
@@ -1363,6 +1403,7 @@ func refresh_achievement_list(player: PlayerClass) -> void:
 		var thumbnail := AchievementThumbnailScene.instantiate() as 成就牌缩略图
 		grid.add_child(thumbnail)
 		thumbnail.setup(card)
+		thumbnail.custom_minimum_size = Vector2(170, 225)
 		thumbnail.request_open_detail.connect(_open_achievement_detail)
 
 ## 左右两侧是同一份“当前回合玩家”HUD，任何后台目标都不能直接覆盖它。
@@ -1395,6 +1436,7 @@ func _request_event_card_use(card_data: 事件牌, player: PlayerClass) -> void:
 
 # 统一处理卡牌使用逻辑（途径1：右键菜单，途径2：弹窗点击）
 func _execute_card_usage(card_data: 非遗牌) -> void:
+	if TurnManager.players[TurnManager.now_player_index].is_bot: return
 	if not TurnManager.GameOn or TurnManager.now_player_index >= TurnManager.players.size():
 		return
 	var player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
@@ -1407,7 +1449,40 @@ func prompt_passive_card_use(card_data: 非遗牌, callable_if_yes: Callable):
 	print("询问：是否要发动被动技能【", card_data.card_name, "】？")
 	# 如果玩家点是：callable_if_yes.call()
 
-func _on_close_pressed():
-	get_tree().paused = false
-	print("退出游戏")
-	get_tree().quit(0)
+var _exit_confirmation: ConfirmationDialog
+var _exit_lease := -1
+
+func _on_close_pressed() -> void:
+	if is_instance_valid(_exit_confirmation): return
+	_exit_lease = TurnManager.acquire_modal(&"board_exit_confirmation", TurnManager.ModalResumePolicy.RESUME_REMAINING, true)
+	_exit_confirmation = ConfirmationDialog.new()
+	_exit_confirmation.process_mode = Node.PROCESS_MODE_ALWAYS
+	_exit_confirmation.title = "退出本局"
+	_exit_confirmation.dialog_text = "本局进度不会保存。确定退出游戏吗？"
+	_exit_confirmation.ok_button_text = "退出游戏"
+	_exit_confirmation.cancel_button_text = "继续游戏"
+	_exit_confirmation.theme = MainUI.theme()
+	add_child(_exit_confirmation)
+	_exit_confirmation.confirmed.connect(func(): get_tree().quit())
+	_exit_confirmation.canceled.connect(_cancel_exit)
+	_exit_confirmation.close_requested.connect(_cancel_exit)
+	_exit_confirmation.popup_centered(Vector2i(1080, 360))
+	_exit_confirmation.get_cancel_button().grab_focus()
+
+func _cancel_exit() -> void:
+	if is_instance_valid(_exit_confirmation): _exit_confirmation.queue_free()
+	_exit_confirmation = null
+	if _exit_lease >= 0: TurnManager.release_modal(_exit_lease)
+	_exit_lease = -1
+
+
+var _board_dice: BoardDicePresenter
+
+func show_dice_faces(player: PlayerClass, values: Array[int], still_current: Callable) -> void:
+	if not is_instance_valid(_board_dice):
+		_board_dice = BoardDicePresenter.new()
+		add_child(_board_dice)
+	await _board_dice.play(player, values, still_current)
+
+func _install_artist_hud() -> void:
+	add_child(MainHUDLayout.new())

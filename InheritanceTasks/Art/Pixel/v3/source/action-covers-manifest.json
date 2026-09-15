@@ -1,0 +1,34 @@
+[
+  {
+    "task": "paper",
+    "source": "artifacts\\action-story-v3\\paper-ready.png",
+    "source_sha256": "8235a939563debdbd58c542e1d96be55e40012122ea7b1bf2226ee5ef4f2b488",
+    "target": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\paper\\cover.png",
+    "method": "Actual Godot ordinary-input frame; exact 2:1 nearest downsample.",
+    "status": "Current playable candidate, not user visual acceptance."
+  },
+  {
+    "task": "story",
+    "source": "artifacts\\action-story-v3\\story-0-0-play.png",
+    "source_sha256": "29b4920e76f54c70fb4a44e5e07d87f4a7795bf7994c7b423aec0657c0f7ea94",
+    "target": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\story\\cover.png",
+    "method": "Actual Godot ordinary-input frame; exact 2:1 nearest downsample.",
+    "status": "Current playable candidate, not user visual acceptance."
+  },
+  {
+    "task": "shenzhou",
+    "source": "artifacts\\action-story-v3\\boat-ready.png",
+    "source_sha256": "a15c7ec30c9748e3b56a6c3622db0db435a7747efdf4c467fffdf27a82e047a7",
+    "target": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\shenzhou\\cover.png",
+    "method": "Actual Godot ordinary-input frame; exact 2:1 nearest downsample.",
+    "status": "Current playable candidate, not user visual acceptance."
+  },
+  {
+    "task": "dong",
+    "source": "artifacts\\dong-hand-connection-v8-final\\dong-travel_blogger.png",
+    "source_sha256": "c4b182799860d2064382c4d959d25d23a281c375f604bb9ed4e7da1f71adb86c",
+    "target": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\dong\\cover.png",
+    "method": "Actual Godot ordinary-input frame; original 1000x600 retained.",
+    "status": "Current playable candidate, not user visual acceptance."
+  }
+]

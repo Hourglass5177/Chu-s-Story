@@ -2,18 +2,21 @@
 [ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
 [ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/xiabaoping_minjian_gushi.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://ctyl04kwrari2" path="res://arts/非遗卡牌/宜昌/下堡坪民间故事.jpg" id="3"]
+[ext_resource type="Resource" path="res://InheritanceTasks/Art/Pixel/v3/resources/xiabaoping_minjian_gushi.tres" id="pixel_presentation"]
+
 [resource]
 script = ExtResource("1")
 task_id = &"xiabaoping_minjian_gushi"
-display_name = "口耳相传"
+display_name = "下堡坪民间故事"
 heritage_name = "下堡坪民间故事"
 region = "宜昌"
-hook = "记住故事图标出现的顺序，再原样传给下一位听众。"
-instructions = PackedStringArray("先看一串图标", "按原顺序复现", "三串通过两串")
-control_hint = "鼠标点击；方向键/摇杆移动选框，确认键选择"
-cultural_link = "不考陌生故事知识，只体验听住一段、再传下去。"
-duration_seconds = 30.0
+hook = "三则地方传说随机其一，拼回三幕完整画面。"
+instructions = PackedStringArray("把空格旁的拼块推入空格。", "对照完整图，120秒内拼好三幕；转场不计时。")
+control_hint = "点击相邻拼块；WASD/方向键/十字键移动空格"
+cultural_link = "水牛洞、秀水贡米、蛟龙寺均据下堡坪地方传说重新简编，新绘三幕。"
+duration_seconds = 120.0
 task_scene = ExtResource("2")
 gallery_thumbnail = ExtResource("3")
-prototype_asset_note = "暂用对应国家级非遗牌正面。"
-future_asset_slot = "独立任务缩略图（640×400）。"
+prototype_asset_note = "独立像素场景、六博主主题装束与动作；当前美术版本见表现资源台账。"
+future_asset_slot = "三则故事各三张独立方形分镜与参考图；故事来源记录在story_puzzle_catalog。"
+presentation = ExtResource("pixel_presentation")

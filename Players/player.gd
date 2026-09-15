@@ -1,6 +1,7 @@
 extends AnimatedSprite2D
 class_name PlayerClass
 signal roll_dice(result:int, player:PlayerClass)
+var computer_presentation_speed: float = 1.0
 var hud:HUD
 var map:MAP
 enum PlayerCharacter{
@@ -35,8 +36,9 @@ func _ready() -> void:
 # 玩家的基础属性 [cite: 1]
 @export var player_name: String = "Player"
 @export var player_types: PlayerCharacter = PlayerCharacter.美食博主
-## 本阶段仅记录席位类型；电脑玩家仍由同一台设备顺序操作，不启用 AI。
+## 电脑席位由主场景的 AISessionController 驱动。
 @export var is_bot: bool = false
+var ai_difficulty: int = 1
 
 @export var current_energy: int = 6 
 @export var max_energy: int = 12
@@ -195,7 +197,9 @@ func _resolve_roll_dice_phase(session_generation: int, turn_epoch: int) -> bool:
 		return false
 	movement_multiplier_applied = false
 	maxMove = FoodManager.adjust_movement_steps(self, do_roll_dice())
-	return true
+	if is_instance_valid(hud) and not GameManager.is_headless_simulation():
+		await hud.show_dice_faces(self, last_dice_faces, func(): return _owns_turn_phase_context(session_generation, turn_epoch, TurnManager.TurnPhase.ROLL_DICE))
+	return _owns_turn_phase_context(session_generation, turn_epoch, TurnManager.TurnPhase.ROLL_DICE)
 
 ## BEGIN/END 阶段各一次的可选职业移动。同步取得模态锁，避免 1 秒阶段计时抢跑。
 func _begin_profession_begin_move() -> void:
@@ -333,6 +337,7 @@ func _move_to_adjacent_for_profession(
 		position = map.to_local(target_section.global_position)
 	else:
 		var tween := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		tween.set_speed_scale(computer_presentation_speed if is_bot else 1.0)
 		tween.tween_property(self, "position", map.to_local(target_section.global_position), 0.28)
 		await tween.finished
 	if turn_session_generation >= 0 \
@@ -420,9 +425,12 @@ func resolve_turn_end_elimination() -> bool:
 	return false
 
 # --- 实体动作逻辑 ---
+var last_dice_faces: Array[int] = []
+
 func do_roll_dice() -> int:
 	# 两枚六面骰，保留 2-12 的正常概率分布。
-	var result: int = GameManager.randi_between(1, 6) + GameManager.randi_between(1, 6)
+	last_dice_faces.assign([GameManager.randi_between(1, 6), GameManager.randi_between(1, 6)])
+	var result: int = last_dice_faces[0] + last_dice_faces[1]
 	roll_dice.emit(result, self)
 	print(player_name, " 掷出了 ", result, " 点")
 	return result
@@ -450,6 +458,7 @@ func move_along_path(path_pixels: Array[Vector2], total_cost: int, target_grid_p
 			position = map.to_local(point)
 	else:
 		var tween = create_tween()
+		tween.set_speed_scale(computer_presentation_speed if is_bot else 1.0)
 		for point in path_pixels:
 			maxMove -= 1
 			hud._update_player_stats(self)
@@ -480,8 +489,26 @@ func move_along_path(path_pixels: Array[Vector2], total_cost: int, target_grid_p
 # ==========================================
 # 格子交互执行枢纽 (由 UI 点击触发)
 # ==========================================
+func can_execute_tile_action() -> bool:
+	if TurnManager.modal_resolution_depth > 0 or not InteractionCoordinator.get_active_snapshot().is_empty() or EventManager.resolving: return false
+	if not alive or not onTurn or not TurnManager.GameOn or TurnManager.now_phase != TurnManager.TurnPhase.ACTION or TurnManager.is_movement_locked():
+		return false
+	if map == null or not map.grid_map.has(now_pos):
+		return false
+	var section: MapSection = map.grid_map[now_pos]
+	match section.type:
+		MapSection.SectionType.非遗:
+			return current_energy >= 1 and not feiyi_collected_this_turn and ResourceManager.has_feiyi_in_region(section.region)
+		MapSection.SectionType.打工:
+			return not now_turn_worked and not EventManager.is_work_banned(self) and current_energy >= ProfessionManager.get_work_energy_cost(self) and (is_working or int(section.grid_visit_history.get(self, 0)) <= 1)
+		MapSection.SectionType.商店:
+			return has_current_action_arrival_at(now_pos) and last_opened_shop_arrival_id != arrival_id
+		MapSection.SectionType.研究所:
+			return has_current_action_arrival_at(now_pos) and MarketManager.can_open_visit(self, arrival_id)
+	return false
+
 func execute_tile_action():
-	if !onTurn:
+	if not can_execute_tile_action():
 		return
 	
 	hud.btn_action.disabled = true
@@ -556,7 +583,6 @@ func execute_tile_action():
 		MapSection.SectionType.商店:
 			if has_current_action_arrival_at(now_pos) and last_opened_shop_arrival_id != arrival_id:
 				hud.btn_action.disabled = true
-				last_opened_shop_arrival_id = arrival_id
 				print(player_name, " 打开了食物商店。")
 				hud.open_shop_panel(self)
 				# 注意：商店打开后不直接 emit END，等玩家买完或关掉弹窗再结束
@@ -613,7 +639,8 @@ func check_and_cancel_work():
 
 # 覆盖原本的结束回合请求
 func request_end_turn():
-	check_and_cancel_work() # 如果正在打工，点结束按钮直接放弃剩余打工回合
+	if not onTurn or not TurnManager.GameOn or TurnManager.is_movement_locked(): return
+	await check_and_cancel_work() # 如果正在打工，点结束按钮直接放弃剩余打工回合
 	if TurnManager.now_phase == TurnManager.TurnPhase.MOVING:
 		TurnManager._emit_next_phase(TurnManager.TurnPhase.ACTION)
 	elif TurnManager.now_phase == TurnManager.TurnPhase.ACTION:

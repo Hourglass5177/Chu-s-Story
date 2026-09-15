@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "voice": "Microsoft Huihui Desktop / Windows offline SAPI",
+  "classification": "下堡坪乡马宗岭村地方传说；重新简编，不作为确证历史",
+  "source": "https://news.hubeidaily.net/pc/c_2714369.html",
+  "rate": 4,
+  "scenes": [
+    {
+      "sha256": "a355ad205ebe56e03873e7af4955dd8cdc72263419f651b8216cddd74f842fc3",
+      "text": "相传马宗岭驻军缺粮，士兵拉犁开荒。",
+      "scene": 1,
+      "original": "narration-1-source.wav",
+      "audio": "narration-1.ogg"
+    },
+    {
+      "sha256": "34357ec05ba1a68711640a3e4e587f4406af7905977f4b210f1354a523001e5f",
+      "text": "刘备调来耕牛，帮助军民种田。",
+      "scene": 2,
+      "original": "narration-2-source.wav",
+      "audio": "narration-2.ogg"
+    },
+    {
+      "sha256": "20de7b432d42b5d98bf05a6f6f5d175f16979ae986510799213bf85ea315dbd9",
+      "text": "牧牛人发现洞穴，把牛群安置其中。",
+      "scene": 3,
+      "original": "narration-3-source.wav",
+      "audio": "narration-3.ogg"
+    },
+    {
+      "sha256": "c59ed94a7e93a51807f72d5b9cd56d3b65cfedbbf7b5b6cfc67c1bd8d7f4e118",
+      "text": "战后有牛逃出后洞，水牛洞之名流传。",
+      "scene": 4,
+      "original": "narration-4-source.wav",
+      "audio": "narration-4.ogg"
+    }
+  ],
+  "newly_generated": true
+}

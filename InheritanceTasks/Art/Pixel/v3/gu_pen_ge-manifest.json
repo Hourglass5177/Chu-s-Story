@@ -1,0 +1,186 @@
+{
+  "method": "imagegen whole strips; native cell slicing, technical green matte where needed; no palette quantization or source pixel reduction",
+  "task": "gu_pen_ge",
+  "status": "generated candidates; not user accepted",
+  "pixel_canvas": [
+    1000,
+    600
+  ],
+  "logical_stage": [
+    1000,
+    600
+  ],
+  "actors": [
+    {
+      "actor": "travel",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/gu_pen_ge/travel-animation.png",
+      "source_sha256": "db28acd91f5c4a43f1d002fc8203c4a72dbd4043cfbf96d7d8ddbcf4f80dd0c9",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/gu_pen_ge/travel.png",
+      "runtime_sha256": "b0622538f70acc7e6df857dd080044ac767514cfe9b26d1ffad7d266e66629b2",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "life",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/gu_pen_ge/life-animation.png",
+      "source_sha256": "c327da5e4b8d71fb1001db8132757b16c88460b9edfc8722e2da4b594bbebcde",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/gu_pen_ge/life.png",
+      "runtime_sha256": "3f14c2516a446ee78bf6f61b97b485fbe1f261a2ef222beb0526939c30f32dcc",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "business",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/gu_pen_ge/business-animation.png",
+      "source_sha256": "3c99f55c30aa6283e45bf074521415dd5150c88f707dffcb2746e8b0d8df0867",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/gu_pen_ge/business.png",
+      "runtime_sha256": "1f1fed4574c08be4d0c08f3985efd99c6648070421c3651f67a33634366c5e4f",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "food",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/gu_pen_ge/food-animation.png",
+      "source_sha256": "3d0417c4b91eeffe37d6e51b271e98762c469970b151be51771f02596da81a2b",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/gu_pen_ge/food.png",
+      "runtime_sha256": "9e4c3102aff934d984595173539d40e99d0074146ca1ea60a592aa5803d774a8",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "adventure",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/gu_pen_ge/adventure-animation.png",
+      "source_sha256": "1174906c8e70fbb07638ba73194226e447509527cd19168e4fd2e20fc699d9d7",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/gu_pen_ge/adventure.png",
+      "runtime_sha256": "a647f7f0fa0d00d3f036ec0aedb5fff7a77ad1c14dc39df86d9886c374ea827b",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "magic",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/gu_pen_ge/magic-animation.png",
+      "source_sha256": "70a0f3df19feecc3de5ac0c6885b575802bbac3688539e01c2726b9407c19eee",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/gu_pen_ge/magic.png",
+      "runtime_sha256": "8e18f6b26dc25003503db12abf9351b2693e7b990a48b6f479bcb0b87abdc7dc",
+      "normal_playback_reviewed": false
+    }
+  ],
+  "npc": {
+    "source": "InheritanceTasks\\Art\\Pixel\\v3\\source\\gu_pen_ge\\teacher.png",
+    "frame_size": [
+      503,
+      781
+    ],
+    "frames": 4,
+    "native_alpha": false,
+    "source_sha256": "fdb03c6ddefbaaf617db4c46885f04f7c8ac4cb130d6090bff3490ad2edc2a0c"
+  },
+  "culture": "New game practice performance. Costume/instrument references documented in prompts; exact motions are artistic/gameplay interpretations. Gupen drum form and authentic audio remain awaiting source video.",
+  "pending": [
+    "user experience and art acceptance",
+    "human listening review of audio cuts and mix balance",
+    "formal Host multi-size review",
+    "continuous motion polish and cultural movement review"
+  ],
+  "covers": {
+    "method": "Composition from the same generated stage layers, including supporting performers. Not a gameplay screenshot.",
+    "items": [
+      {
+        "actor": "travel",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\gu_pen_ge\\cover-travel.png",
+        "sha256": "4c2dd15d40fe517547238db5cb8163e4e4a0d1ad1df02e37db9d6697951aae5c"
+      },
+      {
+        "actor": "life",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\gu_pen_ge\\cover-life.png",
+        "sha256": "79ce3f8fe29fd34a644f57fabbff461b11982bb7c0586c66dee1ebf1e5058301"
+      },
+      {
+        "actor": "business",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\gu_pen_ge\\cover-business.png",
+        "sha256": "0d6ebd26835e22eadc70decf2ea7bfa6cc01dc3433f24d560cd1092278074448"
+      },
+      {
+        "actor": "food",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\gu_pen_ge\\cover-food.png",
+        "sha256": "85159988b76111b104450c1755969417ce8259ffd510d20fb6a55de8c014eb54"
+      },
+      {
+        "actor": "adventure",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\gu_pen_ge\\cover-adventure.png",
+        "sha256": "3cf5b2868c1347bf0dc2b7f752e9017f47681d3adf6833708a2bd024b18b37f0"
+      },
+      {
+        "actor": "magic",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\gu_pen_ge\\cover-magic.png",
+        "sha256": "24237b514649bfa69df3910d4f729cf4616c43ce1b135533e1b4d0949ff5454d"
+      }
+    ]
+  },
+  "engine_scene_review": {
+    "method": "Godot 4.7.2 independent stage; six identities by six staged states; viewed contact sheets",
+    "path": "artifacts/music-pixel-review/gu_pen_ge-six-avatars-six-poses.png",
+    "not_user_acceptance": true
+  },
+  "normal_input_evidence": {
+    "method": "Travel avatar; physical keyboard events; actual audio clock; one pause and resize; standalone controller fixture",
+    "path": "artifacts/rework-play/gu_pen_ge-inputs.json",
+    "formal_host_review": false,
+    "audio_listening_review": false
+  }
+}

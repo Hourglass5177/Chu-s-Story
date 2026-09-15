@@ -1,0 +1,97 @@
+{
+  "version": 8,
+  "display_height": 156,
+  "method": "Intact generated head, neck, torso, bent elbows, wrists and fists are transformed together with uniform scale. No separate arm stretch. Points measured on reference.png.",
+  "avatars": {
+    "travel_blogger": {
+      "hip": [
+        148,
+        465
+      ],
+      "near_grip": [
+        212,
+        374
+      ],
+      "far_grip": [
+        282,
+        367
+      ],
+      "cut_y": 481
+    },
+    "life_blogger": {
+      "hip": [
+        135,
+        468
+      ],
+      "near_grip": [
+        205,
+        384
+      ],
+      "far_grip": [
+        275,
+        366
+      ],
+      "cut_y": 481
+    },
+    "business_blogger": {
+      "hip": [
+        139,
+        468
+      ],
+      "near_grip": [
+        247,
+        400
+      ],
+      "far_grip": [
+        320,
+        381
+      ],
+      "cut_y": 498
+    },
+    "food_blogger": {
+      "hip": [
+        128,
+        394
+      ],
+      "near_grip": [
+        218,
+        327
+      ],
+      "far_grip": [
+        264,
+        311
+      ],
+      "cut_y": 411
+    },
+    "adventure_blogger": {
+      "hip": [
+        148,
+        410
+      ],
+      "near_grip": [
+        278,
+        341
+      ],
+      "far_grip": [
+        331,
+        326
+      ],
+      "cut_y": 436
+    },
+    "magic_blogger": {
+      "hip": [
+        136,
+        433
+      ],
+      "near_grip": [
+        231,
+        369
+      ],
+      "far_grip": [
+        282,
+        356
+      ],
+      "cut_y": 461
+    }
+  }
+}

@@ -13,13 +13,9 @@ config_version=5
 config/name="楚物志"
 config/version="beta 0.5.0"
 run/main_scene="uid://bpggqwetns32d"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/image="uid://conv21o25i7e4"
 config/icon="uid://gforsoryh67s"
-
-[audio]
-
-driver/enable_input=true
 
 [autoload]
 
@@ -53,4 +49,5 @@ MAINMAP=""
 
 [rendering]
 
-rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

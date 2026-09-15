@@ -1,0 +1,186 @@
+{
+  "method": "imagegen whole strips; native cell slicing, technical green matte where needed; no palette quantization or source pixel reduction",
+  "task": "laohekou_si_xian",
+  "status": "generated candidates; not user accepted",
+  "pixel_canvas": [
+    1000,
+    600
+  ],
+  "logical_stage": [
+    1000,
+    600
+  ],
+  "actors": [
+    {
+      "actor": "travel",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/laohekou_si_xian/travel-pluck-r3.png",
+      "source_sha256": "db3cf9a4a761c79dc1ad050a042d09a8360938a555e13162a8716a1cf1934627",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/laohekou_si_xian/travel.png",
+      "runtime_sha256": "a75873d66e90e50db0b1f397c83e2287e8e135a2aed366fb7d6f225d5e9e0bfd",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "life",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/laohekou_si_xian/life-animation.png",
+      "source_sha256": "3c3dad16207647c11284a50b4eb927e695e08f800a8d1581f511a052c2d010ee",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/laohekou_si_xian/life.png",
+      "runtime_sha256": "cf44fdac4a34897277598d8ce9df16305f0ad9ccf3626575f8806afa92595020",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "business",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/laohekou_si_xian/business-animation.png",
+      "source_sha256": "5d306b449103ecc7d73302b062b3c5d3bc2bb4eb20b358fda93ded2f572b9f0e",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/laohekou_si_xian/business.png",
+      "runtime_sha256": "ca544d36bd069fee0162475f01a4b0bd0f8554c82c2c873b89b30515476e135a",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "food",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/laohekou_si_xian/food-animation.png",
+      "source_sha256": "f7a1ffe784598c73668cbc336d530c90a59da078562fa779a873ce6017791569",
+      "source_size": [
+        2012,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/laohekou_si_xian/food.png",
+      "runtime_sha256": "2a3fdc069655a41724c411a2b38ce85f128dea5c10d552d047b0143738f7d2a5",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "adventure",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/laohekou_si_xian/adventure-animation.png",
+      "source_sha256": "39aba8405cdfb391197625db210a8b115f6122c150ab23ca12808e7b2fb777e6",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/laohekou_si_xian/adventure.png",
+      "runtime_sha256": "2515ab6486b93b667604c781a2f4ce533706f5aea2353b23a83720e7faff4f46",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "magic",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/laohekou_si_xian/magic-animation.png",
+      "source_sha256": "707c6a1761762c69fc51375a6100709fa0ea0acc7c7c87117ec615083c3340d0",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/laohekou_si_xian/magic.png",
+      "runtime_sha256": "5bbb2e064f119a4b7d9e9962df5938f075865be76cd5b303fb4b33a9a06c715e",
+      "normal_playback_reviewed": false
+    }
+  ],
+  "npc": {
+    "source": "InheritanceTasks\\Art\\Pixel\\v3\\source\\laohekou_si_xian\\partners.png",
+    "frame_size": [
+      503,
+      390
+    ],
+    "frames": 8,
+    "native_alpha": false,
+    "source_sha256": "5938b45ae2125f044b33e9ae2e82e476196d51cc6e0fbe22e4325359f009806a"
+  },
+  "culture": "New game practice performance. Costume/instrument references documented in prompts; exact motions are artistic/gameplay interpretations. Gupen drum form and authentic audio remain awaiting source video.",
+  "pending": [
+    "user experience and art acceptance",
+    "human listening review of audio cuts and mix balance",
+    "formal Host multi-size review",
+    "continuous motion polish and cultural movement review"
+  ],
+  "covers": {
+    "method": "Composition from the same generated stage layers, including supporting performers. Not a gameplay screenshot.",
+    "items": [
+      {
+        "actor": "travel",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\laohekou_si_xian\\cover-travel.png",
+        "sha256": "1ab17bcd6c9dc9c2a316eed7945dd4a4cc01e0ce0783c6f64f52afc8d320751e"
+      },
+      {
+        "actor": "life",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\laohekou_si_xian\\cover-life.png",
+        "sha256": "7ddbaa8fb384f2afd52e56ad4dcc062b3914790c9b444a3029e5e6a16a7dc8e6"
+      },
+      {
+        "actor": "business",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\laohekou_si_xian\\cover-business.png",
+        "sha256": "d210b3b4a952625954f6877854860aa231b34eb93cc07efa9376caf7230ad990"
+      },
+      {
+        "actor": "food",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\laohekou_si_xian\\cover-food.png",
+        "sha256": "d0e01d6611d78203076fc4472190a44cdf8cd25ba9c18aadb1cada38d4a1963c"
+      },
+      {
+        "actor": "adventure",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\laohekou_si_xian\\cover-adventure.png",
+        "sha256": "7dc48e21dce0193497efc0fe23ad95d75319dc5081a8bd9a8687613713303209"
+      },
+      {
+        "actor": "magic",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\laohekou_si_xian\\cover-magic.png",
+        "sha256": "bb567310c58a02fcec85eea6cd65ff21b619788fc72645f6466ba51aa75064ee"
+      }
+    ]
+  },
+  "engine_scene_review": {
+    "method": "Godot 4.7.2 independent stage; six identities by six staged states; viewed contact sheets",
+    "path": "artifacts/music-pixel-review/laohekou_si_xian-six-avatars-six-poses.png",
+    "not_user_acceptance": true
+  },
+  "normal_input_evidence": {
+    "method": "Travel avatar; physical keyboard events; actual audio clock; one pause and resize; standalone controller fixture",
+    "path": "artifacts/rework-play/laohekou_si_xian-inputs.json",
+    "formal_host_review": false,
+    "audio_listening_review": false
+  }
+}

@@ -13,12 +13,12 @@ const PROFESSION_CARD_SCENE: PackedScene = preload("res://UI/Frontend/stateful_c
 
 ## 仅用于选角简图上的 UI 展示位置；真实出生坐标始终取自 MapSection.出生点坐标。
 const MAP_HOTSPOT_POSITIONS: Dictionary = {
-	MapSection.REGION.十堰: Vector2(0.285, 0.245),
-	MapSection.REGION.随州: Vector2(0.680, 0.320),
-	MapSection.REGION.孝感: Vector2(0.755, 0.505),
-	MapSection.REGION.黄冈: Vector2(0.895, 0.420),
-	MapSection.REGION.荆州: Vector2(0.575, 0.590),
-	MapSection.REGION.恩施: Vector2(0.095, 0.655),
+	MapSection.REGION.十堰: Vector2(0.120, 0.120),
+	MapSection.REGION.随州: Vector2(0.560, 0.080),
+	MapSection.REGION.孝感: Vector2(0.560, 0.580),
+	MapSection.REGION.黄冈: Vector2(0.980, 0.420),
+	MapSection.REGION.荆州: Vector2(0.430, 0.960),
+	MapSection.REGION.恩施: Vector2(0.040, 0.700),
 }
 
 @onready var slot_label: Label = %SlotLabel
@@ -36,6 +36,10 @@ const MAP_HOTSPOT_POSITIONS: Dictionary = {
 @onready var message_label: Label = %Message
 @onready var previous_button: Button = %PreviousButton
 @onready var confirm_button: Button = %ConfirmButton
+
+var difficulty_box: VBoxContainer
+var difficulty_buttons: Array[Button] = []
+var difficulty_description: Label
 
 var _setup: SessionSetup
 var _slot_index := -1
@@ -61,6 +65,7 @@ func _ready() -> void:
 	name_input.text_changed.connect(_on_name_changed)
 	previous_button.pressed.connect(_on_previous_pressed)
 	confirm_button.pressed.connect(_on_confirm_pressed)
+	_build_difficulty_controls()
 	_build_profession_cards()
 	_build_birthplace_controls()
 	_wire_focus_navigation()
@@ -92,6 +97,7 @@ func refresh_view() -> void:
 		return
 	var player := _get_current_player()
 	var valid_binding := player != null
+	difficulty_box.visible = valid_binding and player.is_bot()
 	name_input.editable = valid_binding
 	confirm_button.disabled = not valid_binding
 	previous_button.disabled = _slot_index < 0
@@ -115,6 +121,7 @@ func refresh_view() -> void:
 	name_input.text = player.display_name
 	_refreshing = false
 
+	_refresh_difficulty(player)
 	_update_profession_cards(player)
 	_update_birthplace_controls(player)
 	var detail_type := player.profession_type
@@ -140,6 +147,7 @@ func grab_initial_focus() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _handle_gamepad_accept(event): return
 	if not handle_cancel_action or screen_state != ScreenState.ACTIVE:
 		return
 	if event.is_action_pressed("ui_cancel"):
@@ -260,11 +268,8 @@ func _update_birthplace_controls(player: PlayerSetup) -> void:
 		_apply_region_button_style(list_button, state, player != null)
 
 		var hotspot := _hotspot_buttons[region] as Button
-		hotspot.text = (
-			"P%d已选" % (owner + 1)
-			if owner >= 0 and not owner_can_yield
-			else region_name
-		)
+		hotspot.text = region_name
+		hotspot.tooltip_text = "%s · P%d已选" % [region_name, owner + 1] if owner >= 0 and not owner_can_yield else region_name
 		hotspot.button_pressed = selected and (owner < 0 or owner_can_yield)
 		hotspot.toggle_mode = true
 		hotspot.disabled = player == null
@@ -292,6 +297,17 @@ func _apply_region_button_style(
 		"pressed",
 		FrontendStyle.card_style(state, false, false, true, interactable)
 	)
+	# List rows need button padding, not the large inset used by profession cards.
+	for style_name in ["normal", "hover", "focus", "pressed"]:
+		var compact := button.get_theme_stylebox(style_name).duplicate() as StyleBox
+		compact.content_margin_top = 6
+		compact.content_margin_bottom = 6
+		if button.is_in_group(&"frontend_birthplace_hotspot"):
+			compact.content_margin_left = 8
+			compact.content_margin_right = 8
+		button.add_theme_stylebox_override(style_name, compact)
+	if button.is_in_group(&"frontend_birthplace_option"):
+		button.custom_minimum_size.y = 72
 	var color := FrontendStyle.card_title_color(state, interactable)
 	button.add_theme_color_override("font_color", color)
 	button.add_theme_color_override("font_hover_color", color)
@@ -434,7 +450,15 @@ func _on_region_activated(region: int) -> void:
 	_show_region_preview(region)
 	player_draft_changed.emit(_slot_index)
 	if _region_buttons.has(region):
-		(_region_buttons[region] as Control).call_deferred("grab_focus")
+		_restore_region_focus.call_deferred(region, _slot_index)
+
+
+func _restore_region_focus(region: int, slot_index: int) -> void:
+	# A confirm/back action may leave this page before the deferred focus runs.
+	if not is_visible_in_tree() or not is_interaction_enabled() or slot_index != _slot_index:
+		return
+	var option := _region_buttons.get(region) as Control
+	if _can_focus(option): option.grab_focus()
 
 
 func _on_confirm_pressed() -> void:
@@ -613,6 +637,7 @@ func _wire_focus_navigation() -> void:
 		return
 
 	name_input.focus_neighbor_bottom = cards[0].get_path()
+	name_input.focus_next = cards[0].get_path()
 	name_input.focus_neighbor_top = previous_button.get_path()
 	name_input.focus_neighbor_left = name_input.get_path()
 	name_input.focus_neighbor_right = name_input.get_path()
@@ -658,3 +683,72 @@ func _wire_focus_navigation() -> void:
 	confirm_button.focus_neighbor_right = previous_button.get_path()
 	confirm_button.focus_neighbor_top = region_controls.back().get_path()
 	confirm_button.focus_neighbor_bottom = name_input.get_path()
+
+func _build_difficulty_controls() -> void:
+	var content := name_input.get_parent().get_parent()
+	difficulty_box = VBoxContainer.new()
+	difficulty_box.name = "DifficultyControls"
+	difficulty_box.add_theme_constant_override("separation", 8)
+	content.add_child(difficulty_box)
+	content.move_child(difficulty_box, name_input.get_parent().get_index() + 1)
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 18)
+	difficulty_box.add_child(row)
+	var caption := Label.new()
+	caption.text = "电脑难度"
+	caption.add_theme_font_size_override("font_size", 34)
+	row.add_child(caption)
+	var group := ButtonGroup.new()
+	for index: int in 3:
+		var button := Button.new()
+		button.name = "Difficulty%d" % index
+		button.custom_minimum_size = Vector2(220, 64)
+		button.toggle_mode = true
+		button.button_group = group
+		button.add_theme_font_size_override("font_size", 34)
+		button.add_theme_color_override("font_color", Color("#51331F"))
+		button.add_theme_constant_override("outline_size", 0)
+		button.pressed.connect(_on_difficulty_selected.bind(index))
+		row.add_child(button)
+		difficulty_buttons.append(button)
+	difficulty_description = Label.new()
+	difficulty_description.add_theme_font_size_override("font_size", 30)
+	difficulty_description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	difficulty_box.add_child(difficulty_description)
+
+func _on_difficulty_selected(value: int) -> void:
+	var player := _get_current_player()
+	if player == null or not player.is_bot(): return
+	if not is_interaction_enabled():
+		_refresh_difficulty(player)
+		return
+	player.ai_difficulty = value as PlayerSetup.AIDifficulty
+	_refresh_difficulty(player)
+	player_draft_changed.emit(_slot_index)
+
+func _refresh_difficulty(player: PlayerSetup) -> void:
+	if not player.is_bot():
+		_wire_focus_navigation()
+		return
+	for index: int in difficulty_buttons.size():
+		var button := difficulty_buttons[index]
+		var selected := int(player.ai_difficulty) == index
+		button.set_pressed_no_signal(selected)
+		button.text = ("已选 · " if selected else "") + AIProfile.LABELS[index]
+		button.tooltip_text = AIProfile.DESCRIPTIONS[index]
+		button.add_theme_stylebox_override("normal", FrontendStyle.make_box(Color("#F6E6C6"), Color("#947052"), 2, 10, Vector4(18, 6, 18, 6)))
+		button.add_theme_stylebox_override("pressed", FrontendStyle.make_box(Color("#6A4939"), Color("#E8B66A"), 4, 10, Vector4(18, 6, 18, 6)))
+		button.add_theme_color_override("font_pressed_color", Color("#FFF3D5"))
+		button.focus_neighbor_top = name_input.get_path()
+		button.focus_neighbor_left = difficulty_buttons[maxi(0, index - 1)].get_path()
+		button.focus_neighbor_right = difficulty_buttons[mini(2, index + 1)].get_path()
+		if not _profession_cards.is_empty(): button.focus_neighbor_bottom = (_profession_cards.values()[0] as Control).get_path()
+		difficulty_buttons[index].focus_next = difficulty_buttons[(index + 1) % 3].get_path() if index < 2 else (_profession_cards.values()[0] as Control).get_path()
+	difficulty_description.text = AIProfile.DESCRIPTIONS[int(player.ai_difficulty)]
+	_wire_focus_navigation()
+	name_input.focus_neighbor_bottom = difficulty_buttons[int(player.ai_difficulty)].get_path()
+	name_input.focus_next = difficulty_buttons[0].get_path()
+	var index := 0
+	for card: Control in _profession_cards.values():
+		if index < 3: card.focus_neighbor_top = difficulty_buttons[index].get_path()
+		index += 1

@@ -1,0 +1,17 @@
+{
+  "name": "Chu Workshop 48", "version": 1,
+  "colors": {
+    "ink":"2a2633", "deepwood":"44313b", "woodshadow":"624039", "wood":"8b5a42",
+    "woodlight":"b27a51", "goldwood":"d5a36b", "honey":"e5bc7f", "cream":"f4dfad",
+    "paper":"faedcb", "offwhite":"fff3d6", "skinshadow":"a45e47", "skin":"d38d65",
+    "skinlight":"edb783", "skinhi":"f5d3a2", "rose":"c97473", "brick":"9c4545",
+    "red":"bc5350", "coral":"e68162", "orange":"ed9b50", "yellow":"f3ca67",
+    "paleyellow":"f6e19b", "charcoal":"343a3f", "slate":"50565d", "stone":"747b7b",
+    "stone_light":"9aa398", "stone_hi":"c2c7ae", "deepblue":"293e52", "blue":"3e6373",
+    "teal":"50878a", "lightblue":"8fb9b0", "sky":"b7d7c5", "skyhi":"dce4c3",
+    "pine":"354e41", "leafshade":"52634a", "leaf":"71834e", "leaflit":"9ca66b",
+    "lemonleaf":"c4c48a", "purple":"58445d", "lavender":"8a748a", "mauve":"b6a0ae",
+    "silver":"c7c6bf", "silvershadow":"8e9297", "hairblack":"3a3138", "hairbrown":"604334",
+    "brownlight":"966747", "goldhair":"d8b164", "brassdark":"756044", "white":"f8f3df"
+  }
+}

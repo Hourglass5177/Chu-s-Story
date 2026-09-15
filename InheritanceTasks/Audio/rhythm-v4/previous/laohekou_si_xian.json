@@ -1,0 +1,986 @@
+{
+  "version": 3,
+  "audio_path": "res://InheritanceTasks/Audio/rhythm-v2/laohekou_si_xian-mix.ogg",
+  "audio_sha256": "5d7a2a31eefaa37f5bc5cad0e143105f5ae438af7d2de79f6f1598f49b257a8b",
+  "end_ms": 39000,
+  "events": [
+    {
+      "id": "laohekou_si_xian-v2-01",
+      "time_ms": 4950,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 4950,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-v2-02",
+      "time_ms": 6350,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 6350,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-v2-03",
+      "time_ms": 7750,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 7750,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-v2-04",
+      "time_ms": 8700,
+      "kind": "rest",
+      "direction": 0,
+      "end_ms": 9100,
+      "cue_ms": 1000,
+      "round": 0,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "laohekou_si_xian-v2-05",
+      "time_ms": 14450,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 14450,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-v2-06",
+      "time_ms": 14980,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 14980,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-v2-07",
+      "time_ms": 17250,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 17250,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-v2-08",
+      "time_ms": 17780,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 17780,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-v2-09",
+      "time_ms": 23950,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 23950,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-v2-10",
+      "time_ms": 25880,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 25880,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-v2-11",
+      "time_ms": 26410,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 26410,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-v2-12",
+      "time_ms": 27700,
+      "kind": "rest",
+      "direction": 0,
+      "end_ms": 28100,
+      "cue_ms": 1000,
+      "round": 2,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "laohekou_si_xian-v2-13",
+      "time_ms": 33450,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 33450,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "laohekou_si_xian-v2-14",
+      "time_ms": 33980,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 33980,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "laohekou_si_xian-v2-15",
+      "time_ms": 35380,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 35380,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "laohekou_si_xian-v2-16",
+      "time_ms": 36780,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 36780,
+      "cue_ms": 1000,
+      "round": 3
+    }
+  ],
+  "presentation": [
+    {
+      "id": "laohekou_si_xian-v2-01",
+      "time_ms": 4950,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 4950,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-v2-02",
+      "time_ms": 6350,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 6350,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-v2-03",
+      "time_ms": 7750,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 7750,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "laohekou_si_xian-v2-04",
+      "time_ms": 8700,
+      "kind": "rest",
+      "direction": 0,
+      "end_ms": 9100,
+      "cue_ms": 1000,
+      "round": 0,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "laohekou_si_xian-v2-05",
+      "time_ms": 14450,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 14450,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-v2-06",
+      "time_ms": 14980,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 14980,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-v2-07",
+      "time_ms": 17250,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 17250,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-v2-08",
+      "time_ms": 17780,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 17780,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "laohekou_si_xian-v2-09",
+      "time_ms": 23950,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 23950,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-v2-10",
+      "time_ms": 25880,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 25880,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-v2-11",
+      "time_ms": 26410,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 26410,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "laohekou_si_xian-v2-12",
+      "time_ms": 27700,
+      "kind": "rest",
+      "direction": 0,
+      "end_ms": 28100,
+      "cue_ms": 1000,
+      "round": 2,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "laohekou_si_xian-v2-13",
+      "time_ms": 33450,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 33450,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "laohekou_si_xian-v2-14",
+      "time_ms": 33980,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 33980,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "laohekou_si_xian-v2-15",
+      "time_ms": 35380,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 35380,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "laohekou_si_xian-v2-16",
+      "time_ms": 36780,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 36780,
+      "cue_ms": 1000,
+      "round": 3
+    }
+  ],
+  "sections": [
+    {
+      "id": "round-1",
+      "start_ms": 0,
+      "listen_end_ms": 3400,
+      "response_start_ms": 4950,
+      "end_ms": 9500,
+      "round": 0,
+      "teacher_times_ms": [
+        3550,
+        4250
+      ]
+    },
+    {
+      "id": "round-2",
+      "start_ms": 9500,
+      "listen_end_ms": 12900,
+      "response_start_ms": 14450,
+      "end_ms": 19000,
+      "round": 1,
+      "teacher_times_ms": [
+        13050,
+        13750
+      ]
+    },
+    {
+      "id": "round-3",
+      "start_ms": 19000,
+      "listen_end_ms": 22400,
+      "response_start_ms": 23950,
+      "end_ms": 28500,
+      "round": 2,
+      "teacher_times_ms": [
+        22550,
+        23250
+      ]
+    },
+    {
+      "id": "round-4",
+      "start_ms": 28500,
+      "listen_end_ms": 31900,
+      "response_start_ms": 33450,
+      "end_ms": 38000,
+      "round": 3,
+      "teacher_times_ms": [
+        32050,
+        32750
+      ]
+    }
+  ],
+  "tutorial_audio_path": "res://InheritanceTasks/Audio/rhythm-v3/laohekou_si_xian-lesson-1.ogg",
+  "feedback_key": "pluck",
+  "production_status": "game_arrangement_pending_listening",
+  "annotation_note": "游戏节奏编排v2；原调原速。短句自然边界、混音及文化动作仍待人工听审，不作为传统节型、帮腔声部或真实弓法转录。 v3：教学复用正式混音片段，伙伴演出独立时间线；既有切句仍待听审。",
+  "choreography": [
+    {
+      "id": "laohekou_si_xian-motion-000",
+      "actor": "partner_left",
+      "action": "play_phrase",
+      "start_ms": 0,
+      "end_ms": 1700,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 720
+    },
+    {
+      "id": "laohekou_si_xian-motion-001",
+      "actor": "partner_left",
+      "action": "handoff",
+      "start_ms": 1700,
+      "end_ms": 4950,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "laohekou_si_xian-motion-002",
+      "actor": "partner_right",
+      "action": "play_phrase",
+      "start_ms": 1700,
+      "end_ms": 3400,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 720
+    },
+    {
+      "id": "laohekou_si_xian-motion-003",
+      "actor": "partner_right",
+      "action": "handoff",
+      "start_ms": 3400,
+      "end_ms": 4950,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "laohekou_si_xian-motion-004",
+      "actor": "partner_left",
+      "action": "play_phrase",
+      "start_ms": 9500,
+      "end_ms": 11200,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 720
+    },
+    {
+      "id": "laohekou_si_xian-motion-005",
+      "actor": "partner_left",
+      "action": "handoff",
+      "start_ms": 11200,
+      "end_ms": 14450,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "laohekou_si_xian-motion-006",
+      "actor": "partner_right",
+      "action": "play_phrase",
+      "start_ms": 11200,
+      "end_ms": 12900,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 720
+    },
+    {
+      "id": "laohekou_si_xian-motion-007",
+      "actor": "partner_right",
+      "action": "handoff",
+      "start_ms": 12900,
+      "end_ms": 14450,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "laohekou_si_xian-motion-008",
+      "actor": "partner_left",
+      "action": "play_phrase",
+      "start_ms": 19000,
+      "end_ms": 20700,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 720
+    },
+    {
+      "id": "laohekou_si_xian-motion-009",
+      "actor": "partner_left",
+      "action": "handoff",
+      "start_ms": 20700,
+      "end_ms": 23950,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "laohekou_si_xian-motion-010",
+      "actor": "partner_right",
+      "action": "play_phrase",
+      "start_ms": 20700,
+      "end_ms": 22400,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 720
+    },
+    {
+      "id": "laohekou_si_xian-motion-011",
+      "actor": "partner_right",
+      "action": "handoff",
+      "start_ms": 22400,
+      "end_ms": 23950,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "laohekou_si_xian-motion-012",
+      "actor": "partner_left",
+      "action": "play_phrase",
+      "start_ms": 28500,
+      "end_ms": 30200,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 720
+    },
+    {
+      "id": "laohekou_si_xian-motion-013",
+      "actor": "partner_left",
+      "action": "handoff",
+      "start_ms": 30200,
+      "end_ms": 33450,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "laohekou_si_xian-motion-014",
+      "actor": "partner_right",
+      "action": "play_phrase",
+      "start_ms": 30200,
+      "end_ms": 31900,
+      "frames": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 720
+    },
+    {
+      "id": "laohekou_si_xian-motion-015",
+      "actor": "partner_right",
+      "action": "handoff",
+      "start_ms": 31900,
+      "end_ms": 33450,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    }
+  ],
+  "tutorial_steps": [
+    {
+      "instruction": "圈合上，拨一下",
+      "retry_hint": "圈合上，拨一下",
+      "initial_lane": -1,
+      "required": "hit",
+      "duration_ms": 5650,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/laohekou_si_xian-lesson-1.ogg",
+      "audio_sha256": "049b46f1a3a0a70aaff50af8489581d906445ae7e9aafee7ffc6ee48f29913e2",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/laohekou_si_xian-mix.ogg",
+      "source_in_ms": 0,
+      "source_out_ms": 5650,
+      "events": [
+        {
+          "id": "laohekou_si_xian-lesson-v5-0-0",
+          "time_ms": 4950,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 4950,
+          "cue_ms": 1000,
+          "round": 0
+        }
+      ],
+      "presentation": [
+        {
+          "id": "laohekou_si_xian-lesson-v5-0-0",
+          "time_ms": 4950,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 4950,
+          "cue_ms": 1000,
+          "round": 0
+        }
+      ],
+      "choreography": [
+        {
+          "id": "laohekou_si_xian-motion-000",
+          "actor": "partner_left",
+          "action": "play_phrase",
+          "start_ms": 0,
+          "end_ms": 1700,
+          "frames": [
+            0,
+            1,
+            2,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 720
+        },
+        {
+          "id": "laohekou_si_xian-motion-001",
+          "actor": "partner_left",
+          "action": "handoff",
+          "start_ms": 1700,
+          "end_ms": 4950,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "laohekou_si_xian-motion-002",
+          "actor": "partner_right",
+          "action": "play_phrase",
+          "start_ms": 1700,
+          "end_ms": 3400,
+          "frames": [
+            0,
+            1,
+            2,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 720
+        },
+        {
+          "id": "laohekou_si_xian-motion-003",
+          "actor": "partner_right",
+          "action": "handoff",
+          "start_ms": 3400,
+          "end_ms": 4950,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": [
+        {
+          "id": "round-1",
+          "start_ms": 0,
+          "listen_end_ms": 3400,
+          "response_start_ms": 4950,
+          "end_ms": 5650,
+          "round": 0,
+          "teacher_times_ms": [
+            3550,
+            4250
+          ]
+        }
+      ]
+    },
+    {
+      "instruction": "拨、松开、再拨",
+      "retry_hint": "拨、松开、再拨",
+      "initial_lane": -1,
+      "required": "double",
+      "duration_ms": 6180,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/laohekou_si_xian-lesson-2.ogg",
+      "audio_sha256": "68348d96938b75b129ee9c1874a77614a78a152968f8af398a3349aca262e1af",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/laohekou_si_xian-mix.ogg",
+      "source_in_ms": 9500,
+      "source_out_ms": 15680,
+      "events": [
+        {
+          "id": "laohekou_si_xian-lesson-v5-1-0",
+          "time_ms": 4950,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 4950,
+          "cue_ms": 1000,
+          "round": 1
+        },
+        {
+          "id": "laohekou_si_xian-lesson-v5-1-1",
+          "time_ms": 5480,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 5480,
+          "cue_ms": 1000,
+          "round": 1
+        }
+      ],
+      "presentation": [
+        {
+          "id": "laohekou_si_xian-lesson-v5-1-0",
+          "time_ms": 4950,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 4950,
+          "cue_ms": 1000,
+          "round": 1
+        },
+        {
+          "id": "laohekou_si_xian-lesson-v5-1-1",
+          "time_ms": 5480,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 5480,
+          "cue_ms": 1000,
+          "round": 1
+        }
+      ],
+      "choreography": [
+        {
+          "id": "laohekou_si_xian-motion-004",
+          "actor": "partner_left",
+          "action": "play_phrase",
+          "start_ms": 0,
+          "end_ms": 1700,
+          "frames": [
+            0,
+            1,
+            2,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 720
+        },
+        {
+          "id": "laohekou_si_xian-motion-005",
+          "actor": "partner_left",
+          "action": "handoff",
+          "start_ms": 1700,
+          "end_ms": 4950,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "laohekou_si_xian-motion-006",
+          "actor": "partner_right",
+          "action": "play_phrase",
+          "start_ms": 1700,
+          "end_ms": 3400,
+          "frames": [
+            0,
+            1,
+            2,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 720
+        },
+        {
+          "id": "laohekou_si_xian-motion-007",
+          "actor": "partner_right",
+          "action": "handoff",
+          "start_ms": 3400,
+          "end_ms": 4950,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": [
+        {
+          "id": "round-2",
+          "start_ms": 0,
+          "listen_end_ms": 3400,
+          "response_start_ms": 4950,
+          "end_ms": 6180,
+          "round": 1,
+          "teacher_times_ms": [
+            3550,
+            4250
+          ]
+        }
+      ]
+    },
+    {
+      "instruction": "拨完停手，听伙伴",
+      "retry_hint": "拨完停手，听伙伴",
+      "initial_lane": -1,
+      "required": "rest",
+      "duration_ms": 9500,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/laohekou_si_xian-lesson-3.ogg",
+      "audio_sha256": "18b8cac8c952d5d588ec069b9cee81156ec30f1e1d2cea25adf87370bcd0b87a",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/laohekou_si_xian-mix.ogg",
+      "source_in_ms": 19000,
+      "source_out_ms": 28500,
+      "events": [
+        {
+          "id": "laohekou_si_xian-lesson-v5-2-0",
+          "time_ms": 6880,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 6880,
+          "cue_ms": 1000,
+          "round": 2
+        },
+        {
+          "id": "laohekou_si_xian-lesson-v5-2-1",
+          "time_ms": 7410,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 7410,
+          "cue_ms": 1000,
+          "round": 2
+        },
+        {
+          "id": "laohekou_si_xian-lesson-v5-2-2",
+          "time_ms": 8700,
+          "kind": "rest",
+          "direction": 0,
+          "end_ms": 9100,
+          "cue_ms": 1000,
+          "round": 2,
+          "rest_policy": "release_required"
+        }
+      ],
+      "presentation": [
+        {
+          "id": "laohekou_si_xian-lesson-v5-2-0",
+          "time_ms": 6880,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 6880,
+          "cue_ms": 1000,
+          "round": 2
+        },
+        {
+          "id": "laohekou_si_xian-lesson-v5-2-1",
+          "time_ms": 7410,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 7410,
+          "cue_ms": 1000,
+          "round": 2
+        },
+        {
+          "id": "laohekou_si_xian-lesson-v5-2-2",
+          "time_ms": 8700,
+          "kind": "rest",
+          "direction": 0,
+          "end_ms": 9100,
+          "cue_ms": 1000,
+          "round": 2,
+          "rest_policy": "release_required"
+        }
+      ],
+      "choreography": [
+        {
+          "id": "laohekou_si_xian-motion-008",
+          "actor": "partner_left",
+          "action": "play_phrase",
+          "start_ms": 0,
+          "end_ms": 1700,
+          "frames": [
+            0,
+            1,
+            2,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 720
+        },
+        {
+          "id": "laohekou_si_xian-motion-009",
+          "actor": "partner_left",
+          "action": "handoff",
+          "start_ms": 1700,
+          "end_ms": 4950,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "laohekou_si_xian-motion-010",
+          "actor": "partner_right",
+          "action": "play_phrase",
+          "start_ms": 1700,
+          "end_ms": 3400,
+          "frames": [
+            0,
+            1,
+            2,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 720
+        },
+        {
+          "id": "laohekou_si_xian-motion-011",
+          "actor": "partner_right",
+          "action": "handoff",
+          "start_ms": 3400,
+          "end_ms": 4950,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": [
+        {
+          "id": "round-3",
+          "start_ms": 0,
+          "listen_end_ms": 3400,
+          "response_start_ms": 4950,
+          "end_ms": 9500,
+          "round": 2,
+          "teacher_times_ms": [
+            3550,
+            4250
+          ]
+        }
+      ]
+    }
+  ]
+}

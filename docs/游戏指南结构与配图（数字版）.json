@@ -274,7 +274,7 @@
       "group_id": "intro",
       "provider": "dynamic",
       "paths": [
-        "res://arts/游戏指南/实机截图/v1/对局全景.png"
+        "res://arts/游戏指南/实机截图/ui-20260915/对局全景.png"
       ],
       "layout": "full",
       "fit": "contain",
@@ -307,7 +307,7 @@
     {"id":"functional_feiyi_detail","match":"获得非遗后的真实详情弹窗","topic_id":"functional_tiles","group_id":"feiyi_tile","provider":"static","paths":["res://arts/游戏指南/实机截图/v3/非遗详情-潜江民歌.png"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":0.9,"alt":"潜江民歌非遗牌的真实详情弹窗","dynamic_kind":"","dynamic_id":"","requirements":[]},
     {"id":"functional_event","match":"事件公开并在地图选择终点","topic_id":"functional_tiles","group_id":"event_tile","provider":"static","paths":["res://arts/游戏指南/实机截图/v3/事件公开-沉浸体验.png","res://arts/游戏指南/实机截图/v3/事件移动-地图选点.png"],"captions":["先公开事件与效果","需要移动时，再回到地图选择终点"],"layout":"sequence","fit":"contain","min_item_width":560,"target_width_ratio":1.0,"alt":"沉浸体验事件从公开到地图选点的真实流程","dynamic_kind":"","dynamic_id":"","requirements":[{"kind":"event","id":"chen_jin_ti_yan"}]},
     {"id":"functional_shop","match":"商店完整实机图","topic_id":"functional_tiles","group_id":"food_shop_tile","provider":"static","paths":["res://arts/游戏指南/实机截图/v3/食物商店.png"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":1.0,"alt":"食物商店的商品、价格、购买按钮与余额","dynamic_kind":"","dynamic_id":"","requirements":[]},
-    {"id":"functional_market","match":"gameplay-market-validation.png","topic_id":"functional_tiles","group_id":"market_tile","provider":"dynamic","paths":["res://arts/游戏指南/实机截图/v1/非遗研究所.png"],"layout":"sequence","fit":"contain","min_item_width":0,"target_width_ratio":0.9,"alt":"非遗研究所的购买与出售页","dynamic_kind":"guide_capture","dynamic_id":"functional_market","requirements":[]},
+    {"id":"functional_market","match":"研究所购买页","topic_id":"functional_tiles","group_id":"market_tile","provider":"dynamic","paths":["res://arts/游戏指南/实机截图/v1/非遗研究所.png"],"layout":"sequence","fit":"contain","min_item_width":0,"target_width_ratio":0.9,"alt":"非遗研究所的购买与出售页","dynamic_kind":"guide_capture","dynamic_id":"functional_market","requirements":[]},
     {"id":"feiyi_active_detail","match":"查看非遗牌面与效果","topic_id":"feiyi_cards","group_id":"active_use","provider":"static","paths":["res://arts/游戏指南/实机截图/v3/非遗详情-潜江民歌.png"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":0.9,"alt":"非遗详情页展示牌面、介绍、效果和操作区域","dynamic_kind":"","dynamic_id":"","requirements":[]},
     {"id":"food_levels","match":"市级、省级、国家级各一张真实牌面","topic_id":"food_system","group_id":"levels_prices","provider":"dynamic","paths":["res://arts/食物牌/数字版/蒿子粑粑.png","res://arts/食物牌/数字版/完全版-v2/枣阳酸浆面.png","res://arts/食物牌/数字版/完全版-v2/荆州鱼糕.png"],"captions":["市级 · 150积分点","省级 · 250积分点","国家级 · 500积分点"],"layout":"gallery","fit":"contain","min_item_width":320,"target_width_ratio":1.0,"max_columns":3,"alt":"市级、省级和国家级食物牌；未发现时只显示牌背","dynamic_kind":"food_levels","dynamic_id":"food_levels","requirements":[]},
     {"id":"food_backpack_use","match":"食物背包与享用按钮","topic_id":"food_system","group_id":"consume_timing","provider":"static","paths":["res://arts/游戏指南/实机截图/v3/食物背包.png"],"layout":"full","fit":"contain","min_item_width":0,"target_width_ratio":1.0,"alt":"行动阶段打开的食物背包，展示食物牌和享用按钮","dynamic_kind":"","dynamic_id":"","requirements":[]},

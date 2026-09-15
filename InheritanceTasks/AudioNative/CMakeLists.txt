@@ -15,6 +15,7 @@ add_subdirectory("${GODOT_CPP_DIR}" godot-cpp EXCLUDE_FROM_ALL)
 
 add_library(chuwuzhi_audio SHARED
 	src/crepe_pitch_extractor.cpp
+	src/windows_vocal_capture.cpp
 	src/register_types.cpp
 )
 
@@ -24,6 +25,7 @@ target_include_directories(chuwuzhi_audio PRIVATE
 
 target_link_libraries(chuwuzhi_audio PRIVATE
 	godot::cpp
+	ole32
 	"${ONNXRUNTIME_ROOT}/runtimes/win-x64/native/onnxruntime.lib"
 )
 
@@ -32,9 +34,17 @@ if(MSVC)
 	set_property(TARGET chuwuzhi_audio PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 endif()
 
+# godot-cpp's target controls DEBUG_ENABLED independently of MSVC's build
+# configuration. Keep the two engine targets in separate DLLs.
+if(GODOTCPP_TARGET STREQUAL "template_release")
+	set(CHUWUZHI_AUDIO_OUTPUT_NAME "chuwuzhi_audio.windows.release.x86_64")
+else()
+	set(CHUWUZHI_AUDIO_OUTPUT_NAME "chuwuzhi_audio.windows.x86_64")
+endif()
+
 set_target_properties(chuwuzhi_audio PROPERTIES
 	PREFIX ""
-	OUTPUT_NAME "chuwuzhi_audio.windows.x86_64"
+	OUTPUT_NAME "${CHUWUZHI_AUDIO_OUTPUT_NAME}"
 	RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
 	RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_CURRENT_SOURCE_DIR}/bin"
 	RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/bin"

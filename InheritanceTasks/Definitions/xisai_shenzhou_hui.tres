@@ -2,18 +2,21 @@
 [ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
 [ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/xisai_shenzhou_hui.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://cir3j1tv6pljh" path="res://arts/非遗卡牌/黄石/西塞神舟会.jpg" id="3"]
+[ext_resource type="Resource" path="res://InheritanceTasks/Art/Pixel/v3/resources/xisai_shenzhou_hui.tres" id="pixel_presentation"]
+
 [resource]
 script = ExtResource("1")
 task_id = &"xisai_shenzhou_hui"
-display_name = "送舟入江"
+display_name = "西塞神舟会"
 heritage_name = "西塞神舟会"
 region = "黄石"
-hook = "抵消水流，让神舟稳稳留在中央水道。"
-instructions = PackedStringArray("观察水势", "反向操舵回正")
-control_hint = "左右键/摇杆操舵；鼠标左右拖动"
-cultural_link = "取神舟会最后的送舟仪式，不把它做成龙舟竞速。"
-duration_seconds = 25.0
+hook = "看清前方空道，护送神舟平安远去。"
+instructions = PackedStringArray("左右选择相邻水道；上下加速或减速。", "35秒内抵达；来不及判断时先减速。")
+control_hint = "A/D或左右换道，W/S加减速；点击邻道，滚轮调速；手柄方向与扳机"
+cultural_link = "依送舟入江表达设计，三道护送与速度控制为游戏化玩法，不作竞速仪式解说。"
+duration_seconds = 35.0
 task_scene = ExtResource("2")
 gallery_thumbnail = ExtResource("3")
-prototype_asset_note = "暂用对应国家级非遗牌正面。"
+prototype_asset_note = "独立像素场景、六博主主题装束与动作；当前美术版本见表现资源台账。"
 future_asset_slot = "独立任务缩略图（640×400）。"
+presentation = ExtResource("pixel_presentation")

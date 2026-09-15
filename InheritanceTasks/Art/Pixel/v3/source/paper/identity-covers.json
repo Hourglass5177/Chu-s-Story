@@ -1,0 +1,42 @@
+{
+  "method": "Unmodified ordinary-input Godot captures; separate cover for each chosen blogger",
+  "user_acceptance": false,
+  "covers": [
+    {
+      "avatar": "travel_blogger",
+      "source": "artifacts/paper-detail-v4/travel_blogger-ready.png",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/paper/cover-travel.png",
+      "sha256": "fc1c8e432ca9556d83ea67dbbbd6b39657e6ee052cf536e778564ce7ce5fa3c4"
+    },
+    {
+      "avatar": "life_blogger",
+      "source": "artifacts/paper-detail-v4/life_blogger-ready.png",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/paper/cover-life.png",
+      "sha256": "df635f363509066fc99916697b2f70bb7b3e00d1d94044b8d8d6c9007d59e3c4"
+    },
+    {
+      "avatar": "business_blogger",
+      "source": "artifacts/paper-detail-v4/business_blogger-ready.png",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/paper/cover-business.png",
+      "sha256": "4efee0fdbf65cf63c708b762f0a8428dfd27982c9273efb748282275879a482c"
+    },
+    {
+      "avatar": "food_blogger",
+      "source": "artifacts/paper-detail-v4/food_blogger-ready.png",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/paper/cover-food.png",
+      "sha256": "e16a7796d797913304d4f4d9e8edde284c3dcb84f1244b5a98710bbc41faf777"
+    },
+    {
+      "avatar": "adventure_blogger",
+      "source": "artifacts/paper-detail-v4/adventure_blogger-ready.png",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/paper/cover-adventure.png",
+      "sha256": "2d7a8122c1f6d424a61ef56941a830ecd2ecf2ee58a5b034c2d3dab469c08b5c"
+    },
+    {
+      "avatar": "magic_blogger",
+      "source": "artifacts/paper-detail-v4/magic_blogger-ready.png",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/paper/cover-magic.png",
+      "sha256": "2b1ae6963e1bdb82e163589a42814889c42e1a526aea16eb9321d44953bb1aef"
+    }
+  ]
+}

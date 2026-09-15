@@ -1,0 +1,20 @@
+{
+  "tool": "built-in imagegen",
+  "source": "InheritanceTasks/Art/Pixel/v3/source/dong/father-chibi-v8-original.png",
+  "reference_roles": {
+    "runtime/dong/father.png": "costume and sitting pose",
+    "runtime/dong/travel_blogger/reference.png": "anime pixel style and chibi proportions"
+  },
+  "prompt": "Replace elderly father with same cute anime pixel world as travel blogger; gray topknot, mature kind face, cream/navy robe, seated with both hands on knees, short rounded limbs and standing-equivalent three-head proportions; transparent background, one complete sprite. No chair/cart/environment. Preserve connected shoulders/elbows/wrists and seated balance.",
+  "source_sha256": "052475132d4476fba58c2e58cf73cdbf52f097542cf513e9055e8ddbe735aa44",
+  "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/dong/father-chibi-v8.png",
+  "alpha_trim_box": [
+    52,
+    37,
+    1066,
+    1369
+  ],
+  "processing": "Only transparent-margin trim; no palette reduction, redraw or resize.",
+  "runtime_sha256": "7a4b2fee1faea2e07717d6b659ee1a4df1af8799dfb7a2b10921ee268c0a9dbc",
+  "status": "Actual full-stage flat and downhill frames inspected alongside intact player; user acceptance pending."
+}

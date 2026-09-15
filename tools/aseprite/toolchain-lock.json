@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "aseprite": {
+    "version": "1.3.18.5",
+    "source_tag": "v1.3.18.5",
+    "root": "F:\\Tools\\Aseprite\\chuwuzhi-v1.3.18.5",
+    "executable": "F:\\Tools\\Aseprite\\chuwuzhi-v1.3.18.5\\build\\bin\\aseprite.exe",
+    "redistributable": false,
+    "build_status": "passed",
+    "install_instructions_sha256": "270bcb254e93eab275612fb696b85f7a1b024a9256db6f04785128a56badc26f",
+    "eula_sha256": "d80bd3c464d02d6fa3fce2347ca0ec7435a9a3265318b67bc4d2235bfd8fcbde",
+    "reported_version": "Aseprite 1.3.18.5-dev",
+    "lua_api_version": 41,
+    "executable_sha256": "9603198bf22020f97650fa6f3dc091cd7b2872ddd0093be28adf158febe96105",
+    "configure_arguments": [
+      "C:/Program Files/CMake/bin/cmake.exe",
+      "-S",
+      "F:\\Tools\\Aseprite\\chuwuzhi-v1.3.18.5\\source",
+      "-B",
+      "F:\\Tools\\Aseprite\\chuwuzhi-v1.3.18.5\\build",
+      "-G",
+      "Ninja",
+      "-DCMAKE_MAKE_PROGRAM=F:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe",
+      "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
+      "-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
+      "-DLAF_BACKEND=skia",
+      "-DSKIA_DIR=F:\\Tools\\Aseprite\\chuwuzhi-v1.3.18.5\\skia",
+      "-DSKIA_LIBRARY_DIR=F:\\Tools\\Aseprite\\chuwuzhi-v1.3.18.5\\skia\\out\\Release-x64",
+      "-DSKIA_LIBRARY=F:\\Tools\\Aseprite\\chuwuzhi-v1.3.18.5\\skia\\out\\Release-x64\\skia.lib"
+    ]
+  },
+  "downloads": [
+    {
+      "name": "source",
+      "url": "https://github.com/aseprite/aseprite/releases/download/v1.3.18.5/Aseprite-v1.3.18.5-Source.zip",
+      "sha256": "04b0a84617efb3107d380c352ebb0af9eb2633ff4c1a8bfcb671d2a437247d5d",
+      "size": 80149617,
+      "upstream_digest_verified": true
+    },
+    {
+      "name": "skia",
+      "url": "https://github.com/aseprite/skia/releases/download/m124-08a5439a6b/Skia-Windows-Release-x64.zip",
+      "sha256": "5a371a4b2819bb4eb96e36cd75fa623585e1d5477e253a970302b6f2471b6934",
+      "size": 28759398,
+      "upstream_digest_verified": false
+    }
+  ],
+  "tools": {
+    "cmake": {
+      "path": "C:/Program Files/CMake/bin/cmake.exe",
+      "version": "4.2.0-rc1",
+      "sha256": "b214620b00c8c1237be002cb6ca7bcb1bdc02291386587620e7e00d0f9861ef4"
+    },
+    "ninja": {
+      "path": "F:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe",
+      "version": "1.12.1",
+      "sha256": "5020138b3757035df9dca9a2243624d5810ffa6ae24444bd95f752cbd1b89123"
+    },
+    "msvc": "14.44.35207",
+    "windows_sdk": "10.0.26100.0"
+  },
+  "knowledge_skill": {
+    "repository": "https://github.com/Gamezxz/pixel-art-studio",
+    "commit": "f8c246635c4621a6c2b427833149afdc3dc3c719",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\skills\\pixel-art-studio",
+    "license": "MIT",
+    "skill_sha256": "3aea3d2fb63a1027ce0cd3f7e8c857e07897c58662536a71489ce19eba0d9296",
+    "license_sha256": "02356246e8a18ae2afe5d156ad52b6d5c6fce527ba86bddbcd7d588097af391a",
+    "use": "knowledge and visual-quality checks; Aseprite remains the user-selected production editor",
+    "installation": "Codex skill-installer; immutable commit; no upstream scripts executed"
+  },
+  "verification": {
+    "status": "passed",
+    "report": "artifacts/aseprite-toolchain/report.json",
+    "checks": [
+      "indexed palette preserved",
+      "two editable layers preserved",
+      "two frames and exact durations",
+      "animation tag preserved",
+      "slice and feet pivot preserved",
+      "transparent PNG alpha is binary",
+      "exact three visible colors",
+      "exactly one intended pixel changes across frames"
+    ],
+    "art_quality_validated": false
+  },
+  "recorded_at": "2026-09-13T22:21:41+08:00",
+  "toolchain_files": {
+    "build_toolchain.py": "648e58dc3cf2820ba588859b13a0da82d3cfdafc12981f45fbd70dee31556297",
+    "verify_toolchain.py": "7b531b09f2ec6e9959c782bd5183cdafe164e4803804161eb6d77330b0ea0acd",
+    "verify_toolchain.lua": "ced3e525c5fefc3a517118ae845b25fbf4bfdcc8bd9c20240e1a84fcb043a62a",
+    "export_p1_assets.py": "fba35e901f4af38c4263d0fb234457ae1821fd96cd43b85366851a342fa2793b",
+    "PIXEL_STANDARD.md": "f28feb5a4bfa90cb727b70e5273d40b92bb2047e81f360abd57feb18f81043f3",
+    "licenses/Aseprite-EULA.txt": "d80bd3c464d02d6fa3fce2347ca0ec7435a9a3265318b67bc4d2235bfd8fcbde",
+    "licenses/pixel-art-studio-MIT.txt": "02356246e8a18ae2afe5d156ad52b6d5c6fce527ba86bddbcd7d588097af391a"
+  },
+  "project_skill": {
+    "name": "chuwuzhi-pixel-production",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\skills\\chuwuzhi-pixel-production\\SKILL.md",
+    "sha256": "21b00dbdaffdfcc8dc7b9863d644312f90892ac51ceed73e92bbe281ead76f92",
+    "standard": "tools/aseprite/PIXEL_STANDARD.md",
+    "standard_sha256": "f28feb5a4bfa90cb727b70e5273d40b92bb2047e81f360abd57feb18f81043f3",
+    "validation": "skill-creator quick_validate.py"
+  },
+  "validation_dependency": {
+    "name": "PyYAML",
+    "version": "6.0.3",
+    "isolated_target": "F:/Tools/Aseprite/chuwuzhi-v1.3.18.5/validation-python",
+    "global_python_unchanged": true
+  }
+}

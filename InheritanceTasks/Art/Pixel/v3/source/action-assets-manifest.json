@@ -1,0 +1,29 @@
+{
+  "generator": "built-in imagegen",
+  "entries": [
+    {
+      "id": "props_green",
+      "source": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a09bc9-e997-7563-8200-e999ae612215\\exec-b9938d08-36c3-47a3-a6d6-e68447068a9a.png",
+      "prompt": "Preserve these four pixel art props exactly, including all shapes, faces, scale, orientation and sheet placement. Replace ONLY the black and brown blurry background and all contact shadows with a perfectly flat pure bright green #00ff00 technical matte. Also replace empty spaces between the wheel spokes with that same flat green; retain every wooden spoke. No checkerboard, no gradients, no glow, no text, no new decoration. Edge pixels of actual objects remain crisp and clean. The outcome is an exact asset separation sheet.",
+      "workspace_source": "InheritanceTasks\\Art\\Pixel\\v3\\source\\dong\\props_green.png"
+    },
+    {
+      "id": "ground",
+      "source": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a09bc9-e997-7563-8200-e999ae612215\\exec-db5de51b-22a0-44d4-b096-4542443ea5a5.png",
+      "prompt": "Production pixel art texture strip sheet for a side-view rural Chinese handcart game, limited coordinated warm earthy palette, confident large pixel clusters. Uniform #00ff00 green background, no writing. Three horizontal isolated strips stacked vertically with ample green separation: top strip is a continuous side-on broad beige compacted earth country road surface with small pebbles and a few grass tufts, its walkable TOP EDGE perfectly straight horizontal and clean, strip has dark soil sides extending 24 pixels down; middle strip is a continuous side-on wooden bridge DECK of brown joined planks, top edge perfectly straight horizontal, plank thickness visible, no rails no posts; bottom strip is a small side-view wooden bridge handrail section with two upright square posts and two simple horizontal rails. All strips exactly orthographic sideview with no isometric or top down perspective. Lighting matches sunny rural pixel art. Seamless left-right tile for top and middle. Do not draw a full landscape, sky, people or cart.",
+      "workspace_source": "InheritanceTasks\\Art\\Pixel\\v3\\source\\dong\\ground.png"
+    },
+    {
+      "id": "paper_pattern",
+      "source": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a09bc9-e997-7563-8200-e999ae612215\\exec-d8e82abf-6940-47a6-97ef-5df4634c7337.png",
+      "prompt": "Use case: sketch-to-render. This guide is an exact spatial layout for an original Chinese DOUBLE BIRD AND FLOWERING BRANCH paper-cutting game. Make a beautiful original flat vermilion-red papercut on perfectly flat white backing. Preserve the THREE WHITE HOLES in this guide EXACTLY in shape, position and size: left broad teardrop = negative space in LEFT BIRD WING; top middle four-lobed flower = negative space in central flowering motif; right teardrop = large leaf negative space on RIGHT SIDE. Build the ornate but readable red positive-space design AROUND those three locked white holes. Two elegant folk-art birds face one another across the central flower, curving branches with leaves, circular feather marks and a simple decorative border. Red connected paper bridges support all pieces; use a limited red/dark-red/ivory palette, no gradients, no textures, no photographic shadow, no text. Crisp 16-bit pixel clusters suitable for a 340x210 native game artwork. Landscape1360x840 same aspect as guide. The three white reserved regions must stay empty, exact registration to input. Paper-cut style original game drawing, not copy of existing artisan art.",
+      "workspace_source": "InheritanceTasks\\Art\\Pixel\\v3\\source\\paper\\paper_pattern.png"
+    },
+    {
+      "id": "paper_background",
+      "source": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a09bc9-e997-7563-8200-e999ae612215\\exec-8cf56e31-a551-4e0a-9cf9-c6c79e9df3a3.png",
+      "prompt": "Use case: stylized-concept. Top-down PIXEL ART background of a Chinese paper carving craft worktable. 500x300 native canvas,5:3 landscape. Warm pale wooden desktop with restrained grain and soft side daylight. In center a large empty dark brown rectangular wax carving mat occupying exactly x80..420,y56..266 in a 500x300 composition, completely unobstructed, no paper design in center (game will place the artwork). At upper left and right edges neatly arranged small carving knife, rolled paper, a few red paper offcuts. Tools stay outside the central mat. No hand, no person, no scissors as primary instrument, no text, no UI. Clean simple 16-bit pixel art, limited harmonious palette, broad color clusters, no photo realism or dense dithering. All objects strictly overhead, not tilted perspective.",
+      "workspace_source": "InheritanceTasks\\Art\\Pixel\\v3\\source\\paper\\paper_background.png"
+    }
+  ]
+}

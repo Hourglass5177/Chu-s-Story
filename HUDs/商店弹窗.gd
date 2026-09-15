@@ -11,14 +11,20 @@ const FOOD_CARD_VIEW_SCRIPT := preload("res://HUDs/food_card_view.gd")
 @onready var btn_guide: Button = $BtnGuide
 var hud:HUD
 var current_player: PlayerClass
-var shop_foods: Array[食物牌] = []
-var _refresh_used_this_visit: bool = false
+var visit := FoodShopVisit.new()
+var shop_foods: Array[食物牌]:
+	get: return visit.shelf
+	set(value): visit.shelf = value
+var _refresh_used_this_visit: bool:
+	get: return visit.refreshed
+	set(value): visit.refreshed = value
 var _modal_lease: int = -1
 var _turn_session_generation: int = -1
 var _turn_epoch: int = -1
 var _tooltip: Control
 
 func _ready():
+	call_deferred("_install_board_ui")
 	btn_close.pressed.connect(_on_leave)
 	btn_refresh.pressed.connect(_on_refresh_pressed)
 	btn_guide.pressed.connect(_open_guide)
@@ -58,8 +64,9 @@ func _open_guide() -> void:
 func open_shop(player: PlayerClass) -> void:
 	if visible:
 		return
+	if not visit.begin(player):
+		return
 	current_player = player
-	_refresh_used_this_visit = false
 	_turn_session_generation = TurnManager.get_session_generation()
 	_turn_epoch = TurnManager.get_turn_epoch()
 	_modal_lease = TurnManager.acquire_modal(
@@ -73,7 +80,6 @@ func open_shop(player: PlayerClass) -> void:
 	lbl_money.text = "余额：" + str(player.current_money) + " 点"
 	
 	# 从裁判那里进货 3 张牌
-	shop_foods = ResourceManager.draw_shop_foods(3)
 	_refresh_shelf()
 
 func _refresh_shelf() -> void:
@@ -112,19 +118,9 @@ func _update_refresh_button() -> void:
 	btn_refresh.disabled = not can_refresh
 
 func _on_refresh_pressed() -> void:
-	if current_player == null or _refresh_used_this_visit:
+	if not visit.refresh():
 		return
-	if not ProfessionManager.is_skill_enabled(current_player, PlayerClass.PlayerCharacter.商业博主):
-		return
-	if ResourceManager.食物牌库.is_empty():
-		return
-	_refresh_used_this_visit = true
-	var previous_foods: Array[食物牌] = shop_foods.duplicate()
-	# 旧货先离开抽牌池；抽完一批新货后，再按原展示顺序放到牌库底。
-	shop_foods = ResourceManager.draw_shop_foods(3)
-	ResourceManager.return_shop_foods_to_bottom(previous_foods)
 	_refresh_shelf()
-	ProfessionManager.notify_skill_triggered(current_player, "刷新商店")
 	if hud != null:
 		hud._update_game_informs("商店已刷新。")
 
@@ -158,7 +154,7 @@ func _open_food_guide(card: 食物牌, source: Control) -> void:
 func _buy_food(card: 食物牌, ui_node: Control) -> void:
 	if not shop_foods.has(card):
 		return
-	if not ResourceManager.buy_food(current_player, card):
+	if not visit.buy(card):
 		return
 	
 	# 从货架数组中移除
@@ -185,8 +181,7 @@ func _buy_food(card: 食物牌, ui_node: Control) -> void:
 
 func _on_leave() -> void:
 	# 离开时，把没买完的牌塞回牌库底
-	ResourceManager.return_shop_foods_to_bottom(shop_foods)
-	shop_foods.clear()
+	visit.close()
 	_refresh_used_this_visit = false
 	current_player = null
 	
@@ -201,3 +196,6 @@ func _on_leave() -> void:
 	_turn_session_generation = -1
 	_turn_epoch = -1
 	
+
+func _install_board_ui() -> void:
+	BoardPanelLayout.install(self, "shop", _on_leave)

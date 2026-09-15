@@ -37,11 +37,7 @@ const STANDARD_TASK_IDS: Array[StringName] = [
 	&"xingshan_min_ge",
 ]
 const RANDOMIZED_TASK_FIELDS: Dictionary[StringName, StringName] = {
-	&"gu_pen_ge": &"_pattern",
-	&"han_ju": &"_notes",
-	&"tujia_saye_erhe": &"_prompts",
-	&"xiabaoping_minjian_gushi": &"_pattern",
-	&"xingshan_min_ge": &"_targets",
+	&"xiabaoping_minjian_gushi": &"candidates",
 }
 
 
@@ -88,6 +84,7 @@ func test_all_fifteen_definitions_are_complete_unique_and_loadable() -> void:
 			continue
 		definitions.append(definition)
 		assert_true(definition.is_valid_definition(), file_name + " 定义必须完整")
+		assert_eq(definition.display_name,definition.heritage_name,"小游戏统一使用非遗原名")
 		assert_false(ids.has(definition.task_id), "task_id 不得重复：" + str(definition.task_id))
 		assert_has(EXPECTED_TASK_IDS, definition.task_id)
 		assert_not_null(definition.gallery_thumbnail, file_name + " 必须提供图鉴缩略图")
@@ -106,8 +103,10 @@ func test_all_fifteen_definitions_are_complete_unique_and_loadable() -> void:
 		assert_gte(definition.duration_seconds, 20.0)
 		if definition.task_id == &"huangmei_xi":
 			assert_eq(definition.duration_seconds, 45.0, "黄梅戏录唱使用独立的音频采样时长")
+		elif definition.task_id == &"xiabaoping_minjian_gushi":
+			assert_eq(definition.duration_seconds, 120.0, "三幕拼图共享120秒有效操作时间")
 		else:
-			assert_lte(definition.duration_seconds, 30.0, file_name + " 白模任务须在30秒内结束")
+			assert_lte(definition.duration_seconds, 45.0, file_name + " 任务不得超过45秒")
 		var task := autofree(definition.instantiate_task()) as HeritageTaskBase
 		assert_not_null(task, file_name + " 必须实例化独立任务场景")
 		if task != null:
@@ -184,21 +183,29 @@ func test_every_task_supports_deterministic_direct_success_and_failure() -> void
 
 
 func test_task_suspension_freezes_clock_and_manual_abort_is_one_shot() -> void:
-	var definition := _load_definition(&"xia_lian_dan_shu")
+	var definition := _load_definition(&"ezhou_diaohua_jianzhi")
 	var task := add_child_autofree(definition.instantiate_task()) as HeritageTaskBase
 	_prepare_task_rect(task)
-	task.configure(HeritageTaskRunContext.new(definition.task_id))
+	var run_context := HeritageTaskRunContext.new(definition.task_id)
+	run_context.metadata["skip_tutorial"] = true
+	task.configure(run_context)
 	var captured: Array[HeritageTaskResult] = []
 	task.task_completed.connect(func(result: HeritageTaskResult) -> void: captured.append(result))
 	task.start_task()
-	task._process(1.0)
+	task.set_process(false)
+	task.set_physics_process(false)
+	var driver := preload("res://tests/support/action_story_input.gd")
+	driver.tick(task,3.1)
 	var before_suspend: float = task.time_left
 	task.set_suspended(true)
 	task._process(4.0)
 	assert_almost_eq(task.time_left, before_suspend, 0.001)
 	task.set_suspended(false)
-	task._process(1.0)
-	assert_almost_eq(task.time_left, before_suspend - 1.0, 0.001)
+	driver.tick(task,1.5)
+	var after_resume: float = task.time_left
+	assert_almost_eq(after_resume,before_suspend,.02,"恢复倒数也冻结正式计时")
+	driver.tick(task,1.0)
+	assert_almost_eq(task.time_left, after_resume - 1.0, 0.02)
 	task.abort_manual()
 	task.abort_manual()
 	assert_eq(captured.size(), 1)
@@ -220,33 +227,18 @@ func test_every_standard_task_suspends_without_advancing_clock_or_progress() -> 
 
 
 func test_mouse_hold_state_is_cleared_when_suspending() -> void:
-	var held_fields: Dictionary[StringName, StringName] = {
-		&"ezhou_diaohua_jianzhi": &"_dragging",
-		&"jingzhou_hua_gu_xi": &"_holding",
-		&"laohekou_si_xian": &"_mouse_active",
-		&"ti_qin_xi": &"_mouse_active",
-		&"tianmen_tang_su": &"_holding",
-		&"xia_lian_dan_shu": &"_holding",
-		&"xingshan_min_ge": &"_mouse_dragging",
-		&"xisai_shenzhou_hui": &"_dragging",
-	}
-	for task_id: StringName in held_fields:
-		var task := _create_started_task(task_id, 4200)
-		var field: StringName = held_fields[task_id]
-		task.set(field, true)
-		task.set_suspended(true)
-		assert_false(bool(task.get(field)), str(task_id) + " 暂停后不得保留按住状态")
-	var controller_hold_fields: Dictionary[StringName, StringName] = {
-		&"ezhou_diaohua_jianzhi": &"_controller_cutting",
-		&"tianmen_tang_su": &"_controller_holding",
-		&"xia_lian_dan_shu": &"_controller_holding",
-	}
-	for task_id: StringName in controller_hold_fields:
-		var task := _create_started_task(task_id, 4250)
-		var field: StringName = controller_hold_fields[task_id]
-		task.set(field, true)
-		task.set_suspended(true)
-		assert_false(bool(task.get(field)), str(task_id) + " 暂停后不得保留手柄按住状态")
+	for task_id: StringName in STANDARD_TASK_IDS:
+		var task := _create_started_task(task_id,4200)
+		if task is HeritageStageTask:
+			task.pressed[0] = true
+			task.pressed[-1] = true
+			task.set_suspended(true)
+			assert_false(task.pressed[0])
+			assert_false(task.pressed[-1])
+		elif task_id in [&"ezhou_diaohua_jianzhi",&"xisai_shenzhou_hui"]:
+			task.set("_dragging",true)
+			task.set_suspended(true)
+			assert_false(task.get("_dragging"))
 
 
 func test_standard_task_timeout_returns_a_specific_failure_reason() -> void:
@@ -272,137 +264,118 @@ func test_randomized_tasks_repeat_exactly_with_the_same_private_seed() -> void:
 		var field: StringName = RANDOMIZED_TASK_FIELDS[task_id]
 		assert_eq(first.get(field), second.get(field), str(task_id) + " 相同种子必须生成相同内容")
 		assert_ne(first.get(field), different.get(field), str(task_id) + " 随机内容必须真正受任务种子控制")
+	# Music is authored against one final audio timeline, so changing the run
+	# seed must not regenerate the teacher's demonstration or response events.
+	var fixed_first := _create_started_task(&"gu_pen_ge", 4401)
+	var fixed_other := _create_started_task(&"gu_pen_ge", 4402)
+	assert_eq(fixed_first.get("chart").sections.size(), 3)
+	assert_eq(fixed_first.get("chart").sections, fixed_other.get("chart").sections)
+	assert_eq(fixed_first.get("chart").events, fixed_other.get("chart").events)
+	assert_eq(fixed_first.get("chart").audio_sha256, fixed_other.get("chart").audio_sha256)
 
 
 func test_all_standard_tasks_expose_mouse_and_ui_action_control_paths() -> void:
 	for task_id: StringName in STANDARD_TASK_IDS:
-		var definition := _load_definition(task_id)
-		var task := autofree(definition.instantiate_task()) as HeritageTaskBase
-		var script := task.get_script() as Script
-		var source: String = FileAccess.get_file_as_string(script.resource_path)
-		assert_true(source.contains("task_gui_input"), str(task_id) + " 必须提供鼠标操作")
-		assert_true(source.contains("ui_"), str(task_id) + " 必须使用 InputMap 动作支持键盘与手柄")
-		if source.contains("ui_accept"):
-			assert_true(source.contains("JOY_BUTTON_A"), str(task_id) + " 必须补齐手柄确认键")
-	for action: StringName in [&"ui_left", &"ui_right", &"ui_up", &"ui_down", &"ui_accept"]:
-		var has_keyboard: bool = false
-		var has_gamepad: bool = false
+		var task := _create_started_task(task_id,4301)
+		assert_true(task.has_method("task_gui_input"))
+		var event := InputEventMouseButton.new()
+		event.button_index=MOUSE_BUTTON_LEFT
+		event.position=Vector2(500,400)
+		if task_id==&"yandi_shennong_chuanshuo": event.position=Vector2(112,560)
+		event.pressed=true
+		if task_id != &"gu_pen_ge": assert_true(task.task_gui_input(event),str(task_id))
+	for action: StringName in [&"ui_left",&"ui_right",&"ui_up",&"ui_down",&"ui_accept"]:
+		var has_keyboard: bool=false
+		var has_gamepad: bool=false
 		for event: InputEvent in InputMap.action_get_events(action):
-			has_keyboard = has_keyboard or event is InputEventKey
-			has_gamepad = has_gamepad or event is InputEventJoypadButton or event is InputEventJoypadMotion
-		assert_true(has_keyboard, str(action) + " 必须有键盘映射")
-		if action != &"ui_accept":
-			assert_true(has_gamepad, str(action) + " 必须有手柄映射")
+			has_keyboard=has_keyboard or event is InputEventKey
+			has_gamepad=has_gamepad or event is InputEventJoypadButton or event is InputEventJoypadMotion
+		assert_true(has_keyboard)
+		if action!=&"ui_accept": assert_true(has_gamepad)
 
 
 func test_raw_gamepad_accept_is_handled_by_every_accept_driven_task() -> void:
-	var accept_driven_ids: Array[StringName] = [
-		&"dong_yong_chuanshuo",
-		&"ezhou_diaohua_jianzhi",
-		&"gu_pen_ge",
-		&"han_ju",
-		&"jingzhou_hua_gu_xi",
-		&"tianmen_tang_su",
-		&"tujia_saye_erhe",
-		&"xia_lian_dan_shu",
-		&"xiabaoping_minjian_gushi",
-		&"xingshan_min_ge",
-		&"yandi_shennong_chuanshuo",
-	]
-	var accept_event := InputEventJoypadButton.new()
-	accept_event.button_index = JOY_BUTTON_A
-	accept_event.pressed = true
-	for task_id: StringName in accept_driven_ids:
-		var task := _create_started_task(task_id, 4450)
-		if task_id == &"gu_pen_ge" or task_id == &"xiabaoping_minjian_gushi":
-			task.set("_stage", 1)
-		assert_true(task.task_input(accept_event), str(task_id) + " 必须响应手柄确认键")
-
+	for task_id: StringName in [&"ezhou_diaohua_jianzhi",&"gu_pen_ge",&"jingzhou_hua_gu_xi",&"tianmen_tang_su",&"xia_lian_dan_shu",&"xingshan_min_ge",&"yandi_shennong_chuanshuo"]:
+		var task := _create_started_task(task_id,4450)
+		for down: bool in [true,false]:
+			var event := InputEventJoypadButton.new()
+			event.button_index = JOY_BUTTON_A
+			event.pressed = down
+			assert_true(task.task_input(event),str(task_id))
 
 func test_paper_cut_cannot_teleport_from_start_to_finish() -> void:
-	var task := _create_started_task(&"ezhou_diaohua_jianzhi", 4500)
-	var path: PackedVector2Array = task.get("_path")
-	task.set("_last_pointer", path[0])
-	task.set("_pointer", path[-1])
-	task.set("_dragging", true)
-	task.task_tick(0.016)
-	assert_lt(float(task.get("_path_progress")), 0.50, "刻纸必须沿连续刻线推进，不能点击终点跳过")
-
+	var task := _create_started_task(&"ezhou_diaohua_jianzhi",4500)
+	var driver := preload("res://tests/support/action_story_input.gd")
+	var path: PackedVector2Array = task.get("contours")[0]
+	driver.mouse(task,path[0],true)
+	driver.motion(task,path[path.size()/2])
+	driver.mouse(task,path[-1],false)
+	assert_eq(task.get("segment"),0)
+	assert_lt(task.get("cut_distance"),task.get("cut_length")*.7)
 
 func test_tiqin_uses_discrete_bow_phrases_instead_of_reskinning_sixian_tracking() -> void:
-	var tiqin_source := FileAccess.get_file_as_string("res://InheritanceTasks/Tasks/ti_qin_xi.gd")
-	var sixian_source := FileAccess.get_file_as_string("res://InheritanceTasks/Tasks/laohekou_si_xian.gd")
-	assert_true(tiqin_source.contains("PHRASE_COUNT"))
-	assert_true(tiqin_source.contains("_phrases_passed"))
-	assert_false(sixian_source.contains("_phrases_passed"), "丝弦保留连续追音，提琴戏按完整弓句分段验收")
+	var bow := _load_definition(&"ti_qin_xi").music_chart
+	var pluck := _load_definition(&"laohekou_si_xian").music_chart
+	var hold_count: int=0
+	for e: Dictionary in bow.events:
+		if e.kind=="hold": hold_count+=1
+	assert_gt(hold_count,0)
+	for e: Dictionary in pluck.events: assert_ne(e.kind,"hold")
 
 
 func test_shenzhou_requires_steering_but_remains_controllable() -> void:
-	var unattended := _create_started_task(&"xisai_shenzhou_hui", 4600)
-	var unattended_results: Array[HeritageTaskResult] = []
-	unattended.task_completed.connect(func(result: HeritageTaskResult) -> void: unattended_results.append(result))
-	_run_until_finished(unattended)
-	assert_eq(unattended_results.size(), 1)
-	assert_eq(unattended_results[0].status, HeritageTaskResult.Status.FAILURE, "完全不操舵不得自动通关")
-
-	var steered := _create_started_task(&"xisai_shenzhou_hui", 4600)
-	var steered_results: Array[HeritageTaskResult] = []
-	steered.task_completed.connect(func(result: HeritageTaskResult) -> void: steered_results.append(result))
-	steered.set("_dragging", true)
-	var frame_count: int = 0
-	while steered.run_state == HeritageTaskBase.RunState.RUNNING and frame_count < 2000:
-		var boat_x: float = float(steered.get("_boat_x"))
-		var velocity: float = float(steered.get("_boat_velocity"))
-		steered.set("_steer", clampf((0.5 - boat_x) * 5.0 - velocity * 2.0, -1.0, 1.0))
-		steered._process(1.0 / 60.0)
-		frame_count += 1
-	assert_eq(steered_results.size(), 1)
-	assert_eq(steered_results[0].status, HeritageTaskResult.Status.SUCCESS, "持续修正方向应能通关")
-
+	var driver := preload("res://tests/support/action_story_input.gd")
+	for control: bool in [false,true]:
+		var task := _create_started_task(&"xisai_shenzhou_hui",4600)
+		var outcomes: Array = []
+		task.task_completed.connect(func(result: HeritageTaskResult) -> void: outcomes.append(result))
+		for frame: int in 36*120:
+			if task.run_state==HeritageTaskBase.RunState.FINISHED: break
+			if control: driver.escort(task)
+			task._process(1.0/120.0)
+		assert_eq(outcomes.size(),1)
+		if not outcomes.is_empty(): assert_eq(outcomes[0].is_success(),control)
 
 func test_tang_su_three_breaths_take_most_of_the_task_window() -> void:
-	var task := _create_started_task(&"tianmen_tang_su", 4700)
-	var captured: Array[HeritageTaskResult] = []
-	task.task_completed.connect(func(result: HeritageTaskResult) -> void: captured.append(result))
-	var targets: Array[Vector2] = [
-		Vector2(0.47, 0.58),
-		Vector2(0.62, 0.73),
-		Vector2(0.52, 0.64),
-	]
-	var frame_count: int = 0
-	while task.run_state == HeritageTaskBase.RunState.RUNNING and frame_count < 2000:
-		task.set("_holding", true)
-		task._process(1.0 / 60.0)
-		var segment: int = int(task.get("_segment"))
-		if segment < targets.size():
-			var inflation: float = float(task.get("_inflation"))
-			var target: Vector2 = targets[segment]
-			if inflation >= (target.x + target.y) * 0.5:
-				task.call("_commit_segment")
-		frame_count += 1
-	assert_eq(captured.size(), 1)
-	assert_eq(captured[0].status, HeritageTaskResult.Status.SUCCESS)
-	assert_gte(captured[0].elapsed_seconds, 20.0, "三口塑形不能在几秒内完成")
-	assert_lte(captured[0].elapsed_seconds, 23.0)
+	var task := _create_started_task(&"tianmen_tang_su",4700) as HeritageStageTask
+	var captured: Array[HeritageTaskResult]=[]
+	task.task_completed.connect(func(r: HeritageTaskResult) -> void: captured.append(r))
+	var residual_seen: bool=false
+	var release_radius: float=0
+	for frame: int in 3500:
+		if task.run_state==HeritageTaskBase.RunState.FINISHED: break
+		var state: int=task.get("blow_phase")
+		var event:=InputEventAction.new()
+		event.action=&"ui_accept"
+		if state==0:
+			event.pressed=true
+			task.task_input(event)
+		elif state==1 and float(task.get("radius"))> ([0.59,0.69,0.62][int(task.get("trial"))]):
+			release_radius=task.get("radius")
+			event.pressed=false
+			task.task_input(event)
+		elif state==2 and float(task.get("radius"))>release_radius+0.005:
+			residual_seen=true
+		task._process(1.0/120)
+	assert_true(residual_seen,"松开后必须实际继续膨胀")
+	assert_eq(captured.size(),1)
+	if not captured.is_empty():
+		assert_eq(captured[0].status,HeritageTaskResult.Status.SUCCESS)
+		assert_gte(captured[0].elapsed_seconds,18.0)
+		assert_lte(captured[0].elapsed_seconds,28.0)
 
 
 func test_shennong_platformer_has_high_ground_hazards_and_goal() -> void:
-	var task := _create_started_task(&"yandi_shennong_chuanshuo", 4800)
-	var platforms: Array = task.get("_platforms")
-	var hazards: Array = task.get("_hazards")
-	var goal_area: Rect2 = task.get("_goal_area")
-	assert_gte(platforms.size(), 6)
-	assert_gte(hazards.size(), 1, "平台跳跃必须存在可辨认陷阱")
-	var highest_y: float = INF
-	for platform: Rect2 in platforms:
-		highest_y = minf(highest_y, platform.position.y)
-	assert_lte(highest_y, task.size.y * 0.20, "关卡必须有明确高台")
-	assert_true(goal_area.has_area(), "关卡必须有独立终点区域")
-	var first_hazard: Rect2 = hazards[0]
-	task.set("_player_position", first_hazard.position - Vector2(0.0, 20.0))
-	task.set("_velocity", Vector2.ZERO)
-	task.task_tick(0.001)
-	assert_eq(int(task.get("_hazard_hits")), 1, "碰到陷阱必须产生失败反馈并复位")
+	var task:=_create_started_task(&"yandi_shennong_chuanshuo",4800)
+	var platforms: Array=task.get("_platforms")
+	var hazards: Array=task.get("_hazards")
+	assert_gte(platforms.size(),6)
+	assert_gte(hazards.size(),1)
+	for i: int in range(1,platforms.size()):
+		var rise: float=platforms[i-1].position.y-platforms[i].position.y
+		assert_lte(rise,470.0*470.0/(2*1150.0)*0.75)
+	assert_true((task.get("_goal") as Rect2).has_area())
+	# Reachability is exercised through normal input in test_heritage_rework.
 
 
 func test_host_configures_begins_and_forwards_exactly_one_result() -> void:
@@ -416,6 +389,7 @@ func test_host_configures_begins_and_forwards_exactly_one_result() -> void:
 	host.configure(definition, context)
 	host.begin()
 	host.begin()
+	host.start_from_preparation()
 	await wait_process_frames(2)
 	host.cancel(&"late_cancel")
 	assert_signal_emit_count(host, "task_entered", 1)
@@ -431,10 +405,12 @@ func test_host_reconfigure_cancels_old_task_without_leaking_a_public_result() ->
 	watch_signals(host)
 	host.configure(first, HeritageTaskRunContext.new(first.task_id))
 	host.begin()
+	host.start_from_preparation()
 	host.configure(second, HeritageTaskRunContext.new(second.task_id))
 	assert_signal_emit_count(host, "task_finished", 0)
 	assert_null(host.get_active_task())
 	host.begin()
+	host.start_from_preparation()
 	assert_signal_emit_count(host, "task_entered", 2)
 
 
@@ -478,8 +454,12 @@ func _create_started_task(task_id: StringName, seed: int) -> HeritageTaskBase:
 	var definition := _load_definition(task_id)
 	var task := add_child_autofree(definition.instantiate_task()) as HeritageTaskBase
 	_prepare_task_rect(task)
-	task.configure(HeritageTaskRunContext.new(task_id, null, null, 1, 1, seed))
+	var run_context := HeritageTaskRunContext.new(task_id, null, null, 1, 1, seed)
+	run_context.test_mode = true
+	run_context.metadata["skip_tutorial"] = true
+	task.configure(run_context)
 	task.start_task()
+	if task is HeritageStageTask: task._process(3.1)
 	return task
 
 

@@ -169,6 +169,10 @@ func record_food_consumed(player: PlayerClass, card: 食物牌) -> void:
 		_try_claim(player, ID_DA_WEI_DAI)
 
 
+func can_check_in_scenery(player: PlayerClass, section: MapSection) -> bool:
+	return _is_registered_player(player) and section != null and section.type == MapSection.SectionType.风景 and not _get_id_set(_progress_by_player[player], PROGRESS_SCENERY).has(_section_id(section))
+
+
 func record_scenery_check_in(player: PlayerClass, section: MapSection) -> bool:
 	if not _is_registered_player(player) or section == null or section.type != MapSection.SectionType.风景:
 		return false

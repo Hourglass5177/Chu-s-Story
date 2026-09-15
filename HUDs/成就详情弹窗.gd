@@ -17,6 +17,7 @@ var _modal_turn_epoch: int = -1
 
 
 func _ready() -> void:
+	call_deferred("_install_board_ui")
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_hud = get_tree().get_first_node_in_group("HUD") as HUD
 	guide_button.pressed.connect(_open_guide)
@@ -96,3 +97,6 @@ func _release_modal() -> void:
 	_modal_lease = -1
 	_modal_session_generation = -1
 	_modal_turn_epoch = -1
+
+func _install_board_ui() -> void:
+	BoardPanelLayout.install(self, "achievement", close_panel)

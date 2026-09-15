@@ -18,6 +18,25 @@ func _ready() -> void:
 	ProfessionManager.draw_choice_resolved.connect(_on_choice_resolved)
 	set_process(false)
 	hide()
+	MainUI.apply(self)
+	MainUI.pixel_label(countdown_label, 48)
+	$Frame.add_theme_stylebox_override("panel", MainUI.box("panel", 48))
+	$Dim.hide()
+	# This timed choice cannot be cancelled; Tab still stays within its controls.
+	BoardModalGuard.install(self, func(): pass)
+	get_viewport().size_changed.connect(_layout_board)
+	_layout_board.call_deferred()
+
+
+func _layout_board() -> void:
+	var area := get_viewport_rect().size
+	var panel_size := Vector2(minf(2360, area.x - 160), minf(1360, area.y - 120))
+	MainUI.rect($Frame, Rect2((area - panel_size) * 0.5, panel_size))
+	MainUI.rect($Frame/Header, Rect2(110, 60, panel_size.x - 220, 90))
+	MainUI.rect($Frame/Hint, Rect2(110, 160, panel_size.x - 220, 64))
+	MainUI.rect(cards_row, Rect2(110, 250, panel_size.x - 220, panel_size.y - 460))
+	cards_row.add_theme_constant_override("separation", 60)
+	MainUI.rect(confirm_button, Rect2(panel_size.x * 0.5 - 210, panel_size.y - 160, 420, 112))
 
 
 func _process(_delta: float) -> void:
@@ -28,8 +47,13 @@ func _process(_delta: float) -> void:
 
 
 func _on_choice_requested(request) -> void:
-	if request == null:
-		return
+	if request == null or (request.player != null and request.player.is_bot): return
+	if PrivateDecisionHandoff.needed():
+		hide()
+		var handoff := PrivateDecisionHandoff.new()
+		add_child(handoff)
+		await handoff.wait_for_player(request.player.player_name)
+		if int(InteractionCoordinator.get_active_snapshot().get("interaction_id", -1)) != request.request_id: return
 	_request = request
 	_cards.assign(request.cards)
 	_selected_card = _cards[0] if not _cards.is_empty() else null
@@ -51,14 +75,14 @@ func _render_cards() -> void:
 	for index: int in _cards.size():
 		var card = _cards[index]
 		var column := VBoxContainer.new()
-		column.custom_minimum_size = Vector2(390, 640)
+		column.custom_minimum_size = Vector2(600, 830)
 		column.add_theme_constant_override("separation", 10)
 		var shell := PanelContainer.new()
-		shell.custom_minimum_size = Vector2(370, 520)
+		shell.custom_minimum_size = Vector2(580, 650)
 		shell.add_theme_stylebox_override("panel", _card_style(card == _selected_card))
 		var image_button := TextureButton.new()
 		image_button.texture_normal = card.image_of_front
-		image_button.custom_minimum_size = Vector2(350, 500)
+		image_button.custom_minimum_size = Vector2(560, 630)
 		image_button.ignore_texture_size = true
 		image_button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
 		image_button.tooltip_text = card.card_name
@@ -69,7 +93,7 @@ func _render_cards() -> void:
 		name_label.text = card.card_name
 		name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		name_label.add_theme_font_override("font", _font())
-		name_label.add_theme_font_size_override("font_size", 31)
+		name_label.add_theme_font_size_override("font_size", 40)
 		name_label.add_theme_color_override("font_color", Color("542c1d"))
 		column.add_child(name_label)
 		var controls := HBoxContainer.new()
@@ -143,9 +167,9 @@ func _reset_panel() -> void:
 func _small_button(text_value: String) -> Button:
 	var button := Button.new()
 	button.text = text_value
-	button.custom_minimum_size = Vector2(104, 52)
+	button.custom_minimum_size = Vector2(164, 96)
 	button.add_theme_font_override("font", _font())
-	button.add_theme_font_size_override("font_size", 27)
+	button.add_theme_font_size_override("font_size", 36)
 	button.add_theme_color_override("font_color", Color("5a3325"))
 	button.add_theme_color_override("font_hover_color", Color("5a3325"))
 	button.add_theme_color_override("font_disabled_color", Color("8d816e"))
@@ -153,6 +177,7 @@ func _small_button(text_value: String) -> Button:
 	button.add_theme_stylebox_override("hover", _button_style(Color("f8dea8")))
 	button.add_theme_stylebox_override("pressed", _button_style(Color("c96a2b")))
 	button.add_theme_stylebox_override("disabled", _button_style(Color("d5c8aa")))
+	button.add_theme_stylebox_override("focus", MainUI.theme().get_stylebox("focus", "Button"))
 	return button
 
 

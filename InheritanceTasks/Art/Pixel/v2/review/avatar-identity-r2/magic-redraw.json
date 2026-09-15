@@ -1,0 +1,34 @@
+{ "frames": [
+   {
+    "filename": "magic-redraw.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 84, "h": 152 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 84, "h": 152 },
+    "sourceSize": { "w": 84, "h": 152 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.18.5-dev",
+  "image": "magic-redraw.png",
+  "format": "I8",
+  "size": { "w": 84, "h": 152 },
+  "scale": "1",
+  "layers": [
+   { "name": "hat crown - original large diamond construction", "opacity": 255, "blendMode": "normal" },
+   { "name": "coat tails and black trousers - original posture", "opacity": 255, "blendMode": "normal" },
+   { "name": "white sleeves and small hands on hips", "opacity": 255, "blendMode": "normal" },
+   { "name": "purple vest and shirt collar", "opacity": 255, "blendMode": "normal" },
+   { "name": "back hair - original grey-green outward neck locks", "opacity": 255, "blendMode": "normal" },
+   { "name": "face - tapered cheeks, original closed-eye expression", "opacity": 255, "blendMode": "normal" },
+   { "name": "blond swept bangs - large gold area and purple streaks", "opacity": 255, "blendMode": "normal" },
+   { "name": "wide tilted blue brim - original silhouette", "opacity": 255, "blendMode": "normal" },
+   { "name": "large harlequin bow and knot - original formal costume", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "identity_study", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 0, "w": 84, "h": 152 }, "pivot": {"x": 41, "y": 149 } }] }
+  ]
+ }
+}

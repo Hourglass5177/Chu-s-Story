@@ -1,0 +1,407 @@
+[gd_resource type="Resource" script_class="HeritageTaskPresentation" format=3]
+
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_presentation.gd" id="1"]
+[ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_avatar_appearance.gd" id="2"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/tujia_saye_erhe-background.png" id="bg"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/tujia_saye_erhe-avatars.png" id="atlas"]
+[ext_resource type="PackedScene" path="res://InheritanceTasks/Presentation/Stages/tujia_saye_erhe_pixel.tscn" id="stage"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/covers/tujia_saye_erhe.png" id="cover"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/identities/travel/portrait.png" id="portrait_travel"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/identities/life/portrait.png" id="portrait_life"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/identities/business/portrait.png" id="portrait_business"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/identities/food/portrait.png" id="portrait_food"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/identities/adventure/portrait.png" id="portrait_adventure"]
+[ext_resource type="Texture2D" path="res://InheritanceTasks/Art/Pixel/v1/runtime/identities/magic/portrait.png" id="portrait_magic"]
+
+[sub_resource type="AtlasTexture" id="travel_0"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 0, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="travel_1"]
+atlas = ExtResource("atlas")
+region = Rect2(128, 0, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="travel_2"]
+atlas = ExtResource("atlas")
+region = Rect2(256, 0, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="travel_3"]
+atlas = ExtResource("atlas")
+region = Rect2(384, 0, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="travel_4"]
+atlas = ExtResource("atlas")
+region = Rect2(512, 0, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="travel_5"]
+atlas = ExtResource("atlas")
+region = Rect2(640, 0, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="travel_6"]
+atlas = ExtResource("atlas")
+region = Rect2(768, 0, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="travel_7"]
+atlas = ExtResource("atlas")
+region = Rect2(896, 0, 128, 128)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_travel"]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("travel_0")}], "loop": true, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_1")}], "loop": true, "name": &"prepare", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_1")}], "loop": true, "name": &"prepare_left", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_2")}], "loop": true, "name": &"step_left", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_3")}], "loop": true, "name": &"prepare_right", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_4")}], "loop": true, "name": &"step_right", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_5")}], "loop": true, "name": &"rest", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_2")}], "loop": true, "name": &"action", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_6")}], "loop": true, "name": &"miss", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_7")}], "loop": true, "name": &"recover", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("travel_5")}], "loop": true, "name": &"release", "speed": 1.0}]
+
+[sub_resource type="Resource" id="avatar_travel"]
+script = ExtResource("2")
+avatar_id = &"travel_blogger"
+costume_id = &"tujia_saye_erhe"
+portrait = SubResource("travel_0")
+sprite_frames = SubResource("frames_travel")
+atlas = ExtResource("atlas")
+frame_size = Vector2i(128, 128)
+anchors = {&"feet": Vector2(64.0, 126)}
+reference_note = "依原角色制作的像素衍生；传统装束与互动动作是游戏化表现。"
+
+[sub_resource type="AtlasTexture" id="life_0"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 128, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="life_1"]
+atlas = ExtResource("atlas")
+region = Rect2(128, 128, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="life_2"]
+atlas = ExtResource("atlas")
+region = Rect2(256, 128, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="life_3"]
+atlas = ExtResource("atlas")
+region = Rect2(384, 128, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="life_4"]
+atlas = ExtResource("atlas")
+region = Rect2(512, 128, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="life_5"]
+atlas = ExtResource("atlas")
+region = Rect2(640, 128, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="life_6"]
+atlas = ExtResource("atlas")
+region = Rect2(768, 128, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="life_7"]
+atlas = ExtResource("atlas")
+region = Rect2(896, 128, 128, 128)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_life"]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("life_0")}], "loop": true, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_1")}], "loop": true, "name": &"prepare", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_1")}], "loop": true, "name": &"prepare_left", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_2")}], "loop": true, "name": &"step_left", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_3")}], "loop": true, "name": &"prepare_right", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_4")}], "loop": true, "name": &"step_right", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_5")}], "loop": true, "name": &"rest", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_2")}], "loop": true, "name": &"action", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_6")}], "loop": true, "name": &"miss", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_7")}], "loop": true, "name": &"recover", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("life_5")}], "loop": true, "name": &"release", "speed": 1.0}]
+
+[sub_resource type="Resource" id="avatar_life"]
+script = ExtResource("2")
+avatar_id = &"life_blogger"
+costume_id = &"tujia_saye_erhe"
+portrait = SubResource("life_0")
+sprite_frames = SubResource("frames_life")
+atlas = ExtResource("atlas")
+frame_size = Vector2i(128, 128)
+anchors = {&"feet": Vector2(64.0, 126)}
+reference_note = "依原角色制作的像素衍生；传统装束与互动动作是游戏化表现。"
+
+[sub_resource type="AtlasTexture" id="business_0"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 256, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="business_1"]
+atlas = ExtResource("atlas")
+region = Rect2(128, 256, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="business_2"]
+atlas = ExtResource("atlas")
+region = Rect2(256, 256, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="business_3"]
+atlas = ExtResource("atlas")
+region = Rect2(384, 256, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="business_4"]
+atlas = ExtResource("atlas")
+region = Rect2(512, 256, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="business_5"]
+atlas = ExtResource("atlas")
+region = Rect2(640, 256, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="business_6"]
+atlas = ExtResource("atlas")
+region = Rect2(768, 256, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="business_7"]
+atlas = ExtResource("atlas")
+region = Rect2(896, 256, 128, 128)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_business"]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("business_0")}], "loop": true, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_1")}], "loop": true, "name": &"prepare", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_1")}], "loop": true, "name": &"prepare_left", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_2")}], "loop": true, "name": &"step_left", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_3")}], "loop": true, "name": &"prepare_right", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_4")}], "loop": true, "name": &"step_right", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_5")}], "loop": true, "name": &"rest", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_2")}], "loop": true, "name": &"action", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_6")}], "loop": true, "name": &"miss", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_7")}], "loop": true, "name": &"recover", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("business_5")}], "loop": true, "name": &"release", "speed": 1.0}]
+
+[sub_resource type="Resource" id="avatar_business"]
+script = ExtResource("2")
+avatar_id = &"business_blogger"
+costume_id = &"tujia_saye_erhe"
+portrait = SubResource("business_0")
+sprite_frames = SubResource("frames_business")
+atlas = ExtResource("atlas")
+frame_size = Vector2i(128, 128)
+anchors = {&"feet": Vector2(64.0, 126)}
+reference_note = "依原角色制作的像素衍生；传统装束与互动动作是游戏化表现。"
+
+[sub_resource type="AtlasTexture" id="food_0"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 384, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="food_1"]
+atlas = ExtResource("atlas")
+region = Rect2(128, 384, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="food_2"]
+atlas = ExtResource("atlas")
+region = Rect2(256, 384, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="food_3"]
+atlas = ExtResource("atlas")
+region = Rect2(384, 384, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="food_4"]
+atlas = ExtResource("atlas")
+region = Rect2(512, 384, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="food_5"]
+atlas = ExtResource("atlas")
+region = Rect2(640, 384, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="food_6"]
+atlas = ExtResource("atlas")
+region = Rect2(768, 384, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="food_7"]
+atlas = ExtResource("atlas")
+region = Rect2(896, 384, 128, 128)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_food"]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("food_0")}], "loop": true, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_1")}], "loop": true, "name": &"prepare", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_1")}], "loop": true, "name": &"prepare_left", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_2")}], "loop": true, "name": &"step_left", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_3")}], "loop": true, "name": &"prepare_right", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_4")}], "loop": true, "name": &"step_right", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_5")}], "loop": true, "name": &"rest", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_2")}], "loop": true, "name": &"action", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_6")}], "loop": true, "name": &"miss", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_7")}], "loop": true, "name": &"recover", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("food_5")}], "loop": true, "name": &"release", "speed": 1.0}]
+
+[sub_resource type="Resource" id="avatar_food"]
+script = ExtResource("2")
+avatar_id = &"food_blogger"
+costume_id = &"tujia_saye_erhe"
+portrait = SubResource("food_0")
+sprite_frames = SubResource("frames_food")
+atlas = ExtResource("atlas")
+frame_size = Vector2i(128, 128)
+anchors = {&"feet": Vector2(64.0, 126)}
+reference_note = "依原角色制作的像素衍生；传统装束与互动动作是游戏化表现。"
+
+[sub_resource type="AtlasTexture" id="adventure_0"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 512, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="adventure_1"]
+atlas = ExtResource("atlas")
+region = Rect2(128, 512, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="adventure_2"]
+atlas = ExtResource("atlas")
+region = Rect2(256, 512, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="adventure_3"]
+atlas = ExtResource("atlas")
+region = Rect2(384, 512, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="adventure_4"]
+atlas = ExtResource("atlas")
+region = Rect2(512, 512, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="adventure_5"]
+atlas = ExtResource("atlas")
+region = Rect2(640, 512, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="adventure_6"]
+atlas = ExtResource("atlas")
+region = Rect2(768, 512, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="adventure_7"]
+atlas = ExtResource("atlas")
+region = Rect2(896, 512, 128, 128)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_adventure"]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("adventure_0")}], "loop": true, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_1")}], "loop": true, "name": &"prepare", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_1")}], "loop": true, "name": &"prepare_left", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_2")}], "loop": true, "name": &"step_left", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_3")}], "loop": true, "name": &"prepare_right", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_4")}], "loop": true, "name": &"step_right", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_5")}], "loop": true, "name": &"rest", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_2")}], "loop": true, "name": &"action", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_6")}], "loop": true, "name": &"miss", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_7")}], "loop": true, "name": &"recover", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("adventure_5")}], "loop": true, "name": &"release", "speed": 1.0}]
+
+[sub_resource type="Resource" id="avatar_adventure"]
+script = ExtResource("2")
+avatar_id = &"adventure_blogger"
+costume_id = &"tujia_saye_erhe"
+portrait = SubResource("adventure_0")
+sprite_frames = SubResource("frames_adventure")
+atlas = ExtResource("atlas")
+frame_size = Vector2i(128, 128)
+anchors = {&"feet": Vector2(64.0, 126)}
+reference_note = "依原角色制作的像素衍生；传统装束与互动动作是游戏化表现。"
+
+[sub_resource type="AtlasTexture" id="magic_0"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 640, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="magic_1"]
+atlas = ExtResource("atlas")
+region = Rect2(128, 640, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="magic_2"]
+atlas = ExtResource("atlas")
+region = Rect2(256, 640, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="magic_3"]
+atlas = ExtResource("atlas")
+region = Rect2(384, 640, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="magic_4"]
+atlas = ExtResource("atlas")
+region = Rect2(512, 640, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="magic_5"]
+atlas = ExtResource("atlas")
+region = Rect2(640, 640, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="magic_6"]
+atlas = ExtResource("atlas")
+region = Rect2(768, 640, 128, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="magic_7"]
+atlas = ExtResource("atlas")
+region = Rect2(896, 640, 128, 128)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames_magic"]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("magic_0")}], "loop": true, "name": &"ready", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_1")}], "loop": true, "name": &"prepare", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_1")}], "loop": true, "name": &"prepare_left", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_2")}], "loop": true, "name": &"step_left", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_3")}], "loop": true, "name": &"prepare_right", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_4")}], "loop": true, "name": &"step_right", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_5")}], "loop": true, "name": &"rest", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_2")}], "loop": true, "name": &"action", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_6")}], "loop": true, "name": &"miss", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_7")}], "loop": true, "name": &"recover", "speed": 1.0},
+{"frames": [{"duration": 1.0, "texture": SubResource("magic_5")}], "loop": true, "name": &"release", "speed": 1.0}]
+
+[sub_resource type="Resource" id="avatar_magic"]
+script = ExtResource("2")
+avatar_id = &"magic_blogger"
+costume_id = &"tujia_saye_erhe"
+portrait = SubResource("magic_0")
+sprite_frames = SubResource("frames_magic")
+atlas = ExtResource("atlas")
+frame_size = Vector2i(128, 128)
+anchors = {&"feet": Vector2(64.0, 126)}
+reference_note = "依原角色制作的像素衍生；传统装束与互动动作是游戏化表现。"
+
+[resource]
+script = ExtResource("1")
+background = ExtResource("bg")
+cover = ExtResource("cover")
+avatar_appearances = {&"travel_blogger": SubResource("avatar_travel"), &"life_blogger": SubResource("avatar_life"), &"business_blogger": SubResource("avatar_business"), &"food_blogger": SubResource("avatar_food"), &"adventure_blogger": SubResource("avatar_adventure"), &"magic_blogger": SubResource("avatar_magic")}
+properties = {"painter": "independent_music_stage", "art_status": "六身份逐格核对；等待引擎画面检查", "npc_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/music-npcs.png", "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/music-art-generation-log.json", "chart_review": "候选谱面尚未完成逐句听审；动作按游戏编排"}
+source_manifest_path = "res://InheritanceTasks/Art/Pixel/v1/presentation-manifest.json"
+stage_scene = ExtResource("stage")

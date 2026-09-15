@@ -2,18 +2,21 @@
 [ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
 [ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/ezhou_diaohua_jianzhi.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://8icmwjyyn7em" path="res://arts/非遗卡牌/鄂州/鄂州雕花剪纸.jpg" id="3"]
+[ext_resource type="Resource" path="res://InheritanceTasks/Art/Pixel/v3/resources/ezhou_diaohua_jianzhi.tres" id="pixel_presentation"]
+
 [resource]
 script = ExtResource("1")
 task_id = &"ezhou_diaohua_jianzhi"
-display_name = "一刀成花"
+display_name = "鄂州雕花剪纸"
 heritage_name = "鄂州雕花剪纸"
 region = "鄂州"
-hook = "沿连续刻线行刀，不要切断纸桥。"
-instructions = PackedStringArray("按住行刀", "沿刻线走到终点")
-control_hint = "鼠标拖动；方向键/摇杆移动，按住确认键行刀"
+hook = "沿同一张纸的四处纹样行刀，刻出双鸟花枝。"
+instructions = PackedStringArray("从金点落刀，沿当前纹样刻一圈。", "松开停刀，再移到下一处金点；30秒内刻完四处。")
+control_hint = "鼠标按住拖动；WASD/方向键或摇杆移动，确认键下刀"
 cultural_link = "以刻刀在蜡盘上雕刻叠纸，一次留下多张相同花样。"
-duration_seconds = 25.0
+duration_seconds = 30.0
 task_scene = ExtResource("2")
 gallery_thumbnail = ExtResource("3")
-prototype_asset_note = "暂用对应国家级非遗牌正面。"
-future_asset_slot = "独立任务缩略图（640×400）。"
+prototype_asset_note = "独立像素场景、六博主主题装束与动作；当前美术版本见表现资源台账。"
+future_asset_slot = "纸样与四处镂空共用paper_cut_pattern几何，手/刀/蜡盘另层。"
+presentation = ExtResource("pixel_presentation")

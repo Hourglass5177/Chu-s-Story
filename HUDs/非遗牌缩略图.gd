@@ -15,6 +15,8 @@ func setup(data: 非遗牌):
 	tooltip_text = card_data.card_name 
 	
 func _ready():
+	focus_mode = Control.FOCUS_ALL
+	pressed.connect(func(): request_open_detail.emit(card_data))
 	# 连接内置的鼠标信号
 	mouse_entered.connect(func(): mask.show())
 	mouse_exited.connect(func(): mask.hide())
@@ -24,21 +26,20 @@ func _ready():
 # 监听鼠标左右键点击
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			# 左键：打开详情窗口
-			request_open_detail.emit(card_data)
-			
-		elif event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.button_index == MOUSE_BUTTON_RIGHT:
 			# 右键：弹出使用菜单
 			_show_context_menu(event.global_position)
 
 func _show_context_menu(pos: Vector2):
+	if not TurnManager.GameOn or TurnManager.now_player_index >= TurnManager.players.size(): return
 	var current_player = TurnManager.players[TurnManager.now_player_index]
+	if current_player.is_bot: return
 	if not card_data.can_use(current_player):
 		return
 		
 	var popup = PopupMenu.new()
 	popup.add_item("使用")
+	popup.popup_hide.connect(popup.queue_free)
 	popup.id_pressed.connect(func(id):
 		if id == 0: ResourceManager.use_feiyi(current_player, card_data)
 	)

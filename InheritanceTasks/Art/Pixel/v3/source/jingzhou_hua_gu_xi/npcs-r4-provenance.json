@@ -1,0 +1,33 @@
+{
+  "tool": "built-in imagegen",
+  "revision": "r4",
+  "source": "npcs-r4-green.png",
+  "source_sha256": "08c59e0dc5fd46b5bfe4668a784adea5630a6aca7b35257002cc2a115c6b1599",
+  "identity_reference": "npcs.png: 红衣、青袖裤、花饰、团扇的独立主唱",
+  "style_reference": "本关旅行博主源图，仅用于头身与画法，不替换独立演员身份",
+  "cultural_status": "沿用已有参考服装设计；本次未新增真实戏服或身段考证",
+  "source_size": [
+    1254,
+    1254
+  ],
+  "exported_frame_size": [
+    627,
+    627
+  ],
+  "source_alpha": false,
+  "source_review": "四个关键姿势，完整脸、双手、扇与双脚可见。",
+  "export_review": "保留原稿颜色和帧框，技术绿底转换；完整场景中未见棋盘格或明显绿边。",
+  "whole_scene_review": {
+    "status": "reviewed",
+    "files": [
+      "artifacts/music-host-v4/jingzhou_hua_gu_xi-teaching-1280.png"
+    ],
+    "notes": "对照玩家、后景演员、舞台、教学顶条及器物，未把单张角色稿当整景完成。"
+  },
+  "normal_speed_review": "pending",
+  "six_avatar_review": "pending",
+  "user_accepted": false,
+  "remaining": "连续动作、帧间接缝、真实演出考证与用户画面反馈继续单独检查。",
+  "rejected_source": "npcs-r4-rejected-checker.png",
+  "rejection_reason": "RGB图画入了棋盘格，用imagegen改为纯技术绿底后才接入。"
+}

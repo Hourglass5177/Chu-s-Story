@@ -15,6 +15,7 @@ var _modal_session_generation: int = -1
 var _modal_turn_epoch: int = -1
 
 func _ready() -> void:
+	call_deferred("_install_board_ui")
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	rules_button.pressed.connect(_open_score_guide)
 	guide_button.pressed.connect(_open_score_guide)
@@ -25,6 +26,9 @@ func _ready() -> void:
 	close_button.pressed.connect(close_panel)
 	_setup_close_button_feedback()
 	hide()
+
+func _install_board_ui() -> void:
+	BoardPanelLayout.install(self, "score", close_panel)
 
 func _setup_close_button_feedback() -> void:
 	if close_button.texture_normal == null:

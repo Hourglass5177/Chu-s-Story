@@ -496,6 +496,11 @@ func _run_external_food_response(source: PlayerClass, target: PlayerClass) -> vo
 
 func _wait_until(predicate: Callable, max_frames: int = 30) -> bool:
 	for _frame: int in max_frames:
+		var handoff := get_tree().get_first_node_in_group("PRIVATE_DECISION_HANDOFF") as PrivateDecisionHandoff
+		if handoff != null and handoff.visible:
+			assert_true(get_tree().paused, "接手期间应冻结选择窗口")
+			assert_false(_overlay.visible, "接手前不显示上一位或下一位玩家的私密选项")
+			handoff.accepted.emit()
 		if bool(predicate.call()):
 			return true
 		await get_tree().process_frame

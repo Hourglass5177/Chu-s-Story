@@ -1,4 +1,5 @@
 #include "crepe_pitch_extractor.h"
+#include "windows_vocal_capture.h"
 
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/defs.hpp>
@@ -11,6 +12,7 @@ void initialize_chuwuzhi_audio(ModuleInitializationLevel level) {
 		return;
 	}
 	GDREGISTER_CLASS(CrepePitchExtractor);
+	GDREGISTER_CLASS(WindowsVocalCapture);
 }
 
 void uninitialize_chuwuzhi_audio(ModuleInitializationLevel level) {

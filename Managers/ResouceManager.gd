@@ -503,23 +503,21 @@ func get_feiyi_with_profession(player: PlayerClass, section: MapSection, energy_
 	return card
 
 # 4. 业务逻辑封装：处理打工发工资
+func get_work_salary(player: PlayerClass, work_turn: int) -> int:
+	if work_turn < 1 or work_turn > 3: return -1
+	return FoodManager.adjust_work_income(player, 200 + work_turn * 50)
+
 func process_work_salary(player: PlayerClass, work_turn: int) -> bool:
 	if player == null:
 		return false
 	var work_energy_cost: int = ProfessionManager.get_work_energy_cost(player)
 	if player.current_energy < work_energy_cost:
 		return false
-	var salary: int = 0
-	# 严格按照说明书规则发放打工积分 [cite: 85]
-	match work_turn:
-		1: salary = 250
-		2: salary = 300
-		3: salary = 350
-		_:
-			push_error("ResourceManager.process_work_salary: 非法的打工轮数。")
-			return false
-	salary = FoodManager.adjust_work_income(player, salary)
-		
+	var salary := get_work_salary(player, work_turn)
+	if salary < 0:
+		push_error("ResourceManager.process_work_salary: 非法的打工轮数。")
+		return false
+
 	if work_energy_cost > 0:
 		modify_energy(player, -work_energy_cost, "打工消耗")
 	modify_money(player, salary, "打工第 " + str(work_turn) + " 回合工资")
@@ -610,68 +608,15 @@ func draw_food_cards_filtered(count: int, levels: Array = []) -> Array[食物牌
 	return result
 
 func get_score_breakdown(player: PlayerClass) -> Dictionary:
-	var base_score: int = 0
-	var categories: Dictionary[非遗牌.CardCategory, int] = {}
-	var regions: Dictionary[MapSection.REGION, int] = {}
-	var category_combo_bonus: int = 0
-	var category_completion_bonus: int = 0
-	var region_combo_bonus: int = 0
-	var region_completion_bonus: int = 0
-	var region_annotations: Dictionary = {}
-	for card:非遗牌 in get_effective_feiyi_cards(player):
-		base_score += card.base_score
-		
-		categories[card.category] = categories.get(card.category, 0) + 1
-		regions[card.region] = regions.get(card.region, 0) + 1
-
-	# 类别组合分取单个类别中可达成的最高档位，不能由遍历顺序决定。
-	for category:非遗牌.CardCategory in categories:
-		var category_count: int = categories[category]
-		category_combo_bonus = maxi(category_combo_bonus, _get_category_combo_bonus(category_count))
-		var category_total: int = 类别非遗牌上限字典.get(category, 0)
-		if category_total > 0 and category_count >= category_total:
-			category_completion_bonus += 5
-
-	if categories.size() >= 5:
-		category_combo_bonus += 5
-
-	# 每个满足条件的城市分别计算“同城 5 张”和“集齐全市”；江汉三市仍只计一次。
-	# 按枚举顺序遍历，保证多城同时达成时的显示不受 Dictionary 顺序影响。
-	for region_value in range(MapSection.REGION.size()):
-		var region: MapSection.REGION = region_value
-		if not regions.has(region):
-			continue
-		var region_count: int = regions[region]
-		if region_count >= 5:
-			region_combo_bonus += 5
-			_add_region_score_annotation(region_annotations, region, "触发同城5张得分+5")
-		var region_total: int = 地区非遗牌上限字典.get(region, 0)
-		if region_total > 0 and region_count >= region_total:
-			region_completion_bonus += 2
-			_add_region_score_annotation(region_annotations, region, "触发集齐全市得分+2")
-
-	if regions.has(MapSection.REGION.潜江) and regions.has(MapSection.REGION.天门) and regions.has(MapSection.REGION.仙桃):
-		region_completion_bonus += 2
-		for trio_region: MapSection.REGION in [MapSection.REGION.潜江, MapSection.REGION.天门, MapSection.REGION.仙桃]:
-			_add_region_score_annotation(region_annotations, trio_region, "触发江汉三市得分+2（合计）")
-
-	var regional_combo_score := region_combo_bonus + region_completion_bonus
-	var achievement_score: int = 0
-	var achievements: Array = []
-	var achievement_manager: Node = get_node_or_null("/root/AchievementManager")
-	if achievement_manager != null:
-		achievement_score = int(achievement_manager.call("get_achievement_score", player))
-		achievements = achievement_manager.call("get_owned_achievements", player)
-	return {
-		"base_score": base_score,
-		"category_combo_score": category_combo_bonus,
-		"category_completion_score": category_completion_bonus,
-		"regional_combo_score": regional_combo_score,
-		"achievement_score": achievement_score,
-		"achievements": achievements,
-		"total_score": base_score + category_combo_bonus + category_completion_bonus + regional_combo_score + achievement_score,
-		"region_annotations": region_annotations,
-	}
+	var cards: Array = []
+	for card: 非遗牌 in get_effective_feiyi_cards(player):
+		cards.append({"score": card.base_score, "category": int(card.category), "region": int(card.region)})
+	var breakdown := HeritageScoreRules.calculate(cards, 类别非遗牌上限字典, 地区非遗牌上限字典)
+	var achievement_manager := get_node_or_null("/root/AchievementManager")
+	breakdown["achievement_score"] = int(achievement_manager.call("get_achievement_score", player)) if achievement_manager != null else 0
+	breakdown["achievements"] = achievement_manager.call("get_owned_achievements", player) if achievement_manager != null else []
+	breakdown["total_score"] += breakdown.achievement_score
+	return breakdown
 
 func _add_region_score_annotation(annotations: Dictionary, region: MapSection.REGION, text: String) -> void:
 	if not annotations.has(region):

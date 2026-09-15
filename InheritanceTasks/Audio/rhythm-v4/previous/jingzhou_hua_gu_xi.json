@@ -1,0 +1,716 @@
+{
+  "version": 3,
+  "audio_path": "res://InheritanceTasks/Audio/rhythm-v2/jingzhou_hua_gu_xi-mix.ogg",
+  "audio_sha256": "93d87779ae4f087e339597dd3131451893b00d039f323c83cc35a5a6db7d172a",
+  "end_ms": 39000,
+  "events": [
+    {
+      "id": "jingzhou_hua_gu_xi-v2-01",
+      "time_ms": 4950,
+      "kind": "hold",
+      "direction": 0,
+      "end_ms": 6250,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-02",
+      "time_ms": 7150,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 7150,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-03",
+      "time_ms": 8700,
+      "kind": "rest",
+      "direction": 0,
+      "end_ms": 9100,
+      "cue_ms": 1000,
+      "round": 0,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-04",
+      "time_ms": 14450,
+      "kind": "hold",
+      "direction": 0,
+      "end_ms": 16150,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-05",
+      "time_ms": 16650,
+      "kind": "hold",
+      "direction": 0,
+      "end_ms": 17900,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-06",
+      "time_ms": 23950,
+      "kind": "hold",
+      "direction": 0,
+      "end_ms": 25050,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-07",
+      "time_ms": 26150,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 26150,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-08",
+      "time_ms": 27700,
+      "kind": "rest",
+      "direction": 0,
+      "end_ms": 28100,
+      "cue_ms": 1000,
+      "round": 2,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-09",
+      "time_ms": 33450,
+      "kind": "hold",
+      "direction": 0,
+      "end_ms": 34950,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-10",
+      "time_ms": 35650,
+      "kind": "hold",
+      "direction": 0,
+      "end_ms": 36900,
+      "cue_ms": 1000,
+      "round": 3
+    }
+  ],
+  "presentation": [
+    {
+      "id": "jingzhou_hua_gu_xi-v2-01",
+      "time_ms": 4950,
+      "kind": "hold",
+      "direction": 0,
+      "end_ms": 6250,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-02",
+      "time_ms": 7150,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 7150,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-03",
+      "time_ms": 8700,
+      "kind": "rest",
+      "direction": 0,
+      "end_ms": 9100,
+      "cue_ms": 1000,
+      "round": 0,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-04",
+      "time_ms": 14450,
+      "kind": "hold",
+      "direction": 0,
+      "end_ms": 16150,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-05",
+      "time_ms": 16650,
+      "kind": "hold",
+      "direction": 0,
+      "end_ms": 17900,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-06",
+      "time_ms": 23950,
+      "kind": "hold",
+      "direction": 0,
+      "end_ms": 25050,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-07",
+      "time_ms": 26150,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 26150,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-08",
+      "time_ms": 27700,
+      "kind": "rest",
+      "direction": 0,
+      "end_ms": 28100,
+      "cue_ms": 1000,
+      "round": 2,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-09",
+      "time_ms": 33450,
+      "kind": "hold",
+      "direction": 0,
+      "end_ms": 34950,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-v2-10",
+      "time_ms": 35650,
+      "kind": "hold",
+      "direction": 0,
+      "end_ms": 36900,
+      "cue_ms": 1000,
+      "round": 3
+    }
+  ],
+  "sections": [
+    {
+      "id": "round-1",
+      "start_ms": 0,
+      "listen_end_ms": 3400,
+      "response_start_ms": 4950,
+      "end_ms": 9500,
+      "round": 0,
+      "teacher_times_ms": [
+        3550,
+        4250
+      ]
+    },
+    {
+      "id": "round-2",
+      "start_ms": 9500,
+      "listen_end_ms": 12900,
+      "response_start_ms": 14450,
+      "end_ms": 19000,
+      "round": 1,
+      "teacher_times_ms": [
+        13050,
+        13750
+      ]
+    },
+    {
+      "id": "round-3",
+      "start_ms": 19000,
+      "listen_end_ms": 22400,
+      "response_start_ms": 23950,
+      "end_ms": 28500,
+      "round": 2,
+      "teacher_times_ms": [
+        22550,
+        23250
+      ]
+    },
+    {
+      "id": "round-4",
+      "start_ms": 28500,
+      "listen_end_ms": 31900,
+      "response_start_ms": 33450,
+      "end_ms": 38000,
+      "round": 3,
+      "teacher_times_ms": [
+        32050,
+        32750
+      ]
+    }
+  ],
+  "tutorial_audio_path": "res://InheritanceTasks/Audio/rhythm-v3/jingzhou_hua_gu_xi-lesson-1.ogg",
+  "feedback_key": "sing",
+  "production_status": "game_arrangement_pending_listening",
+  "annotation_note": "游戏节奏编排v2；原调原速。短句自然边界、混音及文化动作仍待人工听审，不作为传统节型、帮腔声部或真实弓法转录。 v3：教学复用正式混音片段，伙伴演出独立时间线；既有切句仍待听审。",
+  "choreography": [
+    {
+      "id": "jingzhou_hua_gu_xi-motion-000",
+      "actor": "lead",
+      "action": "prepare",
+      "start_ms": 0,
+      "end_ms": 380,
+      "frames": [
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-motion-001",
+      "actor": "lead",
+      "action": "sing_phrase",
+      "start_ms": 380,
+      "end_ms": 3400,
+      "frames": [
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 1500
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-motion-002",
+      "actor": "lead",
+      "action": "handoff",
+      "start_ms": 3400,
+      "end_ms": 4950,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-motion-003",
+      "actor": "lead",
+      "action": "prepare",
+      "start_ms": 9500,
+      "end_ms": 9880,
+      "frames": [
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-motion-004",
+      "actor": "lead",
+      "action": "sing_phrase",
+      "start_ms": 9880,
+      "end_ms": 12900,
+      "frames": [
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 1500
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-motion-005",
+      "actor": "lead",
+      "action": "handoff",
+      "start_ms": 12900,
+      "end_ms": 14450,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-motion-006",
+      "actor": "lead",
+      "action": "prepare",
+      "start_ms": 19000,
+      "end_ms": 19380,
+      "frames": [
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-motion-007",
+      "actor": "lead",
+      "action": "sing_phrase",
+      "start_ms": 19380,
+      "end_ms": 22400,
+      "frames": [
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 1500
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-motion-008",
+      "actor": "lead",
+      "action": "handoff",
+      "start_ms": 22400,
+      "end_ms": 23950,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-motion-009",
+      "actor": "lead",
+      "action": "prepare",
+      "start_ms": 28500,
+      "end_ms": 28880,
+      "frames": [
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-motion-010",
+      "actor": "lead",
+      "action": "sing_phrase",
+      "start_ms": 28880,
+      "end_ms": 31900,
+      "frames": [
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 1500
+    },
+    {
+      "id": "jingzhou_hua_gu_xi-motion-011",
+      "actor": "lead",
+      "action": "handoff",
+      "start_ms": 31900,
+      "end_ms": 33450,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    }
+  ],
+  "tutorial_steps": [
+    {
+      "instruction": "轮到你，点一下",
+      "retry_hint": "轮到你，点一下",
+      "initial_lane": -1,
+      "required": "hit",
+      "duration_ms": 7850,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/jingzhou_hua_gu_xi-lesson-1.ogg",
+      "audio_sha256": "42c184d4d3532c9334eb37b2b5e24b08ca3e4c8c657cbf81e84dd8c1f728e373",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/jingzhou_hua_gu_xi-mix.ogg",
+      "source_in_ms": 0,
+      "source_out_ms": 7850,
+      "events": [
+        {
+          "id": "jingzhou_hua_gu_xi-lesson-v5-0-0",
+          "time_ms": 7150,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 7150,
+          "cue_ms": 1000,
+          "round": 0
+        }
+      ],
+      "presentation": [
+        {
+          "id": "jingzhou_hua_gu_xi-lesson-v5-0-0",
+          "time_ms": 7150,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 7150,
+          "cue_ms": 1000,
+          "round": 0
+        }
+      ],
+      "choreography": [
+        {
+          "id": "jingzhou_hua_gu_xi-motion-000",
+          "actor": "lead",
+          "action": "prepare",
+          "start_ms": 0,
+          "end_ms": 380,
+          "frames": [
+            0
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "jingzhou_hua_gu_xi-motion-001",
+          "actor": "lead",
+          "action": "sing_phrase",
+          "start_ms": 380,
+          "end_ms": 3400,
+          "frames": [
+            1,
+            2,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 1500
+        },
+        {
+          "id": "jingzhou_hua_gu_xi-motion-002",
+          "actor": "lead",
+          "action": "handoff",
+          "start_ms": 3400,
+          "end_ms": 4950,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": [
+        {
+          "id": "round-1",
+          "start_ms": 0,
+          "listen_end_ms": 3400,
+          "response_start_ms": 4950,
+          "end_ms": 7850,
+          "round": 0,
+          "teacher_times_ms": [
+            3550,
+            4250
+          ]
+        }
+      ]
+    },
+    {
+      "instruction": "按住，青圈合上时松开",
+      "retry_hint": "按住，青圈合上时松开",
+      "initial_lane": -1,
+      "required": "hold",
+      "duration_ms": 6950,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/jingzhou_hua_gu_xi-lesson-2.ogg",
+      "audio_sha256": "7e5190896746c5aebbf4305a1ba8a95ebbb368e871b1f72b58c82328719d3adc",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/jingzhou_hua_gu_xi-mix.ogg",
+      "source_in_ms": 0,
+      "source_out_ms": 6950,
+      "events": [
+        {
+          "id": "jingzhou_hua_gu_xi-lesson-v5-1-0",
+          "time_ms": 4950,
+          "kind": "hold",
+          "direction": 0,
+          "end_ms": 6250,
+          "cue_ms": 1000,
+          "round": 0
+        }
+      ],
+      "presentation": [
+        {
+          "id": "jingzhou_hua_gu_xi-lesson-v5-1-0",
+          "time_ms": 4950,
+          "kind": "hold",
+          "direction": 0,
+          "end_ms": 6250,
+          "cue_ms": 1000,
+          "round": 0
+        }
+      ],
+      "choreography": [
+        {
+          "id": "jingzhou_hua_gu_xi-motion-000",
+          "actor": "lead",
+          "action": "prepare",
+          "start_ms": 0,
+          "end_ms": 380,
+          "frames": [
+            0
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "jingzhou_hua_gu_xi-motion-001",
+          "actor": "lead",
+          "action": "sing_phrase",
+          "start_ms": 380,
+          "end_ms": 3400,
+          "frames": [
+            1,
+            2,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 1500
+        },
+        {
+          "id": "jingzhou_hua_gu_xi-motion-002",
+          "actor": "lead",
+          "action": "handoff",
+          "start_ms": 3400,
+          "end_ms": 4950,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": [
+        {
+          "id": "round-1",
+          "start_ms": 0,
+          "listen_end_ms": 3400,
+          "response_start_ms": 4950,
+          "end_ms": 6950,
+          "round": 0,
+          "teacher_times_ms": [
+            3550,
+            4250
+          ]
+        }
+      ]
+    },
+    {
+      "instruction": "收声后，停手听主唱",
+      "retry_hint": "收声后，停手听主唱",
+      "initial_lane": -1,
+      "required": "hold_rest",
+      "duration_ms": 9500,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/jingzhou_hua_gu_xi-lesson-3.ogg",
+      "audio_sha256": "8cf329418a3d0271bc218c1fa764202c519b78391d58bca98e56ca7161df63d9",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/jingzhou_hua_gu_xi-mix.ogg",
+      "source_in_ms": 19000,
+      "source_out_ms": 28500,
+      "events": [
+        {
+          "id": "jingzhou_hua_gu_xi-lesson-v5-2-0",
+          "time_ms": 4950,
+          "kind": "hold",
+          "direction": 0,
+          "end_ms": 6050,
+          "cue_ms": 1000,
+          "round": 2
+        },
+        {
+          "id": "jingzhou_hua_gu_xi-lesson-v5-2-1",
+          "time_ms": 8700,
+          "kind": "rest",
+          "direction": 0,
+          "end_ms": 9100,
+          "cue_ms": 1000,
+          "round": 2,
+          "rest_policy": "release_required"
+        }
+      ],
+      "presentation": [
+        {
+          "id": "jingzhou_hua_gu_xi-lesson-v5-2-0",
+          "time_ms": 4950,
+          "kind": "hold",
+          "direction": 0,
+          "end_ms": 6050,
+          "cue_ms": 1000,
+          "round": 2
+        },
+        {
+          "id": "jingzhou_hua_gu_xi-lesson-v5-2-1",
+          "time_ms": 8700,
+          "kind": "rest",
+          "direction": 0,
+          "end_ms": 9100,
+          "cue_ms": 1000,
+          "round": 2,
+          "rest_policy": "release_required"
+        }
+      ],
+      "choreography": [
+        {
+          "id": "jingzhou_hua_gu_xi-motion-006",
+          "actor": "lead",
+          "action": "prepare",
+          "start_ms": 0,
+          "end_ms": 380,
+          "frames": [
+            0
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "jingzhou_hua_gu_xi-motion-007",
+          "actor": "lead",
+          "action": "sing_phrase",
+          "start_ms": 380,
+          "end_ms": 3400,
+          "frames": [
+            1,
+            2,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 1500
+        },
+        {
+          "id": "jingzhou_hua_gu_xi-motion-008",
+          "actor": "lead",
+          "action": "handoff",
+          "start_ms": 3400,
+          "end_ms": 4950,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": [
+        {
+          "id": "round-3",
+          "start_ms": 0,
+          "listen_end_ms": 3400,
+          "response_start_ms": 4950,
+          "end_ms": 9500,
+          "round": 2,
+          "teacher_times_ms": [
+            3550,
+            4250
+          ]
+        }
+      ]
+    }
+  ]
+}

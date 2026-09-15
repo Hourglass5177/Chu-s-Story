@@ -1,0 +1,706 @@
+{
+  "version": 4,
+  "assets": [
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/paper/background.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/paper/paper_background.png",
+      "size": [
+        500,
+        300
+      ],
+      "sha256": "f929f2277f8e162daefea96fea22ac2f5dc25630cab55fe1c654c47a3582a53b",
+      "method": "500x300 native palette normalization"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/paper/pattern.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/paper/paper_pattern.png",
+      "size": [
+        340,
+        210
+      ],
+      "sha256": "385deca831eb1622dcb0da87d1aad2fe51c8da277280fd11951a490fdb9717c4",
+      "method": "three active hole contours extracted as gameplay geometry; backing mapped to wax mat"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/paper/travel_blogger-hand.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/paper/paper_hands.png",
+      "size": [
+        56,
+        54
+      ],
+      "sha256": "b373238cfb7b14349cf6edeb85e45514d9310cb67212733b5a1b611cdfd9eb18",
+      "method": "six sleeve variants; blade-tip crop is input anchor"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/paper/life_blogger-hand.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/paper/paper_hands.png",
+      "size": [
+        56,
+        54
+      ],
+      "sha256": "63a241c6bfe21a975770120f2404cd5cad583db78880b30e4990202d0b62fd8a",
+      "method": "six sleeve variants; blade-tip crop is input anchor"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/paper/business_blogger-hand.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/paper/paper_hands.png",
+      "size": [
+        56,
+        54
+      ],
+      "sha256": "18d4c63e98f7702ea4dcdbfd6bba476e86f92b37d96a15268312a5495d5715e6",
+      "method": "six sleeve variants; blade-tip crop is input anchor"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/paper/food_blogger-hand.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/paper/paper_hands.png",
+      "size": [
+        56,
+        54
+      ],
+      "sha256": "a92406edb54a4cea81ca4e65f4ab451e7d1c0f662a42becb5b8c1a92ec809187",
+      "method": "six sleeve variants; blade-tip crop is input anchor"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/paper/adventure_blogger-hand.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/paper/paper_hands.png",
+      "size": [
+        56,
+        54
+      ],
+      "sha256": "8c54c7f1043e5415eebd4a6339f9b27d6252d0523ff25bdca9dae207d9f78c9e",
+      "method": "six sleeve variants; blade-tip crop is input anchor"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/paper/magic_blogger-hand.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/paper/paper_hands.png",
+      "size": [
+        56,
+        54
+      ],
+      "sha256": "f37838c67e493803b164694cd4bdb9825a3f91dc6c0bae4f6c419deb58d7097f",
+      "method": "six sleeve variants; blade-tip crop is input anchor"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/shenzhou/background.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/shenzhou/river.png",
+      "size": [
+        500,
+        300
+      ],
+      "sha256": "55ce6426ff17af6f21a53c7f5e3066ab75a80a82ce247657c5d915ba5fc479de",
+      "method": "500x300 native,32-color background"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/shenzhou/obstacle-boat.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/shenzhou/obstacles.png",
+      "size": [
+        16,
+        28
+      ],
+      "sha256": "5f78bdab50a5fdf1d144cac5eb957b2e7f69507e8c38dc32de2886afb988bdc3",
+      "method": "native RGBA preserved, separate ordinary boat/wood sprites, nearest contain"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/shenzhou/obstacle-small-boat.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/shenzhou/obstacles.png",
+      "size": [
+        16,
+        28
+      ],
+      "sha256": "6b90c5d75f7871671fc31361a977a7133660e69cf31c7577053ed79ca4b1fa31",
+      "method": "native RGBA preserved, separate ordinary boat/wood sprites, nearest contain"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/shenzhou/obstacle-driftwood.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/shenzhou/obstacles.png",
+      "size": [
+        22,
+        28
+      ],
+      "sha256": "1c8a7168bf9f01d0906ffd25e1ca28f620ed7194ca4eb0ebe4db99b1a0cb5aea",
+      "method": "native RGBA preserved, separate ordinary boat/wood sprites, nearest contain"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/travel_blogger/reference.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/travel_green.png",
+      "size": [
+        313,
+        661
+      ],
+      "sha256": "81a8ba7a33281b4bacbb260e6dcd6b19240d54ee2d9d760135dc5333d1f722dd",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/travel_blogger/head.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/travel_green.png",
+      "size": [
+        317,
+        273
+      ],
+      "sha256": "a4878ac1e52b065c094334bb0c2767ac0637f2f5e9e8bc1375c43ccdaf5f6488",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/travel_blogger/torso.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/travel_green.png",
+      "size": [
+        223,
+        311
+      ],
+      "sha256": "685e73a855db4b62dc1f6d576c5ce2f480069b3d0d2280004cf6be8700ac43b5",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/travel_blogger/hand.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/travel_green.png",
+      "size": [
+        169,
+        109
+      ],
+      "sha256": "451423c1be65a4bfa2be015b7193ec662749b1e6d75e36f9a6ff527419591c86",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/travel_blogger/upper-arm.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/travel_green.png",
+      "size": [
+        142,
+        318
+      ],
+      "sha256": "95098d9913cf3e31311d02104373d83bca9e8b0145c8be26df2d92c85b0ecf11",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/travel_blogger/forearm.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/travel_green.png",
+      "size": [
+        141,
+        307
+      ],
+      "sha256": "df7da19286c8db4aad718afcf3ea4c0b6da21f0bbe6206dd231c3a6d5e162662",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/travel_blogger/thigh.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/travel_green.png",
+      "size": [
+        170,
+        355
+      ],
+      "sha256": "2c8752978b924ccbb64650909241be2a335900936454a0c7af651d15af106fb1",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/travel_blogger/shin.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/travel_green.png",
+      "size": [
+        187,
+        320
+      ],
+      "sha256": "aed9588930109d80a6aed38001af64a7859c429bb691471cbac001567dc73e5b",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/life_blogger/reference.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/life.png",
+      "size": [
+        298,
+        654
+      ],
+      "sha256": "bb412cec89815fc70e1c4847fe1860ebc81511802b6c98a2c39fe49caff92622",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/life_blogger/head.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/life.png",
+      "size": [
+        302,
+        353
+      ],
+      "sha256": "4d74eefad1e844797639dac75362e4dffabb4f4bc65c324146c527da81380338",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/life_blogger/torso.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/life.png",
+      "size": [
+        222,
+        330
+      ],
+      "sha256": "6a1103744f265756bc5f5e2ddfee40740b8d6b864805cba10942919628596120",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/life_blogger/hand.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/life.png",
+      "size": [
+        151,
+        105
+      ],
+      "sha256": "ceee7d3b65c1eabf5a86c270fea19c301edaaa6e388f83e2b0375167f22a2a41",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/life_blogger/upper-arm.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/life.png",
+      "size": [
+        170,
+        353
+      ],
+      "sha256": "cd18f71f80eed822de2c4ab3e3c2e9b2626880bb7743c81f655d6ffe9e239907",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/life_blogger/forearm.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/life.png",
+      "size": [
+        140,
+        348
+      ],
+      "sha256": "3b47dae179dd9b02d86616fc6f6f645db188da0b8a8301d3377122d0aebc20e8",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/life_blogger/thigh.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/life.png",
+      "size": [
+        150,
+        348
+      ],
+      "sha256": "c6f0875b74ecc91bff8a1b65dd30749b08af39ed36cccfa50c0c5f4197f81fb0",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/life_blogger/shin.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/life.png",
+      "size": [
+        200,
+        336
+      ],
+      "sha256": "b8bfc4795dff2f3cabb97db9d0a0fdee33387c2ddca318e7f7d8e9dbdc49a71a",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/business_blogger/reference.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/business.png",
+      "size": [
+        344,
+        682
+      ],
+      "sha256": "c9c2ab05807d43817653dda819165c55260722d2360bc4f68aa6296d9dbf0778",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/business_blogger/head.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/business.png",
+      "size": [
+        284,
+        317
+      ],
+      "sha256": "7b7b22ecd7cd9596714cac46a5b818d2c64d7892e6855dea5e8b60471ef0cfce",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/business_blogger/torso.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/business.png",
+      "size": [
+        230,
+        359
+      ],
+      "sha256": "8c0616089169e22569477dfe199d1e64e2d3026f15ec205e0bf690ef1ce48a99",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/business_blogger/hand.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/business.png",
+      "size": [
+        164,
+        104
+      ],
+      "sha256": "9056e8edc41c65cc518e6a2a5c9fa05f8050fa516ee7d583289bb00f36281c33",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/business_blogger/upper-arm.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/business.png",
+      "size": [
+        132,
+        315
+      ],
+      "sha256": "677c797f0d188502ae833cf0b0344456a049f6d7f4c675aa1e997ffc6ef32b79",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/business_blogger/forearm.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/business.png",
+      "size": [
+        123,
+        308
+      ],
+      "sha256": "f266fe2fc689183f69c2b1e0bf1cab61b2fb3312212eac9e7ee4ddf12c20d32f",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/business_blogger/thigh.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/business.png",
+      "size": [
+        154,
+        323
+      ],
+      "sha256": "b07433920a842721f9e807177eef7e6ed8e506345c62caf1c388321a57abdf50",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/business_blogger/shin.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/business.png",
+      "size": [
+        176,
+        299
+      ],
+      "sha256": "4712de5644120dccf5411b723a8ed67e91e0b7cd2e4e365b6e7ae23e33d6185a",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/food_blogger/reference.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/food.png",
+      "size": [
+        282,
+        575
+      ],
+      "sha256": "6f8b6309d74eea63ba5258961aa4805090881807ae08a552e23ad1ddabbac919",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/food_blogger/head.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/food.png",
+      "size": [
+        297,
+        268
+      ],
+      "sha256": "62366dd28e298ce98f4edcd380037b7b466e9272a1561ed1755c85e7c6ef1c92",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/food_blogger/torso.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/food.png",
+      "size": [
+        244,
+        311
+      ],
+      "sha256": "48de26b28a5376e0833aa574b6dae96db7e321a46e3ac68e26b676c41aa77e0f",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/food_blogger/hand.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/food.png",
+      "size": [
+        179,
+        115
+      ],
+      "sha256": "24d3bdfb498803d59cbf16cce06e7a6132f404e00dd802d801a7d2e5b5290b98",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/food_blogger/upper-arm.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/food.png",
+      "size": [
+        148,
+        330
+      ],
+      "sha256": "adee5e36fc8a88abb38c475a9ec5e82fe069ec796a3bd90bf4ea6d2cc3bf4d65",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/food_blogger/forearm.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/food.png",
+      "size": [
+        136,
+        327
+      ],
+      "sha256": "6b5d69874dd2532111dfa01e365817a08d336394a1a5d47bb5fac627009e9f52",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/food_blogger/thigh.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/food.png",
+      "size": [
+        165,
+        377
+      ],
+      "sha256": "8f4a6c231a7c9486e8d82b3e3f021d07854bf488fdc3f5c820aec51e798955f2",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/food_blogger/shin.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/food.png",
+      "size": [
+        193,
+        344
+      ],
+      "sha256": "f89549509e3a9d74703b1c35f5b537158bf06a010f5fdfab22e1a4e6e4e4a0da",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/adventure_blogger/reference.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/adventure.png",
+      "size": [
+        348,
+        588
+      ],
+      "sha256": "81f8cc532226cf1adc52e7f1c58403584d5dbc880fd3ec003c9530a36981dac2",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/adventure_blogger/head.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/adventure.png",
+      "size": [
+        308,
+        281
+      ],
+      "sha256": "5c354ce7abde59e181b70768f595a8db7a95b53e41b463b72e00ef0e384baf25",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/adventure_blogger/torso.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/adventure.png",
+      "size": [
+        217,
+        319
+      ],
+      "sha256": "0c8cee91582c2905f569d98c22e96261a42d76c72c5fc3f63469e187b4f54149",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/adventure_blogger/hand.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/adventure.png",
+      "size": [
+        185,
+        133
+      ],
+      "sha256": "b6c4c155d66fcf4f2df6517a3759efc71de3842fd40b3b5b3f0bb586a4b89736",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/adventure_blogger/upper-arm.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/adventure.png",
+      "size": [
+        152,
+        337
+      ],
+      "sha256": "57fe7bd1c8e6134407d306564117dcaa3b62a347aae6fa2282efcf562c585394",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/adventure_blogger/forearm.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/adventure.png",
+      "size": [
+        128,
+        328
+      ],
+      "sha256": "4c0747d6eca033775152ebad599e8a614f0e94e746e5cb3ba948e6fbf5e52e82",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/adventure_blogger/thigh.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/adventure.png",
+      "size": [
+        149,
+        326
+      ],
+      "sha256": "571efeab247af34bb6ac942f2e7e7b927688b8c3a843777d9493b70451439bc6",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/adventure_blogger/shin.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/adventure.png",
+      "size": [
+        190,
+        308
+      ],
+      "sha256": "5bddf3c6e51145cc549cfefb17413d8560889b46ec22b9b4b2f8360face93992",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/magic_blogger/reference.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/magic.png",
+      "size": [
+        300,
+        609
+      ],
+      "sha256": "112e32c3a24296371893c1286e34d1f54b3dd4a586630e64221ca60931c7dba6",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/magic_blogger/head.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/magic.png",
+      "size": [
+        332,
+        303
+      ],
+      "sha256": "fb4f84663ff35a31ffcb5b1b22666277a1b4f5fd93a2a1a54ac5aed730fef948",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/magic_blogger/torso.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/magic.png",
+      "size": [
+        222,
+        322
+      ],
+      "sha256": "44b695c346dd13f9edc1632ffe0c481666edaf1c8b06654994acb3e0645d84f2",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/magic_blogger/hand.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/magic.png",
+      "size": [
+        177,
+        137
+      ],
+      "sha256": "1a0fcbacafbd7b625f9d7d4a55ca484c830041d30494da6f3ce03e3686657859",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/magic_blogger/upper-arm.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/magic.png",
+      "size": [
+        130,
+        273
+      ],
+      "sha256": "3e18474d67fbc1cd5eba7344e9759196f6320e6c393fd6879591a4a4ccb9b026",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/magic_blogger/forearm.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/magic.png",
+      "size": [
+        118,
+        326
+      ],
+      "sha256": "ce4d83c8b9956611dcd360a68ee2720a4d9eca19c4e3f8f5ee59f788fcf766c2",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/magic_blogger/thigh.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/magic.png",
+      "size": [
+        142,
+        337
+      ],
+      "sha256": "f742ee87cf7dcadc5e1359fe6917a71457e504d3bc16d1d03b41af5e221f6427",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/magic_blogger/shin.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/magic.png",
+      "size": [
+        171,
+        317
+      ],
+      "sha256": "cb22fa1057272226c2253658b0942654f8798f06cd7dd54742ed1c2ff904093a",
+      "method": "full-resolution generated RGBA crop; green matte only; no quantization or resize"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/background.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/dong_background.png",
+      "size": [
+        1619,
+        971
+      ],
+      "sha256": "f41a5ea33929df86c54b51eeb0f3ad1e2cf28c33b0d07278497dbee842ceb4e9",
+      "method": "original generated resolution and colors retained"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/cart.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/props_green.png",
+      "size": [
+        926,
+        297
+      ],
+      "sha256": "dc6d5171776738c2fb49029d49d206d49c07125bdc75bebe5d612fae4c5066d9",
+      "method": "full original prop crop with all rim/spokes and details; matte only, no resize/quantization"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/father.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/props_green.png",
+      "size": [
+        359,
+        440
+      ],
+      "sha256": "fecdc96c0f08d633b916452e187891b8f56466c7742434c52db794e0aa091213",
+      "method": "full original prop crop with all rim/spokes and details; matte only, no resize/quantization"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/wheel.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/props_green.png",
+      "size": [
+        369,
+        371
+      ],
+      "sha256": "de4ad8096f6c11956046a1c52f9ce9a2c5736379a8ba7f98c608d0a0f0d5753f",
+      "method": "full original prop crop with all rim/spokes and details; matte only, no resize/quantization"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/blanket.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/props_green.png",
+      "size": [
+        309,
+        156
+      ],
+      "sha256": "7cf26ced3c068feb3a3e19c90e2eb43e5f6b8eb52a6c0585dde299ff4a32bf58",
+      "method": "full original prop crop with all rim/spokes and details; matte only, no resize/quantization"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/bundle.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/props_green.png",
+      "size": [
+        212,
+        173
+      ],
+      "sha256": "5f649462cba71b4d2fbd95b3dd96ef5d636019afacb14707b174492e3a7b9512",
+      "method": "full original prop crop with all rim/spokes and details; matte only, no resize/quantization"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/shaft.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/props_green.png",
+      "size": [
+        260,
+        27
+      ],
+      "sha256": "c44767498adaf721d4181cd29b817864afe36364ac356bad3bd7195dda9d729d",
+      "method": "full resolution generated timber crop; rendered along exact handle anchor"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/ground.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/ground.png",
+      "size": [
+        1774,
+        207
+      ],
+      "sha256": "bd5bd546e14fd417738f9278ef81e96091a2dd6d3e123bfeac86ff48e7fd524a",
+      "method": "original generated terrain crop; no resize/quantization; world-anchored display"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/bridge.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/ground.png",
+      "size": [
+        1774,
+        139
+      ],
+      "sha256": "7ddcef9fb86216e7eaab59c9512706d6c187867863c0c52b8ffac470328a18b0",
+      "method": "original generated terrain crop; no resize/quantization; world-anchored display"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/dong/rail.png",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/dong/ground.png",
+      "size": [
+        1301,
+        226
+      ],
+      "sha256": "16865c9ba39066206f4f1d585bb51915b5597eb8d41332dd3f4bdf53e1ec737f",
+      "method": "original generated terrain crop; no resize/quantization; world-anchored display"
+    }
+  ],
+  "acceptance": "generated candidate; full-detail Dong export v4; engine and user review separately recorded"
+}

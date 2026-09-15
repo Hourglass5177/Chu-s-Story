@@ -1,0 +1,389 @@
+{
+  "version": 3,
+  "status": "teaching_and_choreography_implemented_phrase_cuts_pending",
+  "tasks": [
+    {
+      "task": "laohekou_si_xian",
+      "mix": "res://InheritanceTasks/Audio/rhythm-v2/laohekou_si_xian-mix.ogg",
+      "mix_sha256": "5d7a2a31eefaa37f5bc5cad0e143105f5ae438af7d2de79f6f1598f49b257a8b",
+      "edits": [
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\laohekou-ensemble-v1.ogg",
+          "source_sha256": "f1be442a176b7ea0110d5d4082d766e0d399f88a6688b744b05ae1556d1dc4a5",
+          "source_in_seconds": 1.0,
+          "source_out_seconds": 4.4,
+          "mix_in_seconds": 0.0,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\laohekou-ensemble-v1.ogg",
+          "source_sha256": "f1be442a176b7ea0110d5d4082d766e0d399f88a6688b744b05ae1556d1dc4a5",
+          "source_in_seconds": 10.0,
+          "source_out_seconds": 13.4,
+          "mix_in_seconds": 9.5,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\laohekou-ensemble-v1.ogg",
+          "source_sha256": "f1be442a176b7ea0110d5d4082d766e0d399f88a6688b744b05ae1556d1dc4a5",
+          "source_in_seconds": 20.0,
+          "source_out_seconds": 23.4,
+          "mix_in_seconds": 19.0,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\laohekou-ensemble-v1.ogg",
+          "source_sha256": "f1be442a176b7ea0110d5d4082d766e0d399f88a6688b744b05ae1556d1dc4a5",
+          "source_in_seconds": 30.0,
+          "source_out_seconds": 33.4,
+          "mix_in_seconds": 28.5,
+          "natural_phrase_review": "pending"
+        }
+      ],
+      "natural_phrase_review": "pending",
+      "listening_review": false,
+      "steps": [
+        {
+          "instruction": "圈合上，拨一下",
+          "retry_hint": "圈合上，拨一下",
+          "initial_lane": -1,
+          "required": "hit",
+          "duration_ms": 5650,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/laohekou_si_xian-lesson-1.ogg",
+          "audio_sha256": "049b46f1a3a0a70aaff50af8489581d906445ae7e9aafee7ffc6ee48f29913e2",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/laohekou_si_xian-mix.ogg",
+          "source_in_ms": 0,
+          "source_out_ms": 5650
+        },
+        {
+          "instruction": "拨、松开、再拨",
+          "retry_hint": "拨、松开、再拨",
+          "initial_lane": -1,
+          "required": "double",
+          "duration_ms": 6180,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/laohekou_si_xian-lesson-2.ogg",
+          "audio_sha256": "68348d96938b75b129ee9c1874a77614a78a152968f8af398a3349aca262e1af",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/laohekou_si_xian-mix.ogg",
+          "source_in_ms": 9500,
+          "source_out_ms": 15680
+        },
+        {
+          "instruction": "拨完停手，听伙伴",
+          "retry_hint": "拨完停手，听伙伴",
+          "initial_lane": -1,
+          "required": "rest",
+          "duration_ms": 9500,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/laohekou_si_xian-lesson-3.ogg",
+          "audio_sha256": "18b8cac8c952d5d588ec069b9cee81156ec30f1e1d2cea25adf87370bcd0b87a",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/laohekou_si_xian-mix.ogg",
+          "source_in_ms": 19000,
+          "source_out_ms": 28500
+        }
+      ]
+    },
+    {
+      "task": "tujia_saye_erhe",
+      "mix": "res://InheritanceTasks/Audio/rhythm-v2/tujia_saye_erhe-mix.ogg",
+      "mix_sha256": "7848fe73ad7305fc023fa15c6c84138e01a03a259d16a0db72da5e1e721e6fc3",
+      "edits": [
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\sayeerhe-stage-v1.ogg",
+          "source_sha256": "0752c38c24b086e96da37a618132afb5b15361ed39e641706a7b90d09cb73f75",
+          "source_in_seconds": 1.0,
+          "source_out_seconds": 40.8,
+          "mix_in_seconds": 0,
+          "natural_phrase_review": "pending",
+          "added_sound": "game rehearsal cue, not isolated authentic percussion"
+        }
+      ],
+      "natural_phrase_review": "pending",
+      "listening_review": false,
+      "steps": [
+        {
+          "instruction": "左脚落地，按左边",
+          "retry_hint": "左脚落地，按左边",
+          "initial_lane": -1,
+          "required": "hit",
+          "duration_ms": 1900,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/tujia_saye_erhe-lesson-1.ogg",
+          "audio_sha256": "eaf686b19e2f6c61394c3f231f98dc540715ef992d6f87310842a9096b712fa2",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/tujia_saye_erhe-mix.ogg",
+          "source_in_ms": 800,
+          "source_out_ms": 2700
+        },
+        {
+          "instruction": "右脚落地，按右边",
+          "retry_hint": "右脚落地，按右边",
+          "initial_lane": -1,
+          "required": "hit",
+          "duration_ms": 1900,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/tujia_saye_erhe-lesson-2.ogg",
+          "audio_sha256": "9b12c10bff48c13208742894a5ed48e41f931961ba92e35be70811ad9c19b572",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/tujia_saye_erhe-mix.ogg",
+          "source_in_ms": 2300,
+          "source_out_ms": 4200
+        },
+        {
+          "instruction": "跟着落步：左、右、右",
+          "retry_hint": "跟着落步：左、右、右",
+          "initial_lane": -1,
+          "required": "double",
+          "duration_ms": 4900,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/tujia_saye_erhe-lesson-3.ogg",
+          "audio_sha256": "b6381da11fcaf77690b24ff8af81ea6b47cac9b6ee90d39ee60d5cead7afbde9",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/tujia_saye_erhe-mix.ogg",
+          "source_in_ms": 10300,
+          "source_out_ms": 15200
+        },
+        {
+          "instruction": "站稳时，两边都松开",
+          "retry_hint": "站稳时，两边都松开",
+          "initial_lane": -1,
+          "required": "rest",
+          "duration_ms": 4100,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/tujia_saye_erhe-lesson-4.ogg",
+          "audio_sha256": "dfa05b6cb8d6cba28afc5b8c9bcb1e59172d6bcbe06bc09e7d00fca3d11fdba5",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/tujia_saye_erhe-mix.ogg",
+          "source_in_ms": 5300,
+          "source_out_ms": 9400
+        }
+      ]
+    },
+    {
+      "task": "jingzhou_hua_gu_xi",
+      "mix": "res://InheritanceTasks/Audio/rhythm-v2/jingzhou_hua_gu_xi-mix.ogg",
+      "mix_sha256": "93d87779ae4f087e339597dd3131451893b00d039f323c83cc35a5a6db7d172a",
+      "edits": [
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\jingzhou-zhanhuaqiang-v1.ogg",
+          "source_sha256": "5c61c29872d53f26ba6754e686d325fa57c9e68d4cba5f375a08aae733893987",
+          "source_in_seconds": 1.0,
+          "source_out_seconds": 4.4,
+          "mix_in_seconds": 0.0,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\jingzhou-zhanhuaqiang-v1.ogg",
+          "source_sha256": "5c61c29872d53f26ba6754e686d325fa57c9e68d4cba5f375a08aae733893987",
+          "source_in_seconds": 10.0,
+          "source_out_seconds": 13.4,
+          "mix_in_seconds": 9.5,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\jingzhou-zhanhuaqiang-v1.ogg",
+          "source_sha256": "5c61c29872d53f26ba6754e686d325fa57c9e68d4cba5f375a08aae733893987",
+          "source_in_seconds": 20.0,
+          "source_out_seconds": 23.4,
+          "mix_in_seconds": 19.0,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\jingzhou-zhanhuaqiang-v1.ogg",
+          "source_sha256": "5c61c29872d53f26ba6754e686d325fa57c9e68d4cba5f375a08aae733893987",
+          "source_in_seconds": 30.0,
+          "source_out_seconds": 33.4,
+          "mix_in_seconds": 28.5,
+          "natural_phrase_review": "pending"
+        }
+      ],
+      "natural_phrase_review": "pending",
+      "listening_review": false,
+      "steps": [
+        {
+          "instruction": "轮到你，点一下",
+          "retry_hint": "轮到你，点一下",
+          "initial_lane": -1,
+          "required": "hit",
+          "duration_ms": 7850,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/jingzhou_hua_gu_xi-lesson-1.ogg",
+          "audio_sha256": "42c184d4d3532c9334eb37b2b5e24b08ca3e4c8c657cbf81e84dd8c1f728e373",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/jingzhou_hua_gu_xi-mix.ogg",
+          "source_in_ms": 0,
+          "source_out_ms": 7850
+        },
+        {
+          "instruction": "按住，青圈合上时松开",
+          "retry_hint": "按住，青圈合上时松开",
+          "initial_lane": -1,
+          "required": "hold",
+          "duration_ms": 6950,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/jingzhou_hua_gu_xi-lesson-2.ogg",
+          "audio_sha256": "7e5190896746c5aebbf4305a1ba8a95ebbb368e871b1f72b58c82328719d3adc",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/jingzhou_hua_gu_xi-mix.ogg",
+          "source_in_ms": 0,
+          "source_out_ms": 6950
+        },
+        {
+          "instruction": "收声后，停手听主唱",
+          "retry_hint": "收声后，停手听主唱",
+          "initial_lane": -1,
+          "required": "hold_rest",
+          "duration_ms": 9500,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/jingzhou_hua_gu_xi-lesson-3.ogg",
+          "audio_sha256": "8cf329418a3d0271bc218c1fa764202c519b78391d58bca98e56ca7161df63d9",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/jingzhou_hua_gu_xi-mix.ogg",
+          "source_in_ms": 19000,
+          "source_out_ms": 28500
+        }
+      ]
+    },
+    {
+      "task": "han_ju",
+      "mix": "res://InheritanceTasks/Audio/rhythm-v2/han_ju-mix.ogg",
+      "mix_sha256": "f73ac07605383c2663d20a31440fd429bf78fef678f4abd4905b3a43d70f6d76",
+      "edits": [
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\hanju-congtaibie-v1.ogg",
+          "source_sha256": "51bf6ea3f83925c4f8874138d787d26e2ec9550273301508bd2872526deb06ad",
+          "source_in_seconds": 1.0,
+          "source_out_seconds": 40.8,
+          "mix_in_seconds": 0,
+          "natural_phrase_review": "pending",
+          "added_sound": "game rehearsal cue, not isolated authentic percussion"
+        }
+      ],
+      "natural_phrase_review": "pending",
+      "listening_review": false,
+      "steps": [
+        {
+          "instruction": "走到右台，按右边",
+          "retry_hint": "走到右台，按右边",
+          "initial_lane": -1,
+          "required": "hit",
+          "duration_ms": 1900,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/han_ju-lesson-1.ogg",
+          "audio_sha256": "89c21070bbb9ba2b358a20206f596748bf6ce6d3460a089fdc22ee338e3847f6",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/han_ju-mix.ogg",
+          "source_in_ms": 800,
+          "source_out_ms": 2700
+        },
+        {
+          "instruction": "灯跟到左台，站定就留住",
+          "retry_hint": "灯跟到左台，站定就留住",
+          "initial_lane": 1,
+          "required": "rest",
+          "duration_ms": 3500,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/han_ju-lesson-2.ogg",
+          "audio_sha256": "386fe6cf6d078d5b9996cdd804f51c36495b1776dc013e36995bd596af4648aa",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/han_ju-mix.ogg",
+          "source_in_ms": 5900,
+          "source_out_ms": 9400
+        }
+      ]
+    },
+    {
+      "task": "ti_qin_xi",
+      "mix": "res://InheritanceTasks/Audio/rhythm-v2/ti_qin_xi-mix.ogg",
+      "mix_sha256": "d34715c7a6308011b6e5efbb6429cdcb3f7e51c927947f4df3135bc588bd8098",
+      "edits": [
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\tiqin-stage-v1.ogg",
+          "source_sha256": "5059edf0c531dfd85e53df270b62ac9d2cb0dde0aa39d041e1b1535ca96f6c6b",
+          "source_in_seconds": 1.0,
+          "source_out_seconds": 4.4,
+          "mix_in_seconds": 0.0,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\tiqin-stage-v1.ogg",
+          "source_sha256": "5059edf0c531dfd85e53df270b62ac9d2cb0dde0aa39d041e1b1535ca96f6c6b",
+          "source_in_seconds": 10.0,
+          "source_out_seconds": 13.4,
+          "mix_in_seconds": 9.5,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\tiqin-stage-v1.ogg",
+          "source_sha256": "5059edf0c531dfd85e53df270b62ac9d2cb0dde0aa39d041e1b1535ca96f6c6b",
+          "source_in_seconds": 20.0,
+          "source_out_seconds": 23.4,
+          "mix_in_seconds": 19.0,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\tiqin-stage-v1.ogg",
+          "source_sha256": "5059edf0c531dfd85e53df270b62ac9d2cb0dde0aa39d041e1b1535ca96f6c6b",
+          "source_in_seconds": 30.0,
+          "source_out_seconds": 33.4,
+          "mix_in_seconds": 28.5,
+          "natural_phrase_review": "pending"
+        }
+      ],
+      "natural_phrase_review": "pending",
+      "listening_review": false,
+      "steps": [
+        {
+          "instruction": "跟弓向，轻轻拉一下",
+          "retry_hint": "跟弓向，轻轻拉一下",
+          "initial_lane": -1,
+          "required": "hit",
+          "duration_ms": 7850,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/ti_qin_xi-lesson-1.ogg",
+          "audio_sha256": "84ffc60619b61b4c33dde65861bbbf7bf4fbe127f746a0c5631368a3b485e167",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/ti_qin_xi-mix.ogg",
+          "source_in_ms": 0,
+          "source_out_ms": 7850
+        },
+        {
+          "instruction": "向左按住，青圈合上时松开",
+          "retry_hint": "向左按住，青圈合上时松开",
+          "initial_lane": -1,
+          "required": "hold",
+          "duration_ms": 6950,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/ti_qin_xi-lesson-2.ogg",
+          "audio_sha256": "cc999539f3997ef873be5eb6970145aa01a92a8aee277020757e42a7522ba198",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/ti_qin_xi-mix.ogg",
+          "source_in_ms": 0,
+          "source_out_ms": 6950
+        },
+        {
+          "instruction": "向右长弓，收手就松开",
+          "retry_hint": "向右长弓，收手就松开",
+          "initial_lane": -1,
+          "required": "hold",
+          "duration_ms": 7350,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/ti_qin_xi-lesson-3.ogg",
+          "audio_sha256": "5a9cc8ae86ebf9f4099a0d8ddbbb5ea42e96cd03e523451397d401f62eb56dcf",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/ti_qin_xi-mix.ogg",
+          "source_in_ms": 9500,
+          "source_out_ms": 16850
+        }
+      ]
+    },
+    {
+      "task": "gu_pen_ge",
+      "mix": "res://InheritanceTasks/Audio/rhythm-v2/gu_pen_ge-mix.ogg",
+      "mix_sha256": "73b06e6025a68b3a7ef44c4866ab156bf6cdb3dca4dfc7c3771681d35805ec06",
+      "edits": [],
+      "natural_phrase_review": "pending",
+      "listening_review": false,
+      "steps": [
+        {
+          "instruction": "听师傅，接回三下",
+          "retry_hint": "听师傅，接回三下",
+          "initial_lane": -1,
+          "required": "double",
+          "duration_ms": 7900,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/gu_pen_ge-lesson-1.ogg",
+          "audio_sha256": "512fc4b4e387fb7169e1872f5216ec7689cf422bbb94662e812e2cd06b71170e",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/gu_pen_ge-mix.ogg",
+          "source_in_ms": 0,
+          "source_out_ms": 7900
+        },
+        {
+          "instruction": "中间停一拍，再接两下",
+          "retry_hint": "中间停一拍，再接两下",
+          "initial_lane": -1,
+          "required": "double",
+          "duration_ms": 9300,
+          "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/gu_pen_ge-lesson-2.ogg",
+          "audio_sha256": "429ee6de0052240c33690fa5bddb6c76f0f4287accc0ecef15cd6ba16594e71f",
+          "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/gu_pen_ge-mix.ogg",
+          "source_in_ms": 11000,
+          "source_out_ms": 20300
+        }
+      ]
+    }
+  ]
+}

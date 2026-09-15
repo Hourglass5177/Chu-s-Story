@@ -229,6 +229,62 @@ func _build_frontend() -> void:
 	_build_toast_layer()
 	_build_modal_layer()
 	_build_game_guide()
+	_apply_artist_frontend()
+
+
+func _apply_artist_frontend() -> void:
+	var background := get_node("Background") as TextureRect
+	background.texture = MainUI.texture("home")
+	background.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	background.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	for key in [SCREEN_HOME, SCREEN_MODE, SCREEN_LOCAL_COUNT]:
+		var page: Control = _pages[key]
+		MainUI.apply(page)
+		var panel := page.get_node("SafeArea/Center/PagePanel") as PanelContainer
+		panel.add_theme_stylebox_override("panel", MainUI.box("panel", 64))
+		MainUI.label(page.get_node("%Title"), 64, true)
+	for stepper in [_human_stepper, _bot_stepper, _target_score_stepper]:
+		for key in ["%Decrease", "%Increase"]:
+			var control := stepper.get_node(key) as Button
+			MainUI.compact_button(control)
+			control.custom_minimum_size = Vector2(120, 120)
+			MainUI.label(control, 52)
+	var home: Control = _pages[SCREEN_HOME]
+	home.get_node("Backdrop").hide()
+	var panel := home.get_node("SafeArea/Center/PagePanel") as PanelContainer
+	panel.custom_minimum_size = Vector2(2200, 1450)
+	panel.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
+	var home_body := home.get_node("%Body") as VBoxContainer
+	home_body.alignment = BoxContainer.ALIGNMENT_BEGIN
+	var spacer := Control.new()
+	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	home_body.add_child(spacer)
+	home_body.move_child(spacer, 1)
+	_style_setup_page(_player_setup_page)
+	_style_setup_page(_roster_page)
+
+func _style_setup_page(page: Control) -> void:
+	MainUI.typography(page)
+	page.get_node("SafeArea/PagePanel").add_theme_stylebox_override("panel", MainUI.box("panel", 80))
+	var footer := page.get_node("SafeArea/PagePanel/Content/Actions" if page == _player_setup_page else "SafeArea/PagePanel/Content/Footer")
+	for child in footer.get_children():
+		if child is Button: MainUI.button(child)
+	if page == _player_setup_page:
+		# Leave room for the computer difficulty row and long profession descriptions.
+		var setup_frame := MainUI.box("panel", 80).duplicate() as StyleBoxTexture
+		setup_frame.content_margin_top = 48
+		setup_frame.content_margin_bottom = 48
+		page.get_node("SafeArea/PagePanel").add_theme_stylebox_override("panel", setup_frame)
+		_player_setup_page.portrait.custom_minimum_size.y = 300
+		page.get_node("SafeArea/PagePanel/Content/MainRow/BirthplaceColumn/BirthMapFrame").custom_minimum_size.y = 260
+		for hotspot: Button in _player_setup_page.birthplace_hotspots.get_children():
+			MainUI.compact_button(hotspot)
+			MainUI.label(hotspot, 26)
+			hotspot.custom_minimum_size = Vector2(82, 56)
+			hotspot.offset_left = -41
+			hotspot.offset_right = 41
+			hotspot.offset_top = -28
+			hotspot.offset_bottom = 28
 
 
 func _capture_and_hide_legacy_nodes() -> void:
@@ -255,28 +311,29 @@ func _build_home_page() -> void:
 	(page.get_node("%Title") as Label).visible = false
 	var body := page.get_node("%Body") as VBoxContainer
 	var title := TextureRect.new()
-	title.texture = TITLE_TEXTURE
-	title.custom_minimum_size = Vector2(760, 260)
+	title.texture = MainUI.texture("logo")
+	title.custom_minimum_size = Vector2(760, 350)
 	title.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	title.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	title.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	body.add_child(title)
-	var buttons := VBoxContainer.new()
+	var buttons := HBoxContainer.new()
+	buttons.add_theme_constant_override("separation", 30)
 	buttons.custom_minimum_size = Vector2(580, 0)
 	buttons.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	body.add_child(buttons)
-	var start_button := _new_button("开始游戏", buttons, Vector2(580, 92))
-	var rules_button := _new_button("游戏说明", buttons, Vector2(580, 82))
+	var start_button := _new_button("开始游戏", buttons, Vector2(500, 128))
+	var rules_button := _new_button("游戏说明", buttons, Vector2(500, 128))
 	_home_rules_button = rules_button
-	var credits_button := _new_button("制作人员", buttons, Vector2(580, 82))
-	var exit_button := _new_button("退出游戏", buttons, Vector2(580, 82))
+	var credits_button := _new_button("制作人员", buttons, Vector2(500, 128))
+	var exit_button := _new_button("退出游戏", buttons, Vector2(500, 128))
 	start_button.pressed.connect(func() -> void: show_screen(SCREEN_MODE))
 	rules_button.pressed.connect(func() -> void: open_game_guide())
 	credits_button.pressed.connect(func() -> void:
 		_show_text_modal("制作人员", _read_legacy_text("CreditsPanel/Label"), credits_button)
 	)
 	exit_button.pressed.connect(func() -> void: get_tree().quit())
-	_link_vertical_focus([start_button, rules_button, credits_button, exit_button])
+	_link_horizontal_focus([start_button, rules_button, credits_button, exit_button])
 	page.initial_focus_path = page.get_path_to(start_button)
 
 
@@ -331,7 +388,7 @@ func _build_count_page() -> void:
 	_target_score_stepper.current_value = SessionSetup.DEFAULT_TARGET_SCORE
 	_target_score_stepper.value_suffix = " 分"
 	body.add_child(_target_score_stepper)
-	var note := _new_label("电脑玩家暂由本地操作", 30, HORIZONTAL_ALIGNMENT_CENTER)
+	var note := _new_label("每位电脑可单独选择简单、普通或困难难度", 30, HORIZONTAL_ALIGNMENT_CENTER)
 	note.add_theme_color_override("font_color", FrontendStyle.BROWN)
 	body.add_child(note)
 	var actions := HBoxContainer.new()
@@ -451,8 +508,10 @@ func _sync_page(screen_name: StringName) -> void:
 			_sync_count_view()
 		SCREEN_PLAYER_SETUP:
 			_player_setup_page.bind_setup(_draft, _editing_slot, _return_to_roster_after_edit)
+			_style_setup_page(_player_setup_page)
 		SCREEN_ROSTER:
 			_roster_page.bind_setup(_draft)
+			_style_setup_page(_roster_page)
 		SCREEN_LOADING:
 			_loading_dot_count = 0
 			_advance_loading_indicator()
@@ -742,15 +801,16 @@ func _on_minigame_replay_requested(task_id: StringName) -> void:
 	minigame_practice_requested.emit(task_id)
 	_game_guide.set_interaction_enabled(false)
 	_game_guide.set_process_input(false)
+	_game_guide.set_practice_obscured(true)
 	_practice_host = HERITAGE_TASK_HOST_SCENE.instantiate() as HeritageTaskHost
 	_practice_host.name = "MinigamePracticeHost"
 	_practice_host.z_index = 2100
 	_shell.add_child(_practice_host)
-	# Host 自己负责结算结果页。主菜单只在玩家明确按下结果页的“返回”后
-	# 恢复下层指南，不能因 task_finished 提前销毁结果页。
+	# 成功/失败等玩家点返回；主动退出由 Host 结算后直接请求返回。
 	_practice_host.return_requested.connect(_on_practice_return_requested, CONNECT_ONE_SHOT)
 	var seed := maxi(int(Time.get_ticks_usec() & 0x7fffffff), 1)
 	var context := HeritageTaskRunContext.new(task_id, null, null, 0, 0, seed, true)
+	context.metadata["reduce_motion"] = _preferences.reduce_motion
 	if definition.microphone_required:
 		var scorer_script := load(VOCAL_SCORER_PATH) as Script
 		if scorer_script != null:
@@ -763,6 +823,7 @@ func _on_minigame_replay_requested(task_id: StringName) -> void:
 func _on_practice_return_requested() -> void:
 	_discard_practice_host()
 	if _game_guide != null:
+		_game_guide.set_practice_obscured(false)
 		_game_guide.set_process_input(true)
 		if _game_guide.is_guide_open():
 			_game_guide.set_interaction_enabled(true)

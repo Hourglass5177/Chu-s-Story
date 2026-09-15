@@ -1,0 +1,175 @@
+{
+  "method": "imagegen whole strips; native cell slicing, technical green matte where needed; no palette quantization or source pixel reduction",
+  "task": "han_ju",
+  "status": "generated candidates; not user accepted",
+  "pixel_canvas": [
+    1000,
+    600
+  ],
+  "logical_stage": [
+    1000,
+    600
+  ],
+  "actors": [
+    {
+      "actor": "travel",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/han_ju/travel-animation-r4.png",
+      "source_sha256": "55d66d1ed7e9ae18b99afbe92d0c54a8b657a431fc8c93d4c603ad533b956f06",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/han_ju/travel.png",
+      "runtime_sha256": "c425b8def59df41c482eca95c04dd20499aa1b4bb00b3e87f68dc7ca84406683",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "life",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/han_ju/life-animation.png",
+      "source_sha256": "620403010e6fb86c9835620ae6647a0bd48632b10dc99cf152ab68b7bc90ba3d",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/han_ju/life.png",
+      "runtime_sha256": "7130e1486d8ff217ee0f87accd035e709bad95ef0e49949d802594a361e3b250",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "business",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/han_ju/business-animation.png",
+      "source_sha256": "9d91c083c5e1626519e323c6eb3404744a6937a09497b63b858832d868c47f2d",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/han_ju/business.png",
+      "runtime_sha256": "77026fc91a13cd509dcb9fa79090cfb2c69aacf31d50302f514062b78d4281af",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "food",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/han_ju/food-animation.png",
+      "source_sha256": "f8777057630a29c9e886fd699fe435cd86261e012c63c0325b0a5a0b14c14f06",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/han_ju/food.png",
+      "runtime_sha256": "0c11f22a1494b94f68e39584dbcd982413eb50e7e877ea19626d855cf2b2e2eb",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "adventure",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/han_ju/adventure-animation.png",
+      "source_sha256": "425f5c08b477713d30aabdee289dbbb82ec21ca0c560f9d23df8174d4b80e302",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/han_ju/adventure.png",
+      "runtime_sha256": "1f2211e7cf4d05da31d11f1c398d59ef10473adc22455920066c64db7d1c210f",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "magic",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/han_ju/magic-animation.png",
+      "source_sha256": "cd9bea79403f86daa63cf755bf8cb4c46b3bc0a151042300554ae9c14cd4e24c",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/han_ju/magic.png",
+      "runtime_sha256": "a8e0e1162512395171fe0e9ba752d2e882cf0371b8f0a33169dbbda8641e7327",
+      "normal_playback_reviewed": false
+    }
+  ],
+  "npc": {
+    "source": "InheritanceTasks\\Art\\Pixel\\v3\\source\\han_ju\\npcs-r4-green.png",
+    "frame_size": [
+      362,
+      543
+    ],
+    "frames": 8,
+    "native_alpha": false,
+    "source_sha256": "0b1a2398793e29fe660189db5d56f39f08c922f72c74d15858b44dc99a649c76"
+  },
+  "culture": "New game practice performance. Costume/instrument references documented in prompts; exact motions are artistic/gameplay interpretations. Gupen drum form and authentic audio remain awaiting source video.",
+  "pending": [
+    "normal-speed full-scene review",
+    "black/white edge review",
+    "user experience review",
+    "human listening review of audio phrase cuts"
+  ],
+  "covers": {
+    "method": "Composition from the same generated stage layers, including supporting performers. Not a gameplay screenshot.",
+    "items": [
+      {
+        "actor": "travel",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/han_ju/cover-travel.png",
+        "sha256": "843767c21157517ccc0e634a315e118c3918b7b8c81eb27fef76bcd636bc87c2"
+      },
+      {
+        "actor": "life",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/han_ju/cover-life.png",
+        "sha256": "412b229c2c9c54cf87327e237e5b8f676ecb59ee6ee176f8dd4cc8943bda2057"
+      },
+      {
+        "actor": "business",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/han_ju/cover-business.png",
+        "sha256": "f1f041f3f0f21b8c854232302ec10af5e6168962b722915100561f99aa1a67b9"
+      },
+      {
+        "actor": "food",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/han_ju/cover-food.png",
+        "sha256": "37d0098af24454dcd46ad3e34debcb8dd4ac2d3352c7d23d3ce20fe479e1c37e"
+      },
+      {
+        "actor": "adventure",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/han_ju/cover-adventure.png",
+        "sha256": "195f8ffe9f93f21d39b37af29154f326aa984631de67b4b21c7f3f02dc20c5d3"
+      },
+      {
+        "actor": "magic",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/han_ju/cover-magic.png",
+        "sha256": "061b1596121d1691c750c4e0fbd287a33cd46db9f46c662601dd75fb4e220920"
+      }
+    ]
+  }
+}

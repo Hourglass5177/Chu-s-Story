@@ -1,0 +1,87 @@
+{
+  "version": 4,
+  "tasks": [
+    {
+      "task": "laohekou_si_xian",
+      "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\laohekou-ensemble-v1.ogg",
+      "source_sha256": "f1be442a176b7ea0110d5d4082d766e0d399f88a6688b744b05ae1556d1dc4a5",
+      "output": "res://InheritanceTasks/Audio/rhythm-v4/laohekou_si_xian-continuous.ogg",
+      "output_sha256": "f1be442a176b7ea0110d5d4082d766e0d399f88a6688b744b05ae1556d1dc4a5",
+      "edits": [],
+      "byte_identical": true,
+      "authored_silence": false,
+      "listening_review": false,
+      "score_review": "pending",
+      "duration_ms": 41000
+    },
+    {
+      "task": "tujia_saye_erhe",
+      "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\sayeerhe-stage-v1.ogg",
+      "source_sha256": "0752c38c24b086e96da37a618132afb5b15361ed39e641706a7b90d09cb73f75",
+      "output": "res://InheritanceTasks/Audio/rhythm-v4/tujia_saye_erhe-continuous.ogg",
+      "output_sha256": "0752c38c24b086e96da37a618132afb5b15361ed39e641706a7b90d09cb73f75",
+      "edits": [],
+      "byte_identical": true,
+      "authored_silence": false,
+      "listening_review": false,
+      "score_review": "pending",
+      "duration_ms": 43350
+    },
+    {
+      "task": "jingzhou_hua_gu_xi",
+      "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\jingzhou-zhanhuaqiang-v1.ogg",
+      "source_sha256": "5c61c29872d53f26ba6754e686d325fa57c9e68d4cba5f375a08aae733893987",
+      "output": "res://InheritanceTasks/Audio/rhythm-v4/jingzhou_hua_gu_xi-continuous.ogg",
+      "output_sha256": "5c61c29872d53f26ba6754e686d325fa57c9e68d4cba5f375a08aae733893987",
+      "edits": [],
+      "byte_identical": true,
+      "authored_silence": false,
+      "listening_review": false,
+      "score_review": "pending",
+      "duration_ms": 40850,
+      "feedback": {
+        "path": "InheritanceTasks\\Audio\\rhythm-v4\\sing-recorded.wav",
+        "sha256": "c50a9c094f22ac42ed10cd26e092d78a6760a1030100c360a309d82dfd56f8f9",
+        "source_in_seconds": 5.48,
+        "source_out_seconds": 5.77,
+        "note": "授权现场录音短片段，非分轨；游戏触发反馈，非声部或真实弓法认证",
+        "listening_review": false
+      }
+    },
+    {
+      "task": "han_ju",
+      "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\hanju-congtaibie-v1.ogg",
+      "source_sha256": "51bf6ea3f83925c4f8874138d787d26e2ec9550273301508bd2872526deb06ad",
+      "output": "res://InheritanceTasks/Audio/rhythm-v4/han_ju-continuous.ogg",
+      "output_sha256": "51bf6ea3f83925c4f8874138d787d26e2ec9550273301508bd2872526deb06ad",
+      "edits": [],
+      "byte_identical": true,
+      "authored_silence": false,
+      "listening_review": false,
+      "score_review": "pending",
+      "duration_ms": 43800
+    },
+    {
+      "task": "ti_qin_xi",
+      "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\tiqin-stage-v1.ogg",
+      "source_sha256": "5059edf0c531dfd85e53df270b62ac9d2cb0dde0aa39d041e1b1535ca96f6c6b",
+      "output": "res://InheritanceTasks/Audio/rhythm-v4/ti_qin_xi-continuous.ogg",
+      "output_sha256": "5059edf0c531dfd85e53df270b62ac9d2cb0dde0aa39d041e1b1535ca96f6c6b",
+      "edits": [],
+      "byte_identical": true,
+      "authored_silence": false,
+      "listening_review": false,
+      "score_review": "pending",
+      "duration_ms": 41100,
+      "feedback": {
+        "path": "InheritanceTasks\\Audio\\rhythm-v4\\bow-recorded.wav",
+        "sha256": "0e4dd81be8e6cc5079e00d8a5e57d4096565947d0e49c17dc18512fd368c7eea",
+        "source_in_seconds": 3.47,
+        "source_out_seconds": 3.71,
+        "note": "授权现场录音短片段，非分轨；游戏触发反馈，非声部或真实弓法认证",
+        "listening_review": false
+      }
+    }
+  ],
+  "gupen": "unchanged demonstration/repeat audio and chart"
+}

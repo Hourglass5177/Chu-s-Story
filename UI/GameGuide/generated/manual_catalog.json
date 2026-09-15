@@ -1,9 +1,9 @@
 {
   "schema_version": 3,
   "source_path": "res://docs/游戏规则与引导（重写稿）.md",
-  "source_sha256": "e2df24a3ceb89793fda674ea463faa423eabdf213e87e7ab7550c84f6ece6324",
+  "source_sha256": "d8bb50f0146d5ba44389390902f0fa2fb5275848f4bbfa6dd5a4cc2635ad2e89",
   "media_source_path": "res://docs/游戏指南结构与配图（数字版）.json",
-  "media_source_sha256": "220abd8cd8ed84ed252d6523930dfb9b17610722733c725833887c91151daeb3",
+  "media_source_sha256": "dc783c3c8ee2d9e005f68987cdf3f00644d4f551e631b92173e1bf95d0d80c8b",
   "home": {
     "id": "home",
     "title": "《楚物志》游戏指南",
@@ -38,7 +38,7 @@
             "id": "home_hero",
             "provider": "dynamic",
             "paths": [
-              "res://arts/游戏指南/实机截图/v1/对局全景.png"
+              "res://arts/游戏指南/实机截图/ui-20260915/对局全景.png"
             ],
             "layout": "full",
             "fit": "contain",
@@ -756,6 +756,8 @@
             "goal_resources.mode_selection.heading.01",
             "goal_resources.mode_selection.paragraph.01",
             "goal_resources.mode_selection.paragraph.02",
+            "goal_resources.mode_selection.paragraph.03",
+            "goal_resources.mode_selection.paragraph.04",
             "goal_resources.mode_selection.media.session_modes"
           ]
         },
@@ -806,7 +808,21 @@
           "id": "goal_resources.mode_selection.paragraph.02",
           "group_id": "mode_selection",
           "type": "paragraph",
-          "text": "本地游戏支持1至6个席位。当前版本的电脑席位还没有接入自动决策，即使在人数页设置了电脑玩家，仍会像其他席位一样由本地玩家依次操作。",
+          "text": "本地游戏支持1至6个席位，至少保留1名真人。每位电脑可在开局配置页单独选择简单、普通或困难，默认普通，同局可以混合；阵容确认页会标明各电脑的难度，开局后固定。简单偏重眼前收益，普通兼顾资源与组合，困难更重视长期目标和公开的对手威胁。非遗手牌公开，食物与保留事件手牌私密；三档电脑都只使用自己的手牌、公开信息及自己合法看到的记忆。",
+          "requirements": []
+        },
+        {
+          "id": "goal_resources.mode_selection.paragraph.03",
+          "group_id": "mode_selection",
+          "type": "paragraph",
+          "text": "电脑回合可以观看，点击顶部回合信息右侧的“AI速度：x1.00”，依次切换1.00、1.50、2.00、3.00倍电脑演出速度，再回到1.00倍。速度不改变骰子、规则倒计时或真人响应时间。需要真人作出选择时，由指定玩家回答；多人真人的私密选牌先显示接手提示。真人全部淘汰后，电脑继续到正式终局，仍可通过暂停菜单退出。",
+          "requirements": []
+        },
+        {
+          "id": "goal_resources.mode_selection.paragraph.04",
+          "group_id": "mode_selection",
+          "type": "paragraph",
+          "text": "电脑持有的国家级非遗采用短展示后自动传承：简单60%、普通80%，困难正常尝试必成功。开始消耗1精力，每张牌每个行动阶段最多尝试一次；普通失败保留消耗，技术错误仍退款，困难也不例外。成功后解锁5分及组合资格。这些是电脑参数，不代表真人通过率。自动传承不运行小游戏、不使用麦克风，也不解锁小游戏图鉴。真人仍游玩原有传承小游戏。难度不影响演出速度，也不提供额外资金、精力、骰点或抽牌优势。",
           "requirements": []
         },
         {
@@ -2623,7 +2639,11 @@
             "feiyi_cards.national_feiyi.paragraph.02",
             "feiyi_cards.national_feiyi.bullets.01",
             "feiyi_cards.national_feiyi.paragraph.03",
-            "feiyi_cards.national_feiyi.paragraph.04"
+            "feiyi_cards.national_feiyi.paragraph.04",
+            "feiyi_cards.national_feiyi.paragraph.05",
+            "feiyi_cards.national_feiyi.paragraph.06",
+            "feiyi_cards.national_feiyi.paragraph.07",
+            "feiyi_cards.national_feiyi.paragraph.08"
           ]
         },
         {
@@ -2919,11 +2939,39 @@
           "id": "feiyi_cards.national_feiyi.paragraph.03",
           "group_id": "national_feiyi",
           "type": "paragraph",
-          "text": "精力恰好为1时也可以开始任务。精力扣至0不会立刻淘汰玩家，仍要等完整回合结束时按统一规则判断。",
+          "text": "首次进入小游戏，会先示范，再让你试做。画面顶部会一直显示“玩法教学”；完成教学后，正式挑战才开始计时。以后默认跳过已完成的教学，也可选择“重学”。主动跳过不记为完成教学。教学不额外收费，必要的故事和音乐提示仍会播放。",
           "requirements": []
         },
         {
           "id": "feiyi_cards.national_feiyi.paragraph.04",
+          "group_id": "national_feiyi",
+          "type": "paragraph",
+          "text": "音乐关按步骤练习，先看示范，再跟着同一段声音操作。圈合上时按下，长音按住，收尾提示出现时准备松开；失误只重练当前步骤。也可以用“重看”再看一遍。",
+          "requirements": []
+        },
+        {
+          "id": "feiyi_cards.national_feiyi.paragraph.05",
+          "group_id": "national_feiyi",
+          "type": "paragraph",
+          "text": "多数操作关约25—30秒，音乐关约33—44秒，登山关最多45秒，神舟护送最多35秒。下堡坪随机讲述一则地方传说，依次拼好三张3×3缺块拼图，三张共用120秒操作时间；看完成画面的转场不计时，完整参考图始终可见。剪纸须在30秒内刻完四处纹样，最后纸屑落下后展示成品。五个表演音游跟随连续原声操作，优、良、失分别反馈命中质量；鼓盆歌仍是听示范后复现。暂停后会短暂倒数再继续；确认退出会直接返回原来的详情或图鉴，已支付的成本按上述规则结算。",
+          "requirements": []
+        },
+        {
+          "id": "feiyi_cards.national_feiyi.paragraph.06",
+          "group_id": "national_feiyi",
+          "type": "paragraph",
+          "text": "关内博主跟随本局职业换装。主菜单小游戏图鉴的练习可选择六位博主，并记住最近选择。准备页显示目标、操作和通过条件。按键图标随最近使用的键盘、鼠标或手柄切换；设置中可以改键，方向操作兼容WASD和箭头键。音乐的图形辅助默认开启，关闭后评分不变；设备偏移可在暂停设置中校准。",
+          "requirements": []
+        },
+        {
+          "id": "feiyi_cards.national_feiyi.paragraph.07",
+          "group_id": "national_feiyi",
+          "type": "paragraph",
+          "text": "精力恰好为1时也可以开始任务。精力扣至0不会立刻淘汰玩家，仍要等完整回合结束时按统一规则判断。",
+          "requirements": []
+        },
+        {
+          "id": "feiyi_cards.national_feiyi.paragraph.08",
           "group_id": "national_feiyi",
           "type": "paragraph",
           "text": "国家级非遗不会进入研究所，不能购买、出售、赠送、偷取、交换或转移。若某个效果要求“弃任意手牌”并弃掉国家级非遗，该牌直接离开本局。",

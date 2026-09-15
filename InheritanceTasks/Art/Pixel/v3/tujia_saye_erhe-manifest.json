@@ -1,0 +1,186 @@
+{
+  "method": "imagegen whole strips; native cell slicing, technical green matte where needed; no palette quantization or source pixel reduction",
+  "task": "tujia_saye_erhe",
+  "status": "generated candidates; not user accepted",
+  "pixel_canvas": [
+    1000,
+    600
+  ],
+  "logical_stage": [
+    1000,
+    600
+  ],
+  "actors": [
+    {
+      "actor": "travel",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/tujia_saye_erhe/travel-step-r2.png",
+      "source_sha256": "adf528dbf5c2afc9a7d25dbbcba6f49b700b9b42d5dc6aa556b86ea900d57bff",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/tujia_saye_erhe/travel.png",
+      "runtime_sha256": "7a7ceef759c5ef5025309bc1ba762030593b172729dcba8a046f4f0b125de475",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "life",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/tujia_saye_erhe/life-animation.png",
+      "source_sha256": "d2d281be55c57dea8329bd06ce19d53876c7c163abca5fe5baf7fcb564391689",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/tujia_saye_erhe/life.png",
+      "runtime_sha256": "9192a857a0ab9d0d3e5d10cd4936cd6298431a3e3f5fff0d178cb1a9877a2a61",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "business",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/tujia_saye_erhe/business-animation.png",
+      "source_sha256": "c668377d88c76d0c4016ccd5c0f837be01c221ee3bb468c461948645d0927b65",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/tujia_saye_erhe/business.png",
+      "runtime_sha256": "acfc505e15f9d50bf795417efa434dbe7586a044ab9f7f504bf13f8ada23f3db",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "food",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/tujia_saye_erhe/food-animation-r2.png",
+      "source_sha256": "660077e01c143996e35443507030637508aa706bfe356bdb53ff63004b1b97ca",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/tujia_saye_erhe/food.png",
+      "runtime_sha256": "88d3503bef1ce93719d88a35ecd5d751492d12fd2e60fabd7a8e45d9a50740ed",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "adventure",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/tujia_saye_erhe/adventure-animation.png",
+      "source_sha256": "54eb81c769594db74449365b2755b04fc6f206c2c59c134945fbdda7a4c7d11f",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/tujia_saye_erhe/adventure.png",
+      "runtime_sha256": "3341cf7fa4d9e255b8793ab994657f4ace34e1ae2ada3eb3b8aba2592e869c6a",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "magic",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/tujia_saye_erhe/magic-animation.png",
+      "source_sha256": "eb62e8b9dd355e96dfb3da857524d29526ade35871d9e84f1792a4284d91a1b0",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/tujia_saye_erhe/magic.png",
+      "runtime_sha256": "b82e1454bacbb3d125f5b92ae714c4f2c1000534af8976e5f218c8a79396b7df",
+      "normal_playback_reviewed": false
+    }
+  ],
+  "npc": {
+    "source": "InheritanceTasks\\Art\\Pixel\\v3\\source\\tujia_saye_erhe\\teacher-drummer.png",
+    "frame_size": [
+      384,
+      512
+    ],
+    "frames": 8,
+    "native_alpha": false,
+    "source_sha256": "7a5c5abd7f85150ad9c5b92d4bca274e7da3b24663ed92cbd5802de2db3ea90d"
+  },
+  "culture": "New game practice performance. Costume/instrument references documented in prompts; exact motions are artistic/gameplay interpretations. Gupen drum form and authentic audio remain awaiting source video.",
+  "pending": [
+    "user experience and art acceptance",
+    "human listening review of audio cuts and mix balance",
+    "formal Host multi-size review",
+    "continuous motion polish and cultural movement review"
+  ],
+  "covers": {
+    "method": "Composition from the same generated stage layers, including supporting performers. Not a gameplay screenshot.",
+    "items": [
+      {
+        "actor": "travel",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\tujia_saye_erhe\\cover-travel.png",
+        "sha256": "4abeb43788eceeb6700baf1db010ebf6f10d76859084c8c36ba0d1d3096a371c"
+      },
+      {
+        "actor": "life",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\tujia_saye_erhe\\cover-life.png",
+        "sha256": "3bae46a37b27538c27c85ffd862f3ae1d104752bc4a47390511fa1ff7df1bc2f"
+      },
+      {
+        "actor": "business",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\tujia_saye_erhe\\cover-business.png",
+        "sha256": "8db1cf46bd1eb448e587ebec92f3ee0b03852492e2497d5ca246d8e8465cdccf"
+      },
+      {
+        "actor": "food",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\tujia_saye_erhe\\cover-food.png",
+        "sha256": "cf9c3bc9c6e4046cd1b00aaca224d766cca84f0af1c8083babec0933c17d5a7b"
+      },
+      {
+        "actor": "adventure",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\tujia_saye_erhe\\cover-adventure.png",
+        "sha256": "e279651084232a63b97f84b790d8fc1982aeeb3ddac1d480419e34ad0c295e91"
+      },
+      {
+        "actor": "magic",
+        "runtime": "InheritanceTasks\\Art\\Pixel\\v3\\runtime\\tujia_saye_erhe\\cover-magic.png",
+        "sha256": "bb10129e912f0ccc37a59a75995cb112d5cb70a4efd4ef4fcbf69a6ddde38c05"
+      }
+    ]
+  },
+  "engine_scene_review": {
+    "method": "Godot 4.7.2 independent stage; six identities by six staged states; viewed contact sheets",
+    "path": "artifacts/music-pixel-review/tujia_saye_erhe-six-avatars-six-poses.png",
+    "not_user_acceptance": true
+  },
+  "normal_input_evidence": {
+    "method": "Travel avatar; physical keyboard events; actual audio clock; one pause and resize; standalone controller fixture",
+    "path": "artifacts/rework-play/tujia_saye_erhe-inputs.json",
+    "formal_host_review": false,
+    "audio_listening_review": false
+  }
+}

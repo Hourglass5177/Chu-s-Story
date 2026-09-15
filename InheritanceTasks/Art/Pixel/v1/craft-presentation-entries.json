@@ -1,0 +1,67 @@
+[
+  {
+    "task_id": "tianmen_tang_su",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/tianmen_tang_su-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/tianmen_tang_su-avatars.png",
+    "frame_size": [
+      128,
+      128
+    ],
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/tianmen_tang_su_pixel.tscn",
+    "properties": {
+      "success_hint": "三次吹塑中，至少两次停在目标范围。",
+      "bubble_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/tianmen_tang_su-bubbles.png",
+      "art_status": "引擎检查中",
+      "cultural_note": "余胀和非线性增长为游戏机制，不是真实工艺参数。"
+    }
+  },
+  {
+    "task_id": "gu_pen_ge",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/gu_pen_ge-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/gu_pen_ge-avatars.png",
+    "frame_size": [
+      128,
+      128
+    ],
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/gu_pen_ge_pixel.tscn",
+    "properties": {
+      "success_hint": "听清师傅的停顿，三轮中接好两轮。",
+      "teacher_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/gu_pen_ge-teacher.png",
+      "art_status": "引擎检查中；鼓板形制待素材核对",
+      "cultural_note": "明亮传习场景为新绘游戏表现；鼓板形制与握法待实拍核对。当前交互短音为合成反馈，非鼓盆歌录音。"
+    }
+  },
+  {
+    "task_id": "ezhou_diaohua_jianzhi",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/ezhou_diaohua_jianzhi-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/ezhou_diaohua_jianzhi-avatars.png",
+    "frame_size": [
+      128,
+      128
+    ],
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/ezhou_diaohua_jianzhi_pixel.tscn",
+    "properties": {
+      "success_hint": "从起点沿刻线完成最后一道边缘，少量偏离可以补救。",
+      "hands_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/ezhou_diaohua_jianzhi-hands.png",
+      "motif": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/ezhou_diaohua_jianzhi-artwork.png",
+      "art_status": "引擎检查中；工艺握法待实拍核对",
+      "cultural_note": "双鸟花枝为原创镂空花样；现有路线构成成品上缘。"
+    }
+  },
+  {
+    "task_id": "huangmei_xi",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/huangmei_xi-open.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/huangmei_xi-avatars.png",
+    "frame_size": [
+      128,
+      128
+    ],
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/huangmei_xi_pixel.tscn",
+    "properties": {
+      "success_hint": "两句均有效发声；综合至少60分，每句至少45分。",
+      "closed_curtain": "res://InheritanceTasks/Art/Pixel/v1/runtime/craft/huangmei_xi-closed.png",
+      "art_status": "引擎检查中；不包含本次真人录唱验收",
+      "cultural_note": "像素博主为《女驸马》主题角色扮演，口部动作不是实时音准反馈。"
+    }
+  }
+]

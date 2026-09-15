@@ -19,12 +19,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Godot 4.6.2
+      - name: Install Godot 4.7.2
         shell: pwsh
         run: |
           $archive = Join-Path $env:RUNNER_TEMP 'godot.zip'
-          $install = Join-Path $env:RUNNER_TEMP 'godot-4.6.2'
-          Invoke-WebRequest 'https://github.com/godotengine/godot/releases/download/4.6.2-stable/Godot_v4.6.2-stable_win64.exe.zip' -OutFile $archive
+          $install = Join-Path $env:RUNNER_TEMP 'godot-4.7.2'
+          Invoke-WebRequest 'https://github.com/godotengine/godot/releases/download/4.7.2-stable/Godot_v4.7.2-stable_win64.exe.zip' -OutFile $archive
           Expand-Archive -LiteralPath $archive -DestinationPath $install
           $console = Get-ChildItem -LiteralPath $install -Filter '*_console.exe' -Recurse | Select-Object -First 1
           if ($null -eq $console) { throw 'Godot console executable was not found.' }

@@ -1,0 +1,3102 @@
+{
+  "version": 4,
+  "audio_path": "res://InheritanceTasks/Audio/rhythm-v4/tujia_saye_erhe-continuous.ogg",
+  "audio_sha256": "0752c38c24b086e96da37a618132afb5b15361ed39e641706a7b90d09cb73f75",
+  "end_ms": 43350,
+  "events": [
+    {
+      "id": "tujia_saye_erhe-continuous-v4-00",
+      "time_ms": 2040,
+      "end_ms": 2040,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-01",
+      "time_ms": 3080,
+      "end_ms": 3080,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-02",
+      "time_ms": 4120,
+      "end_ms": 4120,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-03",
+      "time_ms": 5190,
+      "end_ms": 5190,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-04",
+      "time_ms": 6270,
+      "end_ms": 6270,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-05",
+      "time_ms": 7330,
+      "end_ms": 7330,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-06",
+      "time_ms": 9480,
+      "end_ms": 9480,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-07",
+      "time_ms": 10530,
+      "end_ms": 10530,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-08",
+      "time_ms": 11610,
+      "end_ms": 11610,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-09",
+      "time_ms": 12670,
+      "end_ms": 12670,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-10",
+      "time_ms": 14780,
+      "end_ms": 14780,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-11",
+      "time_ms": 15850,
+      "end_ms": 15850,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-12",
+      "time_ms": 16930,
+      "end_ms": 16930,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-13",
+      "time_ms": 18020,
+      "end_ms": 18020,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-14",
+      "time_ms": 20150,
+      "end_ms": 20150,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-15",
+      "time_ms": 21210,
+      "end_ms": 21210,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-16",
+      "time_ms": 22280,
+      "end_ms": 22280,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-17",
+      "time_ms": 23350,
+      "end_ms": 23350,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-18",
+      "time_ms": 25470,
+      "end_ms": 25470,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-19",
+      "time_ms": 26540,
+      "end_ms": 26540,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-20",
+      "time_ms": 27610,
+      "end_ms": 27610,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-21",
+      "time_ms": 28680,
+      "end_ms": 28680,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-22",
+      "time_ms": 30830,
+      "end_ms": 30830,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-23",
+      "time_ms": 31890,
+      "end_ms": 31890,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-24",
+      "time_ms": 32960,
+      "end_ms": 32960,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 4
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-25",
+      "time_ms": 34020,
+      "end_ms": 34020,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 4
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-26",
+      "time_ms": 36160,
+      "end_ms": 36160,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 4
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-27",
+      "time_ms": 37220,
+      "end_ms": 37220,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 4
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-28",
+      "time_ms": 38300,
+      "end_ms": 38300,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 4
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-29",
+      "time_ms": 39370,
+      "end_ms": 39370,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 4
+    }
+  ],
+  "presentation": [
+    {
+      "id": "tujia_saye_erhe-continuous-v4-00",
+      "time_ms": 2040,
+      "end_ms": 2040,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-01",
+      "time_ms": 3080,
+      "end_ms": 3080,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-02",
+      "time_ms": 4120,
+      "end_ms": 4120,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-03",
+      "time_ms": 5190,
+      "end_ms": 5190,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-04",
+      "time_ms": 6270,
+      "end_ms": 6270,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-05",
+      "time_ms": 7330,
+      "end_ms": 7330,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-06",
+      "time_ms": 9480,
+      "end_ms": 9480,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-07",
+      "time_ms": 10530,
+      "end_ms": 10530,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-08",
+      "time_ms": 11610,
+      "end_ms": 11610,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-09",
+      "time_ms": 12670,
+      "end_ms": 12670,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-10",
+      "time_ms": 14780,
+      "end_ms": 14780,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-11",
+      "time_ms": 15850,
+      "end_ms": 15850,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-12",
+      "time_ms": 16930,
+      "end_ms": 16930,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-13",
+      "time_ms": 18020,
+      "end_ms": 18020,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-14",
+      "time_ms": 20150,
+      "end_ms": 20150,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-15",
+      "time_ms": 21210,
+      "end_ms": 21210,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-16",
+      "time_ms": 22280,
+      "end_ms": 22280,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-17",
+      "time_ms": 23350,
+      "end_ms": 23350,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-18",
+      "time_ms": 25470,
+      "end_ms": 25470,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-19",
+      "time_ms": 26540,
+      "end_ms": 26540,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-20",
+      "time_ms": 27610,
+      "end_ms": 27610,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-21",
+      "time_ms": 28680,
+      "end_ms": 28680,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-22",
+      "time_ms": 30830,
+      "end_ms": 30830,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-23",
+      "time_ms": 31890,
+      "end_ms": 31890,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-24",
+      "time_ms": 32960,
+      "end_ms": 32960,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 4
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-25",
+      "time_ms": 34020,
+      "end_ms": 34020,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 4
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-26",
+      "time_ms": 36160,
+      "end_ms": 36160,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 4
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-27",
+      "time_ms": 37220,
+      "end_ms": 37220,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 4
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-28",
+      "time_ms": 38300,
+      "end_ms": 38300,
+      "kind": "tap",
+      "direction": 1,
+      "cue_ms": 1100,
+      "round": 4
+    },
+    {
+      "id": "tujia_saye_erhe-continuous-v4-29",
+      "time_ms": 39370,
+      "end_ms": 39370,
+      "kind": "tap",
+      "direction": -1,
+      "cue_ms": 1100,
+      "round": 4
+    }
+  ],
+  "sections": [],
+  "tutorial_audio_path": "res://InheritanceTasks/Audio/rhythm-v4/dance-lesson-0.ogg",
+  "feedback_key": "dance",
+  "production_status": "continuous_source_integrated_timing_listening_pending",
+  "annotation_note": "v4连续授权原声，原速原调，玩家输入不切断演出。明确游戏提示时间线；尚待逐句听审，不宣称真实帮腔、弓法或声腔转录。",
+  "choreography": [
+    {
+      "id": "tujia_saye_erhe-motion-000",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 940,
+      "end_ms": 2040,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-00",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-003",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 1720,
+      "end_ms": 2040,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-00",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-005",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 1980,
+      "end_ms": 3080,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-01",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-001",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 2040,
+      "end_ms": 2240,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-00",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-004",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 2040,
+      "end_ms": 2280,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-00",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-002",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 2240,
+      "end_ms": 2470,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-00",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-008",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 2760,
+      "end_ms": 3080,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-01",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-010",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 3020,
+      "end_ms": 4120,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-02",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-006",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 3080,
+      "end_ms": 3280,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-01",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-009",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 3080,
+      "end_ms": 3320,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-01",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-007",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 3280,
+      "end_ms": 3510,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-01",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-013",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 3800,
+      "end_ms": 4120,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-02",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-015",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 4090,
+      "end_ms": 5190,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-03",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-011",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 4120,
+      "end_ms": 4320,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-02",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-014",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 4120,
+      "end_ms": 4360,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-02",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-012",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 4320,
+      "end_ms": 4550,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-02",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-018",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 4870,
+      "end_ms": 5190,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-03",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-020",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 5170,
+      "end_ms": 6270,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-04",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-016",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 5190,
+      "end_ms": 5390,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-03",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-019",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 5190,
+      "end_ms": 5430,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-03",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-017",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 5390,
+      "end_ms": 5620,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-03",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-023",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 5950,
+      "end_ms": 6270,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-04",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-025",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 6230,
+      "end_ms": 7330,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-05",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-021",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 6270,
+      "end_ms": 6470,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-04",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-024",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 6270,
+      "end_ms": 6510,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-04",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-022",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 6470,
+      "end_ms": 6700,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-04",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-028",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 7010,
+      "end_ms": 7330,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-05",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-026",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 7330,
+      "end_ms": 7530,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-05",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-029",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 7330,
+      "end_ms": 7570,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-05",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-027",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 7530,
+      "end_ms": 7760,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-05",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-030",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 8380,
+      "end_ms": 9480,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-06",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-033",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 9160,
+      "end_ms": 9480,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-06",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-035",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 9430,
+      "end_ms": 10530,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-07",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-031",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 9480,
+      "end_ms": 9680,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-06",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-034",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 9480,
+      "end_ms": 9720,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-06",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-032",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 9680,
+      "end_ms": 9910,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-06",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-038",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 10210,
+      "end_ms": 10530,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-07",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-040",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 10510,
+      "end_ms": 11610,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-08",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-036",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 10530,
+      "end_ms": 10730,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-07",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-039",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 10530,
+      "end_ms": 10770,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-07",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-037",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 10730,
+      "end_ms": 10960,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-07",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-043",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 11290,
+      "end_ms": 11610,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-08",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-045",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 11570,
+      "end_ms": 12670,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-09",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-041",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 11610,
+      "end_ms": 11810,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-08",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-044",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 11610,
+      "end_ms": 11850,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-08",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-042",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 11810,
+      "end_ms": 12040,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-08",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-048",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 12350,
+      "end_ms": 12670,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-09",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-046",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 12670,
+      "end_ms": 12870,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-09",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-049",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 12670,
+      "end_ms": 12910,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-09",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-047",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 12870,
+      "end_ms": 13100,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-09",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-050",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 13680,
+      "end_ms": 14780,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-10",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-053",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 14460,
+      "end_ms": 14780,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-10",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-055",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 14750,
+      "end_ms": 15850,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-11",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-051",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 14780,
+      "end_ms": 14980,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-10",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-054",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 14780,
+      "end_ms": 15020,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-10",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-052",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 14980,
+      "end_ms": 15210,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-10",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-058",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 15530,
+      "end_ms": 15850,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-11",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-060",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 15830,
+      "end_ms": 16930,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-12",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-056",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 15850,
+      "end_ms": 16050,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-11",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-059",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 15850,
+      "end_ms": 16090,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-11",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-057",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 16050,
+      "end_ms": 16280,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-11",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-063",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 16610,
+      "end_ms": 16930,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-12",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-065",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 16920,
+      "end_ms": 18020,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-13",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-061",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 16930,
+      "end_ms": 17130,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-12",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-064",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 16930,
+      "end_ms": 17170,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-12",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-062",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 17130,
+      "end_ms": 17360,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-12",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-068",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 17700,
+      "end_ms": 18020,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-13",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-066",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 18020,
+      "end_ms": 18220,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-13",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-069",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 18020,
+      "end_ms": 18260,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-13",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-067",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 18220,
+      "end_ms": 18450,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-13",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-070",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 19050,
+      "end_ms": 20150,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-14",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-073",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 19830,
+      "end_ms": 20150,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-14",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-075",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 20110,
+      "end_ms": 21210,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-15",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-071",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 20150,
+      "end_ms": 20350,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-14",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-074",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 20150,
+      "end_ms": 20390,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-14",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-072",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 20350,
+      "end_ms": 20580,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-14",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-078",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 20890,
+      "end_ms": 21210,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-15",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-080",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 21180,
+      "end_ms": 22280,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-16",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-076",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 21210,
+      "end_ms": 21410,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-15",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-079",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 21210,
+      "end_ms": 21450,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-15",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-077",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 21410,
+      "end_ms": 21640,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-15",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-083",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 21960,
+      "end_ms": 22280,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-16",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-085",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 22250,
+      "end_ms": 23350,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-17",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-081",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 22280,
+      "end_ms": 22480,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-16",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-084",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 22280,
+      "end_ms": 22520,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-16",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-082",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 22480,
+      "end_ms": 22710,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-16",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-088",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 23030,
+      "end_ms": 23350,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-17",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-086",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 23350,
+      "end_ms": 23550,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-17",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-089",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 23350,
+      "end_ms": 23590,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-17",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-087",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 23550,
+      "end_ms": 23780,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-17",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-090",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 24370,
+      "end_ms": 25470,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-18",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-093",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 25150,
+      "end_ms": 25470,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-18",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-095",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 25440,
+      "end_ms": 26540,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-19",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-091",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 25470,
+      "end_ms": 25670,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-18",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-094",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 25470,
+      "end_ms": 25710,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-18",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-092",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 25670,
+      "end_ms": 25900,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-18",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-098",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 26220,
+      "end_ms": 26540,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-19",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-100",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 26510,
+      "end_ms": 27610,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-20",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-096",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 26540,
+      "end_ms": 26740,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-19",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-099",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 26540,
+      "end_ms": 26780,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-19",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-097",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 26740,
+      "end_ms": 26970,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-19",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-103",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 27290,
+      "end_ms": 27610,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-20",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-105",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 27580,
+      "end_ms": 28680,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-21",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-101",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 27610,
+      "end_ms": 27810,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-20",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-104",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 27610,
+      "end_ms": 27850,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-20",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-102",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 27810,
+      "end_ms": 28040,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-20",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-108",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 28360,
+      "end_ms": 28680,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-21",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-106",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 28680,
+      "end_ms": 28880,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-21",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-109",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 28680,
+      "end_ms": 28920,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-21",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-107",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 28880,
+      "end_ms": 29110,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-21",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-110",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 29730,
+      "end_ms": 30830,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-22",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-113",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 30510,
+      "end_ms": 30830,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-22",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-115",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 30790,
+      "end_ms": 31890,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-23",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-111",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 30830,
+      "end_ms": 31030,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-22",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-114",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 30830,
+      "end_ms": 31070,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-22",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-112",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 31030,
+      "end_ms": 31260,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-22",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-118",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 31570,
+      "end_ms": 31890,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-23",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-120",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 31860,
+      "end_ms": 32960,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-24",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-116",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 31890,
+      "end_ms": 32090,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-23",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-119",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 31890,
+      "end_ms": 32130,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-23",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-117",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 32090,
+      "end_ms": 32320,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-23",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-123",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 32640,
+      "end_ms": 32960,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-24",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-125",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 32920,
+      "end_ms": 34020,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-25",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-121",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 32960,
+      "end_ms": 33160,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-24",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-124",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 32960,
+      "end_ms": 33200,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-24",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-122",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 33160,
+      "end_ms": 33390,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-24",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-128",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 33700,
+      "end_ms": 34020,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-25",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-126",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 34020,
+      "end_ms": 34220,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-25",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-129",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 34020,
+      "end_ms": 34260,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-25",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-127",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 34220,
+      "end_ms": 34450,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-25",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-130",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 35060,
+      "end_ms": 36160,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-26",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-133",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 35840,
+      "end_ms": 36160,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-26",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-135",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 36120,
+      "end_ms": 37220,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-27",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-131",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 36160,
+      "end_ms": 36360,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-26",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-134",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 36160,
+      "end_ms": 36400,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-26",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-132",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 36360,
+      "end_ms": 36590,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-26",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-138",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 36900,
+      "end_ms": 37220,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-27",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-140",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 37200,
+      "end_ms": 38300,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-28",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-136",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 37220,
+      "end_ms": 37420,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-27",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-139",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 37220,
+      "end_ms": 37460,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-27",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-137",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 37420,
+      "end_ms": 37650,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-27",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-143",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 37980,
+      "end_ms": 38300,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-28",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-145",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 38270,
+      "end_ms": 39370,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-29",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-141",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 38300,
+      "end_ms": 38500,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-28",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-144",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 38300,
+      "end_ms": 38540,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-28",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-142",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 38500,
+      "end_ms": 38730,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-28",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-148",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 39050,
+      "end_ms": 39370,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-29",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-146",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 39370,
+      "end_ms": 39570,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-29",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-149",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 39370,
+      "end_ms": 39610,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-29",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-147",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 39570,
+      "end_ms": 39800,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-continuous-v4-29",
+      "direction": -1,
+      "cycle_ms": 0
+    }
+  ],
+  "tutorial_steps": [
+    {
+      "instruction": "左右脚跟着落地",
+      "retry_hint": "左右脚跟着落地",
+      "initial_lane": -1,
+      "required": "double",
+      "duration_ms": 3440,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v4/dance-lesson-0.ogg",
+      "audio_sha256": "687ea92c3b871450fced473cddb073d7b7ae0c6c624fd1547cc1f5555175be71",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v4/tujia_saye_erhe-continuous.ogg",
+      "source_in_ms": 540,
+      "source_out_ms": 3980,
+      "events": [
+        {
+          "id": "tujia_saye_erhe-continuous-v4-00",
+          "time_ms": 1500,
+          "end_ms": 1500,
+          "kind": "tap",
+          "direction": -1,
+          "cue_ms": 1100,
+          "round": 0
+        },
+        {
+          "id": "tujia_saye_erhe-continuous-v4-01",
+          "time_ms": 2540,
+          "end_ms": 2540,
+          "kind": "tap",
+          "direction": 1,
+          "cue_ms": 1100,
+          "round": 0
+        }
+      ],
+      "presentation": [
+        {
+          "id": "tujia_saye_erhe-continuous-v4-00",
+          "time_ms": 1500,
+          "end_ms": 1500,
+          "kind": "tap",
+          "direction": -1,
+          "cue_ms": 1100,
+          "round": 0
+        },
+        {
+          "id": "tujia_saye_erhe-continuous-v4-01",
+          "time_ms": 2540,
+          "end_ms": 2540,
+          "kind": "tap",
+          "direction": 1,
+          "cue_ms": 1100,
+          "round": 0
+        }
+      ],
+      "choreography": [
+        {
+          "id": "tujia_saye_erhe-motion-000",
+          "actor": "leader",
+          "action": "weight_shift",
+          "start_ms": 400,
+          "end_ms": 1500,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-00",
+          "direction": -1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-003",
+          "actor": "drummer",
+          "action": "prepare",
+          "start_ms": 1180,
+          "end_ms": 1500,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-00",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-005",
+          "actor": "leader",
+          "action": "weight_shift",
+          "start_ms": 1440,
+          "end_ms": 2540,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-01",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-001",
+          "actor": "leader",
+          "action": "land",
+          "start_ms": 1500,
+          "end_ms": 1700,
+          "frames": [
+            2
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-00",
+          "direction": -1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-004",
+          "actor": "drummer",
+          "action": "strike",
+          "start_ms": 1500,
+          "end_ms": 1740,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-00",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-002",
+          "actor": "leader",
+          "action": "recover",
+          "start_ms": 1700,
+          "end_ms": 1930,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-00",
+          "direction": -1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-008",
+          "actor": "drummer",
+          "action": "prepare",
+          "start_ms": 2220,
+          "end_ms": 2540,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-01",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-006",
+          "actor": "leader",
+          "action": "land",
+          "start_ms": 2540,
+          "end_ms": 2740,
+          "frames": [
+            2
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-01",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-009",
+          "actor": "drummer",
+          "action": "strike",
+          "start_ms": 2540,
+          "end_ms": 2780,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-01",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-007",
+          "actor": "leader",
+          "action": "recover",
+          "start_ms": 2740,
+          "end_ms": 2970,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-01",
+          "direction": 1,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": []
+    },
+    {
+      "instruction": "左、右、再右",
+      "retry_hint": "左、右、再右",
+      "initial_lane": -1,
+      "required": "double",
+      "duration_ms": 4530,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v4/dance-lesson-1.ogg",
+      "audio_sha256": "03b199e02b3c1c05595bfe9c15106603b0c7682cedc8987bf27412177f2209a5",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v4/tujia_saye_erhe-continuous.ogg",
+      "source_in_ms": 7980,
+      "source_out_ms": 12510,
+      "events": [
+        {
+          "id": "tujia_saye_erhe-continuous-v4-06",
+          "time_ms": 1500,
+          "end_ms": 1500,
+          "kind": "tap",
+          "direction": -1,
+          "cue_ms": 1100,
+          "round": 1
+        },
+        {
+          "id": "tujia_saye_erhe-continuous-v4-07",
+          "time_ms": 2550,
+          "end_ms": 2550,
+          "kind": "tap",
+          "direction": 1,
+          "cue_ms": 1100,
+          "round": 1
+        },
+        {
+          "id": "tujia_saye_erhe-continuous-v4-08",
+          "time_ms": 3630,
+          "end_ms": 3630,
+          "kind": "tap",
+          "direction": 1,
+          "cue_ms": 1100,
+          "round": 1
+        }
+      ],
+      "presentation": [
+        {
+          "id": "tujia_saye_erhe-continuous-v4-06",
+          "time_ms": 1500,
+          "end_ms": 1500,
+          "kind": "tap",
+          "direction": -1,
+          "cue_ms": 1100,
+          "round": 1
+        },
+        {
+          "id": "tujia_saye_erhe-continuous-v4-07",
+          "time_ms": 2550,
+          "end_ms": 2550,
+          "kind": "tap",
+          "direction": 1,
+          "cue_ms": 1100,
+          "round": 1
+        },
+        {
+          "id": "tujia_saye_erhe-continuous-v4-08",
+          "time_ms": 3630,
+          "end_ms": 3630,
+          "kind": "tap",
+          "direction": 1,
+          "cue_ms": 1100,
+          "round": 1
+        }
+      ],
+      "choreography": [
+        {
+          "id": "tujia_saye_erhe-motion-030",
+          "actor": "leader",
+          "action": "weight_shift",
+          "start_ms": 400,
+          "end_ms": 1500,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-06",
+          "direction": -1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-033",
+          "actor": "drummer",
+          "action": "prepare",
+          "start_ms": 1180,
+          "end_ms": 1500,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-06",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-035",
+          "actor": "leader",
+          "action": "weight_shift",
+          "start_ms": 1450,
+          "end_ms": 2550,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-07",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-031",
+          "actor": "leader",
+          "action": "land",
+          "start_ms": 1500,
+          "end_ms": 1700,
+          "frames": [
+            2
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-06",
+          "direction": -1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-034",
+          "actor": "drummer",
+          "action": "strike",
+          "start_ms": 1500,
+          "end_ms": 1740,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-06",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-032",
+          "actor": "leader",
+          "action": "recover",
+          "start_ms": 1700,
+          "end_ms": 1930,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-06",
+          "direction": -1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-038",
+          "actor": "drummer",
+          "action": "prepare",
+          "start_ms": 2230,
+          "end_ms": 2550,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-07",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-040",
+          "actor": "leader",
+          "action": "weight_shift",
+          "start_ms": 2530,
+          "end_ms": 3630,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-08",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-036",
+          "actor": "leader",
+          "action": "land",
+          "start_ms": 2550,
+          "end_ms": 2750,
+          "frames": [
+            2
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-07",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-039",
+          "actor": "drummer",
+          "action": "strike",
+          "start_ms": 2550,
+          "end_ms": 2790,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-07",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-037",
+          "actor": "leader",
+          "action": "recover",
+          "start_ms": 2750,
+          "end_ms": 2980,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-07",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-043",
+          "actor": "drummer",
+          "action": "prepare",
+          "start_ms": 3310,
+          "end_ms": 3630,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-08",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-041",
+          "actor": "leader",
+          "action": "land",
+          "start_ms": 3630,
+          "end_ms": 3830,
+          "frames": [
+            2
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-08",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-044",
+          "actor": "drummer",
+          "action": "strike",
+          "start_ms": 3630,
+          "end_ms": 3870,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-08",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-042",
+          "actor": "leader",
+          "action": "recover",
+          "start_ms": 3830,
+          "end_ms": 4060,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "tujia_saye_erhe-continuous-v4-08",
+          "direction": 1,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": []
+    }
+  ]
+}

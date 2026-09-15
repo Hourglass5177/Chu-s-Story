@@ -1,0 +1,1344 @@
+{
+  "version": 3,
+  "audio_path": "res://InheritanceTasks/Audio/rhythm-v2/gu_pen_ge-mix.ogg",
+  "audio_sha256": "73b06e6025a68b3a7ef44c4866ab156bf6cdb3dca4dfc7c3771681d35805ec06",
+  "end_ms": 33000,
+  "events": [
+    {
+      "id": "gu_pen_ge-v2-01",
+      "time_ms": 5800,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 5800,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "gu_pen_ge-v2-02",
+      "time_ms": 6500,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 6500,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "gu_pen_ge-v2-03",
+      "time_ms": 7200,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 7200,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "gu_pen_ge-v2-04",
+      "time_ms": 16800,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 16800,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "gu_pen_ge-v2-05",
+      "time_ms": 17500,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 17500,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "gu_pen_ge-v2-06",
+      "time_ms": 18900,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 18900,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "gu_pen_ge-v2-07",
+      "time_ms": 19600,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 19600,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "gu_pen_ge-v2-08",
+      "time_ms": 27800,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 27800,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "gu_pen_ge-v2-09",
+      "time_ms": 28220,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 28220,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "gu_pen_ge-v2-10",
+      "time_ms": 28640,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 28640,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "gu_pen_ge-v2-11",
+      "time_ms": 29480,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 29480,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "gu_pen_ge-v2-12",
+      "time_ms": 30320,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 30320,
+      "cue_ms": 1000,
+      "round": 2
+    }
+  ],
+  "presentation": [
+    {
+      "id": "gu_pen_ge-v2-01",
+      "time_ms": 5800,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 5800,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "gu_pen_ge-v2-02",
+      "time_ms": 6500,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 6500,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "gu_pen_ge-v2-03",
+      "time_ms": 7200,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 7200,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "gu_pen_ge-v2-04",
+      "time_ms": 16800,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 16800,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "gu_pen_ge-v2-05",
+      "time_ms": 17500,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 17500,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "gu_pen_ge-v2-06",
+      "time_ms": 18900,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 18900,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "gu_pen_ge-v2-07",
+      "time_ms": 19600,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 19600,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "gu_pen_ge-v2-08",
+      "time_ms": 27800,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 27800,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "gu_pen_ge-v2-09",
+      "time_ms": 28220,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 28220,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "gu_pen_ge-v2-10",
+      "time_ms": 28640,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 28640,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "gu_pen_ge-v2-11",
+      "time_ms": 29480,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 29480,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "gu_pen_ge-v2-12",
+      "time_ms": 30320,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 30320,
+      "cue_ms": 1000,
+      "round": 2
+    }
+  ],
+  "sections": [
+    {
+      "id": "round-1",
+      "round": 0,
+      "start_ms": 0,
+      "listen_end_ms": 4200,
+      "response_start_ms": 5800,
+      "end_ms": 11000,
+      "teacher_times_ms": [
+        1200,
+        1900,
+        2600
+      ],
+      "pattern_ms": [
+        0,
+        700,
+        1400
+      ]
+    },
+    {
+      "id": "round-2",
+      "round": 1,
+      "start_ms": 11000,
+      "listen_end_ms": 15200,
+      "response_start_ms": 16800,
+      "end_ms": 22000,
+      "teacher_times_ms": [
+        12200,
+        12900,
+        14300,
+        15000
+      ],
+      "pattern_ms": [
+        0,
+        700,
+        2100,
+        2800
+      ]
+    },
+    {
+      "id": "round-3",
+      "round": 2,
+      "start_ms": 22000,
+      "listen_end_ms": 26200,
+      "response_start_ms": 27800,
+      "end_ms": 33000,
+      "teacher_times_ms": [
+        23200,
+        23620,
+        24040,
+        24880,
+        25720
+      ],
+      "pattern_ms": [
+        0,
+        420,
+        840,
+        1680,
+        2520
+      ]
+    }
+  ],
+  "tutorial_audio_path": "res://InheritanceTasks/Audio/rhythm-v3/gu_pen_ge-lesson-1.ogg",
+  "feedback_key": "drum",
+  "production_status": "game_arrangement_pending_listening",
+  "annotation_note": "游戏节奏编排v2；原调原速。短句自然边界、混音及文化动作仍待人工听审，不作为传统节型、帮腔声部或真实弓法转录。 v3：教学复用正式混音片段，伙伴演出独立时间线；既有切句仍待听审。",
+  "choreography": [
+    {
+      "id": "gu_pen_ge-motion-000",
+      "actor": "teacher",
+      "action": "prepare",
+      "start_ms": 850,
+      "end_ms": 1200,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-001",
+      "actor": "teacher",
+      "action": "strike",
+      "start_ms": 1200,
+      "end_ms": 1370,
+      "frames": [
+        2
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-002",
+      "actor": "teacher",
+      "action": "recover",
+      "start_ms": 1370,
+      "end_ms": 1550,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-003",
+      "actor": "teacher",
+      "action": "prepare",
+      "start_ms": 1550,
+      "end_ms": 1900,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-004",
+      "actor": "teacher",
+      "action": "strike",
+      "start_ms": 1900,
+      "end_ms": 2070,
+      "frames": [
+        2
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-005",
+      "actor": "teacher",
+      "action": "recover",
+      "start_ms": 2070,
+      "end_ms": 2250,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-006",
+      "actor": "teacher",
+      "action": "prepare",
+      "start_ms": 2250,
+      "end_ms": 2600,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-007",
+      "actor": "teacher",
+      "action": "strike",
+      "start_ms": 2600,
+      "end_ms": 2770,
+      "frames": [
+        2
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-008",
+      "actor": "teacher",
+      "action": "recover",
+      "start_ms": 2770,
+      "end_ms": 2950,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-009",
+      "actor": "teacher",
+      "action": "handoff",
+      "start_ms": 4200,
+      "end_ms": 5800,
+      "frames": [
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-010",
+      "actor": "teacher",
+      "action": "prepare",
+      "start_ms": 11850,
+      "end_ms": 12200,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-011",
+      "actor": "teacher",
+      "action": "strike",
+      "start_ms": 12200,
+      "end_ms": 12370,
+      "frames": [
+        2
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-012",
+      "actor": "teacher",
+      "action": "recover",
+      "start_ms": 12370,
+      "end_ms": 12550,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-013",
+      "actor": "teacher",
+      "action": "prepare",
+      "start_ms": 12550,
+      "end_ms": 12900,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-014",
+      "actor": "teacher",
+      "action": "strike",
+      "start_ms": 12900,
+      "end_ms": 13070,
+      "frames": [
+        2
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-015",
+      "actor": "teacher",
+      "action": "recover",
+      "start_ms": 13070,
+      "end_ms": 13250,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-016",
+      "actor": "teacher",
+      "action": "prepare",
+      "start_ms": 13950,
+      "end_ms": 14300,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-017",
+      "actor": "teacher",
+      "action": "strike",
+      "start_ms": 14300,
+      "end_ms": 14470,
+      "frames": [
+        2
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-018",
+      "actor": "teacher",
+      "action": "recover",
+      "start_ms": 14470,
+      "end_ms": 14650,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-019",
+      "actor": "teacher",
+      "action": "prepare",
+      "start_ms": 14650,
+      "end_ms": 15000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-020",
+      "actor": "teacher",
+      "action": "strike",
+      "start_ms": 15000,
+      "end_ms": 15170,
+      "frames": [
+        2
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-021",
+      "actor": "teacher",
+      "action": "recover",
+      "start_ms": 15170,
+      "end_ms": 15350,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-022",
+      "actor": "teacher",
+      "action": "handoff",
+      "start_ms": 15200,
+      "end_ms": 16800,
+      "frames": [
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-023",
+      "actor": "teacher",
+      "action": "prepare",
+      "start_ms": 22850,
+      "end_ms": 23200,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-024",
+      "actor": "teacher",
+      "action": "strike",
+      "start_ms": 23200,
+      "end_ms": 23370,
+      "frames": [
+        2
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-026",
+      "actor": "teacher",
+      "action": "prepare",
+      "start_ms": 23270,
+      "end_ms": 23620,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-025",
+      "actor": "teacher",
+      "action": "recover",
+      "start_ms": 23370,
+      "end_ms": 23550,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-027",
+      "actor": "teacher",
+      "action": "strike",
+      "start_ms": 23620,
+      "end_ms": 23790,
+      "frames": [
+        2
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-029",
+      "actor": "teacher",
+      "action": "prepare",
+      "start_ms": 23690,
+      "end_ms": 24040,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-028",
+      "actor": "teacher",
+      "action": "recover",
+      "start_ms": 23790,
+      "end_ms": 23970,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-030",
+      "actor": "teacher",
+      "action": "strike",
+      "start_ms": 24040,
+      "end_ms": 24210,
+      "frames": [
+        2
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-031",
+      "actor": "teacher",
+      "action": "recover",
+      "start_ms": 24210,
+      "end_ms": 24390,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-032",
+      "actor": "teacher",
+      "action": "prepare",
+      "start_ms": 24530,
+      "end_ms": 24880,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-033",
+      "actor": "teacher",
+      "action": "strike",
+      "start_ms": 24880,
+      "end_ms": 25050,
+      "frames": [
+        2
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-034",
+      "actor": "teacher",
+      "action": "recover",
+      "start_ms": 25050,
+      "end_ms": 25230,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-035",
+      "actor": "teacher",
+      "action": "prepare",
+      "start_ms": 25370,
+      "end_ms": 25720,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-036",
+      "actor": "teacher",
+      "action": "strike",
+      "start_ms": 25720,
+      "end_ms": 25890,
+      "frames": [
+        2
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-037",
+      "actor": "teacher",
+      "action": "recover",
+      "start_ms": 25890,
+      "end_ms": 26070,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "gu_pen_ge-motion-038",
+      "actor": "teacher",
+      "action": "handoff",
+      "start_ms": 26200,
+      "end_ms": 27800,
+      "frames": [
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    }
+  ],
+  "tutorial_steps": [
+    {
+      "instruction": "听师傅，接回三下",
+      "retry_hint": "听师傅，接回三下",
+      "initial_lane": -1,
+      "required": "double",
+      "duration_ms": 7900,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/gu_pen_ge-lesson-1.ogg",
+      "audio_sha256": "512fc4b4e387fb7169e1872f5216ec7689cf422bbb94662e812e2cd06b71170e",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/gu_pen_ge-mix.ogg",
+      "source_in_ms": 0,
+      "source_out_ms": 7900,
+      "events": [
+        {
+          "id": "gu_pen_ge-lesson-v5-0-0",
+          "time_ms": 5800,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 5800,
+          "cue_ms": 1000,
+          "round": 0
+        },
+        {
+          "id": "gu_pen_ge-lesson-v5-0-1",
+          "time_ms": 6500,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 6500,
+          "cue_ms": 1000,
+          "round": 0
+        },
+        {
+          "id": "gu_pen_ge-lesson-v5-0-2",
+          "time_ms": 7200,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 7200,
+          "cue_ms": 1000,
+          "round": 0
+        }
+      ],
+      "presentation": [
+        {
+          "id": "gu_pen_ge-lesson-v5-0-0",
+          "time_ms": 5800,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 5800,
+          "cue_ms": 1000,
+          "round": 0
+        },
+        {
+          "id": "gu_pen_ge-lesson-v5-0-1",
+          "time_ms": 6500,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 6500,
+          "cue_ms": 1000,
+          "round": 0
+        },
+        {
+          "id": "gu_pen_ge-lesson-v5-0-2",
+          "time_ms": 7200,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 7200,
+          "cue_ms": 1000,
+          "round": 0
+        }
+      ],
+      "choreography": [
+        {
+          "id": "gu_pen_ge-motion-000",
+          "actor": "teacher",
+          "action": "prepare",
+          "start_ms": 850,
+          "end_ms": 1200,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-001",
+          "actor": "teacher",
+          "action": "strike",
+          "start_ms": 1200,
+          "end_ms": 1370,
+          "frames": [
+            2
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-002",
+          "actor": "teacher",
+          "action": "recover",
+          "start_ms": 1370,
+          "end_ms": 1550,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-003",
+          "actor": "teacher",
+          "action": "prepare",
+          "start_ms": 1550,
+          "end_ms": 1900,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-004",
+          "actor": "teacher",
+          "action": "strike",
+          "start_ms": 1900,
+          "end_ms": 2070,
+          "frames": [
+            2
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-005",
+          "actor": "teacher",
+          "action": "recover",
+          "start_ms": 2070,
+          "end_ms": 2250,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-006",
+          "actor": "teacher",
+          "action": "prepare",
+          "start_ms": 2250,
+          "end_ms": 2600,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-007",
+          "actor": "teacher",
+          "action": "strike",
+          "start_ms": 2600,
+          "end_ms": 2770,
+          "frames": [
+            2
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-008",
+          "actor": "teacher",
+          "action": "recover",
+          "start_ms": 2770,
+          "end_ms": 2950,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-009",
+          "actor": "teacher",
+          "action": "handoff",
+          "start_ms": 4200,
+          "end_ms": 5800,
+          "frames": [
+            3
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": [
+        {
+          "id": "round-1",
+          "round": 0,
+          "start_ms": 0,
+          "listen_end_ms": 4200,
+          "response_start_ms": 5800,
+          "end_ms": 7900,
+          "teacher_times_ms": [
+            1200,
+            1900,
+            2600
+          ],
+          "pattern_ms": [
+            0,
+            700,
+            1400
+          ]
+        }
+      ]
+    },
+    {
+      "instruction": "中间停一拍，再接两下",
+      "retry_hint": "中间停一拍，再接两下",
+      "initial_lane": -1,
+      "required": "double",
+      "duration_ms": 9300,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/gu_pen_ge-lesson-2.ogg",
+      "audio_sha256": "429ee6de0052240c33690fa5bddb6c76f0f4287accc0ecef15cd6ba16594e71f",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/gu_pen_ge-mix.ogg",
+      "source_in_ms": 11000,
+      "source_out_ms": 20300,
+      "events": [
+        {
+          "id": "gu_pen_ge-lesson-v5-1-0",
+          "time_ms": 5800,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 5800,
+          "cue_ms": 1000,
+          "round": 1
+        },
+        {
+          "id": "gu_pen_ge-lesson-v5-1-1",
+          "time_ms": 6500,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 6500,
+          "cue_ms": 1000,
+          "round": 1
+        },
+        {
+          "id": "gu_pen_ge-lesson-v5-1-2",
+          "time_ms": 7900,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 7900,
+          "cue_ms": 1000,
+          "round": 1
+        },
+        {
+          "id": "gu_pen_ge-lesson-v5-1-3",
+          "time_ms": 8600,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 8600,
+          "cue_ms": 1000,
+          "round": 1
+        }
+      ],
+      "presentation": [
+        {
+          "id": "gu_pen_ge-lesson-v5-1-0",
+          "time_ms": 5800,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 5800,
+          "cue_ms": 1000,
+          "round": 1
+        },
+        {
+          "id": "gu_pen_ge-lesson-v5-1-1",
+          "time_ms": 6500,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 6500,
+          "cue_ms": 1000,
+          "round": 1
+        },
+        {
+          "id": "gu_pen_ge-lesson-v5-1-2",
+          "time_ms": 7900,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 7900,
+          "cue_ms": 1000,
+          "round": 1
+        },
+        {
+          "id": "gu_pen_ge-lesson-v5-1-3",
+          "time_ms": 8600,
+          "kind": "tap",
+          "direction": 0,
+          "end_ms": 8600,
+          "cue_ms": 1000,
+          "round": 1
+        }
+      ],
+      "choreography": [
+        {
+          "id": "gu_pen_ge-motion-010",
+          "actor": "teacher",
+          "action": "prepare",
+          "start_ms": 850,
+          "end_ms": 1200,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-011",
+          "actor": "teacher",
+          "action": "strike",
+          "start_ms": 1200,
+          "end_ms": 1370,
+          "frames": [
+            2
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-012",
+          "actor": "teacher",
+          "action": "recover",
+          "start_ms": 1370,
+          "end_ms": 1550,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-013",
+          "actor": "teacher",
+          "action": "prepare",
+          "start_ms": 1550,
+          "end_ms": 1900,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-014",
+          "actor": "teacher",
+          "action": "strike",
+          "start_ms": 1900,
+          "end_ms": 2070,
+          "frames": [
+            2
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-015",
+          "actor": "teacher",
+          "action": "recover",
+          "start_ms": 2070,
+          "end_ms": 2250,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-016",
+          "actor": "teacher",
+          "action": "prepare",
+          "start_ms": 2950,
+          "end_ms": 3300,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-017",
+          "actor": "teacher",
+          "action": "strike",
+          "start_ms": 3300,
+          "end_ms": 3470,
+          "frames": [
+            2
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-018",
+          "actor": "teacher",
+          "action": "recover",
+          "start_ms": 3470,
+          "end_ms": 3650,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-019",
+          "actor": "teacher",
+          "action": "prepare",
+          "start_ms": 3650,
+          "end_ms": 4000,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-020",
+          "actor": "teacher",
+          "action": "strike",
+          "start_ms": 4000,
+          "end_ms": 4170,
+          "frames": [
+            2
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-021",
+          "actor": "teacher",
+          "action": "recover",
+          "start_ms": 4170,
+          "end_ms": 4350,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "gu_pen_ge-motion-022",
+          "actor": "teacher",
+          "action": "handoff",
+          "start_ms": 4200,
+          "end_ms": 5800,
+          "frames": [
+            3
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": [
+        {
+          "id": "round-2",
+          "round": 1,
+          "start_ms": 0,
+          "listen_end_ms": 4200,
+          "response_start_ms": 5800,
+          "end_ms": 9300,
+          "teacher_times_ms": [
+            1200,
+            1900,
+            3300,
+            4000
+          ],
+          "pattern_ms": [
+            0,
+            700,
+            2100,
+            2800
+          ]
+        }
+      ]
+    }
+  ]
+}

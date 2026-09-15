@@ -1,0 +1,146 @@
+[
+  {
+    "id": "tv",
+    "prompt": "Use case: ui-mockup. Production raster game asset for 楚物志: one front-facing warm wooden retro television bezel, detailed authentic 16-bit pixel art with crisp pixel clusters, no anti-aliased vector look or photo textures. Wide rectangular 5:3 overall canvas, straight-on orthographic view. The game screen is a large perfectly rectangular blank dark charcoal area occupying x=6% to84%, y=10% to88%, with a narrow cream inner rim; do not paint content in the screen. Rightmost slim cream panel has two bronze knobs at the top, speaker cloth grille below, and three small blank ivory physical buttons at the bottom. Honey walnut wood casing, grouped subtle horizontal wood grain, precise square pixel highlights, slightly rounded outer corners, small solid feet. Decoration concentrated on outer border, leave maximum screen area. Transparent background outside the television. No text, no logos, no perspective skew, no screen curvature, no scanlines, no glow, no reflections over the screen. This is a reusable game UI asset, not a room illustration. Render at 1500x900 with consistent 3x enlarged pixels from a 500x300 art grid.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-49ee0ae0-70b9-49de-9bdb-258489437a85.png",
+    "status": "generated_pending_asset_checks",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "identity-travel",
+    "prompt": "Use case: identity-preserve. Create one production pixel character identity sheet for a Chinese heritage game, using the supplied original illustration ONLY as character identity reference. Same travel blogger girl: friendly round eyes, warm brown-grey twin low braids/ponytails with mauve highlights, kind expression. Detailed 16-bit pixel art, clean crisp pixel clusters, 3.5 heads tall, consistent dark brown one-pixel contour, warm skin shadows, no painterly smoothing. Transparent background. Sheet layout precisely 4 columns x2 rows, equal square cells, NO text or dividing lines. Top row: full-body FRONT view with yellow bucket hat and simple yellow travel tunic navy scarf boots; full-body RIGHT SIDE view; full-body BACK view; full-body front without hat showing complete twin braids. Bottom row: four large isolated head portraits: neutral attentive, smile, worried, relieved. Keep identical scale within top row and within bottom row, feet aligned, ample empty margin in every cell, no crop. Original high-detail illustration should become a coherent new game sprite, do not reproduce its watermark/typography. This is an identity master for later traditional-craft costumes; no held bags or props. 1536x768 sheet.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-29709c0f-1131-4127-87f4-f4447839dcc2.png",
+    "status": "generated_pending_asset_checks",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "identity-life",
+    "prompt": "Create a production identity model sheet of the young woman with medium brown shoulder-length hair, half-up bun tied with a pale ivory scrunchie, gentle grey-brown eyes, cream knit cardigan and beige skirt. Use the original supplied illustration only for identity, and the second pixel travel sheet only for coherent pixel style. Clean detailed 16-bit pixel art, 3.5 heads tall, strong grouped pixel clusters, warm skin, consistent fine dark contour. Four equal columns: top two thirds contain complete full-body front, right side, back, and front relaxed pose; bottom third contain separate large head portraits attentive, smiling, worried, relieved in same order. Maintain same character proportions and scale across the full-body views. NO objects held, no labels, no lettering, no dividing lines. Real transparent alpha background (no checkerboard pattern). If transparency is impossible, use completely uniform flat saturated #00FF00 background, never a drawn transparency checkerboard. Master identity reference for traditional-costume pixel game characters. 1536x768.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-7241631a-990d-4098-83c9-a5bee24d746f.png",
+    "status": "generated_pending_asset_checks",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "identity-business",
+    "prompt": "Create a production identity model sheet of the mature man with silver ivory curled swept hair, a distinct dark moustache, kind mature face and sturdier shoulders, navy jacket and maroon tie. Use the original supplied illustration only for identity, and the second pixel travel sheet only for coherent pixel style. Clean detailed 16-bit pixel art, 3.5 heads tall, strong grouped pixel clusters, warm skin, consistent fine dark contour. Four equal columns: top two thirds contain complete full-body front, right side, back, and front relaxed pose; bottom third contain separate large head portraits attentive, smiling, worried, relieved in same order. Maintain same character proportions and scale across the full-body views. NO objects held, no labels, no lettering, no dividing lines. Real transparent alpha background (no checkerboard pattern). If transparency is impossible, use completely uniform flat saturated #00FF00 background, never a drawn transparency checkerboard. Master identity reference for traditional-costume pixel game characters. 1536x768.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-32800a97-f165-428b-b48f-8f2eff6b8416.png",
+    "status": "generated_pending_asset_checks",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "identity-food",
+    "prompt": "Production character identity turnaround sheet for the supplied food blogger girl. ORIGINAL INPUT IS IDENTITY ONLY. Warm brown hair with side braid and red side ribbon, lively kind eyes, pink chef hat, blue blouse and plain pink apron. Change to detailed 16-bit pixel art, 3.5 heads tall, crisp clusters, dark brown single pixel outline and warm skin shadows. Canvas background entirely SOLID flat #00FF00 green, no checker pattern and no texture. Layout four equal columns. Top 62% has four fullbody views: front, right side, back, front without hat (show side hair knot). Bottom38% has four isolated head expressions: attentive, happy, concerned, relieved, same head scale. Large gutters, full feet, no cut off sprites, no held objects, no text, no labels, no ground shadows. 1536x768 horizontal sheet. Do not preserve the source illustration's rendering or background.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-54bfaac9-5b53-41ed-9b75-1454e3c98bc3.png",
+    "status": "generated_pending_asset_checks",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "identity-adventure",
+    "prompt": "Production pixel character identity turnaround sheet from this original adventure blogger. Preserve young man's distinctive short spiky grey hair, tiny diagonal nose mark, red scarf accent, energetic features; tan outdoor tunic, trousers and leg boots, flight cap with goggles in first3views. Detailed 16-bit game pixel art, three-and-a-half heads tall, crisp colored pixel clusters, thin dark brown contour, warm skin. Horizontal four equal columns. Upper62%: fullbody front, right side, back, and front without flight cap (complete grey hair). Lower38%: four large isolated head expressions attentive, happy, concerned, relieved, WITHOUT cap. Same body scale and same head scale across views. Canvas background completely flat solid saturated #00FF00, no pattern, no shadows, no text, no framing, no labels, no cut off. Original identity reference only, replace rendering with pixel art. 1536x768.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-d5254133-0549-44e7-bc60-4112a490dab6.png",
+    "status": "generated_pending_asset_checks",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "identity-magic",
+    "prompt": "Production pixel character identity turnaround sheet from the supplied original magic blogger. Preserve boyish androgynous face, shoulder-length dark green-grey hair with distinctive GOLD blond front streaks and purple highlight, confident warm expression. Purple waistcoat, white shirt, navy tailcoat, checked necktie, checkered tall top hat in first3views. Detailed 16-bit pixel art, 3.5 heads tall, controlled crisp pixel clusters, thin dark brown contour, warm skin. Four equal columns. Upper62%: complete fullbody front, right side, back, front WITHOUT hat to show long hair and gold streak. Lower38%: four isolated head portraits without hat: attentive, smiling, worried, relieved. Same body and head scale across poses, plenty of gutters, all feet visible. SOLID flat saturated #00FF00 green background only, no checker pattern, no text, no labels, no ground shadows, no held props. Original reference for identity only, convert rendering to pixel art. 1536x768.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-88a83598-5241-45d9-bfda-e1401a922fde.png",
+    "status": "generated_pending_asset_checks",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "workshop_background",
+    "prompt": "Use case: stylized-concept. Production in-game background for Xia family traditional alchemy furnace craft minigame, warm Hubei rural workshop, horizontal 5:3 composition. Detailed 16-bit pixel art rendered on coherent 500x300 grid and enlarged3x, crisp grouped pixels and limited ramps, no blur. On left rear wall a wooden lattice window with cool daylight, below a few ceramic jars, rear herbal drawer cabinet. LARGE OPEN LOW-CONTRAST FOREGROUND at left x70..240 of500, y110..275 for a 3.5head character and bellows to be composited. At middle-right x300 y190 a traditional squat charcoal furnace with brick base, bronze-brown vessel and dark open rectangular fire door, nozzle on its LEFT at y225 to receive bellows. No fire painted inside the black opening, fire will animate separately. Rightmost x410..475 lowcontrast wall kept open for temperature gauge. Warm wood/plaster/copper, cold windowlight versuswarmorange furnace rim. Woodgrain grouped, metalfewhardhighlights. No people, no written characters, no UI, no TV frame, no text, no floating props, no photorealism. Include full floor, plain calm lower30pixels reserved gauges. 1500x900.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-f7e810a8-03eb-4751-9938-5efbefb3a518.png",
+    "status": "generated_pending_asset_checks",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "workshop_avatars",
+    "prompt": "PRODUCTION ANIMATION ATLAS, EXACTLY SIX COLUMNS by SIX ROWS =36 separate sprites, square1536x1536. Input reference shows six game characters LEFT TO RIGHT; use them in ROW order:1 travel girl twin low braids,2 life girl half-up ivory hair tie,3 mature business man silver curls moustache,4 food girl side hair knot red ribbon,5 adventure boy short grey hair red accent,6 magic longer dark green-grey hair GOLD front streak. Preserve those faces and hairstyles, dress ALL in traditional Chinese tied-sleeve work tunics and waist aprons, cloth trousers and shoes, no hats/backpacks. Strict RIGHT-facing 3/4 side fullbody,3.5 heads tall, detailed16bit pixel art, crisp pixel clusters, consistent outlines. Each character stands LEFT of a low wooden piston bellows box, hands grip horizontal handle projecting LEFT from the box; nozzle points RIGHT. Bellows box stays fixed in every cell. Six COLUMNS form one action strip:1 ready hands grip,2 draw handle backward arms bend,3 push handle forward lean,4 release and stand straighter,5 worried stop leaning back still grip,6 relieved steady recovery. Keep scale, feet baseline, facing, box/nozzle anchors identical across every pose. Every sprite isolated within a cell with12%clear gutters,no overlaps/no cropping. Entire background is FLAT SOLID #00FF00 GREEN, never checkerboard. NO TEXT NO LABELS NO GRIDLINES NO FURNACE NO SCENERY. Complete all36cells.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-b1bf8f5c-1443-443a-8f42-79ba0a703350.png",
+    "status": "generated_pending_asset_checks",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "story-panel1",
+    "prompt": "Original rural Chinese legend comic panel for the Water Buffalo Cave story of Mazongling, Hubei. Landscape5:3, detailed16-bit pixel art, legible large action silhouettes, gentle warm daylight, earthy field green distant hills, no text no UI. Scene1 HUMAN PLOUGHING: a plainclothed ancient worker at LEFT guides a wooden plough with both hands, plough iron blade clearly cuts dark furrows. Two other plainclothed men at CENTER and RIGHT lean FORWARD toward RIGHT straining to pull a long taut rope attached back to the plough; rope passes across their shoulders and connects correctly. Show the whole plough, workers' feet, tight rope and turned soil in foreground. Repeated field landmark: a bent willow on upperleft bank, split grey boulder upperright, paddy dike and low mountains behind. These landmarks must leave room for replacing the two pulling men with buffalo next panel. Ancient villagers/laborers with practical tied hair and grey-blue/brown tunics, not armored warriors. Four-head proportions, distinct thick working limbs, expressive effort but not comedy. No animals in this first panel, no modern technology, no text or numbers, no decorative borders. 1500x900 game comic frame.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-e53a6620-dbf9-4a51-b589-cdd201248b54.png",
+    "status": "generated_pending_asset_checks",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "story-panel2",
+    "prompt": "Create the NEXT panel of this same original pixel comic, same landscape5:3 composition, same ploughman at LEFT in grey-blue tunic, exact same willow upperleft, split boulder upperright, mountain horizon, field and plough. Scene2 WATER BUFFALO HELPS FARMING: replace the two straining men in front with ONE large dark slate-grey Asian water buffalo facing RIGHT with broad low sweeping crescent horns and a small light forehead tuft, pulling the wooden plough using a clearly connected simple wooden shoulder yoke and rope. The ploughman now calmly guides behind with both hands, standing a little straighter. Show deeper, longer neat freshly turned furrows to communicate that the animal makes work easier. All feet/hooves and connections in frame, calm willing animal, warm humane scene, no violence. Keep legible silhouettes and few background details, detailed16-bit pixel art crisp 500x300 grid enlarged3x. No text numbers borders UI. Maintain character and scene continuity, recompose only as required to fit the buffalo.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-1e45e8d7-2a18-43d3-8bbc-8e44aae35b6f.png",
+    "status": "generated_pending_asset_checks",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "story-panel3",
+    "prompt": "Third original pixel comic panel of same Water Buffalo Cave legend. Match supplied panel's warm16bit pixel style and SAME dark slate buffalo with low crescent horns and small light forehead tuft. New clear scene: people find a large dry rock cave and lead their buffalo herd INSIDE for shelter. View broad cave entrance from outdoors, front opening large at LEFT-CENTER and tunnel extending to back RIGHT; clearly visible small patch of daylight at a second REAR EXIT deep in the tunnel. The distinctive buffalo in foreground walks from grassy OUTSIDE at left INTO shadowed cave toward right, two other buffalo already within. Plain ancient worker in same grey-blue tunic gently guides at entrance, another points toward safe dry interior. Hooves and walking direction clear, calm shelter scene, no frightened animals, no harm. Large easy-to-read silhouettes, few background details, rock layers and some fern edges, small clear spring in rear left not flooding ground. NO text, arrows, numbers, modern objects or UI. Landscape5:3,1500x900.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-e28fbd4a-7109-42ab-ac1f-db6326c739ba.png",
+    "status": "generated_pending_asset_checks",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "story-panel4",
+    "prompt": "Fourth and final original pixel comic panel of the Water Buffalo Cave story. Same16-bit pixel style and same buffalo identity as reference: dark slate body, broad low crescent horns, white forehead tuft. View from OUTSIDE the cave's BACK EXIT: rocky dark opening on LEFT, bright green hillside and open fields on RIGHT. Three buffalo are WALKING OUT of the dark cave toward RIGHT into daylight, distinctive buffalo largest leading foreground, two following with their hindquarters still partly in cave. No yokes or ropes now; cattle have escaped shelter after war. Far far distance on upperright horizon show only a small faded old military flag and thin smoke column to suggest the aftermath; no fighting, no bodies, no fire near animals. Bright calm hillside signifies survival. Full hooves, clear dark-to-light direction. Do NOT show a human herding them inward; exit action must be unmistakable and contrast prior entering panel. Same grey rock layers, fen edges, rural Hubei mountains. Large simple readable silhouettes, no textual labels numbers UI or arrows, landscape5:3 1500x900 game comic art.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-63218e22-bd80-49a1-a3e9-28be8ce6753d.png",
+    "status": "generated_pending_asset_checks",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "story-thumbnails",
+    "prompt": "One PRODUCTION STORY-CARD THUMBNAIL ATLAS,2 columns x2 rows, square1536x1536, four equal square tiles, no lines separating tiles and NO text or numbers. REDRAW the four supplied story panels into MUCH SIMPLER readable pixel illustrations for tiny cards, do not simply shrink the busy backgrounds. Flat earthy warm backdrops with just a few landmarks. Top-left: two large men pulling taut rope and wooden plough, third man behind guiding, NO buffalo. Top-right: one large grey crescent-horned white-forehead buffalo pulling same plough, one man guiding behind; no pulling men. Bottom-left: one buffalo going INTO a dark cave opening on RIGHT, man on LEFT at entrance guiding, buffalo head inside shadow, dark cave dominates right half. Bottom-right: one buffalo coming OUT of a dark cave on LEFT into bright green daylight to RIGHT, NO guiding person, whole head and shoulders in bright outside. Each tile must read a different cause/action instantly at120pixels. Keep same grey-blue man and dark buffalo with white forehead tuft across tiles. Detailed clean16-bit pixelart with large calm color clusters, thick dark silhouettes, simplified forms,4-head cartoon people. Leave8%inner margin every tile, no crops. All four tiles have opaque simple environments, not transparent. Game asset atlas, no card frames, no UI.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-27a785a3-1573-4fa7-82eb-662b92c31d7d.png",
+    "status": "generated_pending_asset_checks",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "identity-travel-alpha-attempt",
+    "prompt": "Edit target: the supplied pixel character sheet. Remove ONLY the fake grey-white checkerboard background and export a true transparent RGBA PNG with alpha zero everywhere between sprites. Keep every character, all eight poses, pixel colors, positions, outlines, dimensions unchanged. Do not draw a new checkerboard. This is a production sprite sheet to composite on a game scene, not a screenshot of transparency. Also leave at least 8 pixels clear margin around each separated pose. Preserve exact 4 columns and 2 rows, no text.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-1f6b9b47-3de0-4b7d-98de-0e03c2e4668f.png",
+    "status": "rejected_false_alpha",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "story-background",
+    "prompt": "Production16-bit pixel game background, rural Hubei village storytelling gathering, warm intimate courtyard, landscape5:3 1500x900 coherent500x300 pixel grid crisp grouped pixels. Old plaster wall and wooden lattice doorway, bamboo shade, a low wooden table on RIGHT at x340y210, two wooden benches placed as gentle shallow arc, woven basket and clay teacups at edges. LEFT foreground x70..210 y145..285 left empty for a3.5-head blogger listener and four story cards to overlay later; storyteller NPC will be separate at right. Rear wall pale warm grey calm, not covered with dense textures. Soft morning light through leaves, earthy brown/cream/mutedgreen. No characters, no text, no inscriptions, no card drawings, no UI or television, no photoreal blur. Detailed cozy16-bit pixel material language consistent with supplied workshop reference but a clearly distinct village gathering location.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-6d9a24aa-db06-407d-8bcd-7da729843bc7.png",
+    "status": "generated_pending_asset_checks",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "story-avatars-rejected",
+    "prompt": "Production animation atlas for village storytelling listeners in a Chinese pixel game. EXACT6columns x6rows36sprites on1536x1536. Input shows6identities left to right, assign ROWS sameorder: travel twinbraidgirl; life halfupivorytie girl; business silvercurlmoustache matureman; food sidehairknotredribbon girl; adventure greyshort-haired boy; magic longgreygreenhair GOLDstreak. Preserve eachidentity. Dress in simple rural heritage-experience tied-cuff linen shirts, clothtrousers, soft waist sashes, plain shoes, NO hats backpacks or modern gadgets. 3.5heads tall, detailed16bitpixelart crispclusteredpixels. Everycharacter seated on a small wooden stool at a45degree angle facing RIGHT, feet anchored, hands visible. Six COLUMNS one complete acting sequence:1 listening attentively hands on knees,2 lean slightly forward interested,3 point to a small square illustrated story card held in otherhand,4 gently place card on lap thinking,5 confused expression with onehand near chin,6 relieved smile showing completed stackofcards. Samebody/headscale acrossallcells, consistentfoot/stoolanchors, donotfloat orcrop. Allspritesseparateinsideequalcellswith12%margin. EntirebackgroundFLAT SOLID #00FF00green for extraction,NOcheckeredpattern,NOlabels,NOtext,NOgridlines,NOscene. Fullsixrowsallcharactersallposes.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-49f6bc09-bb99-4bfe-9c7e-7969c0813568.png",
+    "status": "rejected_cross_frame_identity",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  },
+  {
+    "id": "story-avatars",
+    "prompt": "Repair ONLY identity mistakes in this6ROW by6COLUMN animation atlas. All SIX sprites in EACH HORIZONTAL ROW must be THE SAME PERSON as that row's FIRST sprite. The reference mixed up people in some later columns. Correct it precisely: TOP ROW all6are twin-braided brown-grey-haired travel GIRL (replace silver-haired man in col3, foodgirl incol4,magic incol6). SECOND ROW all6half-up brown-haired ivory scrunchie life GIRL (replace man col3,foodgirl col4). THIRD ROW all6silver-curly-haired mature MOUSTACHED MAN (replace grey short-haired boy col5). FOURTH ROW all6brown side-knot red ribbon food GIRL (replace man col3,magic col6). FIFTH ROW all6shortspikyGREY-haired adventure BOY (replace silvercurlman col3,magic col6). BOTTOM ROW all6longgrey-greenhair GOLDfrontstreak magic BOY. Keep the sitting poses and hand/card actions of each COLUMN, same stool footanchors and linen costume/color within EACH ROW. Do not change background (#00FF00solid), grid6x6, cellsize or drawingstyle. Every row oneidentity, every column a differentaction by that SAME identity. No captions or labels. Do not copy identity vertically from other rows.",
+    "path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-fec0c534-0dbf-406c-8828-7302015fb20c.png",
+    "status": "generated_pending_asset_checks",
+    "method": "built-in imagegen",
+    "date": "2026-09-13"
+  }
+]

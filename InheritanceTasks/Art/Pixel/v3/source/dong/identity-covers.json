@@ -1,0 +1,42 @@
+{
+  "method": "Unmodified ordinary-input Godot captures; separate cover for each chosen blogger",
+  "user_acceptance": false,
+  "covers": [
+    {
+      "avatar": "travel_blogger",
+      "source": "artifacts/dong-hand-connection-v8-final/dong-travel_blogger.png",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/dong/cover-travel.png",
+      "sha256": "c4b182799860d2064382c4d959d25d23a281c375f604bb9ed4e7da1f71adb86c"
+    },
+    {
+      "avatar": "life_blogger",
+      "source": "artifacts/dong-hand-connection-v8-final/dong-life_blogger.png",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/dong/cover-life.png",
+      "sha256": "1ca308497a7f52015baefa922a6845e5cc189decb33fde0185074d43d1f2090b"
+    },
+    {
+      "avatar": "business_blogger",
+      "source": "artifacts/dong-hand-connection-v8-final/dong-business_blogger.png",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/dong/cover-business.png",
+      "sha256": "51bcba2b432913982e011ac2def2bdae31f73d236ca3b7014a58fcd96663e6e7"
+    },
+    {
+      "avatar": "food_blogger",
+      "source": "artifacts/dong-hand-connection-v8-final/dong-food_blogger.png",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/dong/cover-food.png",
+      "sha256": "c409c9c74e15dee8c398f8387cf47e10164f979e8f0b023222668428fe6b7280"
+    },
+    {
+      "avatar": "adventure_blogger",
+      "source": "artifacts/dong-hand-connection-v8-final/dong-adventure_blogger.png",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/dong/cover-adventure.png",
+      "sha256": "aca929f7b7d45b2f9fe773b082d35e2524e88c12bf094bc30cb6bb12b4cfe12b"
+    },
+    {
+      "avatar": "magic_blogger",
+      "source": "artifacts/dong-hand-connection-v8-final/dong-magic_blogger.png",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/dong/cover-magic.png",
+      "sha256": "22fdf22c3c3dec7d172b704a6bbac01184e62cf77a20168c6967e881cba1d3ff"
+    }
+  ]
+}

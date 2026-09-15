@@ -1,0 +1,696 @@
+{
+  "version": 3,
+  "audio_path": "res://InheritanceTasks/Audio/rhythm-v2/ti_qin_xi-mix.ogg",
+  "audio_sha256": "d34715c7a6308011b6e5efbb6429cdcb3f7e51c927947f4df3135bc588bd8098",
+  "end_ms": 39000,
+  "events": [
+    {
+      "id": "ti_qin_xi-v2-01",
+      "time_ms": 4950,
+      "kind": "hold",
+      "direction": -1,
+      "end_ms": 6250,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "ti_qin_xi-v2-02",
+      "time_ms": 7150,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 7150,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "ti_qin_xi-v2-03",
+      "time_ms": 8700,
+      "kind": "rest",
+      "direction": 0,
+      "end_ms": 9100,
+      "cue_ms": 1000,
+      "round": 0,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "ti_qin_xi-v2-04",
+      "time_ms": 14450,
+      "kind": "hold",
+      "direction": 1,
+      "end_ms": 16150,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "ti_qin_xi-v2-05",
+      "time_ms": 16650,
+      "kind": "hold",
+      "direction": -1,
+      "end_ms": 17900,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "ti_qin_xi-v2-06",
+      "time_ms": 23950,
+      "kind": "hold",
+      "direction": -1,
+      "end_ms": 25050,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "ti_qin_xi-v2-07",
+      "time_ms": 26150,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 26150,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "ti_qin_xi-v2-08",
+      "time_ms": 27700,
+      "kind": "rest",
+      "direction": 0,
+      "end_ms": 28100,
+      "cue_ms": 1000,
+      "round": 2,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "ti_qin_xi-v2-09",
+      "time_ms": 33450,
+      "kind": "hold",
+      "direction": 1,
+      "end_ms": 34950,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "ti_qin_xi-v2-10",
+      "time_ms": 35650,
+      "kind": "hold",
+      "direction": -1,
+      "end_ms": 36900,
+      "cue_ms": 1000,
+      "round": 3
+    }
+  ],
+  "presentation": [
+    {
+      "id": "ti_qin_xi-v2-01",
+      "time_ms": 4950,
+      "kind": "hold",
+      "direction": -1,
+      "end_ms": 6250,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "ti_qin_xi-v2-02",
+      "time_ms": 7150,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 7150,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "ti_qin_xi-v2-03",
+      "time_ms": 8700,
+      "kind": "rest",
+      "direction": 0,
+      "end_ms": 9100,
+      "cue_ms": 1000,
+      "round": 0,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "ti_qin_xi-v2-04",
+      "time_ms": 14450,
+      "kind": "hold",
+      "direction": 1,
+      "end_ms": 16150,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "ti_qin_xi-v2-05",
+      "time_ms": 16650,
+      "kind": "hold",
+      "direction": -1,
+      "end_ms": 17900,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "ti_qin_xi-v2-06",
+      "time_ms": 23950,
+      "kind": "hold",
+      "direction": -1,
+      "end_ms": 25050,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "ti_qin_xi-v2-07",
+      "time_ms": 26150,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 26150,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "ti_qin_xi-v2-08",
+      "time_ms": 27700,
+      "kind": "rest",
+      "direction": 0,
+      "end_ms": 28100,
+      "cue_ms": 1000,
+      "round": 2,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "ti_qin_xi-v2-09",
+      "time_ms": 33450,
+      "kind": "hold",
+      "direction": 1,
+      "end_ms": 34950,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "ti_qin_xi-v2-10",
+      "time_ms": 35650,
+      "kind": "hold",
+      "direction": -1,
+      "end_ms": 36900,
+      "cue_ms": 1000,
+      "round": 3
+    }
+  ],
+  "sections": [
+    {
+      "id": "round-1",
+      "start_ms": 0,
+      "listen_end_ms": 3400,
+      "response_start_ms": 4950,
+      "end_ms": 9500,
+      "round": 0,
+      "teacher_times_ms": [
+        3550,
+        4250
+      ]
+    },
+    {
+      "id": "round-2",
+      "start_ms": 9500,
+      "listen_end_ms": 12900,
+      "response_start_ms": 14450,
+      "end_ms": 19000,
+      "round": 1,
+      "teacher_times_ms": [
+        13050,
+        13750
+      ]
+    },
+    {
+      "id": "round-3",
+      "start_ms": 19000,
+      "listen_end_ms": 22400,
+      "response_start_ms": 23950,
+      "end_ms": 28500,
+      "round": 2,
+      "teacher_times_ms": [
+        22550,
+        23250
+      ]
+    },
+    {
+      "id": "round-4",
+      "start_ms": 28500,
+      "listen_end_ms": 31900,
+      "response_start_ms": 33450,
+      "end_ms": 38000,
+      "round": 3,
+      "teacher_times_ms": [
+        32050,
+        32750
+      ]
+    }
+  ],
+  "tutorial_audio_path": "res://InheritanceTasks/Audio/rhythm-v3/ti_qin_xi-lesson-1.ogg",
+  "feedback_key": "bow",
+  "production_status": "game_arrangement_pending_listening",
+  "annotation_note": "游戏节奏编排v2；原调原速。短句自然边界、混音及文化动作仍待人工听审，不作为传统节型、帮腔声部或真实弓法转录。 v3：教学复用正式混音片段，伙伴演出独立时间线；既有切句仍待听审。",
+  "choreography": [
+    {
+      "id": "ti_qin_xi-motion-000",
+      "actor": "lead",
+      "action": "prepare",
+      "start_ms": 0,
+      "end_ms": 380,
+      "frames": [
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "ti_qin_xi-motion-001",
+      "actor": "lead",
+      "action": "sing_phrase",
+      "start_ms": 380,
+      "end_ms": 3400,
+      "frames": [
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 1500
+    },
+    {
+      "id": "ti_qin_xi-motion-002",
+      "actor": "lead",
+      "action": "handoff",
+      "start_ms": 3400,
+      "end_ms": 4950,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "ti_qin_xi-motion-003",
+      "actor": "lead",
+      "action": "prepare",
+      "start_ms": 9500,
+      "end_ms": 9880,
+      "frames": [
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "ti_qin_xi-motion-004",
+      "actor": "lead",
+      "action": "sing_phrase",
+      "start_ms": 9880,
+      "end_ms": 12900,
+      "frames": [
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 1500
+    },
+    {
+      "id": "ti_qin_xi-motion-005",
+      "actor": "lead",
+      "action": "handoff",
+      "start_ms": 12900,
+      "end_ms": 14450,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "ti_qin_xi-motion-006",
+      "actor": "lead",
+      "action": "prepare",
+      "start_ms": 19000,
+      "end_ms": 19380,
+      "frames": [
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "ti_qin_xi-motion-007",
+      "actor": "lead",
+      "action": "sing_phrase",
+      "start_ms": 19380,
+      "end_ms": 22400,
+      "frames": [
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 1500
+    },
+    {
+      "id": "ti_qin_xi-motion-008",
+      "actor": "lead",
+      "action": "handoff",
+      "start_ms": 22400,
+      "end_ms": 23950,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "ti_qin_xi-motion-009",
+      "actor": "lead",
+      "action": "prepare",
+      "start_ms": 28500,
+      "end_ms": 28880,
+      "frames": [
+        0
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "ti_qin_xi-motion-010",
+      "actor": "lead",
+      "action": "sing_phrase",
+      "start_ms": 28880,
+      "end_ms": 31900,
+      "frames": [
+        1,
+        2,
+        1
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 1500
+    },
+    {
+      "id": "ti_qin_xi-motion-011",
+      "actor": "lead",
+      "action": "handoff",
+      "start_ms": 31900,
+      "end_ms": 33450,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "",
+      "direction": 0,
+      "cycle_ms": 0
+    }
+  ],
+  "tutorial_steps": [
+    {
+      "instruction": "跟弓向，轻轻拉一下",
+      "retry_hint": "跟弓向，轻轻拉一下",
+      "initial_lane": -1,
+      "required": "hit",
+      "duration_ms": 7850,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/ti_qin_xi-lesson-1.ogg",
+      "audio_sha256": "84ffc60619b61b4c33dde65861bbbf7bf4fbe127f746a0c5631368a3b485e167",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/ti_qin_xi-mix.ogg",
+      "source_in_ms": 0,
+      "source_out_ms": 7850,
+      "events": [
+        {
+          "id": "ti_qin_xi-lesson-v5-0-0",
+          "time_ms": 7150,
+          "kind": "tap",
+          "direction": 1,
+          "end_ms": 7150,
+          "cue_ms": 1000,
+          "round": 0
+        }
+      ],
+      "presentation": [
+        {
+          "id": "ti_qin_xi-lesson-v5-0-0",
+          "time_ms": 7150,
+          "kind": "tap",
+          "direction": 1,
+          "end_ms": 7150,
+          "cue_ms": 1000,
+          "round": 0
+        }
+      ],
+      "choreography": [
+        {
+          "id": "ti_qin_xi-motion-000",
+          "actor": "lead",
+          "action": "prepare",
+          "start_ms": 0,
+          "end_ms": 380,
+          "frames": [
+            0
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "ti_qin_xi-motion-001",
+          "actor": "lead",
+          "action": "sing_phrase",
+          "start_ms": 380,
+          "end_ms": 3400,
+          "frames": [
+            1,
+            2,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 1500
+        },
+        {
+          "id": "ti_qin_xi-motion-002",
+          "actor": "lead",
+          "action": "handoff",
+          "start_ms": 3400,
+          "end_ms": 4950,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": [
+        {
+          "id": "round-1",
+          "start_ms": 0,
+          "listen_end_ms": 3400,
+          "response_start_ms": 4950,
+          "end_ms": 7850,
+          "round": 0,
+          "teacher_times_ms": [
+            3550,
+            4250
+          ]
+        }
+      ]
+    },
+    {
+      "instruction": "向左按住，青圈合上时松开",
+      "retry_hint": "向左按住，青圈合上时松开",
+      "initial_lane": -1,
+      "required": "hold",
+      "duration_ms": 6950,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/ti_qin_xi-lesson-2.ogg",
+      "audio_sha256": "cc999539f3997ef873be5eb6970145aa01a92a8aee277020757e42a7522ba198",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/ti_qin_xi-mix.ogg",
+      "source_in_ms": 0,
+      "source_out_ms": 6950,
+      "events": [
+        {
+          "id": "ti_qin_xi-lesson-v5-1-0",
+          "time_ms": 4950,
+          "kind": "hold",
+          "direction": -1,
+          "end_ms": 6250,
+          "cue_ms": 1000,
+          "round": 0
+        }
+      ],
+      "presentation": [
+        {
+          "id": "ti_qin_xi-lesson-v5-1-0",
+          "time_ms": 4950,
+          "kind": "hold",
+          "direction": -1,
+          "end_ms": 6250,
+          "cue_ms": 1000,
+          "round": 0
+        }
+      ],
+      "choreography": [
+        {
+          "id": "ti_qin_xi-motion-000",
+          "actor": "lead",
+          "action": "prepare",
+          "start_ms": 0,
+          "end_ms": 380,
+          "frames": [
+            0
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "ti_qin_xi-motion-001",
+          "actor": "lead",
+          "action": "sing_phrase",
+          "start_ms": 380,
+          "end_ms": 3400,
+          "frames": [
+            1,
+            2,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 1500
+        },
+        {
+          "id": "ti_qin_xi-motion-002",
+          "actor": "lead",
+          "action": "handoff",
+          "start_ms": 3400,
+          "end_ms": 4950,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": [
+        {
+          "id": "round-1",
+          "start_ms": 0,
+          "listen_end_ms": 3400,
+          "response_start_ms": 4950,
+          "end_ms": 6950,
+          "round": 0,
+          "teacher_times_ms": [
+            3550,
+            4250
+          ]
+        }
+      ]
+    },
+    {
+      "instruction": "向右长弓，收手就松开",
+      "retry_hint": "向右长弓，收手就松开",
+      "initial_lane": -1,
+      "required": "hold",
+      "duration_ms": 7350,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/ti_qin_xi-lesson-3.ogg",
+      "audio_sha256": "5a9cc8ae86ebf9f4099a0d8ddbbb5ea42e96cd03e523451397d401f62eb56dcf",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/ti_qin_xi-mix.ogg",
+      "source_in_ms": 9500,
+      "source_out_ms": 16850,
+      "events": [
+        {
+          "id": "ti_qin_xi-lesson-v5-2-0",
+          "time_ms": 4950,
+          "kind": "hold",
+          "direction": 1,
+          "end_ms": 6650,
+          "cue_ms": 1000,
+          "round": 1
+        }
+      ],
+      "presentation": [
+        {
+          "id": "ti_qin_xi-lesson-v5-2-0",
+          "time_ms": 4950,
+          "kind": "hold",
+          "direction": 1,
+          "end_ms": 6650,
+          "cue_ms": 1000,
+          "round": 1
+        }
+      ],
+      "choreography": [
+        {
+          "id": "ti_qin_xi-motion-003",
+          "actor": "lead",
+          "action": "prepare",
+          "start_ms": 0,
+          "end_ms": 380,
+          "frames": [
+            0
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "ti_qin_xi-motion-004",
+          "actor": "lead",
+          "action": "sing_phrase",
+          "start_ms": 380,
+          "end_ms": 3400,
+          "frames": [
+            1,
+            2,
+            1
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 1500
+        },
+        {
+          "id": "ti_qin_xi-motion-005",
+          "actor": "lead",
+          "action": "handoff",
+          "start_ms": 3400,
+          "end_ms": 4950,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "",
+          "direction": 0,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": [
+        {
+          "id": "round-2",
+          "start_ms": 0,
+          "listen_end_ms": 3400,
+          "response_start_ms": 4950,
+          "end_ms": 7350,
+          "round": 1,
+          "teacher_times_ms": [
+            3550,
+            4250
+          ]
+        }
+      ]
+    }
+  ]
+}

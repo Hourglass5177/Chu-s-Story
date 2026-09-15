@@ -10,4 +10,4 @@ grow_vertical = 2
 mouse_filter = 0
 script = ExtResource("1")
 task_id = &"tianmen_tang_su"
-duration_seconds = 23.0
+duration_seconds = 25

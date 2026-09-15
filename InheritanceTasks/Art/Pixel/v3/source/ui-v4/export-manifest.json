@@ -1,0 +1,19 @@
+{
+  "version": 4,
+  "tool": "built-in imagegen",
+  "assets": [
+    {
+      "name": "楚物TV",
+      "source": "chuwu-tv-v2.png",
+      "matte": "Generated RGB checkerboard removed using neutral/warm separation; no lettering recolored",
+      "prompt": "Preserve 楚物TV letter shapes; remove brown glow and plate; cream/gold pixel wordmark with close dark outline"
+    },
+    {
+      "name": "ordinary river boat",
+      "source": "river-boat-v2.png",
+      "matte": "native alpha preserved, green residue removed",
+      "prompt": "Broad short wooden cargo lighter, rear above 35 degrees, strong foreshortening, no people or ceremonial decoration"
+    }
+  ],
+  "review": "source and exports inspected; engine scale review pending"
+}

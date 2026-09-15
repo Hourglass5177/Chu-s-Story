@@ -1,0 +1,175 @@
+{
+  "method": "imagegen whole strips; native cell slicing, technical green matte where needed; no palette quantization or source pixel reduction",
+  "task": "ti_qin_xi",
+  "status": "generated candidates; not user accepted",
+  "pixel_canvas": [
+    1000,
+    600
+  ],
+  "logical_stage": [
+    1000,
+    600
+  ],
+  "actors": [
+    {
+      "actor": "travel",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/ti_qin_xi/travel-animation-r5.png",
+      "source_sha256": "bfff1f585962ef22af233400b03b2c5d1d2ad2972ffec8669423a248c09d9423",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/ti_qin_xi/travel.png",
+      "runtime_sha256": "7d087a92a247e2547f214e5cd475da6fcc0b1837b9bcd3928e912d9dacf927f7",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "life",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/ti_qin_xi/life-animation.png",
+      "source_sha256": "51dd3e5fe13c14452f2144e565a90c2ac8ba4e056a2b743fa1af2c8aace248c9",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/ti_qin_xi/life.png",
+      "runtime_sha256": "7a0e0c88bd674b3d351fc967df2b5ed8177a8c9a9f282491e5565a5378e94152",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "business",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/ti_qin_xi/business-animation.png",
+      "source_sha256": "99b5db605c857e83aa3601b564057d6d5b00e157184e97fc9bb5de60d0838e70",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/ti_qin_xi/business.png",
+      "runtime_sha256": "3c7189091c7132c6c22662de74b3b8b5731c3d2420bf3c463f9f44c0917bc3d5",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "food",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/ti_qin_xi/food-animation.png",
+      "source_sha256": "489a52b0e2f4b8fef860cee302f1d283dea9ad9a6b2316f6c9ec38e313c3f8d8",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/ti_qin_xi/food.png",
+      "runtime_sha256": "1afe7dd7518bf81b964f85d79c49d0682b4970384648e353804ae7716dfd4d67",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "adventure",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/ti_qin_xi/adventure-animation-r2.png",
+      "source_sha256": "12fb631309adfa7ae3a3c20559d558bd8b12ccc4f401cfc1d86947ed2a14a78c",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/ti_qin_xi/adventure.png",
+      "runtime_sha256": "06aaa6ecb1d3907fcee848b7571590db1969a172b8e0bfbde39a52ba425e7a7d",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "magic",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/ti_qin_xi/magic-animation.png",
+      "source_sha256": "c79f048731ba8f1a997f2d06edbda6d054f8c734192dd3b9da046c78c9b60309",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        384,
+        512
+      ],
+      "frames": 8,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/ti_qin_xi/magic.png",
+      "runtime_sha256": "c449c78ae2d396c83992fccec3d7fccef044d94095c47ec45c5cd26a70fb948a",
+      "normal_playback_reviewed": false
+    }
+  ],
+  "npc": {
+    "source": "InheritanceTasks\\Art\\Pixel\\v3\\source\\ti_qin_xi\\npcs-r4-green.png",
+    "frame_size": [
+      512,
+      768
+    ],
+    "frames": 4,
+    "native_alpha": false,
+    "source_sha256": "329b26582c5ab19c783d4f63412a1b45efe2a8245f39487a2b23685c05938bc6"
+  },
+  "culture": "New game practice performance. Costume/instrument references documented in prompts; exact motions are artistic/gameplay interpretations. Gupen drum form and authentic audio remain awaiting source video.",
+  "pending": [
+    "normal-speed full-scene review",
+    "black/white edge review",
+    "user experience review",
+    "human listening review of audio phrase cuts"
+  ],
+  "covers": {
+    "method": "Composition from the same generated stage layers, including supporting performers. Not a gameplay screenshot.",
+    "items": [
+      {
+        "actor": "travel",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/ti_qin_xi/cover-travel.png",
+        "sha256": "d2ffa167a3ed660b1ba52f1e76723051173668adce9e70bd6e72403408226247"
+      },
+      {
+        "actor": "life",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/ti_qin_xi/cover-life.png",
+        "sha256": "7be20fe931a1647a36c3cb308666fea635a0dfe4c2b0ea357a195813b90fe1bc"
+      },
+      {
+        "actor": "business",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/ti_qin_xi/cover-business.png",
+        "sha256": "5d8e4d0a1614281dc252fba9fdb36c04ae17acffe260c373925280eb9e45a6dd"
+      },
+      {
+        "actor": "food",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/ti_qin_xi/cover-food.png",
+        "sha256": "3a5b43a123418b651968321e0b8dd7213e9b74e4ed387d3ee8973e8bdd4eb306"
+      },
+      {
+        "actor": "adventure",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/ti_qin_xi/cover-adventure.png",
+        "sha256": "5147791da979c5c6748d93e84a46b725dea1998e985f282bf9f84b29e69a5205"
+      },
+      {
+        "actor": "magic",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/ti_qin_xi/cover-magic.png",
+        "sha256": "9568527970230532f366e0f8017b10ccbfa14290d6b336476c88f292358284b4"
+      }
+    ]
+  }
+}

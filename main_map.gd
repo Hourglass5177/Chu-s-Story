@@ -26,6 +26,10 @@ func init_game() -> void:
 		# 模拟器与旧菜单仍可直接写入 player_data；没有强类型快照时保持原通路。
 		player_data = GameManager.player_data
 		for config: Dictionary in player_data:
+			if PlayerSetup.legacy_difficulty(config) < 0:
+				push_error("电脑难度无效，取消开局")
+				return
+		for config: Dictionary in player_data:
 			var new_player: PlayerClass = player_scene.instantiate() as PlayerClass
 			_apply_legacy_player_setup(new_player, config, players.size())
 			add_child(new_player)
@@ -40,7 +44,10 @@ func init_game() -> void:
 	EventManager.bind_runtime(current_hud, current_hud.get_event_overlay())
 	await get_tree().process_frame
 	TurnManager.map = get_tree().get_first_node_in_group("MAP")
+	var ai_controller := AISessionController.new()
+	add_child(ai_controller)
 	TurnManager.start_game(players)
+	ai_controller.configure(players, GameManager.get_session_seed())
 	AchievementManager.bind_map(TurnManager.map)
 
 
@@ -50,6 +57,7 @@ func _apply_typed_player_setup(player: PlayerClass, config: PlayerSetup) -> void
 	player.start_coord = MapSection.出生点坐标[config.starting_region]
 	player.player_index = config.slot_index
 	player.is_bot = config.is_bot()
+	player.ai_difficulty = int(config.ai_difficulty)
 
 
 func _apply_legacy_player_setup(player: PlayerClass, config: Dictionary, index: int) -> void:
@@ -59,3 +67,4 @@ func _apply_legacy_player_setup(player: PlayerClass, config: Dictionary, index: 
 	player.start_coord = MapSection.出生点坐标[region]
 	player.player_index = index
 	player.is_bot = bool(config.get("is_bot", false))
+	player.ai_difficulty = PlayerSetup.legacy_difficulty(config)

@@ -1,0 +1,368 @@
+{
+  "version": 2,
+  "audio_path": "res://InheritanceTasks/Audio/rhythm-v2/tujia_saye_erhe-mix.ogg",
+  "audio_sha256": "7848fe73ad7305fc023fa15c6c84138e01a03a259d16a0db72da5e1e721e6fc3",
+  "end_ms": 40000,
+  "events": [
+    {
+      "id": "tujia_saye_erhe-v2-01",
+      "time_ms": 2000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 2000,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-v2-02",
+      "time_ms": 3500,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 3500,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-v2-03",
+      "time_ms": 5000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 5000,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-v2-04",
+      "time_ms": 6500,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 6500,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-v2-05",
+      "time_ms": 7800,
+      "kind": "rest",
+      "direction": 1,
+      "end_ms": 8700,
+      "cue_ms": 1000,
+      "round": 0,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "tujia_saye_erhe-v2-06",
+      "time_ms": 11500,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 11500,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-v2-07",
+      "time_ms": 13000,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 13000,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-v2-08",
+      "time_ms": 14500,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 14500,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-v2-09",
+      "time_ms": 16000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 16000,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-v2-10",
+      "time_ms": 21000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 21000,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-v2-11",
+      "time_ms": 22500,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 22500,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-v2-12",
+      "time_ms": 24000,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 24000,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-v2-13",
+      "time_ms": 25500,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 25500,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-v2-14",
+      "time_ms": 26800,
+      "kind": "rest",
+      "direction": 1,
+      "end_ms": 27700,
+      "cue_ms": 1000,
+      "round": 2,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "tujia_saye_erhe-v2-15",
+      "time_ms": 30500,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 30500,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-v2-16",
+      "time_ms": 32000,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 32000,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-v2-17",
+      "time_ms": 33500,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 33500,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-v2-18",
+      "time_ms": 35000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 35000,
+      "cue_ms": 1000,
+      "round": 3
+    }
+  ],
+  "presentation": [
+    {
+      "id": "tujia_saye_erhe-v2-01",
+      "time_ms": 2000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 2000,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-v2-02",
+      "time_ms": 3500,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 3500,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-v2-03",
+      "time_ms": 5000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 5000,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-v2-04",
+      "time_ms": 6500,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 6500,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-v2-05",
+      "time_ms": 7800,
+      "kind": "rest",
+      "direction": 1,
+      "end_ms": 8700,
+      "cue_ms": 1000,
+      "round": 0,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "tujia_saye_erhe-v2-06",
+      "time_ms": 11500,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 11500,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-v2-07",
+      "time_ms": 13000,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 13000,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-v2-08",
+      "time_ms": 14500,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 14500,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-v2-09",
+      "time_ms": 16000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 16000,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-v2-10",
+      "time_ms": 21000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 21000,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-v2-11",
+      "time_ms": 22500,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 22500,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-v2-12",
+      "time_ms": 24000,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 24000,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-v2-13",
+      "time_ms": 25500,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 25500,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-v2-14",
+      "time_ms": 26800,
+      "kind": "rest",
+      "direction": 1,
+      "end_ms": 27700,
+      "cue_ms": 1000,
+      "round": 2,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "tujia_saye_erhe-v2-15",
+      "time_ms": 30500,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 30500,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-v2-16",
+      "time_ms": 32000,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 32000,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-v2-17",
+      "time_ms": 33500,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 33500,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-v2-18",
+      "time_ms": 35000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 35000,
+      "cue_ms": 1000,
+      "round": 3
+    }
+  ],
+  "sections": [
+    {
+      "id": "group-1",
+      "start_ms": 0,
+      "end_ms": 9500,
+      "round": 0
+    },
+    {
+      "id": "group-2",
+      "start_ms": 9500,
+      "end_ms": 19000,
+      "round": 1
+    },
+    {
+      "id": "group-3",
+      "start_ms": 19000,
+      "end_ms": 28500,
+      "round": 2
+    },
+    {
+      "id": "group-4",
+      "start_ms": 28500,
+      "end_ms": 38000,
+      "round": 3
+    }
+  ],
+  "tutorial_audio_path": "res://InheritanceTasks/Audio/rhythm-v2/tujia_saye_erhe-lesson.ogg",
+  "feedback_key": "dance",
+  "production_status": "game_arrangement_pending_listening",
+  "annotation_note": "游戏节奏编排v2；原调原速。短句自然边界、混音及文化动作仍待人工听审，不作为传统节型、帮腔声部或真实弓法转录。"
+}

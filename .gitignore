@@ -7,3 +7,6 @@
 ~*.dll
 __pycache__/
 *.py[cod]
+
+# Local disposable previews; reusable references live under docs/prototypes.
+/tmp/

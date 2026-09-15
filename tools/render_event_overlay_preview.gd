@@ -1,9 +1,10 @@
 extends Node
 
-const OUTPUT_PATH := "res://tmp/event-overlay-validation.png"
-const STRESS_OUTPUT_PATH := "res://tmp/event-overlay-stress-validation.png"
+const OUTPUT_PATH := "res://artifacts/legacy-ui-preview/event-overlay-validation.png"
+const STRESS_OUTPUT_PATH := "res://artifacts/legacy-ui-preview/event-overlay-stress-validation.png"
 
 func _ready() -> void:
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUTPUT_PATH.get_base_dir()))
 	await _render_preview()
 
 func _render_preview() -> void:

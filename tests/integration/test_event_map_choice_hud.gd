@@ -337,13 +337,13 @@ func test_collected_feiyi_city_header_waits_for_animation_and_detail_close() -> 
 	var card := load("res://Cards/非遗牌/随州/花鼓戏.tres") as 非遗牌
 	assert_true(ResourceManager.add_feiyi_card(_player, card, true, true))
 	await get_tree().process_frame
-	assert_false(_has_label_text("== 随州 =="), "新城市标题不得在获得动画前出现")
+	assert_false(_has_label_text("随州"), "新城市标题不得在获得动画前出现")
 	assert_true(await _wait_until(func() -> bool: return _hud.detail_panel.visible, 2.0))
 	assert_true(_hud.card_hand_animator.is_busy(), "介绍弹窗关闭前获得流程仍应处于展示中")
-	assert_false(_has_label_text("== 随州 =="), "介绍弹窗显示期间仍不得提前出现城市标题")
+	assert_false(_has_label_text("随州"), "介绍弹窗显示期间仍不得提前出现城市标题")
 	_hud.detail_panel.close_detail()
 	assert_true(await _wait_until(func() -> bool: return not _hud.card_hand_animator.is_busy(), 1.0))
-	assert_true(_has_label_text("== 随州 =="))
+	assert_true(_has_label_text("随州"))
 
 
 func test_jian_wang_uses_market_panel_and_finishes_after_the_hand_animation_queue_is_idle() -> void:

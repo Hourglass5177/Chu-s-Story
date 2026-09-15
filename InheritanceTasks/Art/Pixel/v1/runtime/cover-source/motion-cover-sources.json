@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "date": "2026-09-13",
+  "covers": [
+    {
+      "task_id": "yandi_shennong_chuanshuo",
+      "source": "artifacts/motion-pixel-play/yandi_shennong_chuanshuo.png",
+      "crop": [
+        360,
+        340,
+        1360,
+        940
+      ],
+      "evidence": "ordinary-input run, captured just after challenge time 12 s",
+      "composition": "Airborne player, cliff edge and next landing; crop excludes HUD.",
+      "source_sha256": "7f0aa8a2d5b09f384d7f25d25c1920c1429bda1c6aac5ca6407eb859b2f30792",
+      "cover_sha256": "49063ab2cd7809841c88a357613314e775cc82e388557d829e0a848548524875",
+      "size": [
+        500,
+        300
+      ],
+      "resample": "nearest",
+      "human_playtest_acceptance": "pending"
+    },
+    {
+      "task_id": "dong_yong_chuanshuo",
+      "source": "artifacts/pixel-art-review/dong_yong_chuanshuo-travel-pixel.png",
+      "crop": [
+        45,
+        65,
+        395,
+        275
+      ],
+      "evidence": "engine visual-state sample, not a normal-input pass record",
+      "composition": "Whole player, hands, cart and father; no obsolete bridge rendering.",
+      "source_sha256": "73df9d63ba116949d934aaa7817c82849cb57dfc442a0e9cd05f854a8c28b283",
+      "cover_sha256": "d5636e79e614fe297daf8e72504a9cbb5b0f8a70c0ba38b3827425f368b03ebd",
+      "size": [
+        500,
+        300
+      ],
+      "resample": "nearest",
+      "human_playtest_acceptance": "pending"
+    },
+    {
+      "task_id": "xingshan_min_ge",
+      "source": "artifacts/motion-pixel-play/xingshan_min_ge.png",
+      "crop": [
+        210,
+        190,
+        1460,
+        940
+      ],
+      "evidence": "ordinary-input run, captured just after challenge time 12 s",
+      "composition": "Lead bird and flock crossing an open gate, with village and fields.",
+      "source_sha256": "b83321b95a886a0ea951e954fd5c447ecdfcbe5221e141d56c608d3cca2ea124",
+      "cover_sha256": "d5ea15acd1223c7cbba7d2bacb50d7d200a1c759c753777f2d3fc3488ddc25ba",
+      "size": [
+        500,
+        300
+      ],
+      "resample": "nearest",
+      "human_playtest_acceptance": "pending"
+    },
+    {
+      "task_id": "xisai_shenzhou_hui",
+      "source": "artifacts/motion-pixel-play/xisai_shenzhou_hui.png",
+      "crop": [
+        360,
+        230,
+        1560,
+        950
+      ],
+      "evidence": "ordinary-input run, captured just after challenge time 12 s",
+      "composition": "Whole pavilion boat, pinwheel and wake, centered in the river.",
+      "source_sha256": "9c88265260e509941dc65eb108ad37a38c6e74c3c463d02185d26eaeb79073a1",
+      "cover_sha256": "66f7b7fb43412535cd526bc76a9edf0dbdac9de503d65f61838d0dd02f43c202",
+      "size": [
+        500,
+        300
+      ],
+      "resample": "nearest",
+      "human_playtest_acceptance": "pending"
+    }
+  ]
+}

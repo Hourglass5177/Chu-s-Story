@@ -152,11 +152,26 @@ func grab_initial_focus() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _handle_gamepad_accept(event): return
 	if not handle_cancel_action or screen_state != ScreenState.ACTIVE:
 		return
 	if event.is_action_pressed("ui_cancel"):
 		back_requested.emit()
 		get_viewport().set_input_as_handled()
+
+func _handle_gamepad_accept(event: InputEvent) -> bool:
+	if not visible or not _interaction_enabled or screen_state != ScreenState.ACTIVE: return false
+	if not event is InputEventJoypadButton or event.button_index != JOY_BUTTON_A: return false
+	var focused := get_viewport().gui_get_focus_owner()
+	if focused == null or not is_ancestor_of(focused): return false
+	# Keep controller acceptance inside the active frontend screen; do not change
+	# the global input map used by the inheritance minigames.
+	var accept := InputEventAction.new()
+	accept.action = &"ui_accept"
+	accept.pressed = event.pressed
+	get_viewport().set_input_as_handled()
+	get_viewport().push_input.call_deferred(accept)
+	return true
 
 
 func _finish_enter(serial: int) -> void:

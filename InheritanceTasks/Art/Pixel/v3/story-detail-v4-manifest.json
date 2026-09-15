@@ -1,0 +1,168 @@
+{
+  "schema_version": 4,
+  "assets": [
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story-detail-v4/water_cow-1.png",
+      "sha256": "2e76f8087ed8bd634c16fc9a97d5cb8e2a7f0ba7cfc413fa50cbfb5a7745cd21",
+      "size": [
+        724,
+        724
+      ],
+      "crop": [
+        0,
+        0,
+        724,
+        724
+      ],
+      "source_sha256": "88b42ef8d26d782162de742c5f3866415252e8b327b6e9e9ddac87e57d489948",
+      "story_source": "https://news.hubeidaily.net/pc/c_2714369.html",
+      "method": "Exact RGB source crop; no palette reduction, resize or sharpening. Puzzle and reference share this texture.",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story-detail-v4/water_cow-2.png",
+      "sha256": "7391cf1a05e3855ac9e9efdfdd52d3d29af9953b50168358f46294e44e68dafb",
+      "size": [
+        724,
+        724
+      ],
+      "crop": [
+        724,
+        0,
+        1448,
+        724
+      ],
+      "source_sha256": "88b42ef8d26d782162de742c5f3866415252e8b327b6e9e9ddac87e57d489948",
+      "story_source": "https://news.hubeidaily.net/pc/c_2714369.html",
+      "method": "Exact RGB source crop; no palette reduction, resize or sharpening. Puzzle and reference share this texture.",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story-detail-v4/water_cow-3.png",
+      "sha256": "3ecd3ff62e9ed7b347486a23fe91193987ead143da1e2a5c0dc35c13768f04fd",
+      "size": [
+        724,
+        724
+      ],
+      "crop": [
+        1448,
+        0,
+        2172,
+        724
+      ],
+      "source_sha256": "88b42ef8d26d782162de742c5f3866415252e8b327b6e9e9ddac87e57d489948",
+      "story_source": "https://news.hubeidaily.net/pc/c_2714369.html",
+      "method": "Exact RGB source crop; no palette reduction, resize or sharpening. Puzzle and reference share this texture.",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story-detail-v4/tribute_rice-1.png",
+      "sha256": "3728d763f5cd6220d2c325ed163561b13ad127ab7279c166d90ce00630560153",
+      "size": [
+        724,
+        724
+      ],
+      "crop": [
+        0,
+        0,
+        724,
+        724
+      ],
+      "source_sha256": "17bbfd912e7827a1828558e4accdedcf28f765ce5fb9242b98d271c8680706bf",
+      "story_source": "https://news.hubeidaily.net/mobile/c_2999822.html",
+      "method": "Exact RGB source crop; no palette reduction, resize or sharpening. Puzzle and reference share this texture.",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story-detail-v4/tribute_rice-2.png",
+      "sha256": "fccf69d86281898234706ad280e67299ff9d880d4202be9c135867fc934b94ad",
+      "size": [
+        724,
+        724
+      ],
+      "crop": [
+        724,
+        0,
+        1448,
+        724
+      ],
+      "source_sha256": "17bbfd912e7827a1828558e4accdedcf28f765ce5fb9242b98d271c8680706bf",
+      "story_source": "https://news.hubeidaily.net/mobile/c_2999822.html",
+      "method": "Exact RGB source crop; no palette reduction, resize or sharpening. Puzzle and reference share this texture.",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story-detail-v4/tribute_rice-3.png",
+      "sha256": "fcf3f9be8748cef5046c1369cdc3c5b0155c05c6a529ddc61e202b0b1ce24dee",
+      "size": [
+        724,
+        724
+      ],
+      "crop": [
+        1448,
+        0,
+        2172,
+        724
+      ],
+      "source_sha256": "17bbfd912e7827a1828558e4accdedcf28f765ce5fb9242b98d271c8680706bf",
+      "story_source": "https://news.hubeidaily.net/mobile/c_2999822.html",
+      "method": "Exact RGB source crop; no palette reduction, resize or sharpening. Puzzle and reference share this texture.",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story-detail-v4/dragon_temple-1.png",
+      "sha256": "4b91711dddef89e4f008853ecd505d563803477e495b532ca5af09dc90d04733",
+      "size": [
+        724,
+        724
+      ],
+      "crop": [
+        0,
+        0,
+        724,
+        724
+      ],
+      "source_sha256": "3ea1c5ef55f2fea03041c0f4422da41deb108190ed1dd757e6532cd9ab071797",
+      "story_source": "https://news.hubeidaily.net/pc/c_3216991.html",
+      "method": "Exact RGB source crop; no palette reduction, resize or sharpening. Puzzle and reference share this texture.",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story-detail-v4/dragon_temple-2.png",
+      "sha256": "3777132a59dbc52ae13fa96e8ab9d79c5b90589a8e07d4e8c5495db7638092a7",
+      "size": [
+        724,
+        724
+      ],
+      "crop": [
+        724,
+        0,
+        1448,
+        724
+      ],
+      "source_sha256": "3ea1c5ef55f2fea03041c0f4422da41deb108190ed1dd757e6532cd9ab071797",
+      "story_source": "https://news.hubeidaily.net/pc/c_3216991.html",
+      "method": "Exact RGB source crop; no palette reduction, resize or sharpening. Puzzle and reference share this texture.",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/story-detail-v4/dragon_temple-3.png",
+      "sha256": "7aa556d98745460693a991f2cb99f09bfd9fc46acd1cdc6f5ad3d2bc36c042c3",
+      "size": [
+        724,
+        724
+      ],
+      "crop": [
+        1448,
+        0,
+        2172,
+        724
+      ],
+      "source_sha256": "3ea1c5ef55f2fea03041c0f4422da41deb108190ed1dd757e6532cd9ab071797",
+      "story_source": "https://news.hubeidaily.net/pc/c_3216991.html",
+      "method": "Exact RGB source crop; no palette reduction, resize or sharpening. Puzzle and reference share this texture.",
+      "status": "new generated legend illustration; not a historical reconstruction; awaiting player review"
+    }
+  ],
+  "culture": "Original illustrations adapted from local legends; published article images not reused. Water-cow middle panel corrected to walk into cave; dragon flood depicts no casualties."
+}

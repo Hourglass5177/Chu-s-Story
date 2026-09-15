@@ -1,0 +1,753 @@
+{
+  "schema_version": 4,
+  "date": "2026-09-14",
+  "method": "built-in imagegen; full-resolution source-frame slicing, technical-matte removal and translation registration only; no palette quantization",
+  "native_canvas": [
+    1000,
+    600
+  ],
+  "logical_scale": 1,
+  "actor_native_rect": [
+    70,
+    90,
+    400,
+    400
+  ],
+  "source_frame_size": [
+    362,
+    362
+  ],
+  "palette_reduction": false,
+  "tube_tip_native": [
+    462,
+    326
+  ],
+  "bubble_center_native": [
+    590,
+    330
+  ],
+  "animations": {
+    "ready": [
+      [
+        7,
+        7,
+        1
+      ],
+      [
+        0.7,
+        0.7,
+        0.22
+      ],
+      true
+    ],
+    "prepare": [
+      [
+        1,
+        2
+      ],
+      [
+        0.24,
+        0.12
+      ],
+      false
+    ],
+    "hold": [
+      [
+        2,
+        3,
+        4,
+        3
+      ],
+      [
+        0.16,
+        0.18,
+        0.2,
+        0.18
+      ],
+      true
+    ],
+    "release": [
+      [
+        5,
+        6,
+        7
+      ],
+      [
+        0.15,
+        0.25,
+        0.35
+      ],
+      false
+    ],
+    "miss": [
+      [
+        8,
+        7
+      ],
+      [
+        0.8,
+        0.35
+      ],
+      false
+    ],
+    "over": [
+      [
+        10,
+        8,
+        7
+      ],
+      [
+        0.35,
+        0.45,
+        0.35
+      ],
+      false
+    ],
+    "recover": [
+      [
+        9,
+        7
+      ],
+      [
+        0.8,
+        0.35
+      ],
+      false
+    ],
+    "success": [
+      [
+        9,
+        9
+      ],
+      [
+        0.6,
+        0.6
+      ],
+      false
+    ]
+  },
+  "reference_roles": {
+    "original_bloggers": "identity only",
+    "sugar/keyframe-travel.png": "scene, costume and proportion",
+    "travel-strip-r2.png": "whole-strip pose and timing template"
+  },
+  "culture": "Generated temple-fair sugar stall and blowing gestures are game art, not documented process parameters.",
+  "status": "generated candidates; runtime visual/playback audit recorded separately; not user accepted",
+  "runtime": [
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/tianmen_tang_su/background.png",
+      "sha256": "9381deed55ba0506436d06ae0415ff58df19b00217b7c28c4c5dd528e04c78a4",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 153123
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/tianmen_tang_su/foreground.png",
+      "sha256": "891f3fca44c4977b3937c9b26aa572df6d4f649ae5dfb1aefc947095a05d9dfc",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 33656
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/tianmen_tang_su/travel.png",
+      "sha256": "efa5826297bd442a5af8023086f1ffcafd71bffa64d8b05898a52c07abfd527b",
+      "size": [
+        4344,
+        362
+      ],
+      "opaque_colors": 291613,
+      "source": "InheritanceTasks/Art/Pixel/v3/source/sugar/travel-strip-r2.png",
+      "source_sha256": "5d192e41c96490dab0f58a443a6486da1ff96ba3801ee59b1ed7454528198022",
+      "original_mode": "RGB",
+      "native_alpha": false,
+      "technical_green_removed": true,
+      "frame_size": [
+        362,
+        362
+      ],
+      "frame_count": 12,
+      "tip": [
+        355,
+        214
+      ],
+      "translation_registration": [
+        [
+          -6,
+          2
+        ],
+        [
+          -2,
+          4
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          -6,
+          4
+        ],
+        [
+          -1,
+          7
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          -6,
+          10
+        ],
+        [
+          -2,
+          7
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          6,
+          11
+        ]
+      ],
+      "original_identity": "arts/素材合集/sprite及立绘/Sprite/角色/旅行博主.png"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/tianmen_tang_su/life.png",
+      "sha256": "4742a631cb003a7a5c7fc4e848158cb20fa547d65417c8b98ddbdd05476f6f1f",
+      "size": [
+        4344,
+        362
+      ],
+      "opaque_colors": 232022,
+      "source": "InheritanceTasks/Art/Pixel/v3/source/sugar/life-strip.png",
+      "source_sha256": "90d79e72140b673180eb6cf90d948107c4a3532f557b4460912e6bce10dda6a9",
+      "original_mode": "RGB",
+      "native_alpha": false,
+      "technical_green_removed": true,
+      "frame_size": [
+        362,
+        362
+      ],
+      "frame_count": 12,
+      "tip": [
+        355,
+        214
+      ],
+      "translation_registration": [
+        [
+          -6,
+          2
+        ],
+        [
+          -6,
+          3
+        ],
+        [
+          -6,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          -6,
+          4
+        ],
+        [
+          -6,
+          4
+        ],
+        [
+          -5,
+          4
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          -6,
+          10
+        ],
+        [
+          -6,
+          10
+        ],
+        [
+          -5,
+          10
+        ],
+        [
+          0,
+          11
+        ]
+      ],
+      "original_identity": "arts/素材合集/sprite及立绘/Sprite/角色/生活博主.png"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/tianmen_tang_su/business.png",
+      "sha256": "b60064c14ac9806ff2594424d7549aa15632a85a9497790d8fa249f665565cf0",
+      "size": [
+        4344,
+        362
+      ],
+      "opaque_colors": 194007,
+      "source": "InheritanceTasks/Art/Pixel/v3/source/sugar/business-strip.png",
+      "source_sha256": "5703401cb3f4584cbe9e36ba30886a5515adc757148548ab64bdaa2d54a6e98c",
+      "original_mode": "RGB",
+      "native_alpha": false,
+      "technical_green_removed": true,
+      "frame_size": [
+        362,
+        362
+      ],
+      "frame_count": 12,
+      "tip": [
+        355,
+        214
+      ],
+      "translation_registration": [
+        [
+          -6,
+          3
+        ],
+        [
+          -6,
+          4
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          -6,
+          7
+        ],
+        [
+          -6,
+          8
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          -6,
+          10
+        ],
+        [
+          -6,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          6,
+          10
+        ]
+      ],
+      "original_identity": "arts/素材合集/sprite及立绘/Sprite/角色/商业博主.png"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/tianmen_tang_su/food.png",
+      "sha256": "6f4ffcad0b9d459226de503539d831dc7eafe6eec3f5999dfd40ceffc974eb02",
+      "size": [
+        4344,
+        362
+      ],
+      "opaque_colors": 233721,
+      "source": "InheritanceTasks/Art/Pixel/v3/source/sugar/food-strip-r2.png",
+      "source_sha256": "99d7e54d0685914d00eb02b4c179087b57eae8c49917664c3c1562af37e417d8",
+      "original_mode": "RGB",
+      "native_alpha": false,
+      "technical_green_removed": true,
+      "frame_size": [
+        362,
+        362
+      ],
+      "frame_count": 12,
+      "tip": [
+        355,
+        214
+      ],
+      "translation_registration": [
+        [
+          -6,
+          -1
+        ],
+        [
+          -4,
+          -2
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          -6,
+          2
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          -6,
+          6
+        ],
+        [
+          -4,
+          6
+        ],
+        [
+          -1,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "original_identity": "arts/素材合集/sprite及立绘/Sprite/角色/美食博主.png"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/tianmen_tang_su/adventure.png",
+      "sha256": "686f934b23f880947b9713430e2251e9f488f0c312fe0c2e0214e792442e4b2e",
+      "size": [
+        4344,
+        362
+      ],
+      "opaque_colors": 236272,
+      "source": "InheritanceTasks/Art/Pixel/v3/source/sugar/adventure-strip.png",
+      "source_sha256": "a46d0d84d7465f9410661f0973d814c31790404839b7e2ed174e0643af57e00e",
+      "original_mode": "RGB",
+      "native_alpha": false,
+      "technical_green_removed": true,
+      "frame_size": [
+        362,
+        362
+      ],
+      "frame_count": 12,
+      "tip": [
+        355,
+        214
+      ],
+      "translation_registration": [
+        [
+          -6,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          -6,
+          4
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          -6,
+          8
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          6,
+          8
+        ]
+      ],
+      "original_identity": "arts/素材合集/sprite及立绘/Sprite/角色/探险博主.png"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/tianmen_tang_su/magic.png",
+      "sha256": "6f968352d9fcbf2b1f9098ba1196589ee090864aca594a3b499e5a9196de52dd",
+      "size": [
+        4344,
+        362
+      ],
+      "opaque_colors": 281712,
+      "source": "InheritanceTasks/Art/Pixel/v3/source/sugar/magic-strip.png",
+      "source_sha256": "1633d9711d14646d9209c6077a4ef79d26d629e548b964009e21f8d93edbc49c",
+      "original_mode": "RGB",
+      "native_alpha": false,
+      "technical_green_removed": true,
+      "frame_size": [
+        362,
+        362
+      ],
+      "frame_count": 12,
+      "tip": [
+        355,
+        214
+      ],
+      "translation_registration": [
+        [
+          -6,
+          2
+        ],
+        [
+          -6,
+          4
+        ],
+        [
+          -5,
+          4
+        ],
+        [
+          -2,
+          3
+        ],
+        [
+          -6,
+          8
+        ],
+        [
+          -6,
+          7
+        ],
+        [
+          -6,
+          6
+        ],
+        [
+          -4,
+          8
+        ],
+        [
+          -6,
+          10
+        ],
+        [
+          -6,
+          11
+        ],
+        [
+          -6,
+          12
+        ],
+        [
+          -6,
+          11
+        ]
+      ],
+      "original_identity": "arts/素材合集/sprite及立绘/Sprite/角色/魔术博主.png"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/tianmen_tang_su/bubbles.png",
+      "sha256": "c21833c4aa1c5dd0f0b72208276c04bae34821d96d375d17eb2d3a3f4de20286",
+      "size": [
+        2172,
+        362
+      ],
+      "opaque_colors": 78698
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/tianmen_tang_su/cover-travel.png",
+      "sha256": "55f4069d581263f0155f1a30ae426bb12cdba75e320c428cde790aa4d0d5fd41",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 186952
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/tianmen_tang_su/cover-life.png",
+      "sha256": "4a2e77a312e1ec289b784c4c8cc55150099cd024e140142c307f28e97b4c0ca8",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 187415
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/tianmen_tang_su/cover-business.png",
+      "sha256": "16e98c8c5b6d68d4e1ea3d58a8e1ccbff3238dfff735df47b7c1d8d4d1add10b",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 181040
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/tianmen_tang_su/cover-food.png",
+      "sha256": "a40a7cc5e79e9d56fa2ce2d34b1cfc16d07d1db1054cb2f388d6e18137134568",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 183801
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/tianmen_tang_su/cover-adventure.png",
+      "sha256": "613b0b9a105a374dd2abde6a54acd49593e9f13e452a5451c73dfdf33709a533",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 185542
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/runtime/tianmen_tang_su/cover-magic.png",
+      "sha256": "a247c8bf86b2f63986db9a04e647c9a18eee373b3c558e708ae99e0b2a601642",
+      "size": [
+        1000,
+        600
+      ],
+      "opaque_colors": 187188
+    }
+  ],
+  "source_files": [
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/adventure-prompt.txt",
+      "sha256": "e8243f4ea6c656a630bdbdd85fb4bfea8284521b19ff610c77fb78255e10397e"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/adventure-strip.png",
+      "sha256": "a46d0d84d7465f9410661f0973d814c31790404839b7e2ed174e0643af57e00e"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/background-clean.png",
+      "sha256": "19169c05276f40afb588bf3779508fb9b0ae9e3982a3cb6c5d483bbe821a32cf"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/background-prompt.txt",
+      "sha256": "2596a910e06301b8a2723b8b12755b04723f322df1ac9ecca8b791e5cac34985"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/bubbles-prompt.txt",
+      "sha256": "7ee50880e638de04c3482ff26e317112a11477a0c2fe5305f42d4a132838d8f5"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/bubbles.png",
+      "sha256": "e413c42427a70fae9b549e4751acf0450e3c4a98262448ad8ae7b2b3abdf4a13"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/business-prompt.txt",
+      "sha256": "59b1dc9711a9fa1396bf4d9464a75243e36be1f4ab4588b2ec0c4cf2ee3e256d"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/business-strip.png",
+      "sha256": "5703401cb3f4584cbe9e36ba30886a5515adc757148548ab64bdaa2d54a6e98c"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/food-prompt.txt",
+      "sha256": "25fe92f1e70736149e5566c7333772ef342547ba2633f96ae1b347e32485adf0"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/food-r2-prompt.txt",
+      "sha256": "1bdf0b61b41b1153b3e614b133d8be7663976dd12fb5022bd41aee75735a5860"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/food-strip-r2.png",
+      "sha256": "99d7e54d0685914d00eb02b4c179087b57eae8c49917664c3c1562af37e417d8"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/food-strip.png",
+      "sha256": "1ca2a895d01dc7c1617d960e8b5ae333e075c6022fda2584ad179abeb7ebeafc"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/keyframe-prompt.txt",
+      "sha256": "75c47ab05f3b09484ee718f7bfa53741f2799e3748ddf03f653316fe76bbb48e"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/keyframe-travel.png",
+      "sha256": "1a7069422a3c80ba5cdbbcf225ef7e048961279f209d0ee505e0b57f30cb4f18"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/life-prompt.txt",
+      "sha256": "0772c9ce6beca168b7eaf01a87adc1ef439d144e04a564bde14e0900b14c1633"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/life-strip.png",
+      "sha256": "90d79e72140b673180eb6cf90d948107c4a3532f557b4460912e6bce10dda6a9"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/magic-prompt.txt",
+      "sha256": "13d18dd366e0e570559969f44501c61d7657a1ff97a9166c1d8723dfa91098e3"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/magic-strip.png",
+      "sha256": "1633d9711d14646d9209c6077a4ef79d26d629e548b964009e21f8d93edbc49c"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/travel-prompt.txt",
+      "sha256": "3e38f4699f148b5153355d025af32faeac0c1a4d2b6ace93514b853cf067c35e"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/travel-r2-prompt.txt",
+      "sha256": "c0ce8c6067deacbb7309016f1b15991b92065a2138ced7eb53ad6a86b0992361"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/travel-strip-r2.png",
+      "sha256": "5d192e41c96490dab0f58a443a6486da1ff96ba3801ee59b1ed7454528198022"
+    },
+    {
+      "file": "InheritanceTasks/Art/Pixel/v3/source/sugar/travel-strip.png",
+      "sha256": "20ee6ea46f9e33104b6907be7dddfb918cd2ef814224f50bdf7cd172d4e1781d"
+    }
+  ]
+}

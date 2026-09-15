@@ -1,0 +1,22 @@
+{
+  "identity": "life",
+  "status": "static identity candidate, not user approved",
+  "size": [
+    80,
+    152
+  ],
+  "visible_colors": 23,
+  "alpha_values": [
+    0,
+    255
+  ],
+  "aseprite_reopen_exact": true,
+  "preview_exact_nearest4x": true,
+  "layers": 11,
+  "sha256": {
+    "life-redraw.aseprite": "24f5a073108afdc6f63688737448423a0409c2d23006c9ed6e2ee019841e2d50",
+    "life-redraw.png": "8157a366a5411fc99b3c6ae71c30fbd69c3a4e5e82a96e46563c3cdd66c2460f",
+    "life-redraw.json": "28400a44c7e8576cca7df1bc5ad1510358db2746897393709711b33810ca52e3",
+    "draw_life_identity_r2.lua": "6a3009c0fa2bae30fbb3edfee3fc46936e519e15d78c98c5a5de815894b6b670"
+  }
+}

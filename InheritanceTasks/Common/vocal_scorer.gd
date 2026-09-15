@@ -24,5 +24,10 @@ func set_capture_paused(_paused: bool) -> void:
 	pass
 
 
+func get_capture_status() -> Dictionary:
+	# Empty means the injected/legacy adapter uses the task clock.
+	return {}
+
+
 func cancel_capture() -> void:
 	pass

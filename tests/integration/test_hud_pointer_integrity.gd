@@ -223,6 +223,13 @@ func test_detail_popups_release_only_their_own_modal_lease() -> void:
 
 
 func test_shop_keeps_and_releases_its_exact_modal_lease() -> void:
+	_player.map = _hud.map
+	_player.onTurn = true
+	for section: MapSection in _hud.map.grid_map.values():
+		if section.type == MapSection.SectionType.商店:
+			_player.now_pos = section.location_index
+			_player._record_action_arrival(section, true)
+			break
 	var food_deck_backup: Array[食物牌] = []
 	food_deck_backup.assign(ResourceManager.食物牌库)
 	var shop := _hud.get_node("商店弹窗") as 商店弹窗

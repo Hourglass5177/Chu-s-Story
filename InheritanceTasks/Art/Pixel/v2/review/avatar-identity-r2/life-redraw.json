@@ -1,0 +1,38 @@
+{ "frames": [
+   {
+    "filename": "life-redraw.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 80, "h": 152 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 152 },
+    "sourceSize": { "w": 80, "h": 152 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.18.5-dev",
+  "image": "life-redraw-reopened.png",
+  "format": "I8",
+  "size": { "w": 80, "h": 152 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "loose shoulder-length back hair / original silhouette", "opacity": 255, "blendMode": "normal" },
+   { "name": "high half-up bun / large gathered locks", "opacity": 255, "blendMode": "normal" },
+   { "name": "cream ruffled scrunchie / independent identity ornament", "opacity": 255, "blendMode": "normal" },
+   { "name": "bare lower legs and cat slippers / original outfit", "opacity": 255, "blendMode": "normal" },
+   { "name": "beige skirt and blue inner shirt", "opacity": 255, "blendMode": "normal" },
+   { "name": "cream cardigan / grouped knit without noisy weave", "opacity": 255, "blendMode": "normal" },
+   { "name": "cup and left hand / retained original contact", "opacity": 255, "blendMode": "normal" },
+   { "name": "pink phone and right hand / no guessed interface text", "opacity": 255, "blendMode": "normal" },
+   { "name": "face / soft oval jaw and visible neck", "opacity": 255, "blendMode": "normal" },
+   { "name": "parted front hair and side locks / no common face template", "opacity": 255, "blendMode": "normal" },
+   { "name": "distinct gentle anime eyes / gray brown irises", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "life_original_outfit_identity", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 0, "w": 80, "h": 152 }, "pivot": {"x": 40, "y": 148 } }] }
+  ]
+ }
+}

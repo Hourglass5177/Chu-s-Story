@@ -452,6 +452,7 @@ func test_main_menu_replays_an_unlocked_minigame_in_practice_mode() -> void:
 	assert_true(host.context.practice_mode)
 	assert_eq(host.context.task_id, TASK_ID)
 	assert_false(guide.is_interaction_enabled(), "练习层打开时，下面的指南不得继续接收操作")
+	assert_false((guide.get("_safe_area") as Control).visible,"练习遮住的图鉴不继续提交绘制")
 	host.task_finished.emit(HeritageTaskResult.cancelled(TASK_ID, &"test_result"))
 	assert_same(_menu.get("_practice_host"), host, "结算完成后应保留 Host 的结果页")
 	assert_false(guide.is_interaction_enabled(), "结果页返回前不得恢复下层指南")
@@ -459,6 +460,7 @@ func test_main_menu_replays_an_unlocked_minigame_in_practice_mode() -> void:
 	assert_null(_menu.get("_practice_host"))
 	assert_true(guide.is_guide_open())
 	assert_true(guide.is_interaction_enabled())
+	assert_true((guide.get("_safe_area") as Control).visible,"返回恢复原图鉴而不重建页面")
 
 
 func test_loading_lock_rejects_guide_modal_and_keeps_the_session_handoff_atomic() -> void:
@@ -490,7 +492,9 @@ func test_rapid_screen_changes_leave_focus_only_on_the_visible_page() -> void:
 		&"mode",
 	]:
 		assert_true(bool(_menu.call(&"show_screen", screen_name)))
-	await get_tree().create_timer(0.32, true, false, true).timeout
+	assert_true(await _wait_until(func() -> bool:
+		return (_get_screen(&"mode") as FrontendScreen).screen_state == FrontendScreen.ScreenState.ACTIVE
+	), "快速切换后的模式页应在有限时间内完成过渡")
 
 	assert_eq(_menu.call(&"get_current_screen"), &"mode")
 	var visible_pages := 0

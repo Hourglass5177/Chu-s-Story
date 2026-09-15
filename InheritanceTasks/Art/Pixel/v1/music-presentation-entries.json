@@ -1,0 +1,271 @@
+[
+  {
+    "task_id": "laohekou_si_xian",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/laohekou_si_xian-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/laohekou_si_xian-avatars.png",
+    "columns": 6,
+    "frame_size": [
+      128,
+      128
+    ],
+    "actions": {
+      "ready": [
+        0
+      ],
+      "prepare": [
+        1
+      ],
+      "action": [
+        2
+      ],
+      "hold": [
+        2
+      ],
+      "release": [
+        3
+      ],
+      "miss": [
+        4
+      ],
+      "recover": [
+        5
+      ],
+      "pluck": [
+        2
+      ],
+      "pluck_recover": [
+        3
+      ]
+    },
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/laohekou_si_xian_pixel.tscn",
+    "properties": {
+      "painter": "independent_music_stage",
+      "art_status": "六身份×六姿态引擎静态检查已完成；实际演出手感待用户试玩",
+      "npc_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/music-npcs.png",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/music-art-generation-log.json",
+      "chart_review": "候选谱面尚未完成逐句听审；动作按游戏编排"
+    }
+  },
+  {
+    "task_id": "tujia_saye_erhe",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/tujia_saye_erhe-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/tujia_saye_erhe-avatars.png",
+    "columns": 8,
+    "frame_size": [
+      128,
+      128
+    ],
+    "actions": {
+      "ready": [
+        0
+      ],
+      "prepare": [
+        1
+      ],
+      "prepare_left": [
+        1
+      ],
+      "step_left": [
+        2
+      ],
+      "prepare_right": [
+        3
+      ],
+      "step_right": [
+        4
+      ],
+      "rest": [
+        5
+      ],
+      "action": [
+        2
+      ],
+      "miss": [
+        6
+      ],
+      "recover": [
+        7
+      ],
+      "release": [
+        5
+      ]
+    },
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/tujia_saye_erhe_pixel.tscn",
+    "properties": {
+      "painter": "independent_music_stage",
+      "art_status": "六身份×六姿态引擎静态检查已完成；实际演出手感待用户试玩",
+      "npc_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/music-npcs.png",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/music-art-generation-log.json",
+      "chart_review": "候选谱面尚未完成逐句听审；动作按游戏编排"
+    }
+  },
+  {
+    "task_id": "jingzhou_hua_gu_xi",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/jingzhou_hua_gu_xi-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/jingzhou_hua_gu_xi-avatars.png",
+    "columns": 6,
+    "frame_size": [
+      128,
+      128
+    ],
+    "actions": {
+      "ready": [
+        0
+      ],
+      "prepare": [
+        1
+      ],
+      "action": [
+        2
+      ],
+      "hold": [
+        2
+      ],
+      "release": [
+        3
+      ],
+      "miss": [
+        4
+      ],
+      "recover": [
+        5
+      ],
+      "voice_short": [
+        2
+      ],
+      "voice_sustain": [
+        2
+      ],
+      "voice_close": [
+        3
+      ]
+    },
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/jingzhou_hua_gu_xi_pixel.tscn",
+    "properties": {
+      "painter": "independent_music_stage",
+      "art_status": "六身份×六姿态引擎静态检查已完成；实际演出手感待用户试玩",
+      "npc_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/music-npcs.png",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/music-art-generation-log.json",
+      "chart_review": "候选谱面尚未完成逐句听审；动作按游戏编排"
+    }
+  },
+  {
+    "task_id": "han_ju",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/han_ju-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/han_ju-avatars.png",
+    "columns": 6,
+    "frame_size": [
+      128,
+      128
+    ],
+    "actions": {
+      "ready": [
+        0
+      ],
+      "prepare": [
+        1
+      ],
+      "action": [
+        2
+      ],
+      "hold": [
+        2
+      ],
+      "release": [
+        3
+      ],
+      "miss": [
+        4
+      ],
+      "recover": [
+        5
+      ],
+      "spotlight_left": [
+        3
+      ],
+      "spotlight_right": [
+        2
+      ]
+    },
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/han_ju_pixel.tscn",
+    "properties": {
+      "painter": "independent_music_stage",
+      "art_status": "六身份×六姿态引擎静态检查已完成；实际演出手感待用户试玩",
+      "npc_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/music-npcs.png",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/music-art-generation-log.json",
+      "chart_review": "候选谱面尚未完成逐句听审；动作按游戏编排"
+    }
+  },
+  {
+    "task_id": "ti_qin_xi",
+    "background": "res://InheritanceTasks/Art/Pixel/v1/runtime/ti_qin_xi-background.png",
+    "atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/ti_qin_xi-avatars.png",
+    "columns": 12,
+    "frame_size": [
+      128,
+      128
+    ],
+    "actions": {
+      "ready": [
+        0
+      ],
+      "prepare": [
+        1
+      ],
+      "prepare_left": [
+        1
+      ],
+      "bow_short_left": [
+        2
+      ],
+      "bow_long_left": [
+        3
+      ],
+      "bow_close_left": [
+        4
+      ],
+      "prepare_right": [
+        5
+      ],
+      "bow_short_right": [
+        6
+      ],
+      "bow_long_right": [
+        7
+      ],
+      "bow_close_right": [
+        8
+      ],
+      "rest": [
+        9
+      ],
+      "action": [
+        2
+      ],
+      "hold": [
+        3
+      ],
+      "release": [
+        4
+      ],
+      "miss": [
+        10
+      ],
+      "recover": [
+        11
+      ]
+    },
+    "stage_scene": "res://InheritanceTasks/Presentation/Stages/ti_qin_xi_pixel.tscn",
+    "properties": {
+      "painter": "independent_music_stage",
+      "art_status": "六身份×六姿态引擎静态检查已完成；实际演出手感待用户试玩",
+      "npc_atlas": "res://InheritanceTasks/Art/Pixel/v1/runtime/music-npcs.png",
+      "source_record": "res://InheritanceTasks/Art/Pixel/v1/source/music-art-generation-log.json",
+      "chart_review": "候选谱面尚未完成逐句听审；动作按游戏编排",
+      "continuous_bow_layers": "res://InheritanceTasks/Art/Pixel/v1/runtime/tiqin-bow-v2/",
+      "continuous_bow_source": "res://InheritanceTasks/Art/Pixel/v1/source/tiqin-bow-layers-v2-generation.json",
+      "continuous_bow_status": "六身份左右保持25%/50%/75%普通Key与GPU画面已检查；运弓为游戏化推演",
+      "atlas_long_pose_usage": "静态封面与资源缺失回退；正式长按使用独立弓手连续运动"
+    }
+  }
+]

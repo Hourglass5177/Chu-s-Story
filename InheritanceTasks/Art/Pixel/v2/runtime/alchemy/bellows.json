@@ -1,0 +1,92 @@
+{ "frames": [
+   {
+    "filename": "bellows 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 92, "h": 70 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 92, "h": 70 },
+    "sourceSize": { "w": 92, "h": 70 },
+    "duration": 100
+   },
+   {
+    "filename": "bellows 1.aseprite",
+    "frame": { "x": 92, "y": 0, "w": 92, "h": 70 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 92, "h": 70 },
+    "sourceSize": { "w": 92, "h": 70 },
+    "duration": 100
+   },
+   {
+    "filename": "bellows 2.aseprite",
+    "frame": { "x": 184, "y": 0, "w": 92, "h": 70 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 92, "h": 70 },
+    "sourceSize": { "w": 92, "h": 70 },
+    "duration": 100
+   },
+   {
+    "filename": "bellows 3.aseprite",
+    "frame": { "x": 276, "y": 0, "w": 92, "h": 70 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 92, "h": 70 },
+    "sourceSize": { "w": 92, "h": 70 },
+    "duration": 100
+   },
+   {
+    "filename": "bellows 4.aseprite",
+    "frame": { "x": 368, "y": 0, "w": 92, "h": 70 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 92, "h": 70 },
+    "sourceSize": { "w": 92, "h": 70 },
+    "duration": 100
+   },
+   {
+    "filename": "bellows 5.aseprite",
+    "frame": { "x": 460, "y": 0, "w": 92, "h": 70 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 92, "h": 70 },
+    "sourceSize": { "w": 92, "h": 70 },
+    "duration": 100
+   },
+   {
+    "filename": "bellows 6.aseprite",
+    "frame": { "x": 552, "y": 0, "w": 92, "h": 70 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 92, "h": 70 },
+    "sourceSize": { "w": 92, "h": 70 },
+    "duration": 100
+   },
+   {
+    "filename": "bellows 7.aseprite",
+    "frame": { "x": 644, "y": 0, "w": 92, "h": 70 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 92, "h": 70 },
+    "sourceSize": { "w": 92, "h": 70 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.18.5-dev",
+  "image": "bellows.png",
+  "format": "I8",
+  "size": { "w": 736, "h": 70 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "pump", "from": 0, "to": 7, "direction": "forward", "color": "#000000ff", "data": "loop" }
+  ],
+  "layers": [
+   { "name": "bellows handle and wood housing", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "grip_frame_1", "keys": [{ "frame": 0, "bounds": {"x": 5, "y": 25, "w": 1, "h": 1 }, "pivot": {"x": 0, "y": 0 } }] }
+  ]
+ }
+}

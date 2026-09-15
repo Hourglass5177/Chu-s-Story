@@ -1,0 +1,27 @@
+{ "frames": [
+   {
+    "filename": "brew_gauge.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 340, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 340, "h": 24 },
+    "sourceSize": { "w": 340, "h": 24 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.18.5-dev",
+  "image": "brew_gauge.png",
+  "format": "I8",
+  "size": { "w": 340, "h": 24 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "brew progress shell", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

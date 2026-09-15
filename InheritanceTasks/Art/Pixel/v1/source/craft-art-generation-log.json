@@ -1,0 +1,286 @@
+[
+  {
+    "asset": "tianmen_tang_su-background",
+    "generator": "built-in imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-6a40-7772-8b6e-de93354ab1f8\\exec-8b449c2d-93f4-449f-a811-bf6a45cc8687.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\tianmen_tang_su-background.png",
+    "prompt": "Use case: stylized-concept. Asset type: production game environment background for 楚物志, Tianmen sugar blowing minigame. Use the attached workshop ONLY as reference for the project's detailed 16-bit pixel-art material treatment, stepped contours and grouped pixels. Create a NEW landscape scene in exact 5:3 aspect ratio, intended to be reduced to 500x300 game pixels. It is a warm dusk temple-fair sugar craft stall, close frontal eye-level view of a wooden worktable across the bottom 24%, a warm shaded lantern at top left, a small rack of delicate amber sugar birds and animals at the FAR RIGHT EDGE. Behind it, muted purple evening sky, two lantern silhouettes and very small soft distant people shapes only. Main game composition: leave the LEFT HALF above the table clear for a separate large half-body blogger, and the center-right area around normalized x0.66 y0.47 completely open low-contrast brown/purple for a separate large amber sugar bubble. This main bubble is NOT baked into the background. A few actual small metal tools can rest at the extreme lower-right edge, with grouped woodgrain on the table. Warm amber lamp illumination, dark amber/brown wood, purple-grey dusk, subtle cream highlights. Finely placed-looking 16-bit pixel clusters with readable square steps, solid controlled materials, no blur, no painterly brushstrokes. NO foreground human, NO blogger, NO sugar bubble, NO text, NO labels, NO numbers, NO UI, NO TV frame, NO buttons, NO watermarks. This is one flat rectangular background only, filling the whole canvas.",
+    "references": [
+      "source/workshop_background.png"
+    ],
+    "status": "generated; visually inspected composition; not engine verified",
+    "layout": {
+      "columns": 1,
+      "rows": 1,
+      "target_cell": [
+        500,
+        300
+      ]
+    }
+  },
+  {
+    "asset": "gu_pen_ge-background",
+    "generator": "built-in imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-6a40-7772-8b6e-de93354ab1f8\\exec-cdeeb722-fcf3-48d6-865a-a78dd8266d45.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\gu_pen_ge-background.png",
+    "prompt": "Use case: stylized-concept. Asset type: production game environment background for 楚物志, Jingzhou Gupen Song teaching courtyard. Use the attached workshop ONLY as reference for the project's detailed 16-bit pixel-art material treatment, stepped contours and grouped pixels. Create a NEW landscape scene in exact 5:3 aspect ratio, intended to be reduced to 500x300 game pixels. A bright friendly rural Hubei courtyard used for music transmission practice: a warm off-white aged plaster wall with a simple grey tile cap behind, weathered wooden low benches at far left and far right, the corner of a small timber door at rear center, green tree foliage at the upper left and dappled pixel shadows confined to the edges. Eye-level frontal camera, open paved ground in the LOWER HALF. Leave two broad EMPTY foreground performance positions centered around normalized x0.28 and x0.74, so a separate seated teacher and blogger with instruments can be placed clearly with all hands visible. Background is low contrast with warm grey stone, cream walls, muted moss green shade, restrained honey-brown wood. No ceremonial stage, no funeral decorations, no dramatic spotlights; this scene is an ordinary teaching gathering. High craft detailed 16-bit pixels, grouped masonry and wood textures, stepped edges, careful material lighting. NO foreground people, NO blogger, NO teacher, NO drums, NO instruments, NO UI, NO letters, NO text, NO numbers, NO TV frame, NO watermark. One continuous background filling the full canvas.",
+    "references": [
+      "source/workshop_background.png"
+    ],
+    "status": "generated; visually inspected composition; not engine verified",
+    "layout": {
+      "columns": 1,
+      "rows": 1,
+      "target_cell": [
+        500,
+        300
+      ]
+    }
+  },
+  {
+    "asset": "ezhou_diaohua_jianzhi-background",
+    "generator": "image_gen__imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-6a40-7772-8b6e-de93354ab1f8\\exec-5ebde273-9a53-4459-b258-f5ffe25f3950.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\ezhou_diaohua_jianzhi-background.png",
+    "prompt": "Use case: stylized-concept. Asset type: flat top-down game workbench background for the Ezhou engraved-paper-cutting minigame in 楚物志. Attached reference is ONLY for the project's detailed 16-bit pixel material style; change the viewpoint completely to strict overhead. Exact 5:3 aspect ratio, intended 500x300 game pixels. A pale honey-colored wooden craft table fills the frame. A VERY LARGE dark-brown oval wax cutting support plate occupies nearly the whole middle, extending normalized x0.03..0.97 and y0.06..0.94. On it lies a plain uncut vermilion paper sheet, nearly rectangular with subtly irregular handmade edges, covering normalized x0.065..0.935 and y0.14..0.86. The paper is EMPTY, a flat low-contrast cinnabar-red surface with only tiny subtle paper grain, absolutely no printed drawing and no design yet. All active path points x0.10 y0.72, x0.18 y0.43, x0.33 y0.25, x0.47 y0.45, x0.58 y0.24, x0.75 y0.38, x0.88 y0.68 must lie over the red paper. These coordinates are composition constraints only; DO NOT draw the path or any markings. On the extreme far left and right table edges, include only a few small paper scraps and a resting spare knife at the very bottom right, leaving the bottom-center open for separate player hands entering from below. NO hands, NO people, NO birds, NO flowers, NO decorative cutout pattern, NO labels, NO text, NO numbers, NO UI. Crisp detailed 16-bit pixel clusters, grouped woodgrain, subtle warm shadows under paper edges and wax plate, no photo textures, no smooth blur, no frame or watermark.",
+    "references": [
+      "source/workshop_background.png"
+    ],
+    "status": "generated; visually inspected composition; not engine verified",
+    "layout": {
+      "columns": 1,
+      "rows": 1,
+      "target_cell": [
+        500,
+        300
+      ]
+    }
+  },
+  {
+    "asset": "huangmei_xi-background",
+    "generator": "image_gen__imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-6a40-7772-8b6e-de93354ab1f8\\exec-262faccb-20d6-419f-83e0-5766913e8dee.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\huangmei_xi-background.png",
+    "prompt": "Use case: stylized-concept. Asset type: TWO-FRAME production background atlas for the Huangmei Opera singing minigame in 楚物志. Attached workshop image is ONLY the shared detailed 16-bit pixel material style. Make ONE image containing TWO equal 5:3 landscape frames STACKED VERTICALLY, total aspect ratio 5:6, no separators, gutters or labels. Intended runtime each frame 500x300. SAME fixed frontal camera, SAME small traditional wooden performance stage, SAME dimensions, pillars, lighting and floor in both frames. TOP FRAME: rich warm red theatrical curtain fully closed with a clear center seam, gathered folds, restrained warm-gold trim, small dark timber side pillars, a wooden stage floor occupies bottom 24%. BOTTOM FRAME: exactly the SAME stage with the curtain opened and gathered at the two sides, showing a spacious empty center. Center backdrop is muted warm grey/soft dusty-teal with a very faint simple painted rural garden scenery low-contrast in the distance. The center 60% width and central 70% height must remain clear for a separate pixel blogger wearing a 女驸马 opera costume. Warm stage lighting, deep red and modest gold accents, readable timber grain, fine 16-bit square pixel clusters and stepped contours. The real example video and all lyrics will be independent layers, so NO video screen baked into the scene. NO actors, NO people, NO props in center, NO audience, NO text, NO letters, NO UI, NO score, NO TV shell, NO watermark. The difference between the two frames is ONLY the curtain position; preserve stage continuity.",
+    "references": [
+      "source/workshop_background.png"
+    ],
+    "status": "generated; visually inspected composition; not engine verified",
+    "layout": {
+      "columns": 1,
+      "rows": 2,
+      "target_cell": [
+        500,
+        300
+      ]
+    }
+  },
+  {
+    "asset": "tianmen_tang_su-avatars",
+    "generator": "image_gen__imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-6a40-7772-8b6e-de93354ab1f8\\exec-88e4380d-b699-4b52-8ce9-d80ce0459613.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\tianmen_tang_su-avatars.png",
+    "prompt": "Asset type: production-ready 16-bit pixel game character animation atlas. FIRST attached image is the mandatory six original blogger identity reference, SECOND the existing 6x6 working avatar atlas specifies crisp detailed pixel art, proportions and technical layout only. Create exactly SIX ROWS and SIX COLUMNS of equally sized cells, one full animation sequence per row, solid pure RGB #00FF00 green background for clean masking, NO separators or labels. Identity rows from top to bottom: travel (twin brown-grey braids), life (dark half-up hair pale hairtie), business (silver curly hair and moustache), food (brown side bun red bow), adventure (short grey hair red accent), magic (long blond hair purple streak). All six wear themed rolled-sleeve traditional craft shirts and warm-brown aprons, preserving faces and hair, no modern suit or backpack or top hat. ALL face to the RIGHT in three-quarter side view, shown from waist up, close and detailed. Sugar-blowing stall role: mouth, narrow hollow blowing tube, and both hands must visibly connect. The slim tube runs from lips toward cell right edge, held by both hands. DO NOT include the sugar bubble, the table or any scenery, those are separate runtime layers. Columns left to right: 1 ready relaxed holding tube at chest; 2 tube lifted to lips inhale cheeks natural; 3 controlled blowing cheeks lightly rounded leaning in; 4 release breath tube lowers a little shoulders relax; 5 mild concerned face after miss head slightly back still safely holds tube; 6 smile and reposition tube to begin again. Same head and torso scale, identical identity, stable feet/base anchor and whole tube fully within each cell with padding. True square pixel clusters, 16-bit palette, clear hands, no blur, no smooth anti-aliasing, no text, no UI, no white checkerboard, green entirely flat.",
+    "references": [
+      "source/six-identities.png",
+      "source/workshop_avatars.png"
+    ],
+    "status": "generated; inspected six identities and key poses; pending anchor and engine review",
+    "layout": {
+      "columns": 6,
+      "rows": 6,
+      "key": "green",
+      "target_cell": [
+        128,
+        128
+      ]
+    }
+  },
+  {
+    "asset": "huangmei_xi-avatars",
+    "generator": "image_gen__imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-6a40-7772-8b6e-de93354ab1f8\\exec-a5948a6f-03f1-48c0-af70-352fc1d61d28.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\huangmei_xi-avatars.png",
+    "prompt": "Asset type: production-ready 16-bit pixel game character animation atlas. FIRST attached image is the mandatory six blogger identity reference, SECOND existing 6x6 avatar atlas is shared crisp detailed pixel style and technical layout only. Create exactly SIX ROWS and SIX COLUMNS equal cells, solid pure RGB #00FF00 green background, no gutters, no labels. Rows in order: travel twin brown-grey braids; life dark half-up hair pale tie; business silver curly hair moustache; food brown side bun red bow; adventure short grey hair red accents; magic longer blond hair purple streak. Full-body three-to-four-head-height figures, all front three-quarter facing slightly RIGHT. Huangmei Opera 女驸马 scholar-costume ROLEPLAY, modest red scholar robe with cream inner collar, gold belt accents, black scholar hat with soft lateral extensions, cloth shoes. Keep blogger faces, recognizable hair/side locks visible around hat, and silver facial hair for business; adapt hat rather than hiding all identity. Simplified theatrical poses not claimed as exact opera choreography. Columns: 1 waiting at side hands calmly gathered; 2 prepare to sing upright chest open one hand lifted; 3 singing gesture one arm extended with sleeve following; 4 finish phrase gently gather sleeve hands at midline; 5 mild stumble/hesitate with encouraging human expression no embarrassment; 6 thankful closing bow small and graceful. Entire costume and arms fit each cell, stable ground line and same head size across all poses. No microphone, no notes, no lyrics, no stage, no scenery, no UI. Crisp square pixel clusters, 16-bit detailed cloth folds, consistent lighting. Green background must remain exactly flat and not be used in costume.",
+    "references": [
+      "source/six-identities.png",
+      "source/workshop_avatars.png"
+    ],
+    "status": "generated; inspected six identities and key poses; pending anchor and engine review",
+    "layout": {
+      "columns": 6,
+      "rows": 6,
+      "key": "green",
+      "target_cell": [
+        128,
+        128
+      ]
+    }
+  },
+  {
+    "asset": "gu_pen_ge-avatars",
+    "generator": "image_gen__imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-6a40-7772-8b6e-de93354ab1f8\\exec-d86a6cdb-677f-4788-b26b-b6accd2bf590.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\gu_pen_ge-avatars.png",
+    "prompt": "Asset type: 16-bit pixel production character animation atlas for a music-learning courtyard game. FIRST reference locks SIX blogger identities; SECOND reference locks existing pixel style and grid. Exactly SIX ROWS SIX COLUMNS equal cells, plain RGB #00FF00 green background for keying. Row identities travel twin brown-grey braids, life half-up hair pale tie, business silver curl moustache mature face, food brown side bun red bow, adventure grey short hair red scarf accent, magic blond streak long hair. Three-to-four-head tall, fully seated on a small low wooden stool facing three-quarter toward camera and slightly LEFT so they face a teacher placed at screen-left. Simple clean practice tunics with rolled sleeves, navy/cream muted colors and each identity accent. Each person holds a small wooden clapper in left hand near waist and a slender short drum beater in right hand; a shallow tan drumhead on a small dark wooden stand immediately ahead at knee height. Drum and clapper are deliberately plain simplified provisional teaching props, no decorative ceremonial claims. Keep left hand clapper, right beater and drum head clearly distinct and complete in each cell. Columns: 1 attentive listening hands resting; 2 prepare raise right beater above drum head; 3 right beater meets drumhead and left clapper closes; 4 beater rebounds and relaxes; 5 missed beat mild pause concerned face hands still safe; 6 small nod and reset to ready. No giant war drum, no drum kit, no cymbals, no scenery, no speech bubbles, no text, no UI, no labels. Stable stool baseline and identical scale; detailed small square pixel clusters, dark clean outlines and clear contact poses. All objects stay inside each cell with margin.",
+    "references": [
+      "source/six-identities.png",
+      "source/workshop_avatars.png"
+    ],
+    "status": "generated; composition inspected; pending engine review",
+    "layout": {
+      "columns": 6,
+      "rows": 6,
+      "key": "green",
+      "target_cell": [
+        128,
+        128
+      ]
+    },
+    "pending": "鼓板形制、握法待用户实拍核对；简化传习插画"
+  },
+  {
+    "asset": "ezhou_diaohua_jianzhi-avatars",
+    "generator": "image_gen__imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-6a40-7772-8b6e-de93354ab1f8\\exec-7c36ceb3-a40c-404e-9981-f2fa912e99cf.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\ezhou_diaohua_jianzhi-avatars.png",
+    "prompt": "Asset type: 16-bit pixel production avatar portrait/gesture atlas for a top-down paper-cutting craft game. FIRST reference is mandatory six blogger identities; SECOND establishes pixel style and technical grid. Exactly SIX ROWS and SIX COLUMNS equal square cells, flat pure RGB #00FF00 background. Six rows: travel brown-grey twin braids, life half-up pale hairtie, business silver curls moustache, food brown side bun red bow, adventure short grey hair red accent, magic long blond with purple streak. Show half-body seated crafters from front three-quarter, rolled-sleeve simple cream shirts and deep-red work aprons. This atlas is for their brief preparation and result portrait; the overhead hands are a separate runtime layer. No knife or paper or table in this portrait. Columns: 1 ready friendly; 2 focused look downward with shoulders preparing; 3 carefully work hands below cell frame; 4 pause relax hands; 5 mild concern but composed; 6 display proud quiet smile. Keep same portrait size, hair identity and expression readable. Avoid pantomime tools, hats, modern suits, backpacks. Fine detailed square pixel clusters, 16-bit game style, full clear silhouette, no text, no UI, no sound bubbles or scenery.",
+    "references": [
+      "source/six-identities.png",
+      "source/workshop_avatars.png"
+    ],
+    "status": "generated; composition inspected; pending engine review",
+    "layout": {
+      "columns": 6,
+      "rows": 6,
+      "key": "green",
+      "target_cell": [
+        128,
+        128
+      ]
+    },
+    "pending": ""
+  },
+  {
+    "asset": "ezhou_diaohua_jianzhi-artwork",
+    "generator": "image_gen__imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-6a40-7772-8b6e-de93354ab1f8\\exec-ce8bd733-5190-4a88-a338-a66a2382c023.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\ezhou_diaohua_jianzhi-artwork.png",
+    "prompt": "Create an ORIGINAL paper-cut design as a production transparent sprite for a 16-bit pixel game. Square-ish wide landscape 5:3 layout, isolated on perfectly uniform bright #00FF00 green for masking. Single connected cinnabar red cut-paper silhouette of TWO small songbirds facing each other among a flowering branch, visually readable as real cut paper, flat colors, delicate negative spaces, no shading cast on background. Bird on left arches upward and inward, bird on right arches upward and inward, a shallow notch between their beaks, branches and three small five-petal flowers connect below. The overall upper outer contour should roughly follow these normalized points in the full canvas: (0.10,0.72) up to (0.18,0.43) up to (0.33,0.25) down to (0.47,0.45) up to (0.58,0.24) down to (0.75,0.38) down to (0.88,0.68). These points are a composition guide ONLY, do not draw a line, number or mark. Place all feather and flower cutout holes in the lower interior and keep the upper contour broad enough for a final cutting exercise. Leave 8% margins. Use crisp pixel stair-step edges at intended 500x300 scale, not smooth vector anti-aliasing. No hands, no desk, no wax plate, no tools, no captions, no UI. This is newly invented artwork, not a copy of an existing folk paper-cut picture.",
+    "references": [
+      "source/six-identities.png",
+      "source/workshop_avatars.png"
+    ],
+    "status": "generated; composition inspected; pending engine review",
+    "layout": {
+      "columns": 1,
+      "rows": 1,
+      "key": "green",
+      "target_cell": [
+        500,
+        300
+      ]
+    },
+    "pending": "最终刻线与图案遮罩对应待引擎检查"
+  },
+  {
+    "asset": "tianmen_tang_su-bubbles",
+    "generator": "image_gen__imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-6a40-7772-8b6e-de93354ab1f8\\exec-2334c096-71ef-4600-9c59-b15be1b66078.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\tianmen_tang_su-bubbles.png",
+    "prompt": "Production 16-bit pixel sprite sheet with SIX equal square cells in ONE HORIZONTAL ROW, total aspect 6:1, pure exact RGB #00FF00 background for masking, no labels or gutters. Each cell shows the SAME single hollow amber sugar bubble as a game prop, no person, no hands, no tube. Bubble has short neck pointing LEFT at exactly cell x0.12 y0.55; main round body centered x0.57 y0.53. Keep SAME OUTER SILHOUETTE AND SIZE in all six cells, body diameter70%cell, because runtime scaling determines actual inflation. Columns show material stages: 1 thick amber membrane pale honey broad rim; 2 warming orange amber; 3 translucent glowing gold thin cream edge; 4 very taut paper-thin amber edge with small stretched highlight; 5 overly thin and asymmetrically dented after overblow, intact no violent burst; 6 set polished amber shell. Crisp stepped square pixels, restrained 16-bit palette, no glossy 3D rendering or blur. Highlights and hollow darker inner amber imply translucence; keep center amber enough to distinguish from green key. Exact green only outside each bubble and no shadows on backdrop. Large generous cell margins, complete outlines.",
+    "references": [
+      "source/workshop_avatars.png"
+    ],
+    "status": "generated; inspected key poses; pending anchor/engine review",
+    "layout": {
+      "columns": 6,
+      "rows": 1,
+      "key": "green",
+      "target_cell": [
+        160,
+        160
+      ]
+    }
+  },
+  {
+    "asset": "gu_pen_ge-teacher",
+    "generator": "image_gen__imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-6a40-7772-8b6e-de93354ab1f8\\exec-5686b418-58cb-4cdc-9197-7c028da05523.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\gu_pen_ge-teacher.png",
+    "prompt": "Production 16-bit pixel animation sprite strip, SIX equal square cells in ONE HORIZONTAL ROW, pure exact #00FF00 flat background. An independent elderly village music teacher, not any blogger: kind weathered face, dark-grey hair in a small practical cap, no moustache, muted dark blue rolled-sleeve tunic, grey trousers, straw cloth shoes, seated on a low wood stool facing camera three-quarter RIGHT. Three-to-four-head proportions, same shared detailed pixel style as reference. A small plain shallow tan-headed wooden practice drum on low stand in front-right at knee level, a short wood beater right hand and two wood clappers left hand. This is a provisional simplified teaching illustration; avoid ornate performance costume or ceremonial objects. Columns: 1 ready listening; 2 lift beater visibly in preparation; 3 beater contacts drumhead clappers closed; 4 rebound to relaxed; 5 mild thoughtful pause; 6 warm approving nod. Keep stool baseline and identical body scale, instruments complete within cells. No game avatar duplication, no setting, no text, no UI, no bubbles, no digital glow. Clear contact poses, flat square pixels, no blur. Must have six complete seated teacher poses with padding.",
+    "references": [
+      "source/workshop_avatars.png"
+    ],
+    "status": "generated; inspected key poses; pending anchor/engine review",
+    "layout": {
+      "columns": 6,
+      "rows": 1,
+      "key": "green",
+      "target_cell": [
+        160,
+        160
+      ]
+    }
+  },
+  {
+    "asset": "ezhou_diaohua_jianzhi-hands",
+    "generator": "image_gen__imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-6a40-7772-8b6e-de93354ab1f8\\exec-5fab5d89-1156-4d87-95db-f4a4f0cf5a69.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\ezhou_diaohua_jianzhi-hands.png",
+    "prompt": "Production game sprite atlas for a top-down paper-cutting craft game. Detailed 16-bit square pixel art matching attached reference, not a photograph. ONE ROW of THREE equal square cells on exact uniform #00FF00 green. Hand views strictly overhead. Cell1: RIGHT human hand entering from BOTTOM-RIGHT holding a short traditional craft carving knife by a dark-brown handle; blade points diagonally TOP-LEFT, sharp blade TIP exactly cell x0.15,y0.12, visible fingers wrap handle safely; cream rolled sleeve and warm ochre skin, entire hand and knife within frame. Cell2: same right hand and SAME knife geometry, wrist slightly relaxed, blade still points top-left and same tip anchor, pause pose. Cell3: LEFT hand entering from BOTTOM-LEFT, relaxed spread fingers resting on craft surface, no tool, same cream rolled sleeve, intended to steady red paper. NO paper or table drawn in any cell, only hands/sleeves/knife isolated. Fine clear steel hard-edge highlight, dark outlines, short trim nails, anatomically plausible fingers. Three independent sprites, no text, no labels, no UI, no shadows on background, no extra objects.",
+    "references": [
+      "source/workshop_avatars.png"
+    ],
+    "status": "generated; inspected key poses; pending anchor/engine review",
+    "layout": {
+      "columns": 3,
+      "rows": 1,
+      "key": "green",
+      "target_cell": [
+        160,
+        160
+      ]
+    }
+  },
+  {
+    "asset": "ezhou_diaohua_jianzhi-background-v2",
+    "generator": "image_gen__imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-6a40-7772-8b6e-de93354ab1f8\\exec-54c40f52-f426-43e4-b57b-dd97e0c59619.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\ezhou_diaohua_jianzhi-background-v2.png",
+    "prompt": "Edit this existing exact overhead pixel workbench background, preserve camera/materials/wax plate/wood table/color/light and empty plain red paper. Expand the blank red paper sheet HORIZONTALLY so it covers 93% of entire image width from normalized x0.035 to x0.965. Keep its current vertical limits approx y0.14 to y0.80. This is necessary because the player cuts near x0.08 and x0.90. Wax plate should remain visible mostly along top and bottom, only a very narrow sliver at sides. Remove the spare knife at bottom right to leave space for a separately animated hand. No designs, no markings, no lines, no UI, no hands, no text. Detailed square pixel texture unchanged. Output exactly 5:3 landscape.",
+    "references": [
+      "ezhou_diaohua_jianzhi-background.png"
+    ],
+    "status": "generated; composition revised; pending engine review",
+    "layout": {
+      "columns": 1,
+      "rows": 1,
+      "key": "none",
+      "target_cell": [
+        500,
+        300
+      ]
+    }
+  },
+  {
+    "asset": "ezhou_diaohua_jianzhi-artwork-v2",
+    "generator": "image_gen__imagegen",
+    "source_path": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a096cb-6a40-7772-8b6e-de93354ab1f8\\exec-ca20754a-7ee5-4f21-bada-e38b49b84c72.png",
+    "project_path": "F:\\Documents\\楚物志\\InheritanceTasks\\Art\\Pixel\\v1\\source\\ezhou_diaohua_jianzhi-artwork-v2.png",
+    "prompt": "Edit the original red double-songbird flowering-branch paper-cut motif. Preserve the original two inward-facing birds, flower/branch theme, flat red cut paper and isolated uniform bright pure #00FF00 masking background. Recompose the upper silhouette to be a shallow W-shaped arch used as the LAST cut in the game: left outer start at canvas (0.10,0.72), rise to (0.18,0.43), left bird rounded head at (0.33,0.25), valley between birds at (0.47,0.45), right bird rounded head at (0.58,0.24), descending upper back (0.75,0.38), end at (0.88,0.68). Fold the birds' wings DOWN into their bodies, so NO feather or wing rises above the two heads, NO tall spiky upper wings. Keep all feather decoration and five-petal flower holes BELOW that upper two-head contour. Use the center valley for downward angled small facing beaks rather than sticking beaks above the outline. Overall motif fills x0.10..0.88 and y0.24..0.89. The listed path points are composition only; DO NOT draw any line, numbers or dots. Keep thick connected paper bridges suitable for a simple final-cut exercise, crisp square pixel edges, original design not a copied traditional work. No text, no UI, no tools, no hands, no scenery.",
+    "references": [
+      "ezhou_diaohua_jianzhi-artwork.png"
+    ],
+    "status": "generated; composition revised; pending engine review",
+    "layout": {
+      "columns": 1,
+      "rows": 1,
+      "key": "green",
+      "target_cell": [
+        500,
+        300
+      ]
+    }
+  }
+]

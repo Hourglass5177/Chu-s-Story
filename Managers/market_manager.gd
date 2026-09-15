@@ -67,6 +67,7 @@ func deposit_card(card: 非遗牌, reason: StringName = &"deposit") -> bool:
 	return true
 
 func sell_card(player: PlayerClass, card: 非遗牌) -> bool:
+	if not _live_visit_is_authorized(player, player.arrival_id if player != null else -1): return false
 	if player == null or not player.非遗牌手牌.has(card) or not is_tradable(card):
 		return false
 	var price: int = get_sell_price(card)
@@ -81,6 +82,7 @@ func sell_card(player: PlayerClass, card: 非遗牌) -> bool:
 	return true
 
 func buy_card(player: PlayerClass, card: 非遗牌, arrival_id: int) -> bool:
+	if not _live_visit_is_authorized(player, arrival_id): return false
 	if player == null or not _inventory.has(card) or not is_tradable(card):
 		return false
 	if get_remaining_purchases(player, arrival_id) <= 0:
@@ -134,3 +136,9 @@ func _refresh_player_ui(player: PlayerClass) -> void:
 		return
 	ResourceManager.hud.refresh_feiyi_list(player)
 	ResourceManager.hud._update_player_stats(player)
+
+## Standalone resource calculations remain usable without a running scene.
+func _live_visit_is_authorized(player: PlayerClass, arrival_id: int) -> bool:
+	if player == null: return false
+	if not TurnManager.players.has(player): return true
+	return TurnManager.GameOn and player.alive and player.onTurn and TurnManager.now_phase == TurnManager.TurnPhase.ACTION and player.map != null and player.map.grid_map.has(player.now_pos) and player.map.grid_map[player.now_pos].type == MapSection.SectionType.研究所 and player.has_current_action_arrival_at(player.now_pos) and player.arrival_id == arrival_id and int(_last_visit_arrivals.get(player, -1)) == arrival_id

@@ -1,19 +1,24 @@
-[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="HeritageTaskDefinition" load_steps=5 format=3]
 [ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
 [ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/laohekou_si_xian.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://cmm6xgqcfmgad" path="res://arts/非遗卡牌/襄阳/老河口丝弦.jpg" id="3"]
+[ext_resource type="Resource" path="res://InheritanceTasks/Charts/laohekou_si_xian.tres" id="4"]
+[ext_resource type="Resource" path="res://InheritanceTasks/Art/Pixel/v3/resources/laohekou_si_xian.tres" id="pixel_presentation"]
+
 [resource]
 script = ExtResource("1")
 task_id = &"laohekou_si_xian"
-display_name = "一拨成曲"
+display_name = "老河口丝弦"
 heritage_name = "老河口丝弦"
 region = "襄阳"
-hook = "随光带上下换弦，让拨片跟住旋律。"
-instructions = PackedStringArray("观察旋律光带", "上下换弦持续跟随")
-control_hint = "上下键/摇杆移动；鼠标纵向移动"
-cultural_link = "以弹拨乐器沿丝弦流动的动作表现级进与加花。"
-duration_seconds = 25.0
+hook = "跟着伙伴，接上自己的三弦短句。"
+instructions = PackedStringArray("接上伙伴的单拨、双拨；停顿时留手。")
+control_hint = "Space 拨弦"
+cultural_link = "以合奏关系组织玩法；连续原声与独立反馈音并行。"
+duration_seconds = 39
 task_scene = ExtResource("2")
 gallery_thumbnail = ExtResource("3")
-prototype_asset_note = "暂用对应国家级非遗牌正面。"
-future_asset_slot = "独立任务缩略图（640×400）。"
+prototype_asset_note = "独立像素场景、六博主主题装束与动作；当前美术版本见表现资源台账。"
+future_asset_slot = "保留现有构图与判定，后续替换精细美术。"
+music_chart = ExtResource("4")
+presentation = ExtResource("pixel_presentation")

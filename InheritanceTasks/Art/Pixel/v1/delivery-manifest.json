@@ -1,0 +1,2775 @@
+{
+  "version": 1,
+  "date": "2026-09-13",
+  "task_count": 15,
+  "avatar_count": 6,
+  "user_visual_acceptance": "pending",
+  "files": [
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/dong_yong_chuanshuo.png",
+      "bytes": 1140048,
+      "sha256": "3d6700ca8a30484b5d6495cbbb6e9178c3e23f4470188f5c23b29c2894edf080",
+      "size": [
+        1800,
+        1430
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/ezhou_diaohua_jianzhi.png",
+      "bytes": 1415667,
+      "sha256": "7c9d60965ce0a9163d0f26184a0bcdf530303e7418c13d4589f8c36f05423000",
+      "size": [
+        1800,
+        1430
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/fifteen-scenes.png",
+      "bytes": 3710621,
+      "sha256": "861c4d22f561b2ebf84bda28d52202ee1ce21042847efe51b9635c703a255371",
+      "size": [
+        1600,
+        1800
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/gu_pen_ge.png",
+      "bytes": 1548365,
+      "sha256": "aa5f988323c5a5134f4f39872b1be3fa7ba040e60388165b866655e3ab0b4634",
+      "size": [
+        1800,
+        1430
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/han_ju.png",
+      "bytes": 1308919,
+      "sha256": "2cb6a95d13b8d06e82351e894a9527161b4526e9c13ac282e276dc0056a27c1b",
+      "size": [
+        1800,
+        1430
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/huangmei_xi.png",
+      "bytes": 824293,
+      "sha256": "5357dca15e2171f9c2f1dc0efe8f13b19c1c5f41874b52eee53f42b809167a4d",
+      "size": [
+        1800,
+        1430
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/identity-adventure.png",
+      "bytes": 164756,
+      "sha256": "b14563fdeae4d65d1bec304ef18ca362abd8ef050c6feb0d6d4b7f7a40d6c9d4",
+      "size": [
+        1200,
+        820
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/identity-business.png",
+      "bytes": 180025,
+      "sha256": "18ed65f714aaa55fd71112b50f6b93f6189fc55cc995edb961fdc693571ee69f",
+      "size": [
+        1200,
+        820
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/identity-food.png",
+      "bytes": 171669,
+      "sha256": "ca0b18c2e59a771cbf4303a9e6730b628c6efec7efdf7057c4d4bf032262a936",
+      "size": [
+        1200,
+        820
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/identity-life.png",
+      "bytes": 188946,
+      "sha256": "2ea0eebcb6878cbd01a3b3a0b354436afcb8a23462f177fccaed314a4b787ed2",
+      "size": [
+        1200,
+        820
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/identity-magic.png",
+      "bytes": 169714,
+      "sha256": "0e3166856a8df274b88baea63392bb507f4b95dc71622fd25bbf84468cdadae3",
+      "size": [
+        1200,
+        820
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/identity-travel.png",
+      "bytes": 178717,
+      "sha256": "94c9eb4fddac1c707f3507c3aaf1623ba4dbf54095aa7f75806d968fcab62087",
+      "size": [
+        1200,
+        820
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/jingzhou_hua_gu_xi.png",
+      "bytes": 1473804,
+      "sha256": "8c1cc61b0323f61952ec6474b7da8c1293f30b6d364f0c7a53ea821c3a2189f5",
+      "size": [
+        1800,
+        1430
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/laohekou_si_xian.png",
+      "bytes": 1419573,
+      "sha256": "d1bce2c5b632348c4c777401938069d9f320fcaaf7693bca5a374f4511e4c009",
+      "size": [
+        1800,
+        1430
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/television-ui.png",
+      "bytes": 1247279,
+      "sha256": "7d8de1b64533ddb50a3150dbda68d3acca58c7d5f0fb6e2c87271d58ea7636b8",
+      "size": [
+        1800,
+        1450
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/ti_qin_xi.png",
+      "bytes": 1346241,
+      "sha256": "ef690d1ef267a7ab14d3c94d14d1ef834b0200c094cca276899547535f76cb1a",
+      "size": [
+        1800,
+        1430
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/tianmen_tang_su.png",
+      "bytes": 1354215,
+      "sha256": "d5db7e0b092f066d51e0c6700fd7e231908b0b1809a56196179339a79b793e71",
+      "size": [
+        1800,
+        1430
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/tujia_saye_erhe.png",
+      "bytes": 1394323,
+      "sha256": "3c81a8f54c861ff23bdf1b254f372d192d4d03c5290de6fd9acb3af3bd5ba33d",
+      "size": [
+        1800,
+        1430
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/xia_lian_dan_shu.png",
+      "bytes": 1331021,
+      "sha256": "1cafb81124e52124bb399e78d3c6e14a2f378c850b5bc0233cd0f9f9325d5eca",
+      "size": [
+        1800,
+        1430
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/xiabaoping_minjian_gushi.png",
+      "bytes": 1238064,
+      "sha256": "835b23536bdc4fbf58f5e2240046c0a770dcc0f1b8e1d01d14effc6d2aa6fc7f",
+      "size": [
+        1800,
+        1430
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/xingshan_min_ge.png",
+      "bytes": 1505160,
+      "sha256": "4e28e38caf6a7cf9186a198d411851c605647893f61b76cc286a6d0ad9477509",
+      "size": [
+        1800,
+        1430
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/xisai_shenzhou_hui.png",
+      "bytes": 1238038,
+      "sha256": "05ab4e82cd15cfef51def58cade120094816c5e2091bb4bcce4e6c2fe110c661",
+      "size": [
+        1800,
+        1430
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/boards/yandi_shennong_chuanshuo.png",
+      "bytes": 1423940,
+      "sha256": "82a9de5408715a56727fbd5876b707189f7fe67030c979d0664f44a83e742626",
+      "size": [
+        1800,
+        1430
+      ],
+      "mode": "RGB",
+      "role": "review_board"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/craft-asset-manifest.json",
+      "bytes": 6920,
+      "sha256": "abb0e10f88b0ae181a062da21b3b1b60fbf1e4b496aca58e81e51610bb73ec64",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/craft-presentation-entries.json",
+      "bytes": 3172,
+      "sha256": "c527d36828e385c43fed18e15637c708dcf02e05d3e2287a7eb2b725cac60cac",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/generation-log.json",
+      "bytes": 24921,
+      "sha256": "43ad5921857821e6402db08b53ac2c9112b5a5582dca63cf6a4dc7407763af47",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/identity-manifest.json",
+      "bytes": 2469,
+      "sha256": "a1d9f4e1afdb1cbf7c7c76c90de874a82a04a61cc4d2cdc8fea7bfc5ab0c1ae3",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/motion-presentation-entries.json",
+      "bytes": 4897,
+      "sha256": "c2db6816e0eacdc32555c83da220d800cfc5107860d5b67c8d2da4c2771ae718",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/motion-runtime-manifest.json",
+      "bytes": 11448,
+      "sha256": "af607fba1504b2a51233dbc3976ff9963c8bdfd7ceaeb7bc5febefcb2c9502c3",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/music-normalization.json",
+      "bytes": 8385,
+      "sha256": "131280d9c6cf699726fe8c61f95d9e9e43c9bf887ad4e9d7aab6e8ac486371b8",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/music-presentation-entries.json",
+      "bytes": 6357,
+      "sha256": "1fc8be8b0308dcf7e3cee0613d5821412366727c88167adcdbb896206d01671b",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/presentation-manifest.json",
+      "bytes": 18833,
+      "sha256": "66725b20245d88660c889f71a85230ebb9d25640ef19fff003919f88a8bd2104",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/resources/dong_yong_chuanshuo.tres",
+      "bytes": 22554,
+      "sha256": "a133b8e21ce7b8c03af82bee72f15a6dc7cdfaddcd67a2d6339baa7026a2c1ae",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/resources/ezhou_diaohua_jianzhi.tres",
+      "bytes": 16538,
+      "sha256": "5479df406125ea29144c1b634b013a736474333c7924a24128c1317dcc1bf206",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/resources/gu_pen_ge.tres",
+      "bytes": 16359,
+      "sha256": "8e6e2a1d77cf8ca69c4351edc1a966cbf8d378c7c7f898036887ef20b45bb6d2",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/resources/han_ju.tres",
+      "bytes": 16803,
+      "sha256": "ba2a892e61f21a749edcd06ba5bb70f23841418a301bcb17de216b392c68dcc5",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/resources/huangmei_xi.tres",
+      "bytes": 16349,
+      "sha256": "1ded2148277f997e17e2d0744ce915f2482512275be801b86d493087a59c2c79",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/resources/jingzhou_hua_gu_xi.tres",
+      "bytes": 17625,
+      "sha256": "f7ac642714252077402d6e0496b1784a3cfd6670c792ac082baaaa60ad46f35f",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/resources/laohekou_si_xian.tres",
+      "bytes": 16837,
+      "sha256": "376a96849b835366d8861c676dfbe43a7e3d145bffbc72653a890c6442d115e4",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/resources/ti_qin_xi.tres",
+      "bytes": 27009,
+      "sha256": "323e0ac21898f3d97a72c119168a95010ba26eef80a522c3f4d6dac033a92dad",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/resources/tianmen_tang_su.tres",
+      "bytes": 16328,
+      "sha256": "a6baad6d9cbf60168cef822ce03fdf9845cb823ca1431fb5f48bfe17a79d4d74",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/resources/tujia_saye_erhe.tres",
+      "bytes": 19967,
+      "sha256": "92cab92b162266327190d36f05730e3ee9614b9dc2a90a15a1c795df21630044",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/resources/xia_lian_dan_shu.tres",
+      "bytes": 16138,
+      "sha256": "02e27097e76286fb33d528e591ff3aca89b1f1aaf150ff2649c645e5a9958be3",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/resources/xiabaoping_minjian_gushi.tres",
+      "bytes": 19507,
+      "sha256": "93e53f1cb5d707b934e3bd93f2025bec29a54fdbeec84821632ba307551b2811",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/resources/xingshan_min_ge.tres",
+      "bytes": 12019,
+      "sha256": "515fca8752db6147f82b2ac478accfe7b78e623e4b82f514901082a87c62658d",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/resources/xisai_shenzhou_hui.tres",
+      "bytes": 12070,
+      "sha256": "41f8dbd4d2e0d65f60d30e5947ab725d3c3a512eba70e77f4d8d5de6d3715ef5",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/resources/yandi_shennong_chuanshuo.tres",
+      "bytes": 22730,
+      "sha256": "c67f868cc13a734964578e5c5a0a2fef968ae09f12934f1e953c925442960564",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/reviewed-performance-covers.json",
+      "bytes": 5102,
+      "sha256": "967e5844fdbea59f376c40f29b5baedb1d4931dc1aba984aeb56784b83bbe310",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/cover-source/dong_yong_chuanshuo.png",
+      "bytes": 129048,
+      "sha256": "d5636e79e614fe297daf8e72504a9cbb5b0f8a70c0ba38b3827425f368b03ebd",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/cover-source/han_ju.png",
+      "bytes": 258030,
+      "sha256": "d8f991cb1d71b58ff782328b284e20b4b07e69b4862328db9f981067f30755f8",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/cover-source/huangmei_xi.png",
+      "bytes": 236031,
+      "sha256": "7b25b69dc557e6dc36f9b6bac7763864563138a773adb21b74fc6861684813f8",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/cover-source/motion-cover-sources.json",
+      "bytes": 2861,
+      "sha256": "0c2dd18f5e85509a7c2dd11cacc9e522e7e3eca4176776b859e3173bfd39dadd",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/cover-source/ti_qin_xi.png",
+      "bytes": 240523,
+      "sha256": "3b1b38f10bec303a2f33f8aa1b4c483e5768926fc79f40b5e9b361f3123b5897",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/cover-source/tianmen_tang_su.png",
+      "bytes": 241428,
+      "sha256": "aa3334c453346de52ce1f7013e6cba86ecb96e1c70607bcd3b8c27fe2a285b26",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/cover-source/xingshan_min_ge.png",
+      "bytes": 194834,
+      "sha256": "d5ea15acd1223c7cbba7d2bacb50d7d200a1c759c753777f2d3fc3488ddc25ba",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/cover-source/xisai_shenzhou_hui.png",
+      "bytes": 123885,
+      "sha256": "66f7b7fb43412535cd526bc76a9edf0dbdac9de503d65f61838d0dd02f43c202",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/cover-source/yandi_shennong_chuanshuo.png",
+      "bytes": 116651,
+      "sha256": "49063ab2cd7809841c88a357613314e775cc82e388557d829e0a848548524875",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/covers/dong_yong_chuanshuo.png",
+      "bytes": 129048,
+      "sha256": "d5636e79e614fe297daf8e72504a9cbb5b0f8a70c0ba38b3827425f368b03ebd",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/covers/ezhou_diaohua_jianzhi.png",
+      "bytes": 271564,
+      "sha256": "3bd3cf2bf9700d695becf38723b255410aac6902371925ad9068dc94412ede1b",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/covers/gu_pen_ge.png",
+      "bytes": 361237,
+      "sha256": "ef1a49ab0d812fd93dd25491388a3fc6aeec1a1f73cba03e60e54eba40c35a6a",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/covers/han_ju.png",
+      "bytes": 292350,
+      "sha256": "8bb02e75b41224d75c7e415f846e474f902326ffae611c05e3211ffb45529f82",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/covers/huangmei_xi.png",
+      "bytes": 266171,
+      "sha256": "e2d0ea379f0011f7e471dfce387a185c1047b37a6c4af0780f442c06067a7831",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/covers/jingzhou_hua_gu_xi.png",
+      "bytes": 346951,
+      "sha256": "ac92ed7c43f7c4ec26d1ec6d4302a17a2e60da3e58b803e0dde66d74ad73e82b",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/covers/laohekou_si_xian.png",
+      "bytes": 327900,
+      "sha256": "e7863abbe56422799e93d8ce35b7fc39c87eec81b395b3bc9e4e01bcca83a22a",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/covers/ti_qin_xi.png",
+      "bytes": 271998,
+      "sha256": "b64ddc2eb08b528fdd0c1f0b613bca8fe0289b799da748868c21bc6178677e1d",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/covers/tianmen_tang_su.png",
+      "bytes": 274471,
+      "sha256": "e2daff5a11a489c683c25626c5a84fa46bab6fc91af963b979726cde2ef8702f",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/covers/tujia_saye_erhe.png",
+      "bytes": 326954,
+      "sha256": "2ceda1050dd74c1fec538d26b629f348380e2b4b370cffba0bbdf0ea1584c4cd",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/covers/xia_lian_dan_shu.png",
+      "bytes": 284578,
+      "sha256": "c4548acec75f89a5361c8a8f12b1a28f79ccaf82dadc91a43f5b1dd584f3d6d9",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/covers/xiabaoping_minjian_gushi.png",
+      "bytes": 376078,
+      "sha256": "874f6e3bea51a7d7715878d56c757003624c9a523447c49a31a1e6aeaa11f1fc",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/covers/xingshan_min_ge.png",
+      "bytes": 194834,
+      "sha256": "d5ea15acd1223c7cbba7d2bacb50d7d200a1c759c753777f2d3fc3488ddc25ba",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/covers/xisai_shenzhou_hui.png",
+      "bytes": 123885,
+      "sha256": "66f7b7fb43412535cd526bc76a9edf0dbdac9de503d65f61838d0dd02f43c202",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/covers/yandi_shennong_chuanshuo.png",
+      "bytes": 116651,
+      "sha256": "49063ab2cd7809841c88a357613314e775cc82e388557d829e0a848548524875",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/craft/anchors.json",
+      "bytes": 1930,
+      "sha256": "7a90e4a96d0c0c01605a69f65c8d52c08daf7c6cb0f7edb0b5d199beadc9bd96",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/craft/ezhou_diaohua_jianzhi-artwork.png",
+      "bytes": 72995,
+      "sha256": "e47b861d62124e8f5b2e22673c65b819545014edfc1b2091afd80f7ede26bf97",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/craft/ezhou_diaohua_jianzhi-avatars.png",
+      "bytes": 812603,
+      "sha256": "6df48db413f5aa221dd251d315146eab69c7b3c4736209d4b65246ec3294953b",
+      "size": [
+        768,
+        768
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/craft/ezhou_diaohua_jianzhi-background.png",
+      "bytes": 265511,
+      "sha256": "abc05f967b5c5ac4c4c5072dbcecec9423ff6a9cf8af8a7dce5d97e4e31b91cb",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/craft/ezhou_diaohua_jianzhi-hands.png",
+      "bytes": 57465,
+      "sha256": "cd4986004dc46e572bc48378d8dde90db7c686d8d81a8d0fa353d75d7dd623fd",
+      "size": [
+        480,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/craft/gu_pen_ge-avatars.png",
+      "bytes": 760912,
+      "sha256": "95085ca6472184cbb7d18b46cca485c718b9dd5c6ca202b9d54551d642b03928",
+      "size": [
+        768,
+        768
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/craft/gu_pen_ge-background.png",
+      "bytes": 363317,
+      "sha256": "9bc2eabb68d425c411f177323156152120e5416df9e2de7e5895081cfe50c13c",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/craft/gu_pen_ge-teacher.png",
+      "bytes": 166754,
+      "sha256": "f5cb919d68ad0840231607b10cbf8bfdaf61a58fe4531cf8c181897d9f1e7ab8",
+      "size": [
+        960,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/craft/huangmei_xi-avatars.png",
+      "bytes": 730476,
+      "sha256": "31c778af5f45deae0d1eee2f5312cb0ae452a3da492bfe62f4b7fb0d2334a9c3",
+      "size": [
+        768,
+        768
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/craft/huangmei_xi-closed.png",
+      "bytes": 259134,
+      "sha256": "41c0a1efad283e7f18a8019d1105d5e7afec7400edf9ffa904d007a70c8b2335",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/craft/huangmei_xi-open.png",
+      "bytes": 273869,
+      "sha256": "9b7acd5ce121995aa800901e980098274d589ef9cf6f68929b7b7ceacd44517e",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/craft/tianmen_tang_su-avatars.png",
+      "bytes": 712099,
+      "sha256": "ff3e364affaddbd644a4d73ca42d8f73cb35e60819820a13d99059c188f0dfaa",
+      "size": [
+        768,
+        768
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/craft/tianmen_tang_su-background.png",
+      "bytes": 288388,
+      "sha256": "9ae15f82b8ebf55cafb4404b9569d2a5376669bf3cf12e4eaeab3e195d458333",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/craft/tianmen_tang_su-bubbles.png",
+      "bytes": 155630,
+      "sha256": "cbec6bd2dec511102b8db34d6f6a3651666cbcd3ec9ef403c08e8595e358a5e2",
+      "size": [
+        960,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/avatars.png",
+      "bytes": 820188,
+      "sha256": "3650ca051cc52cc998763ae371a3ea840491ebc22219976030dec931a9979d16",
+      "size": [
+        1024,
+        960
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/background-0.png",
+      "bytes": 310857,
+      "sha256": "b0ff87737b8a4de326fab2f2d3ea372d51d18c9933b3505cee3f08364b99c887",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/bundle.png",
+      "bytes": 4791,
+      "sha256": "dcd01c3a032f5c219813e8d8765eb0350ff3460bae87314e97644faa9e19dcef",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/cart.png",
+      "bytes": 26103,
+      "sha256": "23c34f6b4cb7bf0ed5a589cbbea0e737df4cfb9301042e1036874da653adb5aa",
+      "size": [
+        240,
+        84
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/father.png",
+      "bytes": 17880,
+      "sha256": "6ba1aece5909f17cc1f08abcf44b4e92a14d96619a41201334c0d287c97ae1f1",
+      "size": [
+        80,
+        112
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/hand-anchors.json",
+      "bytes": 1565,
+      "sha256": "550c90e7fa68849770eb96c7daf19bd11092f8bd1043cfe4d226ca20ea7512fa",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/dong_yong_chuanshuo/wheel.png",
+      "bytes": 8396,
+      "sha256": "5aee68ebe3da40532277cbdc8044b3a26303a438a999c5700c37a6a49f0eb9ba",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/han_ju-avatars.png",
+      "bytes": 683177,
+      "sha256": "6b1cb0cbf526800ed84ccd9aef4976a313bdd3912ea8e93698fb69bfc7feef0e",
+      "size": [
+        768,
+        768
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/han_ju-background.png",
+      "bytes": 242093,
+      "sha256": "b131ed62b8f3e8f772c8088ee13a10e5cbebb054fc9746db3e4d9f7ee20bb34c",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/adventure/body-0.png",
+      "bytes": 20008,
+      "sha256": "0f1c9e09a676041ec7c2ffb8ef6ad91fc9087b2a22a9662832739d44382bf7bc",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/adventure/body-1.png",
+      "bytes": 17830,
+      "sha256": "16d801d56094ab7749de2304c5773f0b022c3a0e6c3b9120e95efc7ab669af86",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/adventure/body-2.png",
+      "bytes": 17110,
+      "sha256": "049af62d5ed596648c6744efe2bdd8e54cf9392134c6b90376180850d962f164",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/adventure/body-3.png",
+      "bytes": 19389,
+      "sha256": "d914fdf3211354aac1cb62f0801da1955a5d41f1a009e0a2666cf9448d14e372",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/adventure/expressions.png",
+      "bytes": 32347,
+      "sha256": "48a11138918beecda24dbad1daa8b566bebb6464578d87bccdb56e5a1063185c",
+      "size": [
+        320,
+        80
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/adventure/portrait.png",
+      "bytes": 8285,
+      "sha256": "797a3f36418638ea957d7771aa5cc72a8ec47baf6fcb840b29a61331fdc90028",
+      "size": [
+        80,
+        80
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/adventure/preview.png",
+      "bytes": 127157,
+      "sha256": "197ec5af0b7d08d1387c56a87ad921acbb8f7a9aae583a411fb1d493ffb2f4a7",
+      "size": [
+        896,
+        504
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/adventure/turnaround.png",
+      "bytes": 73119,
+      "sha256": "e6dc1c34f666103b2fd20dde2b3f93752cb42a3ee32111927ad8f632c7ef1d12",
+      "size": [
+        448,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/business/body-0.png",
+      "bytes": 20737,
+      "sha256": "8dee8fe9e0cc859d2e2c66f324278ff9399fc91322d65022cb5cdd6dc0695e00",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/business/body-1.png",
+      "bytes": 18682,
+      "sha256": "743e31c9e2f35ce9bcc60b9298988eb0a8c2cab5e5c24e5fa6aff36da5b83f90",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/business/body-2.png",
+      "bytes": 19935,
+      "sha256": "e7287ecbc5a5bcebd67534d48fd5f5155e74170c99823d53df57e591a5b568e4",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/business/body-3.png",
+      "bytes": 20151,
+      "sha256": "a11ec531277e5a2a2ce62090c09605a28df513c98ec450ebcda7cb7e9851e3e7",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/business/expressions.png",
+      "bytes": 39222,
+      "sha256": "a7221045bd27d129dd79c62b8e2a2132f56d9906e534eee4dc6767a4793361ff",
+      "size": [
+        320,
+        80
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/business/portrait.png",
+      "bytes": 10125,
+      "sha256": "b20d4432193579da6004dcd50a404a36e4553c08ebef14c98d9f184a1dd5b749",
+      "size": [
+        80,
+        80
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/business/preview.png",
+      "bytes": 142548,
+      "sha256": "5e61c5750a20b87412c9c8c6bcb274af34a705dfe528582e48395372e2b7bed3",
+      "size": [
+        896,
+        504
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/business/turnaround.png",
+      "bytes": 78454,
+      "sha256": "aed48f2d8b85eb76a6807772516baf506ff8a4d39a87f76573eaacb17d7f1f63",
+      "size": [
+        448,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/food/body-0.png",
+      "bytes": 21369,
+      "sha256": "2d2b8bff5c88394f18060037b9c916000b0ffa249e3991dfda49665cc21ce3d1",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/food/body-1.png",
+      "bytes": 18665,
+      "sha256": "cdb9d42324ee9d0aad10e168f2edc1bd82ec9d95e2c298fc4f4bd8cfa60bcff4",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/food/body-2.png",
+      "bytes": 19145,
+      "sha256": "b9d935442b9197d86a797a2e110024b747ecbd047d0aa954e44ab0ab014bcda3",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/food/body-3.png",
+      "bytes": 19493,
+      "sha256": "17930d67a770d1f8eb94bee0d9f5f89409b8f9d48f89fda7497078ba73f3520d",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/food/expressions.png",
+      "bytes": 33967,
+      "sha256": "59ca7dcc9d94d2d59763b8c6a82845efd4797cf3f3d87b520922c3fc1a28d94b",
+      "size": [
+        320,
+        80
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/food/portrait.png",
+      "bytes": 8748,
+      "sha256": "6109a9348e3c13e6088d392db8580d89f65d76647da77c682183ae558ea96ff4",
+      "size": [
+        80,
+        80
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/food/preview.png",
+      "bytes": 134980,
+      "sha256": "f4bc2a0060aaf17a8362adb9f45300c645f98471e135536f21015a82c076504e",
+      "size": [
+        896,
+        504
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/food/turnaround.png",
+      "bytes": 77627,
+      "sha256": "2c9ff5db842d4ba830552bd6f5bb88737711996933ebcff5f00d373a82621f7a",
+      "size": [
+        448,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/life/body-0.png",
+      "bytes": 21187,
+      "sha256": "9e1a74e27f765f3a0dd018ec268a75ffd9b927ddf504787814710365eb81f42e",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/life/body-1.png",
+      "bytes": 18614,
+      "sha256": "49065249c830122816e8761ac4d52f3167bdb0af8492924d9aa872ed19795ca6",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/life/body-2.png",
+      "bytes": 18881,
+      "sha256": "f01f72b749583c651ea0ad56aa8148b782f93a477038b3ea2291dc1d85570410",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/life/body-3.png",
+      "bytes": 22049,
+      "sha256": "29124d9549b4c98abf6b43dd0a2379e7528797ad2ff5f00da0ba6b25ab60edfc",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/life/expressions.png",
+      "bytes": 45690,
+      "sha256": "7573a718afd5430d0f5eab655d200bf61f81fce0a5efb1fe1fa2f9892d560287",
+      "size": [
+        320,
+        80
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/life/portrait.png",
+      "bytes": 11566,
+      "sha256": "cf1ddff1f7ff51947aca6f766e1fa17e49f37245c42714f7ee95a0cc1917d807",
+      "size": [
+        80,
+        80
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/life/preview.png",
+      "bytes": 153881,
+      "sha256": "7590e43f0e395fd559a5bcb9383f5a2410ff8ad37612b536dd977daa8c102326",
+      "size": [
+        896,
+        504
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/life/turnaround.png",
+      "bytes": 80056,
+      "sha256": "6f7a156d5ad494b9f6c8781ce13e67902b28a81843107e8876f367048a583774",
+      "size": [
+        448,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/magic/body-0.png",
+      "bytes": 21629,
+      "sha256": "3fe9902a86f7100a31bf3ed47647c1db9d459ab29dd36bddf31128bcc789a233",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/magic/body-1.png",
+      "bytes": 18411,
+      "sha256": "5b1894297993188b358506605ef3447b7a932dd3e77ef2fb7770abef4aa8f4b6",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/magic/body-2.png",
+      "bytes": 17741,
+      "sha256": "360f414af86c71905dc2f3cb68aa34d3817a109f9381f33f1455579f640dc1fd",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/magic/body-3.png",
+      "bytes": 17848,
+      "sha256": "76e8f573a45f8bb4e57b000175ff6abd867aca9effc0f63521dcf26de9e7663d",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/magic/expressions.png",
+      "bytes": 34834,
+      "sha256": "b700e670a2aec63b1e3a40ba8fac32ad2b1def3d78fcc135cc0ed221f66923a0",
+      "size": [
+        320,
+        80
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/magic/portrait.png",
+      "bytes": 8979,
+      "sha256": "d0e16d38ecb380518f9c103fedc81595a3e225b441f2477a06f983b2d6df3a36",
+      "size": [
+        80,
+        80
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/magic/preview.png",
+      "bytes": 133253,
+      "sha256": "567a47722202563c09e0eb4f1d0714f74cafdfb49dbe677b267f5c36868f8f08",
+      "size": [
+        896,
+        504
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/magic/turnaround.png",
+      "bytes": 74558,
+      "sha256": "2133bd4199243790b0f133057bf1876a858f3cc6b215ca9a0c7c470730e7c8f9",
+      "size": [
+        448,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/travel/body-0.png",
+      "bytes": 22595,
+      "sha256": "90bbe6dbfefed36512ea4d33bb53c81311effbae1d38033161f4df0a9defbdcd",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/travel/body-1.png",
+      "bytes": 19063,
+      "sha256": "847bae33971be6c76eaea675ee5d0d622ad59a885b8d5687037f963267e22c06",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/travel/body-2.png",
+      "bytes": 19075,
+      "sha256": "66f13079da11d66b4918b1fe5451fcc6a22a8c90590ee5b0a06e1531ad8a4217",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/travel/body-3.png",
+      "bytes": 21260,
+      "sha256": "f49cd927e116942c04cb76acf4dea1751ae5e5a95266ff2b7a81499e1da8c864",
+      "size": [
+        112,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/travel/expressions.png",
+      "bytes": 37381,
+      "sha256": "f948a4798b76952172565aab8b48a8a3283115abff1102db8ef227733b0f4d3e",
+      "size": [
+        320,
+        80
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/travel/portrait.png",
+      "bytes": 9565,
+      "sha256": "2833657e329b3f68140d1fa334254ca6b599229770445c20217e92cf326b4f5d",
+      "size": [
+        80,
+        80
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/travel/preview.png",
+      "bytes": 142690,
+      "sha256": "10dd90584e4d102d22ba9d9c24b98ce1b35f54a03cbfc8a9fff5340b4a740dcd",
+      "size": [
+        896,
+        504
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/identities/travel/turnaround.png",
+      "bytes": 81311,
+      "sha256": "ba506a4e4688c716e50062f53f4c926fa8ad541cfc5f62fe75ecd1b5ca1da0a1",
+      "size": [
+        448,
+        160
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/jingzhou_hua_gu_xi-avatars.png",
+      "bytes": 665304,
+      "sha256": "5b502e0511c6d37883b6865812a844bbe57d4da1b5c633b2054208a7f90513ab",
+      "size": [
+        768,
+        768
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/jingzhou_hua_gu_xi-background.png",
+      "bytes": 298323,
+      "sha256": "a37290e10954efd5bcba0bf681345d420cdb8a42a16c6c096dae98eacc0cd790",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/laohekou_si_xian-avatars.png",
+      "bytes": 672991,
+      "sha256": "3ba6ae7b0e6ee75a8e4ee5ee6ae69d7077b6c14814acde65b4237f891e6396ad",
+      "size": [
+        768,
+        768
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/laohekou_si_xian-background.png",
+      "bytes": 268446,
+      "sha256": "1559c972a0a0fa529102d1dadf284b1ceb1127e8b18ae5fb28b0d65cae972f04",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/music-npcs.png",
+      "bytes": 755753,
+      "sha256": "56abc8d21dead87039034d14ae8eb770855f0dc2f87a9f8390f403bcce5565c4",
+      "size": [
+        768,
+        896
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/outdoor-avatars.png",
+      "bytes": 591655,
+      "sha256": "97cc58154495e6ea364132cc43f365b2664642f049b526ff267c8b35942feb17",
+      "size": [
+        448,
+        960
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/avatars.png",
+      "bytes": 716312,
+      "sha256": "dd00cb3b53d204c07d986377297cb04f2b7735fe9e5fd377d9b146946feb8adc",
+      "size": [
+        768,
+        768
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/background.png",
+      "bytes": 366961,
+      "sha256": "2c86eb0d363271f94430e45dff5964d66424d57c97120b511e43ffb387a2a2a5",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/card-1.png",
+      "bytes": 74234,
+      "sha256": "fad2ab5768abd797905db1f4d591e6a63886e00d4a03da99e44eab98bcc46d4f",
+      "size": [
+        180,
+        180
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/card-2.png",
+      "bytes": 73278,
+      "sha256": "791356090ea2416d579f18cdb08d9fad13b210ebd78c977858fa1d75969dd3b7",
+      "size": [
+        180,
+        180
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/card-3.png",
+      "bytes": 73409,
+      "sha256": "2837ae3ad12432154695178f7356ef1b39080591a4bba6dcdb7717fdfedb6ca5",
+      "size": [
+        180,
+        180
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/card-4.png",
+      "bytes": 75748,
+      "sha256": "8c12ea1efd7576c72cedc105e4939ec14a554ed547e9145728af5da9032e1893",
+      "size": [
+        180,
+        180
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/panel-1.png",
+      "bytes": 370495,
+      "sha256": "60b606bfeb5a76052f18992f8a05b6fa1081c877f0543c21e783bdb5982db720",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/panel-2.png",
+      "bytes": 364795,
+      "sha256": "f7d81efcfe241d09b5021105dd30f346a29e0c2aaa2eb1f925876c8a8f9ca682",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/panel-3.png",
+      "bytes": 353566,
+      "sha256": "e26d8b7f45a769f9851b94831c20131c95941b416de3a56bda4224917a15209f",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/panel-4.png",
+      "bytes": 363033,
+      "sha256": "f4c944066a921d26225894f606aedede1c4a8dc19d7ba1fbda0f6ad969338d78",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-1-pose-1.png",
+      "bytes": 300876,
+      "sha256": "4ee9837597e3d363762554779fffb6458fff2fd7335a49c5c2abe71eb6a0c735",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-1-pose-2.png",
+      "bytes": 298779,
+      "sha256": "47d270abcd4b82190d4685deb4a7b4685d51d7ab1818960bc6dfa804cedd7758",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-1-pose-3.png",
+      "bytes": 298618,
+      "sha256": "a9e4694c405bc2366d05219d7165f6a369501238c65ae4d275dd2bf7981f85ee",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-2-pose-1.png",
+      "bytes": 301667,
+      "sha256": "c72cbeab6aca777924783a61aeaa28bca74d4aeb396241a1f0b2fb91d6c1b350",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-2-pose-2.png",
+      "bytes": 300256,
+      "sha256": "fd8140204b1c995a6ed27b9fe0049ab24f7837b60a5036252c6e9a24e8239924",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-2-pose-3.png",
+      "bytes": 300267,
+      "sha256": "c4d8a948daccbce29a8efe4676c76ce54319cd0de946144b1cc29908013deb48",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-3-pose-1.png",
+      "bytes": 293926,
+      "sha256": "c6160f7833636528bd7026f6a323806b3bd491d681eb1cb6f834ff99f4b2d054",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-3-pose-2.png",
+      "bytes": 289710,
+      "sha256": "0b54f1ff984bd6d957064e87960ace46771e65f8993c4b68aafa5d7eda135801",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-3-pose-3.png",
+      "bytes": 287811,
+      "sha256": "c0b2b1e8825f931e286576961e5ee3f83732a153a0ca1c44fb18540838f571c0",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-4-pose-1.png",
+      "bytes": 299592,
+      "sha256": "da307930abfb8ad6de3b5c3c9a3e6f4ab0a9b03edb0e25445ca7c9374506555a",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-4-pose-2.png",
+      "bytes": 296647,
+      "sha256": "f33a0d7598207b710aa9fba5da7befd09dad12f5d894a756c5344d50b846ef46",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/story/v2/panel-4-pose-3.png",
+      "bytes": 297331,
+      "sha256": "db97337a81a3d7bd99c6529691deed1298d1975ea239a1927d07822fc7564f20",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/ti_qin_xi-avatars.png",
+      "bytes": 1339955,
+      "sha256": "26b37d609e0db13d01ed66b83f45623eb204621eb0ee1e7b556eaf3719bfca84",
+      "size": [
+        1536,
+        768
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/ti_qin_xi-background.png",
+      "bytes": 249445,
+      "sha256": "2858f4bdd138b0f7b40cce51f4c3183e57aa01444eda70cf35b07a0fd3a1ae08",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/tujia_saye_erhe-avatars.png",
+      "bytes": 742306,
+      "sha256": "b50ebc3d67106eb3144d4dd490cafb44a621f1acba0f80a50faa3a5591bc6d7f",
+      "size": [
+        1024,
+        768
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/tujia_saye_erhe-background.png",
+      "bytes": 276277,
+      "sha256": "d0f3ee3c00a23ab63039dbc595ae44785d21067c8d76fa45ada3d1f7573e3071",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGB",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/tv.png",
+      "bytes": 1326025,
+      "sha256": "c69e41df90191c25c6693e89f5ee5626a00fbfba6f9aade5705268a911e910ce",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/workshop-avatars.png",
+      "bytes": 714726,
+      "sha256": "63f4f2e73af9e848cf7a4bf2d9cb461bce88d2388fd0b395f2eb9c7ead641729",
+      "size": [
+        768,
+        768
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/workshop-background.png",
+      "bytes": 297751,
+      "sha256": "40f23fc8bb255a62cdaa8f5344607071da574d65390478c811958fd0592b320a",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/avatars.png",
+      "bytes": 304340,
+      "sha256": "4b095247c05988a14546d6105c465be8ad8bd4da887090aa70cb6990122a8ee7",
+      "size": [
+        224,
+        960
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/background-0.png",
+      "bytes": 335270,
+      "sha256": "dc0ec03c454ed1c7513f53b8aae2bb21717eacc89bf1bfbe0ed44cd9862455be",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/background-1.png",
+      "bytes": 337827,
+      "sha256": "ee3c9f2d1f5d8674c08fe4cc50c2a187ed2e4c25865583a3ac5e5d3fb79809d5",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/background-2.png",
+      "bytes": 332296,
+      "sha256": "ef69d9e7b5d056d4e97c8db969e40336d220b3570f85e8485499410e692cb6dd",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/background-3.png",
+      "bytes": 287811,
+      "sha256": "e7ac2ccb6bc4c9d1a3d9bd9753ca22d54880ce663484866176af41b2041f4936",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/bird.png",
+      "bytes": 28994,
+      "sha256": "38c7e115fe50084b9d52529fa803f27cf1bff09a8a387827a56cb2f25ea5a58a",
+      "size": [
+        256,
+        128
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/gate-bottom.png",
+      "bytes": 31398,
+      "sha256": "865d63d7153a199f24778444a1eb78588e933258099ed212f01cca4c8a3acfc2",
+      "size": [
+        96,
+        192
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/xingshan_min_ge/gate-top.png",
+      "bytes": 29841,
+      "sha256": "0fe5172c9dbfdd7beda45fb2dee98c287a13a5c35ba6d8b39dbcfb037ac67037",
+      "size": [
+        96,
+        192
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/xisai_shenzhou_hui/avatars.png",
+      "bytes": 289670,
+      "sha256": "d673e68cae4ed6350f9f778e8de0526e237e8ab89a1a60fe70e905135e6a4158",
+      "size": [
+        224,
+        960
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/xisai_shenzhou_hui/background-0.png",
+      "bytes": 194176,
+      "sha256": "a2702e684ccd25587542c892627247f835d2911144c22c76f4b77f68a511ece2",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/xisai_shenzhou_hui/boat.png",
+      "bytes": 36299,
+      "sha256": "97970a8a5f8c984544f93321dd844ad8b6b226216ca04ff66638542074177ddd",
+      "size": [
+        128,
+        176
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/avatars.png",
+      "bytes": 206599,
+      "sha256": "ca616924436f0a9692bfcb80ee442c505f41b528dc929e20a506a431f20f35bb",
+      "size": [
+        480,
+        384
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/background-0.png",
+      "bytes": 364512,
+      "sha256": "9086bf8a6aeaf42f1e51e46e6318bd5269b68d53f4be408dcf2ad1ea734fb56e",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/background-1.png",
+      "bytes": 365859,
+      "sha256": "2b4564ed763614af70e0c1344ed4f0c700731d00d191a23945ded248747844e7",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/background-2.png",
+      "bytes": 343863,
+      "sha256": "f69f1fc28b184b388d83c3882fcf65f10c736cb2c25bd2b1c44b4239bac40ac1",
+      "size": [
+        500,
+        300
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/branch.png",
+      "bytes": 3826,
+      "sha256": "5194e43846209607968bc90f2aff254628484d9e3301ad917cd0192c9671c46a",
+      "size": [
+        112,
+        24
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/creek.png",
+      "bytes": 17550,
+      "sha256": "baa8e41ae49d9b6e611904a6f512bda684d2218736a84cbef7af33e4f81db121",
+      "size": [
+        96,
+        64
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/forest.png",
+      "bytes": 17923,
+      "sha256": "88f13d96b670a88a0bdbd13e73baab70fd15cce663da954d540bfa2ed779a968",
+      "size": [
+        96,
+        64
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/marker.png",
+      "bytes": 4042,
+      "sha256": "f2b7cc883eb1ba02ec4e36a38ad8d171b1e9fefbd71c128544535c59e9b235cc",
+      "size": [
+        40,
+        64
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/ridge.png",
+      "bytes": 18877,
+      "sha256": "2e3cfb2df211a93da30c0e84db150daf2be46a8cfbf1f97e30a22e10e95cb3bf",
+      "size": [
+        96,
+        64
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/runtime/yandi_shennong_chuanshuo/rock.png",
+      "bytes": 1704,
+      "sha256": "999daa1d93cb1f98d43156c05ba7894c8d0dfc0d9abdb154054f27c7bf0b5813",
+      "size": [
+        32,
+        20
+      ],
+      "mode": "RGBA",
+      "role": "runtime_or_metadata"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/craft-art-generation-log.json",
+      "bytes": 28917,
+      "sha256": "94c23d303ee62c39dad64d805305fce12e9c1f8464d9968096f32e028b78512b",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/dong_yong_chuanshuo-avatars.png",
+      "bytes": 2243561,
+      "sha256": "bc3a876a2578f1492796e7e1fbec0afc57ce07b9a9e2603439d530fdedac1daa",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/dong_yong_chuanshuo-background.png",
+      "bytes": 2026615,
+      "sha256": "058458b7b3c8724ac07fa19aa10db8ad508ce50f9c2e9296a89ae0772e0c7d2e",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/dong_yong_chuanshuo-cart-props-draft.png",
+      "bytes": 1833970,
+      "sha256": "217d963bcd26fd51c94f5e9e888558e1f1098b4ec378344875127b20b1b6e2bd",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/dong_yong_chuanshuo-cart-props.png",
+      "bytes": 1682837,
+      "sha256": "985d90b116327351f9fc7983d90d18204811ea55635a0565df365e44c4de0b30",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/ezhou_diaohua_jianzhi-artwork-v2.png",
+      "bytes": 1223655,
+      "sha256": "79bca924ca9386a4a61798209564d83088337b1d116ab1a5b8de8f384f0c9c5a",
+      "size": [
+        1619,
+        972
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/ezhou_diaohua_jianzhi-artwork.png",
+      "bytes": 1314721,
+      "sha256": "ff28103eb19ce7cc5c7866c441ef0d3664486bcb0a1fc9422cc821805ef4798e",
+      "size": [
+        1619,
+        972
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/ezhou_diaohua_jianzhi-avatars.png",
+      "bytes": 2480263,
+      "sha256": "d6417c2bb3210489968527e679ffdee5d76b6a0ccfb581a8962e10fb3e352642",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/ezhou_diaohua_jianzhi-background-v2.png",
+      "bytes": 1889518,
+      "sha256": "455bdf8cfb0b4d49b9cbb59bdea2079e7e582873f14f7a227490f3cb162b3e10",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/ezhou_diaohua_jianzhi-background.png",
+      "bytes": 2005163,
+      "sha256": "ad1b57b5c7dd0d90b2416791b10007ada68f28960c4e10a2362bad32e22eb47d",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/ezhou_diaohua_jianzhi-hands.png",
+      "bytes": 1263166,
+      "sha256": "bb71463c0332a7aa5c425753b789fbec2564d79e9a935bfe35d806261dbdb635",
+      "size": [
+        2172,
+        724
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/gu_pen_ge-avatars.png",
+      "bytes": 2355472,
+      "sha256": "bc87a06f45a9c866d2b18a6fe89d7ea8fb5a2cedc8f8c850a409df2e58c1198b",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/gu_pen_ge-background.png",
+      "bytes": 2491184,
+      "sha256": "eb4353d58ce2d51631f908bf0e32cbedf529766a6bb68aa780185f0ca2101858",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/gu_pen_ge-teacher.png",
+      "bytes": 1779127,
+      "sha256": "9efadcc18c5764e02fd1511bdd8c4bb0f62645f96db3db43235e0b2c320c4dc3",
+      "size": [
+        2172,
+        724
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/han_ju-avatars-candidate-v1.png",
+      "bytes": 2254786,
+      "sha256": "fe043bd554159def61a76c146a87730e3c1c375fa0ea90d296c3537d99bc0e54",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/han_ju-avatars.png",
+      "bytes": 2167191,
+      "sha256": "16fc7591e3a5c69b103a1bde4bf67673b66e1a661a6a419d6d49642b4e3da6fc",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/han_ju-background.png",
+      "bytes": 1911621,
+      "sha256": "6f38a294b5c239aaa52c562159fce201f51787f4b25474e57d934fe5b9354faa",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/huangmei_xi-avatars.png",
+      "bytes": 2399405,
+      "sha256": "4ca21fb584b4d2b80a949290c6d310ffc4438e976547d2a9865e1c2805053204",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/huangmei_xi-background.png",
+      "bytes": 1984564,
+      "sha256": "d0529f103729163a8ad145ade425063588f15175a568e790898ff0a54835feaf",
+      "size": [
+        1145,
+        1374
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/identity-adventure.png",
+      "bytes": 1507394,
+      "sha256": "6b011007602fdae88102c09a434e6fd2cb3b25cec61676aa927eec69de69a7be",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/identity-business.png",
+      "bytes": 2097348,
+      "sha256": "391ada57a539c62522d666146e5274a6bd6afbb836a9db44554a250a1881496b",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/identity-food.png",
+      "bytes": 1650414,
+      "sha256": "679daaca9c4b3fcb0c375c4b3e91d6b350500eda38cd019f911678f12fe88354",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/identity-life.png",
+      "bytes": 2128776,
+      "sha256": "46bb06ad22bc07edc60bd147936630c0ecb34193a700baa40ea8048b68a5b526",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/identity-magic.png",
+      "bytes": 1536735,
+      "sha256": "c59ef2daefb4618cc381038cdbee62b45f623fb8ee2a08aefbacc87215263507",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/identity-travel-alpha-attempt.png",
+      "bytes": 1971898,
+      "sha256": "bdeb30e265ff0a5a000375e112b64a15a85220c4b262b14285d309eeb0ce4573",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/identity-travel.png",
+      "bytes": 1949129,
+      "sha256": "b332e2e7fb168d9d7020c00299ef8b43150008d1577060eb36ff3186ac755add",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/jingzhou_hua_gu_xi-avatars.png",
+      "bytes": 2250306,
+      "sha256": "7a5cc4bb28314bf57a3db1df56ac1c83b40fedda153b7ea11d58efa51c9bb0c9",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/jingzhou_hua_gu_xi-background.png",
+      "bytes": 2272026,
+      "sha256": "376daeaa42fd47f7c1dfc6ab659399f2f12cd193f60d7e0890341549c0c73daf",
+      "size": [
+        1619,
+        972
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/laohekou_si_xian-avatars.png",
+      "bytes": 2395190,
+      "sha256": "67a493a1c0c1038ff7b8129b5517f7d4216f4076f0a579c3c3210c1b855b4768",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/laohekou_si_xian-background.png",
+      "bytes": 2107586,
+      "sha256": "423d0fbe95b0d4b0d0ef31890db405b805250c8a90172acd07fe69dd2bd808b4",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/motion-art-generation-log.json",
+      "bytes": 31332,
+      "sha256": "91ff316ecf520229ef13dc4c834c7a85307db3a08bb46c1f166fa3af2af8f8c9",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/music-art-generation-log.json",
+      "bytes": 34640,
+      "sha256": "9e0b88ba39264c0a9694fb565cb5eb7206615ec7287475d465366b8441049b53",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/music-npcs.png",
+      "bytes": 2277667,
+      "sha256": "17e9e78d32b35efccca799a3f5487f2f97c7414951b0001a3cbb18900a5215ce",
+      "size": [
+        1161,
+        1355
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/river-field-avatars.png",
+      "bytes": 2074113,
+      "sha256": "f4493c542a3c5867355d07abdc86500cf67b618e7100406f5fcb7ecc602b2f72",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/six-identities.png",
+      "bytes": 221936,
+      "sha256": "9af6f89a7810c4e3fcdef631bbe764333b15268c3024b09cca0431045269da0f",
+      "size": [
+        1344,
+        480
+      ],
+      "mode": "RGBA",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/story-animation-v2-generation.json",
+      "bytes": 2818,
+      "sha256": "354416e9c33f9644c4999b906718ec202af0d1faa05a9ba0c80331141b8f34de",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/story-animation-v2.png",
+      "bytes": 3402193,
+      "sha256": "5d22e1f30a869de254e1a7d8a22d5d13a4fcc18f5d188ced0a194d94cd23978e",
+      "size": [
+        1402,
+        1122
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/story-avatars-rejected.png",
+      "bytes": 2390938,
+      "sha256": "934207a1c0625ea6754ba71dbec7d209adc8fb67230e88c26bb8a1445e4a9047",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/story-avatars.png",
+      "bytes": 2383292,
+      "sha256": "8dc7d2a9e8958d0200da842cd6e7eed9ed2226ce7d30d4301576e3ddb740d58d",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/story-background.png",
+      "bytes": 2558409,
+      "sha256": "01e8e3d3a52629d7fa5bd7ce88d18dffea9cf55c8f304e465537e4f675975bc2",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/story-panel1.png",
+      "bytes": 3017974,
+      "sha256": "ad88c52cfd9605b738d7c3a248f4499ab19aacef0fb4c90583f9ba5391364cab",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/story-panel2.png",
+      "bytes": 2938617,
+      "sha256": "1a726b3da335e6657e959d275e2efcfc38f2059df7f70787ab0929012cfcfd13",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/story-panel3.png",
+      "bytes": 2822360,
+      "sha256": "12dd2e50492e1d094d3c6566e4a68f41490358b52f6e3ba5b19861f836ee140f",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/story-panel4.png",
+      "bytes": 2940474,
+      "sha256": "43b750cf164ff7c8be5bd94535dcb43fde7d9f9e695ce361cb1f1ce2500abd30",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/story-thumbnails.png",
+      "bytes": 2686708,
+      "sha256": "b8998052cae713247bb9691c7147afee8b3d46a759c8281d9e6a9fb04bb205ab",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/ti_qin_xi-avatars-candidate-v1.png",
+      "bytes": 2520333,
+      "sha256": "da225d7ef6c6094ede34a8facf0ec5629fd243184fd7b385bc3241e1a3ba944a",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/ti_qin_xi-avatars.png",
+      "bytes": 2507185,
+      "sha256": "29903928c88c2c1dae01fb5f3ecae41e9f36d45c32dd7e1881521f1681978f14",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/ti_qin_xi-background.png",
+      "bytes": 1913814,
+      "sha256": "ca99fb7decab2b920ef01265715d2e91d3b4dd776c770579ee14fd5d90854a9f",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/tianmen_tang_su-avatars.png",
+      "bytes": 2337750,
+      "sha256": "7370077ae86056c51d1e3fa7070a792d1848cd948bc3b30397c917f12bd87dbb",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/tianmen_tang_su-background.png",
+      "bytes": 1945314,
+      "sha256": "2739b66f96b23d127bdd9fb957b63aac5f18813324ce6ffc568b7dfcc9f4096a",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/tianmen_tang_su-bubbles.png",
+      "bytes": 642374,
+      "sha256": "96d99f998e5ee0fd6c2ce14d24a2cd0747a9b7071a87ddad100b28cf4017dff5",
+      "size": [
+        2172,
+        724
+      ],
+      "mode": "RGBA",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/tujia_saye_erhe-avatars.png",
+      "bytes": 2082375,
+      "sha256": "97f923b12a19b3a00539ba15a4c770466e95963e7b99642f7d468ce9bd403ba9",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/tujia_saye_erhe-background.png",
+      "bytes": 2148754,
+      "sha256": "574dd275a6ac933c101a4eafc5dd3415aa9834ed1726d079e1e512ed3254d88f",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/tv.png",
+      "bytes": 1326025,
+      "sha256": "c69e41df90191c25c6693e89f5ee5626a00fbfba6f9aade5705268a911e910ce",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGBA",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/workshop_avatars.png",
+      "bytes": 2338479,
+      "sha256": "92115a9a774491b14f4c0d1c50cb8c3a11df3255dd6badd6030cbab5072d146f",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/workshop_background.png",
+      "bytes": 1999224,
+      "sha256": "26651e91235ae500745444726e74b0e7bd41c9ba006fddb58778c4cf6ab014a7",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/xingshan_min_ge-background-atlas.png",
+      "bytes": 2598785,
+      "sha256": "fb492888df3c86860196d311a49c1cde9b377703569204ee69f9fb3a492e860a",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/xingshan_min_ge-bird-atlas.png",
+      "bytes": 916841,
+      "sha256": "a9422708a50fd7677d9ec2faa6d36c8aa39a2e3d6075edbfbe469d4cf0595732",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/xingshan_min_ge-bird-seed.png",
+      "bytes": 489753,
+      "sha256": "3d593e9f7b10cc22b68b3fe56328ec185abe6eb2d90fe92f88b5b14e5331c14c",
+      "size": [
+        1470,
+        1070
+      ],
+      "mode": "RGBA",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/xingshan_min_ge-gates.png",
+      "bytes": 2234674,
+      "sha256": "e853b744e18381c9f88c1b74b10564e60a799a6e57345bc01b70941953984555",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/xisai_shenzhou_hui-background.png",
+      "bytes": 1214835,
+      "sha256": "cc6294ddbffdea4e76b40546b31e8e6ac422b473be9495f76a81211b7608f15a",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/xisai_shenzhou_hui-boat-draft-v1.png",
+      "bytes": 2115682,
+      "sha256": "f0437edec7be89a589c27be49d4335cab8bce47777756dbc405a767d1ba4ac84",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/xisai_shenzhou_hui-boat.png",
+      "bytes": 1625562,
+      "sha256": "b85d8aeb6d0de8fd36a16d5bbb93467d333281a1a3e2c3b12514554f922a8645",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/yandi_shennong_chuanshuo-avatars-v2.png",
+      "bytes": 2472581,
+      "sha256": "f6826e6df364281428e5bf388d574084b804b8a9ec648bd4e73df7309031c578",
+      "size": [
+        1619,
+        971
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/yandi_shennong_chuanshuo-avatars.png",
+      "bytes": 2240742,
+      "sha256": "211d09547a99378704ced54eebe06e6e5c00059948bd5f38de4876bd9bcaf86c",
+      "size": [
+        1292,
+        1218
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/yandi_shennong_chuanshuo-background-atlas.png",
+      "bytes": 2864078,
+      "sha256": "c28cd9e578abf8d6ee7dec38f4ca6684a70a5790db0b11ac243c42c3421c047c",
+      "size": [
+        936,
+        1681
+      ],
+      "mode": "RGB",
+      "role": "source"
+    },
+    {
+      "path": "InheritanceTasks/Art/Pixel/v1/source/yandi_shennong_chuanshuo-terrain.png",
+      "bytes": 1677034,
+      "sha256": "600b0e2b3fd8689ad09f95691828935e058aa35af2940c57e00a1d85ae52d149",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "role": "source"
+    }
+  ]
+}

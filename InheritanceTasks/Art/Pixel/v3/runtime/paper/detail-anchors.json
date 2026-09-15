@@ -1,0 +1,31 @@
+{
+  "version": 4,
+  "hand_display_sizes": {
+    "travel_blogger": [
+      112,
+      108
+    ],
+    "life_blogger": [
+      112,
+      108
+    ],
+    "business_blogger": [
+      112,
+      108
+    ],
+    "food_blogger": [
+      112,
+      108
+    ],
+    "adventure_blogger": [
+      112,
+      108
+    ],
+    "magic_blogger": [
+      112,
+      108
+    ]
+  },
+  "geometry_sha256": "17fbe75b93af9e72e39031d46e5298dee1c6b5587fb161c838a22e151909a543",
+  "note": "Logical blade position and displayed hand size retained"
+}

@@ -135,12 +135,12 @@ func _sync_content() -> void:
 		return
 
 	var slot_number := player_setup.slot_index + 1
-	var control_text := "AI" if player_setup.is_bot() else ""
+	var control_text := "AI·" + AIProfile.LABELS[int(player_setup.ai_difficulty)] if player_setup.is_bot() else ""
 	var profession_name := definition.profession_name if definition != null else "未选择职业"
 	var region_name := "未选择出生点"
 	if player_setup.has_valid_starting_region():
 		region_name = String(MapSection.REGION.find_key(player_setup.starting_region))
-	title = "P%d%s" % [slot_number, " · AI" if player_setup.is_bot() else ""]
+	title = "P%d%s" % [slot_number, " · " + control_text if player_setup.is_bot() else ""]
 	subtitle = "%s\n%s\n%s" % [player_setup.normalized_display_name(), profession_name, region_name]
 	artwork = definition.selection_portrait if definition != null else null
 	_slot_label.text = "P%d" % slot_number

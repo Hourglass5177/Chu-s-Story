@@ -1,0 +1,175 @@
+{
+  "method": "imagegen whole strips; native cell slicing, technical green matte where needed; no palette quantization or source pixel reduction",
+  "task": "jingzhou_hua_gu_xi",
+  "status": "generated candidates; not user accepted",
+  "pixel_canvas": [
+    1000,
+    600
+  ],
+  "logical_stage": [
+    1000,
+    600
+  ],
+  "actors": [
+    {
+      "actor": "travel",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/jingzhou_hua_gu_xi/travel-animation.png",
+      "source_sha256": "5f2d64f30cbe7bcaf004184aa8728851863ff73bb5365be9a3877c05e30f188e",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": true,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/jingzhou_hua_gu_xi/travel.png",
+      "runtime_sha256": "bf2f26c49bb4643ada6b0109aa2ca908df4ed9b4a6537cc89889c13793eb50d5",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "life",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/jingzhou_hua_gu_xi/life-animation.png",
+      "source_sha256": "f0bdc0d71defb6663ee4ba5c5c947a7a3c54978f3ac696bb75bc27308470d9a0",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/jingzhou_hua_gu_xi/life.png",
+      "runtime_sha256": "74e2c3655bb17d958a61c3c5f2b6e7dabf9ace54ce3e1be0b44aacab78a7ecc6",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "business",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/jingzhou_hua_gu_xi/business-animation.png",
+      "source_sha256": "14d02f68c301cffbbdf97e583f4bb1f92b4bd246302bdd2a3e085c81caef2b23",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/jingzhou_hua_gu_xi/business.png",
+      "runtime_sha256": "bdfcbc5d151e1caf6cd2d223b565f1bd749074c2da8ab0e64d197a113cbebe7a",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "food",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/jingzhou_hua_gu_xi/food-animation.png",
+      "source_sha256": "3710928e6ec48815f1b34f47b3e389d1d00f047668d338cfec87c3b7496fc6eb",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/jingzhou_hua_gu_xi/food.png",
+      "runtime_sha256": "3345f0801a94cfa21efac11089bc2c75a74b73f8f646dd355472492198795695",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "adventure",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/jingzhou_hua_gu_xi/adventure-animation.png",
+      "source_sha256": "686f819bb0fb38ad28bef7e65e3547a73c6c72d2777fe640bfcdc7d658c3ec5f",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/jingzhou_hua_gu_xi/adventure.png",
+      "runtime_sha256": "a3869af8e7fc4e0aa6f4b351c02b2a98c7d6543e77640725c37498e3cf728a11",
+      "normal_playback_reviewed": false
+    },
+    {
+      "actor": "magic",
+      "source": "InheritanceTasks/Art/Pixel/v3/source/jingzhou_hua_gu_xi/magic-animation.png",
+      "source_sha256": "cdab8b25c82b6a2b08fa9e2247d341133f2154ce183e338b80df0d378351af20",
+      "source_size": [
+        2014,
+        781
+      ],
+      "native_alpha": false,
+      "frame_size": [
+        503,
+        781
+      ],
+      "frames": 4,
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/jingzhou_hua_gu_xi/magic.png",
+      "runtime_sha256": "3656ef4529a8db1fac61749e45cf4f7f6f6fb9bba03c31eba4a737a1382c22f3",
+      "normal_playback_reviewed": false
+    }
+  ],
+  "npc": {
+    "source": "InheritanceTasks\\Art\\Pixel\\v3\\source\\jingzhou_hua_gu_xi\\npcs-r4-green.png",
+    "frame_size": [
+      627,
+      627
+    ],
+    "frames": 4,
+    "native_alpha": false,
+    "source_sha256": "08c59e0dc5fd46b5bfe4668a784adea5630a6aca7b35257002cc2a115c6b1599"
+  },
+  "culture": "New game practice performance. Costume/instrument references documented in prompts; exact motions are artistic/gameplay interpretations. Gupen drum form and authentic audio remain awaiting source video.",
+  "pending": [
+    "normal-speed full-scene review",
+    "black/white edge review",
+    "user experience review",
+    "human listening review of audio phrase cuts"
+  ],
+  "covers": {
+    "method": "Composition from the same generated stage layers, including supporting performers. Not a gameplay screenshot.",
+    "items": [
+      {
+        "actor": "travel",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/jingzhou_hua_gu_xi/cover-travel.png",
+        "sha256": "9cc48627ba2c19c1b180e83f9633cb5ae7b4c0c4ec90279b820e4586355c25b9"
+      },
+      {
+        "actor": "life",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/jingzhou_hua_gu_xi/cover-life.png",
+        "sha256": "3dd9b847288127da3b63dd3f8e9cd267e65011542e21d2f00cbff80e54900827"
+      },
+      {
+        "actor": "business",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/jingzhou_hua_gu_xi/cover-business.png",
+        "sha256": "ce8e45b17495d90f1e7f22d8081e1371e2ee62e90f7988f9f502be9916a7bd31"
+      },
+      {
+        "actor": "food",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/jingzhou_hua_gu_xi/cover-food.png",
+        "sha256": "4c65344946c86414ad7efda3afa480b303e4544ed8fac573cbf837fbbad786a7"
+      },
+      {
+        "actor": "adventure",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/jingzhou_hua_gu_xi/cover-adventure.png",
+        "sha256": "c821dd1d617ff394cbe7afec0f34e8f7362a9abe6faf0c9636ca2d7e97a191a1"
+      },
+      {
+        "actor": "magic",
+        "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/jingzhou_hua_gu_xi/cover-magic.png",
+        "sha256": "f3827e2be850b6007bf6b38beb379d00aa21ba8af42db81a4ab7e02370c17b23"
+      }
+    ]
+  }
+}

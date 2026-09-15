@@ -1,0 +1,254 @@
+{
+  "version": 2,
+  "authoring": "explicit editable game phrase arrangement; no automatic onset scoring",
+  "source_permission": "user-provided authorized videos; originals preserved",
+  "source_pitch_shift": false,
+  "source_time_stretch": false,
+  "listening_status": "not listened by an audio-capable reviewer; all natural phrase cuts and mix balance need review",
+  "feedback_provenance": "six original synthesized game interaction sounds, not authentic instruments or traditional repertoire",
+  "tasks": [
+    {
+      "task": "laohekou_si_xian",
+      "status": "game_arrangement_pending_listening",
+      "mix": "InheritanceTasks\\Audio\\rhythm-v2\\laohekou_si_xian-mix.ogg",
+      "sha256": "5d7a2a31eefaa37f5bc5cad0e143105f5ae438af7d2de79f6f1598f49b257a8b",
+      "sample": "InheritanceTasks\\Audio\\rhythm-v2\\laohekou_si_xian-sample.ogg",
+      "edits": [
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\laohekou-ensemble-v1.ogg",
+          "source_sha256": "f1be442a176b7ea0110d5d4082d766e0d399f88a6688b744b05ae1556d1dc4a5",
+          "source_in_seconds": 1.0,
+          "source_out_seconds": 4.4,
+          "mix_in_seconds": 0.0,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\laohekou-ensemble-v1.ogg",
+          "source_sha256": "f1be442a176b7ea0110d5d4082d766e0d399f88a6688b744b05ae1556d1dc4a5",
+          "source_in_seconds": 10.0,
+          "source_out_seconds": 13.4,
+          "mix_in_seconds": 9.5,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\laohekou-ensemble-v1.ogg",
+          "source_sha256": "f1be442a176b7ea0110d5d4082d766e0d399f88a6688b744b05ae1556d1dc4a5",
+          "source_in_seconds": 20.0,
+          "source_out_seconds": 23.4,
+          "mix_in_seconds": 19.0,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\laohekou-ensemble-v1.ogg",
+          "source_sha256": "f1be442a176b7ea0110d5d4082d766e0d399f88a6688b744b05ae1556d1dc4a5",
+          "source_in_seconds": 30.0,
+          "source_out_seconds": 33.4,
+          "mix_in_seconds": 28.5,
+          "natural_phrase_review": "pending"
+        }
+      ],
+      "events": 16,
+      "feedback": "pluck",
+      "checks": {
+        "decoded_samples": 1719900,
+        "peak_dbfs": -8.775979370250536,
+        "listened": false
+      }
+    },
+    {
+      "task": "jingzhou_hua_gu_xi",
+      "status": "game_arrangement_pending_listening",
+      "mix": "InheritanceTasks\\Audio\\rhythm-v2\\jingzhou_hua_gu_xi-mix.ogg",
+      "sha256": "93d87779ae4f087e339597dd3131451893b00d039f323c83cc35a5a6db7d172a",
+      "sample": "InheritanceTasks\\Audio\\rhythm-v2\\jingzhou_hua_gu_xi-sample.ogg",
+      "edits": [
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\jingzhou-zhanhuaqiang-v1.ogg",
+          "source_sha256": "5c61c29872d53f26ba6754e686d325fa57c9e68d4cba5f375a08aae733893987",
+          "source_in_seconds": 1.0,
+          "source_out_seconds": 4.4,
+          "mix_in_seconds": 0.0,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\jingzhou-zhanhuaqiang-v1.ogg",
+          "source_sha256": "5c61c29872d53f26ba6754e686d325fa57c9e68d4cba5f375a08aae733893987",
+          "source_in_seconds": 10.0,
+          "source_out_seconds": 13.4,
+          "mix_in_seconds": 9.5,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\jingzhou-zhanhuaqiang-v1.ogg",
+          "source_sha256": "5c61c29872d53f26ba6754e686d325fa57c9e68d4cba5f375a08aae733893987",
+          "source_in_seconds": 20.0,
+          "source_out_seconds": 23.4,
+          "mix_in_seconds": 19.0,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\jingzhou-zhanhuaqiang-v1.ogg",
+          "source_sha256": "5c61c29872d53f26ba6754e686d325fa57c9e68d4cba5f375a08aae733893987",
+          "source_in_seconds": 30.0,
+          "source_out_seconds": 33.4,
+          "mix_in_seconds": 28.5,
+          "natural_phrase_review": "pending"
+        }
+      ],
+      "events": 10,
+      "feedback": "sing",
+      "checks": {
+        "decoded_samples": 1719900,
+        "peak_dbfs": -4.817952234070413,
+        "listened": false
+      }
+    },
+    {
+      "task": "ti_qin_xi",
+      "status": "game_arrangement_pending_listening",
+      "mix": "InheritanceTasks\\Audio\\rhythm-v2\\ti_qin_xi-mix.ogg",
+      "sha256": "d34715c7a6308011b6e5efbb6429cdcb3f7e51c927947f4df3135bc588bd8098",
+      "sample": "InheritanceTasks\\Audio\\rhythm-v2\\ti_qin_xi-sample.ogg",
+      "edits": [
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\tiqin-stage-v1.ogg",
+          "source_sha256": "5059edf0c531dfd85e53df270b62ac9d2cb0dde0aa39d041e1b1535ca96f6c6b",
+          "source_in_seconds": 1.0,
+          "source_out_seconds": 4.4,
+          "mix_in_seconds": 0.0,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\tiqin-stage-v1.ogg",
+          "source_sha256": "5059edf0c531dfd85e53df270b62ac9d2cb0dde0aa39d041e1b1535ca96f6c6b",
+          "source_in_seconds": 10.0,
+          "source_out_seconds": 13.4,
+          "mix_in_seconds": 9.5,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\tiqin-stage-v1.ogg",
+          "source_sha256": "5059edf0c531dfd85e53df270b62ac9d2cb0dde0aa39d041e1b1535ca96f6c6b",
+          "source_in_seconds": 20.0,
+          "source_out_seconds": 23.4,
+          "mix_in_seconds": 19.0,
+          "natural_phrase_review": "pending"
+        },
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\tiqin-stage-v1.ogg",
+          "source_sha256": "5059edf0c531dfd85e53df270b62ac9d2cb0dde0aa39d041e1b1535ca96f6c6b",
+          "source_in_seconds": 30.0,
+          "source_out_seconds": 33.4,
+          "mix_in_seconds": 28.5,
+          "natural_phrase_review": "pending"
+        }
+      ],
+      "events": 10,
+      "feedback": "bow",
+      "checks": {
+        "decoded_samples": 1719900,
+        "peak_dbfs": -2.937428145116599,
+        "listened": false
+      }
+    },
+    {
+      "task": "tujia_saye_erhe",
+      "status": "game_arrangement_pending_listening",
+      "mix": "InheritanceTasks\\Audio\\rhythm-v2\\tujia_saye_erhe-mix.ogg",
+      "sha256": "7848fe73ad7305fc023fa15c6c84138e01a03a259d16a0db72da5e1e721e6fc3",
+      "sample": "InheritanceTasks\\Audio\\rhythm-v2\\tujia_saye_erhe-sample.ogg",
+      "edits": [
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\sayeerhe-stage-v1.ogg",
+          "source_sha256": "0752c38c24b086e96da37a618132afb5b15361ed39e641706a7b90d09cb73f75",
+          "source_in_seconds": 1.0,
+          "source_out_seconds": 40.8,
+          "mix_in_seconds": 0,
+          "natural_phrase_review": "pending",
+          "added_sound": "game rehearsal cue, not isolated authentic percussion"
+        }
+      ],
+      "events": 18,
+      "feedback": "dance",
+      "checks": {
+        "decoded_samples": 1764000,
+        "peak_dbfs": -8.171551356953156,
+        "listened": false
+      }
+    },
+    {
+      "task": "han_ju",
+      "status": "game_arrangement_pending_listening",
+      "mix": "InheritanceTasks\\Audio\\rhythm-v2\\han_ju-mix.ogg",
+      "sha256": "f73ac07605383c2663d20a31440fd429bf78fef678f4abd4905b3a43d70f6d76",
+      "sample": "InheritanceTasks\\Audio\\rhythm-v2\\han_ju-sample.ogg",
+      "edits": [
+        {
+          "source": "arts\\非遗媒体资源\\数字版\\2026-09-09\\hanju-congtaibie-v1.ogg",
+          "source_sha256": "51bf6ea3f83925c4f8874138d787d26e2ec9550273301508bd2872526deb06ad",
+          "source_in_seconds": 1.0,
+          "source_out_seconds": 40.8,
+          "mix_in_seconds": 0,
+          "natural_phrase_review": "pending",
+          "added_sound": "game rehearsal cue, not isolated authentic percussion"
+        }
+      ],
+      "events": 18,
+      "feedback": "switch",
+      "checks": {
+        "decoded_samples": 1764000,
+        "peak_dbfs": -15.998087358994326,
+        "listened": false
+      }
+    },
+    {
+      "task": "gu_pen_ge",
+      "status": "game_arrangement_pending_listening",
+      "mix": "InheritanceTasks\\Audio\\rhythm-v2\\gu_pen_ge-mix.ogg",
+      "sha256": "73b06e6025a68b3a7ef44c4866ab156bf6cdb3dca4dfc7c3771681d35805ec06",
+      "sample": "InheritanceTasks\\Audio\\rhythm-v2\\gu_pen_ge-sample.ogg",
+      "edits": [],
+      "events": 12,
+      "feedback": "drum",
+      "checks": {
+        "decoded_samples": 1455300,
+        "peak_dbfs": -2.767904987534513,
+        "listened": false
+      }
+    }
+  ],
+  "feedback_files": {
+    "pluck": {
+      "path": "InheritanceTasks\\Audio\\rhythm-v2\\pluck.wav",
+      "sha256": "3f27a70e1aa9ade023cbe33de131d61d70bd8f9e32375d60ccf7d2e8e80a345e"
+    },
+    "dance": {
+      "path": "InheritanceTasks\\Audio\\rhythm-v2\\dance.wav",
+      "sha256": "e29fde16e9e89e93235fc9c01f1f69d1edb58b161860099cd8e75242af164b10"
+    },
+    "sing": {
+      "path": "InheritanceTasks\\Audio\\rhythm-v2\\sing.wav",
+      "sha256": "e1d0800e53b55fa9bf1bf4266c310a7601cd208ef1f7b1d04a403a7f59663c47"
+    },
+    "switch": {
+      "path": "InheritanceTasks\\Audio\\rhythm-v2\\switch.wav",
+      "sha256": "3efa1c94252f08ce569898a9360e1c2ee1c58709eb3ca24100a4e856acdefe53"
+    },
+    "bow": {
+      "path": "InheritanceTasks\\Audio\\rhythm-v2\\bow.wav",
+      "sha256": "38d85cb87f926be0b17361eeb1a3151ef14213e97c91c0188e25d6e16a61a9e5"
+    },
+    "drum": {
+      "path": "InheritanceTasks\\Audio\\rhythm-v2\\drum.wav",
+      "sha256": "82e73b993a7412c50bcab73c482fa754302c8aa0513e72d8463aa81090bf33bc"
+    },
+    "confirm": {
+      "path": "InheritanceTasks\\Audio\\rhythm-v2\\confirm.wav",
+      "sha256": "32dc65ed6f1fd485b87f96acaf9b7eb635f01146864e02ed02576d7eecae2bcb"
+    },
+    "count": {
+      "path": "InheritanceTasks\\Audio\\rhythm-v2\\count.wav",
+      "sha256": "1000e23eada75eadf7080b7f043ae7cb618f59c76b7c59174fae3ce4743be990"
+    }
+  }
+}

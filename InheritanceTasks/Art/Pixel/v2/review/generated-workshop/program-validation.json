@@ -1,0 +1,55 @@
+{
+  "source_sha256": "8773d69c5222b26e448044b485fa01edb071405003ca0ae0903088bade6f75ca",
+  "aseprite_sha256": "9603198bf22020f97650fa6f3dc091cd7b2872ddd0093be28adf158febe96105",
+  "status": "program checks only; candidate not approved",
+  "log": "Workshop candidates: 48 and 64 colors, editable layers, native500x300 and nearest2x.\n",
+  "variants": [
+    {
+      "budget": 48,
+      "visible_colors": 48,
+      "cleanup_pixels": 219,
+      "checks": {
+        "native_size_500x300": true,
+        "preview_exact_nearest_2x": true,
+        "visible_colors_within_budget": true,
+        "fully_opaque_background": true,
+        "aseprite_reopen_exact": true,
+        "three_editable_layers": true,
+        "two_visible_export_layers": true,
+        "six_placement_slices": true,
+        "only_registered_cleanup_pixels_changed": true
+      },
+      "files_sha256": {
+        "workshop-r1-48.aseprite": "62782a894f10eb0fe45cf9dc45c3c98e7fd63cc971148f91ea4021855cc3bcc3",
+        "workshop-r1-48.png": "f2f14c823195e07eeda267e6264967e49ec1bd31720877fb3fc4782f7b9e7a51",
+        "workshop-r1-48-metadata.json": "1d39f3fefa793066baad115c9ca966788a06bb786d6ab6f55e74967ce7ad4b3b",
+        "workshop-r1-48-reopened.png": "f2f14c823195e07eeda267e6264967e49ec1bd31720877fb3fc4782f7b9e7a51",
+        "workshop-r1-48-2x.png": "99a329ee71530fa6dd208e0d35175000ba9f8e186e5f77f967a20e86a62591f2"
+      }
+    },
+    {
+      "budget": 64,
+      "visible_colors": 63,
+      "cleanup_pixels": 255,
+      "checks": {
+        "native_size_500x300": true,
+        "preview_exact_nearest_2x": true,
+        "visible_colors_within_budget": true,
+        "fully_opaque_background": true,
+        "aseprite_reopen_exact": true,
+        "three_editable_layers": true,
+        "two_visible_export_layers": true,
+        "six_placement_slices": true,
+        "only_registered_cleanup_pixels_changed": true
+      },
+      "files_sha256": {
+        "workshop-r1-64.aseprite": "6589adee7f9349d2db8937a6ca180ff504ecb6a7c6e510e3f9e9e0701308c4f2",
+        "workshop-r1-64.png": "f0c8c99b90b4ac5329f3608afd0e12c6ea07799a88aece543cfb600660a0aa52",
+        "workshop-r1-64-metadata.json": "bfec1e1ce04de29cb7e3f7b629963748f9e3ad22bc905272f7903a9540d411a0",
+        "workshop-r1-64-reopened.png": "f0c8c99b90b4ac5329f3608afd0e12c6ea07799a88aece543cfb600660a0aa52",
+        "workshop-r1-64-2x.png": "650fe87dee376b3af6082369c9f447c80d571a1b68b17473ac1d5c4bcdca3dc2"
+      }
+    }
+  ],
+  "original_preserved": true
+}

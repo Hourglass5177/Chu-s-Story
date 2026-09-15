@@ -1,0 +1,12 @@
+{
+  "source": "InheritanceTasks\\Art\\Pixel\\v3\\source\\shenzhou\\boat-rear-r2-green.png",
+  "source_sha256": "4fac85c1c0e8efbfa0f3193152a462a15885c97617782822c40e30bcc3f53315",
+  "output_sha256": "b8d12bf58e09727f63e55f3be60f76bb887b0911788104dfc8e12e615d0eb283",
+  "frame_size": [
+    384,
+    512
+  ],
+  "method": "Generated high rear view; border-connected green technical matte removed; source colors preserved, no palette reduction.",
+  "cultural_reference": "https://hswhj.huangshi.gov.cn/xwzx/gzdt/202307/t20230711_1031116.html",
+  "status": "Generated camera correction, actual scene and user review recorded separately; artistic simplification, not a measured reconstruction."
+}

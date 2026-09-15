@@ -1,0 +1,2165 @@
+{
+  "version": 3,
+  "audio_path": "res://InheritanceTasks/Audio/rhythm-v2/tujia_saye_erhe-mix.ogg",
+  "audio_sha256": "7848fe73ad7305fc023fa15c6c84138e01a03a259d16a0db72da5e1e721e6fc3",
+  "end_ms": 40000,
+  "events": [
+    {
+      "id": "tujia_saye_erhe-v2-01",
+      "time_ms": 2000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 2000,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-v2-02",
+      "time_ms": 3500,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 3500,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-v2-03",
+      "time_ms": 5000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 5000,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-v2-04",
+      "time_ms": 6500,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 6500,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-v2-05",
+      "time_ms": 7800,
+      "kind": "rest",
+      "direction": 1,
+      "end_ms": 8700,
+      "cue_ms": 1000,
+      "round": 0,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "tujia_saye_erhe-v2-06",
+      "time_ms": 11500,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 11500,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-v2-07",
+      "time_ms": 13000,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 13000,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-v2-08",
+      "time_ms": 14500,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 14500,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-v2-09",
+      "time_ms": 16000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 16000,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-v2-10",
+      "time_ms": 21000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 21000,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-v2-11",
+      "time_ms": 22500,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 22500,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-v2-12",
+      "time_ms": 24000,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 24000,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-v2-13",
+      "time_ms": 25500,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 25500,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-v2-14",
+      "time_ms": 26800,
+      "kind": "rest",
+      "direction": 1,
+      "end_ms": 27700,
+      "cue_ms": 1000,
+      "round": 2,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "tujia_saye_erhe-v2-15",
+      "time_ms": 30500,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 30500,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-v2-16",
+      "time_ms": 32000,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 32000,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-v2-17",
+      "time_ms": 33500,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 33500,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-v2-18",
+      "time_ms": 35000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 35000,
+      "cue_ms": 1000,
+      "round": 3
+    }
+  ],
+  "presentation": [
+    {
+      "id": "tujia_saye_erhe-v2-01",
+      "time_ms": 2000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 2000,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-v2-02",
+      "time_ms": 3500,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 3500,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-v2-03",
+      "time_ms": 5000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 5000,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-v2-04",
+      "time_ms": 6500,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 6500,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "tujia_saye_erhe-v2-05",
+      "time_ms": 7800,
+      "kind": "rest",
+      "direction": 1,
+      "end_ms": 8700,
+      "cue_ms": 1000,
+      "round": 0,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "tujia_saye_erhe-v2-06",
+      "time_ms": 11500,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 11500,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-v2-07",
+      "time_ms": 13000,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 13000,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-v2-08",
+      "time_ms": 14500,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 14500,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-v2-09",
+      "time_ms": 16000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 16000,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "tujia_saye_erhe-v2-10",
+      "time_ms": 21000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 21000,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-v2-11",
+      "time_ms": 22500,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 22500,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-v2-12",
+      "time_ms": 24000,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 24000,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-v2-13",
+      "time_ms": 25500,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 25500,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "tujia_saye_erhe-v2-14",
+      "time_ms": 26800,
+      "kind": "rest",
+      "direction": 1,
+      "end_ms": 27700,
+      "cue_ms": 1000,
+      "round": 2,
+      "rest_policy": "release_required"
+    },
+    {
+      "id": "tujia_saye_erhe-v2-15",
+      "time_ms": 30500,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 30500,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-v2-16",
+      "time_ms": 32000,
+      "kind": "tap",
+      "direction": 1,
+      "end_ms": 32000,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-v2-17",
+      "time_ms": 33500,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 33500,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "tujia_saye_erhe-v2-18",
+      "time_ms": 35000,
+      "kind": "tap",
+      "direction": -1,
+      "end_ms": 35000,
+      "cue_ms": 1000,
+      "round": 3
+    }
+  ],
+  "sections": [
+    {
+      "id": "group-1",
+      "start_ms": 0,
+      "end_ms": 9500,
+      "round": 0
+    },
+    {
+      "id": "group-2",
+      "start_ms": 9500,
+      "end_ms": 19000,
+      "round": 1
+    },
+    {
+      "id": "group-3",
+      "start_ms": 19000,
+      "end_ms": 28500,
+      "round": 2
+    },
+    {
+      "id": "group-4",
+      "start_ms": 28500,
+      "end_ms": 38000,
+      "round": 3
+    }
+  ],
+  "tutorial_audio_path": "res://InheritanceTasks/Audio/rhythm-v3/tujia_saye_erhe-lesson-1.ogg",
+  "feedback_key": "dance",
+  "production_status": "game_arrangement_pending_listening",
+  "annotation_note": "游戏节奏编排v2；原调原速。短句自然边界、混音及文化动作仍待人工听审，不作为传统节型、帮腔声部或真实弓法转录。 v3：教学复用正式混音片段，伙伴演出独立时间线；既有切句仍待听审。",
+  "choreography": [
+    {
+      "id": "tujia_saye_erhe-motion-000",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 1000,
+      "end_ms": 2000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-01",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-003",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 1680,
+      "end_ms": 2000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-01",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-001",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 2000,
+      "end_ms": 2200,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-v2-01",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-004",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 2000,
+      "end_ms": 2240,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-v2-01",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-002",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 2200,
+      "end_ms": 2430,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-01",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-005",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 2500,
+      "end_ms": 3500,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-02",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-008",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 3180,
+      "end_ms": 3500,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-02",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-006",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 3500,
+      "end_ms": 3700,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-v2-02",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-009",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 3500,
+      "end_ms": 3740,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-v2-02",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-007",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 3700,
+      "end_ms": 3930,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-02",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-010",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 4000,
+      "end_ms": 5000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-03",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-013",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 4680,
+      "end_ms": 5000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-03",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-011",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 5000,
+      "end_ms": 5200,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-v2-03",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-014",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 5000,
+      "end_ms": 5240,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-v2-03",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-012",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 5200,
+      "end_ms": 5430,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-03",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-015",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 5500,
+      "end_ms": 6500,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-04",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-018",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 6180,
+      "end_ms": 6500,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-04",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-016",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 6500,
+      "end_ms": 6700,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-v2-04",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-019",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 6500,
+      "end_ms": 6740,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-v2-04",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-017",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 6700,
+      "end_ms": 6930,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-04",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-020",
+      "actor": "leader",
+      "action": "rest",
+      "start_ms": 7800,
+      "end_ms": 8700,
+      "frames": [
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-05",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-021",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 10500,
+      "end_ms": 11500,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-06",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-024",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 11180,
+      "end_ms": 11500,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-06",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-022",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 11500,
+      "end_ms": 11700,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-v2-06",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-025",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 11500,
+      "end_ms": 11740,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-v2-06",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-023",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 11700,
+      "end_ms": 11930,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-06",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-026",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 12000,
+      "end_ms": 13000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-07",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-029",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 12680,
+      "end_ms": 13000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-07",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-027",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 13000,
+      "end_ms": 13200,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-v2-07",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-030",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 13000,
+      "end_ms": 13240,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-v2-07",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-028",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 13200,
+      "end_ms": 13430,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-07",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-031",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 13500,
+      "end_ms": 14500,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-08",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-034",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 14180,
+      "end_ms": 14500,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-08",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-032",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 14500,
+      "end_ms": 14700,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-v2-08",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-035",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 14500,
+      "end_ms": 14740,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-v2-08",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-033",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 14700,
+      "end_ms": 14930,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-08",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-036",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 15000,
+      "end_ms": 16000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-09",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-039",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 15680,
+      "end_ms": 16000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-09",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-037",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 16000,
+      "end_ms": 16200,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-v2-09",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-040",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 16000,
+      "end_ms": 16240,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-v2-09",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-038",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 16200,
+      "end_ms": 16430,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-09",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-041",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 20000,
+      "end_ms": 21000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-10",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-044",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 20680,
+      "end_ms": 21000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-10",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-042",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 21000,
+      "end_ms": 21200,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-v2-10",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-045",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 21000,
+      "end_ms": 21240,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-v2-10",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-043",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 21200,
+      "end_ms": 21430,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-10",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-046",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 21500,
+      "end_ms": 22500,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-11",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-049",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 22180,
+      "end_ms": 22500,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-11",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-047",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 22500,
+      "end_ms": 22700,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-v2-11",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-050",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 22500,
+      "end_ms": 22740,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-v2-11",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-048",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 22700,
+      "end_ms": 22930,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-11",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-051",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 23000,
+      "end_ms": 24000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-12",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-054",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 23680,
+      "end_ms": 24000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-12",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-052",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 24000,
+      "end_ms": 24200,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-v2-12",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-055",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 24000,
+      "end_ms": 24240,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-v2-12",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-053",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 24200,
+      "end_ms": 24430,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-12",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-056",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 24500,
+      "end_ms": 25500,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-13",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-059",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 25180,
+      "end_ms": 25500,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-13",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-057",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 25500,
+      "end_ms": 25700,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-v2-13",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-060",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 25500,
+      "end_ms": 25740,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-v2-13",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-058",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 25700,
+      "end_ms": 25930,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-13",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-061",
+      "actor": "leader",
+      "action": "rest",
+      "start_ms": 26800,
+      "end_ms": 27700,
+      "frames": [
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-14",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-062",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 29500,
+      "end_ms": 30500,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-15",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-065",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 30180,
+      "end_ms": 30500,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-15",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-063",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 30500,
+      "end_ms": 30700,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-v2-15",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-066",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 30500,
+      "end_ms": 30740,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-v2-15",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-064",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 30700,
+      "end_ms": 30930,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-15",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-067",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 31000,
+      "end_ms": 32000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-16",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-070",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 31680,
+      "end_ms": 32000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-16",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-068",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 32000,
+      "end_ms": 32200,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-v2-16",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-071",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 32000,
+      "end_ms": 32240,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-v2-16",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-069",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 32200,
+      "end_ms": 32430,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-16",
+      "direction": 1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-072",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 32500,
+      "end_ms": 33500,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-17",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-075",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 33180,
+      "end_ms": 33500,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-17",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-073",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 33500,
+      "end_ms": 33700,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-v2-17",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-076",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 33500,
+      "end_ms": 33740,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-v2-17",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-074",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 33700,
+      "end_ms": 33930,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-17",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-077",
+      "actor": "leader",
+      "action": "weight_shift",
+      "start_ms": 34000,
+      "end_ms": 35000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-18",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-080",
+      "actor": "drummer",
+      "action": "prepare",
+      "start_ms": 34680,
+      "end_ms": 35000,
+      "frames": [
+        0,
+        1
+      ],
+      "event_id": "tujia_saye_erhe-v2-18",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-078",
+      "actor": "leader",
+      "action": "land",
+      "start_ms": 35000,
+      "end_ms": 35200,
+      "frames": [
+        2
+      ],
+      "event_id": "tujia_saye_erhe-v2-18",
+      "direction": -1,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-081",
+      "actor": "drummer",
+      "action": "strike",
+      "start_ms": 35000,
+      "end_ms": 35240,
+      "frames": [
+        2,
+        3
+      ],
+      "event_id": "tujia_saye_erhe-v2-18",
+      "direction": 0,
+      "cycle_ms": 0
+    },
+    {
+      "id": "tujia_saye_erhe-motion-079",
+      "actor": "leader",
+      "action": "recover",
+      "start_ms": 35200,
+      "end_ms": 35430,
+      "frames": [
+        3,
+        0
+      ],
+      "event_id": "tujia_saye_erhe-v2-18",
+      "direction": -1,
+      "cycle_ms": 0
+    }
+  ],
+  "tutorial_steps": [
+    {
+      "instruction": "左脚落地，按左边",
+      "retry_hint": "左脚落地，按左边",
+      "initial_lane": -1,
+      "required": "hit",
+      "duration_ms": 1900,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/tujia_saye_erhe-lesson-1.ogg",
+      "audio_sha256": "eaf686b19e2f6c61394c3f231f98dc540715ef992d6f87310842a9096b712fa2",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/tujia_saye_erhe-mix.ogg",
+      "source_in_ms": 800,
+      "source_out_ms": 2700,
+      "events": [
+        {
+          "id": "tujia_saye_erhe-lesson-v5-0-0",
+          "time_ms": 1200,
+          "kind": "tap",
+          "direction": -1,
+          "end_ms": 1200,
+          "cue_ms": 1000,
+          "round": 0
+        }
+      ],
+      "presentation": [
+        {
+          "id": "tujia_saye_erhe-lesson-v5-0-0",
+          "time_ms": 1200,
+          "kind": "tap",
+          "direction": -1,
+          "end_ms": 1200,
+          "cue_ms": 1000,
+          "round": 0
+        }
+      ],
+      "choreography": [
+        {
+          "id": "tujia_saye_erhe-motion-000",
+          "actor": "leader",
+          "action": "weight_shift",
+          "start_ms": 200,
+          "end_ms": 1200,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-0-0",
+          "direction": -1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-003",
+          "actor": "drummer",
+          "action": "prepare",
+          "start_ms": 880,
+          "end_ms": 1200,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-0-0",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-001",
+          "actor": "leader",
+          "action": "land",
+          "start_ms": 1200,
+          "end_ms": 1400,
+          "frames": [
+            2
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-0-0",
+          "direction": -1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-004",
+          "actor": "drummer",
+          "action": "strike",
+          "start_ms": 1200,
+          "end_ms": 1440,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-0-0",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-002",
+          "actor": "leader",
+          "action": "recover",
+          "start_ms": 1400,
+          "end_ms": 1630,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-0-0",
+          "direction": -1,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": [
+        {
+          "id": "group-1",
+          "start_ms": 0,
+          "end_ms": 1900,
+          "round": 0,
+          "teacher_times_ms": []
+        }
+      ]
+    },
+    {
+      "instruction": "右脚落地，按右边",
+      "retry_hint": "右脚落地，按右边",
+      "initial_lane": -1,
+      "required": "hit",
+      "duration_ms": 1900,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/tujia_saye_erhe-lesson-2.ogg",
+      "audio_sha256": "9b12c10bff48c13208742894a5ed48e41f931961ba92e35be70811ad9c19b572",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/tujia_saye_erhe-mix.ogg",
+      "source_in_ms": 2300,
+      "source_out_ms": 4200,
+      "events": [
+        {
+          "id": "tujia_saye_erhe-lesson-v5-1-0",
+          "time_ms": 1200,
+          "kind": "tap",
+          "direction": 1,
+          "end_ms": 1200,
+          "cue_ms": 1000,
+          "round": 0
+        }
+      ],
+      "presentation": [
+        {
+          "id": "tujia_saye_erhe-lesson-v5-1-0",
+          "time_ms": 1200,
+          "kind": "tap",
+          "direction": 1,
+          "end_ms": 1200,
+          "cue_ms": 1000,
+          "round": 0
+        }
+      ],
+      "choreography": [
+        {
+          "id": "tujia_saye_erhe-motion-005",
+          "actor": "leader",
+          "action": "weight_shift",
+          "start_ms": 200,
+          "end_ms": 1200,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-1-0",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-008",
+          "actor": "drummer",
+          "action": "prepare",
+          "start_ms": 880,
+          "end_ms": 1200,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-1-0",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-006",
+          "actor": "leader",
+          "action": "land",
+          "start_ms": 1200,
+          "end_ms": 1400,
+          "frames": [
+            2
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-1-0",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-009",
+          "actor": "drummer",
+          "action": "strike",
+          "start_ms": 1200,
+          "end_ms": 1440,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-1-0",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-007",
+          "actor": "leader",
+          "action": "recover",
+          "start_ms": 1400,
+          "end_ms": 1630,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-1-0",
+          "direction": 1,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": [
+        {
+          "id": "group-1",
+          "start_ms": 0,
+          "end_ms": 1900,
+          "round": 0,
+          "teacher_times_ms": []
+        }
+      ]
+    },
+    {
+      "instruction": "跟着落步：左、右、右",
+      "retry_hint": "跟着落步：左、右、右",
+      "initial_lane": -1,
+      "required": "double",
+      "duration_ms": 4900,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/tujia_saye_erhe-lesson-3.ogg",
+      "audio_sha256": "b6381da11fcaf77690b24ff8af81ea6b47cac9b6ee90d39ee60d5cead7afbde9",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/tujia_saye_erhe-mix.ogg",
+      "source_in_ms": 10300,
+      "source_out_ms": 15200,
+      "events": [
+        {
+          "id": "tujia_saye_erhe-lesson-v5-2-0",
+          "time_ms": 1200,
+          "kind": "tap",
+          "direction": -1,
+          "end_ms": 1200,
+          "cue_ms": 1000,
+          "round": 1
+        },
+        {
+          "id": "tujia_saye_erhe-lesson-v5-2-1",
+          "time_ms": 2700,
+          "kind": "tap",
+          "direction": 1,
+          "end_ms": 2700,
+          "cue_ms": 1000,
+          "round": 1
+        },
+        {
+          "id": "tujia_saye_erhe-lesson-v5-2-2",
+          "time_ms": 4200,
+          "kind": "tap",
+          "direction": 1,
+          "end_ms": 4200,
+          "cue_ms": 1000,
+          "round": 1
+        }
+      ],
+      "presentation": [
+        {
+          "id": "tujia_saye_erhe-lesson-v5-2-0",
+          "time_ms": 1200,
+          "kind": "tap",
+          "direction": -1,
+          "end_ms": 1200,
+          "cue_ms": 1000,
+          "round": 1
+        },
+        {
+          "id": "tujia_saye_erhe-lesson-v5-2-1",
+          "time_ms": 2700,
+          "kind": "tap",
+          "direction": 1,
+          "end_ms": 2700,
+          "cue_ms": 1000,
+          "round": 1
+        },
+        {
+          "id": "tujia_saye_erhe-lesson-v5-2-2",
+          "time_ms": 4200,
+          "kind": "tap",
+          "direction": 1,
+          "end_ms": 4200,
+          "cue_ms": 1000,
+          "round": 1
+        }
+      ],
+      "choreography": [
+        {
+          "id": "tujia_saye_erhe-motion-021",
+          "actor": "leader",
+          "action": "weight_shift",
+          "start_ms": 200,
+          "end_ms": 1200,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-2-0",
+          "direction": -1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-024",
+          "actor": "drummer",
+          "action": "prepare",
+          "start_ms": 880,
+          "end_ms": 1200,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-2-0",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-022",
+          "actor": "leader",
+          "action": "land",
+          "start_ms": 1200,
+          "end_ms": 1400,
+          "frames": [
+            2
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-2-0",
+          "direction": -1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-025",
+          "actor": "drummer",
+          "action": "strike",
+          "start_ms": 1200,
+          "end_ms": 1440,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-2-0",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-023",
+          "actor": "leader",
+          "action": "recover",
+          "start_ms": 1400,
+          "end_ms": 1630,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-2-0",
+          "direction": -1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-026",
+          "actor": "leader",
+          "action": "weight_shift",
+          "start_ms": 1700,
+          "end_ms": 2700,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-2-1",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-029",
+          "actor": "drummer",
+          "action": "prepare",
+          "start_ms": 2380,
+          "end_ms": 2700,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-2-1",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-027",
+          "actor": "leader",
+          "action": "land",
+          "start_ms": 2700,
+          "end_ms": 2900,
+          "frames": [
+            2
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-2-1",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-030",
+          "actor": "drummer",
+          "action": "strike",
+          "start_ms": 2700,
+          "end_ms": 2940,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-2-1",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-028",
+          "actor": "leader",
+          "action": "recover",
+          "start_ms": 2900,
+          "end_ms": 3130,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-2-1",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-031",
+          "actor": "leader",
+          "action": "weight_shift",
+          "start_ms": 3200,
+          "end_ms": 4200,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-2-2",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-034",
+          "actor": "drummer",
+          "action": "prepare",
+          "start_ms": 3880,
+          "end_ms": 4200,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-2-2",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-032",
+          "actor": "leader",
+          "action": "land",
+          "start_ms": 4200,
+          "end_ms": 4400,
+          "frames": [
+            2
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-2-2",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-035",
+          "actor": "drummer",
+          "action": "strike",
+          "start_ms": 4200,
+          "end_ms": 4440,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-2-2",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-033",
+          "actor": "leader",
+          "action": "recover",
+          "start_ms": 4400,
+          "end_ms": 4630,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-2-2",
+          "direction": 1,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": [
+        {
+          "id": "group-2",
+          "start_ms": 0,
+          "end_ms": 4900,
+          "round": 1,
+          "teacher_times_ms": []
+        }
+      ]
+    },
+    {
+      "instruction": "站稳时，两边都松开",
+      "retry_hint": "站稳时，两边都松开",
+      "initial_lane": -1,
+      "required": "rest",
+      "duration_ms": 4100,
+      "audio_path": "res://InheritanceTasks/Audio/rhythm-v3/tujia_saye_erhe-lesson-4.ogg",
+      "audio_sha256": "dfa05b6cb8d6cba28afc5b8c9bcb1e59172d6bcbe06bc09e7d00fca3d11fdba5",
+      "source_mix": "res://InheritanceTasks/Audio/rhythm-v2/tujia_saye_erhe-mix.ogg",
+      "source_in_ms": 5300,
+      "source_out_ms": 9400,
+      "events": [
+        {
+          "id": "tujia_saye_erhe-lesson-v5-3-0",
+          "time_ms": 1200,
+          "kind": "tap",
+          "direction": 1,
+          "end_ms": 1200,
+          "cue_ms": 1000,
+          "round": 0
+        },
+        {
+          "id": "tujia_saye_erhe-lesson-v5-3-1",
+          "time_ms": 2500,
+          "kind": "rest",
+          "direction": 1,
+          "end_ms": 3400,
+          "cue_ms": 1000,
+          "round": 0,
+          "rest_policy": "release_required"
+        }
+      ],
+      "presentation": [
+        {
+          "id": "tujia_saye_erhe-lesson-v5-3-0",
+          "time_ms": 1200,
+          "kind": "tap",
+          "direction": 1,
+          "end_ms": 1200,
+          "cue_ms": 1000,
+          "round": 0
+        },
+        {
+          "id": "tujia_saye_erhe-lesson-v5-3-1",
+          "time_ms": 2500,
+          "kind": "rest",
+          "direction": 1,
+          "end_ms": 3400,
+          "cue_ms": 1000,
+          "round": 0,
+          "rest_policy": "release_required"
+        }
+      ],
+      "choreography": [
+        {
+          "id": "tujia_saye_erhe-motion-015",
+          "actor": "leader",
+          "action": "weight_shift",
+          "start_ms": 200,
+          "end_ms": 1200,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-3-0",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-018",
+          "actor": "drummer",
+          "action": "prepare",
+          "start_ms": 880,
+          "end_ms": 1200,
+          "frames": [
+            0,
+            1
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-3-0",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-016",
+          "actor": "leader",
+          "action": "land",
+          "start_ms": 1200,
+          "end_ms": 1400,
+          "frames": [
+            2
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-3-0",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-019",
+          "actor": "drummer",
+          "action": "strike",
+          "start_ms": 1200,
+          "end_ms": 1440,
+          "frames": [
+            2,
+            3
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-3-0",
+          "direction": 0,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-017",
+          "actor": "leader",
+          "action": "recover",
+          "start_ms": 1400,
+          "end_ms": 1630,
+          "frames": [
+            3,
+            0
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-3-0",
+          "direction": 1,
+          "cycle_ms": 0
+        },
+        {
+          "id": "tujia_saye_erhe-motion-020",
+          "actor": "leader",
+          "action": "rest",
+          "start_ms": 2500,
+          "end_ms": 3400,
+          "frames": [
+            0
+          ],
+          "event_id": "tujia_saye_erhe-lesson-v5-3-1",
+          "direction": 0,
+          "cycle_ms": 0
+        }
+      ],
+      "sections": [
+        {
+          "id": "group-1",
+          "start_ms": 0,
+          "end_ms": 4100,
+          "round": 0,
+          "teacher_times_ms": []
+        }
+      ]
+    }
+  ]
+}

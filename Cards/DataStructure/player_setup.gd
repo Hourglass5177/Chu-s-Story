@@ -5,12 +5,14 @@ class_name PlayerSetup
 ## -1 代表尚未选择；正式提交前由 SessionSetup.validate() 拦截。
 
 enum ControlKind { HUMAN, BOT }
+enum AIDifficulty { EASY = 0, NORMAL = 1, HARD = 2 }
 
 const UNSELECTED: int = -1
 
 @export_range(0, 5, 1) var slot_index: int = 0
 @export var display_name: String = ""
 @export var control_kind: ControlKind = ControlKind.HUMAN
+@export var ai_difficulty: AIDifficulty = AIDifficulty.NORMAL
 @export var profession_type: int = UNSELECTED
 @export var starting_region: int = UNSELECTED
 
@@ -25,6 +27,13 @@ func _init(
 
 func is_bot() -> bool:
 	return control_kind == ControlKind.BOT
+
+static func legacy_difficulty(data: Dictionary) -> int:
+	if not data.has("ai_difficulty"): return AIDifficulty.NORMAL
+	var value: Variant = data.ai_difficulty
+	if not (value is int or value is float): return -1
+	if float(value) != floorf(float(value)): return -1
+	return int(value) if AIProfile.is_valid(int(value)) else -1
 
 
 func has_valid_profession() -> bool:
@@ -53,6 +62,7 @@ func normalize_display_name() -> String:
 
 func duplicate_snapshot() -> PlayerSetup:
 	var snapshot := PlayerSetup.new(slot_index, control_kind)
+	snapshot.ai_difficulty = ai_difficulty
 	snapshot.display_name = display_name
 	snapshot.profession_type = profession_type
 	snapshot.starting_region = starting_region
@@ -64,6 +74,7 @@ func is_equivalent_to(other: PlayerSetup) -> bool:
 		and slot_index == other.slot_index \
 		and normalized_display_name() == other.normalized_display_name() \
 		and control_kind == other.control_kind \
+		and ai_difficulty == other.ai_difficulty \
 		and profession_type == other.profession_type \
 		and starting_region == other.starting_region
 
@@ -80,4 +91,5 @@ func to_legacy_dictionary() -> Dictionary:
 		"location": region_name,
 		"job": profession_name,
 		"is_bot": is_bot(),
+		"ai_difficulty": int(ai_difficulty),
 	}

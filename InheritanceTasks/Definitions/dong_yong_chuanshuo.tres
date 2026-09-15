@@ -2,18 +2,21 @@
 [ext_resource type="Script" path="res://InheritanceTasks/Data/heritage_task_definition.gd" id="1"]
 [ext_resource type="PackedScene" path="res://InheritanceTasks/Tasks/dong_yong_chuanshuo.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://bwisn1kq0wssk" path="res://arts/非遗卡牌/孝感/董永传说.jpg" id="3"]
+[ext_resource type="Resource" path="res://InheritanceTasks/Art/Pixel/v3/resources/dong_yong_chuanshuo.tres" id="pixel_presentation"]
+
 [resource]
 script = ExtResource("1")
 task_id = &"dong_yong_chuanshuo"
-display_name = "槐荫穿梭"
+display_name = "董永传说"
 heritage_name = "董永传说"
 region = "孝感"
-hook = "等经线完全打开，按下按钮送出梭子。"
-instructions = PackedStringArray("观察经线开合", "开口完全对齐时送梭")
-control_hint = "鼠标左键、确认键或手柄主键送梭"
-cultural_link = "借传说流变中的织锦图景，让每次穿梭留下完整纹样。"
-duration_seconds = 25.0
+hook = "上坡蓄力、下坡收力、桥前慢行，带父亲平稳抵达。"
+instructions = PackedStringArray("右侧推车，左侧刹车，松开滑行。", "桥前降到慢行区，30秒内到达。")
+control_hint = "D推车，A刹车；鼠标左键推、右键刹；右扳机推、左扳机刹"
+cultural_link = "取材于董永传说鹿车载父情节；危险时停住回到安全处。"
+duration_seconds = 30.0
 task_scene = ExtResource("2")
 gallery_thumbnail = ExtResource("3")
-prototype_asset_note = "暂用对应国家级非遗牌正面。"
-future_asset_slot = "独立任务缩略图（640×400）。"
+prototype_asset_note = "独立像素场景、六博主主题装束与动作；当前美术版本见表现资源台账。"
+future_asset_slot = "保留现有构图与判定，后续替换精细美术。"
+presentation = ExtResource("pixel_presentation")

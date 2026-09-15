@@ -1,0 +1,292 @@
+{
+  "version": 2,
+  "audio_path": "res://InheritanceTasks/Audio/rhythm-v2/gu_pen_ge-mix.ogg",
+  "audio_sha256": "73b06e6025a68b3a7ef44c4866ab156bf6cdb3dca4dfc7c3771681d35805ec06",
+  "end_ms": 33000,
+  "events": [
+    {
+      "id": "gu_pen_ge-v2-01",
+      "time_ms": 5800,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 5800,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "gu_pen_ge-v2-02",
+      "time_ms": 6500,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 6500,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "gu_pen_ge-v2-03",
+      "time_ms": 7200,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 7200,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "gu_pen_ge-v2-04",
+      "time_ms": 16800,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 16800,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "gu_pen_ge-v2-05",
+      "time_ms": 17500,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 17500,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "gu_pen_ge-v2-06",
+      "time_ms": 18900,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 18900,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "gu_pen_ge-v2-07",
+      "time_ms": 19600,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 19600,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "gu_pen_ge-v2-08",
+      "time_ms": 27800,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 27800,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "gu_pen_ge-v2-09",
+      "time_ms": 28220,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 28220,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "gu_pen_ge-v2-10",
+      "time_ms": 28640,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 28640,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "gu_pen_ge-v2-11",
+      "time_ms": 29480,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 29480,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "gu_pen_ge-v2-12",
+      "time_ms": 30320,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 30320,
+      "cue_ms": 1000,
+      "round": 2
+    }
+  ],
+  "presentation": [
+    {
+      "id": "gu_pen_ge-v2-01",
+      "time_ms": 5800,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 5800,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "gu_pen_ge-v2-02",
+      "time_ms": 6500,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 6500,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "gu_pen_ge-v2-03",
+      "time_ms": 7200,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 7200,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "gu_pen_ge-v2-04",
+      "time_ms": 16800,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 16800,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "gu_pen_ge-v2-05",
+      "time_ms": 17500,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 17500,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "gu_pen_ge-v2-06",
+      "time_ms": 18900,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 18900,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "gu_pen_ge-v2-07",
+      "time_ms": 19600,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 19600,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "gu_pen_ge-v2-08",
+      "time_ms": 27800,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 27800,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "gu_pen_ge-v2-09",
+      "time_ms": 28220,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 28220,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "gu_pen_ge-v2-10",
+      "time_ms": 28640,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 28640,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "gu_pen_ge-v2-11",
+      "time_ms": 29480,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 29480,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "gu_pen_ge-v2-12",
+      "time_ms": 30320,
+      "kind": "tap",
+      "direction": 0,
+      "end_ms": 30320,
+      "cue_ms": 1000,
+      "round": 2
+    }
+  ],
+  "sections": [
+    {
+      "id": "round-1",
+      "round": 0,
+      "start_ms": 0,
+      "listen_end_ms": 4200,
+      "response_start_ms": 5800,
+      "end_ms": 11000,
+      "teacher_times_ms": [
+        1200,
+        1900,
+        2600
+      ],
+      "pattern_ms": [
+        0,
+        700,
+        1400
+      ]
+    },
+    {
+      "id": "round-2",
+      "round": 1,
+      "start_ms": 11000,
+      "listen_end_ms": 15200,
+      "response_start_ms": 16800,
+      "end_ms": 22000,
+      "teacher_times_ms": [
+        12200,
+        12900,
+        14300,
+        15000
+      ],
+      "pattern_ms": [
+        0,
+        700,
+        2100,
+        2800
+      ]
+    },
+    {
+      "id": "round-3",
+      "round": 2,
+      "start_ms": 22000,
+      "listen_end_ms": 26200,
+      "response_start_ms": 27800,
+      "end_ms": 33000,
+      "teacher_times_ms": [
+        23200,
+        23620,
+        24040,
+        24880,
+        25720
+      ],
+      "pattern_ms": [
+        0,
+        420,
+        840,
+        1680,
+        2520
+      ]
+    }
+  ],
+  "tutorial_audio_path": "res://InheritanceTasks/Audio/rhythm-v2/gu_pen_ge-lesson.ogg",
+  "feedback_key": "drum",
+  "production_status": "game_arrangement_pending_listening",
+  "annotation_note": "游戏节奏编排v2；原调原速。短句自然边界、混音及文化动作仍待人工听审，不作为传统节型、帮腔声部或真实弓法转录。"
+}

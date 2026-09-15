@@ -1,0 +1,368 @@
+{
+  "travel_blogger": {
+    "parts": {
+      "body": {
+        "source_bounds": [
+          40,
+          18,
+          240,
+          249
+        ],
+        "scale": 0.5194805194805194,
+        "offset": [
+          12,
+          4
+        ]
+      },
+      "upper_arm": {
+        "source_bounds": [
+          56,
+          106,
+          133,
+          161
+        ],
+        "size": [
+          77,
+          55
+        ]
+      },
+      "forearm_hand": {
+        "source_bounds": [
+          63,
+          116,
+          185,
+          169
+        ],
+        "size": [
+          122,
+          53
+        ]
+      },
+      "bow": {
+        "source_bounds": [
+          23,
+          138,
+          266,
+          155
+        ],
+        "size": [
+          243,
+          17
+        ]
+      }
+    },
+    "shoulder": [
+      38,
+      90
+    ],
+    "string_contact": [
+      81,
+      104
+    ]
+  },
+  "life_blogger": {
+    "parts": {
+      "body": {
+        "source_bounds": [
+          37,
+          3,
+          235,
+          254
+        ],
+        "scale": 0.47808764940239046,
+        "offset": [
+          16,
+          4
+        ]
+      },
+      "upper_arm": {
+        "source_bounds": [
+          55,
+          104,
+          135,
+          159
+        ],
+        "size": [
+          80,
+          55
+        ]
+      },
+      "forearm_hand": {
+        "source_bounds": [
+          62,
+          111,
+          185,
+          167
+        ],
+        "size": [
+          123,
+          56
+        ]
+      },
+      "bow": {
+        "source_bounds": [
+          24,
+          135,
+          267,
+          151
+        ],
+        "size": [
+          243,
+          16
+        ]
+      }
+    },
+    "shoulder": [
+      42,
+      92
+    ],
+    "string_contact": [
+      85,
+      104
+    ]
+  },
+  "business_blogger": {
+    "parts": {
+      "body": {
+        "source_bounds": [
+          49,
+          9,
+          237,
+          250
+        ],
+        "scale": 0.4979253112033195,
+        "offset": [
+          17,
+          4
+        ]
+      },
+      "upper_arm": {
+        "source_bounds": [
+          55,
+          100,
+          135,
+          154
+        ],
+        "size": [
+          80,
+          54
+        ]
+      },
+      "forearm_hand": {
+        "source_bounds": [
+          62,
+          107,
+          183,
+          164
+        ],
+        "size": [
+          121,
+          57
+        ]
+      },
+      "bow": {
+        "source_bounds": [
+          24,
+          133,
+          267,
+          150
+        ],
+        "size": [
+          243,
+          17
+        ]
+      }
+    },
+    "shoulder": [
+      35,
+      89
+    ],
+    "string_contact": [
+      84,
+      104
+    ]
+  },
+  "food_blogger": {
+    "parts": {
+      "body": {
+        "source_bounds": [
+          32,
+          10,
+          238,
+          242
+        ],
+        "scale": 0.5172413793103449,
+        "offset": [
+          10,
+          4
+        ]
+      },
+      "upper_arm": {
+        "source_bounds": [
+          55,
+          97,
+          135,
+          151
+        ],
+        "size": [
+          80,
+          54
+        ]
+      },
+      "forearm_hand": {
+        "source_bounds": [
+          62,
+          103,
+          184,
+          161
+        ],
+        "size": [
+          122,
+          58
+        ]
+      },
+      "bow": {
+        "source_bounds": [
+          24,
+          128,
+          266,
+          144
+        ],
+        "size": [
+          242,
+          16
+        ]
+      }
+    },
+    "shoulder": [
+      39,
+      89
+    ],
+    "string_contact": [
+      84,
+      104
+    ]
+  },
+  "adventure_blogger": {
+    "parts": {
+      "body": {
+        "source_bounds": [
+          37,
+          0,
+          234,
+          236
+        ],
+        "scale": 0.5084745762711864,
+        "offset": [
+          14,
+          4
+        ]
+      },
+      "upper_arm": {
+        "source_bounds": [
+          55,
+          92,
+          135,
+          148
+        ],
+        "size": [
+          80,
+          56
+        ]
+      },
+      "forearm_hand": {
+        "source_bounds": [
+          62,
+          99,
+          185,
+          157
+        ],
+        "size": [
+          123,
+          58
+        ]
+      },
+      "bow": {
+        "source_bounds": [
+          24,
+          122,
+          264,
+          138
+        ],
+        "size": [
+          240,
+          16
+        ]
+      }
+    },
+    "shoulder": [
+      40,
+      90
+    ],
+    "string_contact": [
+      85,
+      104
+    ]
+  },
+  "magic_blogger": {
+    "parts": {
+      "body": {
+        "source_bounds": [
+          35,
+          0,
+          235,
+          235
+        ],
+        "scale": 0.5106382978723404,
+        "offset": [
+          13,
+          4
+        ]
+      },
+      "upper_arm": {
+        "source_bounds": [
+          54,
+          81,
+          136,
+          137
+        ],
+        "size": [
+          82,
+          56
+        ]
+      },
+      "forearm_hand": {
+        "source_bounds": [
+          62,
+          85,
+          185,
+          143
+        ],
+        "size": [
+          123,
+          58
+        ]
+      },
+      "bow": {
+        "source_bounds": [
+          23,
+          113,
+          265,
+          130
+        ],
+        "size": [
+          242,
+          17
+        ]
+      }
+    },
+    "shoulder": [
+      39,
+      88
+    ],
+    "string_contact": [
+      91,
+      102
+    ]
+  }
+}

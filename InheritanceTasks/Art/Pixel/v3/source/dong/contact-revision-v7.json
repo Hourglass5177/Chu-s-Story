@@ -1,0 +1,27 @@
+{
+  "version": 7,
+  "date": "2026-09-14",
+  "reason": "Repair visibly detached pushing hands and over-wide braking arms.",
+  "source_policy": "Original generated component PNGs remain intact at original resolution and colors. Rendering uses individually reviewed opaque joint anchors and sleeve regions.",
+  "changes": [
+    "The palm has separate wrist and grip anchors. Forearm endpoint follows the actual wrist opening, while grip stays attached to the cart shaft.",
+    "Near and far arms are drawn after the torso and cart so the far sleeve is not erased by the torso.",
+    "Arm width is constant along the projected opaque source outline. Only the longitudinal direction changes length.",
+    "Six upper-sleeve source ends are reviewed independently to exclude duplicate exposed-skin caps.",
+    "Pusher and both feet move together 22 logical units farther behind the axle, with ground resampled at their own positions. Speed, route, controls and scoring remain unchanged.",
+    "The bridge board's walking edge remains anchored to the same physical road height as the wheel bottom.",
+    "Preparation cover now comes from the v7 ordinary-input scene. Repeated cover export follows its source record instead of reverting to the v4 detached-hand image."
+  ],
+  "evidence": {
+    "before_detail": "artifacts/dong-original-detail-v4/hand-connection-before.png",
+    "frames_directory": "artifacts/dong-hand-connection-v7",
+    "ordinary_input_log": "artifacts/dong-hand-connection-v7-render.log",
+    "tests_log": "artifacts/dong-hand-connection-v7-tests.log",
+    "ordinary_input": "All six avatar identities reach the end in 23.8416667 seconds, zero recoveries. Includes individual uphill, crest, downhill, braking and bridge captures plus 16 travel motion frames at 50 ms intervals.",
+    "tests": "7 cart-filtered tests passed, 1294 assertions. This targeted run also included existing cart tests selected by the project's GUT configuration.",
+    "image_review": "Read six identities at ordinary push and braking, travel uphill/downhill/bridge, and representative travel motion frames. Wrist connection and stable arm width are visible in these captured frames."
+  },
+  "limits": "Not user art acceptance and not a claim of human-reviewed normal-speed continuous animation. Capture and ordinary-input success do not establish game feel or historical vehicle reconstruction.",
+  "user_review": "REJECTED: arms longitudinally stretched into bands; anatomical proportions wrong. Joint continuity checks missed the overall silhouette.",
+  "superseded_by": "v8 intact generated upper-body pose; awaiting user review"
+}

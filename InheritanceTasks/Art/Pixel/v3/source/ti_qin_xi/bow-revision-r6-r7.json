@@ -1,0 +1,18 @@
+{
+  "task": "ti_qin_xi",
+  "avatar": "travel_blogger",
+  "user_accepted": false,
+  "attempts": [
+    {
+      "file": "travel-bow-r6-rejected.png",
+      "status": "rejected_not_integrated",
+      "reason": "琴弓明显随伸臂变长，不能作为连续运弓素材。"
+    },
+    {
+      "file": "travel-bow-r7-review.png",
+      "status": "not_integrated_needs_revision",
+      "reason": "弓长变化减小，但第一帧右弓尖越过分格边界；中间帧变化不均匀。"
+    }
+  ],
+  "rule": "不能用加帧数、拉长手臂、倒放同一方向或强制缩小掩盖结构缺陷。当前正式前景保留旧候选，尚未完成本轮长弓整改。"
+}

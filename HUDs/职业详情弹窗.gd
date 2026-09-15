@@ -18,6 +18,7 @@ var _modal_turn_epoch: int = -1
 
 
 func _ready() -> void:
+	call_deferred("_install_board_ui")
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_hud = get_tree().get_first_node_in_group("HUD") as HUD
 	guide_button.pressed.connect(_open_guide)
@@ -118,3 +119,6 @@ func _setup_close_button_feedback() -> void:
 	close_button.mouse_exited.connect(func() -> void: close_mask.hide())
 	close_button.button_down.connect(func() -> void: close_mask.modulate = Color(0, 0, 0, 0.7))
 	close_button.button_up.connect(func() -> void: close_mask.modulate = Color(0, 0, 0, 0.4))
+
+func _install_board_ui() -> void:
+	BoardPanelLayout.install(self, "profession", close_panel)

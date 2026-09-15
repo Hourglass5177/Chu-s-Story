@@ -1,0 +1,95 @@
+{
+  "version": 4,
+  "assets": [
+    {
+      "source": "InheritanceTasks/Art/Pixel/v3/source/paper/paper_background.png",
+      "source_sha256": "c17807772b19d04e1a3695e4fafdfd94564aec5304c09b2417ef25d342b7f0fc",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/paper/background.png",
+      "sha256": "26c01831ec0b109fc09c8f071bd6e564934b0d2913487a5b7fceaf258fb12fc5",
+      "size": [
+        1000,
+        600
+      ],
+      "method": "1000x600 display; original colors retained"
+    },
+    {
+      "source": "InheritanceTasks/Art/Pixel/v3/source/paper/paper_pattern.png",
+      "source_sha256": "8f1932eb66135c19e1a3256ca0a46f7d9bcc3edd8b7ff3f676b0cb6113c7d750",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/paper/pattern.png",
+      "sha256": "0e9015279c5efc5edb5749d423d7fab3cedbf6857cc1889ac6fbbfc66dd75863",
+      "size": [
+        680,
+        420
+      ],
+      "method": "Original red tones; technical backing matches wax. Existing three gameplay contours unchanged"
+    },
+    {
+      "source": "InheritanceTasks/Art/Pixel/v3/source/paper/paper_hands.png",
+      "source_sha256": "58dc3b1b734154ddf21ffc34006e4bf1c7ad91e7b27f896f9baea3070da9c4d8",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/paper/travel_blogger-hand.png",
+      "sha256": "a04ab87b681a0a218b29cac6598f99eadad2c5a0362c08811ba7e66635e05fad",
+      "size": [
+        424,
+        412
+      ],
+      "method": "Original transparent crop with blade tip at crop origin; no quantization or reduction"
+    },
+    {
+      "source": "InheritanceTasks/Art/Pixel/v3/source/paper/paper_hands.png",
+      "source_sha256": "58dc3b1b734154ddf21ffc34006e4bf1c7ad91e7b27f896f9baea3070da9c4d8",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/paper/life_blogger-hand.png",
+      "sha256": "89ac6588bffbb4aa264cd97d71685fd30302056f7a0020e8952c44d7fdb573fd",
+      "size": [
+        424,
+        412
+      ],
+      "method": "Original transparent crop with blade tip at crop origin; no quantization or reduction"
+    },
+    {
+      "source": "InheritanceTasks/Art/Pixel/v3/source/paper/paper_hands.png",
+      "source_sha256": "58dc3b1b734154ddf21ffc34006e4bf1c7ad91e7b27f896f9baea3070da9c4d8",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/paper/business_blogger-hand.png",
+      "sha256": "e3bbad66e1e7e7f929f3396b3b9697a7e6e0fa58816c3537e033ae2bf21cc697",
+      "size": [
+        424,
+        412
+      ],
+      "method": "Original transparent crop with blade tip at crop origin; no quantization or reduction"
+    },
+    {
+      "source": "InheritanceTasks/Art/Pixel/v3/source/paper/paper_hands.png",
+      "source_sha256": "58dc3b1b734154ddf21ffc34006e4bf1c7ad91e7b27f896f9baea3070da9c4d8",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/paper/food_blogger-hand.png",
+      "sha256": "caadb95c692b1bc3852e8b7f8a688ec8bed86c681a228db07f784337089ba061",
+      "size": [
+        424,
+        412
+      ],
+      "method": "Original transparent crop with blade tip at crop origin; no quantization or reduction"
+    },
+    {
+      "source": "InheritanceTasks/Art/Pixel/v3/source/paper/paper_hands.png",
+      "source_sha256": "58dc3b1b734154ddf21ffc34006e4bf1c7ad91e7b27f896f9baea3070da9c4d8",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/paper/adventure_blogger-hand.png",
+      "sha256": "8c70d80f6d6bd05d934d3eba466d37a5db72d83d6e11eb16edb43e268fdcccb8",
+      "size": [
+        420,
+        408
+      ],
+      "method": "Original transparent crop with blade tip at crop origin; no quantization or reduction"
+    },
+    {
+      "source": "InheritanceTasks/Art/Pixel/v3/source/paper/paper_hands.png",
+      "source_sha256": "58dc3b1b734154ddf21ffc34006e4bf1c7ad91e7b27f896f9baea3070da9c4d8",
+      "runtime": "InheritanceTasks/Art/Pixel/v3/runtime/paper/magic_blogger-hand.png",
+      "sha256": "d22508b2291ba431ac3d448085f3f321a8fcaf164592c2dd1490f08a92def4b7",
+      "size": [
+        424,
+        412
+      ],
+      "method": "Original transparent crop with blade tip at crop origin; no quantization or reduction"
+    }
+  ],
+  "geometry_sha256_unchanged": "17fbe75b93af9e72e39031d46e5298dee1c6b5587fb161c838a22e151909a543",
+  "status": "original-detail export; engine and user review recorded separately"
+}

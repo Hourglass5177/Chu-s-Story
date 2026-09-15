@@ -1,162 +1,225 @@
-extends HeritageTaskBase
+extends HeritageStageTask
 
-const PATH_COLOR := Color(0.72, 0.18, 0.12, 1.0)
-const PAPER_COLOR := Color(0.96, 0.84, 0.62, 1.0)
+const Pattern := preload("res://InheritanceTasks/Data/paper_cut_pattern.gd")
+const KNIFE_SPEED: float = 230.0
+const MOUSE_TOLERANCE: float = 18.0
+const CONTROL_TOLERANCE: float = 24.0
+var contours: Array[PackedVector2Array] = []
+var segment: int = 0
+var cut_distance: float = 0.0
+var cut_length: float = 0.0
+var pointer := Vector2.ZERO
+var last_pointer := Vector2.ZERO
+var dragging: bool = false
+var off_path_seconds: float = 0.0
+var path_valid: bool = true
+var awaiting_release: bool = false
+var detached_time: float = 0.0
+var lesson_cut_complete: bool = false
+var ending_time: float = 0.0
 
-var _path: PackedVector2Array = PackedVector2Array()
-var _pointer: Vector2 = Vector2.ZERO
-var _last_pointer: Vector2 = Vector2.ZERO
-var _dragging: bool = false
-var _controller_cutting: bool = false
-var _off_path_seconds: float = 0.0
-var _path_progress: float = 0.0
+func input_profile_kind() -> StringName: return &"trace"
+func play_feedback(good: bool) -> void:
+	if is_instance_valid(sfx): sfx.stream = load("res://InheritanceTasks/Audio/action-story-v3/paper-%s.wav"%("good" if good else "miss"))
+	super.play_feedback(good)
+	if is_instance_valid(sfx):
+		sfx.pitch_scale = 1.0
+		sfx.volume_db = -16.0
 
+func tutorial_version() -> int: return 5
+func tutorial_overlay_bounds() -> Rect2: return Rect2(105,20,790,90)
+func feedback_overlay_bounds() -> Rect2: return Rect2(105,20,790,70)
 
-func on_task_started() -> void:
-	_build_path()
-	_pointer = _path[0]
-	_last_pointer = _pointer
-	_dragging = false
-	_controller_cutting = false
-	_off_path_seconds = 0.0
-	_path_progress = 0.0
-	queue_redraw()
+func setup_game() -> void:
+	duration_seconds = 30.0
+	contours = Pattern.contours()
+	if contours.size()!=4:
+		complete_technical_error(&"invalid_paper_geometry","纸样数据未就绪")
+		return
+	segment = 0
+	cut_distance = 0.0
+	cut_length = Pattern.length(contours[0])
+	pointer = contours[0][0]
+	last_pointer = pointer
+	dragging = false
+	off_path_seconds = 0.0
+	awaiting_release = false
+	path_valid = true
+	detached_time = 0.0
+	ending_time = 0.0
+	lesson_cut_complete = false
+	lesson_text = "从金点落刀，沿鸟翼刻一圈"
+	status_text = "从金点落刀 · " + Pattern.NAMES[segment]
 
+func begin_game() -> void:
+	setup_game()
+
+func practice_tick(delta: float) -> void:
+	_advance_knife(delta)
+	if lesson_cut_complete and not dragging and not bool(pressed.get(0,false)):
+		finish_lesson()
+func step_game(delta: float) -> void: _advance_knife(delta)
+
+func is_settling_result() -> bool:
+	return ending_time > 0.0
 
 func task_tick(delta: float) -> void:
-	if _path.is_empty():
+	if ending_time > 0.0 and resume_countdown <= 0.0:
+		detached_time = maxf(0.0,detached_time-delta)
+		ending_time = maxf(0.0,ending_time-delta)
+		status_text = "纸屑落下" if detached_time>0.0 else "揭纸，双鸟花枝完成"
+		if ending_time <= 0.0:
+			var metrics := {"off_path_seconds":off_path_seconds,"segments":contours.size(),"pattern_version":4}
+			if off_path_seconds <= 2.8: complete_success(metrics,"双鸟花枝刻好了")
+			else: complete_failure(&"paper_bridge_cut","几处纸桥切偏了，下次慢一点",metrics)
 		return
-	var direction := Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down")
-	var keyboard_cutting: bool = Input.is_action_pressed(&"ui_accept") or _controller_cutting
-	if keyboard_cutting and direction != Vector2.ZERO:
-		_pointer += direction * 270.0 * delta
-		_pointer.x = clampf(_pointer.x, 0.0, size.x)
-		_pointer.y = clampf(_pointer.y, 0.0, size.y)
-	if _dragging or keyboard_cutting:
-		_update_trace(delta)
-	else:
-		_last_pointer = _pointer
-	if _path_progress >= 0.995:
-		if _off_path_seconds <= 2.8:
-			complete_success({"off_path_seconds": _off_path_seconds}, "一刀成花")
-		else:
-			complete_failure(&"paper_bridge_cut", "纸桥被切断了", {
-				"off_path_seconds": _off_path_seconds,
-			})
+	super.task_tick(delta)
 
+func demo_tick(delta: float) -> void:
+	var distance := minf(cut_length,phase_time/2.1*cut_length)
+	var shown := Pattern.prefix(contours[0],distance)
+	dragging = true
+	_trace_to(shown[-1])
+	if delta > 0.0: detached_time = maxf(0.0,detached_time-delta)
+
+func _advance_knife(delta: float) -> void:
+	detached_time = maxf(0.0,detached_time-delta)
+	if segment >= contours.size(): return
+	var direction := Vector2(float(bool(pressed.get(1,false)))-float(bool(pressed.get(-1,false))),float(bool(pressed.get(2,false)))-float(bool(pressed.get(-2,false))))
+	if direction.length_squared() > 0.0:
+		var next := (pointer+direction.normalized()*KNIFE_SPEED*delta).clamp(Vector2.ZERO,STAGE)
+		if bool(pressed.get(0,false)) and not awaiting_release: _trace_to(next)
+		else:
+			pointer = next
+			last_pointer = pointer
+	if (dragging or bool(pressed.get(0,false))) and not awaiting_release and not path_valid:
+		off_path_seconds += delta
+		status_text = "偏了，回到已刻线的末端"
+
+func practice_edge(direction: int, down: bool) -> void: game_edge(direction,down)
+
+func game_edge(direction: int, down: bool) -> void:
+	if direction != 0: return
+	if not down:
+		awaiting_release = false
+		dragging = false
+	last_pointer = pointer
+
+func _input(event: InputEvent) -> void:
+	# Global release precedes Control._gui_input, including releases outside
+	# the canvas. Capture its final spatial sample before the profile clears it.
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+		if dragging and not awaiting_release and is_input_active() and resume_countdown <= 0.0:
+			var local_point: Vector2 = get_global_transform_with_canvas().affine_inverse() * event.position
+			_trace_to(logical_point(local_point))
+	super._input(event)
 
 func task_gui_input(event: InputEvent) -> bool:
-	if event is InputEventMouseButton:
-		var button := event as InputEventMouseButton
-		if button.button_index != MOUSE_BUTTON_LEFT:
-			return false
-		_dragging = button.pressed
-		_pointer = button.position
-		if button.pressed:
-			_last_pointer = _pointer
-		return true
-	if event is InputEventMouseMotion and _dragging:
-		_pointer = (event as InputEventMouseMotion).position
+	if not is_input_active() or resume_countdown > 0.0: return false
+	if event is InputEventMouseMotion:
+		if input_profile != null: input_profile.note_pointer_motion(event.relative)
+		if dragging and not awaiting_release: _trace_to(logical_point(event.position))
+		return dragging
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		var point := logical_point(event.position)
+		if event.pressed:
+			if not Rect2(Vector2.ZERO,STAGE).has_point(point): return false
+			pointer = point
+			last_pointer = point
+			dragging = true
+			if input_profile != null: input_profile.pointer_edge(0,true)
+			_trace_to(point)
+		else:
+			# Final position is sampled BEFORE releasing input ownership.
+			if dragging and not awaiting_release: _trace_to(point)
+			dragging = false
+			awaiting_release = false
+			if input_profile != null: input_profile.pointer_edge(0,false)
 		return true
 	return false
 
+func _trace_to(point: Vector2) -> void:
+	if segment >= contours.size() or awaiting_release: return
+	var from := last_pointer
+	var samples := maxi(1,ceili(from.distance_to(point)/5.0))
+	for sample: int in samples:
+		var at := from.lerp(point,float(sample+1)/samples)
+		_sample_cut(at)
+		if awaiting_release or segment >= contours.size(): break
+	pointer = point
+	last_pointer = point
 
-func task_input(event: InputEvent) -> bool:
-	if event is InputEventJoypadButton and (event as InputEventJoypadButton).button_index == JOY_BUTTON_A:
-		_controller_cutting = (event as InputEventJoypadButton).pressed
-		return true
-	return false
+func _sample_cut(at: Vector2) -> void:
+	var path := contours[segment]
+	var traveled := 0.0
+	var best_distance := INF
+	var best_progress := cut_distance
+	# Restrict arc search: the coincident start/end never skips a closed loop.
+	for i: int in path.size()-1:
+		var a := path[i]
+		var b := path[i+1]
+		var length := a.distance_to(b)
+		if traveled+length >= cut_distance-22.0 and traveled <= cut_distance+22.0:
+			var t := clampf((at-a).dot(b-a)/maxf(.001,length*length),0.0,1.0)
+			var along := traveled+length*t
+			var distance := at.distance_to(a.lerp(b,t))
+			if distance < best_distance and along <= cut_distance+22.0:
+				best_distance = distance
+				best_progress = along
+		traveled += length
+	path_valid = best_distance <= (MOUSE_TOLERANCE if dragging else CONTROL_TOLERANCE)
+	if path_valid:
+		cut_distance = maxf(cut_distance,best_progress)
+		set_progress((segment+cut_distance/cut_length)/float(contours.size()))
+		status_text = "%d/%d · %s" % [segment+1,contours.size(),Pattern.NAMES[segment]]
+		# The last native pixel must be reachable with discrete key/DPAD steps.
+		# Progress still comes from the legal arc; release never grants completion.
+		if cut_distance >= cut_length-2.5 and at.distance_to(path[-1]) <= 8.0: _finish_contour()
 
+func _finish_contour() -> void:
+	play_feedback(true)
+	if phase == Phase.PRACTICE:
+		lesson_cut_complete = true
+		awaiting_release = true
+		lesson_text = "松开，停刀"
+		return
+	if phase != Phase.LIVE: return
+	segment += 1
+	detached_time = .6
+	awaiting_release = true
+	if segment >= contours.size():
+		ending_time = 1.05
+		dragging = false
+		_clear_profile_input()
+		pressed.clear()
+		return
+	cut_distance = 0.0
+	cut_length = Pattern.length(contours[segment])
+	status_text = "松开，再从下一处金点落刀"
 
 func on_suspension_changed(suspended: bool) -> void:
-	if suspended:
-		_dragging = false
-		_controller_cutting = false
-		_last_pointer = _pointer
-
+	dragging = false
+	awaiting_release = false
+	last_pointer = pointer
+	super.on_suspension_changed(suspended)
 
 func on_time_expired() -> void:
-	complete_failure(&"trace_incomplete", "刻线还没有走完", {
-		"trace_progress": _path_progress,
-		"off_path_seconds": _off_path_seconds,
-	})
+	if ending_time>0.0: return
+	complete_failure(&"trace_incomplete","还差几刀，再试一次",{"segments":segment,"progress":progress})
 
+func get_presentation_state() -> Dictionary:
+	return {"contours":contours,"segment":segment,"cut_distance":cut_distance,"cut_length":cut_length,"pointer":pointer,"cutting":dragging or bool(pressed.get(0,false)),"path_valid":path_valid,"finished":segment==contours.size(),"detached_time":detached_time,"action":&"action" if dragging else &"ready"}
 
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_RESIZED and is_node_ready() and run_state == RunState.RUNNING:
-		_build_path()
-
-
-func _build_path() -> void:
-	var w: float = maxf(size.x, 800.0)
-	var h: float = maxf(size.y, 500.0)
-	_path = PackedVector2Array([
-		Vector2(w * 0.10, h * 0.72),
-		Vector2(w * 0.18, h * 0.43),
-		Vector2(w * 0.33, h * 0.25),
-		Vector2(w * 0.47, h * 0.45),
-		Vector2(w * 0.58, h * 0.24),
-		Vector2(w * 0.75, h * 0.38),
-		Vector2(w * 0.88, h * 0.68),
-	])
-
-
-func _update_trace(delta: float) -> void:
-	var travel_distance: float = _last_pointer.distance_to(_pointer)
-	var sample_count: int = maxi(1, int(ceil(travel_distance / 18.0)))
-	for sample_index: int in sample_count:
-		var ratio: float = float(sample_index + 1) / float(sample_count)
-		var sample: Vector2 = _last_pointer.lerp(_pointer, ratio)
-		_update_trace_sample(sample, delta / float(sample_count))
-	_last_pointer = _pointer
-
-
-func _update_trace_sample(sample: Vector2, delta: float) -> void:
-	var nearest_distance: float = INF
-	var nearest_progress: float = 0.0
-	var traversed: float = 0.0
-	var total_length: float = 0.0
-	for index: int in range(_path.size() - 1):
-		total_length += _path[index].distance_to(_path[index + 1])
-	for index: int in range(_path.size() - 1):
-		var from: Vector2 = _path[index]
-		var to: Vector2 = _path[index + 1]
-		var segment: Vector2 = to - from
-		var length_squared: float = segment.length_squared()
-		var ratio: float = clampf((sample - from).dot(segment) / maxf(length_squared, 0.001), 0.0, 1.0)
-		var closest: Vector2 = from + segment * ratio
-		var distance: float = sample.distance_to(closest)
-		if distance < nearest_distance:
-			nearest_distance = distance
-			nearest_progress = (traversed + segment.length() * ratio) / maxf(total_length, 0.001)
-		traversed += segment.length()
-	var tolerance: float = 42.0 if _dragging else 58.0
-	var follows_cut_edge: bool = nearest_progress + 0.07 >= _path_progress \
-			and nearest_progress <= _path_progress + 0.12
-	if nearest_distance <= tolerance and follows_cut_edge:
-		_path_progress = maxf(_path_progress, nearest_progress)
-		set_progress(_path_progress)
-	else:
-		_off_path_seconds += delta
-
-
-func _draw() -> void:
-	draw_rect(Rect2(Vector2.ZERO, size), PAPER_COLOR, true)
-	for offset: float in [0.0, 9.0, 18.0]:
-		var shifted := PackedVector2Array()
-		for point: Vector2 in _path:
-			shifted.append(point + Vector2(offset * 0.35, offset))
-		if shifted.size() > 1:
-			draw_polyline(shifted, Color(0.56, 0.33, 0.20, 0.18), 3.0, true)
-	if _path.size() > 1:
-		draw_polyline(_path, Color(0.55, 0.34, 0.22, 0.45), 38.0, true)
-		draw_polyline(_path, PATH_COLOR, 5.0, true)
-	var completed_points := PackedVector2Array()
-	var last_index: int = clampi(int(floor(_path_progress * float(_path.size() - 1))) + 1, 1, _path.size())
-	for index: int in last_index:
-		completed_points.append(_path[index])
-	if completed_points.size() > 1:
-		draw_polyline(completed_points, Color(0.91, 0.60, 0.12, 1.0), 8.0, true)
-	draw_circle(_pointer, 17.0 + feedback_strength * 4.0, Color(0.24, 0.18, 0.14, 1.0))
-	draw_circle(_path[0] if not _path.is_empty() else Vector2.ZERO, 11.0, Color(0.18, 0.55, 0.35, 1.0))
-	draw_circle(_path[-1] if not _path.is_empty() else Vector2.ZERO, 13.0, Color(0.82, 0.32, 0.12, 1.0))
+func draw_scene() -> void:
+	if contours.size()!=4: return
+	draw_rect(Rect2(Vector2.ZERO,STAGE),Color("bf9d69"))
+	draw_rect(Pattern.PAPER_RECT.grow(15),Color("423426"))
+	draw_rect(Pattern.PAPER_RECT,Color("b63836"))
+	for i: int in contours.size():
+		if i < segment: draw_colored_polygon(contours[i],Color("423426"))
+		else: draw_polyline(contours[i],Color("e58b69"),3)
+	if segment < contours.size():
+		var path := contours[segment]
+		draw_polyline(Pattern.prefix(path,cut_distance),Color("352a24"),5)
+		draw_circle(path[0],8,GOLD)
+	draw_circle(pointer,5,Color("eee5c8"))

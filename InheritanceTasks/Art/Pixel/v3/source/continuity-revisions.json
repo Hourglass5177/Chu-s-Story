@@ -1,0 +1,62 @@
+[
+  {
+    "file": "InheritanceTasks/Art/Pixel/v3/source/shennong/travel-run.png",
+    "generatedOriginal": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-7af6be1a-76f7-44b1-ae68-b1d6162288bd.png",
+    "sourcePrompt": "InheritanceTasks/Art/Pixel/v3/source/shennong/travel-run-prompt.txt"
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v3/source/alchemy/travel-reactions.png",
+    "generatedOriginal": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-e8b77dea-6439-484b-93b0-711c30d8e1f0.png",
+    "sourcePrompt": "InheritanceTasks/Art/Pixel/v3/source/alchemy/travel-reactions-prompt.txt"
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v3/source/shennong/life-run.png",
+    "generatedOriginal": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-db1783ab-78c1-4537-b8b4-598a634a11cf.png",
+    "sourcePrompt": "InheritanceTasks/Art/Pixel/v3/source/shennong/life-run-prompt.txt"
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v3/source/alchemy/life-reactions.png",
+    "generatedOriginal": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-d2fc4bf6-0ce1-49a1-893d-ad545b220008.png",
+    "sourcePrompt": "InheritanceTasks/Art/Pixel/v3/source/alchemy/life-reactions-prompt.txt"
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v3/source/shennong/business-run.png",
+    "generatedOriginal": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-2bdca9e9-7c7a-4c29-a4f3-6dd4268db5fa.png",
+    "sourcePrompt": "InheritanceTasks/Art/Pixel/v3/source/shennong/business-run-prompt.txt"
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v3/source/alchemy/business-reactions.png",
+    "generatedOriginal": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-b154cf2f-c7d2-42bb-9303-62dce1a1cf74.png",
+    "sourcePrompt": "InheritanceTasks/Art/Pixel/v3/source/alchemy/business-reactions-prompt.txt"
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v3/source/shennong/food-run.png",
+    "generatedOriginal": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-7a979df0-7b55-4443-853a-875bdc2318b1.png",
+    "sourcePrompt": "InheritanceTasks/Art/Pixel/v3/source/shennong/food-run-prompt.txt"
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v3/source/alchemy/food-reactions.png",
+    "generatedOriginal": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-061c5fd8-5291-4b5b-9c00-4c907eba1082.png",
+    "sourcePrompt": "InheritanceTasks/Art/Pixel/v3/source/alchemy/food-reactions-prompt.txt"
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v3/source/shennong/adventure-run.png",
+    "generatedOriginal": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-f5d688fb-ff59-4fda-8bf9-a6af064591aa.png",
+    "sourcePrompt": "InheritanceTasks/Art/Pixel/v3/source/shennong/adventure-run-prompt.txt"
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v3/source/alchemy/adventure-reactions.png",
+    "generatedOriginal": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-7df493c5-deb5-4363-9ac4-59ce9ea499b5.png",
+    "sourcePrompt": "InheritanceTasks/Art/Pixel/v3/source/alchemy/adventure-reactions-prompt.txt"
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v3/source/shennong/magic-run.png",
+    "generatedOriginal": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-71a75d44-266e-46cf-9f41-b9d9d36ef102.png",
+    "sourcePrompt": "InheritanceTasks/Art/Pixel/v3/source/shennong/magic-run-prompt.txt"
+  },
+  {
+    "file": "InheritanceTasks/Art/Pixel/v3/source/alchemy/magic-reactions.png",
+    "generatedOriginal": "F:\\Tools\\OpenAI\\CodexHome\\generated_images\\01a08252-f1c9-7c52-ab42-f49111f72612\\exec-1e2b763b-0688-42e7-8911-dd2d10477961.png",
+    "sourcePrompt": "InheritanceTasks/Art/Pixel/v3/source/alchemy/magic-reactions-prompt.txt"
+  }
+]

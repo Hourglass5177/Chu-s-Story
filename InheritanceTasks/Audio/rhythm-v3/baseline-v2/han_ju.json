@@ -1,0 +1,368 @@
+{
+  "version": 2,
+  "audio_path": "res://InheritanceTasks/Audio/rhythm-v2/han_ju-mix.ogg",
+  "audio_sha256": "f73ac07605383c2663d20a31440fd429bf78fef678f4abd4905b3a43d70f6d76",
+  "end_ms": 40000,
+  "events": [
+    {
+      "id": "han_ju-v2-01",
+      "time_ms": 2000,
+      "kind": "switch",
+      "direction": 1,
+      "end_ms": 2000,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "han_ju-v2-02",
+      "time_ms": 3700,
+      "kind": "switch",
+      "direction": -1,
+      "end_ms": 3700,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "han_ju-v2-03",
+      "time_ms": 5400,
+      "kind": "switch",
+      "direction": 1,
+      "end_ms": 5400,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "han_ju-v2-04",
+      "time_ms": 7100,
+      "kind": "switch",
+      "direction": -1,
+      "end_ms": 7100,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "han_ju-v2-05",
+      "time_ms": 7800,
+      "kind": "rest",
+      "direction": -1,
+      "end_ms": 8700,
+      "cue_ms": 1000,
+      "round": 0,
+      "rest_policy": "keep_position"
+    },
+    {
+      "id": "han_ju-v2-06",
+      "time_ms": 11500,
+      "kind": "switch",
+      "direction": 1,
+      "end_ms": 11500,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "han_ju-v2-07",
+      "time_ms": 13200,
+      "kind": "switch",
+      "direction": -1,
+      "end_ms": 13200,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "han_ju-v2-08",
+      "time_ms": 14900,
+      "kind": "switch",
+      "direction": 1,
+      "end_ms": 14900,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "han_ju-v2-09",
+      "time_ms": 16600,
+      "kind": "switch",
+      "direction": -1,
+      "end_ms": 16600,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "han_ju-v2-10",
+      "time_ms": 21000,
+      "kind": "switch",
+      "direction": 1,
+      "end_ms": 21000,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "han_ju-v2-11",
+      "time_ms": 22700,
+      "kind": "switch",
+      "direction": -1,
+      "end_ms": 22700,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "han_ju-v2-12",
+      "time_ms": 24400,
+      "kind": "switch",
+      "direction": 1,
+      "end_ms": 24400,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "han_ju-v2-13",
+      "time_ms": 26100,
+      "kind": "switch",
+      "direction": -1,
+      "end_ms": 26100,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "han_ju-v2-14",
+      "time_ms": 26800,
+      "kind": "rest",
+      "direction": -1,
+      "end_ms": 27700,
+      "cue_ms": 1000,
+      "round": 2,
+      "rest_policy": "keep_position"
+    },
+    {
+      "id": "han_ju-v2-15",
+      "time_ms": 30500,
+      "kind": "switch",
+      "direction": 1,
+      "end_ms": 30500,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "han_ju-v2-16",
+      "time_ms": 32200,
+      "kind": "switch",
+      "direction": -1,
+      "end_ms": 32200,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "han_ju-v2-17",
+      "time_ms": 33900,
+      "kind": "switch",
+      "direction": 1,
+      "end_ms": 33900,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "han_ju-v2-18",
+      "time_ms": 35600,
+      "kind": "switch",
+      "direction": -1,
+      "end_ms": 35600,
+      "cue_ms": 1000,
+      "round": 3
+    }
+  ],
+  "presentation": [
+    {
+      "id": "han_ju-v2-01",
+      "time_ms": 2000,
+      "kind": "switch",
+      "direction": 1,
+      "end_ms": 2000,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "han_ju-v2-02",
+      "time_ms": 3700,
+      "kind": "switch",
+      "direction": -1,
+      "end_ms": 3700,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "han_ju-v2-03",
+      "time_ms": 5400,
+      "kind": "switch",
+      "direction": 1,
+      "end_ms": 5400,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "han_ju-v2-04",
+      "time_ms": 7100,
+      "kind": "switch",
+      "direction": -1,
+      "end_ms": 7100,
+      "cue_ms": 1000,
+      "round": 0
+    },
+    {
+      "id": "han_ju-v2-05",
+      "time_ms": 7800,
+      "kind": "rest",
+      "direction": -1,
+      "end_ms": 8700,
+      "cue_ms": 1000,
+      "round": 0,
+      "rest_policy": "keep_position"
+    },
+    {
+      "id": "han_ju-v2-06",
+      "time_ms": 11500,
+      "kind": "switch",
+      "direction": 1,
+      "end_ms": 11500,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "han_ju-v2-07",
+      "time_ms": 13200,
+      "kind": "switch",
+      "direction": -1,
+      "end_ms": 13200,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "han_ju-v2-08",
+      "time_ms": 14900,
+      "kind": "switch",
+      "direction": 1,
+      "end_ms": 14900,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "han_ju-v2-09",
+      "time_ms": 16600,
+      "kind": "switch",
+      "direction": -1,
+      "end_ms": 16600,
+      "cue_ms": 1000,
+      "round": 1
+    },
+    {
+      "id": "han_ju-v2-10",
+      "time_ms": 21000,
+      "kind": "switch",
+      "direction": 1,
+      "end_ms": 21000,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "han_ju-v2-11",
+      "time_ms": 22700,
+      "kind": "switch",
+      "direction": -1,
+      "end_ms": 22700,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "han_ju-v2-12",
+      "time_ms": 24400,
+      "kind": "switch",
+      "direction": 1,
+      "end_ms": 24400,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "han_ju-v2-13",
+      "time_ms": 26100,
+      "kind": "switch",
+      "direction": -1,
+      "end_ms": 26100,
+      "cue_ms": 1000,
+      "round": 2
+    },
+    {
+      "id": "han_ju-v2-14",
+      "time_ms": 26800,
+      "kind": "rest",
+      "direction": -1,
+      "end_ms": 27700,
+      "cue_ms": 1000,
+      "round": 2,
+      "rest_policy": "keep_position"
+    },
+    {
+      "id": "han_ju-v2-15",
+      "time_ms": 30500,
+      "kind": "switch",
+      "direction": 1,
+      "end_ms": 30500,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "han_ju-v2-16",
+      "time_ms": 32200,
+      "kind": "switch",
+      "direction": -1,
+      "end_ms": 32200,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "han_ju-v2-17",
+      "time_ms": 33900,
+      "kind": "switch",
+      "direction": 1,
+      "end_ms": 33900,
+      "cue_ms": 1000,
+      "round": 3
+    },
+    {
+      "id": "han_ju-v2-18",
+      "time_ms": 35600,
+      "kind": "switch",
+      "direction": -1,
+      "end_ms": 35600,
+      "cue_ms": 1000,
+      "round": 3
+    }
+  ],
+  "sections": [
+    {
+      "id": "group-1",
+      "start_ms": 0,
+      "end_ms": 9500,
+      "round": 0
+    },
+    {
+      "id": "group-2",
+      "start_ms": 9500,
+      "end_ms": 19000,
+      "round": 1
+    },
+    {
+      "id": "group-3",
+      "start_ms": 19000,
+      "end_ms": 28500,
+      "round": 2
+    },
+    {
+      "id": "group-4",
+      "start_ms": 28500,
+      "end_ms": 38000,
+      "round": 3
+    }
+  ],
+  "tutorial_audio_path": "res://InheritanceTasks/Audio/rhythm-v2/han_ju-lesson.ogg",
+  "feedback_key": "switch",
+  "production_status": "game_arrangement_pending_listening",
+  "annotation_note": "游戏节奏编排v2；原调原速。短句自然边界、混音及文化动作仍待人工听审，不作为传统节型、帮腔声部或真实弓法转录。"
+}
