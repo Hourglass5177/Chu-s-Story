@@ -61,28 +61,42 @@ static func save_practice_avatar(avatar_id: StringName) -> bool:
 
 
 static func visual_assistance_enabled() -> bool:
+	var shared := _shared_settings()
+	if shared != null: return shared.get_value("music_visual_assistance")
 	var config := _config()
 	return bool(config.get_value("display", "music_visual_assistance", true))
 
 
 static func save_visual_assistance(enabled: bool) -> bool:
+	var shared := _shared_settings()
+	if shared != null:
+		shared.set_value("music_visual_assistance", enabled)
+		return true
 	var config := _config()
 	config.set_value("display", "music_visual_assistance", enabled)
 	return _save_config(config) == OK
 
 
 static func volume_percent() -> int:
+	var shared := _shared_settings()
+	if shared != null: return shared.get_value("minigame_volume")
 	var config := _config()
 	return clampi(int(config.get_value("audio", "volume_percent", 100)), 0, 100)
 
 
 static func save_volume_percent(value: int) -> bool:
+	var shared := _shared_settings()
+	if shared != null:
+		shared.set_value("minigame_volume", value)
+		return true
 	var config := _config()
 	config.set_value("audio", "volume_percent", clampi(value, 0, 100))
 	return _save_config(config) == OK
 
 
 static func reduced_motion_enabled() -> bool:
+	var shared := _shared_settings()
+	if shared != null: return shared.get_value("reduce_motion")
 	var config := _config()
 	return bool(config.get_value("display", "reduce_motion", false))
 
@@ -100,12 +114,18 @@ static func save_input_bindings(profile: StringName, bindings: Dictionary) -> bo
 
 
 static func gamepad_glyph_style() -> String:
+	var shared := _shared_settings()
+	if shared != null: return shared.get_value("gamepad_glyph_style")
 	var config := _config()
 	var style := String(config.get_value("input", "gamepad_glyph_style", "position"))
 	return style if style in ["position", "letters", "symbols"] else "position"
 
 
 static func save_gamepad_glyph_style(style: String) -> bool:
+	var shared := _shared_settings()
+	if shared != null:
+		shared.set_value("gamepad_glyph_style", style)
+		return true
 	if style not in ["position", "letters", "symbols"]: return false
 	var config := _config()
 	config.set_value("input", "gamepad_glyph_style", style)
@@ -113,6 +133,10 @@ static func save_gamepad_glyph_style(style: String) -> bool:
 
 
 static func save_reduced_motion(enabled: bool) -> bool:
+	var shared := _shared_settings()
+	if shared != null:
+		shared.set_value("reduce_motion", enabled)
+		return true
 	var config := _config()
 	config.set_value("display", "reduce_motion", enabled)
 	return _save_config(config) == OK
@@ -124,3 +148,10 @@ static func _save_config(config: ConfigFile) -> Error:
 	if error != OK:
 		push_warning("小游戏偏好保存失败：%s" % error_string(error))
 	return error
+
+
+static func _shared_settings() -> Node:
+	# Isolated test stores retain their own settings and cannot touch player preferences.
+	if storage_path != PATH: return null
+	var tree := Engine.get_main_loop() as SceneTree
+	return tree.root.get_node_or_null("Settings") if tree != null else null

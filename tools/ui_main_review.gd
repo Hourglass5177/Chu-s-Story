@@ -12,19 +12,36 @@ func _ready() -> void:
 		if arg.begins_with("--avatar="): avatar = arg.trim_prefix("--avatar=").to_int()
 		if arg.begins_with("--phase="): review_phase = arg.trim_prefix("--phase=").to_int()
 		if arg.begins_with("--capture-tag="): capture_tag = arg.trim_prefix("--capture-tag=")
-	if page in ["home", "mode", "local_count", "guide", "guide_topic", "compendium", "player_setup", "player_setup_bot", "roster"]:
+	if page.begins_with("minigame_gallery") or page in ["home", "credits", "mode", "local_count", "loading", "menu_confirm", "guide", "guide_topic", "compendium", "player_setup", "player_setup_bot", "birthplace_map", "roster"]:
 		var menu := load("res://main_menu.tscn").instantiate() as MainMenu
 		add_child(menu)
 		await get_tree().process_frame
-		if page in ["player_setup", "player_setup_bot", "roster"]:
+		if page in ["player_setup", "player_setup_bot", "birthplace_map", "roster"]:
 			menu.set_local_player_counts(2, 1)
 			for index in range(3):
 				menu._draft.players[index].profession_type = index
 				menu._draft.players[index].starting_region = [MapSection.REGION.十堰, MapSection.REGION.随州, MapSection.REGION.孝感][index]
-		if page in ["guide", "guide_topic", "compendium"]:
+		if page == "credits":
+			menu._show_credits_modal(null)
+		elif page == "menu_confirm":
+			menu._show_confirmation("放弃本次配置？", "返回首页后，需要重新配置本地游戏。", "放弃配置", func(): pass)
+		elif page.begins_with("minigame_gallery"):
+			menu.open_game_guide()
+			var guide := menu.get_game_guide()
+			# Process-local preview only; never unlock or save player discoveries.
+			guide._developer_view_enabled = page != "minigame_gallery"
+			guide.open_minigame_gallery()
+			if page.ends_with("last"):
+				var gallery := guide.find_child("MinigameGallery", true, false) as GuideMinigameGallery
+				gallery._page = 2
+				gallery._rebuild()
+		elif page in ["guide", "guide_topic", "compendium"]:
 			menu.open_game_guide()
 			if page == "compendium": menu.get_game_guide()._render_compendium(DiscoveryManager.KIND_FEIYI, 0)
 			if page == "guide_topic": menu.get_game_guide()._open_topic_by_index(&"quick", 0)
+		elif page == "birthplace_map":
+			menu.show_screen(&"player_setup", false)
+			menu._show_birthplace_map()
 		elif page == "player_setup_bot": menu._open_player_setup(2, false)
 		else: menu.show_screen(StringName(page), false)
 	else:
@@ -51,6 +68,10 @@ func _ready() -> void:
 		player.非遗牌手牌.append(card)
 		hud.refresh_feiyi_list(player)
 		match page:
+			"hud_message":
+				hud.current_status.text = "【艺径寻踪】请选择移动终点"
+				hud.information.text = (load("res://Cards/事件牌/艺径寻踪.tres") as 事件牌).description + "\n无事发生！"
+			"exit": hud._on_close_pressed()
 			"profession_draw":
 				var choices: Array = []
 				for title: String in ["妙手回春", "天降横财", "水逆退散"]:
@@ -126,6 +147,10 @@ func _ready() -> void:
 		get_window().size = dimensions
 		for frame in range(20): await get_tree().process_frame
 		await RenderingServer.frame_post_draw
+		if page == "exit":
+			var exit_hud := get_tree().get_first_node_in_group("HUD") as HUD
+			var dialog := exit_hud._exit_confirmation
+			print("EXIT_LAYOUT ", dimensions, " dialog=", dialog.size, " cancel=", dialog.get_cancel_button().size, " minimum=", dialog.get_cancel_button().custom_minimum_size)
 		if not _verify_layout(page):
 			get_tree().quit(1)
 			return
@@ -137,6 +162,16 @@ func _ready() -> void:
 	if not "--interactive" in OS.get_cmdline_user_args(): get_tree().quit()
 
 func _verify_layout(page: String) -> bool:
+	if page == "hud_message":
+		var hud := get_tree().get_first_node_in_group("HUD") as HUD
+		var content := hud.get_node("手牌信息/InformationContent") as Control
+		var scroll := content.get_node("MessageScroll") as ScrollContainer
+		var frame := (hud.get_node("手牌信息/LogFrame") as Control).get_global_rect()
+		if not frame.encloses(content.get_global_rect()) or hud.current_status.get_global_rect().intersects(scroll.get_global_rect()):
+			push_error("HUD information exceeds frame or overlaps its heading")
+			return false
+		if content.get_global_rect().intersects(hud.btn_action.get_global_rect()): return false
+		print("MESSAGE_LAYOUT ", get_window().size, " visible=", scroll.size, " text=", hud.information.size)
 	if page in ["player_setup", "player_setup_bot"]:
 		var menu := get_child(0) as MainMenu
 		var setup := menu._player_setup_page
@@ -149,12 +184,17 @@ func _verify_layout(page: String) -> bool:
 				for child in setup.get_node("SafeArea/PagePanel/Content/MainRow").get_children():
 					print("LAYOUT_COLUMN ", child.name, " ", child.get_combined_minimum_size())
 				return false
-		var hotspots := setup.birthplace_hotspots.get_children()
-		for index in range(hotspots.size()):
-			for other in range(index + 1, hotspots.size()):
-				if hotspots[index].get_global_rect().intersects(hotspots[other].get_global_rect()):
-					push_error("UI layout: birthplace labels overlap %s %s / %s %s" % [hotspots[index].name, hotspots[index].get_global_rect(), hotspots[other].name, hotspots[other].get_global_rect()])
-					return false
+		var map := setup.get_node("%BirthMap/MapTexture") as TextureRect
+		if map.texture.resource_path != "res://arts/地图/地图完整版.png" or map.size.x < 700 or map.size.y < 460:
+			push_error("UI map: wrong board texture or preview still too small: %s" % map.size)
+			return false
+		for control: Control in setup.birthplace_list.get_children():
+			if not bounds.encloses(control.get_global_rect()): return false
+	if page == "birthplace_map":
+		var menu := get_child(0) as MainMenu
+		if not get_viewport().get_visible_rect().grow(1).encloses(menu._modal_panel.get_global_rect()):
+			push_error("Enlarged map outside viewport")
+			return false
 	if page == "hud_ai":
 		var controller := get_tree().get_first_node_in_group("AI_SESSION")
 		var speed := controller.find_child("AISpeedButton", true, false) as Control
@@ -167,9 +207,74 @@ func _verify_layout(page: String) -> bool:
 		print("MAIN_UI_LAYOUT verified: ", page, " ", get_window().size)
 	return true
 
+func _verify_birthplace_map_input() -> void:
+	var menu := get_child(0) as MainMenu
+	var setup := menu._player_setup_page
+	var driver = preload("res://tests/helpers/real_pointer_driver.gd").new(get_viewport(), get_tree())
+	var selected := menu._draft.players[menu._editing_slot].starting_region
+	await driver.click(setup.map_zoom_button)
+	assert(menu._modal_layer.visible and not setup.is_interaction_enabled(), "Map click must open a modal")
+	var close := menu._modal_body.find_child("CloseMapPreview", true, false) as Button
+	assert(get_viewport().gui_get_focus_owner() == close, "Map must focus its return button")
+	# An underlying selection must not activate through the full-screen shield.
+	await driver.click(setup.birthplace_list.get_child(5))
+	assert(menu._draft.players[menu._editing_slot].starting_region == selected, "Map must block underlying birthplace buttons")
+	var escape := InputEventKey.new()
+	escape.keycode = KEY_ESCAPE
+	escape.pressed = true
+	get_viewport().push_input(escape)
+	await get_tree().process_frame
+	escape = InputEventKey.new()
+	escape.keycode = KEY_ESCAPE
+	get_viewport().push_input(escape)
+	await get_tree().process_frame
+	assert(not menu._modal_layer.visible and setup.is_interaction_enabled(), "Esc must only close the map")
+	assert(get_viewport().gui_get_focus_owner() == setup.map_zoom_button, "Map must restore preview focus")
+	var enter := InputEventKey.new()
+	enter.keycode = KEY_ENTER
+	enter.pressed = true
+	get_viewport().push_input(enter)
+	await get_tree().process_frame
+	enter = InputEventKey.new()
+	enter.keycode = KEY_ENTER
+	get_viewport().push_input(enter)
+	await get_tree().process_frame
+	assert(menu._modal_layer.visible, "Enter must open the focused map")
+	close = menu._modal_body.find_child("CloseMapPreview", true, false) as Button
+	await driver.click(close)
+	assert(not menu._modal_layer.visible and setup.is_interaction_enabled(), "Map return button must close")
+	await driver.click(setup.birthplace_list.get_child(5))
+	assert(menu._draft.players[menu._editing_slot].starting_region == int(setup.birthplace_list.get_child(5).get_meta(&"region")), "Birthplace selection must still work after zoom")
+	print("MAIN_UI_INPUT verified map pointer/Enter entry, Esc/button return, focus, click shield and subsequent birthplace selection")
+
+
 func _verify_board_input(page: String) -> void:
+	if page in ["player_setup", "player_setup_bot"]:
+		await _verify_birthplace_map_input()
+		return
+	if page.begins_with("minigame_gallery"):
+		await _verify_gallery_input()
+		return
 	var hud := get_tree().get_first_node_in_group("HUD") as HUD
 	if hud == null: return
+	if page == "hud_message":
+		var scroll := hud.information.get_parent() as ScrollContainer
+		var event := InputEventMouseButton.new()
+		event.position = scroll.get_global_rect().get_center()
+		event.button_index = MOUSE_BUTTON_WHEEL_DOWN
+		event.pressed = true
+		get_viewport().push_input(event)
+		await get_tree().process_frame
+		assert(scroll.scroll_vertical > 0, "Long messages must scroll")
+		hud._update_game_informs("剩余可移动：6 步")
+		await get_tree().process_frame
+		await get_tree().process_frame
+		assert(scroll.scroll_vertical == 0, "A new short message must return to the top")
+		print("MAIN_UI_INPUT verified long message wheel scrolling and short message reset")
+		return
+	if page == "exit":
+		await _verify_exit_input(hud)
+		return
 	if page == "hud":
 		var driver = preload("res://tests/helpers/real_pointer_driver.gd").new(get_viewport(), get_tree())
 		var track := hud.get_node("回合信息/PhaseTrack") as Button
@@ -253,3 +358,95 @@ func _verify_board_input(page: String) -> void:
 		get_tree().quit(1)
 		return
 	print("MAIN_UI_INPUT verified Tab focus and pointer close: ", page)
+
+
+func _verify_gallery_input() -> void:
+	var menu := get_child(0) as MainMenu
+	var guide := menu.get_game_guide()
+	var gallery := guide.find_child("MinigameGallery", true, false) as GuideMinigameGallery
+	# Exercise selection without changing the user's persisted avatar preference.
+	for connection in gallery.avatar_selected.get_connections():
+		gallery.avatar_selected.disconnect(connection.callable)
+	var pointer = preload("res://tests/helpers/real_pointer_driver.gd").new(get_viewport(), get_tree())
+	var choices := gallery.get_node("PracticeAvatarSelector")
+	var chosen := choices.get_child(1) as Button
+	await pointer.click(chosen)
+	if not chosen.button_pressed or gallery.get_selected_avatar_id() != HeritageAvatarCatalog.IDS[1]:
+		push_error("Gallery pointer selection failed")
+		get_tree().quit(1)
+		return
+	guide._article_scroll.scroll_vertical = 10000
+	for frame in range(8): await get_tree().process_frame
+	var next := gallery.get_node("GalleryPager").get_child(2) as Button
+	await pointer.click(next)
+	for frame in range(8): await get_tree().process_frame
+	if gallery._page != 1:
+		push_error("Gallery pointer pagination failed")
+		get_tree().quit(1)
+		return
+	# Keyboard activation on the new page must hand focus to a live pager button.
+	next = gallery.get_node("GalleryPager").get_child(2) as Button
+	next.grab_focus()
+	for pressed: bool in [true, false]:
+		var key := InputEventKey.new()
+		key.keycode = KEY_ENTER
+		key.pressed = pressed
+		get_viewport().push_input(key, true)
+		await get_tree().process_frame
+	for frame in range(8): await get_tree().process_frame
+	if gallery._page != 2 or get_viewport().gui_get_focus_owner() == null:
+		push_error("Gallery keyboard pagination lost page or focus")
+		get_tree().quit(1)
+		return
+	await pointer.click(guide.get_node("%RulesButton"))
+	for frame in range(25): await get_tree().process_frame
+	await pointer.click(guide.get_node("%MinigameButton"))
+	for frame in range(25): await get_tree().process_frame
+	if guide._view_mode != DigitalGameGuide.ViewMode.MINIGAME_GALLERY or guide.theme != MainUI.theme():
+		push_error("Gallery return changed theme or destination")
+		get_tree().quit(1)
+		return
+	await pointer.click(guide.get_node("%CloseButton"))
+	var deadline := Time.get_ticks_msec() + 2000
+	while guide.is_guide_open() and Time.get_ticks_msec() < deadline:
+		await get_tree().process_frame
+	if guide.is_guide_open():
+		push_error("Gallery close failed")
+		get_tree().quit(1)
+		return
+	print("MAIN_UI_INPUT gallery: avatar, pointer/keyboard pages, live focus, rules roundtrip, close passed")
+
+
+func _verify_exit_input(hud: HUD) -> void:
+	var dialog := hud._exit_confirmation
+	if not get_tree().paused or dialog.get_viewport().gui_get_focus_owner() != dialog.get_cancel_button():
+		push_error("Exit confirmation did not pause or focus Continue")
+		get_tree().quit(1)
+		return
+	var pointer = preload("res://tests/helpers/real_pointer_driver.gd").new(dialog.get_viewport(), get_tree())
+	await pointer.click(dialog.get_cancel_button())
+	await get_tree().process_frame
+	if is_instance_valid(hud._exit_confirmation) or get_tree().paused:
+		push_error("Continue did not dismiss exit and resume the board")
+		get_tree().quit(1)
+		return
+	var outer_lease := TurnManager.acquire_modal(&"exit_review_outer", TurnManager.ModalResumePolicy.RESUME_REMAINING, true)
+	hud._on_close_pressed()
+	await get_tree().process_frame
+	dialog = hud._exit_confirmation
+	for pressed: bool in [true, false]:
+		var key := InputEventKey.new()
+		key.keycode = KEY_ESCAPE
+		key.pressed = pressed
+		if is_instance_valid(dialog): dialog.get_viewport().push_input(key, true)
+		await get_tree().process_frame
+	if is_instance_valid(hud._exit_confirmation) or not get_tree().paused:
+		push_error("Exit Escape did not preserve the outer pause owner")
+		get_tree().quit(1)
+		return
+	TurnManager.release_modal(outer_lease)
+	if get_tree().paused:
+		push_error("Exit confirmation leaked a pause lease")
+		get_tree().quit(1)
+		return
+	print("MAIN_UI_INPUT exit: Continue pointer, default focus, Escape, nested pause ownership passed")

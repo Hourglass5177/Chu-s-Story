@@ -72,6 +72,25 @@ func test_pause_preserves_an_uncovered_map_choice_modal() -> void:
 	assert_eq(int(TurnManager.get_modal_snapshot().get("depth", 0)), 1)
 	assert_true(TurnManager.release_modal(lease))
 
+func test_settings_returns_to_pause_without_releasing_its_lease() -> void:
+	assert_true(_overlay.open_pause())
+	_overlay.general_settings.open_panel(_overlay.settings_button)
+	await get_tree().process_frame
+	assert_true(Settings.is_panel_open())
+	assert_true(get_tree().paused)
+	assert_eq(int(TurnManager.get_modal_snapshot().get("depth", 0)), 1)
+	var cancel := InputEventKey.new()
+	cancel.keycode = KEY_ESCAPE
+	cancel.pressed = true
+	get_viewport().push_input(cancel)
+	await get_tree().process_frame
+	assert_false(_overlay.general_settings.visible)
+	assert_true(_overlay.visible)
+	assert_true(get_tree().paused)
+	assert_eq(int(TurnManager.get_modal_snapshot().get("depth", 0)), 1)
+	_overlay.close_pause()
+	assert_false(get_tree().paused)
+
 
 func test_pause_freezes_and_resumes_an_active_interaction() -> void:
 	var ticket := InteractionCoordinator.begin_interaction(&"pause_test_interaction", 5.0)

@@ -5,6 +5,8 @@ signal resumed
 
 @onready var continue_button: Button = %ContinueButton
 
+var general_settings: GameSettingsPanel
+var settings_button: Button
 var _modal_lease: int = -1
 var _interaction_suspend_lease: int = -1
 var _session_generation: int = -1
@@ -16,6 +18,13 @@ func _ready() -> void:
 	$Center/Panel.add_theme_stylebox_override("panel", MainUI.box("panel", 0))
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	continue_button.pressed.connect(close_pause)
+	general_settings = GameSettingsPanel.mount(self)
+	settings_button = Button.new()
+	settings_button.name = "SettingsButton"
+	settings_button.text = "设置"
+	MainUI.button(settings_button, "secondary")
+	continue_button.get_parent().add_child(settings_button)
+	settings_button.pressed.connect(func() -> void: general_settings.open_panel(settings_button))
 	if not TurnManager.game_finished.is_connected(_on_game_finished):
 		TurnManager.game_finished.connect(_on_game_finished)
 	hide()
@@ -54,6 +63,7 @@ func open_pause() -> bool:
 func close_pause() -> bool:
 	if not visible:
 		return false
+	if is_instance_valid(general_settings): general_settings.close_panel(true)
 	hide()
 	var same_context: bool = (
 		_session_generation == TurnManager.get_session_generation()
@@ -69,6 +79,7 @@ func close_pause() -> bool:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if Settings.is_panel_open(): return
 	if not visible:
 		return
 	if event.is_action_pressed("ui_cancel"):

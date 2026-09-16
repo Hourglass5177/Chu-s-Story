@@ -8,18 +8,9 @@ signal player_confirmed(slot_index: int, return_to_roster: bool)
 signal previous_requested(slot_index: int)
 signal invalid_action(message: String)
 signal player_draft_changed(slot_index: int)
+signal map_preview_requested
 
 const PROFESSION_CARD_SCENE: PackedScene = preload("res://UI/Frontend/stateful_card.tscn")
-
-## 仅用于选角简图上的 UI 展示位置；真实出生坐标始终取自 MapSection.出生点坐标。
-const MAP_HOTSPOT_POSITIONS: Dictionary = {
-	MapSection.REGION.十堰: Vector2(0.120, 0.120),
-	MapSection.REGION.随州: Vector2(0.560, 0.080),
-	MapSection.REGION.孝感: Vector2(0.560, 0.580),
-	MapSection.REGION.黄冈: Vector2(0.980, 0.420),
-	MapSection.REGION.荆州: Vector2(0.430, 0.960),
-	MapSection.REGION.恩施: Vector2(0.040, 0.700),
-}
 
 @onready var slot_label: Label = %SlotLabel
 @onready var control_kind_label: Label = %ControlKindLabel
@@ -31,8 +22,8 @@ const MAP_HOTSPOT_POSITIONS: Dictionary = {
 @onready var skill_name_label: Label = %SkillName
 @onready var skill_description_label: Label = %SkillDescription
 @onready var birthplace_preview_label: Label = %BirthplacePreview
-@onready var birthplace_hotspots: Control = %BirthplaceHotspots
-@onready var birthplace_list: VBoxContainer = %BirthplaceList
+@onready var map_zoom_button: Button = %MapZoomButton
+@onready var birthplace_list: GridContainer = %BirthplaceList
 @onready var message_label: Label = %Message
 @onready var previous_button: Button = %PreviousButton
 @onready var confirm_button: Button = %ConfirmButton
@@ -50,7 +41,6 @@ var _hovered_profession_type := PlayerSetup.UNSELECTED
 var _hovered_region := PlayerSetup.UNSELECTED
 var _profession_cards: Dictionary = {}
 var _region_buttons: Dictionary = {}
-var _hotspot_buttons: Dictionary = {}
 var _region_order: Array[int] = []
 ## 自动生成但尚未轮到的 BOT 配置可以为前序玩家让位；一旦玩家按下确认，
 ## 其选择就和真人一样受到保护，返回修改其他席位时不会被静默改写。
@@ -65,6 +55,14 @@ func _ready() -> void:
 	name_input.text_changed.connect(_on_name_changed)
 	previous_button.pressed.connect(_on_previous_pressed)
 	confirm_button.pressed.connect(_on_confirm_pressed)
+	map_zoom_button.pressed.connect(func(): map_preview_requested.emit())
+	for state in ["normal", "disabled"]:
+		map_zoom_button.add_theme_stylebox_override(state, StyleBoxEmpty.new())
+	for state in ["hover", "pressed", "focus"]:
+		map_zoom_button.add_theme_stylebox_override(state, MainUI.theme().get_stylebox("focus", "Button"))
+	var map_frame := map_zoom_button.get_parent().get_parent() as PanelContainer
+	map_frame.add_theme_stylebox_override("panel", FrontendStyle.make_box(
+		Color("f8eac9"), Color("a9794e"), 2, 12, Vector4(12, 12, 12, 12)))
 	_build_difficulty_controls()
 	_build_profession_cards()
 	_build_birthplace_controls()
@@ -202,30 +200,6 @@ func _build_birthplace_controls() -> void:
 		list_button.mouse_exited.connect(_on_region_mouse_exited.bind(region))
 		_region_buttons[region] = list_button
 
-		var hotspot := Button.new()
-		hotspot.name = "Hotspot_%s" % _region_name(region)
-		hotspot.text = _region_name(region)
-		hotspot.focus_mode = Control.FOCUS_CLICK
-		hotspot.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		hotspot.z_index = 2
-		var position_ratio: Vector2 = MAP_HOTSPOT_POSITIONS.get(region, Vector2(0.5, 0.5))
-		hotspot.anchor_left = position_ratio.x
-		hotspot.anchor_top = position_ratio.y
-		hotspot.anchor_right = position_ratio.x
-		hotspot.anchor_bottom = position_ratio.y
-		hotspot.offset_left = -52.0
-		hotspot.offset_top = -23.0
-		hotspot.offset_right = 52.0
-		hotspot.offset_bottom = 23.0
-		hotspot.add_theme_font_size_override("font_size", 22)
-		hotspot.set_meta(&"region", region)
-		hotspot.add_to_group(&"frontend_birthplace_hotspot")
-		birthplace_hotspots.add_child(hotspot)
-		hotspot.pressed.connect(_on_region_activated.bind(region))
-		hotspot.mouse_entered.connect(_on_region_mouse_entered.bind(region))
-		hotspot.mouse_exited.connect(_on_region_mouse_exited.bind(region))
-		_hotspot_buttons[region] = hotspot
-
 
 func _update_profession_cards(player: PlayerSetup) -> void:
 	for profession_variant: Variant in _profession_cards.keys():
@@ -267,14 +241,6 @@ func _update_birthplace_controls(player: PlayerSetup) -> void:
 		list_button.disabled = player == null
 		_apply_region_button_style(list_button, state, player != null)
 
-		var hotspot := _hotspot_buttons[region] as Button
-		hotspot.text = region_name
-		hotspot.tooltip_text = "%s · P%d已选" % [region_name, owner + 1] if owner >= 0 and not owner_can_yield else region_name
-		hotspot.button_pressed = selected and (owner < 0 or owner_can_yield)
-		hotspot.toggle_mode = true
-		hotspot.disabled = player == null
-		_apply_region_button_style(hotspot, state, player != null)
-
 
 func _apply_region_button_style(
 		button: Button,
@@ -302,9 +268,8 @@ func _apply_region_button_style(
 		var compact := button.get_theme_stylebox(style_name).duplicate() as StyleBox
 		compact.content_margin_top = 6
 		compact.content_margin_bottom = 6
-		if button.is_in_group(&"frontend_birthplace_hotspot"):
-			compact.content_margin_left = 8
-			compact.content_margin_right = 8
+		compact.content_margin_left = 12
+		compact.content_margin_right = 12
 		button.add_theme_stylebox_override(style_name, compact)
 	if button.is_in_group(&"frontend_birthplace_option"):
 		button.custom_minimum_size.y = 72
@@ -385,7 +350,7 @@ func _on_region_mouse_exited(region: int) -> void:
 	if _hovered_region != region:
 		return
 	_hovered_region = PlayerSetup.UNSELECTED
-	# 在列表按钮或地图热点之间移动时，新控件的 mouse_entered
+	# 在出生点按钮之间移动时，新控件的 mouse_entered
 	# 会先更新该值；延迟恢复可避免标题短暂闪回已选起点。
 	call_deferred("_restore_default_region_preview_after_hover")
 
@@ -664,16 +629,23 @@ func _wire_focus_navigation() -> void:
 
 	for index: int in region_controls.size():
 		var region_control := region_controls[index]
-		region_control.focus_neighbor_left = cards[mini(index, cards.size() - 1)].get_path()
-		region_control.focus_neighbor_right = region_control.get_path()
+		region_control.focus_neighbor_left = (region_controls[index - 1] if index % 2 == 1 else cards[mini(index, cards.size() - 1)]).get_path()
+		region_control.focus_neighbor_right = (region_controls[index + 1] if index % 2 == 0 else region_control).get_path()
 		region_control.focus_neighbor_top = (
-			region_controls[index - 1].get_path() if index > 0 else name_input.get_path()
+			region_controls[index - 2].get_path() if index >= 2 else map_zoom_button.get_path()
 		)
 		region_control.focus_neighbor_bottom = (
-			region_controls[index + 1].get_path()
-			if index + 1 < region_controls.size()
+			region_controls[index + 2].get_path()
+			if index + 2 < region_controls.size()
 			else confirm_button.get_path()
 		)
+		region_control.focus_next = (region_controls[index + 1] if index + 1 < region_controls.size() else confirm_button).get_path()
+		region_control.focus_previous = (region_controls[index - 1] if index > 0 else map_zoom_button).get_path()
+	map_zoom_button.focus_neighbor_top = name_input.get_path()
+	map_zoom_button.focus_neighbor_bottom = region_controls[0].get_path()
+	map_zoom_button.focus_neighbor_left = cards[2].get_path()
+	map_zoom_button.focus_neighbor_right = map_zoom_button.get_path()
+	map_zoom_button.focus_next = region_controls[0].get_path()
 
 	previous_button.focus_neighbor_right = confirm_button.get_path()
 	previous_button.focus_neighbor_left = confirm_button.get_path()

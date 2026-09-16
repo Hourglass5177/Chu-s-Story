@@ -16,29 +16,6 @@ var _narrow_layout: bool = false
 var _avatar_id: StringName = HeritageAvatarCatalog.DEFAULT_AVATAR_ID
 var _avatars: Array[Dictionary] = []
 var _avatar_buttons: Dictionary[StringName, Button] = {}
-var _pixel_font: Font
-var _pixel_aux: Font
-var _last_physical_scale: float = 0.0
-
-
-func _physical_scale() -> float:
-	var value := (get_viewport().get_stretch_transform() * get_global_transform_with_canvas()).get_scale().abs()
-	return maxf(0.1,minf(value.x,value.y))
-
-
-func _px(value: float) -> float:
-	return value / _physical_scale()
-
-
-func _process(_delta: float) -> void:
-	if not is_visible_in_tree(): return
-	if _entries.is_empty() or is_equal_approx(_last_physical_scale,_physical_scale()): return
-	var previous_focus := get_viewport().gui_get_focus_owner()
-	var focus_name := String(previous_focus.name) if is_instance_valid(previous_focus) and is_ancestor_of(previous_focus) else ""
-	_rebuild()
-	if not focus_name.is_empty():
-		var next := find_child(focus_name,true,false) as Control
-		if next != null: next.grab_focus.call_deferred()
 
 
 func configure(
@@ -64,18 +41,17 @@ func get_first_focusable() -> Control:
 
 
 func _rebuild(focus_hint: StringName = &"") -> void:
-	_last_physical_scale = _physical_scale()
 	for child: Node in get_children():
 		remove_child(child)
 		child.queue_free()
-	add_theme_constant_override("separation", ceili(_px(18)))
+	add_theme_constant_override("separation", 20)
 	_add_avatar_selector()
 	var grid := GridContainer.new()
 	grid.name = "GalleryGrid"
 	grid.columns = 1 if _narrow_layout else 3
 	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	grid.add_theme_constant_override("h_separation", ceili(_px(16)))
-	grid.add_theme_constant_override("v_separation", ceili(_px(16)))
+	grid.add_theme_constant_override("h_separation", 20)
+	grid.add_theme_constant_override("v_separation", 20)
 	add_child(grid)
 
 	var page_count := maxi(ceili(float(_entries.size()) / PAGE_SIZE), 1)
@@ -132,7 +108,7 @@ func _add_avatar_selector() -> void:
 	_avatar_buttons.clear()
 	if _avatars.is_empty():
 		return
-	var title := _new_label("选择练习博主", 34, HeritageTelevisionStyle.V2_INK)
+	var title := _new_label("选择练习博主", 34, MainUI.INK)
 	add_child(title)
 	var choices := GridContainer.new()
 	choices.name = "PracticeAvatarSelector"
@@ -147,18 +123,18 @@ func _add_avatar_selector() -> void:
 		var avatar_id := StringName(avatar.get("avatar_id", &""))
 		if not HeritageAvatarCatalog.is_known(avatar_id):
 			continue
-		var button := _new_button(HeritageAvatarCatalog.display_name(avatar_id), Vector2(150, 192))
+		var button := _new_button(HeritageAvatarCatalog.display_name(avatar_id), Vector2(150, 204))
 		button.name = "Avatar_%s" % avatar_id
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		button.add_theme_font_size_override("font_size", ceili(_px(20)))
+		button.add_theme_font_size_override("font_size", 32)
 		button.icon = _portrait_headshot(avatar.get("portrait") as Texture2D)
 		button.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 		button.expand_icon = true
 		button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		button.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
 		button.alignment = HORIZONTAL_ALIGNMENT_CENTER
-		button.add_theme_constant_override("icon_max_width", ceili(_px(88)))
-		button.custom_minimum_size.y = _px(130)
+		button.add_theme_constant_override("icon_max_width", 120)
+		button.custom_minimum_size.y = 204
 		button.toggle_mode = true
 		button.button_group = group
 		button.button_pressed = avatar_id == _avatar_id
@@ -189,20 +165,20 @@ func _add_entry_card(parent: GridContainer, entry: Dictionary, local_index: int)
 	var unlocked := bool(entry.get("unlocked", false))
 	var panel := PanelContainer.new()
 	panel.name = "UnlockedTask%d" % local_index if unlocked else "LockedTask%d" % local_index
-	panel.custom_minimum_size = Vector2(300, _px(300))
+	panel.custom_minimum_size = Vector2(300, 420 if unlocked else 280)
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	panel.add_theme_stylebox_override(
 		"panel",
-		HeritageTelevisionStyle.pixel_box("panel",_px(12),1.0 / _physical_scale())
+		FrontendStyle.make_box(Color("fff4dc"), Color("bd9867"), 2, 14, Vector4(20, 18, 20, 18))
 	)
 	parent.add_child(panel)
 	var content := VBoxContainer.new()
-	content.add_theme_constant_override("separation", ceili(_px(8)))
+	content.add_theme_constant_override("separation", 12)
 	panel.add_child(content)
 	if not unlocked:
 		panel.accessibility_name = "未发现小游戏"
 		panel.accessibility_description = "未发现"
-		content.add_child(_new_thumbnail(LOCKED_CARD_BACK, _px(220)))
+		content.add_child(_new_thumbnail(LOCKED_CARD_BACK, 180))
 		var locked_title := _new_label("未发现", 30, FrontendStyle.BROWN_MUTED)
 		locked_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		content.add_child(locked_title)
@@ -210,10 +186,10 @@ func _add_entry_card(parent: GridContainer, entry: Dictionary, local_index: int)
 
 	var texture := entry.get("thumbnail") as Texture2D
 	if texture != null:
-		content.add_child(_new_thumbnail(texture, _px(160)))
+		content.add_child(_new_thumbnail(texture, 180))
 	else:
-		var placeholder := _new_label("缩略图待替换", 34, FrontendStyle.ORANGE)
-		placeholder.custom_minimum_size = Vector2(0, _px(160))
+		var placeholder := _new_label("传承任务", 34, FrontendStyle.ORANGE)
+		placeholder.custom_minimum_size = Vector2(0, 180)
 		placeholder.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		placeholder.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		content.add_child(placeholder)
@@ -227,8 +203,10 @@ func _add_entry_card(parent: GridContainer, entry: Dictionary, local_index: int)
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	content.add_child(title_label)
-	# Full goal and controls live on the preparation screen. Keeping them in
-	# accessibility text avoids making six card fronts into tiny manuals.
+	var summary := _new_detail_label(goal, Color("75604d"))
+	summary.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	content.add_child(summary)
+	panel.tooltip_text = "目标：%s\n操作：%s" % [goal, operation]
 	var spacer := Control.new()
 	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	content.add_child(spacer)
@@ -255,7 +233,7 @@ func _new_thumbnail(texture: Texture2D, minimum_height: float) -> TextureRect:
 func _new_detail_label(text_value: String, color: Color) -> Label:
 	var label := _new_label(text_value, 23, color)
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	label.max_lines_visible = 3
+	label.max_lines_visible = 2
 	label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	return label
 
@@ -263,11 +241,7 @@ func _new_detail_label(text_value: String, color: Color) -> Label:
 func _new_label(text_value: String, font_size: int, color: Color) -> Label:
 	var label := Label.new()
 	label.text = text_value
-	if _pixel_font == null: _pixel_font = HeritageTelevisionStyle.pixel_font()
-	if _pixel_aux == null: _pixel_aux = HeritageTelevisionStyle.pixel_font(true)
-	label.add_theme_font_override("font",_pixel_aux if font_size < 28 else _pixel_font)
-	label.add_theme_font_size_override("font_size", ceili(_px(20 if font_size < 28 else 24)))
-	label.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	MainUI.label(label, maxi(font_size, 32), font_size >= 30)
 	label.add_theme_color_override("font_color", color)
 	return label
 
@@ -275,11 +249,9 @@ func _new_label(text_value: String, font_size: int, color: Color) -> Label:
 func _new_button(text_value: String, minimum_size: Vector2) -> Button:
 	var button := Button.new()
 	button.text = text_value
-	button.custom_minimum_size = Vector2(minimum_size.x,maxf(minimum_size.y,_px(48)))
-	if _pixel_font == null: _pixel_font = HeritageTelevisionStyle.pixel_font()
-	button.add_theme_font_override("font",_pixel_font)
-	button.add_theme_font_size_override("font_size",ceili(_px(24)))
-	HeritageTelevisionStyle.pixel_button(button,_px(8),1.0 / _physical_scale())
+	MainUI.compact_button(button)
+	MainUI.label(button, 36)
+	button.custom_minimum_size = Vector2(minimum_size.x, maxf(minimum_size.y, 86))
 	button.focus_mode = Control.FOCUS_ALL
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	return button

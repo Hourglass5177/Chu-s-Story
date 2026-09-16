@@ -11,6 +11,7 @@ DEST = ROOT / 'arts' / 'ui-main-v1'
 FILES = {
     'home': '03_主界面与开局/开启界面/拆分部件/背景（正常）v001.png',
     'logo': '01_品牌与Logo/彩色logov2.png',
+    'loading_logo': '01_品牌与Logo/彩色logov1.png',
     'panel': '04_局内界面/卡牌详情/界面底版.png',
     'content': '04_局内界面/卡牌详情/右上文本框.png',
     'card': '04_局内界面/商店背包研究所/食物商店/食物底框.png',

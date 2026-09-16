@@ -12,3 +12,7 @@ __pycache__/
 /tmp/
 
 /docs/楚物志数字版美术需求书（第一版）.docx
+
+# Generated promotion preview copies; prepare_editor.py rebuilds these from sources.
+/tools/promotion-video/remotion/public/
+/tools/promotion-video/sample-10s.mp4

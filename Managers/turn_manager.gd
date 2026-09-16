@@ -135,20 +135,20 @@ func change_phase(new_phase: TurnPhase) -> void:
 	match now_phase:
 		TurnPhase.BEGIN:
 			print("--- 回合开始 ---")
-			turn_timer.start(1.0)
+			_start_phase_timer(1.0)
 		TurnPhase.ROLL_DICE:
 			print(">>> 等待玩家掷骰子")
-			turn_timer.start(3.0) # 兜底防卡死
+			_start_phase_timer(3.0) # 兜底防卡死
 		TurnPhase.MOVING:
 			get_tree().call_group("section", "_clear_is_reached")
 			print(">>> 等待玩家移动")
-			turn_timer.start(15.0)
+			_start_phase_timer(15.0)
 		TurnPhase.ACTION:
 			print(">>> 等待玩家行动")
-			turn_timer.start(15.0)
+			_start_phase_timer(15.0)
 		TurnPhase.END:
 			print("--- 回合结束 ---")
-			turn_timer.start(1.0)
+			_start_phase_timer(1.0)
 			
 	# 广播当前阶段，让 Player 和 HUD 做出反应
 	phase_changed.emit(now_phase)
@@ -190,7 +190,7 @@ func end_movement_lock() -> void:
 		return
 	movement_lock_active = false
 	if GameOn and now_phase == TurnPhase.MOVING and modal_resolution_depth == 0:
-		turn_timer.start(maxf(_movement_resume_time, 0.05))
+		_start_phase_timer(maxf(_movement_resume_time, 0.05))
 	_movement_resume_time = 0.0
 
 func is_movement_locked() -> bool:
@@ -250,9 +250,9 @@ func release_modal(lease_id: int, resume_policy_override: int = -1) -> bool:
 	# 嵌套租约只负责延长锁；恢复方式始终由根租约决定。
 	var policy: int = _root_modal_policy
 	if owns_resume_context and policy == ModalResumePolicy.RESET_ACTION and GameOn and now_phase == TurnPhase.ACTION:
-		turn_timer.start(15.0)
+		_start_phase_timer(15.0)
 	elif owns_resume_context and policy == ModalResumePolicy.RESUME_REMAINING and GameOn and now_phase == _modal_resume_phase and _modal_resume_time > 0.0:
-		turn_timer.start(maxf(_modal_resume_time, 0.05))
+		_start_phase_timer(maxf(_modal_resume_time, 0.05))
 	_clear_modal_resume_context()
 	modal_state_changed.emit(get_modal_snapshot())
 	return true
@@ -423,7 +423,7 @@ func now_turn_end() -> void:
 		push_error("TurnManager.now_turn_end: 运行时清理失败，拒绝交接下一位玩家。")
 		_ending_turn = false
 		if GameOn and now_phase == TurnPhase.END:
-			turn_timer.start(0.25)
+			_start_phase_timer(0.25)
 		return
 	# 清理过程会让已取消的 await 协程恢复；再次确认仍属于原会话和原回合。
 	if ending_session_generation != _session_generation or ending_turn_epoch != _turn_epoch or not GameOn:
@@ -432,6 +432,9 @@ func now_turn_end() -> void:
 		return
 	if now_player_index >= 0 and now_player_index < players.size():
 		turn_completed.emit(players[now_player_index], now_turn)
+	if GameManager.is_tutorial_session():
+		_ending_turn = false
+		return
 	# 淘汰结算完成后再同时检查两项胜利条件，避免死亡回调抢先结束游戏。
 	var end_reason: int = get_current_end_reason()
 	if end_reason != NO_END_REASON:
@@ -694,3 +697,10 @@ func _ranked_player_precedes(first: Dictionary, second: Dictionary) -> bool:
 	if first_player_index != second_player_index:
 		return first_player_index < second_player_index
 	return int(first["original_order"]) < int(second["original_order"])
+
+
+func _start_phase_timer(seconds: float) -> void:
+	if GameManager.is_tutorial_session() and now_phase in [TurnPhase.MOVING, TurnPhase.ACTION]:
+		turn_timer.stop()
+		return
+	turn_timer.start(seconds)

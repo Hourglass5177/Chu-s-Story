@@ -254,6 +254,7 @@ func query_moves(player: PlayerClass) -> Dictionary:
 	return results
 
 func execute_move(current_player: PlayerClass, target_section: MapSection) -> String:
+	if not GameManager.allows_tutorial_action(&"move", target_section): return "tutorial blocked"
 	if TurnManager.modal_resolution_depth > 0 or not InteractionCoordinator.get_active_snapshot().is_empty(): return "not available"
 	var path_result := query_move(current_player, target_section)
 	if path_result.is_empty():

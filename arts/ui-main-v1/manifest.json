@@ -394,5 +394,11 @@
     "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\03_主界面与开局\\主界面（AI）\\PNG\\27_浅色按钮.png",
     "runtime": "arts\\ui-main-v1\\hud_action_disabled.png",
     "sha256": "cb5b2d4ea2aea106ff1a57eda846ce14dcf3ba15c3bcdb6017b25c2f3c51bcec"
+  },
+  {
+    "id": "loading_logo",
+    "source": "E:\\大学\\MEMO\\桌游 · 楚物志\\新版素材\\现有素材\\01_品牌与Logo\\彩色logov1.png",
+    "runtime": "arts\\ui-main-v1\\loading_logo.png",
+    "sha256": "652ff9dd17d80c1df69d4c8dd997a512b4046c1f74cf8f38c2a918eec63d93ba"
   }
 ]

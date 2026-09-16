@@ -14,10 +14,11 @@ func before_each() -> void:
 	_page.enter_screen(false)
 
 
-func test_page_builds_six_focusable_professions_and_six_synchronised_birthplaces() -> void:
+func test_page_builds_six_focusable_professions_and_six_birthplaces_with_map_preview() -> void:
 	assert_eq(_page.profession_grid.get_child_count(), 6)
 	assert_eq(_page.birthplace_list.get_child_count(), MapSection.出生点坐标.size())
-	assert_eq(_page.birthplace_hotspots.get_child_count(), MapSection.出生点坐标.size())
+	assert_eq(_page.map_zoom_button.focus_mode, Control.FOCUS_ALL)
+	assert_eq(_page.birthplace_list.columns, 2)
 	for card_node: Node in _page.profession_grid.get_children():
 		var card := card_node as FrontendStatefulCard
 		assert_not_null(card)
@@ -58,18 +59,20 @@ func test_occupied_profession_and_birthplace_stay_inspectable_but_cannot_be_sele
 	assert_signal_emitted_with_parameters(_page, "invalid_action", ["该出生点已由P1选择"])
 
 
-func test_free_card_and_map_hotspot_update_the_same_player_draft() -> void:
+func test_free_card_and_birthplace_update_draft_while_map_only_requests_preview() -> void:
 	var profession_type := PlayerClass.PlayerCharacter.旅行博主
 	var card := _find_profession_card(profession_type)
 	card._activate()
 	assert_eq(_setup.players[0].profession_type, profession_type)
 
 	var region := MapSection.REGION.恩施
-	var hotspot := _find_hotspot(region)
-	hotspot.pressed.emit()
+	_find_region_button(region).pressed.emit()
 	assert_eq(_setup.players[0].starting_region, region)
 	assert_true(_find_region_button(region).button_pressed)
-	assert_true(_find_hotspot(region).button_pressed)
+	watch_signals(_page)
+	_page.map_zoom_button.pressed.emit()
+	assert_signal_emitted(_page, "map_preview_requested")
+	assert_eq(_setup.players[0].starting_region, region, "查看地图不能更改出生点")
 
 
 func test_profession_preview_returns_to_selected_card_after_hover_leaves() -> void:
@@ -106,17 +109,6 @@ func test_birthplace_preview_returns_to_selected_region_after_hover_leaves() -> 
 		_page.birthplace_preview_label.text,
 		"出生点：恩施",
 		"移出起点列表后应恢复当前已选起点"
-	)
-
-	var hovered_hotspot := _find_hotspot(hovered_region)
-	hovered_hotspot.mouse_entered.emit()
-	assert_eq(_page.birthplace_preview_label.text, "出生点：十堰")
-	hovered_hotspot.mouse_exited.emit()
-	await get_tree().process_frame
-	assert_eq(
-		_page.birthplace_preview_label.text,
-		"出生点：恩施",
-		"移出地图热点后应恢复当前已选起点"
 	)
 
 
@@ -253,13 +245,6 @@ func _find_profession_card(profession_type: int) -> FrontendStatefulCard:
 
 func _find_region_button(region: int) -> Button:
 	for node: Node in _page.birthplace_list.get_children():
-		if int(node.get_meta(&"region", PlayerSetup.UNSELECTED)) == region:
-			return node as Button
-	return null
-
-
-func _find_hotspot(region: int) -> Button:
-	for node: Node in _page.birthplace_hotspots.get_children():
 		if int(node.get_meta(&"region", PlayerSetup.UNSELECTED)) == region:
 			return node as Button
 	return null

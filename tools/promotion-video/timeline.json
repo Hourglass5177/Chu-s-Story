@@ -1,0 +1,172 @@
+{
+  "fps": 60,
+  "width": 1920,
+  "height": 1080,
+  "duration": 150,
+  "shots": [
+    {
+      "take": "board2",
+      "start": 4.2,
+      "duration": 7,
+      "caption": "在湖北12市开启一场非遗研习之旅~",
+      "city": "武汉",
+      "index": 0,
+      "from_seconds": 0
+    },
+    {
+      "take": "home",
+      "start": 3,
+      "duration": 8,
+      "caption": "楚物志，一场走遍荆楚的桌上旅行。",
+      "city": "湖北非遗文化主题桌游",
+      "index": 1,
+      "from_seconds": 7
+    },
+    {
+      "take": "collection",
+      "start": 5,
+      "duration": 15,
+      "caption": "走到非遗点，把多达数十种非遗牌收入囊中。",
+      "city": "移动 · 收集非遗",
+      "index": 2,
+      "from_seconds": 15
+    },
+    {
+      "take": "collection",
+      "start": 17,
+      "duration": 8,
+      "caption": "收集不同类别与地区，凑出你的收藏组合。",
+      "city": "多种非遗 · 不同效果",
+      "index": 3,
+      "from_seconds": 30
+    },
+    {
+      "take": "collection",
+      "start": 28,
+      "duration": 5,
+      "caption": "收集不同类别与地区，凑出你的收藏组合。",
+      "city": "收藏组合 · 计分",
+      "index": 4,
+      "from_seconds": 38
+    },
+    {
+      "take": "foodvariety",
+      "start": 6,
+      "duration": 5,
+      "caption": "体验老武汉特色“过早”。",
+      "city": "荆楚美食",
+      "index": 5,
+      "from_seconds": 43
+    },
+    {
+      "take": "food",
+      "start": 18.8,
+      "duration": 7,
+      "caption": "体验老武汉特色“过早”。",
+      "city": "武汉 · 热干面",
+      "index": 6,
+      "from_seconds": 48
+    },
+    {
+      "take": "event",
+      "start": 5.5,
+      "duration": 5,
+      "caption": "旅途中，总有意想不到的事。",
+      "city": "事件 · 旅途变化",
+      "index": 7,
+      "from_seconds": 55
+    },
+    {
+      "take": "eventcards",
+      "start": 6,
+      "duration": 9,
+      "caption": "旅途中，总有意想不到的事。",
+      "city": "保留事件 · 择机使用",
+      "index": 8,
+      "from_seconds": 60
+    },
+    {
+      "take": "market",
+      "start": 14,
+      "duration": 14,
+      "caption": "在非遗研究所交易，换回想要的那一张。",
+      "city": "非遗研究所 · 买卖",
+      "index": 9,
+      "from_seconds": 69
+    },
+    {
+      "take": "achievements",
+      "start": 10,
+      "duration": 11,
+      "caption": "完成成就，让这趟旅程多一份收获。",
+      "city": "成就 · 超越人类",
+      "index": 10,
+      "from_seconds": 83
+    },
+    {
+      "take": "professions",
+      "start": 9,
+      "duration": 12,
+      "caption": "六种博主，六种旅行方式。",
+      "city": "职业 · 不同能力",
+      "index": 11,
+      "from_seconds": 94
+    },
+    {
+      "take": "ai",
+      "start": 3,
+      "duration": 10,
+      "caption": "和朋友同游，也能与电脑对手切磋。",
+      "city": "电脑对手 · 真实行动",
+      "index": 12,
+      "from_seconds": 106
+    },
+    {
+      "take": "ai",
+      "start": 50,
+      "duration": 4,
+      "caption": "和朋友同游，也能与电脑对手切磋。",
+      "city": "电脑对手 · 补给选择",
+      "index": 13,
+      "from_seconds": 116
+    },
+    {
+      "take": "board2",
+      "start": 48,
+      "duration": 10,
+      "caption": "内置多达15种国家级非遗传承任务小游戏。",
+      "city": "武汉 · 汉剧",
+      "tv": true,
+      "music": true,
+      "index": 14,
+      "from_seconds": 120
+    },
+    {
+      "take": "tutorial",
+      "start": 8,
+      "duration": 7,
+      "caption": "千里之行，始于足下",
+      "city": "入门教学",
+      "index": 15,
+      "from_seconds": 130
+    },
+    {
+      "take": "collection",
+      "start": 36,
+      "duration": 4,
+      "caption": "千里之行，始于足下",
+      "city": "详细规则",
+      "index": 16,
+      "from_seconds": 137
+    },
+    {
+      "take": "outro",
+      "start": 0,
+      "duration": 9,
+      "caption": "楚物志 · 楚行九州",
+      "city": "",
+      "index": 17,
+      "from_seconds": 141
+    }
+  ]
+}

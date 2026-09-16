@@ -1,0 +1,32 @@
+[
+  {
+    "name": "screencast-capture",
+    "repository": "https://github.com/SkillMedev/skills",
+    "commit": "a28c4ce9366b5a8540577bed8f70b6a60f8fde27",
+    "source_path": "skills/screencast-capture",
+    "installed_path": "F:\\Tools\\OpenAI\\CodexHome\\skills\\screencast-capture",
+    "files": 1,
+    "skill_sha256": "ad02f16cb2345ab1498308a75974ba60613cda079a9f1365a5c09387496eff2f",
+    "scope": "knowledge_and_workflow_only_no_software_runtime_installed"
+  },
+  {
+    "name": "video-storyboard",
+    "repository": "https://github.com/SkillMedev/skills",
+    "commit": "a28c4ce9366b5a8540577bed8f70b6a60f8fde27",
+    "source_path": "skills/video-storyboard",
+    "installed_path": "F:\\Tools\\OpenAI\\CodexHome\\skills\\video-storyboard",
+    "files": 1,
+    "skill_sha256": "f481c41b2c541c561af1c9803e7890bd416fd9a25910b405d9be3f605f61feba",
+    "scope": "knowledge_and_workflow_only_no_software_runtime_installed"
+  },
+  {
+    "name": "remotion-best-practices",
+    "repository": "https://github.com/remotion-dev/skills",
+    "commit": "3b9e6561dababf40a485772a7cd641268bb7c365",
+    "source_path": "skills/remotion-best-practices",
+    "installed_path": "F:\\Tools\\OpenAI\\CodexHome\\skills\\remotion-best-practices",
+    "files": 137,
+    "skill_sha256": "6ae252772ca74923a2b529059caa83526cf20580aa9fafa6f0bb8524f950d194",
+    "scope": "knowledge_and_workflow_only_no_software_runtime_installed"
+  }
+]

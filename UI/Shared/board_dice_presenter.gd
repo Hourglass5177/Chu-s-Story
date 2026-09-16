@@ -47,6 +47,8 @@ func play(player: PlayerClass, values: Array[int], still_current: Callable) -> v
 	for index in range(_faces.size()): _faces[index].visible = index < values.size()
 	show()
 	var elapsed := 0.0
+	var landed := false
+	BoardSfx.request(&"dice_roll", player)
 	while elapsed < 1.5 and serial == _serial and still_current.call():
 		await get_tree().process_frame
 		if not is_instance_valid(player): break
@@ -54,6 +56,10 @@ func play(player: PlayerClass, values: Array[int], still_current: Callable) -> v
 		var ai := get_tree().get_first_node_in_group("AI_SESSION")
 		var speed: float = ai.get_speed_multiplier() if player.is_bot and ai != null else 1.0
 		elapsed += get_process_delta_time() * speed
+		if elapsed >= 0.7 and not landed:
+			landed = true
+			BoardSfx.stop_cue(&"dice_roll")
+			BoardSfx.request(&"dice_land", player)
 		_caption.text = "%s · 掷骰中" % player.player_name if elapsed < 0.7 else "%s · %s 点" % [player.player_name, " + ".join(values.map(func(value): return str(value)))]
 		for index in range(mini(values.size(), _faces.size())):
 			var face := _faces[index]
@@ -63,8 +69,11 @@ func play(player: PlayerClass, values: Array[int], still_current: Callable) -> v
 			face.pivot_offset = face.size * 0.5
 			face.rotation = sin(elapsed * 38 + index) * 0.26 * maxf(0, 1 - elapsed / 0.9)
 			face.scale = Vector2.ONE * (1.0 + sin(elapsed * 30) * 0.06 * maxf(0, 1 - elapsed / 0.9))
-	if serial == _serial: hide()
+	if serial == _serial:
+		BoardSfx.stop_cue(&"dice_roll")
+		hide()
 
 func cancel() -> void:
 	_serial += 1
+	BoardSfx.stop_cue(&"dice_roll")
 	hide()

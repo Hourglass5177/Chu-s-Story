@@ -79,6 +79,7 @@ func _open_food_guide(card: 食物牌, source: Control) -> void:
 	))
 
 func _on_food_used(card: 食物牌, player: PlayerClass) -> void:
+	if not GameManager.allows_tutorial_action(&"food"): return
 	if _resolving or not card.can_use(player):
 		return
 	_resolving = true

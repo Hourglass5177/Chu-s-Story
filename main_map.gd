@@ -5,6 +5,8 @@ signal game_start
 var player_data: Array
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	BoardMusic.ensure_started()
+	BoardSfx.attach_scene(self)
 	#var players: Array[PlayerClass] = [$Player, $Player2]
 	#$Player.start_coord = Vector3i(0,0,0)
 	#$Player2.start_coord = Vector3i(7, -6, -1)
@@ -44,17 +46,22 @@ func init_game() -> void:
 	EventManager.bind_runtime(current_hud, current_hud.get_event_overlay())
 	await get_tree().process_frame
 	TurnManager.map = get_tree().get_first_node_in_group("MAP")
-	var ai_controller := AISessionController.new()
-	add_child(ai_controller)
-	TurnManager.start_game(players)
-	ai_controller.configure(players, GameManager.get_session_seed())
+	if GameManager.is_tutorial_session():
+		var tutorial := TutorialController.new()
+		add_child(tutorial)
+		tutorial.configure(players[0], current_hud)
+	else:
+		var ai_controller := AISessionController.new()
+		add_child(ai_controller)
+		TurnManager.start_game(players)
+		ai_controller.configure(players, GameManager.get_session_seed())
 	AchievementManager.bind_map(TurnManager.map)
 
 
 func _apply_typed_player_setup(player: PlayerClass, config: PlayerSetup) -> void:
 	player.player_name = config.normalized_display_name()
 	player.player_types = config.profession_type as PlayerClass.PlayerCharacter
-	player.start_coord = MapSection.出生点坐标[config.starting_region]
+	player.start_coord = TutorialDefinition.START if GameManager.is_tutorial_session() else MapSection.出生点坐标[config.starting_region]
 	player.player_index = config.slot_index
 	player.is_bot = config.is_bot()
 	player.ai_difficulty = int(config.ai_difficulty)

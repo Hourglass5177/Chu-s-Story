@@ -7,6 +7,8 @@ extends RefCounted
 
 
 func prepare_local_session(setup: SessionSetup) -> Error:
+	if setup != null and setup.mode == SessionSetup.GameMode.TUTORIAL:
+		return GameManager.begin_tutorial_session()
 	return GameManager.begin_local_session(setup)
 
 

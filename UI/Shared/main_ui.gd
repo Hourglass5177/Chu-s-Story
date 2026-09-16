@@ -13,7 +13,7 @@ static var _theme: Theme
 
 static func texture(key: String) -> Texture2D:
 	if not _textures.has(key):
-		_textures[key] = load(ROOT + key + ".png")
+		_textures[key] = load("res://arts/branding-v2/logo-combined.png" if key in ["logo", "loading_logo"] else ROOT + key + ".png")
 	return _textures[key] as Texture2D
 
 static func box(key: String = "panel", margin: float = 36.0) -> StyleBoxTexture:

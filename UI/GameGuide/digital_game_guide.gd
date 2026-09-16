@@ -72,9 +72,6 @@ static var _developer_view_enabled: bool = false
 @onready var _media_preview_caption: Label = %MediaPreviewCaption
 @onready var _media_preview_close: Button = %MediaPreviewClose
 
-var _original_board_styles: Dictionary = {}
-var _original_guide_theme: Theme
-var _board_shell_defaults: Dictionary = {}
 
 var _catalog: ManualCatalog
 var _context: GuideOpenContext = null
@@ -121,9 +118,6 @@ var _compendium_filters: Dictionary = {
 
 func _ready() -> void:
 	super._ready()
-	_original_guide_theme = theme
-	for control in [_frame, _sidebar, _content_panel]:
-		_original_board_styles[control] = control.get_theme_stylebox("panel")
 	if not _catalog_injected_for_test:
 		_catalog = ManualCatalog.load_generated()
 	if _catalog != null and not _catalog.validate().is_empty():
@@ -881,11 +875,10 @@ func _add_rich_text(parent: Control, value: String, font_size: int, color: Color
 	label.add_theme_color_override("default_color", color)
 	label.add_theme_constant_override("line_separation", 7)
 	label.text = _restricted_markdown_to_bbcode(value)
-	if _view_mode != ViewMode.MINIGAME_GALLERY:
-		label.add_theme_font_override("normal_font", MainUI.FONT)
-		label.add_theme_font_override("bold_font", preload("res://arts/ui-main-v1/fonts/SourceHanSansSC-Bold.otf"))
-		label.add_theme_font_size_override("normal_font_size", maxi(font_size, 40))
-		label.add_theme_font_size_override("bold_font_size", maxi(font_size, 40))
+	label.add_theme_font_override("normal_font", MainUI.FONT)
+	label.add_theme_font_override("bold_font", preload("res://arts/ui-main-v1/fonts/SourceHanSansSC-Bold.otf"))
+	label.add_theme_font_size_override("normal_font_size", maxi(font_size, 40))
+	label.add_theme_font_size_override("bold_font_size", maxi(font_size, 40))
 	parent.add_child(label)
 	return label
 
@@ -1904,10 +1897,9 @@ func _add_button(parent: Control, text: String, minimum: Vector2) -> Button:
 	button.custom_minimum_size = minimum
 	button.focus_mode = Control.FOCUS_ALL
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	if _view_mode != ViewMode.MINIGAME_GALLERY:
-		MainUI.compact_button(button)
-		MainUI.label(button, 36)
-		button.custom_minimum_size.y = maxf(minimum.y, 86)
+	MainUI.compact_button(button)
+	MainUI.label(button, 36)
+	button.custom_minimum_size.y = maxf(minimum.y, 86)
 	parent.add_child(button)
 	return button
 
@@ -1919,7 +1911,7 @@ func _add_label(parent: Control, text: String, font_size: int, color: Color) -> 
 	label.add_theme_color_override("font_color", color)
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	if _view_mode != ViewMode.MINIGAME_GALLERY: MainUI.label(label, maxi(font_size, 36), font_size >= 44)
+	MainUI.label(label, maxi(font_size, 36), font_size >= 44)
 	parent.add_child(label)
 	return label
 
@@ -2288,30 +2280,18 @@ func _refresh_current_view_for_developer_toggle() -> void:
 				_render_home()
 
 func _apply_board_guide_style() -> void:
-	var gallery := _view_mode == ViewMode.MINIGAME_GALLERY
-	theme = _original_guide_theme if gallery else MainUI.theme()
+	# All guide destinations share the board shell, including minigame discovery.
+	theme = MainUI.theme()
 	var shell: Array[Control] = [_sidebar, _brand, _breadcrumb, _progress_label, _back_button, _close_button, _drawer_button, _previous_button, _next_button, _home_button, _quick_button, _rules_button, _compendium_button, _minigame_button, _continue_button, _context_button]
 	for control in shell:
-		if not _board_shell_defaults.has(control):
-			var properties := {"theme": control.theme, "custom_minimum_size": control.custom_minimum_size}
-			for property in control.get_property_list():
-				if String(property.name).begins_with("theme_override"):
-					properties[property.name] = control.get(property.name)
-			_board_shell_defaults[control] = properties
-		if gallery:
-			for property in control.get_property_list():
-				if String(property.name).begins_with("theme_override"):
-					control.set(property.name, null)
-			for property in _board_shell_defaults[control]: control.set(property, _board_shell_defaults[control][property])
-		elif control is Button:
+		if control is Button:
 			MainUI.button(control)
 			MainUI.label(control, 40)
 		elif control is Label:
 			MainUI.label(control, 38)
 	for pair in [[_frame, "guide_panel"], [_sidebar, "guide_sidebar"], [_content_panel, "guide_content"]]:
 		var control: Control = pair[0]
-		control.add_theme_stylebox_override("panel", _original_board_styles[control] if gallery else MainUI.box(pair[1], 32 if control == _sidebar else 48))
-	if gallery: return
+		control.add_theme_stylebox_override("panel", MainUI.box(pair[1], 32 if control == _sidebar else 48))
 	_sidebar.custom_minimum_size.x = 400
 	for control: Button in [_home_button, _quick_button, _rules_button, _compendium_button, _minigame_button, _continue_button, _context_button]:
 		control.custom_minimum_size.y = 112

@@ -1,0 +1,25 @@
+{
+  "method": "Direct alpha composition of supplied PNGs; equal-aspect resize and centering only. No generation, recoloring or background removal.",
+  "frame_native_size": [
+    912,
+    912
+  ],
+  "inner_bounds": [
+    140,
+    128,
+    624,
+    638
+  ],
+  "inset": 10,
+  "source_sha256": {
+    "frame.png": "a72d3eb662fa4877c5ee09cac9b27f2127409cd8af0dd82e4c33929bd5c8dcd5",
+    "wordmark.png": "652ff9dd17d80c1df69d4c8dd997a512b4046c1f74cf8f38c2a918eec63d93ba"
+  },
+  "output_sha256": "0efb2a92527208279e8c346b0547710cc1ff75e4d2a7b874ba2106755548d735",
+  "script": "tools/compose_brand_logo.ps1",
+  "original_directory": "E:/大学/MEMO/桌游 · 楚物志/新版素材/现有素材/01_品牌与Logo",
+  "original_files": {
+    "frame.png": "底部缺角框.png",
+    "wordmark.png": "彩色logov1.png"
+  }
+}

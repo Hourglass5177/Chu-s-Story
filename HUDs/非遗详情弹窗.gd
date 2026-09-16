@@ -100,12 +100,16 @@ func _refresh_task_panel() -> void:
 		return
 	var check := HeritageTaskManager.get_attempt_check(current_player, current_card)
 	task_button.text = "传承任务"
-	task_button.disabled = check == null or not check.allowed or _active_attempt != null or (current_player != null and current_player.is_bot)
+	task_button.disabled = not GameManager.allows_tutorial_action(&"inherit") or check == null or not check.allowed or _active_attempt != null or (current_player != null and current_player.is_bot)
 	task_cost.text = "消耗1精力" if check != null and check.allowed else ""
 	task_status.text = "未传承" if check != null and check.allowed else (check.message if check != null else "当前不可挑战")
 
 
 func _on_task_pressed() -> void:
+	if GameManager.is_tutorial_session():
+		if is_instance_valid(GameManager.tutorial_controller):
+			GameManager.tutorial_controller.present_inheritance(self)
+		return
 	if current_player != null and current_player.is_bot: return
 	if _active_attempt != null or current_card == null or current_player == null:
 		return

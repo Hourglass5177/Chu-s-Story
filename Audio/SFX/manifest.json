@@ -1,0 +1,345 @@
+[
+  {
+    "cue": "dice_roll",
+    "source": "dice-shake-1.ogg",
+    "pack": "casino",
+    "license": "CC0-1.0",
+    "source_sha256": "ba603441c857204dbe3ff3345902c7e1c3f523bf1bd314acf088609bc6c1e4e5",
+    "sha256": "1391f161d668a1d8008e10b03248923addaf5b4a79232fc0486c77c4505ee614",
+    "duration": 0.66
+  },
+  {
+    "cue": "dice_land",
+    "source": "die-throw-1.ogg",
+    "pack": "casino",
+    "license": "CC0-1.0",
+    "source_sha256": "b31d716165be60e442da3c1ca25a3968aad1e0851a7f0859f495aecc02fd9e13",
+    "sha256": "75b6192138b3e189151b851c6f4b9d41d0804223bdb5f7a617d45aac763e52d5",
+    "duration": 0.3
+  },
+  {
+    "cue": "card",
+    "source": "card-slide-1.ogg",
+    "pack": "casino",
+    "license": "CC0-1.0",
+    "source_sha256": "006cf9822d15d7063f8899e56041f41646df30adb6fbd8b974ee5d5420012690",
+    "sha256": "8e2b814caa90e4f5398d81598c764fe16349de30b68768963b4989a74a482c13",
+    "duration": 0.24
+  },
+  {
+    "cue": "page",
+    "source": "card-fan-1.ogg",
+    "pack": "casino",
+    "license": "CC0-1.0",
+    "source_sha256": "7a9758ccad8899baef1b9f60b4064e4baa724a548293832fdaea07e6e07e638d",
+    "sha256": "2421f49f13b3a7835357e77bc8825e22ddaf4b36425ea9a06ce366470140347c",
+    "duration": 0.24984126984126984
+  },
+  {
+    "cue": "trade",
+    "source": "chips-handle-1.ogg",
+    "pack": "casino",
+    "license": "CC0-1.0",
+    "source_sha256": "a2c495237fb0dc0dc96ccc2c9840572edd226e6459398ecb631c6c9f9e5408f0",
+    "sha256": "280e32970faa00b0a2394c3144fae86476e9d18e791728663bab1448fce6133a",
+    "duration": 0.34
+  },
+  {
+    "cue": "move",
+    "source": "chip-lay-1.ogg",
+    "pack": "casino",
+    "license": "CC0-1.0",
+    "source_sha256": "4b2111252ccb64eed67f171e061053849cfbb29873536c03948646f244a3905c",
+    "sha256": "9275bc328a880ac985ce83f4afe5a0a2ec56dc78d18251879e53d12337f2bd67",
+    "duration": 0.1581859410430839
+  },
+  {
+    "cue": "confirm",
+    "label": "确认 / 选择 · 木鱼轻点",
+    "revision": "soft-percussion-v4",
+    "source": [
+      "mokugyo-607215-hq.mp3"
+    ],
+    "license": "CC0-1.0",
+    "processing": "original-speed cloth-beater wooden fish recording; 7ms softened attack, 60ms release; no pitch shift, strings, gong, or added reverb",
+    "lowpass_hz": 2400,
+    "export_gain": 0.22,
+    "source_sha256": {
+      "mokugyo-607215-hq.mp3": "1d9ff75843635b1d5cc1b3e446e6e350eaa65faa33a2423dbd42bd5e75124cc9"
+    },
+    "sha256": "f4a86d26265d1924af591245a7975dbf069364b7a99e0e2b71c8079ea44b2d82",
+    "duration": 0.14
+  },
+  {
+    "cue": "back",
+    "label": "返回 / 取消 / 关闭 · 木鱼轻收",
+    "revision": "soft-percussion-v4",
+    "source": [
+      "mokugyo-607215-hq.mp3"
+    ],
+    "license": "CC0-1.0",
+    "processing": "original-speed cloth-beater wooden fish recording; 7ms softened attack, 60ms release; no pitch shift, strings, gong, or added reverb",
+    "lowpass_hz": 1650,
+    "export_gain": 0.18,
+    "source_sha256": {
+      "mokugyo-607215-hq.mp3": "1d9ff75843635b1d5cc1b3e446e6e350eaa65faa33a2423dbd42bd5e75124cc9"
+    },
+    "sha256": "cad441b7fbf177216e3e04ecfd5ed80f9bafdbb1f963292c3f8c0a670e8eab8a",
+    "duration": 0.16
+  },
+  {
+    "cue": "invalid",
+    "label": "无效操作 · 木鱼短点",
+    "revision": "soft-percussion-v4",
+    "source": [
+      "mokugyo-607215-hq.mp3"
+    ],
+    "license": "CC0-1.0",
+    "processing": "original-speed cloth-beater wooden fish recording; 7ms softened attack, 60ms release; no pitch shift, strings, gong, or added reverb",
+    "lowpass_hz": 1850,
+    "export_gain": 0.24,
+    "source_sha256": {
+      "mokugyo-607215-hq.mp3": "1d9ff75843635b1d5cc1b3e446e6e350eaa65faa33a2423dbd42bd5e75124cc9"
+    },
+    "sha256": "f0ff69299accdd3ac87b7a32c4845e49a6d617ae1d34c02d08f02f74fdb6ced4",
+    "duration": 0.18
+  },
+  {
+    "cue": "turn",
+    "label": "回合 · 一声淡弦",
+    "revision": "soft-natural-v3",
+    "source": [
+      "guzheng-847157-hq.mp3"
+    ],
+    "license": "CC0-1.0",
+    "processing": "original-speed samples, soft attack, natural decay, fixed gain without peak normalization",
+    "notes_hz": [
+      219.0
+    ],
+    "export_gain": 0.26,
+    "percussion_pitch": null,
+    "source_sha256": {
+      "guzheng-847157-hq.mp3": "5e0204e3f110922f9dc19b0f24d029406ec0bc0e0ae2eaa80e27682952eacacf"
+    },
+    "sha256": "f29d9aee2b1f1edc5063be7cc94f42ea480f9628ca2b39ab3300ca8e1f539b47",
+    "duration": 0.8
+  },
+  {
+    "cue": "action",
+    "label": "行动 · 短弦",
+    "revision": "soft-natural-v3",
+    "source": [
+      "guzheng-847157-hq.mp3"
+    ],
+    "license": "CC0-1.0",
+    "processing": "original-speed samples, soft attack, natural decay, fixed gain without peak normalization",
+    "notes_hz": [
+      219.0
+    ],
+    "export_gain": 0.24,
+    "percussion_pitch": null,
+    "source_sha256": {
+      "guzheng-847157-hq.mp3": "5e0204e3f110922f9dc19b0f24d029406ec0bc0e0ae2eaa80e27682952eacacf"
+    },
+    "sha256": "7571cf4aee052f0927b42c9d012caddd74f8cfb2cc3b84c6ba057d81f79dbb62",
+    "duration": 0.5
+  },
+  {
+    "cue": "warning",
+    "label": "倒计时 · 木鱼轻双点",
+    "revision": "soft-percussion-v4",
+    "source": [
+      "mokugyo-607215-hq.mp3"
+    ],
+    "license": "CC0-1.0",
+    "processing": "original-speed cloth-beater wooden fish recording; 7ms softened attack, 60ms release; no pitch shift, strings, gong, or added reverb",
+    "lowpass_hz": 2250,
+    "export_gain": 0.25,
+    "source_sha256": {
+      "mokugyo-607215-hq.mp3": "1d9ff75843635b1d5cc1b3e446e6e350eaa65faa33a2423dbd42bd5e75124cc9"
+    },
+    "sha256": "5d27676a2be444b3f07e34c8e3fd2c1a45c7b41dde936aa8526e3661ad1c2279",
+    "duration": 0.4
+  },
+  {
+    "cue": "recover",
+    "label": "恢复 · 舒展双弦",
+    "revision": "soft-natural-v3",
+    "source": [
+      "guzheng-847157-hq.mp3"
+    ],
+    "license": "CC0-1.0",
+    "processing": "original-speed samples, soft attack, natural decay, fixed gain without peak normalization",
+    "notes_hz": [
+      130.3,
+      219.0
+    ],
+    "export_gain": 0.24,
+    "percussion_pitch": null,
+    "source_sha256": {
+      "guzheng-847157-hq.mp3": "5e0204e3f110922f9dc19b0f24d029406ec0bc0e0ae2eaa80e27682952eacacf"
+    },
+    "sha256": "e31589f26182fd2280113137cda9214a1c225fb97c0c74dd4f21658494179d03",
+    "duration": 0.98
+  },
+  {
+    "cue": "event",
+    "label": "事件 · 淡低弦",
+    "revision": "soft-natural-v3",
+    "source": [
+      "guzheng-847157-hq.mp3"
+    ],
+    "license": "CC0-1.0",
+    "processing": "original-speed samples, soft attack, natural decay, fixed gain without peak normalization",
+    "notes_hz": [
+      130.3
+    ],
+    "export_gain": 0.24,
+    "percussion_pitch": null,
+    "source_sha256": {
+      "guzheng-847157-hq.mp3": "5e0204e3f110922f9dc19b0f24d029406ec0bc0e0ae2eaa80e27682952eacacf"
+    },
+    "sha256": "8982a055b58be09fb1d973d30cb6717c278b7a26f49be2502faf3b5e7f771bb2",
+    "duration": 0.72
+  },
+  {
+    "cue": "response",
+    "label": "响应 · 木鱼轻点",
+    "revision": "soft-percussion-v4",
+    "source": [
+      "mokugyo-607215-hq.mp3"
+    ],
+    "license": "CC0-1.0",
+    "processing": "original-speed cloth-beater wooden fish recording; 7ms softened attack, 60ms release; no pitch shift, strings, gong, or added reverb",
+    "lowpass_hz": 2150,
+    "export_gain": 0.2,
+    "source_sha256": {
+      "mokugyo-607215-hq.mp3": "1d9ff75843635b1d5cc1b3e446e6e350eaa65faa33a2423dbd42bd5e75124cc9"
+    },
+    "sha256": "c6ec45eae0788c81cf0bf498bec94a8b91de9b828cb4cca74734ef49f01e3549",
+    "duration": 0.14
+  },
+  {
+    "cue": "achievement",
+    "label": "成就 · 古筝华彩",
+    "revision": "achievement-result-v5",
+    "source": [
+      "guzheng-847157-hq.mp3"
+    ],
+    "license": "CC0-1.0",
+    "processing": "five-note rising guzheng figure, soft tonic landing, subtle early reflections; nearby sample transposition within four semitones; no gong",
+    "notes_hz": [
+      130.3,
+      164.17,
+      195.11,
+      219.0,
+      260.6
+    ],
+    "events": [
+      [
+        0.0,
+        130.3,
+        0.48
+      ],
+      [
+        0.14,
+        164.17,
+        0.54
+      ],
+      [
+        0.29,
+        195.11,
+        0.61
+      ],
+      [
+        0.47,
+        219.0,
+        0.7
+      ],
+      [
+        0.75,
+        260.6,
+        0.85
+      ],
+      [
+        0.77,
+        130.3,
+        0.23
+      ],
+      [
+        0.8,
+        195.11,
+        0.18
+      ]
+    ],
+    "export_gain": 0.22,
+    "source_sha256": {
+      "guzheng-847157-hq.mp3": "5e0204e3f110922f9dc19b0f24d029406ec0bc0e0ae2eaa80e27682952eacacf"
+    },
+    "sha256": "5bad91bf5a634f90a4521364a8872a101444221f751542bb4c89c103039126d3",
+    "duration": 1.9
+  },
+  {
+    "cue": "result",
+    "label": "结算 · 单弦收束",
+    "revision": "achievement-result-v5",
+    "source": [
+      "guzheng-847157-hq.mp3"
+    ],
+    "license": "CC0-1.0",
+    "processing": "one original-speed low guzheng pluck; soft attack and release; no arpeggio, chord, gong or added reflections",
+    "notes_hz": [
+      130.3
+    ],
+    "events": [
+      [
+        0.0,
+        130.3,
+        1.0
+      ]
+    ],
+    "export_gain": 0.2,
+    "source_sha256": {
+      "guzheng-847157-hq.mp3": "5e0204e3f110922f9dc19b0f24d029406ec0bc0e0ae2eaa80e27682952eacacf"
+    },
+    "sha256": "277b76f646d3e5e2b5042a63e180dda71970724b1b27fa29e710a0f488d5ca46",
+    "duration": 0.65
+  },
+  {
+    "cue": "eliminate",
+    "label": "淘汰 · 低弦渐收",
+    "revision": "soft-natural-v3",
+    "source": [
+      "guzheng-847157-hq.mp3"
+    ],
+    "license": "CC0-1.0",
+    "processing": "original-speed samples, soft attack, natural decay, fixed gain without peak normalization",
+    "notes_hz": [
+      130.3
+    ],
+    "export_gain": 0.24,
+    "percussion_pitch": null,
+    "source_sha256": {
+      "guzheng-847157-hq.mp3": "5e0204e3f110922f9dc19b0f24d029406ec0bc0e0ae2eaa80e27682952eacacf"
+    },
+    "sha256": "39b4c65c2792e0ad53e3694842d229a0731e90097569c6196ea5437e474536be",
+    "duration": 0.85
+  },
+  {
+    "cue": "technical",
+    "label": "异常 · 木鱼单点",
+    "revision": "soft-percussion-v4",
+    "source": [
+      "mokugyo-607215-hq.mp3"
+    ],
+    "license": "CC0-1.0",
+    "processing": "original-speed cloth-beater wooden fish recording; 7ms softened attack, 60ms release; no pitch shift, strings, gong, or added reverb",
+    "lowpass_hz": 1800,
+    "export_gain": 0.24,
+    "source_sha256": {
+      "mokugyo-607215-hq.mp3": "1d9ff75843635b1d5cc1b3e446e6e350eaa65faa33a2423dbd42bd5e75124cc9"
+    },
+    "sha256": "6712753a48d06da1a898734422d9705011f8593b90d0a02513af50e260efec3a",
+    "duration": 0.2
+  }
+]

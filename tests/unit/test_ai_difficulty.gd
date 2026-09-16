@@ -1,5 +1,32 @@
 extends GutTest
 
+func test_profession_move_routes_to_supply_without_spending_last_energy() -> void:
+	var observation := view()
+	observation.state.self.energy = 1
+	observation.state.map = [
+		{"position": Vector3i.ZERO, "cost": 1, "type": 1, "occupied": true, "fresh_scenery": false, "supply": true, "region": 0},
+		{"position": Vector3i(1,-1,0), "cost": 1, "type": 0, "occupied": false, "fresh_scenery": false},
+		{"position": Vector3i(2,-2,0), "cost": 1, "type": 4, "occupied": false, "fresh_scenery": false}]
+	for difficulty: int in 3:
+		var policy := AIPolicy.new()
+		policy.profile = AIProfile.for_difficulty(difficulty)
+		policy.prepare_choice_observation(observation)
+		var connector: Dictionary = observation.state.map[1]
+		assert_gt(policy.profession_move_value(connector, observation, true), 0.0)
+		assert_gt(policy.profession_move_value(connector, observation, false), 0.0)
+		assert_eq(observation.state.self.energy, 1)
+		assert_eq(observation.state.self.position, Vector3i.ZERO)
+
+func test_profession_end_does_not_award_begin_arrival_recovery() -> void:
+	var observation := view()
+	observation.state.self.energy = 1
+	var tile := {"position": Vector3i(1,-1,0), "cost": 1, "type": 5, "occupied": false, "fresh_scenery": true}
+	observation.state.map = [{"position": Vector3i.ZERO, "cost": 1, "type": 0, "occupied": true, "fresh_scenery": false}, tile]
+	var policy := AIPolicy.new()
+	policy.prepare_choice_observation(observation)
+	assert_gt(policy.profession_move_value(tile, observation, true), policy.profession_move_value(tile, observation, false))
+	assert_eq(observation.state.self.energy, 1)
+
 func test_position_cache_distinguishes_equal_size_food_hands() -> void:
 	var observation := view()
 	observation.state.self.energy = 1

@@ -23,7 +23,7 @@ const HERITAGE_TASK_DEFINITION_ROOT: String = "res://InheritanceTasks/Definition
 const VOCAL_SCORER_PATH := "res://InheritanceTasks/Common/onnx_crepe_vocal_scorer.gd"
 const FRONTEND_THEME: Theme = preload("res://UI/Frontend/frontend_theme.tres")
 const SESSION_LAUNCHER_SCRIPT: Script = preload("res://UI/Frontend/frontend_session_launcher.gd")
-const TITLE_TEXTURE: Texture2D = preload("res://arts/素材合集/主界面（启动+首页）/游戏标题.png")
+const TITLE_TEXTURE: Texture2D = preload("res://arts/branding-v2/logo-combined.png")
 
 const SCREEN_HOME := &"home"
 const SCREEN_MODE := &"mode"
@@ -42,6 +42,7 @@ const STABLE_SCREENS: Array[StringName] = [
 
 var _draft := SessionSetup.new()
 var _preferences := FrontendUIPreferences.new()
+var _general_settings: GameSettingsPanel
 var _pages: Dictionary[StringName, FrontendScreen] = {}
 var _current_screen: StringName = &""
 var _shell: Control
@@ -85,6 +86,11 @@ var _practice_definition_paths: Dictionary = {}
 
 
 func _ready() -> void:
+	BoardMusic.ensure_started()
+	BoardSfx.attach_scene(self)
+	if GameManager.open_local_setup_on_menu:
+		GameManager.open_local_setup_on_menu = false
+		call_deferred(&"request_mode", SessionSetup.GameMode.LOCAL)
 	# SceneTree 的暂停状态会跨场景保留。主菜单不属于游戏内暂停域，
 	# 无论它由终局、调试入口还是异常中断进入，都必须先恢复前端输入。
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -107,6 +113,7 @@ func _exit_tree() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if Settings.is_panel_open(): return
 	if is_instance_valid(_practice_host):
 		return
 	if _modal_layer != null and _modal_layer.visible:
@@ -171,7 +178,12 @@ func request_mode(mode: int) -> bool:
 		SessionSetup.GameMode.LOCAL:
 			_draft.mode = SessionSetup.GameMode.LOCAL
 			show_screen(SCREEN_LOCAL_COUNT)
-		SessionSetup.GameMode.NETWORK, SessionSetup.GameMode.TUTORIAL:
+		SessionSetup.GameMode.TUTORIAL:
+			if _start_locked: return false
+			_start_locked = true
+			show_screen(SCREEN_LOADING)
+			_begin_local_session(TutorialDefinition.make_setup())
+		SessionSetup.GameMode.NETWORK:
 			_show_toast("暂未开放")
 	return true
 
@@ -276,15 +288,7 @@ func _style_setup_page(page: Control) -> void:
 		setup_frame.content_margin_bottom = 48
 		page.get_node("SafeArea/PagePanel").add_theme_stylebox_override("panel", setup_frame)
 		_player_setup_page.portrait.custom_minimum_size.y = 300
-		page.get_node("SafeArea/PagePanel/Content/MainRow/BirthplaceColumn/BirthMapFrame").custom_minimum_size.y = 260
-		for hotspot: Button in _player_setup_page.birthplace_hotspots.get_children():
-			MainUI.compact_button(hotspot)
-			MainUI.label(hotspot, 26)
-			hotspot.custom_minimum_size = Vector2(82, 56)
-			hotspot.offset_left = -41
-			hotspot.offset_right = 41
-			hotspot.offset_top = -28
-			hotspot.offset_bottom = 28
+		MainUI.label(page.get_node("SafeArea/PagePanel/Content/MainRow/BirthplaceColumn/ListHint"), 30)
 
 
 func _capture_and_hide_legacy_nodes() -> void:
@@ -312,7 +316,7 @@ func _build_home_page() -> void:
 	var body := page.get_node("%Body") as VBoxContainer
 	var title := TextureRect.new()
 	title.texture = MainUI.texture("logo")
-	title.custom_minimum_size = Vector2(760, 350)
+	title.custom_minimum_size = Vector2(760, 450)
 	title.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	title.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	title.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -330,11 +334,25 @@ func _build_home_page() -> void:
 	start_button.pressed.connect(func() -> void: show_screen(SCREEN_MODE))
 	rules_button.pressed.connect(func() -> void: open_game_guide())
 	credits_button.pressed.connect(func() -> void:
-		_show_text_modal("制作人员", _read_legacy_text("CreditsPanel/Label"), credits_button)
+		_show_credits_modal(credits_button)
 	)
 	exit_button.pressed.connect(func() -> void: get_tree().quit())
 	_link_horizontal_focus([start_button, rules_button, credits_button, exit_button])
 	page.initial_focus_path = page.get_path_to(start_button)
+	_general_settings = GameSettingsPanel.mount(self)
+	var settings_button := Button.new()
+	settings_button.text = "设置"
+	page.add_child(settings_button)
+	settings_button.name = "SettingsButton"
+	MainUI.button(settings_button, "secondary")
+	settings_button.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+	settings_button.offset_left = -270
+	settings_button.offset_right = -40
+	settings_button.offset_top = 32
+	settings_button.offset_bottom = 136
+	settings_button.pressed.connect(func() -> void: _general_settings.open_panel(settings_button))
+	settings_button.focus_neighbor_bottom = start_button.get_path()
+	start_button.focus_neighbor_top = settings_button.get_path()
 
 
 func _build_mode_page() -> void:
@@ -347,7 +365,7 @@ func _build_mode_page() -> void:
 	body.add_child(cards)
 	var local_card := _new_card("本地游戏", "1–6 人同屏游玩", null, cards)
 	var network_card := _new_card("网络游戏", "暂未开放", null, cards)
-	var tutorial_card := _new_card("教学模式", "暂未开放", null, cards)
+	var tutorial_card := _new_card("教学模式", "跟着博主，学会一回合", null, cards)
 	local_card.activated.connect(func() -> void: request_mode(SessionSetup.GameMode.LOCAL))
 	network_card.activated.connect(func() -> void: request_mode(SessionSetup.GameMode.NETWORK))
 	tutorial_card.activated.connect(func() -> void: request_mode(SessionSetup.GameMode.TUTORIAL))
@@ -446,6 +464,7 @@ func _build_player_setup_page() -> void:
 	_player_setup_page.previous_requested.connect(_on_player_setup_previous)
 	_player_setup_page.invalid_action.connect(_show_toast)
 	_player_setup_page.player_draft_changed.connect(_mark_slot_touched)
+	_player_setup_page.map_preview_requested.connect(_show_birthplace_map)
 
 
 func _build_roster_page() -> void:
@@ -465,15 +484,51 @@ func _build_roster_page() -> void:
 func _build_loading_page() -> void:
 	var page := _create_page(SCREEN_LOADING, "准备中", "本地游戏", Vector2(900, 620))
 	page.handle_cancel_action = false
-	var body := page.get_node("%Body") as VBoxContainer
-	var spacer := Control.new()
-	spacer.custom_minimum_size.y = 80
-	body.add_child(spacer)
-	_loading_label = _new_label("正在准备", 42, HORIZONTAL_ALIGNMENT_CENTER)
-	body.add_child(_loading_label)
-	var note := _new_label("请稍候", 26, HORIZONTAL_ALIGNMENT_CENTER)
-	note.add_theme_color_override("font_color", FrontendStyle.BROWN_MUTED)
-	body.add_child(note)
+	page.initial_focus_path = NodePath()
+	page.transition_target_path = NodePath()
+	page.get_node("Backdrop").hide()
+	page.get_node("SafeArea").hide()
+	# The delivered illustration has six full figures below a quiet sky. Keep it
+	# intact at both 16:9 and 16:10; place all loading copy in that sky, not a modal.
+	var paper := ColorRect.new()
+	paper.color = Color("f6e8c9")
+	paper.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	page.add_child(paper)
+	paper.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var art := MainUI.surface(page, "home", "LoadingArtwork")
+	page.move_child(paper, 0)
+	art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	var heading := VBoxContainer.new()
+	heading.name = "LoadingHeading"
+	heading.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	heading.alignment = BoxContainer.ALIGNMENT_CENTER
+	heading.add_theme_constant_override("separation", 12)
+	page.add_child(heading)
+	heading.anchor_left = 0.25
+	heading.anchor_right = 0.75
+	heading.anchor_top = 0.025
+	heading.anchor_bottom = 0.29
+	var logo := TextureRect.new()
+	logo.name = "OfficialLoadingLogo"
+	logo.texture = MainUI.texture("loading_logo")
+	logo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	logo.custom_minimum_size = Vector2(250, 300)
+	logo.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	logo.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	heading.add_child(logo)
+	var status := HBoxContainer.new()
+	status.alignment = BoxContainer.ALIGNMENT_CENTER
+	status.add_theme_constant_override("separation", 0)
+	heading.add_child(status)
+	var note := _new_label("正在加载", 36, HORIZONTAL_ALIGNMENT_CENTER)
+	MainUI.label(note, 36)
+	status.add_child(note)
+	_loading_label = _new_label("", 40, HORIZONTAL_ALIGNMENT_LEFT)
+	MainUI.label(_loading_label, 40)
+	_loading_label.custom_minimum_size.x = 64
+	status.add_child(_loading_label)
 	_loading_timer = Timer.new()
 	_loading_timer.wait_time = 0.28
 	_loading_timer.timeout.connect(_advance_loading_indicator)
@@ -522,6 +577,7 @@ func _sync_page(screen_name: StringName) -> void:
 
 
 func _on_page_back(screen_name: StringName) -> void:
+	_preferences.request_feedback(&"back")
 	if _modal_layer != null and _modal_layer.visible:
 		_close_modal(false)
 		return
@@ -700,7 +756,7 @@ func _prepare_pending_local_session(generation: int) -> void:
 	var error := _session_launcher.prepare_local_session(snapshot)
 	if error != OK:
 		_start_locked = false
-		show_screen(SCREEN_ROSTER, false)
+		show_screen(SCREEN_MODE if snapshot.mode == SessionSetup.GameMode.TUTORIAL else SCREEN_ROSTER, false)
 		_show_toast("无法开始游戏")
 		return
 	local_setup_confirmed.emit(snapshot.duplicate_snapshot())
@@ -708,13 +764,13 @@ func _prepare_pending_local_session(generation: int) -> void:
 	if scene_error != OK:
 		_start_locked = false
 		_session_launcher.rollback_session()
-		show_screen(SCREEN_ROSTER, false)
+		show_screen(SCREEN_MODE if snapshot.mode == SessionSetup.GameMode.TUTORIAL else SCREEN_ROSTER, false)
 		_show_toast("场景加载失败")
 
 
 func _advance_loading_indicator() -> void:
 	_loading_dot_count = (_loading_dot_count + 1) % 4
-	_loading_label.text = "正在准备%s" % ".".repeat(_loading_dot_count)
+	_loading_label.text = ".".repeat(_loading_dot_count)
 
 
 func _build_modal_layer() -> void:
@@ -734,6 +790,8 @@ func _build_modal_layer() -> void:
 	_modal_layer.add_child(center)
 	_modal_panel = PanelContainer.new()
 	_modal_panel.custom_minimum_size = Vector2(920, 480)
+	_modal_panel.theme = MainUI.theme()
+	_modal_panel.add_theme_stylebox_override("panel", MainUI.box("panel", 64))
 	center.add_child(_modal_panel)
 	_modal_body = VBoxContainer.new()
 	_modal_body.add_theme_constant_override("separation", 24)
@@ -866,6 +924,105 @@ func _index_practice_definitions(root_path: String) -> void:
 			_practice_definition_paths[definition.task_id] = path
 
 
+func _show_birthplace_map() -> void:
+	if _modal_layer.visible or not _player_setup_page.is_interaction_enabled(): return
+	var selected := _draft.players[_editing_slot].starting_region
+	var region_name := String(MapSection.REGION.find_key(selected)) if MapSection.出生点坐标.has(selected) else "未选择"
+	_prepare_modal("对局地图 · 出生点：" + region_name, _player_setup_page.map_zoom_button)
+	_modal_panel.custom_minimum_size = Vector2(2320, 1460)
+	# Share the exact texture displayed by the setup preview and the live board.
+	# Do not instantiate MAP here: its ready callbacks attach to the match managers.
+	var title := _modal_body.get_child(0) as Label
+	var separator := _modal_body.get_child(1)
+	_modal_body.remove_child(separator)
+	separator.queue_free()
+	var header := HBoxContainer.new()
+	_modal_body.add_child(header)
+	_modal_body.move_child(header, 0)
+	title.reparent(header)
+	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	MainUI.label(title, 44, true)
+	var close_button := _new_button("返回选择  Esc", header, Vector2(360, 104))
+	close_button.name = "CloseMapPreview"
+	MainUI.button(close_button)
+	close_button.pressed.connect(func(): _close_modal(false))
+	_link_horizontal_focus([close_button])
+	var map := TextureRect.new()
+	map.name = "FullBoardMap"
+	map.texture = (_player_setup_page.get_node("%BirthMap/MapTexture") as TextureRect).texture
+	map.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	map.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	map.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	map.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_modal_body.add_child(map)
+	close_button.grab_focus()
+
+
+func _show_credits_modal(return_focus: Control) -> void:
+	_prepare_modal("制作人员", return_focus)
+	_modal_panel.custom_minimum_size = Vector2(1840, 1320)
+	var scroll := ScrollContainer.new()
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_modal_body.add_child(scroll)
+	var content := VBoxContainer.new()
+	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	content.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	content.alignment = BoxContainer.ALIGNMENT_CENTER
+	content.add_theme_constant_override("separation", 24)
+	scroll.add_child(content)
+	# Keep the original credit text as the single source; only its layout is separated.
+	var lines := _read_legacy_text("CreditsPanel/Label").strip_edges().split("\n")
+	var heading := lines[0].strip_edges().trim_prefix("【====").trim_suffix("====】")
+	_credit_label(content, heading, 64, true)
+	_credit_label(content, lines[1].strip_edges(), 44)
+	var roles := HBoxContainer.new()
+	roles.add_theme_constant_override("separation", 48)
+	content.add_child(roles)
+	for index in range(2, 5):
+		var parts := lines[index].strip_edges().split("：", true, 1)
+		var column := VBoxContainer.new()
+		column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		column.add_theme_constant_override("separation", 18)
+		roles.add_child(column)
+		var caption := _credit_label(column, parts[0], 48, true)
+		caption.add_theme_color_override("font_color", Color("88612f"))
+		_credit_label(column, parts[1], 54)
+	var divider := HSeparator.new()
+	divider.custom_minimum_size.y = 32
+	content.add_child(divider)
+	for index in range(6, lines.size()):
+		var line := lines[index].strip_edges()
+		if line.is_empty(): continue
+		if line.begins_with("《"):
+			_credit_label(content, line, 48, true)
+		elif line.begins_with("=="):
+			_credit_label(content, line.trim_prefix("== ").trim_suffix(" =="), 48, true)
+		else:
+			var row := HBoxContainer.new()
+			row.alignment = BoxContainer.ALIGNMENT_CENTER
+			row.add_theme_constant_override("separation", 24)
+			content.add_child(row)
+			for person: String in line.split(" ", false):
+				var name_label := _credit_label(row, person, 48)
+				name_label.custom_minimum_size.x = 270
+	var close_button := _new_button("关闭", _modal_body, Vector2(360, 112))
+	MainUI.label(close_button, 48)
+	for color_name: String in ["font_hover_color", "font_pressed_color", "font_hover_pressed_color", "font_focus_color"]:
+		close_button.add_theme_color_override(color_name, MainUI.INK)
+	close_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	close_button.pressed.connect(func() -> void: _close_modal(true))
+	close_button.grab_focus()
+
+
+func _credit_label(parent: Node, text_value: String, font_size: int, heading := false) -> Label:
+	var label := _new_label(text_value, font_size, HORIZONTAL_ALIGNMENT_CENTER)
+	MainUI.label(label, font_size, heading)
+	parent.add_child(label)
+	return label
+
+
 func _show_text_modal(title_text: String, body_text: String, return_focus: Control) -> void:
 	_prepare_modal(title_text, return_focus)
 	_modal_panel.custom_minimum_size = Vector2(1420, 1060)
@@ -885,16 +1042,22 @@ func _show_text_modal(title_text: String, body_text: String, return_focus: Contr
 func _show_confirmation(title_text: String, message: String, confirm_text: String, on_confirm: Callable) -> void:
 	var focus_owner := get_viewport().gui_get_focus_owner()
 	_prepare_modal(title_text, focus_owner)
-	_modal_panel.custom_minimum_size = Vector2(900, 460)
-	var message_label := _new_label(message, 30, HORIZONTAL_ALIGNMENT_CENTER)
+	_modal_panel.custom_minimum_size = Vector2(1200, 600)
+	var message_label := _new_label(message, 40, HORIZONTAL_ALIGNMENT_CENTER)
+	MainUI.label(message_label, 40)
 	message_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	message_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_modal_body.add_child(message_label)
 	var actions := HBoxContainer.new()
 	actions.alignment = BoxContainer.ALIGNMENT_CENTER
+	actions.add_theme_constant_override("separation", 40)
 	_modal_body.add_child(actions)
-	var cancel_button := _new_button("取消", actions, Vector2(260, 76))
-	var confirm_button := _new_button(confirm_text, actions, Vector2(280, 76))
+	var cancel_button := _new_button("取消", actions, Vector2(360, 110))
+	var confirm_button := _new_button(confirm_text, actions, Vector2(360, 110))
+	MainUI.button(cancel_button)
+	MainUI.button(confirm_button, "danger")
+	for color_name in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+		confirm_button.add_theme_color_override(color_name, Color("fff4dc"))
 	_modal_callback = on_confirm
 	cancel_button.pressed.connect(func() -> void: _close_modal(false))
 	confirm_button.pressed.connect(func() -> void: _close_modal(true))
@@ -914,6 +1077,7 @@ func _prepare_modal(title_text: String, return_focus: Control) -> void:
 		current_page.set_interaction_enabled(false)
 	_modal_layer.visible = true
 	var title := _new_label(title_text, 48, HORIZONTAL_ALIGNMENT_CENTER)
+	MainUI.label(title, 56, true)
 	_modal_body.add_child(title)
 	_modal_body.add_child(HSeparator.new())
 
@@ -994,12 +1158,16 @@ func _show_toast(message: String) -> void:
 
 
 func _connect_preferences() -> void:
+	_preferences.reduce_motion = bool(Settings.get_value("reduce_motion"))
+	Settings.changed.connect(_on_general_setting_changed)
 	_preferences.ui_scale_changed.connect(func(value: float) -> void:
 		ui_scale_changed.emit(value)
 	)
 	_preferences.reduce_motion_changed.connect(func(enabled: bool) -> void: reduce_motion_changed.emit(enabled))
 	_preferences.ui_sound_enabled_changed.connect(func(enabled: bool) -> void: ui_sound_enabled_changed.emit(enabled))
-	_preferences.ui_feedback_requested.connect(func(cue: StringName) -> void: ui_feedback_requested.emit(cue))
+	_preferences.ui_feedback_requested.connect(func(cue: StringName) -> void:
+		ui_feedback_requested.emit(cue)
+		BoardSfx.request(cue))
 
 
 func _read_legacy_text(node_path: String) -> String:
@@ -1062,3 +1230,7 @@ func _link_horizontal_focus(controls: Array[Control]) -> void:
 		var next := controls[(index + 1) % controls.size()]
 		current.focus_neighbor_left = current.get_path_to(previous)
 		current.focus_neighbor_right = current.get_path_to(next)
+
+
+func _on_general_setting_changed(key: String, value: Variant) -> void:
+	if key == "reduce_motion": _preferences.reduce_motion = bool(value)

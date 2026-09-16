@@ -3,7 +3,7 @@ extends Resource
 
 const LABELS: Array[String] = ["简单", "普通", "困难"]
 const DESCRIPTIONS: Array[String] = ["偏重眼前收益，电脑传承成功率60%。", "兼顾资源与组合，电脑传承成功率80%。", "更重视长期目标与对手威胁，电脑传承必成功。"]
-@export var version: int = 3
+@export var version: int = 4
 @export var difficulty: int = 1
 @export var inheritance_chance: float = 0.8
 @export var planning_depth: int = 3

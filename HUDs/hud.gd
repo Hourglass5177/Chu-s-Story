@@ -1038,7 +1038,9 @@ func _get_map_section_tooltip_text(section: MapSection) -> String:
 	return "%s\nF1：相关规则" % section.get_tooltip_text()
 
 func _process(delta: float):
-	if _active_event_map_request != null:
+	if GameManager.is_tutorial_session():
+		time_label.visible = false
+	elif _active_event_map_request != null:
 		var choice_time_left := EventManager.get_choice_time_left(_active_event_map_request.request_id)
 		time_label.visible = choice_time_left > 0.0
 		time_label.text = "剩余 %d秒" % int(ceil(choice_time_left))
@@ -1126,6 +1128,11 @@ func _update_game_informs(information_to_display: String) -> void:
 	information.text = information_to_display
 
 func _update_button_states(phase: TurnManager.TurnPhase) -> void:
+	_update_core_button_states(phase)
+	if GameManager.is_tutorial_session() and is_instance_valid(GameManager.tutorial_controller):
+		GameManager.tutorial_controller.apply_button_rules()
+
+func _update_core_button_states(phase: TurnManager.TurnPhase) -> void:
 	btn_end_turn.text = "结束移动" if phase == TurnManager.TurnPhase.MOVING else "结束回合"
 	# 核心解耦：UI 自己决定什么时候按钮该亮起
 	btn_action.disabled = (phase != TurnManager.TurnPhase.ACTION)
@@ -1198,6 +1205,7 @@ func _update_button_states(phase: TurnManager.TurnPhase) -> void:
 	else: btn_action.text = "探索"
 
 func _on_btn_action_pressed() -> void:
+	if not GameManager.allows_tutorial_action(&"collect"): return
 	if _active_profession_map_request != null and _active_profession_map_request.optional:
 		ProfessionManager.submit_section_choice(_active_profession_map_request.request_id, null)
 		return
@@ -1206,6 +1214,7 @@ func _on_btn_action_pressed() -> void:
 	current_player.execute_tile_action()
 
 func _on_btn_end_turn_pressed() -> void:
+	if not GameManager.allows_tutorial_action(&"end"): return
 	var current_player: PlayerClass = TurnManager.players[TurnManager.now_player_index]
 	if current_player.is_bot: return
 	if current_player.is_working:
@@ -1220,6 +1229,7 @@ func _on_btn_end_turn_pressed() -> void:
 		current_player.emit_next_phase(TurnManager.TurnPhase.END)
 
 func _on_btn_food_pressed() -> void:
+	if not GameManager.allows_tutorial_action(&"food"): return
 	var current_player = TurnManager.players[TurnManager.now_player_index]
 	if current_player.is_bot: return
 	if current_player.is_working:
@@ -1449,31 +1459,34 @@ func prompt_passive_card_use(card_data: 非遗牌, callable_if_yes: Callable):
 	print("询问：是否要发动被动技能【", card_data.card_name, "】？")
 	# 如果玩家点是：callable_if_yes.call()
 
-var _exit_confirmation: ConfirmationDialog
+var _exit_confirmation: Control
 var _exit_lease := -1
+var _exit_dimmer: ColorRect
 
 func _on_close_pressed() -> void:
 	if is_instance_valid(_exit_confirmation): return
 	_exit_lease = TurnManager.acquire_modal(&"board_exit_confirmation", TurnManager.ModalResumePolicy.RESUME_REMAINING, true)
-	_exit_confirmation = ConfirmationDialog.new()
+	_exit_dimmer = ColorRect.new()
+	_exit_dimmer.color = Color(0.12, 0.07, 0.04, 0.58)
+	_exit_dimmer.mouse_filter = Control.MOUSE_FILTER_STOP
+	_exit_dimmer.z_index = 4096
+	add_child(_exit_dimmer)
+	_exit_dimmer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_exit_confirmation = preload("res://UI/Shared/board_exit_confirmation.gd").new()
 	_exit_confirmation.process_mode = Node.PROCESS_MODE_ALWAYS
-	_exit_confirmation.title = "退出本局"
-	_exit_confirmation.dialog_text = "本局进度不会保存。确定退出游戏吗？"
-	_exit_confirmation.ok_button_text = "退出游戏"
-	_exit_confirmation.cancel_button_text = "继续游戏"
-	_exit_confirmation.theme = MainUI.theme()
 	add_child(_exit_confirmation)
 	_exit_confirmation.confirmed.connect(func(): get_tree().quit())
 	_exit_confirmation.canceled.connect(_cancel_exit)
-	_exit_confirmation.close_requested.connect(_cancel_exit)
-	_exit_confirmation.popup_centered(Vector2i(1080, 360))
-	_exit_confirmation.get_cancel_button().grab_focus()
+	_exit_confirmation.call("open")
 
 func _cancel_exit() -> void:
 	if is_instance_valid(_exit_confirmation): _exit_confirmation.queue_free()
 	_exit_confirmation = null
+	if is_instance_valid(_exit_dimmer): _exit_dimmer.queue_free()
+	_exit_dimmer = null
 	if _exit_lease >= 0: TurnManager.release_modal(_exit_lease)
 	_exit_lease = -1
+	if is_inside_tree(): $BtnClose.grab_focus.call_deferred()
 
 
 var _board_dice: BoardDicePresenter
@@ -1486,3 +1499,16 @@ func show_dice_faces(player: PlayerClass, values: Array[int], still_current: Cal
 
 func _install_artist_hud() -> void:
 	add_child(MainHUDLayout.new())
+
+## Stable lesson target in the HUD viewport; includes the nested map camera.
+func get_tutorial_map_rect(coordinate: Vector3i) -> Rect2:
+	var map := TurnManager.map as MAP
+	if map == null or not map.grid_map.has(coordinate): return Rect2()
+	var section: MapSection = map.grid_map[coordinate]
+	var sub := map_camera.get_viewport()
+	var container := sub.get_parent() as SubViewportContainer
+	var local_point := section.get_global_transform_with_canvas().origin
+	var mapping := container.size / Vector2(sub.size)
+	var point := container.get_global_transform() * (local_point * mapping)
+	var extent: Vector2 = Vector2(45, 45) * map_camera.zoom * mapping
+	return Rect2(point - extent, extent * 2)

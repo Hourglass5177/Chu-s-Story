@@ -1,6 +1,7 @@
 extends AnimatedSprite2D
 class_name PlayerClass
 signal roll_dice(result:int, player:PlayerClass)
+signal movement_completed(destination: Vector3i)
 var computer_presentation_speed: float = 1.0
 var hud:HUD
 var map:MAP
@@ -485,6 +486,7 @@ func move_along_path(path_pixels: Array[Vector2], total_cost: int, target_grid_p
 	if TurnManager.GameOn and TurnManager.now_phase == TurnManager.TurnPhase.MOVING:
 		map._show_reachable_areas()
 	hud._update_button_states(TurnManager.now_phase)
+	movement_completed.emit(now_pos)
 	return true
 # ==========================================
 # 格子交互执行枢纽 (由 UI 点击触发)

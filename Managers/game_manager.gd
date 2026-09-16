@@ -4,6 +4,26 @@ const MAIN_MENU_SCENE: String = "res://main_menu.tscn"
 
 enum RuntimeProfile { NORMAL, HEADLESS_SIMULATION }
 
+var tutorial_controller: Node = null
+var open_local_setup_on_menu := false
+
+func is_tutorial_session() -> bool:
+	return _active_session_setup != null and _active_session_setup.mode == SessionSetup.GameMode.TUTORIAL
+
+func allows_tutorial_action(action: StringName, target: Variant = null) -> bool:
+	if not is_tutorial_session(): return true
+	return is_instance_valid(tutorial_controller) and tutorial_controller.allows_action(action, target)
+
+func begin_tutorial_session() -> Error:
+	var setup := TutorialDefinition.make_setup()
+	configure_session(5177, RuntimeProfile.NORMAL, setup.target_score)
+	reset_session()
+	_active_session_setup = setup.duplicate_snapshot()
+	_configured_target_score = setup.target_score
+	player_data.assign(setup.to_legacy_player_data())
+	_local_session_prepared = true
+	return OK
+
 var player_data: Array = []
 var runtime_profile: RuntimeProfile = RuntimeProfile.NORMAL
 var _session_rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -92,6 +112,9 @@ func get_active_session_setup() -> SessionSetup:
 
 ## 清理上一局的全部运行时绑定。每个管理器都通过能力检查调用，便于系统分阶段接入。
 func reset_session(rebuild_resources: bool = true) -> void:
+	if is_instance_valid(tutorial_controller):
+		tutorial_controller.cancel()
+	tutorial_controller = null
 	var tree: SceneTree = get_tree()
 	if tree != null:
 		tree.paused = false

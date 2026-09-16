@@ -55,7 +55,7 @@ func setup(
 	icon.ignore_texture_size = true
 	icon.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
 	icon.focus_mode = Control.FOCUS_ALL
-	icon.tooltip_text = "查看%s" % card.card_name
+	icon.accessibility_name = "查看%s" % card.card_name
 	icon.pressed.connect(func() -> void: guide_requested.emit(card, icon))
 	_content.add_child(icon)
 	info_label = Label.new()

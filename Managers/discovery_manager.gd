@@ -55,6 +55,8 @@ func is_discovered(kind: StringName, entry_id: StringName) -> bool:
 
 
 func record_discovery(kind: StringName, entry_id: StringName) -> bool:
+	# Teaching examples must not alter either the live collection or its save.
+	if GameManager.is_tutorial_session(): return false
 	if PUBLIC_KINDS.has(kind) or not _is_known(kind, entry_id):
 		return false
 	var entries: Dictionary = _discovered[kind]

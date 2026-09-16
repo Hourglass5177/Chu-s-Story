@@ -14,11 +14,13 @@ config/name="楚物志"
 config/version="beta 0.5.0"
 run/main_scene="uid://bpggqwetns32d"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-boot_splash/image="uid://conv21o25i7e4"
-config/icon="uid://gforsoryh67s"
+boot_splash/bg_color=Color(0.964706, 0.909804, 0.788235, 1)
+boot_splash/image="res://arts/ui-main-v1/home.png"
+config/icon="res://arts/branding-v2/logo-combined.png"
 
 [autoload]
 
+Settings="*res://UI/Settings/game_settings.gd"
 GameManager="*res://Managers/game_manager.tscn"
 ResourceManager="*res://Managers/ResouceManager.gd"
 TurnManager="*res://Managers/turn_manager.tscn"
@@ -30,6 +32,8 @@ MarketManager="*res://Managers/market_manager.gd"
 AchievementManager="*res://Managers/achievement_manager.gd"
 FoodManager="*res://Managers/food_manager.gd"
 DiscoveryManager="*res://Managers/discovery_manager.gd"
+BoardMusic="*res://Audio/board_music.gd"
+BoardSfx="*res://Audio/board_sfx.gd"
 
 [display]
 

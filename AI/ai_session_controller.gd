@@ -301,8 +301,7 @@ func _answer_ticket() -> void:
 		var value := 0.0
 		for section: MapSection in request.options:
 			var data := world.section_data(section, player)
-			var candidate := policy.section_value(data, observation.state.self)
-			if bool(data.fresh_scenery) and TurnManager.now_phase == TurnManager.TurnPhase.BEGIN: candidate += mini(3, 12 - player.current_energy) * 18.0
+			var candidate := policy.profession_move_value(data, observation, TurnManager.now_phase == TurnManager.TurnPhase.BEGIN)
 			if candidate > value:
 				value = candidate
 				best = section

@@ -7,6 +7,8 @@ var _player_name: Label
 var _phase_track: Button
 var _phase_panels: Array[PanelContainer] = []
 var _phase_names: Array[Label] = []
+var _log_content: VBoxContainer
+var _log_scroll: ScrollContainer
 const PHASE_NAMES := ["准备", "掷骰", "移动", "行动", "结束"]
 
 func _ready() -> void:
@@ -69,8 +71,62 @@ func _ready() -> void:
 			hud.score_overlay.open_for_player(TurnManager.players[TurnManager.now_player_index]))
 	hud.get_node("积分区域").add_child(score_button)
 	_setup_turn_banner()
+	_setup_information_panel()
 	get_viewport().size_changed.connect(_layout)
 	_layout()
+
+func _setup_information_panel() -> void:
+	# Containers constrain long event descriptions to the illustrated writing area.
+	# Keep the existing labels so manager updates and tutorial visibility still work.
+	_log_content = VBoxContainer.new()
+	_log_content.name = "InformationContent"
+	_log_content.add_theme_constant_override("separation", 8)
+	hud.get_node("手牌信息").add_child(_log_content)
+	var header := HBoxContainer.new()
+	header.add_theme_constant_override("separation", 20)
+	_log_content.add_child(header)
+	hud.current_status.reparent(header)
+	hud.current_status.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	hud.current_status.custom_minimum_size = Vector2.ZERO
+	hud.current_status.autowrap_mode = TextServer.AUTOWRAP_OFF
+	hud.current_status.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	hud.current_status.clip_text = true
+	hud.current_status.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	MainUI.label(hud.current_status, 34, true)
+	var scroll_hint := Label.new()
+	scroll_hint.text = "滚动查看"
+	MainUI.label(scroll_hint, 26)
+	scroll_hint.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	header.add_child(scroll_hint)
+	_log_scroll = ScrollContainer.new()
+	_log_scroll.name = "MessageScroll"
+	_log_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_log_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_log_scroll.follow_focus = true
+	_log_scroll.focus_mode = Control.FOCUS_ALL
+	_log_scroll.accessibility_name = "局内消息，可滚动阅读"
+	_log_scroll.add_theme_stylebox_override("focus", MainUI.theme().get_stylebox("focus", "Button"))
+	_log_content.add_child(_log_scroll)
+	_log_scroll.get_v_scroll_bar().changed.connect(func():
+		var bar := _log_scroll.get_v_scroll_bar()
+		scroll_hint.visible = bar.max_value > bar.page)
+	hud.information.reparent(_log_scroll)
+	hud.information.custom_minimum_size = Vector2.ZERO
+	hud.information.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	hud.information.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	hud.information.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	hud.information.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	MainUI.label(hud.information, 36)
+	hud.information.add_theme_constant_override("line_spacing", 4)
+	hud.information.minimum_size_changed.connect(_reset_message_scroll)
+	hud.current_status.minimum_size_changed.connect(_update_status_tooltip)
+	_update_status_tooltip()
+
+func _reset_message_scroll() -> void:
+	_log_scroll.set_deferred("scroll_vertical", 0)
+
+func _update_status_tooltip() -> void:
+	hud.current_status.tooltip_text = hud.current_status.text
 
 func _setup_turn_banner() -> void:
 	var banner := hud.get_node("回合信息")
@@ -158,6 +214,8 @@ func _layout() -> void:
 		text.offset_bottom = -10
 		text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		text.clip_text = true
+		text.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		MainUI.label(text, 42, true)
 	hud.get_node("玩家信息/职业背景/职业").add_theme_color_override("font_color", Color("fff1d3"))
 	for pair in [[hud.money_label,"积分背景"],[hud.energy_label,"精力背景"]]:
@@ -186,11 +244,7 @@ func _layout() -> void:
 	hud.time_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	hud.turn_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	hud.time_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_place("手牌信息/当前", Rect2(210,40,1190,58), unit)
-	_place("手牌信息/游戏信息", Rect2(210,110,1190,100), unit)
-	MainUI.label(hud.current_status, 40)
-	MainUI.label(hud.information, 40)
-	hud.information.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_place("手牌信息/InformationContent", Rect2(210,38,1190,166), unit)
 	for index in range(3):
 		var control: Button = [hud.btn_action,hud.btn_food,hud.btn_end_turn][index]
 		MainUI.rect(control, Rect2(Vector2(index*310,0)*unit,Vector2(280,140)*unit))

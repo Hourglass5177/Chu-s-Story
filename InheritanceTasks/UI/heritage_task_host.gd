@@ -55,6 +55,7 @@ var _prepare_success: Label
 var _prepare_tutorial: Label
 var _start_button: Button
 var _relearn_button: Button
+var _general_settings: GameSettingsPanel
 var _settings_box: VBoxContainer
 var _volume_slider: HSlider
 var _volume_value: Label
@@ -100,6 +101,7 @@ var _binding_focus_before: Control
 
 
 func _ready() -> void:
+	BoardMusic.hold_for(self)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	abort_button.pressed.connect(_on_abort_pressed)
 	pause_button.pressed.connect(_on_pause_pressed)
@@ -115,6 +117,8 @@ func _ready() -> void:
 	%VolumeKnob.accessibility_name = "小游戏音量"
 	_build_preparation()
 	_build_settings()
+	_general_settings = GameSettingsPanel.mount(self)
+	Settings.changed.connect(_on_shared_setting_changed)
 	_build_bindings()
 	_build_pixel_chrome()
 	_result_art = _image_rect()
@@ -741,6 +745,10 @@ func _build_settings() -> void:
 	bindings.name = "OpenBindingsButton"
 	bindings.pressed.connect(_show_bindings)
 	_settings_box.add_child(bindings)
+	var general := _button("通用设置")
+	general.name = "GeneralSettingsButton"
+	general.pressed.connect(func() -> void: _general_settings.open_panel(general))
+	_settings_box.add_child(general)
 	_settings_return = _button("返回")
 	_settings_return.name = "SettingsReturn"
 	_settings_return.pressed.connect(_hide_settings)
@@ -851,6 +859,7 @@ func _retry_practice() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if Settings.is_panel_open(): return
 	if not event.is_action_pressed(&"ui_cancel") or event.is_echo(): return
 	if _bindings_panel.visible: _hide_bindings()
 	elif exit_confirm.visible: _hide_exit_confirm()
@@ -863,6 +872,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if Settings.is_panel_open(): return
 	if not _pixel_shell or not visible or event.is_echo(): return
 	if not _capture_action.is_empty():
 		if event.is_action_pressed(&"ui_cancel"):
@@ -941,7 +951,7 @@ func _add_panel_background(panel: Control) -> void:
 
 
 func _style_controls(node: Node) -> void:
-	if node == task_container: return
+	if node == task_container or node is GameSettingsPanel: return
 	if node is Button:
 		HeritageTelevisionStyle.button(node, node == %VolumeKnob or node == %SettingsKnob)
 	if node is Label:
@@ -978,7 +988,7 @@ func _px(physical_pixels: float) -> float:
 
 
 func _style_text(node: Node) -> void:
-	if node == task_container: return
+	if node == task_container or node is GameSettingsPanel: return
 	if _pixel_shell:
 		_style_pixel_text(node)
 		return
@@ -1157,7 +1167,7 @@ func _apply_shell_version() -> void:
 
 
 func _style_pixel_text(node: Node) -> void:
-	if node == task_container: return
+	if node == task_container or node is GameSettingsPanel: return
 	if node.get_script() == INPUT_GLYPH:
 		var glyph_scale := float(maxi(2,_pixel_integer_scale)) / 2.0
 		node.set("font_size",ceili(_px(20 * glyph_scale)))
@@ -1421,13 +1431,13 @@ func _sync_pixel_focus() -> void:
 
 
 func _collect_focus_controls(node: Node, controls: Array[Control]) -> void:
-	if node == task_container: return
+	if node == task_container or node is GameSettingsPanel: return
 	if node is BaseButton or node is Slider: controls.append(node as Control)
 	for child: Node in node.get_children(): _collect_focus_controls(child, controls)
 
 
 func _clear_pixel_fonts(node: Node) -> void:
-	if node == task_container: return
+	if node == task_container or node is GameSettingsPanel: return
 	if node is Control:
 		(node as Control).remove_theme_font_override("font")
 	for child: Node in node.get_children(): _clear_pixel_fonts(child)
@@ -1584,3 +1594,21 @@ func _visible_underlay() -> Control:
 	for panel: Control in [settings_panel, pause_panel, prepare_panel, result_panel]:
 		if panel.visible: return panel
 	return null
+
+
+func _on_shared_setting_changed(key: String, value: Variant) -> void:
+	match key:
+		"minigame_volume":
+			_volume_slider.set_value_no_signal(float(value))
+			_volume_value.text = "音量  %d%%" % int(value)
+		"reduce_motion":
+			_reduce_motion.set_pressed_no_signal(bool(value))
+			_on_reduced_motion_changed(bool(value))
+		"music_visual_assistance":
+			_visual_assistance.set_pressed_no_signal(bool(value))
+			_on_visual_assistance_changed(bool(value))
+		"gamepad_glyph_style":
+			_hint_signature = ""
+			var selector := find_child("GamepadGlyphStyle", true, false) as OptionButton
+			if selector != null: selector.select(["position","letters","symbols"].find(value))
+			_on_input_device_changed(&"gamepad")

@@ -1,7 +1,7 @@
 {
   "schema_version": 3,
   "source_path": "res://docs/游戏规则与引导（重写稿）.md",
-  "source_sha256": "d8bb50f0146d5ba44389390902f0fa2fb5275848f4bbfa6dd5a4cc2635ad2e89",
+  "source_sha256": "99f2c8f16167dbcbe150d6b69dd99ec1f716bc3ff0e906bef91caf40874e4d36",
   "media_source_path": "res://docs/游戏指南结构与配图（数字版）.json",
   "media_source_sha256": "dc783c3c8ee2d9e005f68987cdf3f00644d4f551e631b92173e1bf95d0d80c8b",
   "home": {
@@ -758,6 +758,7 @@
             "goal_resources.mode_selection.paragraph.02",
             "goal_resources.mode_selection.paragraph.03",
             "goal_resources.mode_selection.paragraph.04",
+            "goal_resources.mode_selection.paragraph.05",
             "goal_resources.mode_selection.media.session_modes"
           ]
         },
@@ -801,25 +802,37 @@
           "id": "goal_resources.mode_selection.paragraph.01",
           "group_id": "mode_selection",
           "type": "paragraph",
-          "text": "从首页进入“开始游戏”，选择“本地游戏”。网络游戏与教学模式目前保留入口，尚未开放。",
+          "text": "从首页进入“开始游戏”，选择“本地游戏”。初次游玩也可以先选“教学模式”，跟着搭档走完一回合。网络游戏暂未开放。",
           "requirements": []
         },
         {
           "id": "goal_resources.mode_selection.paragraph.02",
           "group_id": "mode_selection",
           "type": "paragraph",
+          "text": "入门教学没有操作倒计时：走到非遗点后点“结束移动”，收集天门糖塑，再享用练习补给云梦鱼面。传承环节会明确展示“教学示意”，本次扣1精力并直接解锁5分；正式对局仍须完成小游戏。教学不会记录正式图鉴或小游戏练习进度，开始本地游戏时会创建全新对局。暂停菜单可以重新开始或退出。",
+          "requirements": [
+            {
+              "kind": "food",
+              "id": "yun_meng_yu_mian"
+            }
+          ]
+        },
+        {
+          "id": "goal_resources.mode_selection.paragraph.03",
+          "group_id": "mode_selection",
+          "type": "paragraph",
           "text": "本地游戏支持1至6个席位，至少保留1名真人。每位电脑可在开局配置页单独选择简单、普通或困难，默认普通，同局可以混合；阵容确认页会标明各电脑的难度，开局后固定。简单偏重眼前收益，普通兼顾资源与组合，困难更重视长期目标和公开的对手威胁。非遗手牌公开，食物与保留事件手牌私密；三档电脑都只使用自己的手牌、公开信息及自己合法看到的记忆。",
           "requirements": []
         },
         {
-          "id": "goal_resources.mode_selection.paragraph.03",
+          "id": "goal_resources.mode_selection.paragraph.04",
           "group_id": "mode_selection",
           "type": "paragraph",
           "text": "电脑回合可以观看，点击顶部回合信息右侧的“AI速度：x1.00”，依次切换1.00、1.50、2.00、3.00倍电脑演出速度，再回到1.00倍。速度不改变骰子、规则倒计时或真人响应时间。需要真人作出选择时，由指定玩家回答；多人真人的私密选牌先显示接手提示。真人全部淘汰后，电脑继续到正式终局，仍可通过暂停菜单退出。",
           "requirements": []
         },
         {
-          "id": "goal_resources.mode_selection.paragraph.04",
+          "id": "goal_resources.mode_selection.paragraph.05",
           "group_id": "mode_selection",
           "type": "paragraph",
           "text": "电脑持有的国家级非遗采用短展示后自动传承：简单60%、普通80%，困难正常尝试必成功。开始消耗1精力，每张牌每个行动阶段最多尝试一次；普通失败保留消耗，技术错误仍退款，困难也不例外。成功后解锁5分及组合资格。这些是电脑参数，不代表真人通过率。自动传承不运行小游戏、不使用麦克风，也不解锁小游戏图鉴。真人仍游玩原有传承小游戏。难度不影响演出速度，也不提供额外资金、精力、骰点或抽牌优势。",
@@ -6621,7 +6634,10 @@
           "section_ids": [
             "controls_compendium.controls.heading.01",
             "controls_compendium.controls.table.01",
-            "controls_compendium.controls.paragraph.01"
+            "controls_compendium.controls.paragraph.01",
+            "controls_compendium.controls.paragraph.02",
+            "controls_compendium.controls.paragraph.03",
+            "controls_compendium.controls.paragraph.04"
           ]
         },
         {
@@ -6744,6 +6760,27 @@
           "group_id": "controls",
           "type": "paragraph",
           "text": "键盘与单只手柄也可以完成主菜单、选角与指南导航。界面当前焦点会使用与鼠标悬浮一致的描边反馈。",
+          "requirements": []
+        },
+        {
+          "id": "controls_compendium.controls.paragraph.02",
+          "group_id": "controls",
+          "type": "paragraph",
+          "text": "首页右上角或局内暂停菜单中，点击“设置”，可以调整声音、窗口或全屏、帧率上限、垂直同步及操作辅助。小游戏内也可从设置进入通用设置。",
+          "requirements": []
+        },
+        {
+          "id": "controls_compendium.controls.paragraph.03",
+          "group_id": "controls",
+          "type": "paragraph",
+          "text": "音量调整立即生效并自动保存；小游戏原声、示范和反馈由“小游戏音量”统一控制。切换显示模式后，15秒内选择“保留更改”，否则自动还原。",
+          "requirements": []
+        },
+        {
+          "id": "controls_compendium.controls.paragraph.04",
+          "group_id": "controls",
+          "type": "paragraph",
+          "text": "“减少装饰动态”保留必要动作与提示；音游方向与预备提示不改变评分。“恢复本页默认”只重置当前分类，不清除图鉴或教学记录。关闭设置后回到暂停页，再选择继续游戏。",
           "requirements": []
         },
         {

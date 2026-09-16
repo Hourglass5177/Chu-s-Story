@@ -150,7 +150,7 @@ func test_all_stable_screens_can_be_selected_without_deep_node_paths() -> void:
 		assert_eq(_menu.call(&"get_current_screen"), screen_name)
 
 
-func test_mode_requests_use_one_signal_and_placeholders_stay_on_mode_screen() -> void:
+func test_network_stays_placeholder_and_tutorial_starts_fixed_session() -> void:
 	if not _has_methods([&"show_screen", &"request_mode", &"get_current_screen"]) \
 			or not _menu.has_signal(&"mode_requested"):
 		return
@@ -161,8 +161,14 @@ func test_mode_requests_use_one_signal_and_placeholders_stay_on_mode_screen() ->
 
 	assert_true(bool(_menu.call(&"request_mode", SessionSetup.GameMode.NETWORK)))
 	assert_eq(_menu.call(&"get_current_screen"), &"mode")
+	var launcher := FakeSessionLauncher.new()
+	_menu.set_session_launcher(launcher)
 	assert_true(bool(_menu.call(&"request_mode", SessionSetup.GameMode.TUTORIAL)))
-	assert_eq(_menu.call(&"get_current_screen"), &"mode")
+	assert_eq(_menu.call(&"get_current_screen"), &"loading")
+	assert_true(await _wait_until(func() -> bool: return launcher.scene_calls == 1))
+	assert_eq(launcher.prepare_calls, 1)
+	assert_eq(launcher.received_setup.mode, SessionSetup.GameMode.TUTORIAL)
+	assert_eq(launcher.received_setup.players.size(), 1)
 	assert_eq(requested_modes, [SessionSetup.GameMode.NETWORK, SessionSetup.GameMode.TUTORIAL])
 	assert_signal_emit_count(_menu, "mode_requested", 2)
 

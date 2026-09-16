@@ -357,6 +357,25 @@ func prepare_choice_observation(observation: AIObservation) -> void:
 	_position_potentials.clear()
 	build_navigation(observation)
 
+func profession_move_value(tile: Dictionary, observation: AIObservation, at_begin: bool) -> float:
+	var own: Dictionary = observation.state.self
+	var next := own.duplicate(true)
+	next.position = tile.position
+	# END movement changes position only; BEGIN can resolve arrival effects.
+	var immediate := 0.0
+	if at_begin:
+		if bool(tile.get("fresh_scenery", false)):
+			next.energy = mini(12, int(next.energy) + 3)
+			immediate += (int(next.energy) - int(own.energy)) * 18.0
+		var reserves := int(next.energy)
+		for card: Dictionary in own.foods: reserves += maxi(0, int(food_effect(card, own).energy))
+		# A collection point is not immediate supply when its cost exhausts us.
+		if int(tile.type) != 1 or reserves > 1:
+			immediate += section_value(tile, next)
+	# Free career movement can bridge a route that ordinary movement cannot afford.
+	# Compare against staying, so a neutral connector toward supply remains useful.
+	return immediate + navigation_value(next, observation) - navigation_value(own, observation)
+
 func begin_plan(observation: AIObservation, excluded: Dictionary = {}) -> void:
 	last_nodes = 0
 	trace_candidates.clear()

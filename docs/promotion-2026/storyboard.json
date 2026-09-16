@@ -1,0 +1,126 @@
+{
+  "title": "楚物志",
+  "team": "楚行九州",
+  "track": "小红花赛道",
+  "topic": "其他社会价值主题",
+  "award_target": "最具武汉特色奖",
+  "status": "planned_not_rendered",
+  "format": "mp4",
+  "size_limit": "用户确认无上限",
+  "width": 1920,
+  "height": 1080,
+  "target_fps": 60,
+  "duration_seconds": 150,
+  "scenes": [
+    {
+      "id": "shot_01",
+      "start_seconds": 0,
+      "end_seconds": 8,
+      "duration_seconds": 8,
+      "visual": "武汉附近真实地图，棋子走向非遗点，接卡动作；以1个可理解小过程开场",
+      "copy": "在武汉，开启一场非遗旅行。",
+      "audio_edit": "骰子、落步、卡牌声；不先放Logo长片头。",
+      "footage_status": "not_captured"
+    },
+    {
+      "id": "shot_02",
+      "start_seconds": 8,
+      "end_seconds": 18,
+      "duration_seconds": 10,
+      "visual": "地图全貌＋博主立绘，短暂出现游戏Logo和团队名",
+      "copy": "楚物志／一场可以亲手参与的非遗旅行",
+      "audio_edit": "音乐进入；让评委明确是地图桌游。",
+      "footage_status": "not_captured"
+    },
+    {
+      "id": "shot_03",
+      "start_seconds": 18,
+      "end_seconds": 34,
+      "duration_seconds": 16,
+      "visual": "选择路线、剩余步数和精力变化，画面只突出当前行动",
+      "copy": "选条路，也留一点余力。",
+      "audio_edit": "一次路线选择和执行，中间不切到无关小游戏。",
+      "footage_status": "not_captured"
+    },
+    {
+      "id": "shot_04",
+      "start_seconds": 34,
+      "end_seconds": 47,
+      "duration_seconds": 13,
+      "visual": "使用热干面，牌面名称和资源变化能看清；武汉卡收藏短展示",
+      "copy": "过早，再出发。",
+      "audio_edit": "使用确认声；不声称食物规则模拟真实营养。",
+      "footage_status": "not_captured"
+    },
+    {
+      "id": "shot_05",
+      "start_seconds": 47,
+      "end_seconds": 61,
+      "duration_seconds": 14,
+      "visual": "获得汉剧卡，卡面“？”、传承按钮、进入小游戏",
+      "copy": "收进手里的，还可以亲手体验。",
+      "audio_edit": "卡牌到电视转场，至少留2秒看清解锁前状态。",
+      "footage_status": "not_captured"
+    },
+    {
+      "id": "shot_06",
+      "start_seconds": 61,
+      "end_seconds": 85,
+      "duration_seconds": 24,
+      "visual": "汉剧原速片段：演员准备、选左灯、选右灯、“优/良”反馈；至少一段连续10秒",
+      "copy": "跟着唱段，把追光送到台前。／武汉·汉剧",
+      "audio_edit": "连续游戏原声占主导，其他BGM降下或退出；保留操作时机。不换拍、不拼假命中。",
+      "footage_status": "not_captured"
+    },
+    {
+      "id": "shot_07",
+      "start_seconds": 85,
+      "end_seconds": 97,
+      "duration_seconds": 12,
+      "visual": "同一局完成、汉剧卡解锁5分，回到收藏/计分",
+      "copy": "完成传承，把“？”变成5分。",
+      "audio_edit": "结果确认声；总分只展示实际结果，可能受组合影响，不强制伪造“总分只加5”。",
+      "footage_status": "not_captured"
+    },
+    {
+      "id": "shot_08",
+      "start_seconds": 97,
+      "end_seconds": 113,
+      "duration_seconds": 16,
+      "visual": "至多两项补充：天门糖塑吹气→余胀→定形；鄂州剪纸切口→纸屑→成品",
+      "copy": "从武汉出发，继续走进荆楚。／天门糖塑／鄂州雕花剪纸",
+      "audio_edit": "每项7–8秒有因果的小段落。若剪纸本版收尾未验看清楚，只用糖塑完整段。",
+      "footage_status": "not_captured"
+    },
+    {
+      "id": "shot_09",
+      "start_seconds": 113,
+      "end_seconds": 126,
+      "duration_seconds": 13,
+      "visual": "返回桌游，另一位玩家行动、收藏比较/计分组合",
+      "copy": "下一站，怎么选？",
+      "audio_edit": "重建策略与同场游戏感，避免被误解为纯小游戏合集。",
+      "footage_status": "not_captured"
+    },
+    {
+      "id": "shot_10",
+      "start_seconds": 126,
+      "end_seconds": 141,
+      "duration_seconds": 15,
+      "visual": "图鉴武汉卡、短教学真实操作；以清楚内容带出文化参与",
+      "copy": "玩过之后，再看看它的故事。",
+      "audio_edit": "放缓，保留图鉴真实介绍片段，不塞政策口号。",
+      "footage_status": "not_captured"
+    },
+    {
+      "id": "shot_11",
+      "start_seconds": 141,
+      "end_seconds": 150,
+      "duration_seconds": 9,
+      "visual": "Logo、团队名、主画面或干净封面；下方体验路径",
+      "copy": "楚物志 · 楚行九州／从入门教学，开始你的第一程",
+      "audio_edit": "简洁收束；Windows可玩版本。无未上线商店链接或虚构二维码。",
+      "footage_status": "not_captured"
+    }
+  ]
+}
