@@ -1,0 +1,28 @@
+Probe verified: Shell visible, $I/$R present, hash matches.
+Verified 80/652: F:\Documents\楚物志\artifacts\ai-difficulty-heldout-final.log
+Verified 100/652: F:\Documents\楚物志\artifacts\ai-difficulty-tests16.log
+Verified 120/652: F:\Documents\楚物志\artifacts\ai-import2.log
+Verified 138/652: F:\Documents\楚物志\artifacts\ai-next-stage
+Verified 140/652: F:\Documents\楚物志\artifacts\ai-normal-0.log
+Verified 159/652: F:\Documents\楚物志\artifacts\ai-phase-move-v4
+Verified 160/652: F:\Documents\楚物志\artifacts\ai-pilot.log
+Verified 180/652: F:\Documents\楚物志\artifacts\ai-stall-224-fixed.log
+Verified 200/652: F:\Documents\楚物志\artifacts\ai-trace-current-on.json
+Verified 217/652: F:\Documents\楚物志\artifacts\ai-traces
+Verified 220/652: F:\Documents\楚物志\artifacts\ai-unit3.log
+Verified 240/652: F:\Documents\楚物志\artifacts\cleanup-commit-scope.json
+Verified 258/652: F:\Documents\楚物志\artifacts\credits-submission
+Verified 260/652: F:\Documents\楚物志\artifacts\dong-anatomy-motion-v8
+Verified 261/652: F:\Documents\楚物志\artifacts\dong-anatomy-motion-v8-final
+Verified 280/652: F:\Documents\楚物志\artifacts\dong-original-detail-v4-appearance-final.log
+Verified 300/652: F:\Documents\楚物志\artifacts\final-replay-session-11780-2.trace.log
+Verified 320/652: F:\Documents\楚物志\artifacts\host-v2-preview.log
+Verified 340/652: F:\Documents\楚物志\artifacts\logo-review-final.log
+Verified 360/652: F:\Documents\楚物志\artifacts\motion-art-import.log
+Verified 375/652: F:\Documents\楚物志\artifacts\music-motion-v4
+Verified 380/652: F:\Documents\楚物志\artifacts\music-motion-v4-text-fixed.log
+Verified 400/652: F:\Documents\楚物志\artifacts\perf-gallery-d3d-after.log
+Verified 410/652: F:\Documents\楚物志\artifacts\pixel-art-review
+Verified 420/652: F:\Documents\楚物志\artifacts\pixel-guide-recheck.log
+Verified 428/652: F:\Documents\楚物志\artifacts\pixel-v3
+recycle_frozen.ps1: Exception calling "Recycle" with "1" argument(s): "0x80270021"

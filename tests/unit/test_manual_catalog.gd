@@ -333,7 +333,9 @@ func _load_raw_catalog() -> Dictionary:
 func _sha256_file(path: String) -> String:
 	var context := HashingContext.new()
 	context.start(HashingContext.HASH_SHA256)
-	context.update(FileAccess.get_file_as_bytes(path))
+	# Match the builder's universal-newline text hash on Windows and CI.
+	var text := FileAccess.get_file_as_string(path).replace("\r\n", "\n").replace("\r", "\n")
+	context.update(text.to_utf8_buffer())
 	return context.finish().hex_encode()
 
 

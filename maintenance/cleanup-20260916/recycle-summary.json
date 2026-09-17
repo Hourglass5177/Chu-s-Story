@@ -1,0 +1,10 @@
+{
+  "targets": 692,
+  "files": 44389,
+  "bytes": 17302799385,
+  "receipts_valid": true,
+  "shell_visible": true,
+  "preserved_hashes_match": true,
+  "permanent_deletion_used": false,
+  "validation": "recycle stage only; Beta/Release results recorded separately"
+}

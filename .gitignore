@@ -1,5 +1,9 @@
 # Godot 4+ specific ignores
 .godot/
+/deliverables/
+/maintenance/cleanup-20260916/existing-recycle-items.json
+/maintenance/cleanup-20260916/legacy-recycle-audit.json
+/maintenance/cleanup-20260916/shell-visible-final.json
 /android/
 /artifacts/*
 !/artifacts/.gdignore

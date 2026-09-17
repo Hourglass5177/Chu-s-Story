@@ -166,6 +166,8 @@ $pythonCommand = Get-Command python -ErrorAction SilentlyContinue
 if ($null -eq $pythonCommand) {
     throw '未找到 Python，无法校验数字版游戏指南生成结果。'
 }
+& $pythonCommand.Source (Join-Path $projectRoot 'tools\test_game_guide_catalog.py')
+if ($LASTEXITCODE -ne 0) { throw '指南生成器换行与内容同步回归失败。' }
 & $pythonCommand.Source (Join-Path $projectRoot 'tools\build_game_guide_catalog.py') --check
 if ($LASTEXITCODE -ne 0) {
     throw '数字版游戏指南源稿与运行时目录不同步。请重新运行 tools/build_game_guide_catalog.py。'

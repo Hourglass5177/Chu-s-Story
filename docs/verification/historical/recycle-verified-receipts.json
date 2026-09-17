@@ -1,0 +1,98 @@
+﻿[
+    {
+        "receipt":  {
+                        "original":  "F:\\Documents\\楚物志-提交验证",
+                        "metadata":  "F:\\$Recycle.Bin\\S-1-5-21-1942464140-2856953516-1393776520-1001\\$I96DR6Z",
+                        "data":  "F:\\$Recycle.Bin\\S-1-5-21-1942464140-2856953516-1393776520-1001\\$R96DR6Z",
+                        "data_exists":  true,
+                        "bytes":  1968289346,
+                        "deleted_utc":  "2026-09-14T19:27:59.0700000Z"
+                    },
+        "inventory":  {
+                          "files":  7414,
+                          "bytes":  1968289346,
+                          "hash":  null
+                      },
+        "verified":  true
+    },
+    {
+        "receipt":  {
+                        "original":  "F:\\Documents\\楚物志-清理隔离",
+                        "metadata":  "F:\\$Recycle.Bin\\S-1-5-21-1942464140-2856953516-1393776520-1001\\$IFI6CWH",
+                        "data":  "F:\\$Recycle.Bin\\S-1-5-21-1942464140-2856953516-1393776520-1001\\$RFI6CWH",
+                        "data_exists":  true,
+                        "bytes":  0,
+                        "deleted_utc":  "2026-09-14T19:28:01.7940000Z"
+                    },
+        "inventory":  {
+                          "files":  0,
+                          "bytes":  0,
+                          "hash":  null
+                      },
+        "verified":  true
+    },
+    {
+        "receipt":  {
+                        "original":  "F:\\Documents\\楚物志\\docs\\prototypes\\guide-layout-references",
+                        "metadata":  "F:\\$Recycle.Bin\\S-1-5-21-1942464140-2856953516-1393776520-1001\\$IPV57US",
+                        "data":  "F:\\$Recycle.Bin\\S-1-5-21-1942464140-2856953516-1393776520-1001\\$RPV57US",
+                        "data_exists":  true,
+                        "bytes":  4148321,
+                        "deleted_utc":  "2026-09-14T19:28:02.4050000Z"
+                    },
+        "inventory":  {
+                          "files":  4,
+                          "bytes":  4148321,
+                          "hash":  null
+                      },
+        "verified":  true
+    },
+    {
+        "receipt":  {
+                        "original":  "F:\\Documents\\楚物志\\artifacts\\build-20260910-archived-logs",
+                        "metadata":  "F:\\$Recycle.Bin\\S-1-5-21-1942464140-2856953516-1393776520-1001\\$ICTLRZ6",
+                        "data":  "F:\\$Recycle.Bin\\S-1-5-21-1942464140-2856953516-1393776520-1001\\$RCTLRZ6",
+                        "data_exists":  true,
+                        "bytes":  3238045,
+                        "deleted_utc":  "2026-09-14T19:28:03.0090000Z"
+                    },
+        "inventory":  {
+                          "files":  24,
+                          "bytes":  3238045,
+                          "hash":  null
+                      },
+        "verified":  true
+    },
+    {
+        "receipt":  {
+                        "original":  "F:\\xwechat_files\\wxid_8t0xifctvcya12_c359\\msg\\file\\2026-09\\楚物志-beta-0.5.0-Windows-x64-含美术需求书-20260910.zip",
+                        "metadata":  "F:\\$Recycle.Bin\\S-1-5-21-1942464140-2856953516-1393776520-1001\\$IPOPARP.zip",
+                        "data":  "F:\\$Recycle.Bin\\S-1-5-21-1942464140-2856953516-1393776520-1001\\$RPOPARP.zip",
+                        "data_exists":  true,
+                        "bytes":  493168873,
+                        "deleted_utc":  "2026-09-14T19:28:03.6690000Z"
+                    },
+        "inventory":  {
+                          "files":  1,
+                          "bytes":  493168873,
+                          "hash":  "12ABA4AFDE0CFCCE85B347738DC2DF453BF16E69A8622E98194BB35B971283BF"
+                      },
+        "verified":  true
+    },
+    {
+        "receipt":  {
+                        "original":  "F:\\Documents\\����־",
+                        "metadata":  "F:\\$Recycle.Bin\\S-1-5-21-1942464140-2856953516-1393776520-1001\\$IUH6URK",
+                        "data":  "F:\\$Recycle.Bin\\S-1-5-21-1942464140-2856953516-1393776520-1001\\$RUH6URK",
+                        "data_exists":  true,
+                        "bytes":  0,
+                        "deleted_utc":  "2026-09-14T19:28:04.4210000Z"
+                    },
+        "inventory":  {
+                          "files":  0,
+                          "bytes":  0,
+                          "hash":  null
+                      },
+        "verified":  true
+    }
+]

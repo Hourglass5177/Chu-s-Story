@@ -41,6 +41,12 @@ def _sha256(raw: bytes) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
+def _canonical_source(path: Path) -> bytes:
+    # Git checkout and editors may use CRLF. Hash the same text that is parsed,
+    # without ignoring real edits, whitespace, or the final newline.
+    return path.read_text(encoding="utf-8").encode("utf-8")
+
+
 def _resource_path(path: Path) -> str:
     return "res://" + path.resolve().relative_to(ROOT).as_posix()
 
@@ -117,8 +123,8 @@ class GuideBuilder:
     def __init__(self, source: Path, media_source: Path) -> None:
         self.source = source
         self.media_source = media_source
-        self.source_raw = source.read_bytes()
-        self.media_raw = media_source.read_bytes()
+        self.source_raw = _canonical_source(source)
+        self.media_raw = _canonical_source(media_source)
         self.lines = self.source_raw.decode("utf-8").splitlines()
         self.structure = _load_json(media_source)
         if int(self.structure.get("schema_version", 0)) != 3:

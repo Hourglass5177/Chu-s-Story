@@ -1,0 +1,22 @@
+[
+  {
+    "source": "F:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Redist\\MSVC\\14.50.35710\\x64\\Microsoft.VC145.CRT\\msvcp140.dll",
+    "sha256": "DEF46AA6A8F72F27BAFAC0C43334419486A4D1DCDB6C479A8EF7034B3E1FA4CB",
+    "name": "msvcp140.dll"
+  },
+  {
+    "source": "F:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Redist\\MSVC\\14.50.35710\\x64\\Microsoft.VC145.CRT\\msvcp140_1.dll",
+    "sha256": "2DD670F874562FBDCA5B022DF1943D70A57BA91FDE559280E3A1DAEBE4DB2380",
+    "name": "msvcp140_1.dll"
+  },
+  {
+    "source": "F:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Redist\\MSVC\\14.50.35710\\x64\\Microsoft.VC145.CRT\\vcruntime140.dll",
+    "sha256": "184146852727A9DB4EEA06178716BEC3CDBB1015C911F6B0F915B184AD7775B2",
+    "name": "vcruntime140.dll"
+  },
+  {
+    "source": "F:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Redist\\MSVC\\14.50.35710\\x64\\Microsoft.VC145.CRT\\vcruntime140_1.dll",
+    "sha256": "E6BFB3662AB4B1969A73441DBE35C96D51441B6BFF8CF1FE7430BD5B246CA605",
+    "name": "vcruntime140_1.dll"
+  }
+]

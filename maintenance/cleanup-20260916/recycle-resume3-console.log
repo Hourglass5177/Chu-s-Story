@@ -1,0 +1,26 @@
+Probe verified: Shell visible, $I/$R present, hash matches.
+Verified 437/689: F:\Documents\楚物志\artifacts\promotion-2026\board2
+Verified 440/689: F:\Documents\楚物志\artifacts\promotion-2026\collection-occluded-rejected
+Verified 443/689: F:\Documents\楚物志\artifacts\promotion-2026\delivery
+Verified 460/689: F:\Documents\楚物志\artifacts\promotion-2026\shots-before-pixel-subtitles
+Verified 480/689: F:\Documents\楚物志\artifacts\recycle-verified-receipts.json
+Verified 500/689: F:\Documents\楚物志\artifacts\rework-actions-output.log
+Verified 520/689: F:\Documents\楚物志\artifacts\rework-suite3.log
+Verified 540/689: F:\Documents\楚物志\artifacts\settings-beta.log
+Verified 550/689: F:\Documents\楚物志\artifacts\submission-20260916
+Verified 560/689: F:\Documents\楚物志\artifacts\test-verified-recycle.ps1
+Verified 580/689: F:\Documents\楚物志\artifacts\tutorial-layout-runtime.log
+Verified 590/689: F:\Documents\楚物志\artifacts\ui-main
+Verified 600/689: F:\Documents\楚物志\artifacts\ui-v4-final-import.log
+Verified 620/689: F:\Documents\楚物志\artifacts\verify-before-puzzle-test-fix
+Verified 640/689: F:\Documents\楚物志\artifacts\vocal-v3-scoring.log
+Verified 650/689: F:\Documents\楚物志\tools\promotion-video\remotion\node_modules
+Verified 651/689: F:\Documents\楚物志\tools\promotion-video\remotion\public
+Verified 653/689: F:\Documents\楚物志\.godot\imported
+Verified 660/689: F:\Documents\楚物志\docs\传承任务素材处理记录（2026-09-09）.md
+Verified 680/689: F:\Documents\楚物志\docs\生成美术动作样板与表现修复（2026-09-14）.md
+Exception: F:\Documents\楚物志\tools\maintenance\recycle_frozen.ps1:117
+Line |
+ 117 |  … LiteralPath $r.data)){throw 'Pre-existing recycle item disappeared'}}
+     |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Pre-existing recycle item disappeared

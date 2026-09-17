@@ -1,0 +1,2 @@
+Probe verified: Shell visible, $I/$R present, hash matches.
+recycle_frozen.ps1: Exception calling "Recycle" with "1" argument(s): "0x80270021"

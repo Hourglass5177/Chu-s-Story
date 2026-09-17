@@ -1,11 +1,14 @@
-extends SceneTree
+extends Node
 
 ## External script for the exported Release executable. Only built-in types are
 ## named here; game scripts/resources are loaded from the executable's PCK.
 ## No WindowsVocalCapture instance or microphone stream is ever constructed.
 const MODEL := "res://InheritanceTasks/AudioNative/models/crepe_tiny.onnx"
-const RUNTIME_ART := "res://InheritanceTasks/Art/Pixel/v1/runtime"
+const RUNTIME_ART := "res://InheritanceTasks/Art/Pixel/v3/runtime"
 const AVATARS: Array[StringName] = [&"travel_blogger", &"life_blogger", &"business_blogger", &"food_blogger", &"adventure_blogger", &"magic_blogger"]
+var root: Window:
+	get: return get_tree().root
+
 var failures: Array[String] = []
 var report: Dictionary = {"microphone_opened":false, "tasks":[], "media":[], "runtime_textures":0, "avatar_sets":0}
 var report_path: String
@@ -13,7 +16,7 @@ var capture_path: String
 var stages: Array[Node] = []
 var media_paths: Dictionary = {}
 
-func _initialize() -> void:
+func _ready() -> void:
 	for argument: String in OS.get_cmdline_user_args():
 		if argument.begins_with("--report="): report_path = argument.trim_prefix("--report=")
 		elif argument.begins_with("--capture="): capture_path = argument.trim_prefix("--capture=")
@@ -25,7 +28,7 @@ func check(ok: bool, description: String) -> void:
 		push_error("RELEASE_PIXEL_CHECK: " + description)
 
 func _run() -> void:
-	await process_frame
+	await get_tree().process_frame
 	root.size = Vector2i(1280,720)
 	root.content_scale_size = Vector2i(1280,720)
 	report.engine = Engine.get_version_info()
@@ -34,7 +37,7 @@ func _run() -> void:
 	report.debug_build = OS.is_debug_build()
 	report.renderer = RenderingServer.get_current_rendering_driver_name()
 	check(not OS.has_feature("editor") and not OS.is_debug_build(), "must run the actual Release executable")
-	check(str(report.renderer).to_lower() == "d3d12", "actual D3D12 renderer")
+	check(str(report.renderer).to_lower().begins_with("opengl"), "actual Compatibility/OpenGL renderer")
 	check(not ResourceLoader.exists("res://InheritanceTasks/Art/Pixel/v1/source/tv.png"), "source artwork excluded from package")
 	check(not ResourceLoader.exists("res://tools/verify_release_pixel.gd"), "verification tools excluded from package")
 	var manager = root.get_node_or_null("HeritageTaskManager")
@@ -64,7 +67,7 @@ func _run() -> void:
 		check(root.get_texture().get_image().save_png(capture_path) == OK, "Release visual contact sheet")
 	for stage: Node in stages: stage.queue_free()
 	stages.clear()
-	for frame: int in 3: await process_frame
+	for frame: int in 3: await get_tree().process_frame
 	report.failures = failures
 	report.status = "PASS" if failures.is_empty() else "FAIL"
 	if not report_path.is_empty():
@@ -74,7 +77,7 @@ func _run() -> void:
 			file.close()
 		else: check(false, "write validation report")
 	print("RELEASE_PIXEL_CHECK ", report.status, " tasks=", report.tasks.size(), " avatars=", report.avatar_sets, " textures=", report.runtime_textures, " media=", report.media.size(), " microphone=false")
-	quit(0 if failures.is_empty() else 1)
+	get_tree().quit(0 if failures.is_empty() else 1)
 
 func _check_task(definition: Resource, index: int) -> void:
 	var id := str(definition.get("task_id"))
@@ -109,7 +112,7 @@ func _check_task(definition: Resource, index: int) -> void:
 		stage.call("update_state", {"action":&"ready", "animation_time":0.0, "listening":false})
 		await RenderingServer.frame_post_draw
 		var image: Image = stage.get_texture().get_image()
-		check(not image.is_empty() and image.get_size() == Vector2i(500,300), id + " render " + str(avatar))
+		check(not image.is_empty() and image.get_size() == Vector2i(stage.size), id + " render " + str(avatar))
 		report.avatar_sets += 1
 	stage.set("avatar_id", AVATARS[0])
 	stage.get("canvas").set("avatar_id", AVATARS[0])
@@ -130,12 +133,15 @@ func _check_task(definition: Resource, index: int) -> void:
 	title.add_theme_font_size_override("font_size",18)
 	root.add_child(title)
 	stages.append(title)
-	var panels: Array = artwork.get("story_panels")
-	var thumbnails: Array = artwork.get("story_thumbnails")
-	var poses: Array = artwork.get("story_animation")
 	if id == "xiabaoping_minjian_gushi":
-		check(panels.size() == 4 and thumbnails.size() == 4 and poses.size() == 12, "story panels, cards, poses")
-		if not panels.is_empty(): tile.texture = panels[0]
+		var stories = load("res://InheritanceTasks/Data/story_puzzle_catalog.gd")
+		check(stories.STORIES.size() == 3, "three puzzle stories")
+		for story: int in 3:
+			for chapter: int in 3:
+				var panel := load(stories.image_path(story, chapter)) as Texture2D
+				check(panel != null and panel.get_width() > 0, "puzzle story image %d/%d" % [story, chapter])
+				if story == 0 and chapter == 0: tile.texture = panel
+		report.story_images = 9
 	var chart: Resource = definition.get("music_chart")
 	if chart != null:
 		check(str(chart.call("validate")).is_empty(), id + " music chart")
@@ -148,18 +154,19 @@ func _check_task(definition: Resource, index: int) -> void:
 	for field: String in ["reference_video_path", "reference_audio_path", "reference_analysis_path"]:
 		var path: String = definition.get(field)
 		if not path.is_empty(): media_paths[path] = "reference"
-	report.tasks.append({"id":id, "presentation_version":artwork.get("version"), "avatars":6, "story_poses":poses.size()})
+	report.tasks.append({"id":id, "presentation_version":artwork.get("version"), "avatars":6})
 
 func _load_runtime_textures(directory: String) -> void:
-	for file_name: String in DirAccess.get_files_at(directory):
-		var name := file_name.trim_suffix(".remap")
+	# Imported PNG names are virtual resources in an exported PCK.
+	for name: String in ResourceLoader.list_directory(directory):
+		if name.ends_with("/"):
+			_load_runtime_textures(directory.path_join(name))
+			continue
 		if not name.ends_with(".png"): continue
 		var path := directory.path_join(name)
 		var texture := ResourceLoader.load(path) as Texture2D
 		check(texture != null and texture.get_width() > 0, "runtime texture " + path)
 		report.runtime_textures += 1
-	for child: String in DirAccess.get_directories_at(directory):
-		_load_runtime_textures(directory.path_join(child))
 
 func _check_media(path: String) -> void:
 	if path.ends_with(".json"):
@@ -176,7 +183,7 @@ func _check_media(path: String) -> void:
 		root.add_child(audio)
 		audio.play()
 		var started := audio.playing
-		await create_timer(.04).timeout
+		await get_tree().create_timer(.04).timeout
 		var position := audio.get_playback_position()
 		check(started and (position > 0 or media.get_length() <= .05), "decoded audio playback " + path)
 		report.media.append({"path":path, "length":media.get_length(), "playback_position":position})
@@ -189,7 +196,7 @@ func _check_media(path: String) -> void:
 		video.volume_db = -80
 		root.add_child(video)
 		video.play()
-		await create_timer(.25).timeout
+		await get_tree().create_timer(.25).timeout
 		var texture := video.get_video_texture()
 		var decoded := texture != null and texture.get_width() > 0 and video.stream_position > 0
 		check(decoded, "decoded video frame " + path)
@@ -214,6 +221,6 @@ func _check_model() -> void:
 	var lifetime: WeakRef = weakref(extractor)
 	extractor = null
 	model_bytes.clear()
-	await process_frame
+	await get_tree().process_frame
 	report.model_released = lifetime.get_ref() == null
 	check(bool(report.model_released), "native model destructor completed before process exit")

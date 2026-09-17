@@ -1,0 +1,161 @@
+{
+	"avatar_sets": 90,
+	"debug_build": false,
+	"engine": {
+		"build": "official",
+		"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+		"hex": 263938,
+		"major": 4,
+		"minor": 7,
+		"patch": 2,
+		"status": "stable",
+		"string": "4.7.2-stable (official)",
+		"timestamp": 0
+	},
+	"executable": "F:/Documents/楚物志/artifacts/cleanup-validation/release/楚物志.exe",
+	"failures": [],
+	"guide_loaded": true,
+	"media": [
+		{
+			"length": 33.0,
+			"path": "res://InheritanceTasks/Audio/rhythm-v2/gu_pen_ge-mix.ogg",
+			"playback_position": 0.00290249427780509
+		},
+		{
+			"length": 43.7999992370605,
+			"path": "res://InheritanceTasks/Audio/rhythm-v4/han_ju-continuous.ogg",
+			"playback_position": 0.0435374155640602
+		},
+		{
+			"decoded": true,
+			"path": "res://arts/非遗媒体资源/数字版/黄梅戏-女驸马-传承任务-v1.ogv",
+			"playback_position": 0.233384
+		},
+		{
+			"length": 13.6499996185303,
+			"path": "res://arts/非遗媒体资源/数字版/黄梅戏-女驸马-参考唱段-v1.ogg",
+			"playback_position": 0.0320000015199184
+		},
+		{
+			"json_loaded": true,
+			"path": "res://arts/非遗媒体资源/数字版/黄梅戏-女驸马-参考分析-v1.json"
+		},
+		{
+			"length": 40.8499984741211,
+			"path": "res://InheritanceTasks/Audio/rhythm-v4/jingzhou_hua_gu_xi-continuous.ogg",
+			"playback_position": 0.0435374155640602
+		},
+		{
+			"length": 41.0,
+			"path": "res://InheritanceTasks/Audio/rhythm-v4/laohekou_si_xian-continuous.ogg",
+			"playback_position": 0.0435374155640602
+		},
+		{
+			"length": 41.0999984741211,
+			"path": "res://InheritanceTasks/Audio/rhythm-v4/ti_qin_xi-continuous.ogg",
+			"playback_position": 0.0348299331963062
+		},
+		{
+			"length": 43.3499984741211,
+			"path": "res://InheritanceTasks/Audio/rhythm-v4/tujia_saye_erhe-continuous.ogg",
+			"playback_position": 0.0435374155640602
+		},
+		{
+			"length": 42.2999992370605,
+			"path": "res://arts/非遗媒体资源/数字版/2026-09-09/xingshan-xiatianhaozi-v1.ogg",
+			"playback_position": 0.0435374155640602
+		},
+		{
+			"length": 0.1,
+			"path": "res://InheritanceTasks/Audio/action-feedback.wav",
+			"playback_position": 0.0435374155640602
+		}
+	],
+	"microphone_opened": false,
+	"model_bytes": 1953958,
+	"model_initialized": true,
+	"model_released": true,
+	"model_sha256": "06600d47348b545b212942c38db9df532af1b31a961cd1b291564a62314f552a",
+	"renderer": "opengl3",
+	"runtime_textures": 296,
+	"status": "PASS",
+	"story_images": 9,
+	"tasks": [
+		{
+			"avatars": 6,
+			"id": "dong_yong_chuanshuo",
+			"presentation_version": 3
+		},
+		{
+			"avatars": 6,
+			"id": "ezhou_diaohua_jianzhi",
+			"presentation_version": 3
+		},
+		{
+			"avatars": 6,
+			"id": "gu_pen_ge",
+			"presentation_version": 3
+		},
+		{
+			"avatars": 6,
+			"id": "han_ju",
+			"presentation_version": 3
+		},
+		{
+			"avatars": 6,
+			"id": "huangmei_xi",
+			"presentation_version": 3
+		},
+		{
+			"avatars": 6,
+			"id": "jingzhou_hua_gu_xi",
+			"presentation_version": 3
+		},
+		{
+			"avatars": 6,
+			"id": "laohekou_si_xian",
+			"presentation_version": 3
+		},
+		{
+			"avatars": 6,
+			"id": "ti_qin_xi",
+			"presentation_version": 3
+		},
+		{
+			"avatars": 6,
+			"id": "tianmen_tang_su",
+			"presentation_version": 3
+		},
+		{
+			"avatars": 6,
+			"id": "tujia_saye_erhe",
+			"presentation_version": 3
+		},
+		{
+			"avatars": 6,
+			"id": "xia_lian_dan_shu",
+			"presentation_version": 3
+		},
+		{
+			"avatars": 6,
+			"id": "xiabaoping_minjian_gushi",
+			"presentation_version": 3
+		},
+		{
+			"avatars": 6,
+			"id": "xingshan_min_ge",
+			"presentation_version": 3
+		},
+		{
+			"avatars": 6,
+			"id": "xisai_shenzhou_hui",
+			"presentation_version": 3
+		},
+		{
+			"avatars": 6,
+			"id": "yandi_shennong_chuanshuo",
+			"presentation_version": 3
+		}
+	],
+	"version": "beta 0.5.0"
+}

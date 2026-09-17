@@ -1,0 +1,30 @@
+startup: PID 32536; log F:\Documents\楚物志\artifacts\cleanup-validation\release-check-r2\startup-console.log
+startup: exit 0; 17.312 seconds; 0 errors
+resource-model: PID 21556; log F:\Documents\楚物志\artifacts\cleanup-validation\release-check-r2\resource-model-console.log
+resource-model: exit 0; 18.875 seconds; 0 errors
+{
+  "executable": "F:\\Documents\\楚物志\\artifacts\\cleanup-validation\\release\\楚物志.exe",
+  "exe_sha256": "c2adaefcf9c0e52d3094c05a5c330fed66d5c6485ae76ebbb24ccc1d693325d6",
+  "pck_sha256": "95aa6c2883b1f543e25a4c80aea755af32f41dada95e0fafcb5cdd9f772674ea",
+  "native_release_dll": "F:\\Documents\\楚物志\\artifacts\\cleanup-validation\\release\\chuwuzhi_audio.windows.release.x86_64.dll",
+  "native_sha256": "d183fefc8d313dc3d67fcbd136b2aae2f7b1aa3080c9c2ecab0ce4ff7a91bb1a",
+  "microphone_opened": false,
+  "startup_and_close": {
+    "exit_code": 0,
+    "seconds": 17.312,
+    "console": "F:\\Documents\\楚物志\\artifacts\\cleanup-validation\\release-check-r2\\startup-console.log",
+    "engine_log": "F:\\Documents\\楚物志\\artifacts\\cleanup-validation\\release-check-r2\\startup-engine.log",
+    "errors": [],
+    "opengl_logged": true
+  },
+  "resource_model_and_close": {
+    "exit_code": 0,
+    "seconds": 18.875,
+    "console": "F:\\Documents\\楚物志\\artifacts\\cleanup-validation\\release-check-r2\\resource-model-console.log",
+    "engine_log": "F:\\Documents\\楚物志\\artifacts\\cleanup-validation\\release-check-r2\\resource-model-engine.log",
+    "errors": [],
+    "opengl_logged": true
+  },
+  "report": "F:\\Documents\\楚物志\\artifacts\\cleanup-validation\\release-check-r2\\resource-model-report.json",
+  "status": "PASS"
+}

@@ -1,0 +1,50 @@
+﻿[
+    {
+        "original":  "F:\\Documents\\楚物志-提交验证",
+        "inventory":  {
+                          "files":  7414,
+                          "bytes":  1968289346,
+                          "hash":  null
+                      }
+    },
+    {
+        "original":  "F:\\Documents\\楚物志-清理隔离",
+        "inventory":  {
+                          "files":  0,
+                          "bytes":  0,
+                          "hash":  null
+                      }
+    },
+    {
+        "original":  "F:\\Documents\\楚物志\\docs\\prototypes\\guide-layout-references",
+        "inventory":  {
+                          "files":  4,
+                          "bytes":  4148321,
+                          "hash":  null
+                      }
+    },
+    {
+        "original":  "F:\\Documents\\楚物志\\artifacts\\build-20260910-archived-logs",
+        "inventory":  {
+                          "files":  24,
+                          "bytes":  3238045,
+                          "hash":  null
+                      }
+    },
+    {
+        "original":  "F:\\xwechat_files\\wxid_8t0xifctvcya12_c359\\msg\\file\\2026-09\\楚物志-beta-0.5.0-Windows-x64-含美术需求书-20260910.zip",
+        "inventory":  {
+                          "files":  1,
+                          "bytes":  493168873,
+                          "hash":  "12ABA4AFDE0CFCCE85B347738DC2DF453BF16E69A8622E98194BB35B971283BF"
+                      }
+    },
+    {
+        "original":  "F:\\Documents\\����־",
+        "inventory":  {
+                          "files":  0,
+                          "bytes":  0,
+                          "hash":  null
+                      }
+    }
+]

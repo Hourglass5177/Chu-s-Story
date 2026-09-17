@@ -33,7 +33,7 @@ def run_game(exe: Path, output: Path, name: str, extra: list[str]) -> dict:
     startup = subprocess.STARTUPINFO()
     startup.dwFlags |= subprocess.STARTF_USESHOWWINDOW
     startup.wShowWindow = subprocess.SW_HIDE
-    args = [str(exe), "--rendering-driver", "d3d12", "--windowed", "--resolution",
+    args = [str(exe), "--rendering-driver", "opengl3", "--windowed", "--resolution",
             "1280x720", "--max-fps", "60", "--log-file", str(engine_log), *extra]
     started = time.monotonic()
     with console.open("w", encoding="utf-8") as log:
@@ -55,9 +55,9 @@ def run_game(exe: Path, output: Path, name: str, extra: list[str]) -> dict:
               or re.search(r"ObjectDB instances leaked|\d+ RIDs? of type .* leaked", line)]
     record = {"exit_code": code, "seconds": round(time.monotonic() - started, 3),
               "console": str(console), "engine_log": str(engine_log), "errors": errors,
-              "d3d12_logged": "D3D12" in text}
+              "opengl_logged": "OpenGL" in text}
     print(f"{name}: exit {code}; {record['seconds']} seconds; {len(errors)} errors", flush=True)
-    if code or errors or not record["d3d12_logged"]:
+    if code or errors or not record["opengl_logged"]:
         print(text[-12000:], flush=True)
         raise RuntimeError(f"{name} failed; inspect {console}")
     return record
@@ -87,9 +87,26 @@ def main() -> None:
     summary["startup_and_close"] = run_game(exe, output, "startup", ["--quit-after", "120"])
     probe = Path(__file__).with_suffix(".gd").resolve(strict=True)
     report_path = output / "resource-model-report.json"
-    summary["resource_model_and_close"] = run_game(exe, output, "resource-model", [
-        "--script", str(probe), "--", f"--report={report_path}",
-        f"--capture={output / 'release-presentations.png'}"])
+    # Release templates do not implement the editor-only --script switch.
+    # Override only this disposable export's main scene, preserving its PCK.
+    override = exe.parent / "override.cfg"
+    if override.exists():
+        raise RuntimeError("Refusing to replace an existing override.cfg")
+    scene = output / "release-audit.tscn"
+    scene.write_text(
+        '[gd_scene load_steps=2 format=3]\n'
+        f'[ext_resource type="Script" path="{probe.as_posix()}" id="1"]\n'
+        '[node name="ReleaseAudit" type="Node"]\n'
+        'script = ExtResource("1")\n', encoding="utf-8")
+    override.write_text('[application]\nrun/main_scene="' + scene.as_posix() + '"\n', encoding="utf-8")
+    try:
+        summary["resource_model_and_close"] = run_game(exe, output, "resource-model", [
+            "--", f"--report={report_path}",
+            f"--capture={output / 'release-presentations.png'}"])
+    finally:
+        override.replace(output / f"audit-override-{time.time_ns()}.used.cfg")
+    if sha256(pck) != summary["pck_sha256"] or sha256(exe) != summary["exe_sha256"]:
+        raise RuntimeError("Export changed during validation")
     report = json.loads(report_path.read_text(encoding="utf-8"))
     if report.get("status") != "PASS" or not report.get("model_initialized") or not report.get("model_released"):
         raise RuntimeError("Packed resource/model report did not pass")

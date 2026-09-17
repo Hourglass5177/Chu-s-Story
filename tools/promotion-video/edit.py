@@ -2,12 +2,11 @@
 from pathlib import Path
 import json,subprocess,shutil,sys
 R=Path(__file__).resolve().parents[2]; P=R/'artifacts/promotion-2026'; W=Path(__file__).resolve().parent
+P.mkdir(parents=True, exist_ok=True)
 FF=R/'artifacts/media-20260909/toolchain/ffmpeg-9.0.1-essentials_build/bin/ffmpeg.exe'
 OUT=P/'delivery'; OUT.mkdir(exist_ok=True); SH=P/'shots'; SH.mkdir(exist_ok=True)
-FONT=Path('tools/promotion-video/fonts/pixel.ttf')
+FONT=Path('InheritanceTasks/Art/Pixel/v2/fonts/fusion-pixel-12px-proportional-zh_hans.ttf')
 BGM_WINDOW=(45,89)
-(R/FONT).parent.mkdir(exist_ok=True)
-shutil.copyfile(R/'InheritanceTasks/Art/Pixel/v2/fonts/fusion-pixel-12px-proportional-zh_hans.ttf',R/FONT)
 shots=[
  dict(take='board2',start=4.2,duration=7,caption='在武汉，开启一场非遗旅行。',city='武汉'),
  dict(take='home',start=3,duration=7,caption='楚物志',city='湖北非遗文化主题桌游'),

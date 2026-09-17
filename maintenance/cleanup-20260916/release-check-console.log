@@ -1,0 +1,95 @@
+startup: PID 33188; log F:\Documents\楚物志\artifacts\cleanup-validation\release-check\startup-console.log
+startup: exit 0; 18.187 seconds; 0 errors
+resource-model: PID 7588; log F:\Documents\楚物志\artifacts\cleanup-validation\release-check\resource-model-console.log
+resource-model: exit 1; 18.625 seconds; 4 errors
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Laptop GPU
+
+已加载地区 [仙桃] 非遗牌库，共 2 张
+已加载地区 [十堰] 非遗牌库，共 7 张
+已加载地区 [咸宁] 非遗牌库，共 1 张
+已加载地区 [天门] 非遗牌库，共 2 张
+已加载地区 [孝感] 非遗牌库，共 5 张
+已加载地区 [宜昌] 非遗牌库，共 16 张
+已加载地区 [恩施] 非遗牌库，共 12 张
+已加载地区 [武汉] 非遗牌库，共 11 张
+已加载地区 [潜江] 非遗牌库，共 2 张
+已加载地区 [神农架] 非遗牌库，共 2 张
+已加载地区 [荆州] 非遗牌库，共 7 张
+已加载地区 [荆门] 非遗牌库，共 1 张
+已加载地区 [襄阳] 非遗牌库，共 4 张
+已加载地区 [鄂州] 非遗牌库，共 2 张
+已加载地区 [随州] 非遗牌库，共 2 张
+已加载地区 [黄冈] 非遗牌库，共 7 张
+已加载地区 [黄石] 非遗牌库，共 4 张
+RELEASE_PIXEL_TASK dong_yong_chuanshuo
+RELEASE_PIXEL_TASK ezhou_diaohua_jianzhi
+RELEASE_PIXEL_TASK gu_pen_ge
+RELEASE_PIXEL_TASK han_ju
+RELEASE_PIXEL_TASK huangmei_xi
+RELEASE_PIXEL_TASK jingzhou_hua_gu_xi
+RELEASE_PIXEL_TASK laohekou_si_xian
+RELEASE_PIXEL_TASK ti_qin_xi
+RELEASE_PIXEL_TASK tianmen_tang_su
+RELEASE_PIXEL_TASK tujia_saye_erhe
+RELEASE_PIXEL_TASK xia_lian_dan_shu
+RELEASE_PIXEL_TASK xiabaoping_minjian_gushi
+ERROR: RELEASE_PIXEL_CHECK: story panels, cards, poses
+   at: push_error (core/variant/variant_utility.cpp:1023)
+RELEASE_PIXEL_TASK xingshan_min_ge
+RELEASE_PIXEL_TASK xisai_shenzhou_hui
+RELEASE_PIXEL_TASK yandi_shennong_chuanshuo
+ERROR: RELEASE_PIXEL_CHECK: packed runtime art catalog
+   at: push_error (core/variant/variant_utility.cpp:1023)
+RELEASE_PIXEL_CHECK FAIL tasks=15 avatars=90 textures=0 media=11 microphone=false
+
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Laptop GPU
+
+已加载地区 [仙桃] 非遗牌库，共 2 张
+已加载地区 [十堰] 非遗牌库，共 7 张
+已加载地区 [咸宁] 非遗牌库，共 1 张
+已加载地区 [天门] 非遗牌库，共 2 张
+已加载地区 [孝感] 非遗牌库，共 5 张
+已加载地区 [宜昌] 非遗牌库，共 16 张
+已加载地区 [恩施] 非遗牌库，共 12 张
+已加载地区 [武汉] 非遗牌库，共 11 张
+已加载地区 [潜江] 非遗牌库，共 2 张
+已加载地区 [神农架] 非遗牌库，共 2 张
+已加载地区 [荆州] 非遗牌库，共 7 张
+已加载地区 [荆门] 非遗牌库，共 1 张
+已加载地区 [襄阳] 非遗牌库，共 4 张
+已加载地区 [鄂州] 非遗牌库，共 2 张
+已加载地区 [随州] 非遗牌库，共 2 张
+已加载地区 [黄冈] 非遗牌库，共 7 张
+已加载地区 [黄石] 非遗牌库，共 4 张
+RELEASE_PIXEL_TASK dong_yong_chuanshuo
+RELEASE_PIXEL_TASK ezhou_diaohua_jianzhi
+RELEASE_PIXEL_TASK gu_pen_ge
+RELEASE_PIXEL_TASK han_ju
+RELEASE_PIXEL_TASK huangmei_xi
+RELEASE_PIXEL_TASK jingzhou_hua_gu_xi
+RELEASE_PIXEL_TASK laohekou_si_xian
+RELEASE_PIXEL_TASK ti_qin_xi
+RELEASE_PIXEL_TASK tianmen_tang_su
+RELEASE_PIXEL_TASK tujia_saye_erhe
+RELEASE_PIXEL_TASK xia_lian_dan_shu
+RELEASE_PIXEL_TASK xiabaoping_minjian_gushi
+ERROR: RELEASE_PIXEL_CHECK: story panels, cards, poses
+   at: push_error (core/variant/variant_utility.cpp:1023)
+RELEASE_PIXEL_TASK xingshan_min_ge
+RELEASE_PIXEL_TASK xisai_shenzhou_hui
+RELEASE_PIXEL_TASK yandi_shennong_chuanshuo
+ERROR: RELEASE_PIXEL_CHECK: packed runtime art catalog
+   at: push_error (core/variant/variant_utility.cpp:1023)
+RELEASE_PIXEL_CHECK FAIL tasks=15 avatars=90 textures=0 media=11 microphone=false
+
+Traceback (most recent call last):
+  File "F:\Documents\楚物志\tools\verify_release_pixel.py", line 120, in <module>
+    main()
+  File "F:\Documents\楚物志\tools\verify_release_pixel.py", line 103, in main
+    summary["resource_model_and_close"] = run_game(exe, output, "resource-model", [
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Documents\楚物志\tools\verify_release_pixel.py", line 62, in run_game
+    raise RuntimeError(f"{name} failed; inspect {console}")
+RuntimeError: resource-model failed; inspect F:\Documents\楚物志\artifacts\cleanup-validation\release-check\resource-model-console.log

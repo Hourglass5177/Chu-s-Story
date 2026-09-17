@@ -1,0 +1,3257 @@
+[
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\action-story-v3",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\action-story-v3-art-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\action-story-v3-art-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\action-story-v3-covers-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\action-story-v3-final-clean.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\action-story-v3-final-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\action-story-v3-final-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\action-story-v3-followup.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\action-story-v3-gut.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\action-story-v3-mixed-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\action-story-v3-mixed-fixed.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\action-story-v3-render-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\action-story-v3-render.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\adjust_tutorial_layout.py",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-baseline-final-0.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-baseline-final-0.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-baseline-final-1.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-baseline-final-1.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-baseline-final-2.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-baseline-final-2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-baseline-pilot.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-baseline-pilot.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-beta-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-beta-final2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-beta.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-01-r13.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-01-r13.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-01.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-01.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-full.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-full.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r10.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r10.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r11.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r12.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r13.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r13.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r2.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r3.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r4.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r4.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r5.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r5.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r5full.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r5full.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r6.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r6.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r7.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r7.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r8.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12-r9.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-calibration-12.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-clock-120.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-clock-120.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-code-manifest.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulties-final",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-acceptance-r20.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-acceptance.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-baseline",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-beta-complete.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-beta-current.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-beta-final-r20.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-beta-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-beta-r14.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-beta.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-fairness-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-final-continuation.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-final-layout.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-gamepad-gui.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-gamepad-gui2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-gamepad-gui3.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-games-gui-final-r20.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-games-gui-r13.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-games-gui.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-gui",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-gui-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-gui.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-heldout-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-heldout.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-layout-final-r20.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-matrix-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-matrix-r20.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-matrix-r20b.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-pilot.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-pilot.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-recovered-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-review.patch",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-six-seat-gui.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests10.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests11.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests12.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests13.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests14.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests15.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests16.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests17.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests18.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests19.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests3.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests4.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests5.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests6.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests7.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests8.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-difficulty-tests9.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-final-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-gui",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-gui-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-gui-interactions-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-gui-interactions-final2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-gui-interactions.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-gui.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-import2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-import3.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-interaction-final-tier0.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-interaction-final-tier1.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-interaction-final-tier2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-interaction-tier0.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-interaction-tier1.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-interaction-tier2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-matches.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-mixed-r10.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-mixed-r10.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-mixed-r12.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-mixed-r12.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-mixed-r13.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-mixed-r13.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-mixed-r15.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-mixed-r15.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-mixed-r9.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-next-stage",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-normal-0.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-normal-0.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-normal-324.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-normal-324.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-normal-648.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-normal-648.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-normal-final-0.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-normal-final-0.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-normal-final-324.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-normal-final-324.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-normal-final-648.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-normal-final-648.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-outlier-203.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-outlier-203.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-outlier-789.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-outlier-789.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-outlier-848.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-outlier-848.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-pair-01-seed910017-rejected.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-pair-12-seed910017-rejected.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-phase-move-v4",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-pilot.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-planning-pilot.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-planning-pilot.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-runtime.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-smoke.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-smoke2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-smoke3.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-smoke4.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-smoke5.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-speed-gui",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-speed-gui.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-speed-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-speed-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-stall-168-analysis.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-stall-168-fixed.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-stall-168-fixed.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-stall-168.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-stall-168.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-stall-224-analysis.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-stall-224-fixed.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-stall-224-fixed.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-stall-224.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-stall-224.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-stall-249-check.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-stall-249-check.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-stall-r9.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-stall-r9.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-stall-regression.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-stall-regression.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-summary.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-tests-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-tests-final2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-tests2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-tests3.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-tests4.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-tests5.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-tests6.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-current-off.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-current-off.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-current-on.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-current-on.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-final-off.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-final-off.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-final-on.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-final-on.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-final.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-pilot.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-pilot.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-pilot2.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-pilot2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-r14.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-r14.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-replay.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-verification-final.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-trace-verification.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-traces",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-unit.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-unit2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-unit3.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-validation-power-events.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-validation-summary.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ai-validation-tool-update",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\art-brief-before-pixel-20260913.docx",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\art-brief-concise",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\art-brief-current",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\aseprite-toolchain",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\audio-native-build.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\audit-smoke",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\audit-smoke-sequential",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\balance-021",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\balance-021-v2",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\board-audio",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\capture-final-console.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\capture-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\capture-regression-console.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\capture-regression.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cleanup-20260915.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cleanup-commit-message.txt",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cleanup-commit-scope.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cleanup-diff-check.txt",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cleanup-disk-location-audit.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cleanup-found-locations.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cleanup-location-scan.py",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cleanup-move-destinations.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cleanup-precommit-audit.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cleanup-stage.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cleanup-staged-check.txt",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cleanup-staged-files.txt",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cleanup-staged-size.txt",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cleanup-usn-errors.txt",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cleanup-usn-journal.csv",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\competition-plan",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cover",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\cover-export.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\craft-pixel-ui",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\credits-review.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\credits-submission",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\current-windows-build.txt",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-anatomy-motion-v8",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-anatomy-motion-v8-final",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-anatomy-motion-v8-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-anatomy-motion-v8.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-anatomy-v8-final-render.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-father-v8-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-hand-connection-v5",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-hand-connection-v5-render.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-hand-connection-v6",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-hand-connection-v6-render.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-hand-connection-v7",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-hand-connection-v7-render.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-hand-connection-v7-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-hand-connection-v8",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-hand-connection-v8-final",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-hand-connection-v8-render.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-hand-connection-v8b",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-hand-connection-v8b-render.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-intact-anatomy-v8-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-original-detail-v4",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-original-detail-v4-appearance-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-original-detail-v4-cover-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-original-detail-v4-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-original-detail-v4-render.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-original-detail-v4-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-parts-review.png",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-reference-six.png",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-v8-final-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-v8-final-regression.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-v8-frame-review",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-v8-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-v8-regression.gutconfig.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-v8-regression.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-v8-user-preview-error.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong-v8-user-preview.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\dong_scale_cleanup.py",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\escort-name-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\escort-route-play.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\escort-route-v5",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\escort-user-preview.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\final-replay-session-11780-2.trace.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\final-replay-session-11780-5.trace.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\final-replay-session-11780-8.trace.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\fix_tutorial_input.py",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\fix_tutorial_runner.py",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\food-tooltip-text-check.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\frontend",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\frontend-e2e-4.7.2-console.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\frontend-e2e-4.7.2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\gallery-short-title-v3.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\git-add-warnings.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\guide",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\guide-qa",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\gupen-pixel-play",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\gut-4.7.2-console.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\gut-4.7.2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\gut-final-4.7.2-console.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\gut-final-4.7.2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\heritage-rework-music-recheck.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\host-v2-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\host-v2-preview.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\host-v2-side-settings-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\host-v2-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\huangmei-complete-audio-console.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\huangmei-complete-audio.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\huangmei-final-console.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\huangmei-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\huangmei-lifecycle.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\huangmei-pipeline.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\huangmei-repeat-console.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\huangmei-repeat.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\huangmei-stable-1-console.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\huangmei-stable-1.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\huangmei-stable-2-console.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\huangmei-stable-2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\implement_tutorial.py",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\input-revision",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\input-v3-play",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\legacy-ui-preview",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\logo-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\logo-review-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\logo-review.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\main-scene-4.7.2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\melody-audio-engine.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\melody-audio.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\melody-full-engine.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\melody-full.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\melody-full.xml",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\melody-green-engine.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\melody-green.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\melody-red-engine.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\melody-red.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\melody-reference-final-engine.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\melody-reference-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\microphone-format-probe.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\microphone-live-probe.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\migrate_action_story_integration.py",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\migrate_action_story_tests.py",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\minigame-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\motion-appearance-invariance.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\motion-art-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\motion-legacy-operators-gut.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\motion-pixel-play",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\motion-pixel-ui",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\motion-pixel-ui-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\motion-pixel-ui-refined.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\motion-pixel-ui.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\motion-v2-pixel-gut.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\motion-v2-play",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-host-regression-v3-fixed.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-host-v3",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-host-v3.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-host-v4",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-host-v4-render.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-input-avatar-regression",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-motion-v4",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-motion-v4-1280-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-motion-v4-capture-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-motion-v4-capture.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-motion-v4-dance.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-motion-v4-text-fixed.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-motion-v4-tiqin-debug.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-motion-v4-tiqin-gupen-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-pixel-review",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-r4-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-v3-contracts.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-v3-final-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-v3-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-v3-lessons.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-v3-normal-input.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-v3-poses.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-v3-test_heritage_craft_presentation.gd.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-v3-test_heritage_preserved_tutorials.gd.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-v3-test_music_input_avatar_regression.gd.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\music-v3-tiqin.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\paper-detail-cover-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\paper-detail-v4",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\paper-detail-v4.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\paper_guide.py",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\perf-gallery-before.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\perf-gallery-d3d-after.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\perf-gallery-d3d-live-before.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\perf-gallery-gl-live-after.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\perf-gallery-gl-live-before.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\perf-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\performance-gallery",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\performance-lessons",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\performance-lessons-v3-real-clock-fixed.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\performance-lessons-v3-real-clock.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-all-art-check.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-art-review",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-art-root-check.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-final-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-font-v2",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-font-v2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-full-gut-first-pass.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-full-verify-first-pass.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-full-verify.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-gallery-guide-recheck.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-gallery-recheck.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-guide-recheck.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-host-v2",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-normal-input-recheck.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-normal-input.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-resources-focused.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-resources-recheck.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-story-v2-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-v2",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\pixel-v3",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\prepare_dong_sources.py",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\preserved-tutorial-ui",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\preview-music-v3-user-error.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\preview-music-v3-user.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\promotion-2026",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\puzzle-detail-capture.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\puzzle-detail-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\puzzle-detail-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\puzzle-detail-v4",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\record-verified-recycle.py",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\recycle-authorized-targets.ps1",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\recycle-probe-receipt.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\recycle-shell-visible.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\recycle-targets-reviewed.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\recycle-verified-receipts.json",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\redesign-review-script.js",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\redesign-review-server-error.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\redesign-review-server.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\reference-audit.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\replay-105-v2",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\replay-65",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\replay-65-v2",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\replay-session-12080-2.trace.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\replay-session-12080-5.trace.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\replay-session-12080-8.trace.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\replay-session-14460-2.trace.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\replay-session-14460-5.trace.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\replay-session-14460-8.trace.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\replay-session-23832-2.trace.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\replay-session-23832-5.trace.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\replay-session-23832-8.trace.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\retired-overviews",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\review_dong_parts.py",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-actions-error.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-actions-output.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-audio-tail-error.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-audio-tail-output.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-chart-preview",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-final-play-error.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-final-play-output.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-final-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-flight-error.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-flight-final-error.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-flight-final-output.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-flight-output.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-focused.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-full-verify.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-import2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-import3.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-play",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-play-error.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-play-output.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-suite.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-suite2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-suite3.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-suite4.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-tail-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-visual-error.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework-visual-output.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rework_visual_check.gd",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rhythm-review-http-error.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rhythm-review-http.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rhythm-v2-contracts.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rhythm-v2-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rhythm-v2-judge-focused.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rhythm-v2-judge.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rhythm-v2-test_heritage_performance_lessons.gd.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rhythm-v2-test_music_input_avatar_regression.gd.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rhythm-v3-contracts-test.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rhythm-v3-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rhythm-v3-import2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\rhythm-v3-lessons-test.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\settings-beta-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\settings-beta.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\settings-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\settings-panel-polish.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\settings-review",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\settings-review.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\settings-tests-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\settings-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\smoke-021",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\smoke-4.7.2",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\smoke-one",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\submission-20260916",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\sugar-v3-detail-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\sugar-v3-detail-render.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\sugar-v3-detail-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\sugar-v3-preview",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\sugar-v3-regression.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\sugar-v3-render.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tangsu-outcomes",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\television-ui",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\test-userdata",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\test-verified-recycle.ps1",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tiqin-body-grid.png",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tiqin-bow-frame-review.png",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tiqin-continuous-bow",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tiqin-layer-anchor-review.png",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tmp_frontend_flow_after.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tmp_frontend_loading.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tmp_frontend_loading_after.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tmp_frontend_loading_after2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tmp_frontend_loading_final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-audit.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-beta-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-beta.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-example.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-final-gui.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-gamepad.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-gui.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-keys.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-layout-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-layout-runtime.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-layout-v2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-pause-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-pause-runtime.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-restart.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-review",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-scoped.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\tutorial-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-host-v4.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-input-v4-unit.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-main",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-main-game.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-main-gut.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-main-home.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-main-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-main-import2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-main-import3.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-main-import4.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-shared-v4.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-v4-final-gallery.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-v4-final-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-v4-final-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-v4-gallery-final-tests.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-v4-gallery.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-v4-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-v4-preview",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-v4-render-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-v4-render-r2.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-v4-render.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\ui-v4-television.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\uiux-audit-20260914",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\untracked-cleanup-audit.txt",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\update_escort_contact.py",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\user-minigame-preview.png",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\user-preview-check.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\user-preview.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\v3-alchemy-preview.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\v3-import.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\verified-recycle.cs",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\verify",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\verify-before-puzzle-test-fix",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\verify-v3-final-console.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\verify-voice-fix-console.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-preview-engine.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-result-1280x720.png",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-result-1920x1080.png",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-result-2048x1536.png",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-result-2560x1600.png",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-result-3440x1440.png",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-v3-combined.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-v3-full-engine.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-v3-full.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-v3-full.xml",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-v3-layout-engine.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-v3-layout-final-engine.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-v3-layout-final.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-v3-layout.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-v3-navigation-engine.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-v3-navigation.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-v3-red.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-v3-scoring.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\vocal-v3-ui.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\voice-alignment-red-console.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\voice-alignment-red.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\voice-fixes-unit-console.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\voice-fixes-unit.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\voice-reference-new-console.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\voice-reference-new.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\xingshan-followers-gut.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\artifacts\\xingshan-followers-invariance.log",
+    "reason": "历史录制、快照、构建、审稿或诊断产物；必要最终结果已保全",
+    "replacement": "deliverables/; docs/verification/; tools/promotion-video/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\tools\\promotion-video\\remotion\\node_modules",
+    "reason": "可重建依赖、媒体副本或导入缓存",
+    "replacement": "依赖锁文件、生成源及正式资源"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\tools\\promotion-video\\remotion\\public",
+    "reason": "可重建依赖、媒体副本或导入缓存",
+    "replacement": "依赖锁文件、生成源及正式资源"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\tools\\promotion-video\\sample-10s.mp4",
+    "reason": "可重建依赖、媒体副本或导入缓存",
+    "replacement": "依赖锁文件、生成源及正式资源"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\.godot\\imported",
+    "reason": "可重建依赖、媒体副本或导入缓存",
+    "replacement": "依赖锁文件、生成源及正式资源"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\.godot\\shader_cache",
+    "reason": "可重建依赖、媒体副本或导入缓存",
+    "replacement": "依赖锁文件、生成源及正式资源"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\AI三档难度与实战打磨（2026-09-15）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\AI并行开发与验收隔离（2026-09-15）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\AI策略缓存修正与后续对抗（2026-09-15）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\主体UI二次校正与实机审查（2026-09-15）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\五音乐关教学与像素制作记录（2026-09-13）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\传承任务素材处理记录（2026-09-09）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\传承小游戏体验复盘与重设计（2026-09-10）.md",
+    "reason": "已被当前实现替代的原型计划",
+    "replacement": "docs/项目现状与已知问题.md"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\传承小游戏像素重构与验收记录（2026-09-13）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\传承小游戏动作关像素验证（2026-09-13）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\传承小游戏第三版生成资产与全面实施（2026-09-14）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\传承小游戏第二轮样板与美术返工（2026-09-13）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\传承小游戏素材待补与用途（2026-09-14）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\传承小游戏素材补充清单（2026-09-10）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\传承小游戏重构实现与验收（2026-09-09）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\六音游教学与演出分离实施（2026-09-14）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\六项音乐小游戏第三版接入与验证（2026-09-14）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\出生点地图预览与放大修正（2026-09-15）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\十五关动作与场景联动复盘（2026-09-13）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\参赛宣传视频与PPT方案（2026-09-15）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\四关像素表现与电视UI实施记录（2026-09-13）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\小游戏图鉴主题统一与加载Logo修正（2026-09-15）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\局内信息栏排版修正（2026-09-15）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\工程清理与提交记录（2026-09-15）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\拼图画质与信息栏修复（2026-09-15）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\清理文件实际去向核查（2026-09-15）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\生成美术动作样板与表现修复（2026-09-14）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\电脑AI接入与验收（2026-09-15）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\短入门教程实施与验收（2026-09-15）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\神舟路线容错与小游戏命名（2026-09-15）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\著作署名与参赛包替换（2026-09-16）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\连续音游与输入画面修订（2026-09-14）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\通用设置实施与验收（2026-09-15）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\键鼠切换与渲染性能优化（2026-09-14）.md",
+    "reason": "阶段记录已收敛至现状文档；历史版本仍在Git",
+    "replacement": "docs/项目现状与已知问题.md; docs/verification/"
+  },
+  {
+    "path": "F:\\Documents\\楚物志\\docs\\传承任务原型素材替换清单.md",
+    "reason": "已被当前实现替代的原型计划",
+    "replacement": "docs/项目现状与已知问题.md"
+  }
+]

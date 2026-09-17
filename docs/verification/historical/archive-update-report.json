@@ -1,0 +1,13 @@
+{
+  "archive": "F:\\Desktop\\楚物志.7z",
+  "archive_sha256": "2d724a2f08b0c876a46fe54a20c5ea72f159721291cd0d5f67178a20867a1331",
+  "backup": "F:\\Documents\\楚物志\\artifacts\\credits-submission\\original-楚物志.7z",
+  "backup_sha256": "c4e045a99ee64b7a57956824cef1f7cfc6df98bb49824afc2545f9b1dfba3205",
+  "replaced_member": "楚物志_楚行九州_Windows参赛版.zip",
+  "new_zip_sha256": "a451f2b1f1cabc72f10f275b4d9508e622a3da79db3cbd674ec6dc923b4b5d29",
+  "other_members_unchanged": {},
+  "startup": "PASS",
+  "zip_crc": "PASS",
+  "7z_integrity": "PASS",
+  "full_beta_rerun": false
+}

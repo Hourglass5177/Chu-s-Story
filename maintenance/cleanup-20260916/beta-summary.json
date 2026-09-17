@@ -1,0 +1,30 @@
+{
+  "date": "2026-09-18",
+  "engine": "4.7.2",
+  "guide_python_tests": 2,
+  "gut_scripts": 89,
+  "gut_tests": 767,
+  "gut_asserts": 42545,
+  "frontend_real_pointer_e2e": "PASS",
+  "simulation_matches": 9,
+  "import": "empty imported and shader caches; editor/UID cache retained; verify_beta -SkipCleanImport performs reimport",
+  "microphone_recorded": false,
+  "logs": {
+    "artifacts/verify/import.log": {
+      "bytes": 316881,
+      "sha256": "bbd332859ab332d8e9e223778ae9a2df0de030aca22e05bcf7c8502b35edab4b"
+    },
+    "artifacts/verify/main-scene.log": {
+      "bytes": 948,
+      "sha256": "5def7cc900fb2c4e68d6426aace203ae5ead1da8f5ca818756d85478ea5282b1"
+    },
+    "artifacts/verify/frontend-session-e2e.log": {
+      "bytes": 4148,
+      "sha256": "adccf8614662470d2a70d6b79789eaa9a8133173e79c96820ff29cd918d98b31"
+    },
+    "artifacts/verify/gut.log": {
+      "bytes": 125423,
+      "sha256": "91a006d9681c26ade43d88a3489e2cca124f7faae2f54eb91439d6450365ba96"
+    }
+  }
+}

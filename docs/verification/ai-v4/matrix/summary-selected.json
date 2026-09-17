@@ -1,0 +1,45 @@
+{
+  "batches": {
+    "pair-01-unified": {
+      "games": 288,
+      "decisions": 41169,
+      "p95_ms": 14.862,
+      "max_ms": 43.471,
+      "mean_turns": 32.30555555555556,
+      "end_reasons": {
+        "0": 204,
+        "1": 84
+      },
+      "wins": 181,
+      "ties": 3,
+      "losses": 104,
+      "adjusted_win_rate": 0.6336805555555556,
+      "paired_normal_95ci": [
+        0.5814657606379668,
+        0.6858953504731443
+      ]
+    },
+    "pair-12-unified": {
+      "games": 288,
+      "decisions": 32206,
+      "p95_ms": 19.064,
+      "max_ms": 65.692,
+      "mean_turns": 26.21527777777778,
+      "end_reasons": {
+        "0": 203,
+        "1": 85
+      },
+      "wins": 154,
+      "ties": 9,
+      "losses": 125,
+      "adjusted_win_rate": 0.5503472222222222,
+      "paired_normal_95ci": [
+        0.5014377623853328,
+        0.5992566820591116
+      ]
+    }
+  },
+  "games": 576,
+  "full_matrix": false,
+  "failures": []
+}
